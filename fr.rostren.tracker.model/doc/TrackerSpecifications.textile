@@ -1,0 +1,13 @@
+h1. spécification du suivi d'opérations bancaires
+
+L'outil de suivi est utilisé pour réaliser des statistiques et une sorte de suivie et statistiques personnalisée des opérations bancaires liées aux comptes chéques et aux livrets.
+
+h2. modèle de suivi
+
+Le modèle de suivi est donné dans l'image ci-dessous:
+
+!images/Tracker.png!
+
+Un propriétaire d'un compte chèque peut avoir un ou plusieurs comptes à gérer:
+* "CheckingAccount": les comptes chèques
+* "BoockletAccount":: les livrets liés aux comptes chèques

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="fr.rostren.tracker.ui.commands.pdfimport"
+               icon="icons/pdfImport.gif"
+               label="Import PDF"
+               style="push"
+               tooltip="import pdf">
+            <visibleWhen>
+               <with
+                     variable="activeMenuSelection">
+                  <iterate>
+                     <adapt
+                           type="fr.rostren.tracker.Tracker">
+                     </adapt>
+                  </iterate>
+                  <count
+                        value="1">
+                  </count>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="fr.rostren.tracker.ui.commands.category"
+            name="Pdf Category">
+      </category>
+      <command
+            categoryId="fr.rostren.tracker.ui.commands.category"
+            defaultHandler="fr.rostren.tracker.ui.handlers.ImportPDFHandler"
+            id="fr.rostren.tracker.ui.commands.pdfimport"
+            name="Import PDF">
+      </command>
+   </extension>
+
+</plugin>

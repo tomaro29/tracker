@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import java.math.BigDecimal;
 
 /**
  * This is the item provider adapter for a {@link fr.rostren.tracker.Operation} object.
@@ -76,7 +77,7 @@ public class OperationItemProvider extends ItemProviderAdapter implements
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -142,8 +143,11 @@ public class OperationItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public String getText(Object object) {
-		Operation operation = (Operation)object;
-		return getString("_UI_Operation_type") + " " + operation.getTotalAmount();
+		BigDecimal labelValue = ((Operation)object).getTotalAmount();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Operation_type") :
+			getString("_UI_Operation_type") + " " + label;
 	}
 
 	/**

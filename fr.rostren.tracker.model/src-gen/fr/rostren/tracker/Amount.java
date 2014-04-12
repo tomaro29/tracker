@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker;
 
+import java.math.BigDecimal;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -31,12 +32,12 @@ public interface Amount extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub Amount</em>' attribute.
-	 * @see #setSubAmount(float)
+	 * @see #setSubAmount(BigDecimal)
 	 * @see fr.rostren.tracker.TrackerPackage#getAmount_SubAmount()
 	 * @model
 	 * @generated
 	 */
-	float getSubAmount();
+	BigDecimal getSubAmount();
 
 	/**
 	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getSubAmount <em>Sub Amount</em>}' attribute.
@@ -46,7 +47,7 @@ public interface Amount extends EObject {
 	 * @see #getSubAmount()
 	 * @generated
 	 */
-	void setSubAmount(float value);
+	void setSubAmount(BigDecimal value);
 
 	/**
 	 * Returns the value of the '<em><b>Category</b></em>' reference.

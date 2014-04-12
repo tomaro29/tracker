@@ -17,7 +17,7 @@
                      variable="activeMenuSelection">
                   <iterate>
                      <adapt
-                           type="fr.rostren.tracker.Tracker">
+                           type="fr.rostren.tracker.Account">
                      </adapt>
                   </iterate>
                   <count

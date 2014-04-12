@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
+import java.math.BigDecimal;
 
 /**
  * This is the item provider adapter for a {@link fr.rostren.tracker.Transfer} object.
@@ -112,8 +113,11 @@ public class TransferItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Transfer transfer = (Transfer)object;
-		return getString("_UI_Transfer_type") + " " + transfer.getTotalAmount();
+		BigDecimal labelValue = ((Transfer)object).getTotalAmount();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Transfer_type") :
+			getString("_UI_Transfer_type") + " " + label;
 	}
 
 	/**

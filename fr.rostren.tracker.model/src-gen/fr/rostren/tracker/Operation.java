@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker;
 
+import java.math.BigDecimal;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -89,12 +90,12 @@ public interface Operation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Total Amount</em>' attribute.
-	 * @see #setTotalAmount(float)
+	 * @see #setTotalAmount(BigDecimal)
 	 * @see fr.rostren.tracker.TrackerPackage#getOperation_TotalAmount()
 	 * @model
 	 * @generated
 	 */
-	float getTotalAmount();
+	BigDecimal getTotalAmount();
 
 	/**
 	 * Sets the value of the '{@link fr.rostren.tracker.Operation#getTotalAmount <em>Total Amount</em>}' attribute.
@@ -104,7 +105,7 @@ public interface Operation extends EObject {
 	 * @see #getTotalAmount()
 	 * @generated
 	 */
-	void setTotalAmount(float value);
+	void setTotalAmount(BigDecimal value);
 
 	/**
 	 * Returns the value of the '<em><b>Operation Title</b></em>' reference.

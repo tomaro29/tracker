@@ -1,12 +1,15 @@
 package fr.rostren.tracker.ui.pdf.utils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
@@ -22,7 +25,22 @@ public class LineContent {
 	private Category linkedCategory;
 	private OperationTitle linkedOperationTitle;
 
-	public LineContent(Date date, String title, Float amount, OperationType type) {
+	/**
+	 * Constructor
+	 * 
+	 * @param date
+	 *            the date of the operation
+	 * @param title
+	 *            the title of the operation
+	 * @param amount
+	 *            the amount of the operation
+	 * @param type
+	 *            the operation type
+	 * @param origin
+	 *            the operation origin
+	 */
+	public LineContent(Date date, String title, BigDecimal amount,
+			OperationType type, Origin origin) {
 		this.title = formatTitle(title);
 		if (OperationType.CREDIT.equals(type)) {
 			operation = TrackerFactory.eINSTANCE.createCreditOperation();
@@ -33,8 +51,16 @@ public class LineContent {
 			operation.setDate(date);
 			operation.setTotalAmount(amount);
 		}
+		operation.setOrigin(origin);
 	}
 
+	/**
+	 * Formats the title
+	 * 
+	 * @param currentTitle
+	 *            the current title
+	 * @return the formatted title.
+	 */
 	private String formatTitle(String currentTitle) {
 		if (currentTitle.startsWith("ECH PRET")) {
 			return "ECH PRET";
@@ -48,37 +74,84 @@ public class LineContent {
 		return currentTitle;
 	}
 
-	public void completeOperation(Tracker tracker) {
-		addTitle(tracker);
-		addTotalAmount(tracker);
+	/**
+	 * Complete the operation
+	 * 
+	 * @param tracker
+	 *            the tracker root
+	 * @param operation
+	 *            the operation to complete
+	 * @param account
+	 *            the account
+	 */
+	public void completeOperation(Tracker tracker, Operation operation,
+			Account account) {
+
+		if (linkedCategory == null) {
+			linkedCategory = findCategory(title, tracker);
+		}
+
+		addTitle(operation, tracker);
+		addTotalAmount(operation, tracker);
 	}
 
-	private void addTitle(Tracker tracker) {
-		if (linkedCategory == null) {
-			linkedCategory = findCategory(tracker);
-		}
+	/**
+	 * Adds a title to the operation
+	 * 
+	 * @param operation
+	 *            the operation to edit
+	 * @param tracker
+	 *            the tracker model
+	 */
+	private void addTitle(Operation operation, Tracker tracker) {
 		operation.setOperationTitle(linkedOperationTitle);
 	}
 
-	private void addTotalAmount(Tracker tracker) {
-		if (linkedCategory == null) {
-			linkedCategory = findCategory(tracker);
-		}
+	/**
+	 * Adds the total amount as a subAmount to the operation
+	 * 
+	 * @param operation
+	 *            the operation to edit
+	 * @param tracker
+	 *            the tracker model
+	 */
+	private void addTotalAmount(Operation operation, Tracker tracker) {
 		Amount newAmountObject = createAmount(operation.getTotalAmount(),
 				linkedCategory);
 		operation.getSubAmounts().add(newAmountObject);
 	}
 
-	private Amount createAmount(Float amount, Category linkedCategory) {
+	/**
+	 * Creates an amount
+	 * 
+	 * @param amount
+	 *            amount to create
+	 * @param linkedCategory
+	 *            the linked category
+	 * @return the created amount
+	 */
+	private Amount createAmount(BigDecimal amount, Category linkedCategory) {
 		Amount amountObject = TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setSubAmount(amount);
 		amountObject.setCategory(linkedCategory);
 		return amountObject;
 	}
 
-	private Category findCategory(Tracker tracker) {
+	/**
+	 * Finds a category given an operation title in the categories repository of
+	 * the tracker model
+	 * 
+	 * @param title
+	 *            the title to find
+	 * @param tracker
+	 *            the tracker model
+	 * @return the corresponding category
+	 */
+	private Category findCategory(String title, Tracker tracker) {
 		List<Category> categories = tracker.getCategoriesRepository()
 				.getCategories();
+		List<OperationTitle> titles = tracker.getOperationsTitlesRepositories()
+				.getOperationsTitles();
 		Category undefinedCategory = null;
 
 		for (Category category : categories) {
@@ -101,10 +174,16 @@ public class LineContent {
 		}
 		linkedOperationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
 		linkedOperationTitle.setTitle(title);
+		titles.add(linkedOperationTitle);
 		undefinedCategory.getOperationTitles().add(linkedOperationTitle);
 		return undefinedCategory;
 	}
 
+	/**
+	 * Returns the operation
+	 * 
+	 * @return the operation
+	 */
 	public Operation getOperation() {
 		return operation;
 	}

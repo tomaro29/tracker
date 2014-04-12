@@ -1,16 +1,18 @@
 package fr.rostren.tracker.ui.pdf.analyzer;
 
+import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Month;
+import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.ui.pdf.utils.LineContent;
 import fr.rostren.tracker.ui.pdf.utils.LineContent.OperationType;
 
 /**
  * An abstract Class to parse banks pdf format.
  * 
- * @author mrostren
+ * @author maro
  */
 public abstract class AbstractPdfContentAnalyzer {
 
@@ -28,6 +30,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	protected final Pattern AMOUNT_NUMBER_PATTREN = Pattern
 			.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})");
 	protected final Pattern NUMBER_PATTREN = Pattern.compile("([0-9]*)");
+	protected final Pattern FACT_PATTREN = Pattern.compile("FACT\\s+([0-9]*)");
 
 	protected int currentYear;
 	protected String currentLine;
@@ -36,30 +39,34 @@ public abstract class AbstractPdfContentAnalyzer {
 
 	protected Date lastPotentialDate = null;
 	protected String lastPotentialOperationTitle = null;
-	protected Float lastPotentialAmount = null;
+	protected BigDecimal lastPotentialAmount = null;
 
 	/**
 	 * This parses a single line in the pdf.
 	 * 
 	 * @param line
 	 *            the current line.
+	 * @param origin
+	 *            the operation origin
 	 * @return {@link LineContent}
 	 */
-	public abstract LineContent parseLine(String line);
+	public abstract LineContent parseLine(String line, Origin origin);
 
 	/**
 	 * Extracts operations if exists from the current line.
 	 * 
+	 * @param origin
+	 *            the operation origin
 	 * @return {@link LineContent}
 	 */
-	protected LineContent extractOperation() {
+	protected LineContent extractOperation(Origin origin) {
 		LineContent currentLineContent = null;
 		extractDataFromCurrentLine();
 		if (isCompleted()) {
 			if (lastToken != null && PdfToken.VIR_RECU.equals(lastToken)) {
 				currentLineContent = new LineContent(lastPotentialDate,
 						lastPotentialOperationTitle, lastPotentialAmount,
-						OperationType.CREDIT);
+						OperationType.CREDIT, origin);
 			} else if (lastToken != null
 					&& PdfToken.PAIE_CHEQUE.equals(lastToken)
 					|| PdfToken.PAIEMENTS_CARTES.equals(lastToken)
@@ -67,7 +74,7 @@ public abstract class AbstractPdfContentAnalyzer {
 					|| PdfToken.OPERATIONS_DIVERSES.equals(lastToken)) {
 				currentLineContent = new LineContent(lastPotentialDate,
 						lastPotentialOperationTitle, lastPotentialAmount,
-						OperationType.DEBIT);
+						OperationType.DEBIT, origin);
 			} else if (lastToken != null
 					&& PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
 				if (lastPotentialOperationTitle.contains("REMISE")
@@ -75,12 +82,12 @@ public abstract class AbstractPdfContentAnalyzer {
 					// REMISE(C), INTERETS(C)
 					currentLineContent = new LineContent(lastPotentialDate,
 							lastPotentialOperationTitle, lastPotentialAmount,
-							OperationType.CREDIT);
+							OperationType.CREDIT, origin);
 				} else {
 					// COTISATION(D), FRAIS(D)
 					currentLineContent = new LineContent(lastPotentialDate,
 							lastPotentialOperationTitle, lastPotentialAmount,
-							OperationType.DEBIT);
+							OperationType.DEBIT, origin);
 				}
 			}
 			reset();

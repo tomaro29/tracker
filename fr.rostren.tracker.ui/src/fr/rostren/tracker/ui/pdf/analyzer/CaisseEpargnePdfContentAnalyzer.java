@@ -1,16 +1,18 @@
 package fr.rostren.tracker.ui.pdf.analyzer;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.rostren.tracker.Date;
+import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.ui.pdf.utils.LineContent;
 
 /**
  * This class parses all caisse epargne Pdf format.
  * 
- * @author mrostren
+ * @author maro
  */
 public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 
@@ -56,7 +58,7 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 	 * fr.rostren.tracker.ui.pdf.analyzer.AbstractPdfContentAnalyzer#parseLine
 	 * (java.lang.String)
 	 */
-	public LineContent parseLine(String line) {
+	public LineContent parseLine(String line, Origin origin) {
 		currentLine = line;
 		currentSplitLine = currentLine.split(SPACE_STRING_PATTREN.pattern());
 		Matcher dateMatcher = DATE_LINE_PATTREN.matcher(currentLine);
@@ -102,7 +104,7 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 						|| PdfToken.RETRAITS_CARTES.equals(lastToken)
 						|| PdfToken.PRELEVEMENTS.equals(lastToken) || PdfToken.OPERATIONS_DIVERSES
 							.equals(lastToken))) {
-			return extractOperation();
+			return extractOperation(origin);
 		}
 		return null;
 	}
@@ -121,7 +123,10 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 			int length = currentSplitLine.length;
 			String lastPart = currentSplitLine[length - 1];
 			String beforeLastPart = currentSplitLine[length - 2];
-			if (beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
+
+			if (!beforeLastPart.matches(FACT_PATTREN.pattern())
+					&& beforeLastPart.length() <= 3
+					&& beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
 				for (int index = 1; index < length - 2; index++) {
 					titleBuilder.append(currentSplitLine[index]);
 					titleBuilder.append(" ");
@@ -129,30 +134,36 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 				amountBuilder.append(beforeLastPart);
 				amountBuilder.append(lastPart);
 
-				lastPotentialAmount = Float.parseFloat(amountBuilder.toString()
-						.replaceAll(" ", "").replaceAll(",", "."));
+				lastPotentialAmount = getAmountAsDecimal(amountBuilder
+						.toString());
 			} else {
 				for (int index = 1; index < currentSplitLine.length - 1; index++) {
 					titleBuilder.append(currentSplitLine[index]);
 					titleBuilder.append(" ");
 				}
 
-				lastPotentialAmount = Float.parseFloat(lastPart.toString()
-						.replaceAll(" ", "").replaceAll(",", "."));
+				lastPotentialAmount = getAmountAsDecimal(lastPart.toString());
 			}
 			lastPotentialOperationTitle = titleBuilder.toString();
 		} else if (currentLine.matches(PARTIAL_LINE_PATTERN.pattern())) {
 			lastPotentialDate = extractDateFromCurrentLine();
 			StringBuilder titleBuilder = new StringBuilder();
-			for (int index = 1; index < currentSplitLine.length - 1; index++) {
+			for (int index = 1; index < currentSplitLine.length; index++) {
 				titleBuilder.append(currentSplitLine[index]);
 				titleBuilder.append(" ");
 			}
 			lastPotentialOperationTitle = titleBuilder.toString();
 		} else if (currentLine.matches(AMOUNT_NUMBER_PATTREN.pattern())) {
-			lastPotentialAmount = Float.parseFloat(currentLine.replaceAll(" ",
-					"").replaceAll(",", "."));
+			lastPotentialAmount = getAmountAsDecimal(currentLine.toString());
 		}
+	}
+
+	/**
+	 * @param amount
+	 * @return
+	 */
+	private BigDecimal getAmountAsDecimal(String amount) {
+		return new BigDecimal(amount.replaceAll(" ", "").replaceAll(",", "."));
 	}
 
 	/*

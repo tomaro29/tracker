@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker.provider;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,9 +18,10 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import fr.rostren.tracker.IncomingTransfer;
 
 /**
- * This is the item provider adapter for a {@link fr.rostren.tracker.IncomingTransfer} object.
- * <!-- begin-user-doc -->
+ * This is the item provider adapter for a
+ * {@link fr.rostren.tracker.IncomingTransfer} object. <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class IncomingTransferItemProvider extends TransferItemProvider
@@ -51,14 +53,15 @@ public class IncomingTransferItemProvider extends TransferItemProvider
 	}
 
 	/**
-	 * This returns IncomingTransfer.gif.
-	 * <!-- begin-user-doc --> <!--
+	 * This returns IncomingTransfer.gif. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IncomingTransfer"));
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/IncomingTransfer"));
 	}
 
 	/**
@@ -71,7 +74,7 @@ public class IncomingTransferItemProvider extends TransferItemProvider
 	public String getText(Object object) {
 		String operationTitle = ((IncomingTransfer) object).getOperationTitle()
 				.getTitle();
-		String operationAmount = ((Float) ((IncomingTransfer) object)
+		String operationAmount = ((BigDecimal) ((IncomingTransfer) object)
 				.getTotalAmount()).toString();
 
 		if (operationTitle == null) {
@@ -87,10 +90,11 @@ public class IncomingTransferItemProvider extends TransferItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

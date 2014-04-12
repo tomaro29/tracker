@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             uri="http://fr.rostren.tracker/1.0"
-            class="fr.rostren.tracker.provider.TrackerItemProviderAdapterFactoryDev"
+            class="fr.rostren.tracker.provider.dev.TrackerItemProviderAdapterFactoryDev"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider

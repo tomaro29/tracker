@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.TrackerPackage;
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +46,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final float SUB_AMOUNT_EDEFAULT = 0.0F;
+	protected static final BigDecimal SUB_AMOUNT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getSubAmount() <em>Sub Amount</em>}' attribute.
@@ -55,7 +56,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @generated
 	 * @ordered
 	 */
-	protected float subAmount = SUB_AMOUNT_EDEFAULT;
+	protected BigDecimal subAmount = SUB_AMOUNT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,7 +82,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public float getSubAmount() {
+	public BigDecimal getSubAmount() {
 		return subAmount;
 	}
 
@@ -90,8 +91,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSubAmount(float newSubAmount) {
-		float oldSubAmount = subAmount;
+	public void setSubAmount(BigDecimal newSubAmount) {
+		BigDecimal oldSubAmount = subAmount;
 		subAmount = newSubAmount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__SUB_AMOUNT, oldSubAmount, subAmount));
@@ -164,7 +165,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				setCategory((Category)newValue);
 				return;
 			case TrackerPackage.AMOUNT__SUB_AMOUNT:
-				setSubAmount((Float)newValue);
+				setSubAmount((BigDecimal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,7 +200,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 			case TrackerPackage.AMOUNT__CATEGORY:
 				return category != null;
 			case TrackerPackage.AMOUNT__SUB_AMOUNT:
-				return subAmount != SUB_AMOUNT_EDEFAULT;
+				return SUB_AMOUNT_EDEFAULT == null ? subAmount != null : !SUB_AMOUNT_EDEFAULT.equals(subAmount);
 		}
 		return super.eIsSet(featureID);
 	}

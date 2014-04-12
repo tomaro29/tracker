@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.TrackerPackage;
+import java.math.BigDecimal;
 
 /**
  * This is the item provider adapter for a {@link fr.rostren.tracker.Amount} object.
@@ -81,7 +82,7 @@ public class AmountItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -127,8 +128,11 @@ public class AmountItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Amount amount = (Amount)object;
-		return getString("_UI_Amount_type") + " " + amount.getSubAmount();
+		BigDecimal labelValue = ((Amount)object).getSubAmount();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Amount_type") :
+			getString("_UI_Amount_type") + " " + label;
 	}
 
 	/**

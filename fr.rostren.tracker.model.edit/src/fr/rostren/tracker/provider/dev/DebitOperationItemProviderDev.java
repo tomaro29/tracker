@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker.provider.dev;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class DebitOperationItemProviderDev extends DebitOperationItemProvider {
 			return super.createSetCommand(domain, owner, feature, value, index);
 
 		final DebitOperation debitOperation = (DebitOperation) owner;
-		final float newTotalAmount = (Float) value;
+		final BigDecimal newTotalAmount = (BigDecimal) value;
 
 		if (debitOperation.getTotalAmount() == newTotalAmount)
 			return super.createSetCommand(domain, owner, feature, value, index);

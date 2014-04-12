@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker.provider.dev;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class CreditOperationItemProviderDev extends CreditOperationItemProvider 
 			return super.createSetCommand(domain, owner, feature, value, index);
 
 		final CreditOperation creditOperation = (CreditOperation) owner;
-		final float newTotalAmount = (Float) value;
+		final BigDecimal newTotalAmount = (BigDecimal) value;
 
 		if (creditOperation.getTotalAmount() == newTotalAmount)
 			return super.createSetCommand(domain, owner, feature, value, index);

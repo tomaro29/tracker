@@ -2,15 +2,17 @@
  */
 package fr.rostren.tracker.ui.handlers;
 
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -19,52 +21,77 @@ import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import fr.rostren.tracker.Account;
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
+import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
 import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
-import fr.rostren.tracker.ui.pdf.utils.ExtractPDFContent;
 
 public class ImportPDFHandler extends AbstractHandler implements IHandler {
 	private Shell shell;
 
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-
+	public Object execute(ExecutionEvent event) {
 		Object applicationContext = event.getApplicationContext();
 		Object currentShell = HandlerUtil.getVariable(applicationContext,
 				ISources.ACTIVE_SHELL_NAME);
 		if (!(currentShell instanceof Shell)) {
 			return null;
-		} else {
-			this.shell = (Shell) currentShell;
 		}
-
+		setShell((Shell) currentShell);
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil
 				.getCurrentSelection(event);
-
 		TrackerEditorDev editor = (TrackerEditorDev) HandlerUtil
 				.getActiveEditor(event);
 		if (selection instanceof StructuredSelection) {
-			NullProgressMonitor monitor = new NullProgressMonitor();
 			for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 				Object selectedElement = AdapterFactoryEditingDomain
 						.unwrap(objects.next());
 				if (selectedElement instanceof Account) {
 
 					// opens dialog to load a pdf
-					LoadResourceDialog dialog = new LoadResourceDialog(shell);
+					LoadResourceDialog dialog = new LoadResourceDialog(
+							getShell());
 					int result = dialog.open();
 					if (result == Window.OK) {
 						// read the pdf file and extract data
-						String uriText = dialog.getURIText();
+						PDFContentExtractor extractor = new PDFContentExtractor(
+								dialog.getURIText(), (Account) selectedElement);
+						try {
+							List<Operation> operations = extractor
+									.extractOperations();
+							// TODO open a dialog to confirm
+							// informations and add to the model
 
-						ExtractPDFContent extractor = new ExtractPDFContent(
-								uriText, (Account) selectedElement, shell);
-						extractor.execute();
+							if (selectedElement instanceof CheckingAccount) {
+								CheckingAccount account = (CheckingAccount) selectedElement;
+								for (Operation operation : operations) {
+									account.getOperations().add(operation);
+								}
+							}
+						} catch (ExtractorException e) {
+							MessageDialog.openError(getShell(),
+									"Problem while extracting operations", //$NON-NLS-1$
+									e.getMessage());
+						} catch (IOException e) {
+							MessageDialog.openError(getShell(),
+									"Problem while opening the PDF File", //$NON-NLS-1$
+									e.getMessage());
+						}
 					}
 				}
 			}
-			editor.doSave(monitor);
+			editor.doSave(new NullProgressMonitor());
 		}
 
 		return null;
+	}
+
+	public Shell getShell() {
+		return this.shell;
+	}
+
+	private void setShell(Shell shell) {
+		this.shell = shell;
 	}
 }

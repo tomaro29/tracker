@@ -26,6 +26,26 @@
                </with>
             </visibleWhen>
          </command>
+         <command
+               commandId="fr.rostren.tracker.ui.commands.cleanmodel"
+               icon="icons/cleanmodel.gif"
+               label="Clean Model"
+               style="push"
+               tooltip="Clean the Model">
+            <visibleWhen>
+               <with
+                     variable="activeMenuSelection">
+                  <iterate>
+                     <adapt
+                           type="fr.rostren.tracker.Account">
+                     </adapt>
+                  </iterate>
+                  <count
+                        value="1">
+                  </count>
+               </with>
+            </visibleWhen>
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -39,6 +59,12 @@
             defaultHandler="fr.rostren.tracker.ui.handlers.ImportPDFHandler"
             id="fr.rostren.tracker.ui.commands.pdfimport"
             name="Import PDF">
+      </command>
+      <command
+            categoryId="fr.rostren.tracker.ui.commands.category"
+            defaultHandler="fr.rostren.tracker.ui.handlers.CleanModelHandler"
+            id="fr.rostren.tracker.ui.commands.cleanmodel"
+            name="Clean Model">
       </command>
    </extension>
 

@@ -5,6 +5,7 @@ package fr.rostren.tracker.ui.handlers;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -69,6 +70,11 @@ public class ImportPDFHandler extends AbstractHandler implements IHandler {
 									account.getOperations().add(operation);
 								}
 							}
+							Set<String> alreadyParsedFiles = extractor
+									.getAlreadyParsedFiles();
+							if (!alreadyParsedFiles.isEmpty()) {
+								displayInformation(alreadyParsedFiles);
+							}
 						} catch (ExtractorException e) {
 							MessageDialog.openError(getShell(),
 									"Problem while extracting operations", //$NON-NLS-1$
@@ -85,6 +91,21 @@ public class ImportPDFHandler extends AbstractHandler implements IHandler {
 		}
 
 		return null;
+	}
+
+	private void displayInformation(Set<String> alreadyParsedFiles) {
+		StringBuilder sb = new StringBuilder();
+		for (String parsedOrigin : alreadyParsedFiles) {
+			if (!sb.toString().isEmpty()) {
+				sb.append("',\n'"); //$NON-NLS-1$
+			}
+			sb.append(parsedOrigin);
+		}
+		MessageDialog.openInformation(shell, "Unable to Import Files", //$NON-NLS-1$
+				"The files:\n'" //$NON-NLS-1$
+						+ sb.toString() + "'\n" //$NON-NLS-1$
+						+ "was already imported before!"); //$NON-NLS-1$
+
 	}
 
 	public Shell getShell() {

@@ -2,7 +2,9 @@ package fr.rostren.tracker.pdf.content.extractor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 import org.eclipse.core.resources.IFile;
@@ -31,6 +33,8 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
  * @author maro
  */
 public class PDFContentExtractor {
+	private Set<String> alreadyParsedFiles = new HashSet<String>();
+
 	private String uriText;
 	private Account account;
 
@@ -106,7 +110,8 @@ public class PDFContentExtractor {
 			CaisseEpargnePdfContentAnalyzer analyzer = new CaisseEpargnePdfContentAnalyzer();
 			for (int i = 0; i < reader.getNumberOfPages(); i++) {
 				int index = src.lastIndexOf("/") + 1; //$NON-NLS-1$
-				String originId = src.substring(index, src.length()) + "_page_" //$NON-NLS-1$
+				String fileName = src.substring(index, src.length());
+				String originId = fileName + "_page_" //$NON-NLS-1$
 						+ (i + 1);
 				if (!isAlreadyParsed(tracker, originId)) {
 					Origin origin = createLinkedOrigin(tracker, originId);
@@ -126,6 +131,8 @@ public class PDFContentExtractor {
 							}
 						}
 					}
+				} else {
+					alreadyParsedFiles.add(fileName);
 				}
 			}
 		} catch (IOException exception) {
@@ -178,5 +185,20 @@ public class PDFContentExtractor {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * @return the alreadyParsedOrigins
+	 */
+	public Set<String> getAlreadyParsedFiles() {
+		return alreadyParsedFiles;
+	}
+
+	/**
+	 * @param alreadyParsedFiles
+	 *            the alreadyParsedOrigins to set
+	 */
+	public void setAlreadyParsedFiles(Set<String> alreadyParsedFiles) {
+		this.alreadyParsedFiles = alreadyParsedFiles;
 	}
 }

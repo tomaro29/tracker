@@ -66,7 +66,7 @@ public class PDFContentExtractor {
 		}
 		List<Operation> operations = new ArrayList<Operation>();
 		for (String uri : getURISFromText()) {
-			if (!"".equals(uri)) { //$NON-NLS-1$
+			if (!"".equals(uri) && uri != null) { //$NON-NLS-1$
 				URI selectedFileURI = URI.createURI(uri);
 				if (selectedFileURI.isPlatform()) {
 					IPath resourcePath = new Path(
@@ -85,7 +85,7 @@ public class PDFContentExtractor {
 	}
 
 	private String[] getURISFromText() {
-		if (uriText.contains(" ")) { //$NON-NLS-1$
+		if (uriText != null && uriText.contains(" ")) { //$NON-NLS-1$
 			return uriText.split(" "); //$NON-NLS-1$
 		}
 		return new String[] { uriText, };

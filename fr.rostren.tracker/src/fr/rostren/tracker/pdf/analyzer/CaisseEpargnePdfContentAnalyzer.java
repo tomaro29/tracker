@@ -17,7 +17,7 @@ import fr.rostren.tracker.pdf.utils.LineContent;
 public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 
 	private final Pattern DATE_LINE_PATTREN = Pattern
-			.compile("au (0[0-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - N° [1-9] Page [1-9] / [1-9][\\s\\n\\r]*"); //$NON-NLS-1$
+			.compile("au (0[1-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - N° [1-9]{2} Page [1-9] / [1-9][\\s\\n\\r]*"); //$NON-NLS-1$
 	private final Pattern VIREMENTS_RECUS_LINE_PATTREN = Pattern
 			.compile("Virements reçus[\\s\\n\\r]*"); //$NON-NLS-1$
 	private final Pattern PAIEMENT_CHEQUE_LINE_PATTREN = Pattern

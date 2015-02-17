@@ -42,15 +42,15 @@ public class LineContent {
 			OperationType type, Origin origin) {
 		this.setTitle(formatTitle(title));
 		if (OperationType.CREDIT.equals(type)) {
-			setOperation(TrackerFactory.eINSTANCE.createCreditOperation());
-			getOperation().setDate(date);
-			getOperation().setTotalAmount(amount);
+			this.operation = TrackerFactory.eINSTANCE.createCreditOperation();
+			this.operation.setDate(date);
+			this.operation.setTotalAmount(amount);
 		} else if (OperationType.DEBIT.equals(type)) {
-			setOperation(TrackerFactory.eINSTANCE.createDebitOperation());
-			getOperation().setDate(date);
-			getOperation().setTotalAmount(amount);
+			this.operation = TrackerFactory.eINSTANCE.createDebitOperation();
+			this.operation.setDate(date);
+			this.operation.setTotalAmount(amount);
 		}
-		getOperation().setOrigin(origin);
+		this.operation.setOrigin(origin);
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class LineContent {
 		operation.setOperationTitle(getLinkedOperationTitle());
 
 		// Adds the total amount as a subAmount to the operation
-		Amount newAmountObject = createCategoryAmount(operation.getTotalAmount(),
-				getLinkedCategory());
+		Amount newAmountObject = createCategoryAmount(
+				operation.getTotalAmount(), getLinkedCategory());
 		operation.getSubAmounts().add(newAmountObject);
 	}
 
@@ -104,7 +104,8 @@ public class LineContent {
 	 *            the linked category
 	 * @return the created amount
 	 */
-	public Amount createCategoryAmount(BigDecimal amount, Category linkedCategory) {
+	public Amount createCategoryAmount(BigDecimal amount,
+			Category linkedCategory) {
 		Amount amountObject = TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setSubAmount(amount);
 		amountObject.setCategory(linkedCategory);

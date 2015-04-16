@@ -1,7 +1,6 @@
 package fr.rostren.tracker.pdf.analyzer;
 
 import fr.rostren.tracker.Date;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
@@ -175,57 +174,6 @@ public abstract class AbstractPdfContentAnalyzer {
 	protected final int extractYearFromCurrentLine() {
 		String year = currentLine.subSequence(NINE, THIRTEEN).toString();
 		return Integer.parseInt(year);
-	}
-
-	/**
-	 * Sets the Month basing on the current content.
-	 * 
-	 * @param date
-	 *            the date.
-	 * @param content
-	 *            the current content.
-	 */
-	protected void setMonthFromContent(Date date, String content) {
-		switch (Integer.parseInt(content)) {
-		case Month.JAN_VALUE:
-			date.setMonth(Month.JAN);
-			break;
-		case Month.FEB_VALUE:
-			date.setMonth(Month.FEB);
-			break;
-		case Month.MARS_VALUE:
-			date.setMonth(Month.MARS);
-			break;
-		case Month.APR_VALUE:
-			date.setMonth(Month.APR);
-			break;
-		case Month.MAY_VALUE:
-			date.setMonth(Month.MAY);
-			break;
-		case Month.JUNE_VALUE:
-			date.setMonth(Month.JUNE);
-			break;
-		case Month.JULY_VALUE:
-			date.setMonth(Month.JULY);
-			break;
-		case Month.AUG_VALUE:
-			date.setMonth(Month.AUG);
-			break;
-		case Month.SEPT_VALUE:
-			date.setMonth(Month.SEPT);
-			break;
-		case Month.OCT_VALUE:
-			date.setMonth(Month.OCT);
-			break;
-		case Month.NOV_VALUE:
-			date.setMonth(Month.NOV);
-			break;
-		case Month.DEC_VALUE:
-			date.setMonth(Month.DEC);
-			break;
-		default:
-			break;
-		}
 	}
 
 	/**

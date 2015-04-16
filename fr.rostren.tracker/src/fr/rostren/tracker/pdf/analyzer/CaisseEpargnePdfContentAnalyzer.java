@@ -2,8 +2,8 @@ package fr.rostren.tracker.pdf.analyzer;
 
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.pdf.utils.TrackerCreator;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
@@ -64,6 +64,8 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 					.concat(EMPTY_STRING_PATTREN.pattern())
 					.concat(OPERATION_TITLE_PATTREN.pattern())
 					.concat(EMPTY_STRING_PATTREN.pattern()));
+	/** The tracker elements creator. */
+	private final TrackerCreator creator = new TrackerCreator();
 
 	@Override
 	public LineContent parseLine(String line, Origin origin) {
@@ -190,16 +192,13 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 		Date date = null;
 		if (getCurrentLine().matches(COMPLETE_LINE_PATTERN.pattern())
 				|| getCurrentLine().matches(PARTIAL_LINE_PATTERN.pattern())) {
-			date = TrackerFactory.eINSTANCE.createDate();
+
 			String potentialDate = getCurrentSplitLine()[0];
 			String[] split = potentialDate.split(DATE_SEPARATOR_PATTREN
 					.pattern());
 
-			date.setDay(Integer.parseInt(split[0]));
-
-			String month = split[1].substring(0, 2);
-			setMonthFromContent(date, month);
-			date.setYear(getCurrentYear());
+			date = creator.date(Integer.parseInt(split[0]),
+					split[1].substring(0, 2), getCurrentYear());
 		}
 		return date;
 	}

@@ -9,9 +9,9 @@ import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.analyzer.CaisseEpargnePdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.pdf.utils.TrackerCreator;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 import java.io.IOException;
@@ -33,6 +33,8 @@ import org.eclipse.emf.common.util.URI;
  * @author maro
  */
 public class PDFContentExtractor {
+	/** The tracker elements creator. */
+	private final TrackerCreator creator = new TrackerCreator();
 	/** the list of parsed files. */
 	private Set<String> alreadyParsedFiles = new HashSet<String>();
 
@@ -169,9 +171,7 @@ public class PDFContentExtractor {
 	 * @return the created origin
 	 */
 	private Origin createLinkedOrigin(Tracker tracker, String originIdentifier) {
-		Origin origin = TrackerFactory.eINSTANCE.createOrigin();
-		origin.setIdentifier(originIdentifier);
-		origin.setType(OriginType.PDF_FILE);
+		Origin origin = creator.origin(originIdentifier);
 		tracker.getOriginsRepository().getOrigins().add(origin);
 		return origin;
 	}
@@ -187,6 +187,9 @@ public class PDFContentExtractor {
 	 * @return true if the current pdf is already parsed, false otherwise.
 	 */
 	private boolean isAlreadyParsed(Tracker tracker, String originId) {
+		if (tracker.getOriginsRepository() == null) {
+			tracker.setOriginsRepository(creator.originsRepository());
+		}
 		List<Origin> existingOrigins = tracker.getOriginsRepository()
 				.getOrigins();
 		for (Origin existingOrigin : existingOrigins) {

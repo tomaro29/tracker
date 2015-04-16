@@ -1,13 +1,11 @@
 package fr.rostren.tracker.pdf.utils;
 
-import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.TrackerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +17,11 @@ import java.util.List;
  *
  */
 public class LineContent {
+	/** The default title. */
+	private static final String UNDEFINED_CATEGORY_TITLE = "UNDEFINED";
+	/** The tracker elements creator. */
+	private final TrackerCreator creator = new TrackerCreator();
+
 	/**
 	 * The Operation Type Class.
 	 * 
@@ -32,8 +35,6 @@ public class LineContent {
 		DEBIT
 	}
 
-	/** The default title. */
-	private static final String UNDEFINED_CATEGORY_TITLE = "UNDEFINED";
 	/** The operation. */
 	private Operation operation;
 
@@ -62,15 +63,10 @@ public class LineContent {
 			OperationType type, Origin origin) {
 		formatTitle(title);
 		if (OperationType.CREDIT.equals(type)) {
-			operation = TrackerFactory.eINSTANCE.createCreditOperation();
-			operation.setDate(date);
-			operation.setTotalAmount(amount);
+			creator.creditOperation(date, amount, origin);
 		} else if (OperationType.DEBIT.equals(type)) {
-			operation = TrackerFactory.eINSTANCE.createDebitOperation();
-			operation.setDate(date);
-			operation.setTotalAmount(amount);
+			creator.debitOperation(date, amount, origin);
 		}
-		operation.setOrigin(origin);
 	}
 
 	/**
@@ -107,27 +103,8 @@ public class LineContent {
 
 		// Adds a title to the operation
 		op.setOperationTitle(linkedOperationTitle);
-
 		// Adds the total amount as a subAmount to the operation
-		Amount newAmountObject = createCategoryAmount(op.getTotalAmount(),
-				linkedCategory);
-		op.getSubAmounts().add(newAmountObject);
-	}
-
-	/**
-	 * Creates an amount.
-	 * 
-	 * @param amount
-	 *            amount to create
-	 * @param category
-	 *            the linked category
-	 * @return the created amount
-	 */
-	public Amount createCategoryAmount(BigDecimal amount, Category category) {
-		Amount amountObject = TrackerFactory.eINSTANCE.createAmount();
-		amountObject.setSubAmount(amount);
-		amountObject.setCategory(category);
-		return amountObject;
+		creator.amount(op, op.getTotalAmount(), linkedCategory);
 	}
 
 	/**
@@ -147,11 +124,11 @@ public class LineContent {
 				.getCategories();
 		List<OperationTitle> titles = tracker.getOperationsTitlesRepositories()
 				.getOperationsTitles();
-		Category undefinedCategory = null;
+		Category theCategory = null;
 
 		for (Category category : categories) {
 			if (UNDEFINED_CATEGORY_TITLE.equals(category.getTitle())) {
-				undefinedCategory = category;
+				theCategory = category;
 			}
 			for (OperationTitle existingOperationTitle : category
 					.getOperationTitles()) {
@@ -161,18 +138,11 @@ public class LineContent {
 				}
 			}
 		}
-		if (undefinedCategory == null) {
-			undefinedCategory = TrackerFactory.eINSTANCE.createCategory();
-			undefinedCategory.setTitle(UNDEFINED_CATEGORY_TITLE);
-			tracker.getCategoriesRepository().getCategories()
-					.add(undefinedCategory);
+		if (theCategory == null) {
+			theCategory = creator.category(tracker, UNDEFINED_CATEGORY_TITLE);
 		}
-		linkedCategory = (Category) TrackerFactory.eINSTANCE
-				.createOperationTitle();
-		linkedOperationTitle.setTitle(string);
-		titles.add(linkedOperationTitle);
-		undefinedCategory.getOperationTitles().add(linkedOperationTitle);
-		return undefinedCategory;
+		creator.operationTitle(theCategory, titles, string);
+		return theCategory;
 	}
 
 	/**

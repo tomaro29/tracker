@@ -26,9 +26,7 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class CheckingAccountItemProvider extends AccountItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class CheckingAccountItemProvider extends AccountItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->

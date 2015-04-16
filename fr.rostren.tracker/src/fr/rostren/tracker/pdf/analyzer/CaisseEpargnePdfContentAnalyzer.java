@@ -1,42 +1,53 @@
 package fr.rostren.tracker.pdf.analyzer;
 
-import java.math.BigDecimal;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.LineContent;
 
+import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- * This class parses all caisse epargne Pdf format.
+ * This class parses all CE Pdf format.
  * 
  * @author maro
  */
 public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer {
-
-	private final Pattern DATE_LINE_PATTREN = Pattern
-			.compile("au (0[0-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - N° [1-9] Page [1-9] / [1-9][\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern VIREMENTS_RECUS_LINE_PATTREN = Pattern
-			.compile("Virements reçus[\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern PAIEMENT_CHEQUE_LINE_PATTREN = Pattern
-			.compile("Paiements chèques[\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern FRAIS_BANCAIRES_LINE_PATTREN = Pattern
-			.compile("Frais bancaires et cotisations : [+|-][0-9]+,[0-9]{2}\\s€[\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern PAIEMENTS_CARTES_BANCAIRES_LINE_PATTREN = Pattern
-			.compile("Paiements carte bancaire N°\\s[0-9]+[A-Z\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern RETRAITS_CARTES_BANCAIRES_LINE_PATTREN = Pattern
-			.compile("Retraits carte bancaire N°\\s[0-9]+[A-Z\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern PRELEVEMENTS_LINE_PATTREN = Pattern
-			.compile("Prélèvements"); //$NON-NLS-1$
-	private final Pattern OPERATIONS_DIVERSES_LINE_PATTREN = Pattern
-			.compile("Opérations diverses"); //$NON-NLS-1$
-	private final Pattern OPERATIONS_DEPOT_LINE_PATTREN = Pattern
-			.compile("Opérations de dépôt"); //$NON-NLS-1$
-
-	private final Pattern DATE_SEPARATOR_PATTREN = Pattern.compile("/"); //$NON-NLS-1$
-	private final Pattern COMPLETE_LINE_PATTERN = Pattern
+	/** The empty string. */
+	private static final String EMPTY_STR = " ";
+	/** The date line pattern. */
+	private static final Pattern DATE_LINE_PATTREN = Pattern
+			.compile("au (0[0-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - NÂ° [1-9] Page [1-9] / [1-9][\\s\\n\\r]*");
+	/** The virements recu line pattern. */
+	private static final Pattern VIREMENTS_RECUS_LINE_PATTREN = Pattern
+			.compile("Virements reÃ§us[\\s\\n\\r]*");
+	/** The paiement cheque line pattern. */
+	private static final Pattern PAIEMENT_CHEQUE_LINE_PATTREN = Pattern
+			.compile("Paiements chÃ¨ques[\\s\\n\\r]*");
+	/** The frais bancaires line pattern. */
+	private static final Pattern FRAIS_BANCAIRES_LINE_PATTREN = Pattern
+			.compile("Frais bancaires et cotisations : [+|-][0-9]+,[0-9]{2}\\sâ‚¬[\\s\\n\\r]*");
+	/** The paiements cartes bancaires line pattern. */
+	private static final Pattern PAIEMENTS_CARTES_BANCAIRES_LINE_PATTREN = Pattern
+			.compile("Paiements carte bancaire NÂ°\\s[0-9]+[A-Z\\s\\n\\r]*");
+	/** The retraits cartes bancaires line pattern. */
+	private static final Pattern RETRAITS_CARTES_BANCAIRES_LINE_PATTREN = Pattern
+			.compile("Retraits carte bancaire NÂ°\\s[0-9]+[A-Z\\s\\n\\r]*");
+	/** The prelevements line pattern. */
+	private static final Pattern PRELEVEMENTS_LINE_PATTREN = Pattern
+			.compile("PrÃ©lÃ¨vements");
+	/** The operations diverses line pattern. */
+	private static final Pattern OPERATIONS_DIVERSES_LINE_PATTREN = Pattern
+			.compile("OpÃ©rations diverses");
+	/** The operations depot line pattern. */
+	private static final Pattern OPERATIONS_DEPOT_LINE_PATTREN = Pattern
+			.compile("OpÃ©rations de dÃ©pÃ´t");
+	/** The date separator pattern. */
+	private static final Pattern DATE_SEPARATOR_PATTREN = Pattern.compile("/");
+	/** The complete line pattern. */
+	private static final Pattern COMPLETE_LINE_PATTERN = Pattern
 			.compile(PART_1_DATE_PATTREN.pattern()
 					.concat(DATE_SEPARATOR_PATTREN.pattern())
 					.concat(PART_2_DATE_PATTREN.pattern())
@@ -45,7 +56,8 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 					.concat(EMPTY_STRING_PATTREN.pattern())
 					.concat(AMOUNT_NUMBER_PATTREN.pattern())
 					.concat(EMPTY_STRING_PATTREN.pattern()));
-	private final Pattern PARTIAL_LINE_PATTERN = Pattern
+	/** The partial line pattern. */
+	private static final Pattern PARTIAL_LINE_PATTERN = Pattern
 			.compile(PART_1_DATE_PATTREN.pattern()
 					.concat(DATE_SEPARATOR_PATTREN.pattern())
 					.concat(PART_2_DATE_PATTREN.pattern())
@@ -53,13 +65,6 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 					.concat(OPERATION_TITLE_PATTREN.pattern())
 					.concat(EMPTY_STRING_PATTREN.pattern()));
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * fr.rostren.tracker.ui.pdf.analyzer.AbstractPdfContentAnalyzer#parseLine
-	 * (java.lang.String)
-	 */
 	@Override
 	public LineContent parseLine(String line, Origin origin) {
 		setCurrentLine(line);
@@ -105,26 +110,24 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 		} else if (getLastToken() != null
 				&& PdfToken.DATE.equals(getLastToken())) {
 			// DONOTHING
-		} else if (getLastToken() != null
-				&& (PdfToken.OPERATIONS_DEPOT.equals(getLastToken())
-						|| PdfToken.VIR_RECU.equals(getLastToken())
-						|| PdfToken.PAIE_CHEQUE.equals(getLastToken())
-						|| PdfToken.FRAIS_BANCAIRES.equals(getLastToken())
-						|| PdfToken.PAIEMENTS_CARTES.equals(getLastToken())
-						|| PdfToken.RETRAITS_CARTES.equals(getLastToken())
-						|| PdfToken.PRELEVEMENTS.equals(getLastToken()) || PdfToken.OPERATIONS_DIVERSES
-							.equals(getLastToken()))) {
-			return extractOperation(origin);
+		} else if (getLastToken() != null) {
+			switch (getLastToken()) {
+			case OPERATIONS_DEPOT:
+			case VIR_RECU:
+			case PAIE_CHEQUE:
+			case FRAIS_BANCAIRES:
+			case PAIEMENTS_CARTES:
+			case RETRAITS_CARTES:
+			case PRELEVEMENTS:
+			case OPERATIONS_DIVERSES:
+				return extractOperation(origin);
+			default:
+				break;
+			}
 		}
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.rostren.tracker.ui.pdf.analyzer.AbstractPdfContentAnalyzer#
-	 * extractDataFromCurrentLine()
-	 */
 	@Override
 	protected void extractDataFromCurrentLine() {
 		if (getCurrentLine().matches(COMPLETE_LINE_PATTERN.pattern())) {
@@ -140,7 +143,7 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 					&& beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
 				for (int index = 1; index < length - 2; index++) {
 					titleBuilder.append(getCurrentSplitLine()[index]);
-					titleBuilder.append(" "); //$NON-NLS-1$
+					titleBuilder.append(EMPTY_STR);
 				}
 				amountBuilder.append(beforeLastPart);
 				amountBuilder.append(lastPart);
@@ -150,7 +153,7 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 			} else {
 				for (int index = 1; index < getCurrentSplitLine().length - 1; index++) {
 					titleBuilder.append(getCurrentSplitLine()[index]);
-					titleBuilder.append(" "); //$NON-NLS-1$
+					titleBuilder.append(EMPTY_STR);
 				}
 
 				setLastPotentialAmount(getAmountAsDecimal(lastPart.toString()));
@@ -161,7 +164,7 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 			StringBuilder titleBuilder = new StringBuilder();
 			for (int index = 1; index < getCurrentSplitLine().length; index++) {
 				titleBuilder.append(getCurrentSplitLine()[index]);
-				titleBuilder.append(" "); //$NON-NLS-1$
+				titleBuilder.append(EMPTY_STR);
 			}
 			setLastPotentialOperationTitle(titleBuilder.toString());
 		} else if (getCurrentLine().matches(AMOUNT_NUMBER_PATTREN.pattern())) {
@@ -171,19 +174,17 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 	}
 
 	/**
+	 * Converts an amount as a string to an amount as a decimal.
+	 * 
 	 * @param amount
-	 * @return
+	 *            the amount as a string.
+	 * @return the amount as a decimal kind.
 	 */
 	private BigDecimal getAmountAsDecimal(String amount) {
-		return new BigDecimal(amount.replaceAll(" ", "").replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		return new BigDecimal(amount.replaceAll(EMPTY_STR, "").replaceAll(",",
+				"."));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.rostren.tracker.ui.pdf.analyzer.AbstractPdfContentAnalyzer#
-	 * extractDateFromCurrentLine()
-	 */
 	@Override
 	protected Date extractDateFromCurrentLine() {
 		Date date = null;

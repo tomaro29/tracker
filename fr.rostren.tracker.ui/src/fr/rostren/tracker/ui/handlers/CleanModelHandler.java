@@ -1,6 +1,9 @@
-/**
- */
 package fr.rostren.tracker.ui.handlers;
+
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
 
 import java.util.Iterator;
 
@@ -16,12 +19,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
-import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
-
+/**
+ * The Clean Model action handler.
+ * 
+ * @author maro
+ *
+ */
 public class CleanModelHandler extends AbstractHandler implements IHandler {
+	/** The parent shell. */
 	private Shell shell;
 
 	@Override
@@ -32,7 +37,7 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 		if (!(currentShell instanceof Shell)) {
 			return null;
 		}
-		setShell((Shell) currentShell);
+		shell = (Shell) currentShell;
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil
 				.getCurrentSelection(event);
 		TrackerEditorDev editor = (TrackerEditorDev) HandlerUtil
@@ -54,7 +59,8 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 
 						// delete all the account content and the pdf origins
 						CheckingAccount account = (CheckingAccount) selectedElement;
-						Tracker tracker = TrackerUtils.getTracker(account);
+						Tracker tracker = new TrackerUtils()
+								.getTracker(account);
 
 						tracker.getOriginsRepository().getOrigins().clear();
 						account.getOperations().clear();
@@ -67,11 +73,12 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 		return null;
 	}
 
+	/**
+	 * Returns the shell.
+	 * 
+	 * @return the shell.
+	 */
 	public Shell getShell() {
 		return this.shell;
-	}
-
-	private void setShell(Shell shell) {
-		this.shell = shell;
 	}
 }

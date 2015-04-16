@@ -25,9 +25,7 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OperationTitleItemProvider extends TitleItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class OperationTitleItemProvider extends TitleItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->

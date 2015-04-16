@@ -2,11 +2,6 @@
  */
 package fr.rostren.tracker.provider.dev;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.eclipse.emf.common.notify.AdapterFactory;
-
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.CreditOperation;
 import fr.rostren.tracker.DebitOperation;
@@ -17,6 +12,11 @@ import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.provider.CheckingAccountItemProvider;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.eclipse.emf.common.notify.AdapterFactory;
+
 /**
  * This is the item provider adapter for a
  * {@link fr.rostren.tracker.CheckingAccount} object. <!-- begin-user-doc -->
@@ -26,6 +26,9 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param adapterFactory
+	 *            the factory
 	 */
 	public CheckingAccountItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);
@@ -69,6 +72,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 				newOutgoingTransfer));
 	}
 
+	/**
+	 * Creates a new credit operation.
+	 * 
+	 * @return a new credit operation.
+	 */
 	private CreditOperation createNewCreditOperation() {
 		CreditOperation newCreditOperation = TrackerFactory.eINSTANCE
 				.createCreditOperation();
@@ -105,6 +113,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		return newDebitOperation;
 	}
 
+	/**
+	 * Creates a new incoming transfer.
+	 * 
+	 * @return a new incoming transfer.
+	 */
 	private IncomingTransfer createNewIncomingTransfer() {
 		IncomingTransfer newIncomingTransfer = TrackerFactory.eINSTANCE
 				.createIncomingTransfer();
@@ -123,6 +136,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		return newIncomingTransfer;
 	}
 
+	/**
+	 * Creates a new outgoing transfer.
+	 * 
+	 * @return a new outgoing transfer.
+	 */
 	private OutgoingTransfer createNewOutgoingTransfer() {
 		OutgoingTransfer newOutgoingTransfer = TrackerFactory.eINSTANCE
 				.createOutgoingTransfer();
@@ -140,5 +158,4 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		newOutgoingTransfer.setOperationTitle(operationTitle);
 		return newOutgoingTransfer;
 	}
-
 }

@@ -1,13 +1,13 @@
 package fr.rostren.tracker.pdf.analyzer;
 
-import java.math.BigDecimal;
-import java.util.regex.Pattern;
-
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
+
+import java.math.BigDecimal;
+import java.util.regex.Pattern;
 
 /**
  * An abstract Class to parse banks pdf format.
@@ -15,31 +15,69 @@ import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
  * @author maro
  */
 public abstract class AbstractPdfContentAnalyzer {
+	/** The space string pattern. */
+	static final Pattern SPACE_STRING_PATTREN = Pattern.compile("(\\s)+");
+	/** The empty string pattern. */
+	static final Pattern EMPTY_STRING_PATTREN = Pattern.compile("(\\s)*");
+	/** The first part of a date pattern. */
+	static final Pattern PART_1_DATE_PATTREN = Pattern
+			.compile("(0[0-9]|1[0-9]|2[0-9]|3[0-1])");
+	/** The second part of a date pattern. */
+	static final Pattern PART_2_DATE_PATTREN = Pattern
+			.compile("(0[1-9]|1[0-2])");
+	/** The operation title pattern. */
+	static final Pattern OPERATION_TITLE_PATTREN = Pattern.compile("(.)*");
+	/** The amount number pattern. */
+	static final Pattern AMOUNT_NUMBER_PATTREN = Pattern
+			.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})");
+	/** The number pattern. */
+	static final Pattern NUMBER_PATTREN = Pattern.compile("([0-9]*)");
+	/** The fact string pattern. */
+	static final Pattern FACT_PATTREN = Pattern.compile("FACT\\s+([0-9]*)");
 
+	/** The thirteen number. */
+	private static final int THIRTEEN = 13;
+	/** The nine number. */
+	private static final int NINE = 9;
+
+	/** The pdf tokens. */
 	protected enum PdfToken {
-		DATE, OPERATIONS_DEPOT, VIR_RECU, PAIE_CHEQUE, FRAIS_BANCAIRES, PAIEMENTS_CARTES, RETRAITS_CARTES, PRELEVEMENTS, OPERATIONS_DIVERSES
+		/** The date token. */
+		DATE,
+		/** The 'operations depot' token. */
+		OPERATIONS_DEPOT,
+		/** The 'vir recu' token. */
+		VIR_RECU,
+		/** The 'paie cheque' token. */
+		PAIE_CHEQUE,
+		/** The 'frais bancaires' token. */
+		FRAIS_BANCAIRES,
+		/** The 'paiements cartes' token. */
+		PAIEMENTS_CARTES,
+		/** The 'retraits cartes' token. */
+		RETRAITS_CARTES,
+		/** The 'prelevements' token. */
+		PRELEVEMENTS,
+		/** The operations 'diverses' token. */
+		OPERATIONS_DIVERSES
 	}
 
-	protected final Pattern SPACE_STRING_PATTREN = Pattern.compile("(\\s)+"); //$NON-NLS-1$
-	protected final Pattern EMPTY_STRING_PATTREN = Pattern.compile("(\\s)*"); //$NON-NLS-1$
-	protected final Pattern PART_1_DATE_PATTREN = Pattern
-			.compile("(0[0-9]|1[0-9]|2[0-9]|3[0-1])"); //$NON-NLS-1$
-	protected final Pattern PART_2_DATE_PATTREN = Pattern
-			.compile("(0[1-9]|1[0-2])"); //$NON-NLS-1$
-	protected final Pattern OPERATION_TITLE_PATTREN = Pattern.compile("(.)*"); //$NON-NLS-1$
-	protected final Pattern AMOUNT_NUMBER_PATTREN = Pattern
-			.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
-	protected final Pattern NUMBER_PATTREN = Pattern.compile("([0-9]*)"); //$NON-NLS-1$
-	protected final Pattern FACT_PATTREN = Pattern.compile("FACT\\s+([0-9]*)"); //$NON-NLS-1$
-
+	/** The current year as an integer. */
 	private int currentYear;
+
+	/** The complete current line content. */
 	private String currentLine;
+	/** The current split line. */
 	private String[] currentSplitLine;
+	/** The last parsed token. */
 	private PdfToken lastToken;
 
-	private Date lastPotentialDate = null;
-	private String lastPotentialOperationTitle = null;
-	private BigDecimal lastPotentialAmount = null;
+	/** The last parsed potential date. */
+	private Date lastPotentialDate;
+	/** The last parsed potential operation title. */
+	private String lastPotentialOperationTitle;
+	/** The last parsed potential amount. */
+	private BigDecimal lastPotentialAmount;
 
 	/**
 	 * This parses a single line in the pdf.
@@ -79,8 +117,8 @@ public abstract class AbstractPdfContentAnalyzer {
 						OperationType.DEBIT, origin);
 			} else if (lastToken != null
 					&& PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
-				if (lastPotentialOperationTitle.contains("REMISE") //$NON-NLS-1$
-						|| lastPotentialOperationTitle.contains("INTERETS")) { //$NON-NLS-1$
+				if (lastPotentialOperationTitle.contains("REMISE")
+						|| lastPotentialOperationTitle.contains("INTERETS")) {
 					// REMISE(C), INTERETS(C)
 					currentLineContent = new LineContent(lastPotentialDate,
 							lastPotentialOperationTitle, lastPotentialAmount,
@@ -100,18 +138,18 @@ public abstract class AbstractPdfContentAnalyzer {
 	/**
 	 * Tests if the operation characteristics are completely specified.
 	 * 
-	 * @return "true" if the date, the operationTitle and the amount are set.
-	 *         "false" otherwise.
+	 * @return <code>true</code> if the date, the operationTitle and the amount
+	 *         are set. <code>false</code> otherwise.
 	 */
-	protected boolean isCompleted() {
-		return (lastPotentialDate != null
-				&& lastPotentialOperationTitle != null && lastPotentialAmount != null);
+	protected final boolean isCompleted() {
+		return lastPotentialDate != null && lastPotentialOperationTitle != null
+				&& lastPotentialAmount != null;
 	}
 
 	/**
 	 * Resets the date, the operationTitle and the amount.
 	 */
-	protected void reset() {
+	private void reset() {
 		setLastPotentialDate(null);
 		setLastPotentialOperationTitle(null);
 		setLastPotentialAmount(null);
@@ -123,59 +161,66 @@ public abstract class AbstractPdfContentAnalyzer {
 	protected abstract void extractDataFromCurrentLine();
 
 	/**
-	 * Specify the date from the current line.
+	 * Specifies the date from the current line.
 	 * 
 	 * @return the Date from the current line
 	 */
 	protected abstract Date extractDateFromCurrentLine();
 
-	protected int extractYearFromCurrentLine() {
-		String year = currentLine.subSequence(9, 13).toString();
+	/**
+	 * Extracts the year from the current line.
+	 * 
+	 * @return the year parsed to integer value.
+	 */
+	protected final int extractYearFromCurrentLine() {
+		String year = currentLine.subSequence(NINE, THIRTEEN).toString();
 		return Integer.parseInt(year);
 	}
 
 	/**
-	 * Sets the Month basing on the current content
+	 * Sets the Month basing on the current content.
 	 * 
 	 * @param date
+	 *            the date.
 	 * @param content
+	 *            the current content.
 	 */
 	protected void setMonthFromContent(Date date, String content) {
 		switch (Integer.parseInt(content)) {
-		case 1:
+		case Month.JAN_VALUE:
 			date.setMonth(Month.JAN);
 			break;
-		case 2:
+		case Month.FEB_VALUE:
 			date.setMonth(Month.FEB);
 			break;
-		case 3:
+		case Month.MARS_VALUE:
 			date.setMonth(Month.MARS);
 			break;
-		case 4:
+		case Month.APR_VALUE:
 			date.setMonth(Month.APR);
 			break;
-		case 5:
+		case Month.MAY_VALUE:
 			date.setMonth(Month.MAY);
 			break;
-		case 6:
+		case Month.JUNE_VALUE:
 			date.setMonth(Month.JUNE);
 			break;
-		case 7:
+		case Month.JULY_VALUE:
 			date.setMonth(Month.JULY);
 			break;
-		case 8:
+		case Month.AUG_VALUE:
 			date.setMonth(Month.AUG);
 			break;
-		case 9:
+		case Month.SEPT_VALUE:
 			date.setMonth(Month.SEPT);
 			break;
-		case 10:
+		case Month.OCT_VALUE:
 			date.setMonth(Month.OCT);
 			break;
-		case 11:
+		case Month.NOV_VALUE:
 			date.setMonth(Month.NOV);
 			break;
-		case 12:
+		case Month.DEC_VALUE:
 			date.setMonth(Month.DEC);
 			break;
 		default:
@@ -184,87 +229,108 @@ public abstract class AbstractPdfContentAnalyzer {
 	}
 
 	/**
-	 * @return the currentLine
+	 * Returns the current line.
+	 * 
+	 * @return the currentLine.
 	 */
-	public String getCurrentLine() {
+	public final String getCurrentLine() {
 		return this.currentLine;
 	}
 
 	/**
-	 * @param currentLine
-	 *            the currentLine to set
+	 * Sets the line.
+	 * 
+	 * @param line
+	 *            the line to set.
 	 */
-	public void setCurrentLine(String currentLine) {
-		this.currentLine = currentLine;
+	public final void setCurrentLine(final String line) {
+		this.currentLine = line;
 	}
 
 	/**
-	 * @param lastPotentialOperationTitle
-	 *            the lastPotentialOperationTitle to set
+	 * Sets the operation title.
+	 * 
+	 * @param operationTitle
+	 *            the operation Title to set as a last potential title.
 	 */
-	public void setLastPotentialOperationTitle(
-			String lastPotentialOperationTitle) {
-		this.lastPotentialOperationTitle = lastPotentialOperationTitle;
+	public final void setLastPotentialOperationTitle(final String operationTitle) {
+		this.lastPotentialOperationTitle = operationTitle;
 	}
 
 	/**
-	 * @param lastPotentialAmount
-	 *            the lastPotentialAmount to set
+	 * Sets the amount.
+	 * 
+	 * @param amount
+	 *            the amount to set as a last parsed amount.
 	 */
-	public void setLastPotentialAmount(BigDecimal lastPotentialAmount) {
-		this.lastPotentialAmount = lastPotentialAmount;
+	public final void setLastPotentialAmount(final BigDecimal amount) {
+		this.lastPotentialAmount = amount;
 	}
 
 	/**
-	 * @return the currentYear
+	 * Returns the current year.
+	 * 
+	 * @return the current year.
 	 */
-	public int getCurrentYear() {
+	public final int getCurrentYear() {
 		return this.currentYear;
 	}
 
 	/**
-	 * @param currentYear
-	 *            the currentYear to set
+	 * Sets the current year.
+	 * 
+	 * @param year
+	 *            the year to set.
 	 */
-	public void setCurrentYear(int currentYear) {
-		this.currentYear = currentYear;
+	public final void setCurrentYear(final int year) {
+		this.currentYear = year;
 	}
 
 	/**
-	 * @param lastPotentialDate
-	 *            the lastPotentialDate to set
+	 * Sets the last potential date.
+	 * 
+	 * @param date
+	 *            the date to set as a last potential date.
 	 */
-	public void setLastPotentialDate(Date lastPotentialDate) {
-		this.lastPotentialDate = lastPotentialDate;
+	public final void setLastPotentialDate(final Date date) {
+		this.lastPotentialDate = date;
 	}
 
 	/**
+	 * Returns the current split line.
+	 * 
 	 * @return the currentSplitLine
 	 */
-	public String[] getCurrentSplitLine() {
+	public final String[] getCurrentSplitLine() {
 		return this.currentSplitLine;
 	}
 
 	/**
-	 * @param currentSplitLine
-	 *            the currentSplitLine to set
+	 * Sets the split line.
+	 * 
+	 * @param splitLine
+	 *            the splitLine to set
 	 */
-	public void setCurrentSplitLine(String[] currentSplitLine) {
-		this.currentSplitLine = currentSplitLine;
+	public final void setCurrentSplitLine(final String[] splitLine) {
+		this.currentSplitLine = splitLine;
 	}
 
 	/**
+	 * Returns the last token.
+	 * 
 	 * @return the lastToken
 	 */
-	public PdfToken getLastToken() {
+	public final PdfToken getLastToken() {
 		return this.lastToken;
 	}
 
 	/**
-	 * @param lastToken
-	 *            the lastToken to set
+	 * Sets the last parsed token.
+	 * 
+	 * @param token
+	 *            the token to set as a last parsed token
 	 */
-	public void setLastToken(PdfToken lastToken) {
-		this.lastToken = lastToken;
+	public final void setLastToken(final PdfToken token) {
+		this.lastToken = token;
 	}
 }

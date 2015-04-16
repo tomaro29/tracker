@@ -2,9 +2,9 @@
  */
 package fr.rostren.tracker.provider.dev;
 
-import org.eclipse.emf.common.notify.Adapter;
-
 import fr.rostren.tracker.provider.TrackerItemProviderAdapterFactory;
+
+import org.eclipse.emf.common.notify.Adapter;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support

@@ -1,18 +1,5 @@
 package fr.rostren.tracker.pdf.content.extractor;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
@@ -27,15 +14,31 @@ import fr.rostren.tracker.pdf.analyzer.CaisseEpargnePdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+
 /**
  * Extracts the content of a pdf file.
  * 
  * @author maro
  */
 public class PDFContentExtractor {
+	/** the list of parsed files. */
 	private Set<String> alreadyParsedFiles = new HashSet<String>();
 
+	/** the uri text. */
 	private String uriText;
+	/** the account. */
 	private Account account;
 
 	/**
@@ -52,11 +55,13 @@ public class PDFContentExtractor {
 	}
 
 	/**
-	 * Extracts all operations from a pdf file
+	 * Extracts all operations from a pdf file.
 	 * 
 	 * @return the list of all operations extracted from the pdf file.
 	 * @throws ExtractorException
+	 *             if a problem occurs while extracting information.
 	 * @throws IOException
+	 *             if a problem occurs while opening or closing the file.
 	 */
 	public List<Operation> extractOperations() throws ExtractorException,
 			IOException {
@@ -66,24 +71,30 @@ public class PDFContentExtractor {
 		}
 		List<Operation> operations = new ArrayList<Operation>();
 		for (String uri : getURISFromText()) {
-			if (!"".equals(uri)) { //$NON-NLS-1$
+			if (!uri.isEmpty()) { //$NON-NLS-1$
 				URI selectedFileURI = URI.createURI(uri);
+				String currentURI = uri;
 				if (selectedFileURI.isPlatform()) {
 					IPath resourcePath = new Path(
 							selectedFileURI.toPlatformString(true));
 					IFile iFile = ResourcesPlugin.getWorkspace().getRoot()
 							.getFile(resourcePath);
-					uri = iFile.getLocationURI().getPath();
+					currentURI = iFile.getLocationURI().getPath();
 				} else {
-					uri = selectedFileURI.toFileString();
+					currentURI = selectedFileURI.toFileString();
 				}
 
-				operations = extractOperations(uri);
+				operations = extractOperations(currentURI);
 			}
 		}
 		return operations;
 	}
 
+	/**
+	 * Returns Uris from text.
+	 * 
+	 * @return Uris from text.
+	 */
 	private String[] getURISFromText() {
 		if (uriText.contains(" ")) { //$NON-NLS-1$
 			return uriText.split(" "); //$NON-NLS-1$
@@ -98,7 +109,9 @@ public class PDFContentExtractor {
 	 *            the original PDF document path
 	 * @return the list of all the extracted operation
 	 * @throws ExtractorException
+	 *             if a problem occurs while extracting information.
 	 * @throws IOException
+	 *             if a problem occurs while opening or closing the file.
 	 */
 	private List<Operation> extractOperations(String src)
 			throws ExtractorException, IOException {
@@ -106,7 +119,7 @@ public class PDFContentExtractor {
 
 		PdfReader reader = new PdfReader(src);
 		try {
-			Tracker tracker = TrackerUtils.getTracker(account);
+			Tracker tracker = new TrackerUtils().getTracker(account);
 			CaisseEpargnePdfContentAnalyzer analyzer = new CaisseEpargnePdfContentAnalyzer();
 			for (int i = 0; i < reader.getNumberOfPages(); i++) {
 				int index = src.lastIndexOf("/") + 1; //$NON-NLS-1$
@@ -151,8 +164,8 @@ public class PDFContentExtractor {
 	 * 
 	 * @param tracker
 	 *            the current tracker model root
-	 * @param src
-	 *            the pdf source uri
+	 * @param originIdentifier
+	 *            the origin identifier
 	 * @return the created origin
 	 */
 	private Origin createLinkedOrigin(Tracker tracker, String originIdentifier) {
@@ -188,17 +201,11 @@ public class PDFContentExtractor {
 	}
 
 	/**
+	 * Return all parsed files.
+	 * 
 	 * @return the alreadyParsedOrigins
 	 */
 	public Set<String> getAlreadyParsedFiles() {
 		return alreadyParsedFiles;
-	}
-
-	/**
-	 * @param alreadyParsedFiles
-	 *            the alreadyParsedOrigins to set
-	 */
-	public void setAlreadyParsedFiles(Set<String> alreadyParsedFiles) {
-		this.alreadyParsedFiles = alreadyParsedFiles;
 	}
 }

@@ -2,6 +2,14 @@
  */
 package fr.rostren.tracker.ui.handlers;
 
+//CHECKSTYLE:OFF
+import fr.rostren.tracker.Account;
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
+import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
+import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -21,14 +29,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import fr.rostren.tracker.Account;
-import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
-import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
-import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
+//CHECKSTYLE:ON
 
+/**
+ * The import pdf action handler.
+ * 
+ * @author maro
+ *
+ */
 public class ImportPDFHandler extends AbstractHandler implements IHandler {
+	/** The parent shell. */
 	private Shell shell;
 
 	@Override
@@ -39,7 +49,7 @@ public class ImportPDFHandler extends AbstractHandler implements IHandler {
 		if (!(currentShell instanceof Shell)) {
 			return null;
 		}
-		setShell((Shell) currentShell);
+		shell = (Shell) currentShell;
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil
 				.getCurrentSelection(event);
 		TrackerEditorDev editor = (TrackerEditorDev) HandlerUtil
@@ -55,35 +65,8 @@ public class ImportPDFHandler extends AbstractHandler implements IHandler {
 							getShell());
 					int result = dialog.open();
 					if (result == Window.OK) {
-						// read the pdf file and extract data
-						PDFContentExtractor extractor = new PDFContentExtractor(
-								dialog.getURIText(), (Account) selectedElement);
-						try {
-							List<Operation> operations = extractor
-									.extractOperations();
-							// TODO open a dialog to confirm
-							// informations and add to the model
-
-							if (selectedElement instanceof CheckingAccount) {
-								CheckingAccount account = (CheckingAccount) selectedElement;
-								for (Operation operation : operations) {
-									account.getOperations().add(operation);
-								}
-							}
-							Set<String> alreadyParsedFiles = extractor
-									.getAlreadyParsedFiles();
-							if (!alreadyParsedFiles.isEmpty()) {
-								displayInformation(alreadyParsedFiles);
-							}
-						} catch (ExtractorException e) {
-							MessageDialog.openError(getShell(),
-									"Problem while extracting operations", //$NON-NLS-1$
-									e.getMessage());
-						} catch (IOException e) {
-							MessageDialog.openError(getShell(),
-									"Problem while opening the PDF File", //$NON-NLS-1$
-									e.getMessage());
-						}
+						readAndExtractData(dialog.getURIText(),
+								(Account) selectedElement);
 					}
 				}
 			}
@@ -93,6 +76,49 @@ public class ImportPDFHandler extends AbstractHandler implements IHandler {
 		return null;
 	}
 
+	/**
+	 * Reads and extract data from the given pdf file.
+	 * 
+	 * @param uri
+	 *            the pdf file uri as string.
+	 * @param account
+	 *            the selected account.
+	 */
+	private void readAndExtractData(String uri, Account account) {
+		// read the pdf file and extract data
+		PDFContentExtractor extractor = new PDFContentExtractor(uri, account);
+		try {
+			List<Operation> operations = extractor.extractOperations();
+			// TODO open a dialog to confirm
+			// informations and add to the model
+
+			if (account instanceof CheckingAccount) {
+				CheckingAccount checkingAccount = (CheckingAccount) account;
+				for (Operation operation : operations) {
+					checkingAccount.getOperations().add(operation);
+				}
+			}
+			Set<String> alreadyParsedFiles = extractor.getAlreadyParsedFiles();
+			if (!alreadyParsedFiles.isEmpty()) {
+				displayInformation(alreadyParsedFiles);
+			}
+		} catch (ExtractorException e) {
+			MessageDialog.openError(getShell(),
+					"Problem while extracting operations", //$NON-NLS-1$
+					e.getMessage());
+		} catch (IOException e) {
+			MessageDialog.openError(getShell(),
+					"Problem while opening the PDF File", //$NON-NLS-1$
+					e.getMessage());
+		}
+	}
+
+	/**
+	 * Displays information when the parsing is finish.
+	 * 
+	 * @param alreadyParsedFiles
+	 *            the already parsed files.
+	 */
 	private void displayInformation(Set<String> alreadyParsedFiles) {
 		StringBuilder sb = new StringBuilder();
 		for (String parsedOrigin : alreadyParsedFiles) {
@@ -108,11 +134,12 @@ public class ImportPDFHandler extends AbstractHandler implements IHandler {
 
 	}
 
+	/**
+	 * Returns the shell.
+	 * 
+	 * @return the shell.
+	 */
 	public Shell getShell() {
 		return this.shell;
-	}
-
-	private void setShell(Shell shell) {
-		this.shell = shell;
 	}
 }

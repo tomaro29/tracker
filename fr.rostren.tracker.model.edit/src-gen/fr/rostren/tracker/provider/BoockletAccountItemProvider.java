@@ -26,9 +26,7 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class BoockletAccountItemProvider extends AccountItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class BoockletAccountItemProvider extends AccountItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->

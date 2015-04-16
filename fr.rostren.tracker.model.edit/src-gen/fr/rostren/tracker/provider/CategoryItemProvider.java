@@ -28,13 +28,7 @@ import fr.rostren.tracker.TrackerPackage;
  * @generated
  */
 public class CategoryItemProvider
-	extends TitleItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends TitleItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

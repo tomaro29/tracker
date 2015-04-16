@@ -48,7 +48,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public static TrackerFactory init() {
 		try {
-			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory("http://fr.rostren.tracker/1.0"); 
+			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory(TrackerPackage.eNS_URI);
 			if (theTrackerFactory != null) {
 				return theTrackerFactory;
 			}

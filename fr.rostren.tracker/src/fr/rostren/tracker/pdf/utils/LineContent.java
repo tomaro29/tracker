@@ -1,8 +1,5 @@
 package fr.rostren.tracker.pdf.utils;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Date;
@@ -12,20 +9,43 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+/**
+ * The Line Content Class.
+ * 
+ * @author maro
+ *
+ */
 public class LineContent {
+	/**
+	 * The Operation Type Class.
+	 * 
+	 * @author maro
+	 *
+	 */
 	public enum OperationType {
-		CREDIT, DEBIT
+		/** Credit operation. */
+		CREDIT,
+		/** Debit operation. */
+		DEBIT
 	}
 
-	private final String UNDEFINED_CATEGORY_TITLE = "UNDEFINED"; //$NON-NLS-1$
+	/** The default title. */
+	private static final String UNDEFINED_CATEGORY_TITLE = "UNDEFINED";
+	/** The operation. */
 	private Operation operation;
 
+	/** The title. */
 	private String title;
+	/** The category. */
 	private Category linkedCategory;
+	/** The operation title. */
 	private OperationTitle linkedOperationTitle;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param date
 	 *            the date of the operation
@@ -40,74 +60,73 @@ public class LineContent {
 	 */
 	public LineContent(Date date, String title, BigDecimal amount,
 			OperationType type, Origin origin) {
-		this.setTitle(formatTitle(title));
+		formatTitle(title);
 		if (OperationType.CREDIT.equals(type)) {
-			setOperation(TrackerFactory.eINSTANCE.createCreditOperation());
-			getOperation().setDate(date);
-			getOperation().setTotalAmount(amount);
+			operation = TrackerFactory.eINSTANCE.createCreditOperation();
+			operation.setDate(date);
+			operation.setTotalAmount(amount);
 		} else if (OperationType.DEBIT.equals(type)) {
-			setOperation(TrackerFactory.eINSTANCE.createDebitOperation());
-			getOperation().setDate(date);
-			getOperation().setTotalAmount(amount);
+			operation = TrackerFactory.eINSTANCE.createDebitOperation();
+			operation.setDate(date);
+			operation.setTotalAmount(amount);
 		}
-		getOperation().setOrigin(origin);
+		operation.setOrigin(origin);
 	}
 
 	/**
-	 * Formats the title
+	 * Formats the title.
 	 * 
-	 * @param currentTitle
+	 * @param string
 	 *            the current title
-	 * @return the formatted title.
 	 */
-	private String formatTitle(String currentTitle) {
-		if (currentTitle.startsWith("ECH PRET")) { //$NON-NLS-1$
-			return "ECH PRET"; //$NON-NLS-1$
-		} else if (currentTitle.startsWith("INTERETS CREDITEURS")) { //$NON-NLS-1$
-			return "INTERETS CREDITEURS"; //$NON-NLS-1$
-		} else if (currentTitle.startsWith("CB LA POSTE")) { //$NON-NLS-1$
-			return "CB LA POSTE"; //$NON-NLS-1$
-		} else if (currentTitle.startsWith("CHEQUE")) { //$NON-NLS-1$
-			return "CHEQUE"; //$NON-NLS-1$
+	private void formatTitle(String string) {
+		if (string.startsWith("ECH PRET")) {
+			this.title = "ECH PRET";
+		} else if (string.startsWith("INTERETS CREDITEURS")) {
+			this.title = "INTERETS CREDITEURS";
+		} else if (string.startsWith("CB LA POSTE")) {
+			this.title = "CB LA POSTE";
+		} else if (string.startsWith("CHEQUE")) {
+			this.title = "CHEQUE";
 		}
-		return currentTitle;
+		this.title = string;
 	}
 
 	/**
-	 * Complete the operation
+	 * Complete the operation.
 	 * 
 	 * @param tracker
 	 *            the tracker root
-	 * @param operation
+	 * @param op
 	 *            the operation to complete
 	 */
-	public void completeOperation(Tracker tracker, Operation operation) {
-		if (getLinkedCategory() == null) {
-			setLinkedCategory(findCategoryInTrackerModel(getTitle(), tracker));
+	public void completeOperation(Tracker tracker, Operation op) {
+		if (linkedCategory == null) {
+			linkedCategory = findCategoryInTrackerModel(title, tracker);
 		}
 
 		// Adds a title to the operation
-		operation.setOperationTitle(getLinkedOperationTitle());
+		op.setOperationTitle(linkedOperationTitle);
 
 		// Adds the total amount as a subAmount to the operation
-		Amount newAmountObject = createCategoryAmount(operation.getTotalAmount(),
-				getLinkedCategory());
-		operation.getSubAmounts().add(newAmountObject);
+		Amount newAmountObject = createCategoryAmount(op.getTotalAmount(),
+				linkedCategory);
+		op.getSubAmounts().add(newAmountObject);
 	}
 
 	/**
-	 * Creates an amount
+	 * Creates an amount.
 	 * 
 	 * @param amount
 	 *            amount to create
-	 * @param linkedCategory
+	 * @param category
 	 *            the linked category
 	 * @return the created amount
 	 */
-	public Amount createCategoryAmount(BigDecimal amount, Category linkedCategory) {
+	public Amount createCategoryAmount(BigDecimal amount, Category category) {
 		Amount amountObject = TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setSubAmount(amount);
-		amountObject.setCategory(linkedCategory);
+		amountObject.setCategory(category);
 		return amountObject;
 	}
 
@@ -116,14 +135,14 @@ public class LineContent {
 	 * the tracker model. It creates a new category if the corresponding one
 	 * does not exist already in the model.
 	 * 
-	 * @param title
+	 * @param string
 	 *            the title of the category to find
 	 * @param tracker
 	 *            the tracker model
 	 * @return the corresponding category if it exists already, and a new
 	 *         category otherwise.
 	 */
-	public Category findCategoryInTrackerModel(String title, Tracker tracker) {
+	public Category findCategoryInTrackerModel(String string, Tracker tracker) {
 		List<Category> categories = tracker.getCategoriesRepository()
 				.getCategories();
 		List<OperationTitle> titles = tracker.getOperationsTitlesRepositories()
@@ -136,8 +155,8 @@ public class LineContent {
 			}
 			for (OperationTitle existingOperationTitle : category
 					.getOperationTitles()) {
-				if (existingOperationTitle.getTitle().equals(title)) {
-					setLinkedOperationTitle(existingOperationTitle);
+				if (existingOperationTitle.getTitle().equals(string)) {
+					linkedOperationTitle = existingOperationTitle;
 					return category;
 				}
 			}
@@ -148,72 +167,20 @@ public class LineContent {
 			tracker.getCategoriesRepository().getCategories()
 					.add(undefinedCategory);
 		}
-		setLinkedOperationTitle(TrackerFactory.eINSTANCE.createOperationTitle());
-		getLinkedOperationTitle().setTitle(title);
-		titles.add(getLinkedOperationTitle());
-		undefinedCategory.getOperationTitles().add(getLinkedOperationTitle());
+		linkedCategory = (Category) TrackerFactory.eINSTANCE
+				.createOperationTitle();
+		linkedOperationTitle.setTitle(string);
+		titles.add(linkedOperationTitle);
+		undefinedCategory.getOperationTitles().add(linkedOperationTitle);
 		return undefinedCategory;
 	}
 
 	/**
-	 * Returns the operation
+	 * Returns the operation.
 	 * 
-	 * @return the operation
+	 * @return the operation.
 	 */
 	public Operation getOperation() {
-		return this.operation;
-	}
-
-	/**
-	 * @param operation
-	 *            the operation to set
-	 */
-	public void setOperation(Operation operation) {
-		this.operation = operation;
-	}
-
-	/**
-	 * @return the linkedCategory
-	 */
-	public Category getLinkedCategory() {
-		return this.linkedCategory;
-	}
-
-	/**
-	 * @param linkedCategory
-	 *            the linkedCategory to set
-	 */
-	public void setLinkedCategory(Category linkedCategory) {
-		this.linkedCategory = linkedCategory;
-	}
-
-	/**
-	 * @return the linkedOperationTitle
-	 */
-	public OperationTitle getLinkedOperationTitle() {
-		return this.linkedOperationTitle;
-	}
-
-	/**
-	 * @param linkedOperationTitle
-	 *            the linkedOperationTitle to set
-	 */
-	public void setLinkedOperationTitle(OperationTitle linkedOperationTitle) {
-		this.linkedOperationTitle = linkedOperationTitle;
-	}
-
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return this.title;
-	}
-
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
+		return operation;
 	}
 }

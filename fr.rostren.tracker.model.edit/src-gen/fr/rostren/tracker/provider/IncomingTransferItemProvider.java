@@ -18,15 +18,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import fr.rostren.tracker.IncomingTransfer;
 
 /**
- * This is the item provider adapter for a
- * {@link fr.rostren.tracker.IncomingTransfer} object. <!-- begin-user-doc -->
+ * This is the item provider adapter for a {@link fr.rostren.tracker.IncomingTransfer} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
-public class IncomingTransferItemProvider extends TransferItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class IncomingTransferItemProvider extends TransferItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -53,15 +50,14 @@ public class IncomingTransferItemProvider extends TransferItemProvider
 	}
 
 	/**
-	 * This returns IncomingTransfer.gif. <!-- begin-user-doc --> <!--
+	 * This returns IncomingTransfer.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/IncomingTransfer"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IncomingTransfer"));
 	}
 
 	/**
@@ -90,11 +86,10 @@ public class IncomingTransferItemProvider extends TransferItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

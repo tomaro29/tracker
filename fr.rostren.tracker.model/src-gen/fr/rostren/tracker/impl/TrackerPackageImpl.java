@@ -1129,12 +1129,12 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createIsUniqueAnnotations() {
-		String source = "isUnique";		
+		String source = "isUnique";	
 		addAnnotation
 		  (getAccount_Identifier(), 
 		   source, 
 		   new String[] {
-		   });		
+		   });	
 		addAnnotation
 		  (getOrigin_Identifier(), 
 		   source, 

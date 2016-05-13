@@ -42,11 +42,9 @@ public class EditOperationHandler extends AbstractHandler {
 	    CheckAndEditOperationWizard wizard = new CheckAndEditOperationWizard(operations,
 		    (CheckingAccount) selectedOperation.eContainer());
 	    WizardDialog wizardDialog = new WizardDialog(shell, wizard);
-	    if (wizardDialog.open() == Window.CANCEL) {
-		// Abort all changes
-		return true;
+	    if (wizardDialog.open() == Window.OK) {
+		// FIXME apply changes in the model use a command
 	    }
-	    return false;
 	}
 	return null;
     }

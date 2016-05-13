@@ -4,11 +4,8 @@ import java.text.MessageFormat;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Rectangle;
@@ -16,7 +13,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -24,10 +20,10 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 public class CheckAndEditOperationWizardPage extends WizardPage {
@@ -51,7 +47,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
     private final String operationTitle;
 
     Amount lastSelection;
-    TableEditor editor;
+    // TableEditor editor;
 
     public CheckAndEditOperationWizardPage(Operation operation) {
 	super(MessageFormat.format(PAGE_NAME, operation.getOperationTitle().getTitle()));
@@ -72,7 +68,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	createOperationInfContainer(container);
 
 	// The operation sub amounts and category
-	createOperationRefinementArea(container);
+	createRefinementTable(container);
 
 	setControl(container);
 	setPageComplete(true);
@@ -87,28 +83,24 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	createOperationLabels(composite, operation);
     }
 
-    private void createOperationRefinementArea(Composite parent) {
-	Table table = createRefinementTable(parent);
-    }
-
     private Table createRefinementTable(Composite parent) {
 	final Composite container = createContainer(parent, 2, 1, 0);
 	final Composite group = createGroup(container, REFINEMENT_GROUP_TITLE);
 
 	final Table table = createTable(group);
 
-	editor = new TableEditor(table);
-	// The editor must have the same size as the cell and must
-	// not be any smaller than 50 pixels.
-	editor.horizontalAlignment = SWT.LEFT;
-	editor.grabHorizontal = true;
-	editor.minimumWidth = 50;
+	// editor = new TableEditor(table);
+	// // The editor must have the same size as the cell and must
+	// // not be any smaller than 50 pixels.
+	// editor.horizontalAlignment = SWT.LEFT;
+	// editor.grabHorizontal = true;
+	// editor.minimumWidth = 50;
 
 	table.addSelectionListener(new SelectionListener() {
 
 	    @Override
 	    public void widgetSelected(SelectionEvent event) {
-		disposeTextEditor();
+		// disposeTextEditor();
 
 		// the selected row
 		final TableItem item = (TableItem) event.item;
@@ -116,12 +108,13 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		    return;
 		lastSelection = (Amount) item.getData();
 
-		Text newEditor = new Text(table, SWT.NONE);
-		newEditor.setText(item.getText(0));
-		newEditor.addModifyListener(new EditorModifyListener(editor, item));
-		newEditor.selectAll();
-		newEditor.setFocus();
-		editor.setEditor(newEditor, item, 0);
+		// Text newEditor = new Text(table, SWT.NONE);
+		// newEditor.setText(item.getText(0));
+		// newEditor.addModifyListener(new EditorModifyListener(editor,
+		// item));
+		// newEditor.selectAll();
+		// newEditor.setFocus();
+		// editor.setEditor(newEditor, item, 0);
 	    }
 
 	    @Override
@@ -229,7 +222,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	    }
 
 	    private void performAdd() {
-		// FIXME implement this
+		// disposeTextEditor();
+
+		Amount newSubAmount = TrackerFactory.eINSTANCE.createAmount();
+		operation.getSubAmounts().add(newSubAmount);
 	    }
 
 	    private void performEdit(Amount amount) {
@@ -254,11 +250,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	composite.pack();
     }
 
-    void disposeTextEditor() {
-	Control currentEditor = editor.getEditor();
-	if (currentEditor != null)
-	    currentEditor.dispose();
-    }
+    // void disposeTextEditor() {
+    // Control currentEditor = editor.getEditor();
+    // if (currentEditor != null)
+    // currentEditor.dispose();
+    // }
 
     private void createOperationLabels(Composite subContainer, Operation operation) {
 	createLabel(subContainer, OPERATION_TYPE_LABEL, operation.eClass().getName());
@@ -274,27 +270,27 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	textLabel.setText(textLabelContent);
     }
 
-    private static class EditorModifyListener implements ModifyListener {
-	private final TableEditor editor;
-	private final TableItem item;
-
-	public EditorModifyListener(TableEditor editor, TableItem item) {
-	    this.editor = editor;
-	    this.item = item;
-	}
-
-	@Override
-	public void modifyText(ModifyEvent me) {
-	    Text text = (Text) editor.getEditor();
-	    Amount amount = (Amount) item.getData();
-
-	    String newText = text.getText();
-	    if (newText != null && !newText.isEmpty())
-		editor.getItem().setText(0, newText);
-	    else
-		text.setText(TrackerUtils.UNDEFINED_TITLE);
-	    // TODO Set an amount data to the new text value
-	    // model.set?(amount, newText);
-	}
-    }
+    // private static class EditorModifyListener implements ModifyListener {
+    // private final TableEditor editor;
+    // private final TableItem item;
+    //
+    // public EditorModifyListener(TableEditor editor, TableItem item) {
+    // this.editor = editor;
+    // this.item = item;
+    // }
+    //
+    // @Override
+    // public void modifyText(ModifyEvent me) {
+    // Text text = (Text) editor.getEditor();
+    // Amount amount = (Amount) item.getData();
+    //
+    // String newText = text.getText();
+    // if (newText != null && !newText.isEmpty())
+    // editor.getItem().setText(0, newText);
+    // else
+    // text.setText(TrackerUtils.UNDEFINED_TITLE);
+    // // TODO Set an amount data to the new text value
+    // // model.set?(amount, newText);
+    // }
+    // }
 }

@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.Amount#getCategory <em>Category</em>}</li>
  *   <li>{@link fr.rostren.tracker.Amount#getSubAmount <em>Sub Amount</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.rostren.tracker.TrackerPackage#getAmount()
  * @model
@@ -24,55 +24,55 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Amount extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Sub Amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Sub Amount</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sub Amount</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Amount</em>' attribute.
-	 * @see #setSubAmount(BigDecimal)
-	 * @see fr.rostren.tracker.TrackerPackage#getAmount_SubAmount()
-	 * @model
-	 * @generated
-	 */
+         * @return the value of the '<em>Sub Amount</em>' attribute.
+         * @see #setSubAmount(BigDecimal)
+         * @see fr.rostren.tracker.TrackerPackage#getAmount_SubAmount()
+         * @model
+         * @generated
+         */
 	BigDecimal getSubAmount();
 
 	/**
-	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getSubAmount <em>Sub Amount</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link fr.rostren.tracker.Amount#getSubAmount <em>Sub Amount</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Sub Amount</em>' attribute.
-	 * @see #getSubAmount()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Sub Amount</em>' attribute.
+         * @see #getSubAmount()
+         * @generated
+         */
 	void setSubAmount(BigDecimal value);
 
 	/**
-	 * Returns the value of the '<em><b>Category</b></em>' reference.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Category</b></em>' reference.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Category</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Category</em>' reference.
-	 * @see #setCategory(Category)
-	 * @see fr.rostren.tracker.TrackerPackage#getAmount_Category()
-	 * @model required="true"
-	 * @generated
-	 */
+         * @return the value of the '<em>Category</em>' reference.
+         * @see #setCategory(Category)
+         * @see fr.rostren.tracker.TrackerPackage#getAmount_Category()
+         * @model required="true"
+         * @generated
+         */
 	Category getCategory();
 
 	/**
-	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getCategory <em>Category</em>}' reference.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link fr.rostren.tracker.Amount#getCategory <em>Category</em>}' reference.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Category</em>' reference.
-	 * @see #getCategory()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Category</em>' reference.
+         * @see #getCategory()
+         * @generated
+         */
 	void setCategory(Category value);
 
 } // Amount

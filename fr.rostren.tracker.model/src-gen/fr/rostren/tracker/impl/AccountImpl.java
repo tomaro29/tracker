@@ -25,255 +25,255 @@ import java.util.Collection;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.AccountImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.AccountImpl#getAmount <em>Amount</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.AccountImpl#getIdentifier <em>Identifier</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public abstract class AccountImpl extends EObjectImpl implements Account {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getName()
+         * @generated
+         * @ordered
+         */
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getName()
+         * @generated
+         * @ordered
+         */
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getAmount() <em>Amount</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getAmount() <em>Amount</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAmount()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getAmount()
+         * @generated
+         * @ordered
+         */
 	protected static final float AMOUNT_EDEFAULT = 0.0F;
 
 	/**
-	 * The cached value of the '{@link #getAmount() <em>Amount</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getAmount() <em>Amount</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAmount()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getAmount()
+         * @generated
+         * @ordered
+         */
 	protected float amount = AMOUNT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIdentifier()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getIdentifier()
+         * @generated
+         * @ordered
+         */
 	protected static final int IDENTIFIER_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIdentifier()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getIdentifier()
+         * @generated
+         * @ordered
+         */
 	protected int identifier = IDENTIFIER_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected AccountImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.ACCOUNT;
-	}
+                return TrackerPackage.Literals.ACCOUNT;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getName() {
-		return name;
-	}
+                return name;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__NAME, oldName, name));
-	}
+                String oldName = name;
+                name = newName;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__NAME, oldName, name));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public float getAmount() {
-		return amount;
-	}
+                return amount;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setAmount(float newAmount) {
-		float oldAmount = amount;
-		amount = newAmount;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__AMOUNT, oldAmount, amount));
-	}
+                float oldAmount = amount;
+                amount = newAmount;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__AMOUNT, oldAmount, amount));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public int getIdentifier() {
-		return identifier;
-	}
+                return identifier;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setIdentifier(int newIdentifier) {
-		int oldIdentifier = identifier;
-		identifier = newIdentifier;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__IDENTIFIER, oldIdentifier, identifier));
-	}
+                int oldIdentifier = identifier;
+                identifier = newIdentifier;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__IDENTIFIER, oldIdentifier, identifier));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TrackerPackage.ACCOUNT__NAME:
-				return getName();
-			case TrackerPackage.ACCOUNT__AMOUNT:
-				return getAmount();
-			case TrackerPackage.ACCOUNT__IDENTIFIER:
-				return getIdentifier();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ACCOUNT__NAME:
+                                return getName();
+                        case TrackerPackage.ACCOUNT__AMOUNT:
+                                return getAmount();
+                        case TrackerPackage.ACCOUNT__IDENTIFIER:
+                                return getIdentifier();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TrackerPackage.ACCOUNT__NAME:
-				setName((String)newValue);
-				return;
-			case TrackerPackage.ACCOUNT__AMOUNT:
-				setAmount((Float)newValue);
-				return;
-			case TrackerPackage.ACCOUNT__IDENTIFIER:
-				setIdentifier((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ACCOUNT__NAME:
+                                setName((String)newValue);
+                                return;
+                        case TrackerPackage.ACCOUNT__AMOUNT:
+                                setAmount((Float)newValue);
+                                return;
+                        case TrackerPackage.ACCOUNT__IDENTIFIER:
+                                setIdentifier((Integer)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.ACCOUNT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case TrackerPackage.ACCOUNT__AMOUNT:
-				setAmount(AMOUNT_EDEFAULT);
-				return;
-			case TrackerPackage.ACCOUNT__IDENTIFIER:
-				setIdentifier(IDENTIFIER_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ACCOUNT__NAME:
+                                setName(NAME_EDEFAULT);
+                                return;
+                        case TrackerPackage.ACCOUNT__AMOUNT:
+                                setAmount(AMOUNT_EDEFAULT);
+                                return;
+                        case TrackerPackage.ACCOUNT__IDENTIFIER:
+                                setIdentifier(IDENTIFIER_EDEFAULT);
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.ACCOUNT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TrackerPackage.ACCOUNT__AMOUNT:
-				return amount != AMOUNT_EDEFAULT;
-			case TrackerPackage.ACCOUNT__IDENTIFIER:
-				return identifier != IDENTIFIER_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ACCOUNT__NAME:
+                                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+                        case TrackerPackage.ACCOUNT__AMOUNT:
+                                return amount != AMOUNT_EDEFAULT;
+                        case TrackerPackage.ACCOUNT__IDENTIFIER:
+                                return identifier != IDENTIFIER_EDEFAULT;
+                }
+                return super.eIsSet(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+                if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", amount: ");
-		result.append(amount);
-		result.append(", identifier: ");
-		result.append(identifier);
-		result.append(')');
-		return result.toString();
-	}
+                StringBuffer result = new StringBuffer(super.toString());
+                result.append(" (name: ");
+                result.append(name);
+                result.append(", amount: ");
+                result.append(amount);
+                result.append(", identifier: ");
+                result.append(identifier);
+                result.append(')');
+                return result.toString();
+        }
 
 } //AccountImpl

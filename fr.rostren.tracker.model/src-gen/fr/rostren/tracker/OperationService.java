@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface OperationService extends EObject {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	float sumAmounts(Operation operation);
 
 } // OperationService

@@ -12,5 +12,6 @@ Export-Package: fr.rostren.tracker.provider,
  fr.rostren.tracker.provider.dev
 Require-Bundle: org.eclipse.core.runtime,
  fr.rostren.tracker.model;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-ActivationPolicy: lazy

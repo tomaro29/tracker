@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore,
  org.eclipse.core.resources,
  fr.rostren.tracker.model;bundle-version="1.0.0",
- fr.rostren.tracker.model.editor;bundle-version="1.0.0"
+ fr.rostren.tracker.model.editor;bundle-version="1.0.0",
+ org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
  lib/itextpdf-5.5.0.jar

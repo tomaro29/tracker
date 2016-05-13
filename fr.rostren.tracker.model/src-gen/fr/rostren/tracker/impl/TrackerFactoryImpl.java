@@ -41,359 +41,359 @@ import fr.rostren.tracker.TrackerPackage;
  */
 public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+         * Creates the default factory implementation.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public static TrackerFactory init() {
-		try {
-			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory("http://fr.rostren.tracker/1.0"); 
-			if (theTrackerFactory != null) {
-				return theTrackerFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new TrackerFactoryImpl();
-	}
+                try {
+                        TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory(TrackerPackage.eNS_URI);
+                        if (theTrackerFactory != null) {
+                                return theTrackerFactory;
+                        }
+                }
+                catch (Exception exception) {
+                        EcorePlugin.INSTANCE.log(exception);
+                }
+                return new TrackerFactoryImpl();
+        }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+         * Creates an instance of the factory.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public TrackerFactoryImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case TrackerPackage.OWNER: return createOwner();
-			case TrackerPackage.CHECKING_ACCOUNT: return createCheckingAccount();
-			case TrackerPackage.BOOCKLET_ACCOUNT: return createBoockletAccount();
-			case TrackerPackage.CREDIT_OPERATION: return createCreditOperation();
-			case TrackerPackage.DEBIT_OPERATION: return createDebitOperation();
-			case TrackerPackage.INCOMING_TRANSFER: return createIncomingTransfer();
-			case TrackerPackage.OUTGOING_TRANSFER: return createOutgoingTransfer();
-			case TrackerPackage.CATEGORY: return createCategory();
-			case TrackerPackage.OPERATION_TITLE: return createOperationTitle();
-			case TrackerPackage.AMOUNT: return createAmount();
-			case TrackerPackage.OPERATION_TITLE_SERVICE: return createOperationTitleService();
-			case TrackerPackage.CATEGORY_SERVICE: return createCategoryService();
-			case TrackerPackage.ACCOUNT_SERVICE: return createAccountService();
-			case TrackerPackage.OPERATION_SERVICE: return createOperationService();
-			case TrackerPackage.CATEGORIES_REPOSITORY: return createCategoriesRepository();
-			case TrackerPackage.DATE: return createDate();
-			case TrackerPackage.ORIGIN: return createOrigin();
-			case TrackerPackage.ORIGINS_REPOSITORY: return createOriginsRepository();
-			case TrackerPackage.TRACKER: return createTracker();
-			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY: return createOperationsTitleRepository();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eClass.getClassifierID()) {
+                        case TrackerPackage.OWNER: return createOwner();
+                        case TrackerPackage.CHECKING_ACCOUNT: return createCheckingAccount();
+                        case TrackerPackage.BOOCKLET_ACCOUNT: return createBoockletAccount();
+                        case TrackerPackage.CREDIT_OPERATION: return createCreditOperation();
+                        case TrackerPackage.DEBIT_OPERATION: return createDebitOperation();
+                        case TrackerPackage.INCOMING_TRANSFER: return createIncomingTransfer();
+                        case TrackerPackage.OUTGOING_TRANSFER: return createOutgoingTransfer();
+                        case TrackerPackage.CATEGORY: return createCategory();
+                        case TrackerPackage.OPERATION_TITLE: return createOperationTitle();
+                        case TrackerPackage.AMOUNT: return createAmount();
+                        case TrackerPackage.OPERATION_TITLE_SERVICE: return createOperationTitleService();
+                        case TrackerPackage.CATEGORY_SERVICE: return createCategoryService();
+                        case TrackerPackage.ACCOUNT_SERVICE: return createAccountService();
+                        case TrackerPackage.OPERATION_SERVICE: return createOperationService();
+                        case TrackerPackage.CATEGORIES_REPOSITORY: return createCategoriesRepository();
+                        case TrackerPackage.DATE: return createDate();
+                        case TrackerPackage.ORIGIN: return createOrigin();
+                        case TrackerPackage.ORIGINS_REPOSITORY: return createOriginsRepository();
+                        case TrackerPackage.TRACKER: return createTracker();
+                        case TrackerPackage.OPERATIONS_TITLE_REPOSITORY: return createOperationsTitleRepository();
+                        default:
+                                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case TrackerPackage.MONTH:
-				return createMonthFromString(eDataType, initialValue);
-			case TrackerPackage.ORIGIN_TYPE:
-				return createOriginTypeFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eDataType.getClassifierID()) {
+                        case TrackerPackage.MONTH:
+                                return createMonthFromString(eDataType, initialValue);
+                        case TrackerPackage.ORIGIN_TYPE:
+                                return createOriginTypeFromString(eDataType, initialValue);
+                        default:
+                                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case TrackerPackage.MONTH:
-				return convertMonthToString(eDataType, instanceValue);
-			case TrackerPackage.ORIGIN_TYPE:
-				return convertOriginTypeToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eDataType.getClassifierID()) {
+                        case TrackerPackage.MONTH:
+                                return convertMonthToString(eDataType, instanceValue);
+                        case TrackerPackage.ORIGIN_TYPE:
+                                return convertOriginTypeToString(eDataType, instanceValue);
+                        default:
+                                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Owner createOwner() {
-		OwnerImpl owner = new OwnerImpl();
-		return owner;
-	}
+                OwnerImpl owner = new OwnerImpl();
+                return owner;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public CheckingAccount createCheckingAccount() {
-		CheckingAccountImpl checkingAccount = new CheckingAccountImpl();
-		return checkingAccount;
-	}
+                CheckingAccountImpl checkingAccount = new CheckingAccountImpl();
+                return checkingAccount;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public BoockletAccount createBoockletAccount() {
-		BoockletAccountImpl boockletAccount = new BoockletAccountImpl();
-		return boockletAccount;
-	}
+                BoockletAccountImpl boockletAccount = new BoockletAccountImpl();
+                return boockletAccount;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public CreditOperation createCreditOperation() {
-		CreditOperationImpl creditOperation = new CreditOperationImpl();
-		return creditOperation;
-	}
+                CreditOperationImpl creditOperation = new CreditOperationImpl();
+                return creditOperation;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public DebitOperation createDebitOperation() {
-		DebitOperationImpl debitOperation = new DebitOperationImpl();
-		return debitOperation;
-	}
+                DebitOperationImpl debitOperation = new DebitOperationImpl();
+                return debitOperation;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public IncomingTransfer createIncomingTransfer() {
-		IncomingTransferImpl incomingTransfer = new IncomingTransferImpl();
-		return incomingTransfer;
-	}
+                IncomingTransferImpl incomingTransfer = new IncomingTransferImpl();
+                return incomingTransfer;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OutgoingTransfer createOutgoingTransfer() {
-		OutgoingTransferImpl outgoingTransfer = new OutgoingTransferImpl();
-		return outgoingTransfer;
-	}
+                OutgoingTransferImpl outgoingTransfer = new OutgoingTransferImpl();
+                return outgoingTransfer;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Category createCategory() {
-		CategoryImpl category = new CategoryImpl();
-		return category;
-	}
+                CategoryImpl category = new CategoryImpl();
+                return category;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OperationTitle createOperationTitle() {
-		OperationTitleImpl operationTitle = new OperationTitleImpl();
-		return operationTitle;
-	}
+                OperationTitleImpl operationTitle = new OperationTitleImpl();
+                return operationTitle;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Amount createAmount() {
-		AmountImpl amount = new AmountImpl();
-		return amount;
-	}
+                AmountImpl amount = new AmountImpl();
+                return amount;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OperationTitleService createOperationTitleService() {
-		OperationTitleServiceImpl operationTitleService = new OperationTitleServiceImpl();
-		return operationTitleService;
-	}
+                OperationTitleServiceImpl operationTitleService = new OperationTitleServiceImpl();
+                return operationTitleService;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public CategoryService createCategoryService() {
-		CategoryServiceImpl categoryService = new CategoryServiceImpl();
-		return categoryService;
-	}
+                CategoryServiceImpl categoryService = new CategoryServiceImpl();
+                return categoryService;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public AccountService createAccountService() {
-		AccountServiceImpl accountService = new AccountServiceImpl();
-		return accountService;
-	}
+                AccountServiceImpl accountService = new AccountServiceImpl();
+                return accountService;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OperationService createOperationService() {
-		OperationServiceImpl operationService = new OperationServiceImpl();
-		return operationService;
-	}
+                OperationServiceImpl operationService = new OperationServiceImpl();
+                return operationService;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public CategoriesRepository createCategoriesRepository() {
-		CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-		return categoriesRepository;
-	}
+                CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+                return categoriesRepository;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Date createDate() {
-		DateImpl date = new DateImpl();
-		return date;
-	}
+                DateImpl date = new DateImpl();
+                return date;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Origin createOrigin() {
-		OriginImpl origin = new OriginImpl();
-		return origin;
-	}
+                OriginImpl origin = new OriginImpl();
+                return origin;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OriginsRepository createOriginsRepository() {
-		OriginsRepositoryImpl originsRepository = new OriginsRepositoryImpl();
-		return originsRepository;
-	}
+                OriginsRepositoryImpl originsRepository = new OriginsRepositoryImpl();
+                return originsRepository;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Tracker createTracker() {
-		TrackerImpl tracker = new TrackerImpl();
-		return tracker;
-	}
+                TrackerImpl tracker = new TrackerImpl();
+                return tracker;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OperationsTitleRepository createOperationsTitleRepository() {
-		OperationsTitleRepositoryImpl operationsTitleRepository = new OperationsTitleRepositoryImpl();
-		return operationsTitleRepository;
-	}
+                OperationsTitleRepositoryImpl operationsTitleRepository = new OperationsTitleRepositoryImpl();
+                return operationsTitleRepository;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Month createMonthFromString(EDataType eDataType, String initialValue) {
-		Month result = Month.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+                Month result = Month.get(initialValue);
+                if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+                return result;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String convertMonthToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+                return instanceValue == null ? null : instanceValue.toString();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OriginType createOriginTypeFromString(EDataType eDataType, String initialValue) {
-		OriginType result = OriginType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+                OriginType result = OriginType.get(initialValue);
+                if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+                return result;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String convertOriginTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+                return instanceValue == null ? null : instanceValue.toString();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public TrackerPackage getTrackerPackage() {
-		return (TrackerPackage)getEPackage();
-	}
+                return (TrackerPackage)getEPackage();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+         * @deprecated
+         * @generated
+         */
 	@Deprecated
 	public static TrackerPackage getPackage() {
-		return TrackerPackage.eINSTANCE;
-	}
+                return TrackerPackage.eINSTANCE;
+        }
 
 } //TrackerFactoryImpl

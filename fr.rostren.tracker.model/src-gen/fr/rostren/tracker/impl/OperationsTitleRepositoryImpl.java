@@ -26,127 +26,127 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.OperationsTitleRepositoryImpl#getOperationsTitles <em>Operations Titles</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class OperationsTitleRepositoryImpl extends EObjectImpl implements OperationsTitleRepository {
 	/**
-	 * The cached value of the '{@link #getOperationsTitles() <em>Operations Titles</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getOperationsTitles() <em>Operations Titles</em>}' containment reference list.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperationsTitles()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getOperationsTitles()
+         * @generated
+         * @ordered
+         */
 	protected EList<OperationTitle> operationsTitles;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected OperationsTitleRepositoryImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY;
-	}
+                return TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public EList<OperationTitle> getOperationsTitles() {
-		if (operationsTitles == null) {
-			operationsTitles = new EObjectContainmentEList<OperationTitle>(OperationTitle.class, this, TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES);
-		}
-		return operationsTitles;
-	}
+                if (operationsTitles == null) {
+                        operationsTitles = new EObjectContainmentEList<OperationTitle>(OperationTitle.class, this, TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES);
+                }
+                return operationsTitles;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
-				return ((InternalEList<?>)getOperationsTitles()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
+                                return ((InternalEList<?>)getOperationsTitles()).basicRemove(otherEnd, msgs);
+                }
+                return super.eInverseRemove(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
-				return getOperationsTitles();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
+                                return getOperationsTitles();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
-				getOperationsTitles().clear();
-				getOperationsTitles().addAll((Collection<? extends OperationTitle>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
+                                getOperationsTitles().clear();
+                                getOperationsTitles().addAll((Collection<? extends OperationTitle>)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
-				getOperationsTitles().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
+                                getOperationsTitles().clear();
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
-				return operationsTitles != null && !operationsTitles.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES:
+                                return operationsTitles != null && !operationsTitles.isEmpty();
+                }
+                return super.eIsSet(featureID);
+        }
 
 } //OperationsTitleRepositoryImpl

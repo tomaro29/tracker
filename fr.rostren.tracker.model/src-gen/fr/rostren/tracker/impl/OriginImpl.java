@@ -29,264 +29,264 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.OriginImpl#getType <em>Type</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.OriginImpl#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.OriginImpl#getOperations <em>Operations</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class OriginImpl extends EObjectImpl implements Origin {
 	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getType()
+         * @generated
+         * @ordered
+         */
 	protected static final OriginType TYPE_EDEFAULT = OriginType.PDF_FILE;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getType()
+         * @generated
+         * @ordered
+         */
 	protected OriginType type = TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIdentifier()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getIdentifier()
+         * @generated
+         * @ordered
+         */
 	protected static final String IDENTIFIER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIdentifier()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getIdentifier()
+         * @generated
+         * @ordered
+         */
 	protected String identifier = IDENTIFIER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' reference list.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getOperations() <em>Operations</em>}' reference list.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getOperations()
+         * @generated
+         * @ordered
+         */
 	protected EList<Operation> operations;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected OriginImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.ORIGIN;
-	}
+                return TrackerPackage.Literals.ORIGIN;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public OriginType getType() {
-		return type;
-	}
+                return type;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setType(OriginType newType) {
-		OriginType oldType = type;
-		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ORIGIN__TYPE, oldType, type));
-	}
+                OriginType oldType = type;
+                type = newType == null ? TYPE_EDEFAULT : newType;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ORIGIN__TYPE, oldType, type));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getIdentifier() {
-		return identifier;
-	}
+                return identifier;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setIdentifier(String newIdentifier) {
-		String oldIdentifier = identifier;
-		identifier = newIdentifier;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ORIGIN__IDENTIFIER, oldIdentifier, identifier));
-	}
+                String oldIdentifier = identifier;
+                identifier = newIdentifier;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ORIGIN__IDENTIFIER, oldIdentifier, identifier));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public EList<Operation> getOperations() {
-		if (operations == null) {
-			operations = new EObjectWithInverseResolvingEList<Operation>(Operation.class, this, TrackerPackage.ORIGIN__OPERATIONS, TrackerPackage.OPERATION__ORIGIN);
-		}
-		return operations;
-	}
+                if (operations == null) {
+                        operations = new EObjectWithInverseResolvingEList<Operation>(Operation.class, this, TrackerPackage.ORIGIN__OPERATIONS, TrackerPackage.OPERATION__ORIGIN);
+                }
+                return operations;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.ORIGIN__OPERATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperations()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ORIGIN__OPERATIONS:
+                                return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperations()).basicAdd(otherEnd, msgs);
+                }
+                return super.eInverseAdd(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.ORIGIN__OPERATIONS:
-				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ORIGIN__OPERATIONS:
+                                return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+                }
+                return super.eInverseRemove(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TrackerPackage.ORIGIN__TYPE:
-				return getType();
-			case TrackerPackage.ORIGIN__IDENTIFIER:
-				return getIdentifier();
-			case TrackerPackage.ORIGIN__OPERATIONS:
-				return getOperations();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ORIGIN__TYPE:
+                                return getType();
+                        case TrackerPackage.ORIGIN__IDENTIFIER:
+                                return getIdentifier();
+                        case TrackerPackage.ORIGIN__OPERATIONS:
+                                return getOperations();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TrackerPackage.ORIGIN__TYPE:
-				setType((OriginType)newValue);
-				return;
-			case TrackerPackage.ORIGIN__IDENTIFIER:
-				setIdentifier((String)newValue);
-				return;
-			case TrackerPackage.ORIGIN__OPERATIONS:
-				getOperations().clear();
-				getOperations().addAll((Collection<? extends Operation>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ORIGIN__TYPE:
+                                setType((OriginType)newValue);
+                                return;
+                        case TrackerPackage.ORIGIN__IDENTIFIER:
+                                setIdentifier((String)newValue);
+                                return;
+                        case TrackerPackage.ORIGIN__OPERATIONS:
+                                getOperations().clear();
+                                getOperations().addAll((Collection<? extends Operation>)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.ORIGIN__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
-			case TrackerPackage.ORIGIN__IDENTIFIER:
-				setIdentifier(IDENTIFIER_EDEFAULT);
-				return;
-			case TrackerPackage.ORIGIN__OPERATIONS:
-				getOperations().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ORIGIN__TYPE:
+                                setType(TYPE_EDEFAULT);
+                                return;
+                        case TrackerPackage.ORIGIN__IDENTIFIER:
+                                setIdentifier(IDENTIFIER_EDEFAULT);
+                                return;
+                        case TrackerPackage.ORIGIN__OPERATIONS:
+                                getOperations().clear();
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.ORIGIN__TYPE:
-				return type != TYPE_EDEFAULT;
-			case TrackerPackage.ORIGIN__IDENTIFIER:
-				return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
-			case TrackerPackage.ORIGIN__OPERATIONS:
-				return operations != null && !operations.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.ORIGIN__TYPE:
+                                return type != TYPE_EDEFAULT;
+                        case TrackerPackage.ORIGIN__IDENTIFIER:
+                                return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
+                        case TrackerPackage.ORIGIN__OPERATIONS:
+                                return operations != null && !operations.isEmpty();
+                }
+                return super.eIsSet(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+                if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (type: ");
-		result.append(type);
-		result.append(", identifier: ");
-		result.append(identifier);
-		result.append(')');
-		return result.toString();
-	}
+                StringBuffer result = new StringBuffer(super.toString());
+                result.append(" (type: ");
+                result.append(type);
+                result.append(", identifier: ");
+                result.append(identifier);
+                result.append(')');
+                return result.toString();
+        }
 
 } //OriginImpl

@@ -25,9 +25,7 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OperationTitleItemProvider extends TitleItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class OperationTitleItemProvider extends TitleItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -35,8 +33,8 @@ public class OperationTitleItemProvider extends TitleItemProvider implements
 	 * @generated
 	 */
 	public OperationTitleItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+                super(adapterFactory);
+        }
 
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
@@ -46,46 +44,46 @@ public class OperationTitleItemProvider extends TitleItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+                if (itemPropertyDescriptors == null) {
+                        super.getPropertyDescriptors(object);
 
-			addCategoriesPropertyDescriptor(object);
-		}
-		return itemPropertyDescriptors;
-	}
+                        addCategoriesPropertyDescriptor(object);
+                }
+                return itemPropertyDescriptors;
+        }
 
 	/**
-	 * This adds a property descriptor for the Categories feature.
-	 * <!-- begin-user-doc -->
+         * This adds a property descriptor for the Categories feature.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected void addCategoriesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OperationTitle_categories_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OperationTitle_categories_feature", "_UI_OperationTitle_type"),
-				 TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
+                itemPropertyDescriptors.add
+                        (createItemPropertyDescriptor
+                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                                 getResourceLocator(),
+                                 getString("_UI_OperationTitle_categories_feature"),
+                                 getString("_UI_PropertyDescriptor_description", "_UI_OperationTitle_categories_feature", "_UI_OperationTitle_type"),
+                                 TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES,
+                                 true,
+                                 false,
+                                 true,
+                                 null,
+                                 null,
+                                 null));
+        }
 
 	/**
-	 * This returns OperationTitle.gif.
-	 * <!-- begin-user-doc --> <!--
+         * This returns OperationTitle.gif.
+         * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationTitle"));
-	}
+                return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationTitle"));
+        }
 
 	/**
 	 * This returns the label text for the adapted class.
@@ -139,7 +137,7 @@ public class OperationTitleItemProvider extends TitleItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
+                super.collectNewChildDescriptors(newChildDescriptors, object);
+        }
 
 }

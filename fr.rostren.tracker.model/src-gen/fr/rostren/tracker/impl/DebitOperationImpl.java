@@ -11,29 +11,27 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Debit Operation</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
 public class DebitOperationImpl extends OperationImpl implements DebitOperation {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected DebitOperationImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.DEBIT_OPERATION;
-	}
+                return TrackerPackage.Literals.DEBIT_OPERATION;
+        }
 
 } //DebitOperationImpl

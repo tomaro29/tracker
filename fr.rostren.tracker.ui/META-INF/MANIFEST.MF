@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  fr.rostren.tracker.model.editor,
  fr.rostren.tracker;bundle-version="1.0.0",
- com.google.guava;bundle-version="11.0.2"
+ com.google.guava;bundle-version="11.0.2",
+ org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

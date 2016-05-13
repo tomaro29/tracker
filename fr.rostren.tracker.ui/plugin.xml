@@ -13,16 +13,11 @@
                style="push"
                tooltip="import pdf">
             <visibleWhen>
-               <with
-                     variable="activeMenuSelection">
+               <with variable="activeMenuSelection">
                   <iterate>
-                     <adapt
-                           type="fr.rostren.tracker.Account">
-                     </adapt>
+                     <adapt type="fr.rostren.tracker.Account"/>
                   </iterate>
-                  <count
-                        value="1">
-                  </count>
+                  <count value="1"/>
                </with>
             </visibleWhen>
          </command>
@@ -33,16 +28,26 @@
                style="push"
                tooltip="Clean the Model">
             <visibleWhen>
-               <with
-                     variable="activeMenuSelection">
+               <with variable="activeMenuSelection">
                   <iterate>
-                     <adapt
-                           type="fr.rostren.tracker.Account">
-                     </adapt>
+                     <adapt type="fr.rostren.tracker.Account"/>
                   </iterate>
-                  <count
-                        value="1">
-                  </count>
+                  <count value="1"/>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="fr.rostren.tracker.ui.commands.editoperation"
+               icon="icons/editOperation.gif"
+               label="Edit Operation"
+               style="push"
+               tooltip="Edit Operation details">
+            <visibleWhen>
+               <with variable="activeMenuSelection">
+                  <iterate>
+                     <adapt type="fr.rostren.tracker.Operation"/>
+                  </iterate>
+                  <count value="1"/>
                </with>
             </visibleWhen>
          </command>
@@ -66,6 +71,11 @@
             id="fr.rostren.tracker.ui.commands.cleanmodel"
             name="Clean Model">
       </command>
+      <command
+            categoryId="fr.rostren.tracker.ui.commands.category"
+            defaultHandler="fr.rostren.tracker.ui.handlers.EditOperationHandler"
+            id="fr.rostren.tracker.ui.commands.editoperation"
+            name="Edit Operation Information">
+      </command>
    </extension>
-
 </plugin>

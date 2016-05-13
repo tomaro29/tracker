@@ -11,29 +11,27 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Credit Operation</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
 public class CreditOperationImpl extends OperationImpl implements CreditOperation {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected CreditOperationImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.CREDIT_OPERATION;
-	}
+                return TrackerPackage.Literals.CREDIT_OPERATION;
+        }
 
 } //CreditOperationImpl

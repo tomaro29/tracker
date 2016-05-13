@@ -16,19 +16,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AccountService extends EObject {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	float sumPerCategory(Account account, Category category, Month month, int year);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	float averagePerCategory(Account account, Category category, Month month, int year);
 
 } // AccountService

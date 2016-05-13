@@ -25,210 +25,210 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.CategoryImpl#getOperationTitles <em>Operation Titles</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.CategoryImpl#getDescription <em>Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class CategoryImpl extends TitleImpl implements Category {
 	/**
-	 * The cached value of the '{@link #getOperationTitles() <em>Operation Titles</em>}' reference list.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getOperationTitles() <em>Operation Titles</em>}' reference list.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperationTitles()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getOperationTitles()
+         * @generated
+         * @ordered
+         */
 	protected EList<OperationTitle> operationTitles;
 
 	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getDescription()
+         * @generated
+         * @ordered
+         */
 	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getDescription()
+         * @generated
+         * @ordered
+         */
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected CategoryImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.CATEGORY;
-	}
+                return TrackerPackage.Literals.CATEGORY;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public EList<OperationTitle> getOperationTitles() {
-		if (operationTitles == null) {
-			operationTitles = new EObjectWithInverseResolvingEList.ManyInverse<OperationTitle>(OperationTitle.class, this, TrackerPackage.CATEGORY__OPERATION_TITLES, TrackerPackage.OPERATION_TITLE__CATEGORIES);
-		}
-		return operationTitles;
-	}
+                if (operationTitles == null) {
+                        operationTitles = new EObjectWithInverseResolvingEList.ManyInverse<OperationTitle>(OperationTitle.class, this, TrackerPackage.CATEGORY__OPERATION_TITLES, TrackerPackage.OPERATION_TITLE__CATEGORIES);
+                }
+                return operationTitles;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getDescription() {
-		return description;
-	}
+                return description;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setDescription(String newDescription) {
-		String oldDescription = description;
-		description = newDescription;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.CATEGORY__DESCRIPTION, oldDescription, description));
-	}
+                String oldDescription = description;
+                description = newDescription;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.CATEGORY__DESCRIPTION, oldDescription, description));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORY__OPERATION_TITLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperationTitles()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORY__OPERATION_TITLES:
+                                return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperationTitles()).basicAdd(otherEnd, msgs);
+                }
+                return super.eInverseAdd(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORY__OPERATION_TITLES:
-				return ((InternalEList<?>)getOperationTitles()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORY__OPERATION_TITLES:
+                                return ((InternalEList<?>)getOperationTitles()).basicRemove(otherEnd, msgs);
+                }
+                return super.eInverseRemove(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORY__OPERATION_TITLES:
-				return getOperationTitles();
-			case TrackerPackage.CATEGORY__DESCRIPTION:
-				return getDescription();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORY__OPERATION_TITLES:
+                                return getOperationTitles();
+                        case TrackerPackage.CATEGORY__DESCRIPTION:
+                                return getDescription();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORY__OPERATION_TITLES:
-				getOperationTitles().clear();
-				getOperationTitles().addAll((Collection<? extends OperationTitle>)newValue);
-				return;
-			case TrackerPackage.CATEGORY__DESCRIPTION:
-				setDescription((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORY__OPERATION_TITLES:
+                                getOperationTitles().clear();
+                                getOperationTitles().addAll((Collection<? extends OperationTitle>)newValue);
+                                return;
+                        case TrackerPackage.CATEGORY__DESCRIPTION:
+                                setDescription((String)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORY__OPERATION_TITLES:
-				getOperationTitles().clear();
-				return;
-			case TrackerPackage.CATEGORY__DESCRIPTION:
-				setDescription(DESCRIPTION_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORY__OPERATION_TITLES:
+                                getOperationTitles().clear();
+                                return;
+                        case TrackerPackage.CATEGORY__DESCRIPTION:
+                                setDescription(DESCRIPTION_EDEFAULT);
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORY__OPERATION_TITLES:
-				return operationTitles != null && !operationTitles.isEmpty();
-			case TrackerPackage.CATEGORY__DESCRIPTION:
-				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORY__OPERATION_TITLES:
+                                return operationTitles != null && !operationTitles.isEmpty();
+                        case TrackerPackage.CATEGORY__DESCRIPTION:
+                                return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+                }
+                return super.eIsSet(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+                if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (description: ");
-		result.append(description);
-		result.append(')');
-		return result.toString();
-	}
+                StringBuffer result = new StringBuffer(super.toString());
+                result.append(" (description: ");
+                result.append(description);
+                result.append(')');
+                return result.toString();
+        }
 
 } //CategoryImpl

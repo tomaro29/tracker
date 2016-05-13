@@ -12,51 +12,49 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Operation Title Service</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
 public class OperationTitleServiceImpl extends EObjectImpl implements OperationTitleService {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected OperationTitleServiceImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.OPERATION_TITLE_SERVICE;
-	}
+                return TrackerPackage.Literals.OPERATION_TITLE_SERVICE;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void addTitle(String title) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+                // TODO: implement this method
+                // Ensure that you remove @generated or mark it @generated NOT
+                throw new UnsupportedOperationException();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void deleteTitle(String title) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+                // TODO: implement this method
+                // Ensure that you remove @generated or mark it @generated NOT
+                throw new UnsupportedOperationException();
+        }
 
 } //OperationTitleServiceImpl

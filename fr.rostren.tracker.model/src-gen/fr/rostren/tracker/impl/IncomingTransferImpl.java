@@ -11,29 +11,27 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Incoming Transfer</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
 public class IncomingTransferImpl extends TransferImpl implements IncomingTransfer {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected IncomingTransferImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.INCOMING_TRANSFER;
-	}
+                return TrackerPackage.Literals.INCOMING_TRANSFER;
+        }
 
 } //IncomingTransferImpl

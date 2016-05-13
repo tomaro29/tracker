@@ -13,40 +13,38 @@ import fr.rostren.tracker.TrackerPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Operation Service</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
 public class OperationServiceImpl extends EObjectImpl implements OperationService {
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected OperationServiceImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.OPERATION_SERVICE;
-	}
+                return TrackerPackage.Literals.OPERATION_SERVICE;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public float sumAmounts(Operation operation) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+                // TODO: implement this method
+                // Ensure that you remove @generated or mark it @generated NOT
+                throw new UnsupportedOperationException();
+        }
 
 } //OperationServiceImpl

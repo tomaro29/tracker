@@ -26,127 +26,127 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.CategoriesRepositoryImpl#getCategories <em>Categories</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class CategoriesRepositoryImpl extends EObjectImpl implements CategoriesRepository {
 	/**
-	 * The cached value of the '{@link #getCategories() <em>Categories</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getCategories() <em>Categories</em>}' containment reference list.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCategories()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getCategories()
+         * @generated
+         * @ordered
+         */
 	protected EList<Category> categories;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected CategoriesRepositoryImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.CATEGORIES_REPOSITORY;
-	}
+                return TrackerPackage.Literals.CATEGORIES_REPOSITORY;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public EList<Category> getCategories() {
-		if (categories == null) {
-			categories = new EObjectContainmentEList<Category>(Category.class, this, TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES);
-		}
-		return categories;
-	}
+                if (categories == null) {
+                        categories = new EObjectContainmentEList<Category>(Category.class, this, TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES);
+                }
+                return categories;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-				return ((InternalEList<?>)getCategories()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+                                return ((InternalEList<?>)getCategories()).basicRemove(otherEnd, msgs);
+                }
+                return super.eInverseRemove(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-				return getCategories();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+                                return getCategories();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-				getCategories().clear();
-				getCategories().addAll((Collection<? extends Category>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+                                getCategories().clear();
+                                getCategories().addAll((Collection<? extends Category>)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-				getCategories().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+                                getCategories().clear();
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-				return categories != null && !categories.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+                                return categories != null && !categories.isEmpty();
+                }
+                return super.eIsSet(featureID);
+        }
 
 } //CategoriesRepositoryImpl

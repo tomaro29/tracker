@@ -48,6 +48,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 
     Amount lastSelection;
     // TableEditor editor;
+    private Table table;
 
     public CheckAndEditOperationWizardPage(Operation operation) {
 	super(MessageFormat.format(PAGE_NAME, operation.getOperationTitle().getTitle()));
@@ -87,7 +88,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	final Composite container = createContainer(parent, 2, 1, 0);
 	final Composite group = createGroup(container, REFINEMENT_GROUP_TITLE);
 
-	final Table table = createTable(group);
+	table = createTable(group);
 
 	// editor = new TableEditor(table);
 	// // The editor must have the same size as the cell and must
@@ -223,6 +224,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 
 	    private void performAdd() {
 		// disposeTextEditor();
+
+		// TODO open a wizard to fill the subAmount informations
+		// TODO set the table input with the updated list of subAmounts
+		table.redraw();
 
 		Amount newSubAmount = TrackerFactory.eINSTANCE.createAmount();
 		operation.getSubAmounts().add(newSubAmount);

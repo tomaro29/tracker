@@ -77,6 +77,20 @@ public class ExtractOperationsAction extends Action {
     }
 
     /**
+     * @return the addedOperations
+     */
+    public List<Operation> getAddedOperations() {
+	return addedOperations;
+    }
+
+    /**
+     * @return the addedOrigins
+     */
+    public Set<Origin> getAddedOrigins() {
+	return addedOrigins;
+    }
+
+    /**
      * @return the done
      */
     public boolean isDone() {

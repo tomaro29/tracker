@@ -16,255 +16,242 @@ import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
  */
 public abstract class AbstractPdfContentAnalyzer {
 
-	protected enum PdfToken {
-		DATE, OPERATIONS_DEPOT, VIR_RECU, PAIE_CHEQUE, FRAIS_BANCAIRES, PAIEMENTS_CARTES, RETRAITS_CARTES, PRELEVEMENTS, OPERATIONS_DIVERSES
-	}
+    protected enum PdfToken {
+	DATE, OPERATIONS_DEPOT, VIR_RECU, PAIE_CHEQUE, FRAIS_BANCAIRES, PAIEMENTS_CARTES, RETRAITS_CARTES, PRELEVEMENTS, OPERATIONS_DIVERSES
+    }
 
-	protected final Pattern SPACE_STRING_PATTREN = Pattern.compile("(\\s)+"); //$NON-NLS-1$
-	protected final Pattern EMPTY_STRING_PATTREN = Pattern.compile("(\\s)*"); //$NON-NLS-1$
-	protected final Pattern PART_1_DATE_PATTREN = Pattern
-			.compile("(0[0-9]|1[0-9]|2[0-9]|3[0-1])"); //$NON-NLS-1$
-	protected final Pattern PART_2_DATE_PATTREN = Pattern
-			.compile("(0[1-9]|1[0-2])"); //$NON-NLS-1$
-	protected final Pattern OPERATION_TITLE_PATTREN = Pattern.compile("(.)*"); //$NON-NLS-1$
-	protected final Pattern AMOUNT_NUMBER_PATTREN = Pattern
-			.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
-	protected final Pattern NUMBER_PATTREN = Pattern.compile("([0-9]*)"); //$NON-NLS-1$
-	protected final Pattern FACT_PATTREN = Pattern.compile("FACT\\s+([0-9]*)"); //$NON-NLS-1$
+    protected final Pattern SPACE_STRING_PATTREN = Pattern.compile("(\\s)+"); //$NON-NLS-1$
+    protected final Pattern EMPTY_STRING_PATTREN = Pattern.compile("(\\s)*"); //$NON-NLS-1$
+    protected final Pattern PART_1_DATE_PATTREN = Pattern.compile("(0[0-9]|1[0-9]|2[0-9]|3[0-1])"); //$NON-NLS-1$
+    protected final Pattern PART_2_DATE_PATTREN = Pattern.compile("(0[1-9]|1[0-2])"); //$NON-NLS-1$
+    protected final Pattern OPERATION_TITLE_PATTREN = Pattern.compile("(.)*"); //$NON-NLS-1$
+    protected final Pattern AMOUNT_NUMBER_PATTREN = Pattern.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
+    protected final Pattern NUMBER_PATTREN = Pattern.compile("([0-9]*)"); //$NON-NLS-1$
+    protected final Pattern FACT_PATTREN = Pattern.compile("FACT\\s+([0-9]*)"); //$NON-NLS-1$
 
-	private int currentYear;
-	private String currentLine;
-	private String[] currentSplitLine;
-	private PdfToken lastToken;
+    private int currentYear;
+    private String currentLine;
+    private String[] currentSplitLine;
+    private PdfToken lastToken;
 
-	private Date lastPotentialDate = null;
-	private String lastPotentialOperationTitle = null;
-	private BigDecimal lastPotentialAmount = null;
+    private Date lastPotentialDate = null;
+    private String lastPotentialOperationTitle = null;
+    private BigDecimal lastPotentialAmount = null;
 
-	/**
-	 * This parses a single line in the pdf.
-	 * 
-	 * @param line
-	 *            the current line.
-	 * @param origin
-	 *            the operation origin
-	 * @return {@link LineContent}
-	 */
-	public abstract LineContent parseLine(String line, Origin origin);
+    /**
+     * This parses a single line in the pdf.
+     * 
+     * @param line
+     *            the current line.
+     * @param origin
+     *            the operation origin
+     * @return {@link LineContent}
+     */
+    public abstract LineContent parseLine(String line, Origin origin);
 
-	/**
-	 * Extracts operations if exists from the current line.
-	 * 
-	 * @param origin
-	 *            the operation origin
-	 * @return {@link LineContent}
-	 */
-	protected LineContent extractOperation(Origin origin) {
-		LineContent currentLineContent = null;
-		extractDataFromCurrentLine();
-		if (isCompleted()) {
-			if (lastToken != null && PdfToken.VIR_RECU.equals(lastToken)
-					|| PdfToken.OPERATIONS_DEPOT.equals(lastToken)) {
-				currentLineContent = new LineContent(lastPotentialDate,
-						lastPotentialOperationTitle, lastPotentialAmount,
-						OperationType.CREDIT, origin);
-			} else if (lastToken != null
-					&& PdfToken.PAIE_CHEQUE.equals(lastToken)
-					|| PdfToken.PAIEMENTS_CARTES.equals(lastToken)
-					|| PdfToken.PRELEVEMENTS.equals(lastToken)
-					|| PdfToken.RETRAITS_CARTES.equals(lastToken)
-					|| PdfToken.OPERATIONS_DIVERSES.equals(lastToken)) {
-				currentLineContent = new LineContent(lastPotentialDate,
-						lastPotentialOperationTitle, lastPotentialAmount,
-						OperationType.DEBIT, origin);
-			} else if (lastToken != null
-					&& PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
-				if (lastPotentialOperationTitle.contains("REMISE") //$NON-NLS-1$
-						|| lastPotentialOperationTitle.contains("INTERETS")) { //$NON-NLS-1$
-					// REMISE(C), INTERETS(C)
-					currentLineContent = new LineContent(lastPotentialDate,
-							lastPotentialOperationTitle, lastPotentialAmount,
-							OperationType.CREDIT, origin);
-				} else {
-					// COTISATION(D), FRAIS(D)
-					currentLineContent = new LineContent(lastPotentialDate,
-							lastPotentialOperationTitle, lastPotentialAmount,
-							OperationType.DEBIT, origin);
-				}
-			}
-			reset();
+    /**
+     * Extracts operations if exists from the current line.
+     * 
+     * @param origin
+     *            the operation origin
+     * @return {@link LineContent}
+     */
+    protected LineContent extractOperation(Origin origin) {
+	LineContent currentLineContent = null;
+	extractDataFromCurrentLine();
+	if (isCompleted()) {
+	    if (lastToken != null && PdfToken.VIR_RECU.equals(lastToken)
+		    || PdfToken.OPERATIONS_DEPOT.equals(lastToken)) {
+		currentLineContent = new LineContent(lastPotentialDate, lastPotentialOperationTitle,
+			lastPotentialAmount, OperationType.CREDIT, origin);
+	    } else if (lastToken != null && PdfToken.PAIE_CHEQUE.equals(lastToken)
+		    || PdfToken.PAIEMENTS_CARTES.equals(lastToken) || PdfToken.PRELEVEMENTS.equals(lastToken)
+		    || PdfToken.RETRAITS_CARTES.equals(lastToken) || PdfToken.OPERATIONS_DIVERSES.equals(lastToken)) {
+		currentLineContent = new LineContent(lastPotentialDate, lastPotentialOperationTitle,
+			lastPotentialAmount, OperationType.DEBIT, origin);
+	    } else if (lastToken != null && PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
+		if (lastPotentialOperationTitle.contains("REMISE") //$NON-NLS-1$
+			|| lastPotentialOperationTitle.contains("INTERETS")) { //$NON-NLS-1$
+		    // REMISE(C), INTERETS(C)
+		    currentLineContent = new LineContent(lastPotentialDate, lastPotentialOperationTitle,
+			    lastPotentialAmount, OperationType.CREDIT, origin);
+		} else {
+		    // COTISATION(D), FRAIS(D)
+		    currentLineContent = new LineContent(lastPotentialDate, lastPotentialOperationTitle,
+			    lastPotentialAmount, OperationType.DEBIT, origin);
 		}
-		return currentLineContent;
+	    }
+	    reset();
 	}
+	return currentLineContent;
+    }
 
-	/**
-	 * Tests if the operation characteristics are completely specified.
-	 * 
-	 * @return "true" if the date, the operationTitle and the amount are set.
-	 *         "false" otherwise.
-	 */
-	protected boolean isCompleted() {
-		return (lastPotentialDate != null
-				&& lastPotentialOperationTitle != null && lastPotentialAmount != null);
+    /**
+     * Tests if the operation characteristics are completely specified.
+     * 
+     * @return "true" if the date, the operationTitle and the amount are set.
+     *         "false" otherwise.
+     */
+    protected boolean isCompleted() {
+	return (lastPotentialDate != null && lastPotentialOperationTitle != null && lastPotentialAmount != null);
+    }
+
+    /**
+     * Resets the date, the operationTitle and the amount.
+     */
+    protected void reset() {
+	setLastPotentialDate(null);
+	setLastPotentialOperationTitle(null);
+	setLastPotentialAmount(null);
+    }
+
+    /**
+     * Tries to extract an operation characteristics from lines.
+     */
+    protected abstract void extractDataFromCurrentLine();
+
+    /**
+     * Specify the date from the current line.
+     * 
+     * @return the Date from the current line
+     */
+    protected abstract Date extractDateFromCurrentLine();
+
+    protected int extractYearFromCurrentLine() {
+	String year = currentLine.subSequence(9, 13).toString();
+	return Integer.parseInt(year);
+    }
+
+    /**
+     * Sets the Month basing on the current content
+     * 
+     * @param date
+     * @param content
+     */
+    protected void setMonthFromContent(Date date, String content) {
+	switch (Integer.parseInt(content)) {
+	case 1:
+	    date.setMonth(Month.JAN);
+	    break;
+	case 2:
+	    date.setMonth(Month.FEB);
+	    break;
+	case 3:
+	    date.setMonth(Month.MARS);
+	    break;
+	case 4:
+	    date.setMonth(Month.APR);
+	    break;
+	case 5:
+	    date.setMonth(Month.MAY);
+	    break;
+	case 6:
+	    date.setMonth(Month.JUNE);
+	    break;
+	case 7:
+	    date.setMonth(Month.JULY);
+	    break;
+	case 8:
+	    date.setMonth(Month.AUG);
+	    break;
+	case 9:
+	    date.setMonth(Month.SEPT);
+	    break;
+	case 10:
+	    date.setMonth(Month.OCT);
+	    break;
+	case 11:
+	    date.setMonth(Month.NOV);
+	    break;
+	case 12:
+	    date.setMonth(Month.DEC);
+	    break;
+	default:
+	    break;
 	}
+    }
 
-	/**
-	 * Resets the date, the operationTitle and the amount.
-	 */
-	protected void reset() {
-		setLastPotentialDate(null);
-		setLastPotentialOperationTitle(null);
-		setLastPotentialAmount(null);
-	}
+    /**
+     * @return the currentLine
+     */
+    public String getCurrentLine() {
+	return this.currentLine;
+    }
 
-	/**
-	 * Tries to extract an operation characteristics from lines.
-	 */
-	protected abstract void extractDataFromCurrentLine();
+    /**
+     * @param currentLine
+     *            the currentLine to set
+     */
+    public void setCurrentLine(String currentLine) {
+	this.currentLine = currentLine;
+    }
 
-	/**
-	 * Specify the date from the current line.
-	 * 
-	 * @return the Date from the current line
-	 */
-	protected abstract Date extractDateFromCurrentLine();
+    /**
+     * @param lastPotentialOperationTitle
+     *            the lastPotentialOperationTitle to set
+     */
+    public void setLastPotentialOperationTitle(String lastPotentialOperationTitle) {
+	this.lastPotentialOperationTitle = lastPotentialOperationTitle;
+    }
 
-	protected int extractYearFromCurrentLine() {
-		String year = currentLine.subSequence(9, 13).toString();
-		return Integer.parseInt(year);
-	}
+    /**
+     * @param lastPotentialAmount
+     *            the lastPotentialAmount to set
+     */
+    public void setLastPotentialAmount(BigDecimal lastPotentialAmount) {
+	this.lastPotentialAmount = lastPotentialAmount;
+    }
 
-	/**
-	 * Sets the Month basing on the current content
-	 * 
-	 * @param date
-	 * @param content
-	 */
-	protected void setMonthFromContent(Date date, String content) {
-		switch (Integer.parseInt(content)) {
-		case 1:
-			date.setMonth(Month.JAN);
-			break;
-		case 2:
-			date.setMonth(Month.FEB);
-			break;
-		case 3:
-			date.setMonth(Month.MARS);
-			break;
-		case 4:
-			date.setMonth(Month.APR);
-			break;
-		case 5:
-			date.setMonth(Month.MAY);
-			break;
-		case 6:
-			date.setMonth(Month.JUNE);
-			break;
-		case 7:
-			date.setMonth(Month.JULY);
-			break;
-		case 8:
-			date.setMonth(Month.AUG);
-			break;
-		case 9:
-			date.setMonth(Month.SEPT);
-			break;
-		case 10:
-			date.setMonth(Month.OCT);
-			break;
-		case 11:
-			date.setMonth(Month.NOV);
-			break;
-		case 12:
-			date.setMonth(Month.DEC);
-			break;
-		default:
-			break;
-		}
-	}
+    /**
+     * @return the currentYear
+     */
+    public int getCurrentYear() {
+	return this.currentYear;
+    }
 
-	/**
-	 * @return the currentLine
-	 */
-	public String getCurrentLine() {
-		return this.currentLine;
-	}
+    /**
+     * @param currentYear
+     *            the currentYear to set
+     */
+    public void setCurrentYear(int currentYear) {
+	this.currentYear = currentYear;
+    }
 
-	/**
-	 * @param currentLine
-	 *            the currentLine to set
-	 */
-	public void setCurrentLine(String currentLine) {
-		this.currentLine = currentLine;
-	}
+    /**
+     * @param lastPotentialDate
+     *            the lastPotentialDate to set
+     */
+    public void setLastPotentialDate(Date lastPotentialDate) {
+	this.lastPotentialDate = lastPotentialDate;
+    }
 
-	/**
-	 * @param lastPotentialOperationTitle
-	 *            the lastPotentialOperationTitle to set
-	 */
-	public void setLastPotentialOperationTitle(
-			String lastPotentialOperationTitle) {
-		this.lastPotentialOperationTitle = lastPotentialOperationTitle;
-	}
+    /**
+     * @return the currentSplitLine
+     */
+    public String[] getCurrentSplitLine() {
+	return this.currentSplitLine;
+    }
 
-	/**
-	 * @param lastPotentialAmount
-	 *            the lastPotentialAmount to set
-	 */
-	public void setLastPotentialAmount(BigDecimal lastPotentialAmount) {
-		this.lastPotentialAmount = lastPotentialAmount;
-	}
+    /**
+     * @param currentSplitLine
+     *            the currentSplitLine to set
+     */
+    public void setCurrentSplitLine(String[] currentSplitLine) {
+	this.currentSplitLine = currentSplitLine;
+    }
 
-	/**
-	 * @return the currentYear
-	 */
-	public int getCurrentYear() {
-		return this.currentYear;
-	}
+    /**
+     * @return the lastToken
+     */
+    public PdfToken getLastToken() {
+	return this.lastToken;
+    }
 
-	/**
-	 * @param currentYear
-	 *            the currentYear to set
-	 */
-	public void setCurrentYear(int currentYear) {
-		this.currentYear = currentYear;
-	}
-
-	/**
-	 * @param lastPotentialDate
-	 *            the lastPotentialDate to set
-	 */
-	public void setLastPotentialDate(Date lastPotentialDate) {
-		this.lastPotentialDate = lastPotentialDate;
-	}
-
-	/**
-	 * @return the currentSplitLine
-	 */
-	public String[] getCurrentSplitLine() {
-		return this.currentSplitLine;
-	}
-
-	/**
-	 * @param currentSplitLine
-	 *            the currentSplitLine to set
-	 */
-	public void setCurrentSplitLine(String[] currentSplitLine) {
-		this.currentSplitLine = currentSplitLine;
-	}
-
-	/**
-	 * @return the lastToken
-	 */
-	public PdfToken getLastToken() {
-		return this.lastToken;
-	}
-
-	/**
-	 * @param lastToken
-	 *            the lastToken to set
-	 */
-	public void setLastToken(PdfToken lastToken) {
-		this.lastToken = lastToken;
-	}
+    /**
+     * @param lastToken
+     *            the lastToken to set
+     */
+    public void setLastToken(PdfToken lastToken) {
+	this.lastToken = lastToken;
+    }
 }

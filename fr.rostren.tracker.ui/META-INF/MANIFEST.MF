@@ -14,4 +14,4 @@ Require-Bundle: org.eclipse.ui,
  com.google.guava;bundle-version="11.0.2",
  org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

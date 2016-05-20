@@ -2,11 +2,7 @@
  */
 package fr.rostren.tracker.ui.handlers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -22,8 +18,6 @@ import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
 import fr.rostren.tracker.ui.actions.ImportOperationsAction;
 
@@ -31,9 +25,6 @@ public class ImportPDFHandler extends AbstractHandler {
     private Shell shell;
     private String pdfURIText;
     private CheckingAccount account;
-
-    private List<Operation> addedOperations = new ArrayList<Operation>();
-    private Set<Origin> addedOrigins = new HashSet<Origin>();
 
     @Override
     public Object execute(ExecutionEvent event) {
@@ -73,18 +64,15 @@ public class ImportPDFHandler extends AbstractHandler {
     }
 
     private void saveAndReset(ExecutionEvent event) {
+	// FIXME use EMF Commands instead of saving directly the model!
 	TrackerEditorDev editor = (TrackerEditorDev) HandlerUtil.getActiveEditor(event);
 	editor.doSave(new NullProgressMonitor());
 	account = null;
 	pdfURIText = null;
-	addedOperations.clear();
-	addedOrigins.clear();
     }
 
     private void runImportOperationsToModel() {
 	ImportOperationsAction action = new ImportOperationsAction(shell, pdfURIText, account);
 	action.run();
-	addedOperations.addAll(action.getAddedOperations());
-	addedOrigins.addAll(action.getAddedOrigins());
     }
 }

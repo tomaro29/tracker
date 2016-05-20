@@ -5,9 +5,6 @@
 package fr.rostren.tracker.ui.actions;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.action.Action;
@@ -15,18 +12,15 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.Origin;
 
 public class ImportOperationsAction extends Action {
-    private static final String FILES_ALREADY_IMPORTED_BEFORE = "The files:\n''{0}''\nare already imported before!"; //$NON-NLS-1$
+    private static final String FILES_ALREADY_IMPORTED_BEFORE = "The files:\n" //$NON-NLS-1$
+	    + "''{0}''\n" //$NON-NLS-1$
+	    + "are already imported before!"; //$NON-NLS-1$
 
     private final Shell shell;
     private final String pdfURIText;
     private final CheckingAccount account;
-
-    private List<Operation> addedOperations = new ArrayList<Operation>();
-    private Set<Origin> addedOrigins = new HashSet<Origin>();
 
     /**
      * @param shell
@@ -41,11 +35,13 @@ public class ImportOperationsAction extends Action {
 
     @Override
     public void run() {
-	// Reads the pdf file, Extracts data and Edits operations categories.
+	// Reads the pdf file, Extracts data
 	ExtractOperationsAction extractAction = new ExtractOperationsAction(shell, pdfURIText, account);
 	extractAction.run();
 
-	EditOperationsAction editAction = new EditOperationsAction(shell, account, addedOperations, addedOrigins);
+	// Edits operations SubAmounts and categories
+	EditOperationsAction editAction = new EditOperationsAction(shell, account, extractAction.getAddedOperations(),
+		extractAction.getAddedOrigins());
 	editAction.run();
 
 	if (extractAction.isDone() && editAction.isAborted()) {
@@ -54,20 +50,6 @@ public class ImportOperationsAction extends Action {
 	    if (!alreadyParsedFiles.isEmpty())
 		displayInformation(alreadyParsedFiles);
 	}
-    }
-
-    /**
-     * @return the addedOperations
-     */
-    public List<Operation> getAddedOperations() {
-	return addedOperations;
-    }
-
-    /**
-     * @return the addedOrigins
-     */
-    public Set<Origin> getAddedOrigins() {
-	return addedOrigins;
     }
 
     private void displayInformation(Set<String> alreadyParsedFiles) {

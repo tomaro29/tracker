@@ -17,79 +17,73 @@ import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
 
 public class ExtractOperationsAction extends Action {
-    private final Shell shell;
-    private final String pdfURIText;
-    private final PDFContentExtractor extractor;
+	private final Shell shell;
+	private final String pdfURIText;
+	private final PDFContentExtractor extractor;
 
-    private List<Operation> addedOperations = new ArrayList<Operation>();
-    private Set<Origin> addedOrigins = new HashSet<Origin>();
-    private boolean done = false;
+	private List<Operation> addedOperations = new ArrayList<Operation>();
+	private Set<Origin> addedOrigins = new HashSet<Origin>();
+	private boolean done = false;
 
-    /**
-     * @param shell
-     * @param pdfURIText
-     * @param account
-     */
-    public ExtractOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
-	this.shell = shell;
-	this.pdfURIText = pdfURIText;
-	this.extractor = new PDFContentExtractor(pdfURIText, account);
-    }
-
-    @Override
-    public void run() {
-	extractOperations(extractor);
-	if (done && addedOperations.isEmpty()) {
-	    MessageDialog.openError(shell, "Cannot Import PDF", //$NON-NLS-1$
-		    "The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
-			    + pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
-	    return;
+	/**
+	 * @param shell
+	 * @param pdfURIText
+	 * @param account
+	 */
+	public ExtractOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
+		this.shell = shell;
+		this.pdfURIText = pdfURIText;
+		this.extractor = new PDFContentExtractor(pdfURIText, account);
 	}
-    }
 
-    /**
-     * @param extractor
-     */
-    private void extractOperations(PDFContentExtractor extractor) {
-	try {
-	    addedOperations = extractor.extractOperations();
-	    for (Operation operation : addedOperations)
-		addedOrigins.add(operation.getOrigin());
-	    done = true;
-	} catch (ExtractorException e) {
-	    MessageDialog.openError(shell, "Problem while extracting operations", //$NON-NLS-1$
-		    e.getMessage());
-	} catch (IOException e) {
-	    MessageDialog.openError(shell, "Problem while opening the PDF File", //$NON-NLS-1$
-		    e.getMessage());
+	@Override
+	public void run() {
+		extractOperations(extractor);
+		if (done && addedOperations.isEmpty()) {
+			MessageDialog.openError(shell, "Cannot Import PDF", //$NON-NLS-1$
+					"The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
+							+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
+			return;
+		}
 	}
-    }
 
-    /**
-     * @return the extractor
-     */
-    public PDFContentExtractor getExtractor() {
-	return extractor;
-    }
+	/**
+	 * @param extractor
+	 */
+	private void extractOperations(PDFContentExtractor extractor) {
+		try {
+			addedOperations = extractor.extractOperations();
+			for (Operation operation : addedOperations)
+				addedOrigins.add(operation.getOrigin());
+			done = true;
+		} catch (ExtractorException e) {
+			MessageDialog.openError(shell, "Problem while extracting operations", //$NON-NLS-1$
+					e.getMessage());
+		} catch (IOException e) {
+			MessageDialog.openError(shell, "Problem while opening the PDF File", //$NON-NLS-1$
+					e.getMessage());
+		}
+	}
 
-    /**
-     * @return the addedOperations
-     */
-    public List<Operation> getAddedOperations() {
-	return addedOperations;
-    }
+	/**
+	 * @return the extractor
+	 */
+	public PDFContentExtractor getExtractor() {
+		return extractor;
+	}
 
-    /**
-     * @return the addedOrigins
-     */
-    public Set<Origin> getAddedOrigins() {
-	return addedOrigins;
-    }
+	public List<Operation> getAddedOperations() {
+		return addedOperations;
+	}
 
-    /**
-     * @return the done
-     */
-    public boolean isDone() {
-	return done;
-    }
+	public Set<Origin> getAddedOrigins() {
+		return addedOrigins;
+	}
+
+	/**
+	 * @return the done
+	 */
+	public boolean isDone() {
+		return done;
+	}
 }

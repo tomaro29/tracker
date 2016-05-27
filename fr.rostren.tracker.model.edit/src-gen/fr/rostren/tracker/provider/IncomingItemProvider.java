@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import fr.rostren.tracker.Incoming;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * This is the item provider adapter for a {@link fr.rostren.tracker.Incoming}
@@ -57,12 +58,12 @@ public class IncomingItemProvider extends TransferItemProvider {
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
-     * @generated
+     * @generated NOT
      */
     @Override
     public String getText(Object object) {
-	String operationTitle = ((Incoming) object).getOperationTitle().getTitle();
-	String operationAmount = ((Incoming) object).getTotalAmount().toString();
+	String operationTitle = TrackerUtils.getOperationTitle((Incoming) object);
+	String operationAmount = TrackerUtils.getOperationTotalAmount((Incoming) object);
 
 	if (operationTitle == null)
 	    return "New " + getString("_UI_Incoming_type");

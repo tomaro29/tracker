@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * This is the item provider adapter for a {@link fr.rostren.tracker.Debit}
@@ -61,8 +62,9 @@ public class DebitItemProvider extends OperationItemProvider {
      */
     @Override
     public String getText(Object object) {
-	String operationTitle = ((Debit) object).getOperationTitle().getTitle();
-	String operationAmount = ((Debit) object).getTotalAmount().toString();
+	String operationTitle = TrackerUtils.getOperationTitle((Debit) object);
+	String operationAmount = TrackerUtils.getOperationTotalAmount((Debit) object);
+
 	if (operationTitle == null)
 	    return "New " + getString("_UI_DebitOperation_type");
 	if (operationTitle.length() == 0)

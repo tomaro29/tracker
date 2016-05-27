@@ -25,6 +25,10 @@ public class TrackerUtils {
 	return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
     }
 
+    public static String getOperationTitle(Operation operation) {
+	return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
+    }
+
     public static String getOperationTotalAmount(Operation operation) {
 	return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
     }

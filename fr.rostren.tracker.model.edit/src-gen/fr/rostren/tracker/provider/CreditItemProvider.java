@@ -2,16 +2,15 @@
  */
 package fr.rostren.tracker.provider;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * This is the item provider adapter for a {@link fr.rostren.tracker.Credit}
@@ -63,10 +62,8 @@ public class CreditItemProvider extends OperationItemProvider {
      */
     @Override
     public String getText(Object object) {
-	Credit credit = (Credit) object;
-	String operationTitle = credit.getOperationTitle().getTitle();
-	BigDecimal totalAmount = credit.getTotalAmount();
-	String operationAmount = totalAmount == null ? StringUtils.EMPTY : totalAmount.toString();
+	String operationTitle = TrackerUtils.getOperationTitle((Credit) object);
+	String operationAmount = TrackerUtils.getOperationTotalAmount((Credit) object);
 
 	if (operationTitle == null) {
 	    return "New " + getString("_UI_CreditOperation_type");

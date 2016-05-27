@@ -333,134 +333,134 @@ public interface TrackerPackage extends EPackage {
 	int OPERATION_FEATURE_COUNT = 5;
 
 	/**
-         * The meta object id for the '{@link fr.rostren.tracker.impl.CreditOperationImpl <em>Credit Operation</em>}' class.
+         * The meta object id for the '{@link fr.rostren.tracker.impl.CreditImpl <em>Credit</em>}' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see fr.rostren.tracker.impl.CreditOperationImpl
-         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCreditOperation()
+         * <!-- end-user-doc -->
+         * @see fr.rostren.tracker.impl.CreditImpl
+         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCredit()
          * @generated
          */
-	int CREDIT_OPERATION = 5;
+        int CREDIT = 5;
 
-	/**
+        /**
          * The feature id for the '<em><b>Total Amount</b></em>' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int CREDIT_OPERATION__TOTAL_AMOUNT = OPERATION__TOTAL_AMOUNT;
+        int CREDIT__TOTAL_AMOUNT = OPERATION__TOTAL_AMOUNT;
 
-	/**
+        /**
          * The feature id for the '<em><b>Operation Title</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int CREDIT_OPERATION__OPERATION_TITLE = OPERATION__OPERATION_TITLE;
+        int CREDIT__OPERATION_TITLE = OPERATION__OPERATION_TITLE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Sub Amounts</b></em>' containment reference list.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int CREDIT_OPERATION__SUB_AMOUNTS = OPERATION__SUB_AMOUNTS;
+        int CREDIT__SUB_AMOUNTS = OPERATION__SUB_AMOUNTS;
 
-	/**
+        /**
          * The feature id for the '<em><b>Date</b></em>' containment reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int CREDIT_OPERATION__DATE = OPERATION__DATE;
+        int CREDIT__DATE = OPERATION__DATE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Origin</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int CREDIT_OPERATION__ORIGIN = OPERATION__ORIGIN;
+        int CREDIT__ORIGIN = OPERATION__ORIGIN;
 
-	/**
-         * The number of structural features of the '<em>Credit Operation</em>' class.
+        /**
+         * The number of structural features of the '<em>Credit</em>' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int CREDIT_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 0;
+        int CREDIT_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 0;
 
-	/**
-         * The meta object id for the '{@link fr.rostren.tracker.impl.DebitOperationImpl <em>Debit Operation</em>}' class.
+        /**
+         * The meta object id for the '{@link fr.rostren.tracker.impl.DebitImpl <em>Debit</em>}' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see fr.rostren.tracker.impl.DebitOperationImpl
-         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDebitOperation()
+         * <!-- end-user-doc -->
+         * @see fr.rostren.tracker.impl.DebitImpl
+         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDebit()
          * @generated
          */
-	int DEBIT_OPERATION = 6;
+        int DEBIT = 6;
 
-	/**
+        /**
          * The feature id for the '<em><b>Total Amount</b></em>' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int DEBIT_OPERATION__TOTAL_AMOUNT = OPERATION__TOTAL_AMOUNT;
+        int DEBIT__TOTAL_AMOUNT = OPERATION__TOTAL_AMOUNT;
 
-	/**
+        /**
          * The feature id for the '<em><b>Operation Title</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int DEBIT_OPERATION__OPERATION_TITLE = OPERATION__OPERATION_TITLE;
+        int DEBIT__OPERATION_TITLE = OPERATION__OPERATION_TITLE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Sub Amounts</b></em>' containment reference list.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int DEBIT_OPERATION__SUB_AMOUNTS = OPERATION__SUB_AMOUNTS;
+        int DEBIT__SUB_AMOUNTS = OPERATION__SUB_AMOUNTS;
 
-	/**
+        /**
          * The feature id for the '<em><b>Date</b></em>' containment reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int DEBIT_OPERATION__DATE = OPERATION__DATE;
+        int DEBIT__DATE = OPERATION__DATE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Origin</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int DEBIT_OPERATION__ORIGIN = OPERATION__ORIGIN;
+        int DEBIT__ORIGIN = OPERATION__ORIGIN;
 
-	/**
-         * The number of structural features of the '<em>Debit Operation</em>' class.
+        /**
+         * The number of structural features of the '<em>Debit</em>' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int DEBIT_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 0;
+        int DEBIT_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 0;
 
-	/**
+        /**
          * The meta object id for the '{@link fr.rostren.tracker.impl.TransferImpl <em>Transfer</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -543,170 +543,170 @@ public interface TrackerPackage extends EPackage {
 	int TRANSFER_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 2;
 
 	/**
-         * The meta object id for the '{@link fr.rostren.tracker.impl.IncomingTransferImpl <em>Incoming Transfer</em>}' class.
+         * The meta object id for the '{@link fr.rostren.tracker.impl.IncomingImpl <em>Incoming</em>}' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see fr.rostren.tracker.impl.IncomingTransferImpl
-         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncomingTransfer()
+         * <!-- end-user-doc -->
+         * @see fr.rostren.tracker.impl.IncomingImpl
+         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncoming()
          * @generated
          */
-	int INCOMING_TRANSFER = 8;
+        int INCOMING = 8;
 
-	/**
+        /**
          * The feature id for the '<em><b>Total Amount</b></em>' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__TOTAL_AMOUNT = TRANSFER__TOTAL_AMOUNT;
+        int INCOMING__TOTAL_AMOUNT = TRANSFER__TOTAL_AMOUNT;
 
-	/**
+        /**
          * The feature id for the '<em><b>Operation Title</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__OPERATION_TITLE = TRANSFER__OPERATION_TITLE;
+        int INCOMING__OPERATION_TITLE = TRANSFER__OPERATION_TITLE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Sub Amounts</b></em>' containment reference list.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__SUB_AMOUNTS = TRANSFER__SUB_AMOUNTS;
+        int INCOMING__SUB_AMOUNTS = TRANSFER__SUB_AMOUNTS;
 
-	/**
+        /**
          * The feature id for the '<em><b>Date</b></em>' containment reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__DATE = TRANSFER__DATE;
+        int INCOMING__DATE = TRANSFER__DATE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Origin</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__ORIGIN = TRANSFER__ORIGIN;
+        int INCOMING__ORIGIN = TRANSFER__ORIGIN;
 
-	/**
+        /**
          * The feature id for the '<em><b>Incoming Account</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__INCOMING_ACCOUNT = TRANSFER__INCOMING_ACCOUNT;
+        int INCOMING__INCOMING_ACCOUNT = TRANSFER__INCOMING_ACCOUNT;
 
-	/**
+        /**
          * The feature id for the '<em><b>Outgoing Account</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER__OUTGOING_ACCOUNT = TRANSFER__OUTGOING_ACCOUNT;
+        int INCOMING__OUTGOING_ACCOUNT = TRANSFER__OUTGOING_ACCOUNT;
 
-	/**
-         * The number of structural features of the '<em>Incoming Transfer</em>' class.
+        /**
+         * The number of structural features of the '<em>Incoming</em>' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int INCOMING_TRANSFER_FEATURE_COUNT = TRANSFER_FEATURE_COUNT + 0;
+        int INCOMING_FEATURE_COUNT = TRANSFER_FEATURE_COUNT + 0;
 
-	/**
-         * The meta object id for the '{@link fr.rostren.tracker.impl.OutgoingTransferImpl <em>Outgoing Transfer</em>}' class.
+        /**
+         * The meta object id for the '{@link fr.rostren.tracker.impl.OutgoingImpl <em>Outgoing</em>}' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see fr.rostren.tracker.impl.OutgoingTransferImpl
-         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOutgoingTransfer()
+         * <!-- end-user-doc -->
+         * @see fr.rostren.tracker.impl.OutgoingImpl
+         * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOutgoing()
          * @generated
          */
-	int OUTGOING_TRANSFER = 9;
+        int OUTGOING = 9;
 
-	/**
+        /**
          * The feature id for the '<em><b>Total Amount</b></em>' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__TOTAL_AMOUNT = TRANSFER__TOTAL_AMOUNT;
+        int OUTGOING__TOTAL_AMOUNT = TRANSFER__TOTAL_AMOUNT;
 
-	/**
+        /**
          * The feature id for the '<em><b>Operation Title</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__OPERATION_TITLE = TRANSFER__OPERATION_TITLE;
+        int OUTGOING__OPERATION_TITLE = TRANSFER__OPERATION_TITLE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Sub Amounts</b></em>' containment reference list.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__SUB_AMOUNTS = TRANSFER__SUB_AMOUNTS;
+        int OUTGOING__SUB_AMOUNTS = TRANSFER__SUB_AMOUNTS;
 
-	/**
+        /**
          * The feature id for the '<em><b>Date</b></em>' containment reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__DATE = TRANSFER__DATE;
+        int OUTGOING__DATE = TRANSFER__DATE;
 
-	/**
+        /**
          * The feature id for the '<em><b>Origin</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__ORIGIN = TRANSFER__ORIGIN;
+        int OUTGOING__ORIGIN = TRANSFER__ORIGIN;
 
-	/**
+        /**
          * The feature id for the '<em><b>Incoming Account</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__INCOMING_ACCOUNT = TRANSFER__INCOMING_ACCOUNT;
+        int OUTGOING__INCOMING_ACCOUNT = TRANSFER__INCOMING_ACCOUNT;
 
-	/**
+        /**
          * The feature id for the '<em><b>Outgoing Account</b></em>' reference.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER__OUTGOING_ACCOUNT = TRANSFER__OUTGOING_ACCOUNT;
+        int OUTGOING__OUTGOING_ACCOUNT = TRANSFER__OUTGOING_ACCOUNT;
 
-	/**
-         * The number of structural features of the '<em>Outgoing Transfer</em>' class.
+        /**
+         * The number of structural features of the '<em>Outgoing</em>' class.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int OUTGOING_TRANSFER_FEATURE_COUNT = TRANSFER_FEATURE_COUNT + 0;
+        int OUTGOING_FEATURE_COUNT = TRANSFER_FEATURE_COUNT + 0;
 
-	/**
+        /**
          * The feature id for the '<em><b>Title</b></em>' attribute.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -827,15 +827,15 @@ public interface TrackerPackage extends EPackage {
 	int AMOUNT__CATEGORY = 0;
 
 	/**
-         * The feature id for the '<em><b>Sub Amount</b></em>' attribute.
+         * The feature id for the '<em><b>Value</b></em>' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-	int AMOUNT__SUB_AMOUNT = 1;
+        int AMOUNT__VALUE = 1;
 
-	/**
+        /**
          * The number of structural features of the '<em>Amount</em>' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1334,6 +1334,26 @@ public interface TrackerPackage extends EPackage {
 	EReference getOperation_Origin();
 
 	/**
+         * Returns the meta object for class '{@link fr.rostren.tracker.Credit <em>Credit</em>}'.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @return the meta object for class '<em>Credit</em>'.
+         * @see fr.rostren.tracker.Credit
+         * @generated
+         */
+        EClass getCredit();
+
+        /**
+         * Returns the meta object for class '{@link fr.rostren.tracker.Debit <em>Debit</em>}'.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @return the meta object for class '<em>Debit</em>'.
+         * @see fr.rostren.tracker.Debit
+         * @generated
+         */
+        EClass getDebit();
+
+        /**
          * Returns the meta object for the attribute '{@link fr.rostren.tracker.Operation#getTotalAmount <em>Total Amount</em>}'.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1365,26 +1385,6 @@ public interface TrackerPackage extends EPackage {
          * @generated
          */
 	EReference getOperation_SubAmounts();
-
-	/**
-         * Returns the meta object for class '{@link fr.rostren.tracker.CreditOperation <em>Credit Operation</em>}'.
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return the meta object for class '<em>Credit Operation</em>'.
-         * @see fr.rostren.tracker.CreditOperation
-         * @generated
-         */
-	EClass getCreditOperation();
-
-	/**
-         * Returns the meta object for class '{@link fr.rostren.tracker.DebitOperation <em>Debit Operation</em>}'.
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return the meta object for class '<em>Debit Operation</em>'.
-         * @see fr.rostren.tracker.DebitOperation
-         * @generated
-         */
-	EClass getDebitOperation();
 
 	/**
          * Returns the meta object for class '{@link fr.rostren.tracker.Transfer <em>Transfer</em>}'.
@@ -1419,26 +1419,26 @@ public interface TrackerPackage extends EPackage {
 	EReference getTransfer_OutgoingAccount();
 
 	/**
-         * Returns the meta object for class '{@link fr.rostren.tracker.IncomingTransfer <em>Incoming Transfer</em>}'.
+         * Returns the meta object for class '{@link fr.rostren.tracker.Incoming <em>Incoming</em>}'.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return the meta object for class '<em>Incoming Transfer</em>'.
-         * @see fr.rostren.tracker.IncomingTransfer
+         * <!-- end-user-doc -->
+         * @return the meta object for class '<em>Incoming</em>'.
+         * @see fr.rostren.tracker.Incoming
          * @generated
          */
-	EClass getIncomingTransfer();
+        EClass getIncoming();
 
-	/**
-         * Returns the meta object for class '{@link fr.rostren.tracker.OutgoingTransfer <em>Outgoing Transfer</em>}'.
+        /**
+         * Returns the meta object for class '{@link fr.rostren.tracker.Outgoing <em>Outgoing</em>}'.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return the meta object for class '<em>Outgoing Transfer</em>'.
-         * @see fr.rostren.tracker.OutgoingTransfer
+         * <!-- end-user-doc -->
+         * @return the meta object for class '<em>Outgoing</em>'.
+         * @see fr.rostren.tracker.Outgoing
          * @generated
          */
-	EClass getOutgoingTransfer();
+        EClass getOutgoing();
 
-	/**
+        /**
          * Returns the meta object for class '{@link fr.rostren.tracker.Title <em>Title</em>}'.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1523,17 +1523,6 @@ public interface TrackerPackage extends EPackage {
 	EClass getAmount();
 
 	/**
-         * Returns the meta object for the attribute '{@link fr.rostren.tracker.Amount#getSubAmount <em>Sub Amount</em>}'.
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return the meta object for the attribute '<em>Sub Amount</em>'.
-         * @see fr.rostren.tracker.Amount#getSubAmount()
-         * @see #getAmount()
-         * @generated
-         */
-	EAttribute getAmount_SubAmount();
-
-	/**
          * Returns the meta object for the reference '{@link fr.rostren.tracker.Amount#getCategory <em>Category</em>}'.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1545,6 +1534,17 @@ public interface TrackerPackage extends EPackage {
 	EReference getAmount_Category();
 
 	/**
+         * Returns the meta object for the attribute '{@link fr.rostren.tracker.Amount#getValue <em>Value</em>}'.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @return the meta object for the attribute '<em>Value</em>'.
+         * @see fr.rostren.tracker.Amount#getValue()
+         * @see #getAmount()
+         * @generated
+         */
+        EAttribute getAmount_Value();
+
+        /**
          * Returns the meta object for class '{@link fr.rostren.tracker.OperationTitleService <em>Operation Title Service</em>}'.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1960,6 +1960,26 @@ public interface TrackerPackage extends EPackage {
 		EReference OPERATION__ORIGIN = eINSTANCE.getOperation_Origin();
 
 		/**
+                 * The meta object literal for the '{@link fr.rostren.tracker.impl.CreditImpl <em>Credit</em>}' class.
+                 * <!-- begin-user-doc -->
+                 * <!-- end-user-doc -->
+                 * @see fr.rostren.tracker.impl.CreditImpl
+                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCredit()
+                 * @generated
+                 */
+                EClass CREDIT = eINSTANCE.getCredit();
+
+                /**
+                 * The meta object literal for the '{@link fr.rostren.tracker.impl.DebitImpl <em>Debit</em>}' class.
+                 * <!-- begin-user-doc -->
+                 * <!-- end-user-doc -->
+                 * @see fr.rostren.tracker.impl.DebitImpl
+                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDebit()
+                 * @generated
+                 */
+                EClass DEBIT = eINSTANCE.getDebit();
+
+                /**
                  * The meta object literal for the '<em><b>Total Amount</b></em>' attribute feature.
                  * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1982,26 +2002,6 @@ public interface TrackerPackage extends EPackage {
                  * @generated
                  */
 		EReference OPERATION__SUB_AMOUNTS = eINSTANCE.getOperation_SubAmounts();
-
-		/**
-                 * The meta object literal for the '{@link fr.rostren.tracker.impl.CreditOperationImpl <em>Credit Operation</em>}' class.
-                 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-                 * @see fr.rostren.tracker.impl.CreditOperationImpl
-                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCreditOperation()
-                 * @generated
-                 */
-		EClass CREDIT_OPERATION = eINSTANCE.getCreditOperation();
-
-		/**
-                 * The meta object literal for the '{@link fr.rostren.tracker.impl.DebitOperationImpl <em>Debit Operation</em>}' class.
-                 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-                 * @see fr.rostren.tracker.impl.DebitOperationImpl
-                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDebitOperation()
-                 * @generated
-                 */
-		EClass DEBIT_OPERATION = eINSTANCE.getDebitOperation();
 
 		/**
                  * The meta object literal for the '{@link fr.rostren.tracker.impl.TransferImpl <em>Transfer</em>}' class.
@@ -2030,26 +2030,26 @@ public interface TrackerPackage extends EPackage {
 		EReference TRANSFER__OUTGOING_ACCOUNT = eINSTANCE.getTransfer_OutgoingAccount();
 
 		/**
-                 * The meta object literal for the '{@link fr.rostren.tracker.impl.IncomingTransferImpl <em>Incoming Transfer</em>}' class.
+                 * The meta object literal for the '{@link fr.rostren.tracker.impl.IncomingImpl <em>Incoming</em>}' class.
                  * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-                 * @see fr.rostren.tracker.impl.IncomingTransferImpl
-                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncomingTransfer()
+                 * <!-- end-user-doc -->
+                 * @see fr.rostren.tracker.impl.IncomingImpl
+                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncoming()
                  * @generated
                  */
-		EClass INCOMING_TRANSFER = eINSTANCE.getIncomingTransfer();
+                EClass INCOMING = eINSTANCE.getIncoming();
 
-		/**
-                 * The meta object literal for the '{@link fr.rostren.tracker.impl.OutgoingTransferImpl <em>Outgoing Transfer</em>}' class.
+                /**
+                 * The meta object literal for the '{@link fr.rostren.tracker.impl.OutgoingImpl <em>Outgoing</em>}' class.
                  * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-                 * @see fr.rostren.tracker.impl.OutgoingTransferImpl
-                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOutgoingTransfer()
+                 * <!-- end-user-doc -->
+                 * @see fr.rostren.tracker.impl.OutgoingImpl
+                 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOutgoing()
                  * @generated
                  */
-		EClass OUTGOING_TRANSFER = eINSTANCE.getOutgoingTransfer();
+                EClass OUTGOING = eINSTANCE.getOutgoing();
 
-		/**
+                /**
                  * The meta object literal for the '{@link fr.rostren.tracker.impl.TitleImpl <em>Title</em>}' class.
                  * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2122,14 +2122,6 @@ public interface TrackerPackage extends EPackage {
 		EClass AMOUNT = eINSTANCE.getAmount();
 
 		/**
-                 * The meta object literal for the '<em><b>Sub Amount</b></em>' attribute feature.
-                 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-                 * @generated
-                 */
-		EAttribute AMOUNT__SUB_AMOUNT = eINSTANCE.getAmount_SubAmount();
-
-		/**
                  * The meta object literal for the '<em><b>Category</b></em>' reference feature.
                  * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2138,6 +2130,14 @@ public interface TrackerPackage extends EPackage {
 		EReference AMOUNT__CATEGORY = eINSTANCE.getAmount_Category();
 
 		/**
+                 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+                 * <!-- begin-user-doc -->
+                 * <!-- end-user-doc -->
+                 * @generated
+                 */
+                EAttribute AMOUNT__VALUE = eINSTANCE.getAmount_Value();
+
+                /**
                  * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationTitleServiceImpl <em>Operation Title Service</em>}' class.
                  * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

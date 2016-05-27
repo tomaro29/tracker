@@ -8,11 +8,11 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 import fr.rostren.tracker.Amount;
-import fr.rostren.tracker.CreditOperation;
-import fr.rostren.tracker.DebitOperation;
-import fr.rostren.tracker.IncomingTransfer;
+import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.Incoming;
 import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.OutgoingTransfer;
+import fr.rostren.tracker.Outgoing;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.provider.CheckingAccountItemProvider;
@@ -23,122 +23,107 @@ import fr.rostren.tracker.provider.CheckingAccountItemProvider;
  * <!-- end-user-doc -->
  */
 public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider {
-	/**
-	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 */
-	public CheckingAccountItemProviderDev(AdapterFactory adapterFactory) {
-		super(adapterFactory);
+    /**
+     * This constructs an instance from a factory and a notifier. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     */
+    public CheckingAccountItemProviderDev(AdapterFactory adapterFactory) {
+	super(adapterFactory);
+    }
+
+    /**
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+     * describing the children that can be created under this object. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+
+	// create newCredit
+	Credit newCredit = createNewCredit();
+
+	newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newCredit));
+
+	// create newDebit
+	Debit newDebit = createNewDebit();
+
+	newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newDebit));
+
+	// create newIncoming
+	Incoming newIncoming = createNewIncoming();
+
+	newChildDescriptors
+		.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newIncoming));
+
+	// create newOutgoing
+	Outgoing newOutgoing = createNewOutgoing();
+
+	newChildDescriptors
+		.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newOutgoing));
+    }
+
+    private Credit createNewCredit() {
+	Credit newCredit = TrackerFactory.eINSTANCE.createCredit();
+	// Add a default sub amount
+	List<Amount> amounts = newCredit.getSubAmounts();
+
+	if (amounts.isEmpty()) {
+	    Amount amount = TrackerFactory.eINSTANCE.createAmount();
+	    amounts.add(amount);
 	}
 
-	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing the children that can be created under this object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	// Add a default operation title
+	OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+	newCredit.setOperationTitle(operationTitle);
+	return newCredit;
+    }
 
-		// create newCreditOperation
-		CreditOperation newCreditOperation = createNewCreditOperation();
+    private Debit createNewDebit() {
+	Debit newDebit = TrackerFactory.eINSTANCE.createDebit();
+	// Add a default sub amount
+	List<Amount> amounts = newDebit.getSubAmounts();
 
-		newChildDescriptors.add(createChildParameter(
-				TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-				newCreditOperation));
-
-		// create newDebitOperation
-		DebitOperation newDebitOperation = createNewDebitOperation();
-
-		newChildDescriptors.add(createChildParameter(
-				TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-				newDebitOperation));
-
-		// create newIncomingTransfer
-		IncomingTransfer newIncomingTransfer = createNewIncomingTransfer();
-
-		newChildDescriptors.add(createChildParameter(
-				TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-				newIncomingTransfer));
-
-		// create newOutgoingTransfer
-		OutgoingTransfer newOutgoingTransfer = createNewOutgoingTransfer();
-
-		newChildDescriptors.add(createChildParameter(
-				TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-				newOutgoingTransfer));
+	if (amounts.isEmpty()) {
+	    Amount amount = TrackerFactory.eINSTANCE.createAmount();
+	    amounts.add(amount);
 	}
 
-	private CreditOperation createNewCreditOperation() {
-		CreditOperation newCreditOperation = TrackerFactory.eINSTANCE
-				.createCreditOperation();
-		// Add a default sub amount
-		List<Amount> amounts = newCreditOperation.getSubAmounts();
+	// Add a default operation title
+	OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+	newDebit.setOperationTitle(operationTitle);
+	return newDebit;
+    }
 
-		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
-			amounts.add(amount);
-		}
+    private Incoming createNewIncoming() {
+	Incoming newIncoming = TrackerFactory.eINSTANCE.createIncoming();
+	// Add a default sub amount
+	List<Amount> amounts = newIncoming.getSubAmounts();
 
-		// Add a default operation title
-		OperationTitle operationTitle = TrackerFactory.eINSTANCE
-				.createOperationTitle();
-		newCreditOperation.setOperationTitle(operationTitle);
-		return newCreditOperation;
+	if (amounts.isEmpty()) {
+	    Amount amount = TrackerFactory.eINSTANCE.createAmount();
+	    amounts.add(amount);
 	}
 
-	private DebitOperation createNewDebitOperation() {
-		DebitOperation newDebitOperation = TrackerFactory.eINSTANCE
-				.createDebitOperation();
-		// Add a default sub amount
-		List<Amount> amounts = newDebitOperation.getSubAmounts();
+	// Add a default operation title
+	OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+	newIncoming.setOperationTitle(operationTitle);
+	return newIncoming;
+    }
 
-		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
-			amounts.add(amount);
-		}
+    private Outgoing createNewOutgoing() {
+	Outgoing newOutgoing = TrackerFactory.eINSTANCE.createOutgoing();
+	// Add a default sub amount
+	List<Amount> amounts = newOutgoing.getSubAmounts();
 
-		// Add a default operation title
-		OperationTitle operationTitle = TrackerFactory.eINSTANCE
-				.createOperationTitle();
-		newDebitOperation.setOperationTitle(operationTitle);
-		return newDebitOperation;
+	if (amounts.isEmpty()) {
+	    Amount amount = TrackerFactory.eINSTANCE.createAmount();
+	    amounts.add(amount);
 	}
 
-	private IncomingTransfer createNewIncomingTransfer() {
-		IncomingTransfer newIncomingTransfer = TrackerFactory.eINSTANCE
-				.createIncomingTransfer();
-		// Add a default sub amount
-		List<Amount> amounts = newIncomingTransfer.getSubAmounts();
-
-		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
-			amounts.add(amount);
-		}
-
-		// Add a default operation title
-		OperationTitle operationTitle = TrackerFactory.eINSTANCE
-				.createOperationTitle();
-		newIncomingTransfer.setOperationTitle(operationTitle);
-		return newIncomingTransfer;
-	}
-
-	private OutgoingTransfer createNewOutgoingTransfer() {
-		OutgoingTransfer newOutgoingTransfer = TrackerFactory.eINSTANCE
-				.createOutgoingTransfer();
-		// Add a default sub amount
-		List<Amount> amounts = newOutgoingTransfer.getSubAmounts();
-
-		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
-			amounts.add(amount);
-		}
-
-		// Add a default operation title
-		OperationTitle operationTitle = TrackerFactory.eINSTANCE
-				.createOperationTitle();
-		newOutgoingTransfer.setOperationTitle(operationTitle);
-		return newOutgoingTransfer;
-	}
+	// Add a default operation title
+	OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+	newOutgoing.setOperationTitle(operationTitle);
+	return newOutgoing;
+    }
 
 }

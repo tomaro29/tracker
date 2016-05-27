@@ -14,97 +14,91 @@ import fr.rostren.tracker.provider.TrackerItemProviderAdapterFactory;
  * are shared among multiple instances. <!-- begin-user-doc --> <!--
  * end-user-doc -->
  */
-public class TrackerItemProviderAdapterFactoryDev extends
-		TrackerItemProviderAdapterFactory {
+public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAdapterFactory {
 
-	/**
-	 * This constructs an instance. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 */
-	public TrackerItemProviderAdapterFactoryDev() {
-		super();
+    /**
+     * This constructs an instance. <!-- begin-user-doc --> <!-- end-user-doc
+     * -->
+     */
+    public TrackerItemProviderAdapterFactoryDev() {
+	super();
+    }
+
+    /**
+     * This creates an adapter for a {@link fr.rostren.tracker.BoockletAccount}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    public Adapter createBoockletAccountAdapter() {
+	if (boockletAccountItemProvider == null) {
+	    boockletAccountItemProvider = new BoockletAccountItemProviderDev(this);
 	}
 
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.BoockletAccount}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	public Adapter createBoockletAccountAdapter() {
-		if (boockletAccountItemProvider == null) {
-			boockletAccountItemProvider = new BoockletAccountItemProviderDev(
-					this);
-		}
+	return boockletAccountItemProvider;
+    }
 
-		return boockletAccountItemProvider;
+    /**
+     * This creates an adapter for a {@link fr.rostren.tracker.CheckingAccount}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    public Adapter createCheckingAccountAdapter() {
+	if (checkingAccountItemProvider == null) {
+	    checkingAccountItemProvider = new CheckingAccountItemProviderDev(this);
 	}
 
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.CheckingAccount}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	public Adapter createCheckingAccountAdapter() {
-		if (checkingAccountItemProvider == null) {
-			checkingAccountItemProvider = new CheckingAccountItemProviderDev(
-					this);
-		}
+	return checkingAccountItemProvider;
+    }
 
-		return checkingAccountItemProvider;
+    /**
+     * This creates an adapter for a {@link fr.rostren.tracker.Credit}. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    public Adapter createCreditAdapter() {
+	if (creditItemProvider == null) {
+	    creditItemProvider = new CreditItemProviderDev(this);
 	}
 
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.CreditOperation}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	public Adapter createCreditOperationAdapter() {
-		if (creditOperationItemProvider == null) {
-			creditOperationItemProvider = new CreditOperationItemProviderDev(
-					this);
-		}
+	return creditItemProvider;
+    }
 
-		return creditOperationItemProvider;
+    /**
+     * This creates an adapter for a {@link fr.rostren.tracker.Debit}. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    public Adapter createDebitAdapter() {
+	if (debitItemProvider == null) {
+	    debitItemProvider = new DebitItemProviderDev(this);
 	}
 
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.DebitOperation}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	public Adapter createDebitOperationAdapter() {
-		if (debitOperationItemProvider == null) {
-			debitOperationItemProvider = new DebitOperationItemProviderDev(this);
-		}
+	return debitItemProvider;
+    }
 
-		return debitOperationItemProvider;
+    /**
+     * This creates an adapter for a {@link fr.rostren.tracker.Incoming} . <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    public Adapter createIncomingAdapter() {
+	if (incomingItemProvider == null) {
+	    incomingItemProvider = new IncomingItemProviderDev(this);
 	}
 
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.IncomingTransfer}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	public Adapter createIncomingTransferAdapter() {
-		if (incomingTransferItemProvider == null) {
-			incomingTransferItemProvider = new IncomingTransferItemProviderDev(
-					this);
-		}
+	return incomingItemProvider;
+    }
 
-		return incomingTransferItemProvider;
+    /**
+     * This creates an adapter for a {@link fr.rostren.tracker.Outgoing} . <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     */
+    @Override
+    public Adapter createOutgoingAdapter() {
+	if (outgoingItemProvider == null) {
+	    outgoingItemProvider = new OutgoingItemProviderDev(this);
 	}
 
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.OutgoingTransfer}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
-	 */
-	@Override
-	public Adapter createOutgoingTransferAdapter() {
-		if (outgoingTransferItemProvider == null) {
-			outgoingTransferItemProvider = new OutgoingTransferItemProviderDev(
-					this);
-		}
-
-		return outgoingTransferItemProvider;
-	}
+	return outgoingItemProvider;
+    }
 }

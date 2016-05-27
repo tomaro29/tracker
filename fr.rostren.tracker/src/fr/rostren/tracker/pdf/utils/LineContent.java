@@ -40,11 +40,11 @@ public class LineContent {
     public LineContent(Date date, String title, BigDecimal amount, OperationType type, Origin origin) {
 	this.setTitle(formatTitle(title));
 	if (OperationType.CREDIT.equals(type)) {
-	    this.operation = TrackerFactory.eINSTANCE.createCreditOperation();
+	    this.operation = TrackerFactory.eINSTANCE.createCredit();
 	    this.operation.setDate(date);
 	    this.operation.setTotalAmount(amount);
 	} else if (OperationType.DEBIT.equals(type)) {
-	    this.operation = TrackerFactory.eINSTANCE.createDebitOperation();
+	    this.operation = TrackerFactory.eINSTANCE.createDebit();
 	    this.operation.setDate(date);
 	    this.operation.setTotalAmount(amount);
 	}
@@ -103,7 +103,7 @@ public class LineContent {
      */
     public Amount createCategoryAmount(BigDecimal amount, Category linkedCategory) {
 	Amount amountObject = TrackerFactory.eINSTANCE.createAmount();
-	amountObject.setSubAmount(amount);
+	amountObject.setValue(amount);
 	amountObject.setCategory(linkedCategory);
 	return amountObject;
     }

@@ -48,14 +48,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/date"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/origin"/>
     </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//CreditOperation"/>
-    <genClasses ecoreClass="Tracker.ecore#//DebitOperation"/>
+    <genClasses ecoreClass="Tracker.ecore#//Credit"/>
+    <genClasses ecoreClass="Tracker.ecore#//Debit"/>
     <genClasses image="false" ecoreClass="Tracker.ecore#//Transfer">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Transfer/incomingAccount"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Transfer/outgoingAccount"/>
     </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//IncomingTransfer"/>
-    <genClasses ecoreClass="Tracker.ecore#//OutgoingTransfer"/>
+    <genClasses ecoreClass="Tracker.ecore#//Incoming"/>
+    <genClasses ecoreClass="Tracker.ecore#//Outgoing"/>
     <genClasses image="false" ecoreClass="Tracker.ecore#//Title">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Title/title"/>
     </genClasses>
@@ -68,7 +68,7 @@
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//Amount">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Amount/category"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Amount/subAmount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Amount/value"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//OperationTitleService">
       <genOperations ecoreOperation="Tracker.ecore#//OperationTitleService/addTitle">

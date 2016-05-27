@@ -140,98 +140,98 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
         }
 
 	/**
-         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.CreditOperation} instances.
+         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Credit} instances.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	protected CreditOperationItemProvider creditOperationItemProvider;
+        protected CreditItemProvider creditItemProvider;
 
-	/**
-         * This creates an adapter for a {@link fr.rostren.tracker.CreditOperation}.
+        /**
+         * This creates an adapter for a {@link fr.rostren.tracker.Credit}.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	@Override
-	public Adapter createCreditOperationAdapter() {
-                if (creditOperationItemProvider == null) {
-                        creditOperationItemProvider = new CreditOperationItemProvider(this);
+        @Override
+        public Adapter createCreditAdapter() {
+                if (creditItemProvider == null) {
+                        creditItemProvider = new CreditItemProvider(this);
                 }
 
-                return creditOperationItemProvider;
+                return creditItemProvider;
         }
 
-	/**
-         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.DebitOperation} instances.
+        /**
+         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Debit} instances.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	protected DebitOperationItemProvider debitOperationItemProvider;
+        protected DebitItemProvider debitItemProvider;
 
-	/**
-         * This creates an adapter for a {@link fr.rostren.tracker.DebitOperation}.
+        /**
+         * This creates an adapter for a {@link fr.rostren.tracker.Debit}.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	@Override
-	public Adapter createDebitOperationAdapter() {
-                if (debitOperationItemProvider == null) {
-                        debitOperationItemProvider = new DebitOperationItemProvider(this);
+        @Override
+        public Adapter createDebitAdapter() {
+                if (debitItemProvider == null) {
+                        debitItemProvider = new DebitItemProvider(this);
                 }
 
-                return debitOperationItemProvider;
+                return debitItemProvider;
         }
 
-	/**
-         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.IncomingTransfer} instances.
+        /**
+         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Incoming} instances.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	protected IncomingTransferItemProvider incomingTransferItemProvider;
+        protected IncomingItemProvider incomingItemProvider;
 
-	/**
-         * This creates an adapter for a {@link fr.rostren.tracker.IncomingTransfer}.
+        /**
+         * This creates an adapter for a {@link fr.rostren.tracker.Incoming}.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	@Override
-	public Adapter createIncomingTransferAdapter() {
-                if (incomingTransferItemProvider == null) {
-                        incomingTransferItemProvider = new IncomingTransferItemProvider(this);
+        @Override
+        public Adapter createIncomingAdapter() {
+                if (incomingItemProvider == null) {
+                        incomingItemProvider = new IncomingItemProvider(this);
                 }
 
-                return incomingTransferItemProvider;
+                return incomingItemProvider;
         }
 
-	/**
-         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.OutgoingTransfer} instances.
+        /**
+         * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Outgoing} instances.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	protected OutgoingTransferItemProvider outgoingTransferItemProvider;
+        protected OutgoingItemProvider outgoingItemProvider;
 
-	/**
-         * This creates an adapter for a {@link fr.rostren.tracker.OutgoingTransfer}.
+        /**
+         * This creates an adapter for a {@link fr.rostren.tracker.Outgoing}.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
          * @generated
          */
-	@Override
-	public Adapter createOutgoingTransferAdapter() {
-                if (outgoingTransferItemProvider == null) {
-                        outgoingTransferItemProvider = new OutgoingTransferItemProvider(this);
+        @Override
+        public Adapter createOutgoingAdapter() {
+                if (outgoingItemProvider == null) {
+                        outgoingItemProvider = new OutgoingItemProvider(this);
                 }
 
-                return outgoingTransferItemProvider;
+                return outgoingItemProvider;
         }
 
-	/**
+        /**
          * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Category} instances.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -632,10 +632,10 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
                 if (ownerItemProvider != null) ownerItemProvider.dispose();
                 if (checkingAccountItemProvider != null) checkingAccountItemProvider.dispose();
                 if (boockletAccountItemProvider != null) boockletAccountItemProvider.dispose();
-                if (creditOperationItemProvider != null) creditOperationItemProvider.dispose();
-                if (debitOperationItemProvider != null) debitOperationItemProvider.dispose();
-                if (incomingTransferItemProvider != null) incomingTransferItemProvider.dispose();
-                if (outgoingTransferItemProvider != null) outgoingTransferItemProvider.dispose();
+                if (creditItemProvider != null) creditItemProvider.dispose();
+                if (debitItemProvider != null) debitItemProvider.dispose();
+                if (incomingItemProvider != null) incomingItemProvider.dispose();
+                if (outgoingItemProvider != null) outgoingItemProvider.dispose();
                 if (categoryItemProvider != null) categoryItemProvider.dispose();
                 if (operationTitleItemProvider != null) operationTitleItemProvider.dispose();
                 if (amountItemProvider != null) amountItemProvider.dispose();

@@ -32,14 +32,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//Origin" eOpposite="#//Origin/operations"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CreditOperation" eSuperTypes="#//Operation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DebitOperation" eSuperTypes="#//Operation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Credit" eSuperTypes="#//Operation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Debit" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Transfer" abstract="true" eSuperTypes="#//Operation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingAccount" eType="#//Account"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingAccount" eType="#//Account"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IncomingTransfer" eSuperTypes="#//Transfer"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OutgoingTransfer" eSuperTypes="#//Transfer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Incoming" eSuperTypes="#//Transfer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Outgoing" eSuperTypes="#//Transfer"/>
   <eClassifiers xsi:type="ecore:EClass" name="Title" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -55,7 +55,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Amount">
     <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
         eType="#//Category"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subAmount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationTitleService">
     <eOperations name="addTitle">

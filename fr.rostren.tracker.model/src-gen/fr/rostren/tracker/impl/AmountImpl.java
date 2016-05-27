@@ -22,7 +22,7 @@ import java.math.BigDecimal;
  * </p>
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.AmountImpl#getCategory <em>Category</em>}</li>
- *   <li>{@link fr.rostren.tracker.impl.AmountImpl#getSubAmount <em>Sub Amount</em>}</li>
+ *   <li>{@link fr.rostren.tracker.impl.AmountImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -39,26 +39,26 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	protected Category category;
 
 	/**
-         * The default value of the '{@link #getSubAmount() <em>Sub Amount</em>}' attribute.
+         * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see #getSubAmount()
+         * <!-- end-user-doc -->
+         * @see #getValue()
          * @generated
          * @ordered
          */
-	protected static final BigDecimal SUB_AMOUNT_EDEFAULT = null;
+        protected static final BigDecimal VALUE_EDEFAULT = null;
 
-	/**
-         * The cached value of the '{@link #getSubAmount() <em>Sub Amount</em>}' attribute.
+        /**
+         * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see #getSubAmount()
+         * <!-- end-user-doc -->
+         * @see #getValue()
          * @generated
          * @ordered
          */
-	protected BigDecimal subAmount = SUB_AMOUNT_EDEFAULT;
+        protected BigDecimal value = VALUE_EDEFAULT;
 
-	/**
+        /**
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
          * @generated
@@ -75,27 +75,6 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	@Override
 	protected EClass eStaticClass() {
                 return TrackerPackage.Literals.AMOUNT;
-        }
-
-	/**
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @generated
-         */
-	public BigDecimal getSubAmount() {
-                return subAmount;
-        }
-
-	/**
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @generated
-         */
-	public void setSubAmount(BigDecimal newSubAmount) {
-                BigDecimal oldSubAmount = subAmount;
-                subAmount = newSubAmount;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__SUB_AMOUNT, oldSubAmount, subAmount));
         }
 
 	/**
@@ -138,6 +117,27 @@ public class AmountImpl extends EObjectImpl implements Amount {
 
 	/**
          * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public BigDecimal getValue() {
+                return value;
+        }
+
+        /**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public void setValue(BigDecimal newValue) {
+                BigDecimal oldValue = value;
+                value = newValue;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__VALUE, oldValue, value));
+        }
+
+        /**
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
          * @generated
          */
@@ -147,8 +147,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
                         case TrackerPackage.AMOUNT__CATEGORY:
                                 if (resolve) return getCategory();
                                 return basicGetCategory();
-                        case TrackerPackage.AMOUNT__SUB_AMOUNT:
-                                return getSubAmount();
+                        case TrackerPackage.AMOUNT__VALUE:
+                                return getValue();
                 }
                 return super.eGet(featureID, resolve, coreType);
         }
@@ -164,8 +164,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
                         case TrackerPackage.AMOUNT__CATEGORY:
                                 setCategory((Category)newValue);
                                 return;
-                        case TrackerPackage.AMOUNT__SUB_AMOUNT:
-                                setSubAmount((BigDecimal)newValue);
+                        case TrackerPackage.AMOUNT__VALUE:
+                                setValue((BigDecimal)newValue);
                                 return;
                 }
                 super.eSet(featureID, newValue);
@@ -182,8 +182,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
                         case TrackerPackage.AMOUNT__CATEGORY:
                                 setCategory((Category)null);
                                 return;
-                        case TrackerPackage.AMOUNT__SUB_AMOUNT:
-                                setSubAmount(SUB_AMOUNT_EDEFAULT);
+                        case TrackerPackage.AMOUNT__VALUE:
+                                setValue(VALUE_EDEFAULT);
                                 return;
                 }
                 super.eUnset(featureID);
@@ -199,8 +199,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
                 switch (featureID) {
                         case TrackerPackage.AMOUNT__CATEGORY:
                                 return category != null;
-                        case TrackerPackage.AMOUNT__SUB_AMOUNT:
-                                return SUB_AMOUNT_EDEFAULT == null ? subAmount != null : !SUB_AMOUNT_EDEFAULT.equals(subAmount);
+                        case TrackerPackage.AMOUNT__VALUE:
+                                return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
                 }
                 return super.eIsSet(featureID);
         }
@@ -215,8 +215,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
                 if (eIsProxy()) return super.toString();
 
                 StringBuffer result = new StringBuffer(super.toString());
-                result.append(" (subAmount: ");
-                result.append(subAmount);
+                result.append(" (value: ");
+                result.append(value);
                 result.append(')');
                 return result.toString();
         }

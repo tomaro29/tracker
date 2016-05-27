@@ -140,11 +140,11 @@ public class BoockletAccountItemProvider extends AccountItemProvider {
                 newChildDescriptors.add
                         (createChildParameter
                                 (TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS,
-                                 TrackerFactory.eINSTANCE.createIncomingTransfer()));
+                                 TrackerFactory.eINSTANCE.createIncoming()));
 
                 newChildDescriptors.add
                         (createChildParameter
                                 (TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS,
-                                 TrackerFactory.eINSTANCE.createOutgoingTransfer()));
+                                 TrackerFactory.eINSTANCE.createOutgoing()));
         }
 }

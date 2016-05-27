@@ -9,23 +9,22 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import fr.rostren.tracker.IncomingTransfer;
+import fr.rostren.tracker.Outgoing;
 
 /**
- * This is the item provider adapter for a
- * {@link fr.rostren.tracker.IncomingTransfer} object. <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link fr.rostren.tracker.Outgoing}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class IncomingTransferItemProvider extends TransferItemProvider {
+public class OutgoingItemProvider extends TransferItemProvider {
     /**
      * This constructs an instance from a factory and a notifier. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
-    public IncomingTransferItemProvider(AdapterFactory adapterFactory) {
+    public OutgoingItemProvider(AdapterFactory adapterFactory) {
 	super(adapterFactory);
     }
 
@@ -45,33 +44,31 @@ public class IncomingTransferItemProvider extends TransferItemProvider {
     }
 
     /**
-     * This returns IncomingTransfer.gif. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+     * This returns Outgoing.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
     @Override
     public Object getImage(Object object) {
-	return overlayImage(object, getResourceLocator().getImage("full/obj16/IncomingTransfer"));
+	return overlayImage(object, getResourceLocator().getImage("full/obj16/Outgoing"));
     }
 
     /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
-     * @generated NOT
+     * @generated
      */
     @Override
     public String getText(Object object) {
-	String operationTitle = ((IncomingTransfer) object).getOperationTitle().getTitle();
-	String operationAmount = ((IncomingTransfer) object).getTotalAmount().toString();
+	String operationTitle = ((Outgoing) object).getOperationTitle().getTitle();
+	String operationAmount = ((Outgoing) object).getTotalAmount().toString();
 
 	if (operationTitle == null)
-	    return "New " + getString("_UI_IncomingTransfer_type");
+	    return "New " + getString("_UI_Outgoing_type");
 	if (operationTitle.length() == 0)
-	    return getString("_UI_IncomingTransfer_type") + " --> Undefined Operation Title = " + operationAmount
-		    + " euros";
-	return getString("_UI_IncomingTransfer_type") + " --> " + operationTitle + " = " + operationAmount + " euros";
+	    return getString("_UI_Outgoing_type") + " --> Undefined Operation Title = " + operationAmount + " euros";
+	return getString("_UI_Outgoing_type") + " --> " + operationTitle + " = " + operationAmount + " euros";
     }
 
     /**

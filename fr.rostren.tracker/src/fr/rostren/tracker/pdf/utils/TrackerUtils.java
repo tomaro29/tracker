@@ -1,13 +1,9 @@
 package fr.rostren.tracker.pdf.utils;
 
-import java.math.BigDecimal;
-
 import org.apache.commons.lang.StringUtils;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
-import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
@@ -22,23 +18,19 @@ public class TrackerUtils {
     }
 
     public static String getCategoryTitle(Amount amount) {
-	Category category = amount.getCategory();
-	return category == null ? StringUtils.EMPTY : category.getTitle();
+	return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
     }
 
-    public static String getSubAmount(Amount amount) {
-	BigDecimal subAmount = amount.getSubAmount();
-	return subAmount == null ? StringUtils.EMPTY : subAmount.toString();
+    public static String getAmountValue(Amount amount) {
+	return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
     }
 
     public static String getOperationTotalAmount(Operation operation) {
-	BigDecimal totalAmount = operation.getTotalAmount();
-	return totalAmount == null ? StringUtils.EMPTY : totalAmount.toString();
+	return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
     }
 
     public static String getOperationDate(Operation operation) {
-	Date date = operation.getDate();
-	return date == null ? StringUtils.EMPTY : date.toString();
+	return operation.getDate() == null ? StringUtils.EMPTY : operation.getDate().toString();
     }
 
 }

@@ -49,42 +49,42 @@ public interface TrackerFactory extends EFactory {
 	BoockletAccount createBoockletAccount();
 
 	/**
-         * Returns a new object of class '<em>Credit Operation</em>'.
+         * Returns a new object of class '<em>Credit</em>'.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Credit Operation</em>'.
+         * <!-- end-user-doc -->
+         * @return a new object of class '<em>Credit</em>'.
          * @generated
          */
-	CreditOperation createCreditOperation();
+        Credit createCredit();
 
-	/**
-         * Returns a new object of class '<em>Debit Operation</em>'.
+        /**
+         * Returns a new object of class '<em>Debit</em>'.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Debit Operation</em>'.
+         * <!-- end-user-doc -->
+         * @return a new object of class '<em>Debit</em>'.
          * @generated
          */
-	DebitOperation createDebitOperation();
+        Debit createDebit();
 
-	/**
-         * Returns a new object of class '<em>Incoming Transfer</em>'.
+        /**
+         * Returns a new object of class '<em>Incoming</em>'.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Incoming Transfer</em>'.
+         * <!-- end-user-doc -->
+         * @return a new object of class '<em>Incoming</em>'.
          * @generated
          */
-	IncomingTransfer createIncomingTransfer();
+        Incoming createIncoming();
 
-	/**
-         * Returns a new object of class '<em>Outgoing Transfer</em>'.
+        /**
+         * Returns a new object of class '<em>Outgoing</em>'.
          * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Outgoing Transfer</em>'.
+         * <!-- end-user-doc -->
+         * @return a new object of class '<em>Outgoing</em>'.
          * @generated
          */
-	OutgoingTransfer createOutgoingTransfer();
+        Outgoing createOutgoing();
 
-	/**
+        /**
          * Returns a new object of class '<em>Category</em>'.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

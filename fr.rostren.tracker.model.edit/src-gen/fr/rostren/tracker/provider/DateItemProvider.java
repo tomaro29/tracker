@@ -24,9 +24,8 @@ import fr.rostren.tracker.Month;
 import fr.rostren.tracker.TrackerPackage;
 
 /**
- * This is the item provider adapter for a {@link fr.rostren.tracker.Date}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link fr.rostren.tracker.Date} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class DateItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -38,8 +37,8 @@ public class DateItemProvider extends ItemProviderAdapter implements IEditingDom
      * @generated
      */
     public DateItemProvider(AdapterFactory adapterFactory) {
-	super(adapterFactory);
-    }
+                super(adapterFactory);
+        }
 
     /**
      * This returns the property descriptors for the adapted class. <!--
@@ -49,30 +48,37 @@ public class DateItemProvider extends ItemProviderAdapter implements IEditingDom
      */
     @Override
     public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-	if (itemPropertyDescriptors == null) {
-	    super.getPropertyDescriptors(object);
+                if (itemPropertyDescriptors == null) {
+                        super.getPropertyDescriptors(object);
 
-	    addDayPropertyDescriptor(object);
-	    addMonthPropertyDescriptor(object);
-	    addYearPropertyDescriptor(object);
-	}
-	return itemPropertyDescriptors;
-    }
+                        addDayPropertyDescriptor(object);
+                        addMonthPropertyDescriptor(object);
+                        addYearPropertyDescriptor(object);
+                }
+                return itemPropertyDescriptors;
+        }
 
     /**
-     * This adds a property descriptor for the Day feature. <!-- begin-user-doc
+         * This adds a property descriptor for the Day feature.
+         * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
+         * @generated
+         */
     protected void addDayPropertyDescriptor(Object object) {
-	itemPropertyDescriptors
-		.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(), getString("_UI_Date_day_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Date_day_feature", "_UI_Date_type"),
-			TrackerPackage.Literals.DATE__DAY, true, false, false,
-			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
-    }
+                itemPropertyDescriptors.add
+                        (createItemPropertyDescriptor
+                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                                 getResourceLocator(),
+                                 getString("_UI_Date_day_feature"),
+                                 getString("_UI_PropertyDescriptor_description", "_UI_Date_day_feature", "_UI_Date_type"),
+                                 TrackerPackage.Literals.DATE__DAY,
+                                 true,
+                                 false,
+                                 false,
+                                 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+                                 null,
+                                 null));
+        }
 
     /**
      * This adds a property descriptor for the Month feature. <!--
@@ -81,38 +87,52 @@ public class DateItemProvider extends ItemProviderAdapter implements IEditingDom
      * @generated
      */
     protected void addMonthPropertyDescriptor(Object object) {
-	itemPropertyDescriptors
-		.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(), getString("_UI_Date_month_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Date_month_feature", "_UI_Date_type"),
-			TrackerPackage.Literals.DATE__MONTH, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-    }
+                itemPropertyDescriptors.add
+                        (createItemPropertyDescriptor
+                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                                 getResourceLocator(),
+                                 getString("_UI_Date_month_feature"),
+                                 getString("_UI_PropertyDescriptor_description", "_UI_Date_month_feature", "_UI_Date_type"),
+                                 TrackerPackage.Literals.DATE__MONTH,
+                                 true,
+                                 false,
+                                 false,
+                                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                                 null,
+                                 null));
+        }
 
     /**
-     * This adds a property descriptor for the Year feature. <!-- begin-user-doc
+         * This adds a property descriptor for the Year feature.
+         * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
+         * @generated
+         */
     protected void addYearPropertyDescriptor(Object object) {
-	itemPropertyDescriptors
-		.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(), getString("_UI_Date_year_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Date_year_feature", "_UI_Date_type"),
-			TrackerPackage.Literals.DATE__YEAR, true, false, false,
-			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
-    }
+                itemPropertyDescriptors.add
+                        (createItemPropertyDescriptor
+                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                                 getResourceLocator(),
+                                 getString("_UI_Date_year_feature"),
+                                 getString("_UI_PropertyDescriptor_description", "_UI_Date_year_feature", "_UI_Date_type"),
+                                 TrackerPackage.Literals.DATE__YEAR,
+                                 true,
+                                 false,
+                                 false,
+                                 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+                                 null,
+                                 null));
+        }
 
     /**
-     * This returns Date.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
+         * This returns Date.gif.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
+         * @generated
+         */
     @Override
     public Object getImage(Object object) {
-	return overlayImage(object, getResourceLocator().getImage("full/obj16/Date"));
-    }
+                return overlayImage(object, getResourceLocator().getImage("full/obj16/Date"));
+        }
 
     /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
@@ -134,26 +154,25 @@ public class DateItemProvider extends ItemProviderAdapter implements IEditingDom
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to
-     * update any cached children and by creating a viewer notification, which
-     * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+         * This handles model notifications by calling {@link #updateChildren} to update any cached
+         * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+         * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @generated
-     */
+         * @generated
+         */
     @Override
     public void notifyChanged(Notification notification) {
-	updateChildren(notification);
+                updateChildren(notification);
 
-	switch (notification.getFeatureID(Date.class)) {
-	case TrackerPackage.DATE__DAY:
-	case TrackerPackage.DATE__MONTH:
-	case TrackerPackage.DATE__YEAR:
-	    fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-	    return;
-	}
-	super.notifyChanged(notification);
-    }
+                switch (notification.getFeatureID(Date.class)) {
+                        case TrackerPackage.DATE__DAY:
+                        case TrackerPackage.DATE__MONTH:
+                        case TrackerPackage.DATE__YEAR:
+                                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                                return;
+                }
+                super.notifyChanged(notification);
+        }
 
     /**
      * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
@@ -164,8 +183,8 @@ public class DateItemProvider extends ItemProviderAdapter implements IEditingDom
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-	super.collectNewChildDescriptors(newChildDescriptors, object);
-    }
+                super.collectNewChildDescriptors(newChildDescriptors, object);
+        }
 
     /**
      * Return the resource locator for this item provider's resources. <!--
@@ -175,7 +194,7 @@ public class DateItemProvider extends ItemProviderAdapter implements IEditingDom
      */
     @Override
     public ResourceLocator getResourceLocator() {
-	return TrackerEditPlugin.INSTANCE;
-    }
+                return TrackerEditPlugin.INSTANCE;
+        }
 
 }

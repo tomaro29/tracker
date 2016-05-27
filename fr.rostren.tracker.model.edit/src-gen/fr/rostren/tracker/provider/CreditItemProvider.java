@@ -9,31 +9,26 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import fr.rostren.tracker.CreditOperation;
+import fr.rostren.tracker.Credit;
 
 /**
- * This is the item provider adapter for a {@link fr.rostren.tracker.CreditOperation} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link fr.rostren.tracker.Credit}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class CreditOperationItemProvider extends OperationItemProvider {
+public class CreditItemProvider extends OperationItemProvider {
     /**
      * This constructs an instance from a factory and a notifier. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
-    public CreditOperationItemProvider(AdapterFactory adapterFactory) {
-                super(adapterFactory);
-        }
+    public CreditItemProvider(AdapterFactory adapterFactory) {
+	super(adapterFactory);
+    }
 
     /**
      * This returns the property descriptors for the adapted class. <!--
@@ -43,23 +38,22 @@ public class CreditOperationItemProvider extends OperationItemProvider {
      */
     @Override
     public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-                if (itemPropertyDescriptors == null) {
-                        super.getPropertyDescriptors(object);
+	if (itemPropertyDescriptors == null) {
+	    super.getPropertyDescriptors(object);
 
-                }
-                return itemPropertyDescriptors;
-        }
+	}
+	return itemPropertyDescriptors;
+    }
 
     /**
-         * This returns CreditOperation.gif.
-         * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-         * @generated
-         */
+     * This returns Credit.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
     @Override
     public Object getImage(Object object) {
-                return overlayImage(object, getResourceLocator().getImage("full/obj16/CreditOperation"));
-        }
+	return overlayImage(object, getResourceLocator().getImage("full/obj16/Credit"));
+    }
 
     /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
@@ -69,9 +63,9 @@ public class CreditOperationItemProvider extends OperationItemProvider {
      */
     @Override
     public String getText(Object object) {
-	CreditOperation creditOperation = (CreditOperation) object;
-	String operationTitle = creditOperation.getOperationTitle().getTitle();
-	BigDecimal totalAmount = creditOperation.getTotalAmount();
+	Credit credit = (Credit) object;
+	String operationTitle = credit.getOperationTitle().getTitle();
+	BigDecimal totalAmount = credit.getTotalAmount();
 	String operationAmount = totalAmount == null ? StringUtils.EMPTY : totalAmount.toString();
 
 	if (operationTitle == null) {
@@ -86,17 +80,18 @@ public class CreditOperationItemProvider extends OperationItemProvider {
     }
 
     /**
-         * This handles model notifications by calling {@link #updateChildren} to update any cached
-         * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-         * <!-- begin-user-doc --> <!--
+     * This handles model notifications by calling {@link #updateChildren} to
+     * update any cached children and by creating a viewer notification, which
+     * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-         * @generated
-         */
+     * 
+     * @generated
+     */
     @Override
     public void notifyChanged(Notification notification) {
-                updateChildren(notification);
-                super.notifyChanged(notification);
-        }
+	updateChildren(notification);
+	super.notifyChanged(notification);
+    }
 
     /**
      * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
@@ -107,7 +102,7 @@ public class CreditOperationItemProvider extends OperationItemProvider {
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-                super.collectNewChildDescriptors(newChildDescriptors, object);
-        }
+	super.collectNewChildDescriptors(newChildDescriptors, object);
+    }
 
 }

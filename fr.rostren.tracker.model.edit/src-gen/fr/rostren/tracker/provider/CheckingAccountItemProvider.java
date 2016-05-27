@@ -141,21 +141,21 @@ public class CheckingAccountItemProvider extends AccountItemProvider {
                 newChildDescriptors.add
                         (createChildParameter
                                 (TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-                                 TrackerFactory.eINSTANCE.createCreditOperation()));
+                                 TrackerFactory.eINSTANCE.createCredit()));
 
                 newChildDescriptors.add
                         (createChildParameter
                                 (TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-                                 TrackerFactory.eINSTANCE.createDebitOperation()));
+                                 TrackerFactory.eINSTANCE.createDebit()));
 
                 newChildDescriptors.add
                         (createChildParameter
                                 (TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-                                 TrackerFactory.eINSTANCE.createIncomingTransfer()));
+                                 TrackerFactory.eINSTANCE.createIncoming()));
 
                 newChildDescriptors.add
                         (createChildParameter
                                 (TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-                                 TrackerFactory.eINSTANCE.createOutgoingTransfer()));
+                                 TrackerFactory.eINSTANCE.createOutgoing()));
         }
 }

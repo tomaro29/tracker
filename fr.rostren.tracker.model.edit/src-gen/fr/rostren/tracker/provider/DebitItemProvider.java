@@ -9,23 +9,22 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import fr.rostren.tracker.DebitOperation;
+import fr.rostren.tracker.Debit;
 
 /**
- * This is the item provider adapter for a
- * {@link fr.rostren.tracker.DebitOperation} object. <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link fr.rostren.tracker.Debit}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class DebitOperationItemProvider extends OperationItemProvider {
+public class DebitItemProvider extends OperationItemProvider {
     /**
      * This constructs an instance from a factory and a notifier. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
-    public DebitOperationItemProvider(AdapterFactory adapterFactory) {
+    public DebitItemProvider(AdapterFactory adapterFactory) {
 	super(adapterFactory);
     }
 
@@ -45,14 +44,13 @@ public class DebitOperationItemProvider extends OperationItemProvider {
     }
 
     /**
-     * This returns DebitOperation.gif. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+     * This returns Debit.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
     @Override
     public Object getImage(Object object) {
-	return overlayImage(object, getResourceLocator().getImage("full/obj16/DebitOperation"));
+	return overlayImage(object, getResourceLocator().getImage("full/obj16/Debit"));
     }
 
     /**
@@ -63,8 +61,8 @@ public class DebitOperationItemProvider extends OperationItemProvider {
      */
     @Override
     public String getText(Object object) {
-	String operationTitle = ((DebitOperation) object).getOperationTitle().getTitle();
-	String operationAmount = ((DebitOperation) object).getTotalAmount().toString();
+	String operationTitle = ((Debit) object).getOperationTitle().getTitle();
+	String operationAmount = ((Debit) object).getTotalAmount().toString();
 	if (operationTitle == null)
 	    return "New " + getString("_UI_DebitOperation_type");
 	if (operationTitle.length() == 0)

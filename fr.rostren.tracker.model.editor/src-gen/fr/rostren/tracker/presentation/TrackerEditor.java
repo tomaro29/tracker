@@ -39,8 +39,6 @@ import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -71,6 +69,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -87,6 +86,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.FileTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
@@ -117,6 +117,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import fr.rostren.tracker.provider.TrackerItemProviderAdapterFactory;
 import fr.rostren.tracker.provider.dev.TrackerItemProviderAdapterFactoryDev;
 
 /**
@@ -172,7 +173,7 @@ public class TrackerEditor extends MultiPageEditorPart
      * 
      * @generated
      */
-    protected PropertySheetPage propertySheetPage;
+    protected List<PropertySheetPage> propertySheetPages = new ArrayList<PropertySheetPage>();
 
     /**
      * This is the viewer that shadows the selection in the content outline. The
@@ -281,7 +282,6 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     protected IPartListener partListener = new IPartListener() {
-	@Override
 	public void partActivated(IWorkbenchPart p) {
 	    if (p instanceof ContentOutline) {
 		if (((ContentOutline) p).getCurrentPage() == contentOutlinePage) {
@@ -290,7 +290,7 @@ public class TrackerEditor extends MultiPageEditorPart
 		    setCurrentViewer(contentOutlineViewer);
 		}
 	    } else if (p instanceof PropertySheet) {
-		if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
+		if (propertySheetPages.contains(((PropertySheet) p).getCurrentPage())) {
 		    getActionBarContributor().setActiveEditor(TrackerEditor.this);
 		    handleActivate();
 		}
@@ -299,22 +299,18 @@ public class TrackerEditor extends MultiPageEditorPart
 	    }
 	}
 
-	@Override
 	public void partBroughtToTop(IWorkbenchPart p) {
 	    // Ignore.
 	}
 
-	@Override
 	public void partClosed(IWorkbenchPart p) {
 	    // Ignore.
 	}
 
-	@Override
 	public void partDeactivated(IWorkbenchPart p) {
 	    // Ignore.
 	}
 
-	@Override
 	public void partOpened(IWorkbenchPart p) {
 	    // Ignore.
 	}
@@ -384,7 +380,6 @@ public class TrackerEditor extends MultiPageEditorPart
 
 		    if (updateProblemIndication) {
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
-			    @Override
 			    public void run() {
 				updateProblemIndication();
 			    }
@@ -406,6 +401,14 @@ public class TrackerEditor extends MultiPageEditorPart
 	@Override
 	protected void unsetTarget(Resource target) {
 	    basicUnsetTarget(target);
+	    resourceToDiagnosticMap.remove(target);
+	    if (updateProblemIndication) {
+		getSite().getShell().getDisplay().asyncExec(new Runnable() {
+		    public void run() {
+			updateProblemIndication();
+		    }
+		});
+	    }
 	}
     };
 
@@ -416,7 +419,6 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
-	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
 	    IResourceDelta delta = event.getDelta();
 	    try {
@@ -425,7 +427,6 @@ public class TrackerEditor extends MultiPageEditorPart
 		    protected Collection<Resource> changedResources = new ArrayList<Resource>();
 		    protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
-		    @Override
 		    public boolean visit(IResourceDelta delta) {
 			if (delta.getResource().getType() == IResource.FILE) {
 			    if (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED
@@ -440,6 +441,7 @@ public class TrackerEditor extends MultiPageEditorPart
 				    }
 				}
 			    }
+			    return false;
 			}
 
 			return true;
@@ -459,7 +461,6 @@ public class TrackerEditor extends MultiPageEditorPart
 
 		if (!visitor.getRemovedResources().isEmpty()) {
 		    getSite().getShell().getDisplay().asyncExec(new Runnable() {
-			@Override
 			public void run() {
 			    removedResources.addAll(visitor.getRemovedResources());
 			    if (!isDirty()) {
@@ -471,7 +472,6 @@ public class TrackerEditor extends MultiPageEditorPart
 
 		if (!visitor.getChangedResources().isEmpty()) {
 		    getSite().getShell().getDisplay().asyncExec(new Runnable() {
-			@Override
 			public void run() {
 			    changedResources.addAll(visitor.getChangedResources());
 			    if (getSite().getPage().getActiveEditor() == TrackerEditor.this) {
@@ -634,6 +634,7 @@ public class TrackerEditor extends MultiPageEditorPart
      */
     protected void initializeEditingDomain() {
 	// Create an adapter factory that yields item providers.
+	//
 	adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 	adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
@@ -655,11 +656,19 @@ public class TrackerEditor extends MultiPageEditorPart
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 
 			// Try to select the affected objects.
+			//
 			Command mostRecentCommand = ((CommandStack) event.getSource()).getMostRecentCommand();
-			if (mostRecentCommand != null)
+			if (mostRecentCommand != null) {
 			    setSelectionToViewer(mostRecentCommand.getAffectedObjects());
-			if (propertySheetPage != null && !propertySheetPage.getControl().isDisposed())
-			    propertySheetPage.refresh();
+			}
+			for (Iterator<PropertySheetPage> i = propertySheetPages.iterator(); i.hasNext();) {
+			    PropertySheetPage propertySheetPage = i.next();
+			    if (propertySheetPage.getControl().isDisposed()) {
+				i.remove();
+			    } else {
+				propertySheetPage.refresh();
+			    }
+			}
 		    }
 		});
 	    }
@@ -692,7 +701,6 @@ public class TrackerEditor extends MultiPageEditorPart
 	//
 	if (theSelection != null && !theSelection.isEmpty()) {
 	    Runnable runnable = new Runnable() {
-		@Override
 		public void run() {
 		    // Try to select the items in the current content viewer of
 		    // the editor.
@@ -812,7 +820,6 @@ public class TrackerEditor extends MultiPageEditorPart
 		    // This just notifies those things that are affected by the
 		    // section.
 		    //
-		    @Override
 		    public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
 			setSelection(selectionChangedEvent.getSelection());
 		    }
@@ -870,7 +877,8 @@ public class TrackerEditor extends MultiPageEditorPart
 	getSite().registerContextMenu(contextMenu, new UnwrappingSelectionProvider(viewer));
 
 	int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
-	Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
+	Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance(), LocalSelectionTransfer.getTransfer(),
+		FileTransfer.getInstance() };
 	viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(viewer));
 	viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
     }
@@ -883,7 +891,7 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     public void createModel() {
-	URI resourceURI = EditUIUtil.getURI(getEditorInput());
+	URI resourceURI = EditUIUtil.getURI(getEditorInput(), editingDomain.getResourceSet().getURIConverter());
 	Exception exception = null;
 	Resource resource = null;
 	try {
@@ -910,9 +918,10 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
-	if (!resource.getErrors().isEmpty() || !resource.getWarnings().isEmpty()) {
-	    BasicDiagnostic basicDiagnostic = new BasicDiagnostic(Diagnostic.ERROR, "fr.rostren.tracker.model.editor",
-		    0, getString("_UI_CreateModelError_message", resource.getURI()),
+	boolean hasErrors = !resource.getErrors().isEmpty();
+	if (hasErrors || !resource.getWarnings().isEmpty()) {
+	    BasicDiagnostic basicDiagnostic = new BasicDiagnostic(hasErrors ? Diagnostic.ERROR : Diagnostic.WARNING,
+		    "fr.rostren.tracker.model.editor", 0, getString("_UI_CreateModelError_message", resource.getURI()),
 		    new Object[] { exception == null ? (Object) resource : exception });
 	    basicDiagnostic.merge(EcoreUtil.computeDiagnostic(resource, true));
 	    return basicDiagnostic;
@@ -1142,7 +1151,6 @@ public class TrackerEditor extends MultiPageEditorPart
 	    }
 
 	    getSite().getShell().getDisplay().asyncExec(new Runnable() {
-		@Override
 		public void run() {
 		    setActivePage(0);
 		}
@@ -1166,7 +1174,6 @@ public class TrackerEditor extends MultiPageEditorPart
 	});
 
 	getSite().getShell().getDisplay().asyncExec(new Runnable() {
-	    @Override
 	    public void run() {
 		updateProblemIndication();
 	    }
@@ -1298,7 +1305,6 @@ public class TrackerEditor extends MultiPageEditorPart
 	    contentOutlinePage.addSelectionChangedListener(new ISelectionChangedListener() {
 		// This ensures that we handle selections correctly.
 		//
-		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 		    handleContentOutlineSelection(event.getSelection());
 		}
@@ -1315,22 +1321,21 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     public IPropertySheetPage getPropertySheetPage() {
-	if (propertySheetPage == null) {
-	    propertySheetPage = new ExtendedPropertySheetPage(editingDomain) {
-		@Override
-		public void setSelectionToViewer(List<?> selection) {
-		    TrackerEditor.this.setSelectionToViewer(selection);
-		    TrackerEditor.this.setFocus();
-		}
+	PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(editingDomain) {
+	    @Override
+	    public void setSelectionToViewer(List<?> selection) {
+		TrackerEditor.this.setSelectionToViewer(selection);
+		TrackerEditor.this.setFocus();
+	    }
 
-		@Override
-		public void setActionBars(IActionBars actionBars) {
-		    super.setActionBars(actionBars);
-		    getActionBarContributor().shareGlobalActions(this, actionBars);
-		}
-	    };
-	    propertySheetPage.setPropertySourceProvider(new AdapterFactoryContentProvider(adapterFactory));
-	}
+	    @Override
+	    public void setActionBars(IActionBars actionBars) {
+		super.setActionBars(actionBars);
+		getActionBarContributor().shareGlobalActions(this, actionBars);
+	    }
+	};
+	propertySheetPage.setPropertySourceProvider(new AdapterFactoryContentProvider(adapterFactory));
+	propertySheetPages.add(propertySheetPage);
 
 	return propertySheetPage;
     }
@@ -1397,6 +1402,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	//
 	final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
 	saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+	saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 
 	// Do the work within an operation because this is a long running
 	// activity that modifies the workbench.
@@ -1519,19 +1525,9 @@ public class TrackerEditor extends MultiPageEditorPart
      */
     @Override
     public void gotoMarker(IMarker marker) {
-	try {
-	    if (marker.getType().equals(EValidator.MARKER)) {
-		String uriAttribute = marker.getAttribute(EValidator.URI_ATTRIBUTE, null);
-		if (uriAttribute != null) {
-		    URI uri = URI.createURI(uriAttribute);
-		    EObject eObject = editingDomain.getResourceSet().getEObject(uri, true);
-		    if (eObject != null) {
-			setSelectionToViewer(Collections.singleton(editingDomain.getWrapper(eObject)));
-		    }
-		}
-	    }
-	} catch (CoreException exception) {
-	    TrackerEditorPlugin.INSTANCE.log(exception);
+	List<?> targetObjects = markerHelper.getTargetObjects(editingDomain, marker);
+	if (!targetObjects.isEmpty()) {
+	    setSelectionToViewer(targetObjects);
 	}
     }
 
@@ -1729,7 +1725,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	    getActionBarContributor().setActiveEditor(null);
 	}
 
-	if (propertySheetPage != null) {
+	for (PropertySheetPage propertySheetPage : propertySheetPages) {
 	    propertySheetPage.dispose();
 	}
 

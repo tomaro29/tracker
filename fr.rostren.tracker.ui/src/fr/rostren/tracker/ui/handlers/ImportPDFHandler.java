@@ -1,5 +1,3 @@
-/**
- */
 package fr.rostren.tracker.ui.handlers;
 
 import java.util.Iterator;

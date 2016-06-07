@@ -31,5 +31,11 @@
             contributorClass="fr.rostren.tracker.presentation.TrackerActionBarContributor">
       </editor>
    </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor contributorId="fr.rostren.tracker.ui.common">
+         <propertyCategory category="trackerProperties"/>
+      </propertyContributor>
+   </extension>
 
 </plugin>

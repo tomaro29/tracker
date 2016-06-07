@@ -78,4 +78,44 @@
             name="Edit Operation Information">
       </command>
    </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+	<propertyContributor
+            contributorId="fr.rostren.tracker.ui.common"
+            labelProvider="fr.rostren.tracker.ui.sheet.TrackerPropertySheetLabelProvider">
+         <propertyCategory category="attributes"/>
+         <propertyCategory category="documentation"/>
+         <propertyCategory category="advanced"/>
+	</propertyContributor>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
+		<propertyTab
+               category="trackerProperties"
+               id="tracker.property.tab.AttributesPropertySection"
+               label="%tab.attributes"/>
+		<propertyTab
+             category="trackerProperties"
+             id="tracker.property.tab.AdvancedPropertySection"
+             label="%tab.advanced"/>
+	</propertyTabs>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+   	<propertySections contributorId="fr.rostren.tracker.ui.common">
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.AttributesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.AttributesPropertySectionFilter"
+               id="tracker.property.section.AttributesPropertySection"
+               tab="tracker.property.tab.AttributesPropertySection">
+         </propertySection>
+         <propertySection
+               afterSection="tracker.property.section.AttributesPropertySection"
+               class="fr.rostren.tracker.ui.properties.sections.AdvancedPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.AdvancedPropertySectionFilter"
+               id="tracker.property.section.AdvancedPropertySection"
+               tab="tracker.property.tab.AdvancedPropertySection">
+         </propertySection>
+     </propertySections>
+   </extension>
 </plugin>

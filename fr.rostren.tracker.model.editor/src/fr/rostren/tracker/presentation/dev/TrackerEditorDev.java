@@ -9,26 +9,24 @@ import fr.rostren.tracker.presentation.TrackerEditor;
 
 public class TrackerEditorDev extends TrackerEditor {
 
-	public Tracker getEditedTracker() {
-		if (editingDomain != null) {
-			ResourceSet resourceSet = editingDomain.getResourceSet();
-			if (resourceSet == null)
-				throw new IllegalArgumentException(new NullPointerException(
-						"Invalid null ResourceSet"));
+    public Tracker getEditedTracker() {
+	if (editingDomain != null) {
+	    ResourceSet resourceSet = editingDomain.getResourceSet();
+	    if (resourceSet == null)
+		throw new IllegalArgumentException(new NullPointerException("Invalid null ResourceSet"));
 
-			for (Resource resource : resourceSet.getResources()) {
-				if (resource == null)
-					throw new IllegalArgumentException(
-							new NullPointerException("Invalid null Resource"));
+	    for (Resource resource : resourceSet.getResources()) {
+		if (resource == null)
+		    throw new IllegalArgumentException(new NullPointerException("Invalid null Resource"));
 
-				if (resource.getContents().isEmpty())
-					return null;
+		if (resource.getContents().isEmpty())
+		    return null;
 
-				final EObject root = resource.getContents().get(0);
-				return (root instanceof Tracker) ? (Tracker) root : null;
-			}
-		}
-
-		return null;
+		final EObject root = resource.getContents().get(0);
+		return (root instanceof Tracker) ? (Tracker) root : null;
+	    }
 	}
+
+	return null;
+    }
 }

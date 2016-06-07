@@ -24,8 +24,9 @@ import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.TrackerPackage;
 
 /**
- * This is the item provider adapter for a {@link fr.rostren.tracker.Origin} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link fr.rostren.tracker.Origin}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class OriginItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -37,8 +38,8 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
      * @generated
      */
     public OriginItemProvider(AdapterFactory adapterFactory) {
-                super(adapterFactory);
-        }
+	super(adapterFactory);
+    }
 
     /**
      * This returns the property descriptors for the adapted class. <!--
@@ -48,37 +49,30 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
      */
     @Override
     public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-                if (itemPropertyDescriptors == null) {
-                        super.getPropertyDescriptors(object);
+	if (itemPropertyDescriptors == null) {
+	    super.getPropertyDescriptors(object);
 
-                        addTypePropertyDescriptor(object);
-                        addIdentifierPropertyDescriptor(object);
-                        addOperationsPropertyDescriptor(object);
-                }
-                return itemPropertyDescriptors;
-        }
+	    addTypePropertyDescriptor(object);
+	    addIdentifierPropertyDescriptor(object);
+	    addOperationsPropertyDescriptor(object);
+	}
+	return itemPropertyDescriptors;
+    }
 
     /**
-         * This adds a property descriptor for the Type feature.
-         * <!-- begin-user-doc
+     * This adds a property descriptor for the Type feature. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-         * @generated
-         */
+     * 
+     * @generated
+     */
     protected void addTypePropertyDescriptor(Object object) {
-                itemPropertyDescriptors.add
-                        (createItemPropertyDescriptor
-                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                                 getResourceLocator(),
-                                 getString("_UI_Origin_type_feature"),
-                                 getString("_UI_PropertyDescriptor_description", "_UI_Origin_type_feature", "_UI_Origin_type"),
-                                 TrackerPackage.Literals.ORIGIN__TYPE,
-                                 true,
-                                 false,
-                                 false,
-                                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                                 null,
-                                 null));
-        }
+	itemPropertyDescriptors
+		.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(), getString("_UI_Origin_type_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_Origin_type_feature", "_UI_Origin_type"),
+			TrackerPackage.Literals.ORIGIN__TYPE, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
 
     /**
      * This adds a property descriptor for the Identifier feature. <!--
@@ -87,20 +81,14 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
      * @generated
      */
     protected void addIdentifierPropertyDescriptor(Object object) {
-                itemPropertyDescriptors.add
-                        (createItemPropertyDescriptor
-                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                                 getResourceLocator(),
-                                 getString("_UI_Origin_identifier_feature"),
-                                 getString("_UI_PropertyDescriptor_description", "_UI_Origin_identifier_feature", "_UI_Origin_type"),
-                                 TrackerPackage.Literals.ORIGIN__IDENTIFIER,
-                                 true,
-                                 false,
-                                 false,
-                                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                                 null,
-                                 null));
-        }
+	itemPropertyDescriptors
+		.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(), getString("_UI_Origin_identifier_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_Origin_identifier_feature",
+				"_UI_Origin_type"),
+			TrackerPackage.Literals.ORIGIN__IDENTIFIER, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
 
     /**
      * This adds a property descriptor for the Operations feature. <!--
@@ -109,20 +97,13 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
      * @generated
      */
     protected void addOperationsPropertyDescriptor(Object object) {
-                itemPropertyDescriptors.add
-                        (createItemPropertyDescriptor
-                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                                 getResourceLocator(),
-                                 getString("_UI_Origin_operations_feature"),
-                                 getString("_UI_PropertyDescriptor_description", "_UI_Origin_operations_feature", "_UI_Origin_type"),
-                                 TrackerPackage.Literals.ORIGIN__OPERATIONS,
-                                 true,
-                                 false,
-                                 true,
-                                 null,
-                                 null,
-                                 null));
-        }
+	itemPropertyDescriptors
+		.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(), getString("_UI_Origin_operations_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_Origin_operations_feature",
+				"_UI_Origin_type"),
+			TrackerPackage.Literals.ORIGIN__OPERATIONS, true, false, true, null, null, null));
+    }
 
     /**
      * This returns Origin.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -153,24 +134,25 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
     }
 
     /**
-         * This handles model notifications by calling {@link #updateChildren} to update any cached
-         * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-         * <!-- begin-user-doc --> <!--
+     * This handles model notifications by calling {@link #updateChildren} to
+     * update any cached children and by creating a viewer notification, which
+     * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-         * @generated
-         */
+     * 
+     * @generated
+     */
     @Override
     public void notifyChanged(Notification notification) {
-                updateChildren(notification);
+	updateChildren(notification);
 
-                switch (notification.getFeatureID(Origin.class)) {
-                        case TrackerPackage.ORIGIN__TYPE:
-                        case TrackerPackage.ORIGIN__IDENTIFIER:
-                                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-                                return;
-                }
-                super.notifyChanged(notification);
-        }
+	switch (notification.getFeatureID(Origin.class)) {
+	case TrackerPackage.ORIGIN__TYPE:
+	case TrackerPackage.ORIGIN__IDENTIFIER:
+	    fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+	    return;
+	}
+	super.notifyChanged(notification);
+    }
 
     /**
      * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
@@ -181,8 +163,8 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-                super.collectNewChildDescriptors(newChildDescriptors, object);
-        }
+	super.collectNewChildDescriptors(newChildDescriptors, object);
+    }
 
     /**
      * Return the resource locator for this item provider's resources. <!--
@@ -192,7 +174,7 @@ public class OriginItemProvider extends ItemProviderAdapter implements IEditingD
      */
     @Override
     public ResourceLocator getResourceLocator() {
-                return TrackerEditPlugin.INSTANCE;
-        }
+	return TrackerEditPlugin.INSTANCE;
+    }
 
 }

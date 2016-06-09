@@ -1,4 +1,4 @@
-package fr.rostren.tracker.ui.properties.sections;
+package fr.rostren.tracker.ui.properties.sections.account;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
@@ -6,7 +6,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-public class AttributesPropertySection extends AbstractPropertySection {
+public class AccountAttributesPropertySection extends AbstractPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 	// TODO Auto-generated method stub

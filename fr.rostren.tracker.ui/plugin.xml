@@ -82,8 +82,210 @@
          <propertyCategory category="categoryProperties"/>
          <propertyCategory category="dateProperties"/>
          <propertyCategory category="operationProperties"/>
+         <propertyCategory category="operationTitleProperties"/>
+         <propertyCategory category="originProperties"/>
+         <propertyCategory category="ownerProperties"/>
+         <propertyCategory category="repositoryProperties"/>
+         <propertyCategory category="trackerProperties"/>
 	</propertyContributor>
    </extension>
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
+		<propertyTab
+               category="trackerProperties"
+               id="tracker.title.property.tab.TrackerOwnersPropertySection"
+               label="Owners"/>
+		<propertyTab
+               category="trackerProperties"
+               id="tracker.title.property.tab.TrackerCategoriesPropertySection"
+               afterTab="1"
+               label="Categories"/>
+		<propertyTab
+               category="trackerProperties"
+               afterTab="2"
+               id="tracker.title.property.tab.TrackerOperationsTitlesPropertySection"
+               label="Operations Titles"/>
+		<propertyTab
+               category="trackerProperties"
+               afterTab="3"
+               id="tracker.title.property.tab.TrackerOriginsPropertySection"
+               label="Origins"/>
+	</propertyTabs>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+   	<propertySections contributorId="fr.rostren.tracker.ui.common">
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.tracker.TrackerCategoriesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.TrackerPropertySectionFilter"
+               id="tracker.title.property.tab.TrackerCategoriesPropertySection"
+               tab="tracker.title.property.tab.TrackerCategoriesPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.tracker.TrackerOperationsTitlesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.TrackerPropertySectionFilter"
+               id="tracker.title.property.tab.TrackerOperationsTitlesPropertySection"
+               tab="tracker.title.property.tab.TrackerOperationsTitlesPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.tracker.TrackerOriginsPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.TrackerPropertySectionFilter"
+               id="tracker.title.property.tab.TrackerOriginsPropertySection"
+               tab="tracker.title.property.tab.TrackerOriginsPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.tracker.TrackerOwnersPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.TrackerPropertySectionFilter"
+               id="tracker.title.property.tab.TrackerOwnersPropertySection"
+               tab="tracker.title.property.tab.TrackerOwnersPropertySection">
+         </propertySection>
+     </propertySections>
+   </extension>
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
+		<propertyTab
+               category="repositoryProperties"
+               id="repository.title.property.tab.CategoriesRepositoryPropertySection"
+               label="Categories"/>
+		<propertyTab
+               category="repositoryProperties"
+               afterTab="1"
+               id="repository.title.property.tab.OperationsTitlesRepositoryPropertySection"
+               label="Operations Titles"/>
+		<propertyTab
+               category="repositoryProperties"
+               afterTab="1"
+               id="repository.title.property.tab.OriginsRepositoryPropertySection"
+               label="Origins"/>
+	</propertyTabs>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+   	<propertySections contributorId="fr.rostren.tracker.ui.common">
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.repository.CategoriesRepositoryPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.CategoriesRepositoryPropertySectionFilter"
+               id="repository.title.property.tab.CategoriesRepositoryPropertySection"
+               tab="repository.title.property.tab.CategoriesRepositoryPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.repository.OperationsTitlesRepositoryPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OperationsTitlesRepositoryPropertySectionFilter"
+               id="repository.title.property.tab.OperationsTitlesRepositoryPropertySection"
+               tab="repository.title.property.tab.OperationsTitlesRepositoryPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.repository.OriginsRepositoryPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OriginsRepositoryPropertySectionFilter"
+               id="repository.title.property.tab.OriginsRepositoryPropertySection"
+               tab="repository.title.property.tab.OriginsRepositoryPropertySection">
+         </propertySection>
+     </propertySections>
+   </extension>
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
+		<propertyTab
+               category="ownerProperties"
+               id="owner.title.property.tab.OwnerAttributesPropertySection"
+               label="Attributes"/>
+		<propertyTab
+               category="ownerProperties"
+               afterTab="1"
+               id="owner.title.property.tab.OwnerAccountsPropertySection"
+               label="Accounts"/>
+	</propertyTabs>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+   	<propertySections contributorId="fr.rostren.tracker.ui.common">
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.owner.OwnerAttributesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OwnerPropertySectionFilter"
+               id="owner.title.property.tab.OwnerAttributesPropertySection"
+               tab="owner.title.property.tab.OwnerAttributesPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.owner.OwnerAccountsPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OwnerPropertySectionFilter"
+               id="owner.title.property.tab.OwnerAccountsPropertySection"
+               tab="owner.title.property.tab.OwnerAccountsPropertySection">
+         </propertySection>
+     </propertySections>
+   </extension>
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
+		<propertyTab
+               category="originProperties"
+               id="origin.title.property.tab.OriginAttributesPropertySection"
+               label="Attributes"/>
+		<propertyTab
+               category="originProperties"
+               afterTab="1"
+               id="origin.title.property.tab.OriginOperationsPropertySection"
+               label="Operations"/>
+	</propertyTabs>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+   	<propertySections contributorId="fr.rostren.tracker.ui.common">
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.origin.OriginAttributesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OriginPropertySectionFilter"
+               id="origin.title.property.tab.OriginAttributesPropertySection"
+               tab="origin.title.property.tab.OriginAttributesPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.origin.OriginOperationsPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OriginPropertySectionFilter"
+               id="origin.title.property.tab.OriginOperationsPropertySection"
+               tab="origin.title.property.tab.OriginOperationsPropertySection">
+         </propertySection>
+     </propertySections>
+   </extension>
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
+		<propertyTab
+               category="operationTitleProperties"
+               id="operation.title.property.tab.OperationTitleAttributesPropertySection"
+               label="Attributes"/>
+		<propertyTab
+               category="operationTitleProperties"
+               afterTab="1"
+               id="operation.title.property.tab.OperationTitleCategoriesPropertySection"
+               label="Category"/>
+	</propertyTabs>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+   	<propertySections contributorId="fr.rostren.tracker.ui.common">
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.operation.title.OperationTitleAttributesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OperationTitlePropertySectionFilter"
+               id="operation.title.property.tab.OperationTitleAttributesPropertySection"
+               tab="operation.title.property.tab.OperationTitleAttributesPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.operation.title.OperationTitleCategoriesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.OperationTitlePropertySectionFilter"
+               id="operation.title.property.tab.OperationTitleCategoriesPropertySection"
+               tab="operation.title.property.tab.OperationTitleCategoriesPropertySection">
+         </propertySection>
+     </propertySections>
+   </extension>
+   
 	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
 	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
 		<propertyTab
@@ -188,8 +390,8 @@
 	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
 		<propertyTab
                category="categoryProperties"
-               id="category.property.tab.CategoryDescriptionPropertySection"
-               label="Description"/>
+               id="category.property.tab.CategoryAttributesPropertySection"
+               label="Attributes"/>
 		<propertyTab
                category="categoryProperties"
                afterTab="1"
@@ -200,11 +402,11 @@
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
    	<propertySections contributorId="fr.rostren.tracker.ui.common">
          <propertySection
-               class="fr.rostren.tracker.ui.properties.sections.category.CategoryDescriptionPropertySection"
+               class="fr.rostren.tracker.ui.properties.sections.category.CategoryAttributesPropertySection"
                enablesFor="1"
                filter="fr.rostren.tracker.ui.properties.filters.CategoryPropertySectionFilter"
-               id="category.property.tab.CategoryDescriptionPropertySection"
-               tab="category.property.tab.CategoryDescriptionPropertySection">
+               id="category.property.tab.CategoryAttributesPropertySection"
+               tab="category.property.tab.CategoryAttributesPropertySection">
          </propertySection>
          <propertySection
                class="fr.rostren.tracker.ui.properties.sections.category.CategoryOperationsTitlesPropertySection"

@@ -63,6 +63,7 @@ public class BoockletAccountImpl extends AccountImpl implements BoockletAccount 
      * 
      * @generated
      */
+    @Override
     public EList<Transfer> getTransfers() {
 	if (transfers == null) {
 	    transfers = new EObjectContainmentEList<Transfer>(Transfer.class, this,

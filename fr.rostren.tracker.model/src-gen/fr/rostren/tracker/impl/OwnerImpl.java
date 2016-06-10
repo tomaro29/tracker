@@ -110,6 +110,7 @@ public class OwnerImpl extends EObjectImpl implements Owner {
      * 
      * @generated
      */
+    @Override
     public EList<Account> getAccounts() {
 	if (accounts == null) {
 	    accounts = new EObjectContainmentEList<Account>(Account.class, this, TrackerPackage.OWNER__ACCOUNTS);
@@ -122,6 +123,7 @@ public class OwnerImpl extends EObjectImpl implements Owner {
      * 
      * @generated
      */
+    @Override
     public String getFirstName() {
 	return firstName;
     }
@@ -131,6 +133,7 @@ public class OwnerImpl extends EObjectImpl implements Owner {
      * 
      * @generated
      */
+    @Override
     public void setFirstName(String newFirstName) {
 	String oldFirstName = firstName;
 	firstName = newFirstName;
@@ -144,6 +147,7 @@ public class OwnerImpl extends EObjectImpl implements Owner {
      * 
      * @generated
      */
+    @Override
     public String getLastName() {
 	return lastName;
     }
@@ -153,6 +157,7 @@ public class OwnerImpl extends EObjectImpl implements Owner {
      * 
      * @generated
      */
+    @Override
     public void setLastName(String newLastName) {
 	String oldLastName = lastName;
 	lastName = newLastName;

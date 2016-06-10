@@ -63,6 +63,7 @@ public class OperationTitleImpl extends TitleImpl implements OperationTitle {
      * 
      * @generated
      */
+    @Override
     public EList<Category> getCategories() {
 	if (categories == null) {
 	    categories = new EObjectWithInverseResolvingEList.ManyInverse<Category>(Category.class, this,

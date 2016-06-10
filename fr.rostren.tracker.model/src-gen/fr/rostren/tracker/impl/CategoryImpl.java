@@ -88,6 +88,7 @@ public class CategoryImpl extends TitleImpl implements Category {
      * 
      * @generated
      */
+    @Override
     public EList<OperationTitle> getOperationTitles() {
 	if (operationTitles == null) {
 	    operationTitles = new EObjectWithInverseResolvingEList.ManyInverse<OperationTitle>(OperationTitle.class,
@@ -101,6 +102,7 @@ public class CategoryImpl extends TitleImpl implements Category {
      * 
      * @generated
      */
+    @Override
     public String getDescription() {
 	return description;
     }
@@ -110,6 +112,7 @@ public class CategoryImpl extends TitleImpl implements Category {
      * 
      * @generated
      */
+    @Override
     public void setDescription(String newDescription) {
 	String oldDescription = description;
 	description = newDescription;

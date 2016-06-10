@@ -42,6 +42,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
      * 
      * @generated
      */
+    @Override
     public float sumPerCategory(Account account, Category category, Month month, int year) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT
@@ -53,6 +54,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
      * 
      * @generated
      */
+    @Override
     public float averagePerCategory(Account account, Category category, Month month, int year) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT

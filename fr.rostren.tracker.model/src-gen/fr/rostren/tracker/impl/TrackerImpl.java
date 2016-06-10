@@ -109,6 +109,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public EList<Owner> getOwners() {
 	if (owners == null) {
 	    owners = new EObjectContainmentEList<Owner>(Owner.class, this, TrackerPackage.TRACKER__OWNERS);
@@ -121,6 +122,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public OriginsRepository getOriginsRepository() {
 	return originsRepository;
     }
@@ -149,6 +151,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public void setOriginsRepository(OriginsRepository newOriginsRepository) {
 	if (newOriginsRepository != originsRepository) {
 	    NotificationChain msgs = null;
@@ -171,6 +174,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public CategoriesRepository getCategoriesRepository() {
 	return categoriesRepository;
     }
@@ -200,6 +204,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public void setCategoriesRepository(CategoriesRepository newCategoriesRepository) {
 	if (newCategoriesRepository != categoriesRepository) {
 	    NotificationChain msgs = null;
@@ -222,6 +227,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public OperationsTitleRepository getOperationsTitlesRepositories() {
 	return operationsTitlesRepositories;
     }
@@ -252,6 +258,7 @@ public class TrackerImpl extends EObjectImpl implements Tracker {
      * 
      * @generated
      */
+    @Override
     public void setOperationsTitlesRepositories(OperationsTitleRepository newOperationsTitlesRepositories) {
 	if (newOperationsTitlesRepositories != operationsTitlesRepositories) {
 	    NotificationChain msgs = null;

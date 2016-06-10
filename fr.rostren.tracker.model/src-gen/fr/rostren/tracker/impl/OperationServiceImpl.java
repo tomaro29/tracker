@@ -40,6 +40,7 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
      * 
      * @generated
      */
+    @Override
     public float sumAmounts(Operation operation) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT

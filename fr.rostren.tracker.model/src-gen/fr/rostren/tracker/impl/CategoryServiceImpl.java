@@ -40,6 +40,7 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
      * 
      * @generated
      */
+    @Override
     public void addCategory(String title) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT
@@ -51,6 +52,7 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
      * 
      * @generated
      */
+    @Override
     public void deleteCategory(Category category) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT
@@ -62,6 +64,7 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
      * 
      * @generated
      */
+    @Override
     public void addCategoryOperation(String operationTitle) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT

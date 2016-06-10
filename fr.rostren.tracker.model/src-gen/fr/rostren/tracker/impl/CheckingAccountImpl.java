@@ -63,6 +63,7 @@ public class CheckingAccountImpl extends AccountImpl implements CheckingAccount 
      * 
      * @generated
      */
+    @Override
     public EList<Operation> getOperations() {
 	if (operations == null) {
 	    operations = new EObjectContainmentEList<Operation>(Operation.class, this,

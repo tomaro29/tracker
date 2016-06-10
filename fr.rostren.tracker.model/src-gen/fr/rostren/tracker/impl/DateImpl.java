@@ -110,6 +110,7 @@ public class DateImpl extends EObjectImpl implements Date {
      * 
      * @generated
      */
+    @Override
     public int getDay() {
 	return day;
     }
@@ -119,6 +120,7 @@ public class DateImpl extends EObjectImpl implements Date {
      * 
      * @generated
      */
+    @Override
     public void setDay(int newDay) {
 	int oldDay = day;
 	day = newDay;
@@ -131,6 +133,7 @@ public class DateImpl extends EObjectImpl implements Date {
      * 
      * @generated
      */
+    @Override
     public Month getMonth() {
 	return month;
     }
@@ -140,6 +143,7 @@ public class DateImpl extends EObjectImpl implements Date {
      * 
      * @generated
      */
+    @Override
     public void setMonth(Month newMonth) {
 	Month oldMonth = month;
 	month = newMonth == null ? MONTH_EDEFAULT : newMonth;
@@ -152,6 +156,7 @@ public class DateImpl extends EObjectImpl implements Date {
      * 
      * @generated
      */
+    @Override
     public int getYear() {
 	return year;
     }
@@ -161,6 +166,7 @@ public class DateImpl extends EObjectImpl implements Date {
      * 
      * @generated
      */
+    @Override
     public void setYear(int newYear) {
 	int oldYear = year;
 	year = newYear;

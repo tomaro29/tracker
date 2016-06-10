@@ -128,6 +128,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public Date getDate() {
 	return date;
     }
@@ -156,6 +157,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public void setDate(Date newDate) {
 	if (newDate != date) {
 	    NotificationChain msgs = null;
@@ -177,6 +179,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public Origin getOrigin() {
 	if (origin != null && origin.eIsProxy()) {
 	    InternalEObject oldOrigin = (InternalEObject) origin;
@@ -223,6 +226,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public void setOrigin(Origin newOrigin) {
 	if (newOrigin != origin) {
 	    NotificationChain msgs = null;
@@ -262,6 +266,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public BigDecimal getTotalAmount() {
 	return totalAmount;
     }
@@ -271,6 +276,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public void setTotalAmount(BigDecimal newTotalAmount) {
 	BigDecimal oldTotalAmount = totalAmount;
 	totalAmount = newTotalAmount;
@@ -284,6 +290,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public OperationTitle getOperationTitle() {
 	if (operationTitle != null && operationTitle.eIsProxy()) {
 	    InternalEObject oldOperationTitle = (InternalEObject) operationTitle;
@@ -311,6 +318,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public void setOperationTitle(OperationTitle newOperationTitle) {
 	OperationTitle oldOperationTitle = operationTitle;
 	operationTitle = newOperationTitle;
@@ -324,6 +332,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
      * 
      * @generated
      */
+    @Override
     public EList<Amount> getSubAmounts() {
 	if (subAmounts == null) {
 	    subAmounts = new EObjectContainmentEList<Amount>(Amount.class, this, TrackerPackage.OPERATION__SUB_AMOUNTS);

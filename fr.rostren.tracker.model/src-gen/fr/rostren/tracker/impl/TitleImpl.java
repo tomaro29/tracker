@@ -67,6 +67,7 @@ public abstract class TitleImpl extends EObjectImpl implements Title {
      * 
      * @generated
      */
+    @Override
     public String getTitle() {
 	return title;
     }
@@ -76,6 +77,7 @@ public abstract class TitleImpl extends EObjectImpl implements Title {
      * 
      * @generated
      */
+    @Override
     public void setTitle(String newTitle) {
 	String oldTitle = title;
 	title = newTitle;

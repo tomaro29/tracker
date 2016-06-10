@@ -299,6 +299,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOwner() {
 	return ownerEClass;
     }
@@ -308,6 +309,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOwner_Accounts() {
 	return (EReference) ownerEClass.getEStructuralFeatures().get(0);
     }
@@ -317,6 +319,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getOwner_FirstName() {
 	return (EAttribute) ownerEClass.getEStructuralFeatures().get(1);
     }
@@ -326,6 +329,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getOwner_LastName() {
 	return (EAttribute) ownerEClass.getEStructuralFeatures().get(2);
     }
@@ -335,6 +339,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getAccount() {
 	return accountEClass;
     }
@@ -344,6 +349,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getAccount_Name() {
 	return (EAttribute) accountEClass.getEStructuralFeatures().get(0);
     }
@@ -353,6 +359,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getAccount_Amount() {
 	return (EAttribute) accountEClass.getEStructuralFeatures().get(1);
     }
@@ -362,6 +369,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getAccount_Identifier() {
 	return (EAttribute) accountEClass.getEStructuralFeatures().get(2);
     }
@@ -371,6 +379,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getCheckingAccount() {
 	return checkingAccountEClass;
     }
@@ -380,6 +389,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getCheckingAccount_Operations() {
 	return (EReference) checkingAccountEClass.getEStructuralFeatures().get(0);
     }
@@ -389,6 +399,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getBoockletAccount() {
 	return boockletAccountEClass;
     }
@@ -398,6 +409,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getBoockletAccount_Transfers() {
 	return (EReference) boockletAccountEClass.getEStructuralFeatures().get(0);
     }
@@ -407,6 +419,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOperation() {
 	return operationEClass;
     }
@@ -416,6 +429,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOperation_Date() {
 	return (EReference) operationEClass.getEStructuralFeatures().get(3);
     }
@@ -425,6 +439,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOperation_Origin() {
 	return (EReference) operationEClass.getEStructuralFeatures().get(4);
     }
@@ -434,6 +449,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getCredit() {
 	return creditEClass;
     }
@@ -443,6 +459,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getDebit() {
 	return debitEClass;
     }
@@ -452,6 +469,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getOperation_TotalAmount() {
 	return (EAttribute) operationEClass.getEStructuralFeatures().get(0);
     }
@@ -461,6 +479,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOperation_OperationTitle() {
 	return (EReference) operationEClass.getEStructuralFeatures().get(1);
     }
@@ -470,6 +489,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOperation_SubAmounts() {
 	return (EReference) operationEClass.getEStructuralFeatures().get(2);
     }
@@ -479,6 +499,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getTransfer() {
 	return transferEClass;
     }
@@ -488,6 +509,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getTransfer_IncomingAccount() {
 	return (EReference) transferEClass.getEStructuralFeatures().get(0);
     }
@@ -497,6 +519,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getTransfer_OutgoingAccount() {
 	return (EReference) transferEClass.getEStructuralFeatures().get(1);
     }
@@ -506,6 +529,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getIncoming() {
 	return incomingEClass;
     }
@@ -515,6 +539,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOutgoing() {
 	return outgoingEClass;
     }
@@ -524,6 +549,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getTitle() {
 	return titleEClass;
     }
@@ -533,6 +559,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getTitle_Title() {
 	return (EAttribute) titleEClass.getEStructuralFeatures().get(0);
     }
@@ -542,6 +569,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getCategory() {
 	return categoryEClass;
     }
@@ -551,6 +579,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getCategory_OperationTitles() {
 	return (EReference) categoryEClass.getEStructuralFeatures().get(0);
     }
@@ -560,6 +589,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getCategory_Description() {
 	return (EAttribute) categoryEClass.getEStructuralFeatures().get(1);
     }
@@ -569,6 +599,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOperationTitle() {
 	return operationTitleEClass;
     }
@@ -578,6 +609,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOperationTitle_Categories() {
 	return (EReference) operationTitleEClass.getEStructuralFeatures().get(0);
     }
@@ -587,6 +619,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getAmount() {
 	return amountEClass;
     }
@@ -596,6 +629,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getAmount_Category() {
 	return (EReference) amountEClass.getEStructuralFeatures().get(0);
     }
@@ -605,6 +639,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getAmount_Value() {
 	return (EAttribute) amountEClass.getEStructuralFeatures().get(1);
     }
@@ -614,6 +649,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOperationTitleService() {
 	return operationTitleServiceEClass;
     }
@@ -623,6 +659,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getCategoryService() {
 	return categoryServiceEClass;
     }
@@ -632,6 +669,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getAccountService() {
 	return accountServiceEClass;
     }
@@ -641,6 +679,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOperationService() {
 	return operationServiceEClass;
     }
@@ -650,6 +689,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getCategoriesRepository() {
 	return categoriesRepositoryEClass;
     }
@@ -659,6 +699,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getCategoriesRepository_Categories() {
 	return (EReference) categoriesRepositoryEClass.getEStructuralFeatures().get(0);
     }
@@ -668,6 +709,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getDate() {
 	return dateEClass;
     }
@@ -677,6 +719,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getDate_Day() {
 	return (EAttribute) dateEClass.getEStructuralFeatures().get(0);
     }
@@ -686,6 +729,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getDate_Month() {
 	return (EAttribute) dateEClass.getEStructuralFeatures().get(1);
     }
@@ -695,6 +739,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getDate_Year() {
 	return (EAttribute) dateEClass.getEStructuralFeatures().get(2);
     }
@@ -704,6 +749,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOrigin() {
 	return originEClass;
     }
@@ -713,6 +759,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getOrigin_Type() {
 	return (EAttribute) originEClass.getEStructuralFeatures().get(0);
     }
@@ -722,6 +769,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EAttribute getOrigin_Identifier() {
 	return (EAttribute) originEClass.getEStructuralFeatures().get(1);
     }
@@ -731,6 +779,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOrigin_Operations() {
 	return (EReference) originEClass.getEStructuralFeatures().get(2);
     }
@@ -740,6 +789,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOriginsRepository() {
 	return originsRepositoryEClass;
     }
@@ -749,6 +799,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOriginsRepository_Origins() {
 	return (EReference) originsRepositoryEClass.getEStructuralFeatures().get(0);
     }
@@ -758,6 +809,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getTracker() {
 	return trackerEClass;
     }
@@ -767,6 +819,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getTracker_Owners() {
 	return (EReference) trackerEClass.getEStructuralFeatures().get(0);
     }
@@ -776,6 +829,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getTracker_OriginsRepository() {
 	return (EReference) trackerEClass.getEStructuralFeatures().get(1);
     }
@@ -785,6 +839,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getTracker_CategoriesRepository() {
 	return (EReference) trackerEClass.getEStructuralFeatures().get(2);
     }
@@ -794,6 +849,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getTracker_OperationsTitlesRepositories() {
 	return (EReference) trackerEClass.getEStructuralFeatures().get(3);
     }
@@ -803,6 +859,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EClass getOperationsTitleRepository() {
 	return operationsTitleRepositoryEClass;
     }
@@ -812,6 +869,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EReference getOperationsTitleRepository_OperationsTitles() {
 	return (EReference) operationsTitleRepositoryEClass.getEStructuralFeatures().get(0);
     }
@@ -821,6 +879,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EEnum getMonth() {
 	return monthEEnum;
     }
@@ -830,6 +889,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public EEnum getOriginType() {
 	return originTypeEEnum;
     }
@@ -839,6 +899,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
      * 
      * @generated
      */
+    @Override
     public TrackerFactory getTrackerFactory() {
 	return (TrackerFactory) getEFactoryInstance();
     }
@@ -1198,6 +1259,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	// Create annotations
 	// isUnique
 	createIsUniqueAnnotations();
+	// http://www.eclipse.org/emf/2002/Ecore
+	createEcoreAnnotations();
     }
 
     /**
@@ -1210,6 +1273,19 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	String source = "isUnique";
 	addAnnotation(getAccount_Identifier(), source, new String[] {});
 	addAnnotation(getOrigin_Identifier(), source, new String[] {});
+    }
+
+    /**
+     * Initializes the annotations for
+     * <b>http://www.eclipse.org/emf/2002/Ecore</b>. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void createEcoreAnnotations() {
+	String source = "http://www.eclipse.org/emf/2002/Ecore";
+	addAnnotation(getDate_Day(), source, new String[] { "constraints", "ValidateDayLength" });
+	addAnnotation(getDate_Year(), source, new String[] { "constraints", "ValidateYearLength" });
     }
 
 } // TrackerPackageImpl

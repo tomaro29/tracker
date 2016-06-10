@@ -116,8 +116,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-
-import fr.rostren.tracker.provider.TrackerItemProviderAdapterFactory;
 import fr.rostren.tracker.provider.dev.TrackerItemProviderAdapterFactoryDev;
 
 /**
@@ -282,6 +280,7 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     protected IPartListener partListener = new IPartListener() {
+	@Override
 	public void partActivated(IWorkbenchPart p) {
 	    if (p instanceof ContentOutline) {
 		if (((ContentOutline) p).getCurrentPage() == contentOutlinePage) {
@@ -299,18 +298,22 @@ public class TrackerEditor extends MultiPageEditorPart
 	    }
 	}
 
+	@Override
 	public void partBroughtToTop(IWorkbenchPart p) {
 	    // Ignore.
 	}
 
+	@Override
 	public void partClosed(IWorkbenchPart p) {
 	    // Ignore.
 	}
 
+	@Override
 	public void partDeactivated(IWorkbenchPart p) {
 	    // Ignore.
 	}
 
+	@Override
 	public void partOpened(IWorkbenchPart p) {
 	    // Ignore.
 	}
@@ -380,6 +383,7 @@ public class TrackerEditor extends MultiPageEditorPart
 
 		    if (updateProblemIndication) {
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
+			    @Override
 			    public void run() {
 				updateProblemIndication();
 			    }
@@ -404,6 +408,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	    resourceToDiagnosticMap.remove(target);
 	    if (updateProblemIndication) {
 		getSite().getShell().getDisplay().asyncExec(new Runnable() {
+		    @Override
 		    public void run() {
 			updateProblemIndication();
 		    }
@@ -419,6 +424,7 @@ public class TrackerEditor extends MultiPageEditorPart
      * @generated
      */
     protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
+	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
 	    IResourceDelta delta = event.getDelta();
 	    try {
@@ -427,6 +433,7 @@ public class TrackerEditor extends MultiPageEditorPart
 		    protected Collection<Resource> changedResources = new ArrayList<Resource>();
 		    protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
+		    @Override
 		    public boolean visit(IResourceDelta delta) {
 			if (delta.getResource().getType() == IResource.FILE) {
 			    if (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED
@@ -461,6 +468,7 @@ public class TrackerEditor extends MultiPageEditorPart
 
 		if (!visitor.getRemovedResources().isEmpty()) {
 		    getSite().getShell().getDisplay().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 			    removedResources.addAll(visitor.getRemovedResources());
 			    if (!isDirty()) {
@@ -472,6 +480,7 @@ public class TrackerEditor extends MultiPageEditorPart
 
 		if (!visitor.getChangedResources().isEmpty()) {
 		    getSite().getShell().getDisplay().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 			    changedResources.addAll(visitor.getChangedResources());
 			    if (getSite().getPage().getActiveEditor() == TrackerEditor.this) {
@@ -701,6 +710,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	//
 	if (theSelection != null && !theSelection.isEmpty()) {
 	    Runnable runnable = new Runnable() {
+		@Override
 		public void run() {
 		    // Try to select the items in the current content viewer of
 		    // the editor.
@@ -820,6 +830,7 @@ public class TrackerEditor extends MultiPageEditorPart
 		    // This just notifies those things that are affected by the
 		    // section.
 		    //
+		    @Override
 		    public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
 			setSelection(selectionChangedEvent.getSelection());
 		    }
@@ -1151,6 +1162,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	    }
 
 	    getSite().getShell().getDisplay().asyncExec(new Runnable() {
+		@Override
 		public void run() {
 		    setActivePage(0);
 		}
@@ -1174,6 +1186,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	});
 
 	getSite().getShell().getDisplay().asyncExec(new Runnable() {
+	    @Override
 	    public void run() {
 		updateProblemIndication();
 	    }
@@ -1305,6 +1318,7 @@ public class TrackerEditor extends MultiPageEditorPart
 	    contentOutlinePage.addSelectionChangedListener(new ISelectionChangedListener() {
 		// This ensures that we handle selections correctly.
 		//
+		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 		    handleContentOutlineSelection(event.getSelection());
 		}

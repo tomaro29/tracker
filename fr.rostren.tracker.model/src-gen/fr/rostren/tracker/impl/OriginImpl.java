@@ -110,6 +110,7 @@ public class OriginImpl extends EObjectImpl implements Origin {
      * 
      * @generated
      */
+    @Override
     public OriginType getType() {
 	return type;
     }
@@ -119,6 +120,7 @@ public class OriginImpl extends EObjectImpl implements Origin {
      * 
      * @generated
      */
+    @Override
     public void setType(OriginType newType) {
 	OriginType oldType = type;
 	type = newType == null ? TYPE_EDEFAULT : newType;
@@ -131,6 +133,7 @@ public class OriginImpl extends EObjectImpl implements Origin {
      * 
      * @generated
      */
+    @Override
     public String getIdentifier() {
 	return identifier;
     }
@@ -140,6 +143,7 @@ public class OriginImpl extends EObjectImpl implements Origin {
      * 
      * @generated
      */
+    @Override
     public void setIdentifier(String newIdentifier) {
 	String oldIdentifier = identifier;
 	identifier = newIdentifier;
@@ -153,6 +157,7 @@ public class OriginImpl extends EObjectImpl implements Origin {
      * 
      * @generated
      */
+    @Override
     public EList<Operation> getOperations() {
 	if (operations == null) {
 	    operations = new EObjectWithInverseResolvingEList<Operation>(Operation.class, this,

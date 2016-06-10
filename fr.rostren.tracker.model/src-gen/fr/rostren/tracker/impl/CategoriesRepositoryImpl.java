@@ -64,6 +64,7 @@ public class CategoriesRepositoryImpl extends EObjectImpl implements CategoriesR
      * 
      * @generated
      */
+    @Override
     public EList<Category> getCategories() {
 	if (categories == null) {
 	    categories = new EObjectContainmentEList<Category>(Category.class, this,

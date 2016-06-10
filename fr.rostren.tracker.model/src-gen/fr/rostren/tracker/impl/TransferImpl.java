@@ -73,6 +73,7 @@ public abstract class TransferImpl extends OperationImpl implements Transfer {
      * 
      * @generated
      */
+    @Override
     public Account getIncomingAccount() {
 	if (incomingAccount != null && incomingAccount.eIsProxy()) {
 	    InternalEObject oldIncomingAccount = (InternalEObject) incomingAccount;
@@ -100,6 +101,7 @@ public abstract class TransferImpl extends OperationImpl implements Transfer {
      * 
      * @generated
      */
+    @Override
     public void setIncomingAccount(Account newIncomingAccount) {
 	Account oldIncomingAccount = incomingAccount;
 	incomingAccount = newIncomingAccount;
@@ -113,6 +115,7 @@ public abstract class TransferImpl extends OperationImpl implements Transfer {
      * 
      * @generated
      */
+    @Override
     public Account getOutgoingAccount() {
 	if (outgoingAccount != null && outgoingAccount.eIsProxy()) {
 	    InternalEObject oldOutgoingAccount = (InternalEObject) outgoingAccount;
@@ -140,6 +143,7 @@ public abstract class TransferImpl extends OperationImpl implements Transfer {
      * 
      * @generated
      */
+    @Override
     public void setOutgoingAccount(Account newOutgoingAccount) {
 	Account oldOutgoingAccount = outgoingAccount;
 	outgoingAccount = newOutgoingAccount;

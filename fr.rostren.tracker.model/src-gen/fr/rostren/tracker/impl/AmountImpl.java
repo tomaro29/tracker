@@ -83,6 +83,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
      * 
      * @generated
      */
+    @Override
     public Category getCategory() {
 	if (category != null && category.eIsProxy()) {
 	    InternalEObject oldCategory = (InternalEObject) category;
@@ -110,6 +111,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
      * 
      * @generated
      */
+    @Override
     public void setCategory(Category newCategory) {
 	Category oldCategory = category;
 	category = newCategory;
@@ -123,6 +125,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
      * 
      * @generated
      */
+    @Override
     public BigDecimal getValue() {
 	return value;
     }
@@ -132,6 +135,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
      * 
      * @generated
      */
+    @Override
     public void setValue(BigDecimal newValue) {
 	BigDecimal oldValue = value;
 	value = newValue;

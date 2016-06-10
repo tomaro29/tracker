@@ -66,6 +66,7 @@ public class OperationsTitleRepositoryImpl extends EObjectImpl implements Operat
      * 
      * @generated
      */
+    @Override
     public EList<OperationTitle> getOperationsTitles() {
 	if (operationsTitles == null) {
 	    operationsTitles = new EObjectContainmentEList<OperationTitle>(OperationTitle.class, this,

@@ -39,6 +39,7 @@ public class OperationTitleServiceImpl extends EObjectImpl implements OperationT
      * 
      * @generated
      */
+    @Override
     public void addTitle(String title) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT
@@ -50,6 +51,7 @@ public class OperationTitleServiceImpl extends EObjectImpl implements OperationT
      * 
      * @generated
      */
+    @Override
     public void deleteTitle(String title) {
 	// TODO: implement this method
 	// Ensure that you remove @generated or mark it @generated NOT

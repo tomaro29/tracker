@@ -64,6 +64,7 @@ public class OriginsRepositoryImpl extends EObjectImpl implements OriginsReposit
      * 
      * @generated
      */
+    @Override
     public EList<Origin> getOrigins() {
 	if (origins == null) {
 	    origins = new EObjectContainmentEList<Origin>(Origin.class, this,

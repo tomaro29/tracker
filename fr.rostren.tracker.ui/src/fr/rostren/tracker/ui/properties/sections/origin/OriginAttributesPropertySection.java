@@ -1,29 +1,73 @@
 package fr.rostren.tracker.ui.properties.sections.origin;
 
-import org.eclipse.jface.viewers.ISelection;
+import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-public class OriginAttributesPropertySection extends AbstractPropertySection {
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	// TODO Auto-generated method stub
-	// FIXME
-	// https://eclipse.org/articles/Article-Tabbed-Properties/tabbed_properties_view.html
-	super.createControls(parent, aTabbedPropertySheetPage);
-    }
+import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.OriginType;
+import fr.rostren.tracker.ui.properties.listeners.OriginAttributesModifyListener;
+import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	// TODO Auto-generated method stub
-	super.setInput(part, selection);
-    }
+public class OriginAttributesPropertySection extends AbstractAttributesPropertySection {
+	protected Text idText;
+	protected Text typeText;
 
-    @Override
-    public void refresh() {
-	// TODO Auto-generated method stub
-	super.refresh();
-    }
+	private ModifyListener listener = new OriginAttributesModifyListener(this);
+
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
+
+		this.idText = createAttribute(body, null, "Identifier:"); //$NON-NLS-1$
+		this.typeText = createAttribute(body, idText, "Type:"); //$NON-NLS-1$
+		addListeners();
+	}
+
+	@Override
+	public void refresh() {
+		disposeListeners();
+		idText.setText(getOriginIdentifier());
+		typeText.setText(getOriginType());
+		addListeners();
+	}
+
+	private String getOriginIdentifier() {
+		Assert.isTrue(currentEObject instanceof Origin);
+		String id = ((Origin) currentEObject).getIdentifier();
+		if (id == null)
+			return StringUtils.EMPTY;
+		return id;
+	}
+
+	private String getOriginType() {
+		Assert.isTrue(currentEObject instanceof Origin);
+		OriginType type = ((Origin) currentEObject).getType();
+		if (type == null)
+			return StringUtils.EMPTY;
+		return type.getLiteral();
+	}
+
+	@Override
+	protected void addListeners() {
+		idText.addModifyListener(listener);
+		typeText.addModifyListener(listener);
+	}
+
+	@Override
+	protected void disposeListeners() {
+		idText.removeModifyListener(listener);
+		typeText.removeModifyListener(listener);
+	}
+
+	public Text getIdText() {
+		return idText;
+	}
+
+	public Text getTypeText() {
+		return typeText;
+	}
 }

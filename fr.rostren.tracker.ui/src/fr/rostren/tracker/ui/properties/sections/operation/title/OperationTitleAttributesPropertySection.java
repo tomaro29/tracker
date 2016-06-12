@@ -1,29 +1,55 @@
 package fr.rostren.tracker.ui.properties.sections.operation.title;
 
-import org.eclipse.jface.viewers.ISelection;
+import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-public class OperationTitleAttributesPropertySection extends AbstractPropertySection {
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	// TODO Auto-generated method stub
-	// FIXME
-	// https://eclipse.org/articles/Article-Tabbed-Properties/tabbed_properties_view.html
-	super.createControls(parent, aTabbedPropertySheetPage);
-    }
+import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.ui.properties.listeners.OperationTitleAttributesModifyListener;
+import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	// TODO Auto-generated method stub
-	super.setInput(part, selection);
-    }
+public class OperationTitleAttributesPropertySection extends AbstractAttributesPropertySection {
+	protected Text titleText;
 
-    @Override
-    public void refresh() {
-	// TODO Auto-generated method stub
-	super.refresh();
-    }
+	private ModifyListener listener = new OperationTitleAttributesModifyListener(this);
+
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
+
+		this.titleText = createAttribute(body, null, "Title:"); //$NON-NLS-1$
+		addListeners();
+	}
+
+	@Override
+	public void refresh() {
+		disposeListeners();
+		titleText.setText(getOperationTileValue());
+		addListeners();
+	}
+
+	private String getOperationTileValue() {
+		Assert.isTrue(currentEObject instanceof OperationTitle);
+		String title = ((OperationTitle) currentEObject).getTitle();
+		if (title == null)
+			return StringUtils.EMPTY;
+		return title;
+	}
+
+	@Override
+	protected void addListeners() {
+		titleText.addModifyListener(listener);
+	}
+
+	@Override
+	protected void disposeListeners() {
+		titleText.removeModifyListener(listener);
+	}
+
+	public Text getTitleText() {
+		return titleText;
+	}
 }

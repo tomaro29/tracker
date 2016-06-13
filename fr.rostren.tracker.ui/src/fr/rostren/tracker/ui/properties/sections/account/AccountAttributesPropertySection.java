@@ -22,9 +22,9 @@ public class AccountAttributesPropertySection extends AbstractAttributesProperty
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 	super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.nameText = createAttribute(body, null, "Name:"); //$NON-NLS-1$
-	this.identifierText = createAttribute(body, nameText, "Identifier:"); //$NON-NLS-1$
-	this.amountText = createAttribute(body, identifierText, "Amount:"); //$NON-NLS-1$
+	this.nameText = createLabeledText(body, null, "Name:"); //$NON-NLS-1$
+	this.identifierText = createLabeledText(body, nameText, "Identifier:"); //$NON-NLS-1$
+	this.amountText = createLabeledText(body, identifierText, "Amount:"); //$NON-NLS-1$
 
 	addListeners();
     }

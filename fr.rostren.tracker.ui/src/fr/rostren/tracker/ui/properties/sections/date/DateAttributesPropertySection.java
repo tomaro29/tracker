@@ -21,9 +21,9 @@ public class DateAttributesPropertySection extends AbstractAttributesPropertySec
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 	super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.dayText = createAttribute(body, null, "Day:"); //$NON-NLS-1$
-	this.monthText = createAttribute(body, dayText, "Month:"); //$NON-NLS-1$
-	this.yearText = createAttribute(body, monthText, "Year:"); //$NON-NLS-1$
+	this.dayText = createLabeledText(body, null, "Day:"); //$NON-NLS-1$
+	this.monthText = createLabeledText(body, dayText, "Month:"); //$NON-NLS-1$
+	this.yearText = createLabeledText(body, monthText, "Year:"); //$NON-NLS-1$
 
 	addListeners();
     }

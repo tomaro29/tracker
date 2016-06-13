@@ -20,7 +20,7 @@ public class OperationTitleAttributesPropertySection extends AbstractAttributesP
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		this.titleText = createAttribute(body, null, "Title:"); //$NON-NLS-1$
+		this.titleText = createLabeledText(body, null, "Title:"); //$NON-NLS-1$
 		addListeners();
 	}
 

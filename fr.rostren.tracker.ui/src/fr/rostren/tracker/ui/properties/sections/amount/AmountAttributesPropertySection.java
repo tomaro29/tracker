@@ -22,7 +22,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 	super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.valueText = createAttribute(body, null, "Value:"); //$NON-NLS-1$
+	this.valueText = createLabeledText(body, null, "Value:"); //$NON-NLS-1$
 	addListeners();
     }
 

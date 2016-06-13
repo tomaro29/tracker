@@ -20,7 +20,7 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 	super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.descriptionText = createAttribute(body, null, "Description:"); //$NON-NLS-1$
+	this.descriptionText = createLabeledText(body, null, "Description:"); //$NON-NLS-1$
 	addListeners();
     }
 

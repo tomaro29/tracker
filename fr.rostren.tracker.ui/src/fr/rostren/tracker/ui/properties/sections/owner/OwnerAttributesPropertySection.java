@@ -21,8 +21,8 @@ public class OwnerAttributesPropertySection extends AbstractAttributesPropertySe
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		this.firstNameText = createAttribute(body, null, "First Name:"); //$NON-NLS-1$
-		this.lastNameText = createAttribute(body, firstNameText, "Last Name:"); //$NON-NLS-1$
+		this.firstNameText = createLabeledText(body, null, "First Name:"); //$NON-NLS-1$
+		this.lastNameText = createLabeledText(body, firstNameText, "Last Name:"); //$NON-NLS-1$
 		addListeners();
 	}
 

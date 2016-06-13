@@ -22,8 +22,8 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		this.idText = createAttribute(body, null, "Identifier:"); //$NON-NLS-1$
-		this.typeText = createAttribute(body, idText, "Type:"); //$NON-NLS-1$
+		this.idText = createLabeledText(body, null, "Identifier:"); //$NON-NLS-1$
+		this.typeText = createLabeledText(body, idText, "Type:"); //$NON-NLS-1$
 		addListeners();
 	}
 

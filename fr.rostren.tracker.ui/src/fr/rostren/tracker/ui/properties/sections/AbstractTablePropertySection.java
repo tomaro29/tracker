@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.properties.sections;
 
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.layout.FormAttachment;
@@ -14,6 +15,9 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 public abstract class AbstractTablePropertySection extends AbstractTrackerPropertySection {
     protected Button addButton;
     protected Button removeButton;
+
+    protected Table table;
+    public TableViewer viewer;
 
     protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener,
 	    SelectionAdapter removeButtonListener) {
@@ -53,7 +57,9 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
     }
 
     protected void disposeButtonsListeners(SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
-	addButton.removeSelectionListener(addButtonlistener);
-	removeButton.removeSelectionListener(removeButtonListener);
+	if (addButton != null && !addButton.isDisposed())
+	    addButton.removeSelectionListener(addButtonlistener);
+	if (removeButton != null && !removeButton.isDisposed())
+	    removeButton.removeSelectionListener(removeButtonListener);
     }
 }

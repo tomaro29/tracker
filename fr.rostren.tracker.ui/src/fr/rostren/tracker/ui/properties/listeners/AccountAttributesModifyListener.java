@@ -16,19 +16,19 @@ public class AccountAttributesModifyListener extends AbstractModifyListener {
     }
 
     @Override
-    protected void executeModifyText(Widget widget) {
+    protected void executeModify(Widget widget) {
 	EObject eObject = section.getCurrentEObject();
 	Text nameText = section.getNameText();
 	Text amountText = section.getAmountText();
 	Text identifierText = section.getIdentifierText();
 
 	if (widget.equals(nameText))
-	    executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__NAME, nameText.getText());
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__NAME, nameText.getText());
 	else if (widget.equals(amountText))
-	    executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__AMOUNT,
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__AMOUNT,
 		    Float.parseFloat(amountText.getText()));
 	else if (widget.equals(identifierText))
-	    executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__IDENTIFIER,
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__IDENTIFIER,
 		    Integer.parseInt(identifierText.getText()));
     }
 }

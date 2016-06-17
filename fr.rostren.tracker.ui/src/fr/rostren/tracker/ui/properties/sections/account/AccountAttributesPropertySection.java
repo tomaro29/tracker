@@ -2,9 +2,11 @@ package fr.rostren.tracker.ui.properties.sections.account;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Account;
@@ -30,13 +32,13 @@ public class AccountAttributesPropertySection extends AbstractAttributesProperty
     }
 
     @Override
-    public void refresh() {
-	disposeListeners();
+    public void setInput(IWorkbenchPart part, ISelection selection) {
+	super.setInput(part, selection);
 
+	disposeListeners();
 	nameText.setText(getAccountName());
 	amountText.setText(getAccountAmount());
 	identifierText.setText(getAccountIdentifier());
-
 	addListeners();
     }
 

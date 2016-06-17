@@ -18,11 +18,12 @@ public class AmountAttributesModifyListener extends AbstractModifyListener {
     }
 
     @Override
-    protected void executeModifyText(Widget widget) {
+    protected void executeModify(Widget widget) {
 	EObject eObject = section.getCurrentEObject();
 	Text text = section.getValueText();
 
 	if (widget.equals(text))
-	    executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, new BigDecimal(text.getText()));
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE,
+		    new BigDecimal(text.getText()));
     }
 }

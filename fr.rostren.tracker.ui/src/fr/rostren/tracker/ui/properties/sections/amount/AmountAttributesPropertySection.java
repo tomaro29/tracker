@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Amount;
@@ -27,9 +29,19 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
     }
 
     @Override
+    public void setInput(IWorkbenchPart part, ISelection selection) {
+	super.setInput(part, selection);
+
+	disposeListeners();
+	valueText.setText(getAmountvalue());
+	addListeners();
+    }
+
+    @Override
     public void refresh() {
 	disposeListeners();
 	valueText.setText(getAmountvalue());
+	super.refresh();
 	addListeners();
     }
 

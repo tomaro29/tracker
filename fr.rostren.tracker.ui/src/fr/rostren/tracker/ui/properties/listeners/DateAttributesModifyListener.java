@@ -16,17 +16,19 @@ public class DateAttributesModifyListener extends AbstractModifyListener {
     }
 
     @Override
-    protected void executeModifyText(Widget widget) {
+    protected void executeModify(Widget widget) {
 	EObject eObject = section.getCurrentEObject();
 	Text dayText = section.getDayText();
 	Text monthText = section.getMonthText();
 	Text yearText = section.getYearText();
 
 	if (widget.equals(dayText))
-	    executeSetCommand(eObject, TrackerPackage.Literals.DATE__DAY, Integer.parseInt(dayText.getText()));
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__DAY,
+		    Integer.parseInt(dayText.getText()));
 	if (widget.equals(monthText))
-	    executeSetCommand(eObject, TrackerPackage.Literals.DATE__MONTH, monthText.getText());
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__MONTH, monthText.getText());
 	if (widget.equals(yearText))
-	    executeSetCommand(eObject, TrackerPackage.Literals.DATE__YEAR, Integer.parseInt(yearText.getText()));
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__YEAR,
+		    Integer.parseInt(yearText.getText()));
     }
 }

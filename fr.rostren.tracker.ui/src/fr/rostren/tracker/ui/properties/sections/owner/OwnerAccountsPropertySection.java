@@ -1,17 +1,33 @@
 package fr.rostren.tracker.ui.properties.sections.owner;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
+import fr.rostren.tracker.Account;
+import fr.rostren.tracker.Owner;
+import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.properties.content.providers.OwnerAccountsContentProvider;
+import fr.rostren.tracker.ui.properties.label.providers.AccountLabelProvider;
+import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 
 public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
-    protected Table accountsTable;
+
+    private ITreeContentProvider contentProvider = new OwnerAccountsContentProvider();
+    private ILabelProvider labelProvider = new AccountLabelProvider();
 
     private SelectionAdapter addButtonlistener = new SelectionAdapter() {
 	@Override
@@ -23,7 +39,15 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
     private SelectionAdapter removeButtonListener = new SelectionAdapter() {
 	@Override
 	public void widgetSelected(SelectionEvent event) {
-	    // TODO
+	    EObject currentEObject = getCurrentEObject();
+	    Assert.isTrue(currentEObject instanceof Owner);
+	    Owner owner = (Owner) currentEObject;
+
+	    ISelection selection = viewer.getSelection();
+	    Assert.isTrue(selection instanceof StructuredSelection);
+	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
+	    ListenersUtils.executeRemoveCommand(owner, TrackerPackage.Literals.OWNER__ACCOUNTS, elementToRemove);
+	    refresh();
 	}
     };
 
@@ -31,7 +55,11 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 	super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.accountsTable = createTable(body, null, addButtonlistener, removeButtonListener);
+	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
+	this.viewer = new TableViewer(table);
+	viewer.setContentProvider(contentProvider);
+	viewer.setLabelProvider(labelProvider);
+	addListeners();
     }
 
     @Override
@@ -41,8 +69,17 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 
     @Override
     public void refresh() {
-	// TODO Auto-generated method stub
-	super.refresh();
+	disposeListeners();
+	viewer.setInput(getAccounts());
+	addListeners();
+    }
+
+    private List<Account> getAccounts() {
+	Assert.isTrue(currentEObject instanceof Owner);
+	List<Account> accounts = ((Owner) currentEObject).getAccounts();
+	if (accounts == null || accounts.isEmpty())
+	    return Collections.emptyList();
+	return accounts;
     }
 
     @Override
@@ -54,6 +91,10 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
     @Override
     protected void disposeListeners() {
 	// TODO Auto-generated method stub
+    }
+
+    @Override
+    public void dispose() {
 	disposeButtonsListeners(addButtonlistener, removeButtonListener);
     }
 }

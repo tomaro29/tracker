@@ -1,9 +1,11 @@
 package fr.rostren.tracker.ui.properties.sections.date;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Date;
@@ -24,18 +26,17 @@ public class DateAttributesPropertySection extends AbstractAttributesPropertySec
 	this.dayText = createLabeledText(body, null, "Day:"); //$NON-NLS-1$
 	this.monthText = createLabeledText(body, dayText, "Month:"); //$NON-NLS-1$
 	this.yearText = createLabeledText(body, monthText, "Year:"); //$NON-NLS-1$
-
 	addListeners();
     }
 
     @Override
-    public void refresh() {
-	disposeListeners();
+    public void setInput(IWorkbenchPart part, ISelection selection) {
+	super.setInput(part, selection);
 
+	disposeListeners();
 	dayText.setText(getDateDay());
 	monthText.setText(getDateMonth());
 	yearText.setText(getDateYear());
-
 	addListeners();
     }
 

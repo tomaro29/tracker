@@ -2,9 +2,11 @@ package fr.rostren.tracker.ui.properties.sections.category;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Category;
@@ -25,7 +27,9 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
     }
 
     @Override
-    public void refresh() {
+    public void setInput(IWorkbenchPart part, ISelection selection) {
+	super.setInput(part, selection);
+
 	disposeListeners();
 	descriptionText.setText(getDescriptionValue());
 	addListeners();

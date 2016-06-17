@@ -1,19 +1,25 @@
-package fr.rostren.tracker.ui.properties.sections.wizards;
+package fr.rostren.tracker.ui.properties.wizards;
 
 import org.eclipse.jface.wizard.Wizard;
 
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.ui.properties.sections.pages.AddCheckOperationWizardPage;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.ui.properties.pages.AddCheckOperationWizardPage;
 
+/**
+ * Wizard to add an {@link Operation} instance to an existing
+ * {@link CheckingAccount} instance.
+ */
 public class AddCheckOperationWizard extends Wizard {
 
     protected AddCheckOperationWizardPage page;
 
-    public AddCheckOperationWizard(CheckingAccount account) {
+    public AddCheckOperationWizard(String pageTitle, Tracker tracker) {
 	super();
-	this.page = new AddCheckOperationWizardPage(account);
+	this.page = new AddCheckOperationWizardPage(pageTitle, tracker);
     }
 
     @Override

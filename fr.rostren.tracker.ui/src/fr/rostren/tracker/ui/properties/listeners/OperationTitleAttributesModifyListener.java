@@ -9,18 +9,18 @@ import fr.rostren.tracker.ui.properties.sections.operation.title.OperationTitleA
 
 public class OperationTitleAttributesModifyListener extends AbstractModifyListener {
 
-	private final OperationTitleAttributesPropertySection section;
+    private final OperationTitleAttributesPropertySection section;
 
-	public OperationTitleAttributesModifyListener(OperationTitleAttributesPropertySection section) {
-		this.section = section;
-	}
+    public OperationTitleAttributesModifyListener(OperationTitleAttributesPropertySection section) {
+	this.section = section;
+    }
 
-	@Override
-	protected void executeModifyText(Widget widget) {
-		EObject eObject = section.getCurrentEObject();
-		Text text = section.getTitleText();
+    @Override
+    protected void executeModify(Widget widget) {
+	EObject eObject = section.getCurrentEObject();
+	Text text = section.getTitleText();
 
-		if (widget.equals(text))
-			executeSetCommand(eObject, TrackerPackage.Literals.TITLE__TITLE, text.getText());
-	}
+	if (widget.equals(text))
+	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.TITLE__TITLE, text.getText());
+    }
 }

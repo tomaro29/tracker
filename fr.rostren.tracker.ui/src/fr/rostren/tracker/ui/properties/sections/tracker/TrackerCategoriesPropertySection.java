@@ -10,6 +10,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
@@ -19,11 +21,13 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.ui.properties.content.providers.TrackerCategoriesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
 import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
+import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
 
 public class TrackerCategoriesPropertySection extends AbstractTablePropertySection {
 
@@ -33,7 +37,28 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
     private SelectionAdapter addButtonlistener = new SelectionAdapter() {
 	@Override
 	public void widgetSelected(SelectionEvent event) {
-	    // TODO
+	    EObject currentEObject = getCurrentEObject();
+	    Assert.isTrue(currentEObject instanceof Tracker);
+	    Tracker tracker = (Tracker) currentEObject;
+	    CategoriesRepository repository = tracker.getCategoriesRepository();
+
+	    AddTrackerCategoryWizard wizard = new AddTrackerCategoryWizard("Tracker", tracker); //$NON-NLS-1$
+	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
+	    if (Window.OK == wizardDialog.open()) {
+		Category newCategory = TrackerFactory.eINSTANCE.createCategory();
+
+		String categTitle = wizard.getCategoryTitle();
+		if (categTitle != null)
+		    newCategory.setTitle(categTitle);
+
+		String categDesc = wizard.getCategoryDescription();
+		if (categDesc != null)
+		    newCategory.setTitle(categDesc);
+
+		ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES,
+			newCategory);
+		refresh();
+	    }
 	}
     };
 

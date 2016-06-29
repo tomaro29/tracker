@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 
@@ -23,7 +22,7 @@ public class TrackerCategoriesContentProvider extends AbstractContentProvider {
 	List<Category> children = new ArrayList<>();
 	if (parentElement instanceof List<?>) {
 	    for (Object element : (List<?>) parentElement) {
-		if (element instanceof OperationTitle)
+		if (element instanceof Category)
 		    children.add((Category) element);
 	    }
 	} else if (parentElement instanceof Tracker) {

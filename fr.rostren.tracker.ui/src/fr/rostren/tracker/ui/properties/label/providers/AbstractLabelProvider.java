@@ -6,6 +6,7 @@ import org.eclipse.swt.graphics.Image;
 
 public class AbstractLabelProvider implements ILabelProvider {
     protected static final String STRING_SEPARATOR = " "; //$NON-NLS-1$
+    protected static final String STRING_UNDEFINED_LABEL = "UNDEFINED LABEL"; //$NON-NLS-1$
 
     @Override
     public void removeListener(ILabelProviderListener listener) {

@@ -12,33 +12,33 @@ import fr.rostren.tracker.ui.properties.pages.AddTrackerOwnerWizardPage;
  */
 public class AddTrackerOwnerWizard extends Wizard {
 
-    protected AddTrackerOwnerWizardPage page;
+	protected AddTrackerOwnerWizardPage page;
 
-    public AddTrackerOwnerWizard(String pageTitle, Tracker tracker) {
-	super();
-	this.page = new AddTrackerOwnerWizardPage(pageTitle, tracker);
-    }
+	public AddTrackerOwnerWizard(String pageTitle, Tracker tracker) {
+		super();
+		page=new AddTrackerOwnerWizardPage(pageTitle, tracker);
+	}
 
-    @Override
-    public String getWindowTitle() {
-	return "Add Owner to tracker."; //$NON-NLS-1$
-    }
+	@Override
+	public String getWindowTitle() {
+		return "Add Owner to tracker."; //$NON-NLS-1$
+	}
 
-    @Override
-    public boolean performFinish() {
-	return true;
-    }
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
 
-    @Override
-    public void addPages() {
-	addPage(page);
-    }
+	@Override
+	public void addPages() {
+		addPage(page);
+	}
 
-    public String getFirstName() {
-	return page.getFirstName();
-    }
+	public String getFirstName() {
+		return page.getFirstName();
+	}
 
-    public String getLastName() {
-	return page.getLastName();
-    }
+	public String getLastName() {
+		return page.getLastName();
+	}
 }

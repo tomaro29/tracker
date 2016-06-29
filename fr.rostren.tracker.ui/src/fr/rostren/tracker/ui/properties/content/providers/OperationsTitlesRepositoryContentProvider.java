@@ -10,25 +10,25 @@ import fr.rostren.tracker.ui.properties.content.comparators.OperationTitleCompar
 
 public class OperationsTitlesRepositoryContentProvider extends AbstractContentProvider {
 
-    @Override
-    public boolean hasChildren(Object element) {
-	if (element instanceof OperationsTitleRepository)
-	    return getChildren(element).length > 0;
-	return false;
-    }
-
-    @Override
-    public Object[] getChildren(Object parentElement) {
-	List<OperationTitle> children = new ArrayList<>();
-	if (parentElement instanceof List<?>) {
-	    for (Object element : (List<?>) parentElement) {
-		if (element instanceof OperationTitle)
-		    children.add((OperationTitle) element);
-	    }
-	} else if (parentElement instanceof OperationsTitleRepository) {
-	    children.addAll(((OperationsTitleRepository) parentElement).getOperationsTitles());
+	@Override
+	public boolean hasChildren(Object element) {
+		if (element instanceof OperationsTitleRepository)
+			return getChildren(element).length > 0;
+		return false;
 	}
-	Collections.sort(children, new OperationTitleComparator());
-	return children.toArray();
-    }
+
+	@Override
+	public Object[] getChildren(Object parentElement) {
+		List<OperationTitle> children = new ArrayList<>();
+		if (parentElement instanceof List<?>) {
+			for (Object element : (List<?>) parentElement) {
+				if (element instanceof OperationTitle)
+					children.add((OperationTitle) element);
+			}
+		} else if (parentElement instanceof OperationsTitleRepository) {
+			children.addAll(((OperationsTitleRepository) parentElement).getOperationsTitles());
+		}
+		Collections.sort(children, new OperationTitleComparator());
+		return children.toArray();
+	}
 }

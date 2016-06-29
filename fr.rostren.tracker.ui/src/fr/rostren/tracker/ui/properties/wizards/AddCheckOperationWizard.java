@@ -15,49 +15,49 @@ import fr.rostren.tracker.ui.properties.pages.AddCheckOperationWizardPage;
  */
 public class AddCheckOperationWizard extends Wizard {
 
-    protected AddCheckOperationWizardPage page;
+	protected AddCheckOperationWizardPage page;
 
-    public AddCheckOperationWizard(String pageTitle, Tracker tracker) {
-	super();
-	this.page = new AddCheckOperationWizardPage(pageTitle, tracker);
-    }
+	public AddCheckOperationWizard(String pageTitle, Tracker tracker) {
+		super();
+		page=new AddCheckOperationWizardPage(pageTitle, tracker);
+	}
 
-    @Override
-    public String getWindowTitle() {
-	return "Add Checking Account Operation."; //$NON-NLS-1$
-    }
+	@Override
+	public String getWindowTitle() {
+		return "Add Checking Account Operation."; //$NON-NLS-1$
+	}
 
-    @Override
-    public boolean performFinish() {
-	return true;
-    }
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
 
-    @Override
-    public void addPages() {
-	addPage(page);
-    }
+	@Override
+	public void addPages() {
+		addPage(page);
+	}
 
-    public boolean isIncoming() {
-	return page.isIncoming();
-    }
+	public boolean isIncoming() {
+		return page.isIncoming();
+	}
 
-    public boolean isOutgoing() {
-	return page.isOutgoing();
-    }
+	public boolean isOutgoing() {
+		return page.isOutgoing();
+	}
 
-    public boolean isCredit() {
-	return page.isCredit();
-    }
+	public boolean isCredit() {
+		return page.isCredit();
+	}
 
-    public boolean isDebit() {
-	return page.isDebit();
-    }
+	public boolean isDebit() {
+		return page.isDebit();
+	}
 
-    public OperationTitle getOperationTitle() {
-	return page.getOperationTitle();
-    }
+	public OperationTitle getOperationTitle() {
+		return page.getOperationTitle();
+	}
 
-    public Origin getOperationOrigin() {
-	return page.getOperationOrigin();
-    }
+	public Origin getOperationOrigin() {
+		return page.getOperationOrigin();
+	}
 }

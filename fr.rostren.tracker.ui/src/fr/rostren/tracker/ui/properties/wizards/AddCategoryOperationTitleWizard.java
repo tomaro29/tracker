@@ -13,29 +13,29 @@ import fr.rostren.tracker.ui.properties.pages.AddCategoryOperationTitleWizardPag
  */
 public class AddCategoryOperationTitleWizard extends Wizard {
 
-    protected AddCategoryOperationTitleWizardPage page;
+	protected AddCategoryOperationTitleWizardPage page;
 
-    public AddCategoryOperationTitleWizard(String pageTitle, Tracker tracker) {
-	super();
-	this.page = new AddCategoryOperationTitleWizardPage(pageTitle, tracker);
-    }
+	public AddCategoryOperationTitleWizard(String pageTitle, Tracker tracker) {
+		super();
+		page=new AddCategoryOperationTitleWizardPage(pageTitle, tracker);
+	}
 
-    @Override
-    public String getWindowTitle() {
-	return "Add Operation Title to Category."; //$NON-NLS-1$
-    }
+	@Override
+	public String getWindowTitle() {
+		return "Add Operation Title to Category."; //$NON-NLS-1$
+	}
 
-    @Override
-    public boolean performFinish() {
-	return true;
-    }
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
 
-    @Override
-    public void addPages() {
-	addPage(page);
-    }
+	@Override
+	public void addPages() {
+		addPage(page);
+	}
 
-    public OperationTitle getOperationTitle() {
-	return page.getOperationTitle();
-    }
+	public OperationTitle getOperationTitle() {
+		return page.getOperationTitle();
+	}
 }

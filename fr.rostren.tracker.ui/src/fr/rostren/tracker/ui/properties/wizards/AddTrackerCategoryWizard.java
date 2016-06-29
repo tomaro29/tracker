@@ -12,33 +12,33 @@ import fr.rostren.tracker.ui.properties.pages.AddTrackerCategoryWizardPage;
  */
 public class AddTrackerCategoryWizard extends Wizard {
 
-    protected AddTrackerCategoryWizardPage page;
+	protected AddTrackerCategoryWizardPage page;
 
-    public AddTrackerCategoryWizard(String pageTitle, Tracker tracker) {
-	super();
-	this.page = new AddTrackerCategoryWizardPage(pageTitle, tracker);
-    }
+	public AddTrackerCategoryWizard(String pageTitle, Tracker tracker) {
+		super();
+		page=new AddTrackerCategoryWizardPage(pageTitle, tracker);
+	}
 
-    @Override
-    public String getWindowTitle() {
-	return "Add Origin to tracker."; //$NON-NLS-1$
-    }
+	@Override
+	public String getWindowTitle() {
+		return "Add Origin to tracker."; //$NON-NLS-1$
+	}
 
-    @Override
-    public boolean performFinish() {
-	return true;
-    }
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
 
-    @Override
-    public void addPages() {
-	addPage(page);
-    }
+	@Override
+	public void addPages() {
+		addPage(page);
+	}
 
-    public String getCategoryTitle() {
-	return page.getCategoryTitle();
-    }
+	public String getCategoryTitle() {
+		return page.getCategoryTitle();
+	}
 
-    public String getCategoryDescription() {
-	return page.getCategoryDescription();
-    }
+	public String getCategoryDescription() {
+		return page.getCategoryDescription();
+	}
 }

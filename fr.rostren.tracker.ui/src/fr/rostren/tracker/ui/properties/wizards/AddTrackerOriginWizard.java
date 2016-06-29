@@ -13,33 +13,33 @@ import fr.rostren.tracker.ui.properties.pages.AddTrackerOriginWizardPage;
  */
 public class AddTrackerOriginWizard extends Wizard {
 
-    protected AddTrackerOriginWizardPage page;
+	protected AddTrackerOriginWizardPage page;
 
-    public AddTrackerOriginWizard(String pageTitle, Tracker tracker) {
-	super();
-	this.page = new AddTrackerOriginWizardPage(pageTitle, tracker);
-    }
+	public AddTrackerOriginWizard(String pageTitle, Tracker tracker) {
+		super();
+		page=new AddTrackerOriginWizardPage(pageTitle, tracker);
+	}
 
-    @Override
-    public String getWindowTitle() {
-	return "Add Origin to tracker."; //$NON-NLS-1$
-    }
+	@Override
+	public String getWindowTitle() {
+		return "Add Origin to tracker."; //$NON-NLS-1$
+	}
 
-    @Override
-    public boolean performFinish() {
-	return true;
-    }
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
 
-    @Override
-    public void addPages() {
-	addPage(page);
-    }
+	@Override
+	public void addPages() {
+		addPage(page);
+	}
 
-    public String getIdentifier() {
-	return page.getIdentifier();
-    }
+	public String getIdentifier() {
+		return page.getIdentifier();
+	}
 
-    public OriginType getType() {
-	return page.getType();
-    }
+	public OriginType getType() {
+		return page.getType();
+	}
 }

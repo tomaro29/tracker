@@ -64,6 +64,15 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		addListeners();
 	}
 
+	private String getAmountvalue() {
+		Assert.isTrue(currentEObject instanceof Amount);
+		BigDecimal value=((Amount)currentEObject).getValue();
+		if (value == null) {
+			return StringUtils.EMPTY;
+		}
+		return String.valueOf(value);
+	}
+
 	@Override
 	protected void addListeners() {
 		valueText.addModifyListener(listener);
@@ -80,15 +89,6 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 
 	public CCombo getCategoryCombo() {
 		return categoryCombo;
-	}
-
-	private String getAmountvalue() {
-		Assert.isTrue(currentEObject instanceof Amount);
-		BigDecimal value=((Amount)currentEObject).getValue();
-		if (value == null) {
-			return StringUtils.EMPTY;
-		}
-		return String.valueOf(value);
 	}
 
 	private Category getAmountCategoryItem() {

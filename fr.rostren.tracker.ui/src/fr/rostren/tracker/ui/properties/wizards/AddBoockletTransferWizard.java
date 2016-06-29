@@ -15,41 +15,41 @@ import fr.rostren.tracker.ui.properties.pages.AddBoockletTransferWizardPage;
  */
 public class AddBoockletTransferWizard extends Wizard {
 
-    protected AddBoockletTransferWizardPage page;
+	protected AddBoockletTransferWizardPage page;
 
-    public AddBoockletTransferWizard(String pageTitle, Tracker tracker) {
-	super();
-	this.page = new AddBoockletTransferWizardPage(pageTitle, tracker);
-    }
+	public AddBoockletTransferWizard(String pageTitle, Tracker tracker) {
+		super();
+		page=new AddBoockletTransferWizardPage(pageTitle, tracker);
+	}
 
-    @Override
-    public String getWindowTitle() {
-	return "Add Boocklet Account Transfer."; //$NON-NLS-1$
-    }
+	@Override
+	public String getWindowTitle() {
+		return "Add Boocklet Account Transfer."; //$NON-NLS-1$
+	}
 
-    @Override
-    public boolean performFinish() {
-	return true;
-    }
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
 
-    @Override
-    public void addPages() {
-	addPage(page);
-    }
+	@Override
+	public void addPages() {
+		addPage(page);
+	}
 
-    public boolean isIncoming() {
-	return page.isIncoming();
-    }
+	public boolean isIncoming() {
+		return page.isIncoming();
+	}
 
-    public boolean isOutgoing() {
-	return page.isOutgoing();
-    }
+	public boolean isOutgoing() {
+		return page.isOutgoing();
+	}
 
-    public OperationTitle getTransferTitle() {
-	return page.getTransferTitle();
-    }
+	public OperationTitle getTransferTitle() {
+		return page.getTransferTitle();
+	}
 
-    public Origin getTransferOrigin() {
-	return page.getTransferOrigin();
-    }
+	public Origin getTransferOrigin() {
+		return page.getTransferOrigin();
+	}
 }

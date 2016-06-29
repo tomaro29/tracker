@@ -2,6 +2,7 @@ package fr.rostren.tracker.ui.properties.sections.origin;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
@@ -46,11 +47,9 @@ public class OriginOperationsPropertySection extends AbstractTablePropertySectio
 			AddOriginOperationWizard wizard=new AddOriginOperationWizard(pageTitle, tracker);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Operation operation=wizard.getOperation();
-				if (operation != null) {
-					ListenersUtils.executeAddCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, operation);
-					refresh();
-				}
+				Optional<Operation> operation=wizard.getOperation();
+				ListenersUtils.executeAddCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, operation);
+				refresh();
 			}
 		}
 	};

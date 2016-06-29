@@ -1,6 +1,7 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
@@ -24,44 +25,44 @@ import fr.rostren.tracker.ui.properties.label.providers.OperationLabelProvider;
  * {@link CheckingAccount} instance.
  */
 public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
-    protected static final String[] OPERATION_TYPES = new String[] { Credit.class.getSimpleName(),
-	    Debit.class.getSimpleName(), Incoming.class.getSimpleName(), Outgoing.class.getSimpleName() };
+	protected static final String[] OPERATION_TYPES = new String[] { Credit.class.getSimpleName(),
+			Debit.class.getSimpleName(), Incoming.class.getSimpleName(), Outgoing.class.getSimpleName() };
 
-    private static final String PAGE_NAME = "Add operation to ''{0}'' Page"; //$NON-NLS-1$
-    private static final String PAGE_TITLE = "Add operation"; //$NON-NLS-1$
-    private static final String WIZARD_DESCRIPTION = "Wizard to add a new operation to the selected origin."; //$NON-NLS-1$
+	private static final String PAGE_NAME = "Add operation to ''{0}'' Page"; //$NON-NLS-1$
+	private static final String PAGE_TITLE = "Add operation"; //$NON-NLS-1$
+	private static final String WIZARD_DESCRIPTION = "Wizard to add a new operation to the selected origin."; //$NON-NLS-1$
 
-    protected final Tracker tracker;
+	protected final Tracker tracker;
 
-    protected Operation operation;
+	protected Optional<Operation> operation;
 
-    private ISelectionChangedListener listener = new ISelectionChangedListener() {
+	private ISelectionChangedListener listener = new ISelectionChangedListener() {
+
+		@Override
+		public void selectionChanged(SelectionChangedEvent event) {
+			ISelection selection = event.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			StructuredSelection ss = (StructuredSelection) selection;
+			Object firstElement = ss.getFirstElement();
+			if (firstElement instanceof Operation)
+				operation = Optional.of((Operation) firstElement);
+		}
+	};
+
+	public AddOriginOperationWizardPage(String pageTitle, Tracker tracker) {
+		super(MessageFormat.format(PAGE_NAME, pageTitle));
+		this.tracker = tracker;
+		setTitle(PAGE_TITLE);
+		setDescription(WIZARD_DESCRIPTION);
+	}
 
 	@Override
-	public void selectionChanged(SelectionChangedEvent event) {
-	    ISelection selection = event.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    StructuredSelection ss = (StructuredSelection) selection;
-	    Object firstElement = ss.getFirstElement();
-	    if (firstElement != null && firstElement instanceof Operation)
-		operation = (Operation) firstElement;
+	protected void createContainer(Composite parent) {
+		createComboViewer(parent, "Operations: ", getOperations(tracker), new OriginOperationsContentProvider(), //$NON-NLS-1$
+				new OperationLabelProvider(), listener);
 	}
-    };
 
-    public AddOriginOperationWizardPage(String pageTitle, Tracker tracker) {
-	super(MessageFormat.format(PAGE_NAME, pageTitle));
-	this.tracker = tracker;
-	setTitle(PAGE_TITLE);
-	setDescription(WIZARD_DESCRIPTION);
-    }
-
-    @Override
-    protected void createContainer(Composite parent) {
-	createComboViewer(parent, "Operations: ", getOperations(tracker), new OriginOperationsContentProvider(), //$NON-NLS-1$
-		new OperationLabelProvider(), listener);
-    }
-
-    public Operation getOperation() {
-	return operation;
-    }
+	public Optional<Operation> getOperation() {
+		return operation;
+	}
 }

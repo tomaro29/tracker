@@ -26,75 +26,76 @@ import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 
 public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new OwnerAccountsContentProvider();
-    private ILabelProvider labelProvider = new AccountLabelProvider();
+	private final ITreeContentProvider contentProvider=new OwnerAccountsContentProvider();
+	private final ILabelProvider labelProvider=new AccountLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			// TODO
+		}
+	};
+
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Owner);
+			Owner owner=(Owner)currentEObject;
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(owner, TrackerPackage.Literals.OWNER__ACCOUNTS, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    // TODO
-	}
-    };
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
+	}
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Owner);
-	    Owner owner = (Owner) currentEObject;
-
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(owner, TrackerPackage.Literals.OWNER__ACCOUNTS, elementToRemove);
-	    refresh();
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getAccounts());
+		addListeners();
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	private List<Account> getAccounts() {
+		Assert.isTrue(currentEObject instanceof Owner);
+		List<Account> accounts=((Owner)currentEObject).getAccounts();
+		if (accounts == null || accounts.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return accounts;
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getAccounts());
-	addListeners();
-    }
+	}
 
-    private List<Account> getAccounts() {
-	Assert.isTrue(currentEObject instanceof Owner);
-	List<Account> accounts = ((Owner) currentEObject).getAccounts();
-	if (accounts == null || accounts.isEmpty())
-	    return Collections.emptyList();
-	return accounts;
-    }
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

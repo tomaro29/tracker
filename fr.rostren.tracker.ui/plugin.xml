@@ -290,18 +290,8 @@
 	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
 		<propertyTab
                category="operationProperties"
-               id="operation.property.tab.OperationTitlePropertySection"
-               label="Title"/>
-		<propertyTab
-               category="operationProperties"
-               afterTab="1"
-               id="operation.property.tab.OperationDatePropertySection"
-               label="Date"/>
-		<propertyTab
-               category="operationProperties"
-               afterTab="2"
-               id="operation.property.tab.OperationOriginPropertySection"
-               label="Origin"/>
+               id="operation.property.tab.OperationAttributesPropertySection"
+               label="Attributes"/>
 		<propertyTab
                category="operationProperties"
                afterTab="3"
@@ -322,20 +312,6 @@
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
    	<propertySections contributorId="fr.rostren.tracker.ui.common">
          <propertySection
-               class="fr.rostren.tracker.ui.properties.sections.operation.OperationDatePropertySection"
-               enablesFor="1"
-               filter="fr.rostren.tracker.ui.properties.filters.DatePropertySectionFilter"
-               id="operation.property.tab.OperationDatePropertySection"
-               tab="operation.property.tab.OperationDatePropertySection">
-         </propertySection>
-         <propertySection
-               class="fr.rostren.tracker.ui.properties.sections.operation.OperationOriginPropertySection"
-               enablesFor="1"
-               filter="fr.rostren.tracker.ui.properties.filters.OperationPropertySectionFilter"
-               id="operation.property.tab.OperationOriginPropertySection"
-               tab="operation.property.tab.OperationOriginPropertySection">
-         </propertySection>
-         <propertySection
                class="fr.rostren.tracker.ui.properties.sections.operation.OperationSubAmountsPropertySection"
                enablesFor="1"
                filter="fr.rostren.tracker.ui.properties.filters.OperationPropertySectionFilter"
@@ -343,11 +319,11 @@
                tab="operation.property.tab.OperationSubAmountsPropertySection">
          </propertySection>
          <propertySection
-               class="fr.rostren.tracker.ui.properties.sections.operation.OperationTitlePropertySection"
+               class="fr.rostren.tracker.ui.properties.sections.operation.OperationAttributesPropertySection"
                enablesFor="1"
                filter="fr.rostren.tracker.ui.properties.filters.OperationPropertySectionFilter"
-               id="operation.property.tab.OperationTitlePropertySection"
-               tab="operation.property.tab.OperationTitlePropertySection">
+               id="operation.property.tab.OperationAttributesPropertySection"
+               tab="operation.property.tab.OperationAttributesPropertySection">
          </propertySection>
          <propertySection
                class="fr.rostren.tracker.ui.properties.sections.operation.TransferIncomingAccountPropertySection"
@@ -424,11 +400,6 @@
                category="amountProperties"
                id="amount.property.tab.AmountAttributesPropertySection"
                label="Attributes"/>
-		<propertyTab
-               category="amountProperties"
-               afterTab="1"
-               id="amount.property.tab.AmountCategoryPropertySection"
-               label="Category"/>
 	</propertyTabs>
    </extension>
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
@@ -439,13 +410,6 @@
                filter="fr.rostren.tracker.ui.properties.filters.AmountPropertySectionFilter"
                id="amount.property.tab.AmountAttributesPropertySection"
                tab="amount.property.tab.AmountAttributesPropertySection">
-         </propertySection>
-         <propertySection
-               class="fr.rostren.tracker.ui.properties.sections.amount.AmountCategoryPropertySection"
-               enablesFor="1"
-               filter="fr.rostren.tracker.ui.properties.filters.AmountPropertySectionFilter"
-               id="amount.property.tab.AmountCategoryPropertySection"
-               tab="amount.property.tab.AmountCategoryPropertySection">
          </propertySection>
      </propertySections>
    </extension>

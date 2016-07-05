@@ -30,90 +30,91 @@ import fr.rostren.tracker.ui.properties.wizards.AddOriginOperationWizard;
 
 public class OriginOperationsPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new OriginOperationsContentProvider();
-    private ILabelProvider labelProvider = new OperationLabelProvider();
+	private final ITreeContentProvider contentProvider=new OriginOperationsContentProvider();
+	private final ILabelProvider labelProvider=new OperationLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
-	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Origin);
-	    Origin origin = (Origin) currentEObject;
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Origin);
+			Origin origin=(Origin)currentEObject;
 
-	    String pageTitle = origin.getIdentifier();
-	    Tracker tracker = (Tracker) origin.eContainer().eContainer();
+			String pageTitle=origin.getIdentifier();
+			Tracker tracker=(Tracker)origin.eContainer().eContainer();
 
-	    AddOriginOperationWizard wizard = new AddOriginOperationWizard(pageTitle, tracker);
-	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
-	    if (Window.OK == wizardDialog.open()) {
-		Operation operation = wizard.getOperation();
-		if (operation != null) {
-		    ListenersUtils.executeAddCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, operation);
-		    refresh();
+			AddOriginOperationWizard wizard=new AddOriginOperationWizard(pageTitle, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Operation operation=wizard.getOperation();
+				if (operation != null) {
+					ListenersUtils.executeAddCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, operation);
+					refresh();
+				}
+			}
 		}
-	    }
-	}
-    };
+	};
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Origin);
+			Origin origin=(Origin)currentEObject;
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Origin);
-	    Origin origin = (Origin) currentEObject;
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, elementToRemove);
-	    refresh();
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getOperations());
+		addListeners();
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	private List<Operation> getOperations() {
+		Assert.isTrue(currentEObject instanceof Origin);
+		List<Operation> operations=((Origin)currentEObject).getOperations();
+		if (operations == null || operations.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return operations;
+	}
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getOperations());
-	addListeners();
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
 
-    private List<Operation> getOperations() {
-	Assert.isTrue(currentEObject instanceof Origin);
-	List<Operation> operations = ((Origin) currentEObject).getOperations();
-	if (operations == null || operations.isEmpty())
-	    return Collections.emptyList();
-	return operations;
-    }
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

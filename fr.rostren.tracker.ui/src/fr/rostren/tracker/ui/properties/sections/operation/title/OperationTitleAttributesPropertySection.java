@@ -14,46 +14,47 @@ import fr.rostren.tracker.ui.properties.listeners.OperationTitleAttributesModify
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
 public class OperationTitleAttributesPropertySection extends AbstractAttributesPropertySection {
-    protected Text titleText;
+	protected Text titleText;
 
-    private ModifyListener listener = new OperationTitleAttributesModifyListener(this);
+	private final ModifyListener listener=new OperationTitleAttributesModifyListener(this);
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.titleText = createLabeledText(body, null, "Title:"); //$NON-NLS-1$
-	addListeners();
-    }
+		titleText=createLabeledText(body, null, "Title:"); //$NON-NLS-1$
+		addListeners();
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 
-	disposeListeners();
-	titleText.setText(getOperationTileValue());
-	addListeners();
-    }
+		disposeListeners();
+		titleText.setText(getOperationTileValue());
+		addListeners();
+	}
 
-    private String getOperationTileValue() {
-	Assert.isTrue(currentEObject instanceof OperationTitle);
-	String title = ((OperationTitle) currentEObject).getTitle();
-	if (title == null)
-	    return StringUtils.EMPTY;
-	return title;
-    }
+	private String getOperationTileValue() {
+		Assert.isTrue(currentEObject instanceof OperationTitle);
+		String title=((OperationTitle)currentEObject).getTitle();
+		if (title == null) {
+			return StringUtils.EMPTY;
+		}
+		return title;
+	}
 
-    @Override
-    protected void addListeners() {
-	titleText.addModifyListener(listener);
-    }
+	@Override
+	protected void addListeners() {
+		titleText.addModifyListener(listener);
+	}
 
-    @Override
-    protected void disposeListeners() {
-	titleText.removeModifyListener(listener);
-    }
+	@Override
+	protected void disposeListeners() {
+		titleText.removeModifyListener(listener);
+	}
 
-    public Text getTitleText() {
-	return titleText;
-    }
+	public Text getTitleText() {
+		return titleText;
+	}
 }

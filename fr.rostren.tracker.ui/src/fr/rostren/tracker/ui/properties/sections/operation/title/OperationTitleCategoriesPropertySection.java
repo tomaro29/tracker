@@ -30,91 +30,90 @@ import fr.rostren.tracker.ui.properties.wizards.AddOperationTitleCategoryWizard;
 
 public class OperationTitleCategoriesPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new OperationTitleCategoriesContentProvider();
-    private ILabelProvider labelProvider = new CategoryLabelProvider();
+	private final ITreeContentProvider contentProvider=new OperationTitleCategoriesContentProvider();
+	private final ILabelProvider labelProvider=new CategoryLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
-	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof OperationTitle);
-	    OperationTitle operationTitle = (OperationTitle) currentEObject;
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof OperationTitle);
+			OperationTitle operationTitle=(OperationTitle)currentEObject;
 
-	    String pageTitle = operationTitle.getTitle();
-	    Tracker tracker = (Tracker) operationTitle.eContainer().eContainer();
+			String pageTitle=operationTitle.getTitle();
+			Tracker tracker=(Tracker)operationTitle.eContainer().eContainer();
 
-	    AddOperationTitleCategoryWizard wizard = new AddOperationTitleCategoryWizard(pageTitle, tracker);
-	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
-	    if (Window.OK == wizardDialog.open()) {
-		Category category = wizard.getCategory();
-		if (category != null) {
-		    ListenersUtils.executeAddCommand(operationTitle,
-			    TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, category);
-		    refresh();
+			AddOperationTitleCategoryWizard wizard=new AddOperationTitleCategoryWizard(pageTitle, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Category category=wizard.getCategory();
+				if (category != null) {
+					ListenersUtils.executeAddCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, category);
+					refresh();
+				}
+			}
 		}
-	    }
-	}
-    };
+	};
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof OperationTitle);
+			OperationTitle operationTitle=(OperationTitle)currentEObject;
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof OperationTitle);
-	    OperationTitle operationTitle = (OperationTitle) currentEObject;
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES,
-		    elementToRemove);
-	    refresh();
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getCategories());
+		addListeners();
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	private List<Category> getCategories() {
+		Assert.isTrue(currentEObject instanceof OperationTitle);
+		List<Category> categories=((OperationTitle)currentEObject).getCategories();
+		if (categories == null || categories.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return categories;
+	}
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getCategories());
-	addListeners();
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    private List<Category> getCategories() {
-	Assert.isTrue(currentEObject instanceof OperationTitle);
-	List<Category> categories = ((OperationTitle) currentEObject).getCategories();
-	if (categories == null || categories.isEmpty())
-	    return Collections.emptyList();
-	return categories;
-    }
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

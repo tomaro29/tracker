@@ -14,63 +14,63 @@ import fr.rostren.tracker.ui.properties.listeners.OwnerAttributesModifyListener;
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
 public class OwnerAttributesPropertySection extends AbstractAttributesPropertySection {
-    protected Text firstNameText;
-    protected Text lastNameText;
+	protected Text firstNameText;
+	protected Text lastNameText;
 
-    private ModifyListener listener = new OwnerAttributesModifyListener(this);
+	private final ModifyListener listener=new OwnerAttributesModifyListener(this);
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.firstNameText = createLabeledText(body, null, "First Name:"); //$NON-NLS-1$
-	this.lastNameText = createLabeledText(body, firstNameText, "Last Name:"); //$NON-NLS-1$
-	addListeners();
-    }
+		firstNameText=createLabeledText(body, null, "First Name:"); //$NON-NLS-1$
+		lastNameText=createLabeledText(body, firstNameText, "Last Name:"); //$NON-NLS-1$
+		addListeners();
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 
-	disposeListeners();
-	firstNameText.setText(getOwnerFirstName());
-	lastNameText.setText(getOwnerLastName());
-	addListeners();
-    }
+		disposeListeners();
+		String firstName=getOwnerFirstName();
+		if (!StringUtils.isEmpty(firstName)) {
+			firstNameText.setText(firstName);
+		}
+		String lastName=getOwnerLastName();
+		if (!StringUtils.isEmpty(lastName)) {
+			lastNameText.setText(lastName);
+		}
+		addListeners();
+	}
 
-    private String getOwnerFirstName() {
-	Assert.isTrue(currentEObject instanceof Owner);
-	String firstName = ((Owner) currentEObject).getFirstName();
-	if (firstName == null)
-	    return StringUtils.EMPTY;
-	return firstName;
-    }
+	private String getOwnerFirstName() {
+		Assert.isTrue(currentEObject instanceof Owner);
+		return ((Owner)currentEObject).getFirstName();
+	}
 
-    private String getOwnerLastName() {
-	Assert.isTrue(currentEObject instanceof Owner);
-	String lastName = ((Owner) currentEObject).getLastName();
-	if (lastName == null)
-	    return StringUtils.EMPTY;
-	return lastName;
-    }
+	private String getOwnerLastName() {
+		Assert.isTrue(currentEObject instanceof Owner);
+		return ((Owner)currentEObject).getLastName();
+	}
 
-    @Override
-    protected void addListeners() {
-	firstNameText.addModifyListener(listener);
-	lastNameText.addModifyListener(listener);
-    }
+	@Override
+	protected void addListeners() {
+		firstNameText.addModifyListener(listener);
+		lastNameText.addModifyListener(listener);
+	}
 
-    @Override
-    protected void disposeListeners() {
-	firstNameText.removeModifyListener(listener);
-	lastNameText.removeModifyListener(listener);
-    }
+	@Override
+	protected void disposeListeners() {
+		firstNameText.removeModifyListener(listener);
+		lastNameText.removeModifyListener(listener);
+	}
 
-    public Text getFirstNameText() {
-	return firstNameText;
-    }
+	public Text getFirstNameText() {
+		return firstNameText;
+	}
 
-    public Text getLastNameText() {
-	return lastNameText;
-    }
+	public Text getLastNameText() {
+		return lastNameText;
+	}
 }

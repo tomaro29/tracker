@@ -12,36 +12,37 @@ import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 public abstract class AbstractTrackerPropertySection extends AbstractPropertySection {
-    protected Composite body;
-    protected EObject currentEObject;
+	protected Composite body;
+	protected EObject currentEObject;
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
-	this.body = getWidgetFactory().createFlatFormComposite(parent);
-    }
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
+		body=getWidgetFactory().createFlatFormComposite(parent);
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-	Assert.isTrue(selection instanceof IStructuredSelection);
-	Object input = ((IStructuredSelection) selection).getFirstElement();
-	Assert.isTrue(input instanceof EObject);
-	this.currentEObject = (EObject) input;
-    }
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
+		Assert.isTrue(selection instanceof IStructuredSelection);
+		Object input=((IStructuredSelection)selection).getFirstElement();
+		Assert.isTrue(input instanceof EObject);
+		currentEObject=(EObject)input;
+	}
 
-    public Shell getShell() {
-	Object currentShell = Display.getDefault().getActiveShell();
-	if (!(currentShell instanceof Shell))
-	    return null;
-	return (Shell) currentShell;
-    }
+	public Shell getShell() {
+		Object currentShell=Display.getDefault().getActiveShell();
+		if (!(currentShell instanceof Shell)) {
+			return null;
+		}
+		return (Shell)currentShell;
+	}
 
-    public EObject getCurrentEObject() {
-	return currentEObject;
-    }
+	public EObject getCurrentEObject() {
+		return currentEObject;
+	}
 
-    abstract protected void addListeners();
+	abstract protected void addListeners();
 
-    abstract protected void disposeListeners();
+	abstract protected void disposeListeners();
 }

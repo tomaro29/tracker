@@ -9,21 +9,23 @@ import fr.rostren.tracker.ui.properties.sections.owner.OwnerAttributesPropertySe
 
 public class OwnerAttributesModifyListener extends AbstractModifyListener {
 
-    private final OwnerAttributesPropertySection section;
+	private final OwnerAttributesPropertySection section;
 
-    public OwnerAttributesModifyListener(OwnerAttributesPropertySection section) {
-	this.section = section;
-    }
+	public OwnerAttributesModifyListener(OwnerAttributesPropertySection section) {
+		this.section=section;
+	}
 
-    @Override
-    protected void executeModify(Widget widget) {
-	EObject eObject = section.getCurrentEObject();
-	Text firstName = section.getFirstNameText();
-	Text lastName = section.getLastNameText();
+	@Override
+	protected void executeModify(Widget widget) {
+		EObject eObject=section.getCurrentEObject();
+		Text firstName=section.getFirstNameText();
+		Text lastName=section.getLastNameText();
 
-	if (widget.equals(firstName))
-	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OWNER__FIRST_NAME, firstName.getText());
-	else if (widget.equals(lastName))
-	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OWNER__LAST_NAME, lastName.getText());
-    }
+		if (widget.equals(firstName)) {
+			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OWNER__FIRST_NAME, firstName.getText());
+		}
+		else if (widget.equals(lastName)) {
+			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OWNER__LAST_NAME, lastName.getText());
+		}
+	}
 }

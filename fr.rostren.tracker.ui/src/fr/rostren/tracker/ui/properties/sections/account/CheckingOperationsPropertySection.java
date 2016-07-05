@@ -34,110 +34,116 @@ import fr.rostren.tracker.ui.properties.wizards.AddCheckOperationWizard;
 
 public class CheckingOperationsPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new CheckingOperationsContentProvider();
-    private ILabelProvider labelProvider = new OperationLabelProvider();
+	private final ITreeContentProvider contentProvider=new CheckingOperationsContentProvider();
+	private final ILabelProvider labelProvider=new OperationLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof CheckingAccount);
+			CheckingAccount checking=(CheckingAccount)currentEObject;
+
+			String pageTitle=checking.getName();
+			Tracker tracker=(Tracker)checking.eContainer().eContainer();
+
+			AddCheckOperationWizard wizard=new AddCheckOperationWizard(pageTitle, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Operation newOperation=null;
+				if (wizard.isCredit()) {
+					newOperation=TrackerFactory.eINSTANCE.createCredit();
+				}
+				else if (wizard.isDebit()) {
+					newOperation=TrackerFactory.eINSTANCE.createDebit();
+				}
+				else if (wizard.isIncoming()) {
+					newOperation=TrackerFactory.eINSTANCE.createIncoming();
+				}
+				else if (wizard.isOutgoing()) {
+					newOperation=TrackerFactory.eINSTANCE.createOutgoing();
+				}
+
+				if (newOperation == null) {
+					return;
+				}
+
+				OperationTitle operationTitle=wizard.getOperationTitle();
+				if (operationTitle != null) {
+					newOperation.setOperationTitle(operationTitle);
+				}
+
+				Origin operationOrigin=wizard.getOperationOrigin();
+				if (operationOrigin != null) {
+					newOperation.setOrigin(operationOrigin);
+				}
+
+				ListenersUtils.executeAddCommand(checking, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newOperation);
+				refresh();
+			}
+		}
+	};
+
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof CheckingAccount);
+			CheckingAccount account=(CheckingAccount)currentEObject;
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof CheckingAccount);
-	    CheckingAccount checking = (CheckingAccount) currentEObject;
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	    String pageTitle = checking.getName();
-	    Tracker tracker = (Tracker) checking.eContainer().eContainer();
-
-	    AddCheckOperationWizard wizard = new AddCheckOperationWizard(pageTitle, tracker);
-	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
-	    if (Window.OK == wizardDialog.open()) {
-		Operation newOperation = null;
-		if (wizard.isCredit())
-		    newOperation = TrackerFactory.eINSTANCE.createCredit();
-		else if (wizard.isDebit())
-		    newOperation = TrackerFactory.eINSTANCE.createDebit();
-		else if (wizard.isIncoming())
-		    newOperation = TrackerFactory.eINSTANCE.createIncoming();
-		else if (wizard.isOutgoing())
-		    newOperation = TrackerFactory.eINSTANCE.createOutgoing();
-
-		if (newOperation == null)
-		    return;
-
-		OperationTitle operationTitle = wizard.getOperationTitle();
-		if (operationTitle != null)
-		    newOperation.setOperationTitle(operationTitle);
-
-		Origin operationOrigin = wizard.getOperationOrigin();
-		if (operationOrigin != null)
-		    newOperation.setOrigin(operationOrigin);
-
-		ListenersUtils.executeAddCommand(checking, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-			newOperation);
-		refresh();
-	    }
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
 	}
-    };
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof CheckingAccount);
-	    CheckingAccount account = (CheckingAccount) currentEObject;
-
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
-		    elementToRemove);
-	    refresh();
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getOperations());
+		addListeners();
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	private List<Operation> getOperations() {
+		Assert.isTrue(currentEObject instanceof CheckingAccount);
+		EList<Operation> operations=((CheckingAccount)currentEObject).getOperations();
+		if (operations == null || operations.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return operations;
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getOperations());
-	addListeners();
-    }
+	}
 
-    private List<Operation> getOperations() {
-	Assert.isTrue(currentEObject instanceof CheckingAccount);
-	EList<Operation> operations = ((CheckingAccount) currentEObject).getOperations();
-	if (operations == null || operations.isEmpty())
-	    return Collections.emptyList();
-	return operations;
-    }
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

@@ -14,74 +14,75 @@ import fr.rostren.tracker.ui.properties.listeners.AccountAttributesModifyListene
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
 public class AccountAttributesPropertySection extends AbstractAttributesPropertySection {
-    protected Text nameText;
-    protected Text amountText;
-    protected Text identifierText;
+	protected Text nameText;
+	protected Text amountText;
+	protected Text identifierText;
 
-    private ModifyListener listener = new AccountAttributesModifyListener(this);
+	private final ModifyListener listener=new AccountAttributesModifyListener(this);
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.nameText = createLabeledText(body, null, "Name:"); //$NON-NLS-1$
-	this.identifierText = createLabeledText(body, nameText, "Identifier:"); //$NON-NLS-1$
-	this.amountText = createLabeledText(body, identifierText, "Amount:"); //$NON-NLS-1$
+		nameText=createLabeledText(body, null, "Name:"); //$NON-NLS-1$
+		identifierText=createLabeledText(body, nameText, "Identifier:"); //$NON-NLS-1$
+		amountText=createLabeledText(body, identifierText, "Amount:"); //$NON-NLS-1$
 
-	addListeners();
-    }
+		addListeners();
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 
-	disposeListeners();
-	nameText.setText(getAccountName());
-	amountText.setText(getAccountAmount());
-	identifierText.setText(getAccountIdentifier());
-	addListeners();
-    }
+		disposeListeners();
+		nameText.setText(getAccountName());
+		amountText.setText(getAccountAmount());
+		identifierText.setText(getAccountIdentifier());
+		addListeners();
+	}
 
-    private String getAccountIdentifier() {
-	Assert.isTrue(currentEObject instanceof Account);
-	return String.valueOf(((Account) currentEObject).getIdentifier());
-    }
+	private String getAccountIdentifier() {
+		Assert.isTrue(currentEObject instanceof Account);
+		return String.valueOf(((Account)currentEObject).getIdentifier());
+	}
 
-    private String getAccountAmount() {
-	Assert.isTrue(currentEObject instanceof Account);
-	return String.valueOf(((Account) currentEObject).getAmount());
-    }
+	private String getAccountAmount() {
+		Assert.isTrue(currentEObject instanceof Account);
+		return String.valueOf(((Account)currentEObject).getAmount());
+	}
 
-    private String getAccountName() {
-	Assert.isTrue(currentEObject instanceof Account);
-	if (((Account) currentEObject).getName() == null)
-	    return StringUtils.EMPTY;
-	return ((Account) currentEObject).getName();
-    }
+	private String getAccountName() {
+		Assert.isTrue(currentEObject instanceof Account);
+		if (((Account)currentEObject).getName() == null) {
+			return StringUtils.EMPTY;
+		}
+		return ((Account)currentEObject).getName();
+	}
 
-    @Override
-    protected void addListeners() {
-	nameText.addModifyListener(listener);
-	amountText.addModifyListener(listener);
-	identifierText.addModifyListener(listener);
-    }
+	@Override
+	protected void addListeners() {
+		nameText.addModifyListener(listener);
+		amountText.addModifyListener(listener);
+		identifierText.addModifyListener(listener);
+	}
 
-    @Override
-    protected void disposeListeners() {
-	nameText.removeModifyListener(listener);
-	amountText.removeModifyListener(listener);
-	identifierText.removeModifyListener(listener);
-    }
+	@Override
+	protected void disposeListeners() {
+		nameText.removeModifyListener(listener);
+		amountText.removeModifyListener(listener);
+		identifierText.removeModifyListener(listener);
+	}
 
-    public Text getNameText() {
-	return nameText;
-    }
+	public Text getNameText() {
+		return nameText;
+	}
 
-    public Text getAmountText() {
-	return amountText;
-    }
+	public Text getAmountText() {
+		return amountText;
+	}
 
-    public Text getIdentifierText() {
-	return identifierText;
-    }
+	public Text getIdentifierText() {
+		return identifierText;
+	}
 }

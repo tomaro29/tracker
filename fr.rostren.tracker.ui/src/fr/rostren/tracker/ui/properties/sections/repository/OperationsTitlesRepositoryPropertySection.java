@@ -31,94 +31,94 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
 
 public class OperationsTitlesRepositoryPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new OperationsTitlesRepositoryContentProvider();
-    private ILabelProvider labelProvider = new OperationTitleLabelProvider();
+	private final ITreeContentProvider contentProvider=new OperationsTitlesRepositoryContentProvider();
+	private final ILabelProvider labelProvider=new OperationTitleLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
+			OperationsTitleRepository repository=(OperationsTitleRepository)currentEObject;
+			Tracker tracker=(Tracker)repository.eContainer();
+
+			AddTrackerOperationTitleWizard wizard=new AddTrackerOperationTitleWizard("Operations Titles Repository", //$NON-NLS-1$
+					tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				OperationTitle newOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
+
+				String title=wizard.getOperationTitle();
+				if (title != null) {
+					newOperationTitle.setTitle(title);
+				}
+
+				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
+				refresh();
+			}
+		}
+	};
+
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
+			OperationsTitleRepository repository=(OperationsTitleRepository)currentEObject;
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
-	    OperationsTitleRepository repository = (OperationsTitleRepository) currentEObject;
-	    Tracker tracker = (Tracker) repository.eContainer();
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	    AddTrackerOperationTitleWizard wizard = new AddTrackerOperationTitleWizard("Operations Titles Repository", //$NON-NLS-1$
-		    tracker);
-	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
-	    if (Window.OK == wizardDialog.open()) {
-		OperationTitle newOperationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
-
-		String title = wizard.getOperationTitle();
-		if (title != null)
-		    newOperationTitle.setTitle(title);
-
-		ListenersUtils.executeAddCommand(repository,
-			TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-		refresh();
-	    }
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
 	}
-    };
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
-	    OperationsTitleRepository repository = (OperationsTitleRepository) currentEObject;
-
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(repository,
-		    TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, elementToRemove);
-	    refresh();
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getOperationsTitles());
+		addListeners();
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	private List<OperationTitle> getOperationsTitles() {
+		Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
+		List<OperationTitle> operationsTitles=((OperationsTitleRepository)currentEObject).getOperationsTitles();
+		if (operationsTitles == null || operationsTitles.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return operationsTitles;
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getOperationsTitles());
-	addListeners();
-    }
+	}
 
-    private List<OperationTitle> getOperationsTitles() {
-	Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
-	List<OperationTitle> operationsTitles = ((OperationsTitleRepository) currentEObject).getOperationsTitles();
-	if (operationsTitles == null || operationsTitles.isEmpty())
-	    return Collections.emptyList();
-	return operationsTitles;
-    }
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

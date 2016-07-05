@@ -30,93 +30,96 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOwnerWizard;
 
 public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new TrackerOwnersContentProvider();
-    private ILabelProvider labelProvider = new OwnerLabelProvider();
+	private final ITreeContentProvider contentProvider=new TrackerOwnersContentProvider();
+	private final ILabelProvider labelProvider=new OwnerLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Tracker);
+			Tracker tracker=(Tracker)currentEObject;
+
+			AddTrackerOwnerWizard wizard=new AddTrackerOwnerWizard("Tracker", tracker); //$NON-NLS-1$
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Owner newOwner=TrackerFactory.eINSTANCE.createOwner();
+
+				String ownerFirstName=wizard.getFirstName();
+				if (ownerFirstName != null) {
+					newOwner.setFirstName(ownerFirstName);
+				}
+				String ownerLastName=wizard.getLastName();
+				if (ownerLastName != null) {
+					newOwner.setLastName(ownerLastName);
+				}
+
+				ListenersUtils.executeAddCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, newOwner);
+				refresh();
+			}
+		}
+	};
+
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Tracker);
+			Tracker tracker=(Tracker)currentEObject;
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Tracker);
-	    Tracker tracker = (Tracker) currentEObject;
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	    AddTrackerOwnerWizard wizard = new AddTrackerOwnerWizard("Tracker", tracker); //$NON-NLS-1$
-	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
-	    if (Window.OK == wizardDialog.open()) {
-		Owner newOwner = TrackerFactory.eINSTANCE.createOwner();
-
-		String ownerFirstName = wizard.getFirstName();
-		if (ownerFirstName != null)
-		    newOwner.setFirstName(ownerFirstName);
-		String ownerLastName = wizard.getLastName();
-		if (ownerLastName != null)
-		    newOwner.setLastName(ownerLastName);
-
-		ListenersUtils.executeAddCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, newOwner);
-		refresh();
-	    }
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
 	}
-    };
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Tracker);
-	    Tracker tracker = (Tracker) currentEObject;
-
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, elementToRemove);
-	    refresh();
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getOwners());
+		addListeners();
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	private List<Owner> getOwners() {
+		Assert.isTrue(currentEObject instanceof Tracker);
+		List<Owner> owners=((Tracker)currentEObject).getOwners();
+		if (owners == null || owners.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return owners;
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getOwners());
-	addListeners();
-    }
+	}
 
-    private List<Owner> getOwners() {
-	Assert.isTrue(currentEObject instanceof Tracker);
-	List<Owner> owners = ((Tracker) currentEObject).getOwners();
-	if (owners == null || owners.isEmpty())
-	    return Collections.emptyList();
-	return owners;
-    }
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

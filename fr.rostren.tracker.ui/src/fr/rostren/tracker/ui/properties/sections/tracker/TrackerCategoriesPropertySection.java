@@ -31,98 +31,99 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
 
 public class TrackerCategoriesPropertySection extends AbstractTablePropertySection {
 
-    private ITreeContentProvider contentProvider = new TrackerCategoriesContentProvider();
-    private ILabelProvider labelProvider = new CategoryLabelProvider();
+	private final ITreeContentProvider contentProvider=new TrackerCategoriesContentProvider();
+	private final ILabelProvider labelProvider=new CategoryLabelProvider();
 
-    private SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Tracker);
+			Tracker tracker=(Tracker)currentEObject;
+			CategoriesRepository repository=tracker.getCategoriesRepository();
+
+			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Tracker", tracker); //$NON-NLS-1$
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+
+				String categTitle=wizard.getCategoryTitle();
+				if (categTitle != null) {
+					newCategory.setTitle(categTitle);
+				}
+
+				String categDesc=wizard.getCategoryDescription();
+				if (categDesc != null) {
+					newCategory.setTitle(categDesc);
+				}
+
+				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
+				refresh();
+			}
+		}
+	};
+
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			EObject currentEObject=getCurrentEObject();
+			Assert.isTrue(currentEObject instanceof Tracker);
+			Tracker tracker=(Tracker)currentEObject;
+			CategoriesRepository repository=tracker.getCategoriesRepository();
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, elementToRemove);
+			refresh();
+		}
+	};
+
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Tracker);
-	    Tracker tracker = (Tracker) currentEObject;
-	    CategoriesRepository repository = tracker.getCategoriesRepository();
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	    AddTrackerCategoryWizard wizard = new AddTrackerCategoryWizard("Tracker", tracker); //$NON-NLS-1$
-	    WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
-	    if (Window.OK == wizardDialog.open()) {
-		Category newCategory = TrackerFactory.eINSTANCE.createCategory();
-
-		String categTitle = wizard.getCategoryTitle();
-		if (categTitle != null)
-		    newCategory.setTitle(categTitle);
-
-		String categDesc = wizard.getCategoryDescription();
-		if (categDesc != null)
-		    newCategory.setTitle(categDesc);
-
-		ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES,
-			newCategory);
-		refresh();
-	    }
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
 	}
-    };
 
-    private SelectionAdapter removeButtonListener = new SelectionAdapter() {
 	@Override
-	public void widgetSelected(SelectionEvent event) {
-	    EObject currentEObject = getCurrentEObject();
-	    Assert.isTrue(currentEObject instanceof Tracker);
-	    Tracker tracker = (Tracker) currentEObject;
-	    CategoriesRepository repository = tracker.getCategoriesRepository();
-
-	    ISelection selection = viewer.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-	    ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES,
-		    elementToRemove);
-	    refresh();
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 	}
-    };
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void refresh() {
+		disposeListeners();
+		tableViewer.setInput(getCategories());
+		addListeners();
+	}
 
-	this.table = createTable(body, null, addButtonlistener, removeButtonListener);
-	this.viewer = new TableViewer(table);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	addListeners();
-    }
+	private List<Category> getCategories() {
+		Assert.isTrue(currentEObject instanceof Tracker);
+		List<Category> categories=((Tracker)currentEObject).getCategoriesRepository().getCategories();
+		if (categories == null || categories.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return categories;
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
-    }
+	@Override
+	protected void addListeners() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void refresh() {
-	disposeListeners();
-	viewer.setInput(getCategories());
-	addListeners();
-    }
+	}
 
-    private List<Category> getCategories() {
-	Assert.isTrue(currentEObject instanceof Tracker);
-	List<Category> categories = ((Tracker) currentEObject).getCategoriesRepository().getCategories();
-	if (categories == null || categories.isEmpty())
-	    return Collections.emptyList();
-	return categories;
-    }
+	@Override
+	protected void disposeListeners() {
+		// TODO Auto-generated method stub
+	}
 
-    @Override
-    protected void addListeners() {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void disposeListeners() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-	disposeButtonsListeners(addButtonlistener, removeButtonListener);
-    }
+	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+	}
 }

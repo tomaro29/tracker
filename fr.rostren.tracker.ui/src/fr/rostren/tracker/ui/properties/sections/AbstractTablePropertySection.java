@@ -17,7 +17,7 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
     protected Button removeButton;
 
     protected Table table;
-    public TableViewer viewer;
+    public TableViewer tableViewer;
 
     protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener,
 	    SelectionAdapter removeButtonListener) {

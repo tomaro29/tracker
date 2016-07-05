@@ -14,46 +14,47 @@ import fr.rostren.tracker.ui.properties.listeners.CategoryAttributesModifyListen
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
 public class CategoryAttributesPropertySection extends AbstractAttributesPropertySection {
-    protected Text descriptionText;
+	protected Text descriptionText;
 
-    private ModifyListener listener = new CategoryAttributesModifyListener(this);
+	private final ModifyListener listener=new CategoryAttributesModifyListener(this);
 
-    @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
-	super.createControls(parent, aTabbedPropertySheetPage);
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
 
-	this.descriptionText = createLabeledText(body, null, "Description:"); //$NON-NLS-1$
-	addListeners();
-    }
+		descriptionText=createLabeledText(body, null, "Description:"); //$NON-NLS-1$
+		addListeners();
+	}
 
-    @Override
-    public void setInput(IWorkbenchPart part, ISelection selection) {
-	super.setInput(part, selection);
+	@Override
+	public void setInput(IWorkbenchPart part, ISelection selection) {
+		super.setInput(part, selection);
 
-	disposeListeners();
-	descriptionText.setText(getDescriptionValue());
-	addListeners();
-    }
+		disposeListeners();
+		descriptionText.setText(getDescriptionValue());
+		addListeners();
+	}
 
-    private String getDescriptionValue() {
-	Assert.isTrue(currentEObject instanceof Category);
-	String description = ((Category) currentEObject).getDescription();
-	if (description == null)
-	    return StringUtils.EMPTY;
-	return description;
-    }
+	private String getDescriptionValue() {
+		Assert.isTrue(currentEObject instanceof Category);
+		String description=((Category)currentEObject).getDescription();
+		if (description == null) {
+			return StringUtils.EMPTY;
+		}
+		return description;
+	}
 
-    @Override
-    protected void addListeners() {
-	descriptionText.addModifyListener(listener);
-    }
+	@Override
+	protected void addListeners() {
+		descriptionText.addModifyListener(listener);
+	}
 
-    @Override
-    protected void disposeListeners() {
-	descriptionText.removeModifyListener(listener);
-    }
+	@Override
+	protected void disposeListeners() {
+		descriptionText.removeModifyListener(listener);
+	}
 
-    public Text getDescriptionText() {
-	return descriptionText;
-    }
+	public Text getDescriptionText() {
+		return descriptionText;
+	}
 }

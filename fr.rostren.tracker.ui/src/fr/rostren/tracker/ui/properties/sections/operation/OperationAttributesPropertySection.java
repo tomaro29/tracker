@@ -1,7 +1,10 @@
 package fr.rostren.tracker.ui.properties.sections.operation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
@@ -10,6 +13,8 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+
+import com.google.common.collect.Sets;
 
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
@@ -42,14 +47,18 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 
 		disposeListeners();
 		OperationTitle operationTitle=getOperationTitle();
-		titleCombo.setItems(getOperationTitlesItems());
+		String[] items=getOperationTitlesItems();
+		titleCombo.setItems(items);
 		if (operationTitle != null) {
-			titleCombo.setItem(getOperationTitleItemIndex(operationTitle), operationTitle.getTitle());
+			String title=operationTitle.getTitle();
+			titleCombo.setItem(Arrays.asList(items).indexOf(title), title);
 		}
-		originCombo.setItems(getOriginsItems());
+		items=getOriginsItems();
+		originCombo.setItems(items);
 		Origin origin=getOperationOriginItem();
 		if (origin != null) {
-			originCombo.setItem(getOperationOriginItemIndex(origin), origin.getIdentifier());
+			String identifier=origin.getIdentifier();
+			originCombo.setItem(Arrays.asList(items).indexOf(identifier), identifier);
 		}
 		addListeners();
 	}
@@ -79,36 +88,26 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		return ((Operation)currentEObject).getOperationTitle();
 	}
 
-	private int getOperationTitleItemIndex(OperationTitle operationTitle) {
-		List<OperationTitle> sortedTitles=getSortedTitles();
-		return sortedTitles.indexOf(operationTitle);
-	}
-
 	private List<OperationTitle> getSortedTitles() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
-		List<OperationTitle> operationTitles=tracker.getOperationsTitlesRepositories().getOperationsTitles();
-		Collections.sort(operationTitles, new OperationTitleComparator());
-		return operationTitles;
+		Set<OperationTitle> operationTitles=Sets.newHashSet(tracker.getOperationsTitlesRepositories().getOperationsTitles());
+		return getSortedList(operationTitles, new OperationTitleComparator());
 	}
 
 	private String[] getOperationTitlesItems() {
 		List<OperationTitle> operationTitles=getSortedTitles();
-		String[] items=new String[operationTitles.size()];
-		for (int i=0; i < operationTitles.size(); i++) {
-			items[i]=operationTitles.get(i).getTitle();
+		List<String> titles=new ArrayList<>();
+		for (OperationTitle operationTitle: operationTitles) {
+			titles.add(operationTitle.getTitle());
 		}
-		return items;
+		titles.removeAll(Collections.singleton(null));
+		return titles.toArray(new String[0]);
 	}
 
 	private Origin getOperationOriginItem() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		return ((Operation)currentEObject).getOrigin();
-	}
-
-	private int getOperationOriginItemIndex(Origin origin) {
-		List<Origin> sortedOrigins=getSortedOrgins();
-		return sortedOrigins.indexOf(origin);
 	}
 
 	private List<Origin> getSortedOrgins() {

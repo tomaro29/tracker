@@ -11,7 +11,8 @@ public class OriginLabelProvider extends AbstractLabelProvider {
 	@Override
 	public String getText(Object element) {
 		if (element instanceof Origin) {
-			return getOriginType((Origin)element) + AbstractLabelProvider.STRING_SEPARATOR + getOriginIdentifier((Origin)element);
+			return getOriginType((Origin)element)	+ AbstractLabelProvider.STRING_SEPARATOR + AbstractLabelProvider.QUOTES + getOriginIdentifier((Origin)element)
+					+ AbstractLabelProvider.QUOTES;
 		}
 		return super.getText(element);
 	}

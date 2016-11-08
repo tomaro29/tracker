@@ -1,5 +1,11 @@
 package fr.rostren.tracker.ui.properties.sections;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
@@ -40,6 +46,13 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 
 	public EObject getCurrentEObject() {
 		return currentEObject;
+	}
+
+	public <T> List<T> getSortedList(Set<T> set, Comparator<T> comparator) {
+		List<T> list=new ArrayList<>(set);
+		Collections.sort(list, comparator);
+		list.removeAll(Collections.singleton(null));
+		return list;
 	}
 
 	abstract protected void addListeners();

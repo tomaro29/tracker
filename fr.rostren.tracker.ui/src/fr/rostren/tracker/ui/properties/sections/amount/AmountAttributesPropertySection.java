@@ -1,8 +1,11 @@
 package fr.rostren.tracker.ui.properties.sections.amount;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
@@ -13,6 +16,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+
+import com.google.common.collect.Sets;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
@@ -44,24 +49,18 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 
 		disposeListeners();
 		valueText.setText(getAmountvalue());
-		categoryCombo.setItems(getItems());
-		Category category=getAmountCategoryItem();
-		if (category != null) {
-			categoryCombo.setItem(getAmountCategoryItemIndex(category), category.getTitle());
-		}
+		String[] items=getItems();
+		categoryCombo.setItems(items);
+		setComboSelection(items);
 		addListeners();
 	}
 
-	@Override
-	public void refresh() {
-		disposeListeners();
-		valueText.setText(getAmountvalue());
+	private void setComboSelection(String[] items) {
 		Category category=getAmountCategoryItem();
 		if (category != null) {
-			categoryCombo.setItem(getAmountCategoryItemIndex(category), category.getTitle());
+			String title=category.getTitle();
+			categoryCombo.setItem(Arrays.asList(items).indexOf(title), title);
 		}
-		super.refresh();
-		addListeners();
 	}
 
 	private String getAmountvalue() {
@@ -104,17 +103,17 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	private List<Category> getSortedCategories() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
-		List<Category> categories=tracker.getCategoriesRepository().getCategories();
-		Collections.sort(categories, new CategoryComparator());
-		return categories;
+		Set<Category> categories=Sets.newHashSet(tracker.getCategoriesRepository().getCategories());
+		return getSortedList(categories, new CategoryComparator());
 	}
 
 	private String[] getItems() {
 		List<Category> categories=getSortedCategories();
-		String[] items=new String[categories.size()];
-		for (int i=0; i < categories.size(); i++) {
-			items[i]=categories.get(i).getTitle();
+		List<String> titles=new ArrayList<>();
+		for (Category category: categories) {
+			titles.add(category.getTitle());
 		}
-		return items;
+		titles.removeAll(Collections.singleton(null));
+		return titles.toArray(new String[0]);
 	}
 }

@@ -6,10 +6,10 @@ import fr.rostren.tracker.Operation;
 
 public class OperationPropertySectionFilter implements IFilter {
 
-    @Override
-    public boolean select(Object object) {
-	if (object instanceof Operation)
-	    return true;
-	return false;
-    }
+	@Override
+	public boolean select(Object object) {
+		if (object instanceof Operation)
+			return true;
+		return false;
+	}
 }

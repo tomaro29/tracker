@@ -16,51 +16,49 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 public abstract class AbstractAttributesPropertySection extends AbstractTrackerPropertySection {
 
 	protected Text createLabeledText(Composite composite, Control control, String label) {
-		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
-		Text attributeText=widgetFactory.createText(composite, StringUtils.EMPTY);
+		TabbedPropertySheetWidgetFactory widgetFactory = getWidgetFactory();
+		Text attributeText = widgetFactory.createText(composite, StringUtils.EMPTY);
 
-		FormData data=new FormData();
-		data=new FormData();
-		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
+		FormData data = new FormData();
+		data = new FormData();
+		data.left = new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
 		if (control == null) {
-			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
+			data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
+		} else {
+			data.top = new FormAttachment(control, ITabbedPropertyConstants.VSPACE);
 		}
-		else {
-			data.top=new FormAttachment(control, ITabbedPropertyConstants.VSPACE);
-		}
-		data.right=new FormAttachment(100, 0);
+		data.right = new FormAttachment(100, 0);
 		attributeText.setLayoutData(data);
 
-		CLabel attributeLabel=widgetFactory.createCLabel(composite, label);
-		data=new FormData();
-		data.left=new FormAttachment(0, 0);
-		data.right=new FormAttachment(attributeText, -ITabbedPropertyConstants.HSPACE);
-		data.top=new FormAttachment(attributeText, 0, SWT.CENTER);
+		CLabel attributeLabel = widgetFactory.createCLabel(composite, label);
+		data = new FormData();
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(attributeText, -ITabbedPropertyConstants.HSPACE);
+		data.top = new FormAttachment(attributeText, 0, SWT.CENTER);
 		attributeLabel.setLayoutData(data);
 		return attributeText;
 	}
 
 	protected CCombo createLabeledCombo(Composite composite, Control control, String label) {
-		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
-		CCombo refCombo=widgetFactory.createCCombo(composite);
+		TabbedPropertySheetWidgetFactory widgetFactory = getWidgetFactory();
+		CCombo refCombo = widgetFactory.createCCombo(composite);
 
-		FormData data=new FormData();
-		data=new FormData();
-		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
+		FormData data = new FormData();
+		data = new FormData();
+		data.left = new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
 		if (control == null) {
-			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
+			data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
+		} else {
+			data.top = new FormAttachment(control, ITabbedPropertyConstants.VSPACE);
 		}
-		else {
-			data.top=new FormAttachment(control, ITabbedPropertyConstants.VSPACE);
-		}
-		data.right=new FormAttachment(100, 0);
+		data.right = new FormAttachment(100, 0);
 		refCombo.setLayoutData(data);
 
-		CLabel comboLabel=widgetFactory.createCLabel(composite, label);
-		data=new FormData();
-		data.left=new FormAttachment(0, 0);
-		data.right=new FormAttachment(refCombo, -ITabbedPropertyConstants.HSPACE);
-		data.top=new FormAttachment(refCombo, 0, SWT.CENTER);
+		CLabel comboLabel = widgetFactory.createCLabel(composite, label);
+		data = new FormData();
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(refCombo, -ITabbedPropertyConstants.HSPACE);
+		data.top = new FormAttachment(refCombo, 0, SWT.CENTER);
 		comboLabel.setLayoutData(data);
 		return refCombo;
 	}

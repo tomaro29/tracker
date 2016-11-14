@@ -198,7 +198,6 @@ public abstract class AccountImpl extends EObjectImpl implements Account {
      * 
      * @generated
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
 	switch (featureID) {

@@ -30,42 +30,44 @@ import fr.rostren.tracker.ui.properties.wizards.AddCategoryOperationTitleWizard;
 
 public class CategoryOperationsTitlesPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider=new CategoryOperationsTitlesContentProvider();
-	private final ILabelProvider labelProvider=new OperationTitleLabelProvider();
+	private final ITreeContentProvider contentProvider = new CategoryOperationsTitlesContentProvider();
+	private final ILabelProvider labelProvider = new OperationTitleLabelProvider();
 
-	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
+			EObject currentEObject = getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Category);
-			Category category=(Category)currentEObject;
+			Category category = (Category) currentEObject;
 
-			String pageTitle=category.getTitle();
-			Tracker tracker=(Tracker)category.eContainer().eContainer();
+			String pageTitle = category.getTitle();
+			Tracker tracker = (Tracker) category.eContainer().eContainer();
 
-			AddCategoryOperationTitleWizard wizard=new AddCategoryOperationTitleWizard(pageTitle, tracker);
-			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			AddCategoryOperationTitleWizard wizard = new AddCategoryOperationTitleWizard(pageTitle, tracker);
+			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				OperationTitle title=wizard.getOperationTitle();
+				OperationTitle title = wizard.getOperationTitle();
 				if (title != null) {
-					ListenersUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__OPERATION_TITLES, title);
+					ListenersUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__OPERATION_TITLES,
+							title);
 					refresh();
 				}
 			}
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
+			EObject currentEObject = getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Category);
-			Category category=(Category)currentEObject;
+			Category category = (Category) currentEObject;
 
-			ISelection selection=tableViewer.getSelection();
+			ISelection selection = tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(category, TrackerPackage.Literals.CATEGORY__OPERATION_TITLES, elementToRemove);
+			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(category, TrackerPackage.Literals.CATEGORY__OPERATION_TITLES,
+					elementToRemove);
 			refresh();
 		}
 	};
@@ -74,8 +76,8 @@ public class CategoryOperationsTitlesPropertySection extends AbstractTableProper
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer=new TableViewer(table);
+		table = createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer = new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -95,7 +97,7 @@ public class CategoryOperationsTitlesPropertySection extends AbstractTableProper
 
 	private List<OperationTitle> getOperationsTitles() {
 		Assert.isTrue(currentEObject instanceof Category);
-		List<OperationTitle> operationsTitles=((Category)currentEObject).getOperationTitles();
+		List<OperationTitle> operationsTitles = ((Category) currentEObject).getOperationTitles();
 		if (operationsTitles == null || operationsTitles.isEmpty()) {
 			return Collections.emptyList();
 		}

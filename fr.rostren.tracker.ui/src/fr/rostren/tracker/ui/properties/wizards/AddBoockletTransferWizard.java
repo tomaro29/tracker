@@ -19,7 +19,7 @@ public class AddBoockletTransferWizard extends Wizard {
 
 	public AddBoockletTransferWizard(String pageTitle, Tracker tracker) {
 		super();
-		page=new AddBoockletTransferWizardPage(pageTitle, tracker);
+		page = new AddBoockletTransferWizardPage(pageTitle, tracker);
 	}
 
 	@Override

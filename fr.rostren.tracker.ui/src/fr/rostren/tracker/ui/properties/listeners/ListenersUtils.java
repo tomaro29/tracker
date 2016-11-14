@@ -13,49 +13,49 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 
 public final class ListenersUtils {
-    private ListenersUtils() {
-	// Do Nothing
-    }
+	private ListenersUtils() {
+		// Do Nothing
+	}
 
-    public static void executeRemoveCommand(EObject eObject, EStructuralFeature feature, Object value) {
-	EditingDomain editingDomain = getEditingDomain(eObject);
-	Command cmd = RemoveCommand.create(editingDomain, eObject, feature, value);
-	editingDomain.getCommandStack().execute(cmd);
-    }
+	public static void executeRemoveCommand(EObject eObject, EStructuralFeature feature, Object value) {
+		EditingDomain editingDomain = getEditingDomain(eObject);
+		Command cmd = RemoveCommand.create(editingDomain, eObject, feature, value);
+		editingDomain.getCommandStack().execute(cmd);
+	}
 
-    public static void executeAddCommand(EObject eObject, EStructuralFeature feature, Object value) {
-	EditingDomain editingDomain = getEditingDomain(eObject);
-	Command cmd = AddCommand.create(editingDomain, eObject, feature, value);
-	editingDomain.getCommandStack().execute(cmd);
-    }
+	public static void executeAddCommand(EObject eObject, EStructuralFeature feature, Object value) {
+		EditingDomain editingDomain = getEditingDomain(eObject);
+		Command cmd = AddCommand.create(editingDomain, eObject, feature, value);
+		editingDomain.getCommandStack().execute(cmd);
+	}
 
-    public static void executeSetCommand(EObject eObject, EStructuralFeature feature, Object value) {
-	EditingDomain editingDomain = getEditingDomain(eObject);
-	Command cmd = SetCommand.create(editingDomain, eObject, feature, value);
-	editingDomain.getCommandStack().execute(cmd);
-    }
+	public static void executeSetCommand(EObject eObject, EStructuralFeature feature, Object value) {
+		EditingDomain editingDomain = getEditingDomain(eObject);
+		Command cmd = SetCommand.create(editingDomain, eObject, feature, value);
+		editingDomain.getCommandStack().execute(cmd);
+	}
 
-    public static EditingDomain getEditingDomain(EObject object) {
-	Resource resource = object.eResource();
-	if (resource == null)
-	    return null;
+	public static EditingDomain getEditingDomain(EObject object) {
+		Resource resource = object.eResource();
+		if (resource == null)
+			return null;
 
-	IEditingDomainProvider editingDomainProvider = (IEditingDomainProvider) EcoreUtil.getExistingAdapter(resource,
-		IEditingDomainProvider.class);
-	if (editingDomainProvider != null)
-	    return editingDomainProvider.getEditingDomain();
+		IEditingDomainProvider editingDomainProvider = (IEditingDomainProvider) EcoreUtil.getExistingAdapter(resource,
+				IEditingDomainProvider.class);
+		if (editingDomainProvider != null)
+			return editingDomainProvider.getEditingDomain();
 
-	ResourceSet resourceSet = resource.getResourceSet();
-	if (resourceSet instanceof IEditingDomainProvider)
-	    return ((IEditingDomainProvider) resourceSet).getEditingDomain();
-	if (resourceSet == null)
-	    return null;
+		ResourceSet resourceSet = resource.getResourceSet();
+		if (resourceSet instanceof IEditingDomainProvider)
+			return ((IEditingDomainProvider) resourceSet).getEditingDomain();
+		if (resourceSet == null)
+			return null;
 
-	editingDomainProvider = (IEditingDomainProvider) EcoreUtil.getExistingAdapter(resourceSet,
-		IEditingDomainProvider.class);
-	if (editingDomainProvider != null)
-	    return editingDomainProvider.getEditingDomain();
+		editingDomainProvider = (IEditingDomainProvider) EcoreUtil.getExistingAdapter(resourceSet,
+				IEditingDomainProvider.class);
+		if (editingDomainProvider != null)
+			return editingDomainProvider.getEditingDomain();
 
-	return null;
-    }
+		return null;
+	}
 }

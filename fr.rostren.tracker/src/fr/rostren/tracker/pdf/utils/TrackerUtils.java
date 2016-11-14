@@ -13,7 +13,7 @@ import fr.rostren.tracker.Tracker;
 
 public class TrackerUtils {
 
-	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$
+	public static final String UNDEFINED_TITLE = "UNDEFINED"; //$NON-NLS-1$
 
 	public static String getCategoryTitle(Amount amount) {
 		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
@@ -36,17 +36,17 @@ public class TrackerUtils {
 	}
 
 	public static Tracker getTracker(EObject eObject) {
-		EObject parent=eObject;
+		EObject parent = eObject;
 		while (parent != null && !(parent instanceof Tracker)) {
-			parent=parent.eContainer();
+			parent = parent.eContainer();
 		}
-		return parent == null ? null : (Tracker)parent;
+		return parent == null ? null : (Tracker) parent;
 	}
 
 	public static Origin getOperationOrigin(Operation operation, String originId) {
-		Tracker tracker=TrackerUtils.getTracker(operation);
-		EList<Origin> origins=tracker.getOriginsRepository().getOrigins();
-		for (Origin origin: origins) {
+		Tracker tracker = TrackerUtils.getTracker(operation);
+		EList<Origin> origins = tracker.getOriginsRepository().getOrigins();
+		for (Origin origin : origins) {
 			if (origin.getIdentifier() != null && origin.getIdentifier().equals(originId)) {
 				return origin;
 			}
@@ -55,9 +55,9 @@ public class TrackerUtils {
 	}
 
 	public static OperationTitle getOperationTitle(Operation operation, String operationTitleString) {
-		Tracker tracker=TrackerUtils.getTracker(operation);
-		EList<OperationTitle> operationTitles=tracker.getOperationsTitlesRepositories().getOperationsTitles();
-		for (OperationTitle opTitle: operationTitles) {
+		Tracker tracker = TrackerUtils.getTracker(operation);
+		EList<OperationTitle> operationTitles = tracker.getOperationsTitlesRepositories().getOperationsTitles();
+		for (OperationTitle opTitle : operationTitles) {
 			if (opTitle.getTitle() != null && opTitle.getTitle().equals(operationTitleString)) {
 				return opTitle;
 			}
@@ -66,9 +66,9 @@ public class TrackerUtils {
 	}
 
 	public static Category getAmountCategory(Amount amount, String categoryTitle) {
-		Tracker tracker=TrackerUtils.getTracker(amount);
-		EList<Category> categories=tracker.getCategoriesRepository().getCategories();
-		for (Category category: categories) {
+		Tracker tracker = TrackerUtils.getTracker(amount);
+		EList<Category> categories = tracker.getCategoriesRepository().getCategories();
+		for (Category category : categories) {
 			if (category.getTitle() != null && category.getTitle().equals(categoryTitle)) {
 				return category;
 			}

@@ -13,9 +13,9 @@ import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Operation;
 
 public class CheckAndEditOperationWizard extends Wizard {
-	private List<Operation> operations = new ArrayList<>();
-
 	protected BiMap<Operation, CheckAndEditOperationWizardPage> pages;
+	
+	private List<Operation> operations = new ArrayList<>();
 	private boolean canFinish = false;
 
 	public CheckAndEditOperationWizard(List<Operation> operations, CheckingAccount account) {

@@ -20,16 +20,15 @@ public class TrackerCategoriesContentProvider extends AbstractContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		List<Category> children=new ArrayList<>();
+		List<Category> children = new ArrayList<>();
 		if (parentElement instanceof List<?>) {
-			for (Object element: (List<?>)parentElement) {
+			for (Object element : (List<?>) parentElement) {
 				if (element instanceof Category) {
-					children.add((Category)element);
+					children.add((Category) element);
 				}
 			}
-		}
-		else if (parentElement instanceof Tracker) {
-			children.addAll(((Tracker)parentElement).getCategoriesRepository().getCategories());
+		} else if (parentElement instanceof Tracker) {
+			children.addAll(((Tracker) parentElement).getCategoriesRepository().getCategories());
 		}
 		Collections.sort(children, new CategoryComparator());
 		return children.toArray();

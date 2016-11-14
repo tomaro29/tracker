@@ -6,10 +6,10 @@ import fr.rostren.tracker.Amount;
 
 public class AmountPropertySectionFilter implements IFilter {
 
-    @Override
-    public boolean select(Object object) {
-	if (object instanceof Amount)
-	    return true;
-	return false;
-    }
+	@Override
+	public boolean select(Object object) {
+		if (object instanceof Amount)
+			return true;
+		return false;
+	}
 }

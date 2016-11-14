@@ -31,14 +31,14 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	protected Text valueText;
 	protected CCombo categoryCombo;
 
-	private final ModifyListener listener=new AmountAttributesModifyListener(this);
+	private final ModifyListener listener = new AmountAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		valueText=createLabeledText(body, null, "Value:"); //$NON-NLS-1$
-		categoryCombo=createLabeledCombo(body, valueText, "Category:"); //$NON-NLS-1$
+		valueText = createLabeledText(body, null, "Value:"); //$NON-NLS-1$
+		categoryCombo = createLabeledCombo(body, valueText, "Category:"); //$NON-NLS-1$
 
 		addListeners();
 	}
@@ -49,23 +49,23 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 
 		disposeListeners();
 		valueText.setText(getAmountvalue());
-		String[] items=getItems();
+		String[] items = getItems();
 		categoryCombo.setItems(items);
 		setComboSelection(items);
 		addListeners();
 	}
 
 	private void setComboSelection(String[] items) {
-		Category category=getAmountCategoryItem();
+		Category category = getAmountCategoryItem();
 		if (category != null) {
-			String title=category.getTitle();
+			String title = category.getTitle();
 			categoryCombo.setItem(Arrays.asList(items).indexOf(title), title);
 		}
 	}
 
 	private String getAmountvalue() {
 		Assert.isTrue(currentEObject instanceof Amount);
-		BigDecimal value=((Amount)currentEObject).getValue();
+		BigDecimal value = ((Amount) currentEObject).getValue();
 		if (value == null) {
 			return StringUtils.EMPTY;
 		}
@@ -92,25 +92,25 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 
 	private Category getAmountCategoryItem() {
 		Assert.isTrue(currentEObject instanceof Amount);
-		return ((Amount)currentEObject).getCategory();
+		return ((Amount) currentEObject).getCategory();
 	}
 
 	private int getAmountCategoryItemIndex(Category category) {
-		List<Category> sortedCategories=getSortedCategories();
+		List<Category> sortedCategories = getSortedCategories();
 		return sortedCategories.indexOf(category);
 	}
 
 	private List<Category> getSortedCategories() {
 		Assert.isTrue(currentEObject instanceof Amount);
-		Tracker tracker=TrackerUtils.getTracker(currentEObject);
-		Set<Category> categories=Sets.newHashSet(tracker.getCategoriesRepository().getCategories());
+		Tracker tracker = TrackerUtils.getTracker(currentEObject);
+		Set<Category> categories = Sets.newHashSet(tracker.getCategoriesRepository().getCategories());
 		return getSortedList(categories, new CategoryComparator());
 	}
 
 	private String[] getItems() {
-		List<Category> categories=getSortedCategories();
-		List<String> titles=new ArrayList<>();
-		for (Category category: categories) {
+		List<Category> categories = getSortedCategories();
+		List<String> titles = new ArrayList<>();
+		for (Category category : categories) {
 			titles.add(category.getTitle());
 		}
 		titles.removeAll(Collections.singleton(null));

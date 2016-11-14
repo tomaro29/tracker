@@ -30,26 +30,26 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOwnerWizard;
 
 public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider=new TrackerOwnersContentProvider();
-	private final ILabelProvider labelProvider=new OwnerLabelProvider();
+	private final ITreeContentProvider contentProvider = new TrackerOwnersContentProvider();
+	private final ILabelProvider labelProvider = new OwnerLabelProvider();
 
-	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
+			EObject currentEObject = getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
-			Tracker tracker=(Tracker)currentEObject;
+			Tracker tracker = (Tracker) currentEObject;
 
-			AddTrackerOwnerWizard wizard=new AddTrackerOwnerWizard("Tracker", tracker); //$NON-NLS-1$
-			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			AddTrackerOwnerWizard wizard = new AddTrackerOwnerWizard("Tracker", tracker); //$NON-NLS-1$
+			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Owner newOwner=TrackerFactory.eINSTANCE.createOwner();
+				Owner newOwner = TrackerFactory.eINSTANCE.createOwner();
 
-				String ownerFirstName=wizard.getFirstName();
+				String ownerFirstName = wizard.getFirstName();
 				if (ownerFirstName != null) {
 					newOwner.setFirstName(ownerFirstName);
 				}
-				String ownerLastName=wizard.getLastName();
+				String ownerLastName = wizard.getLastName();
 				if (ownerLastName != null) {
 					newOwner.setLastName(ownerLastName);
 				}
@@ -60,16 +60,16 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
+			EObject currentEObject = getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
-			Tracker tracker=(Tracker)currentEObject;
+			Tracker tracker = (Tracker) currentEObject;
 
-			ISelection selection=tableViewer.getSelection();
+			ISelection selection = tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
 			ListenersUtils.executeRemoveCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, elementToRemove);
 			refresh();
 		}
@@ -79,8 +79,8 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer=new TableViewer(table);
+		table = createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer = new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -100,7 +100,7 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 
 	private List<Owner> getOwners() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<Owner> owners=((Tracker)currentEObject).getOwners();
+		List<Owner> owners = ((Tracker) currentEObject).getOwners();
 		if (owners == null || owners.isEmpty()) {
 			return Collections.emptyList();
 		}

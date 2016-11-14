@@ -11,21 +11,21 @@ import fr.rostren.tracker.ui.properties.sections.account.BoockletTransfersProper
 
 public class AccountTransfersModifyListener extends AbstractSelectionChangedListener {
 
-    private final BoockletTransfersPropertySection section;
+	private final BoockletTransfersPropertySection section;
 
-    public AccountTransfersModifyListener(BoockletTransfersPropertySection section) {
-	this.section = section;
-    }
+	public AccountTransfersModifyListener(BoockletTransfersPropertySection section) {
+		this.section = section;
+	}
 
-    @Override
-    public void executeSelectionChanged(ISelection selection) {
-	Assert.isTrue(selection instanceof Transfer);
-	Transfer transfer = (Transfer) selection;
+	@Override
+	public void executeSelectionChanged(ISelection selection) {
+		Assert.isTrue(selection instanceof Transfer);
+		Transfer transfer = (Transfer) selection;
 
-	EObject currentEObject = section.getCurrentEObject();
-	Assert.isTrue(currentEObject instanceof BoockletAccount);
-	BoockletAccount bookclet = (BoockletAccount) currentEObject;
+		EObject currentEObject = section.getCurrentEObject();
+		Assert.isTrue(currentEObject instanceof BoockletAccount);
+		BoockletAccount bookclet = (BoockletAccount) currentEObject;
 
-	ListenersUtils.executeAddCommand(bookclet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, transfer);
-    }
+		ListenersUtils.executeAddCommand(bookclet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, transfer);
+	}
 }

@@ -21,44 +21,44 @@ import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvi
  * {@link Category} instance.
  */
 public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
-    private static final String PAGE_NAME = "Add operation title to ''{0}'' Page"; //$NON-NLS-1$
-    private static final String PAGE_TITLE = "Add operation title"; //$NON-NLS-1$
-    private static final String WIZARD_DESCRIPTION = "Wizard to add a new operation title to the selected category."; //$NON-NLS-1$
+	private static final String PAGE_NAME = "Add operation title to ''{0}'' Page"; //$NON-NLS-1$
+	private static final String PAGE_TITLE = "Add operation title"; //$NON-NLS-1$
+	private static final String WIZARD_DESCRIPTION = "Wizard to add a new operation title to the selected category."; //$NON-NLS-1$
 
-    protected final Tracker tracker;
+	protected final Tracker tracker;
 
-    protected OperationTitle title;
+	protected OperationTitle title;
 
-    private ISelectionChangedListener titleListener = new ISelectionChangedListener() {
+	private ISelectionChangedListener titleListener = new ISelectionChangedListener() {
+
+		@Override
+		public void selectionChanged(SelectionChangedEvent event) {
+			ISelection selection = event.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			StructuredSelection ss = (StructuredSelection) selection;
+			Object firstElement = ss.getFirstElement();
+			if (firstElement != null && firstElement instanceof OperationTitle)
+				title = (OperationTitle) firstElement;
+		}
+	};
+
+	public AddCategoryOperationTitleWizardPage(String pageTitle, Tracker tracker) {
+		super(MessageFormat.format(PAGE_NAME, pageTitle));
+		this.tracker = tracker;
+		setTitle(PAGE_TITLE);
+		setDescription(WIZARD_DESCRIPTION);
+	}
 
 	@Override
-	public void selectionChanged(SelectionChangedEvent event) {
-	    ISelection selection = event.getSelection();
-	    Assert.isTrue(selection instanceof StructuredSelection);
-	    StructuredSelection ss = (StructuredSelection) selection;
-	    Object firstElement = ss.getFirstElement();
-	    if (firstElement != null && firstElement instanceof OperationTitle)
-		title = (OperationTitle) firstElement;
+	protected void createContainer(Composite parent) {
+		List<Object> operationsTitles = getOperationsTitles(tracker);
+		createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
+				new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener);
+		if (!operationsTitles.isEmpty())
+			title = (OperationTitle) operationsTitles.get(0);
 	}
-    };
 
-    public AddCategoryOperationTitleWizardPage(String pageTitle, Tracker tracker) {
-	super(MessageFormat.format(PAGE_NAME, pageTitle));
-	this.tracker = tracker;
-	setTitle(PAGE_TITLE);
-	setDescription(WIZARD_DESCRIPTION);
-    }
-
-    @Override
-    protected void createContainer(Composite parent) {
-	List<Object> operationsTitles = getOperationsTitles(tracker);
-	createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
-		new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener);
-	if (!operationsTitles.isEmpty())
-	    title = (OperationTitle) operationsTitles.get(0);
-    }
-
-    public OperationTitle getOperationTitle() {
-	return title;
-    }
+	public OperationTitle getOperationTitle() {
+		return title;
+	}
 }

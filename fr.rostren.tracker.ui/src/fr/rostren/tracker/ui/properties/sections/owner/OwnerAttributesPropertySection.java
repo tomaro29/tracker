@@ -17,14 +17,14 @@ public class OwnerAttributesPropertySection extends AbstractAttributesPropertySe
 	protected Text firstNameText;
 	protected Text lastNameText;
 
-	private final ModifyListener listener=new OwnerAttributesModifyListener(this);
+	private final ModifyListener listener = new OwnerAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		firstNameText=createLabeledText(body, null, "First Name:"); //$NON-NLS-1$
-		lastNameText=createLabeledText(body, firstNameText, "Last Name:"); //$NON-NLS-1$
+		firstNameText = createLabeledText(body, null, "First Name:"); //$NON-NLS-1$
+		lastNameText = createLabeledText(body, firstNameText, "Last Name:"); //$NON-NLS-1$
 		addListeners();
 	}
 
@@ -33,11 +33,11 @@ public class OwnerAttributesPropertySection extends AbstractAttributesPropertySe
 		super.setInput(part, selection);
 
 		disposeListeners();
-		String firstName=getOwnerFirstName();
+		String firstName = getOwnerFirstName();
 		if (!StringUtils.isEmpty(firstName)) {
 			firstNameText.setText(firstName);
 		}
-		String lastName=getOwnerLastName();
+		String lastName = getOwnerLastName();
 		if (!StringUtils.isEmpty(lastName)) {
 			lastNameText.setText(lastName);
 		}
@@ -46,12 +46,12 @@ public class OwnerAttributesPropertySection extends AbstractAttributesPropertySe
 
 	private String getOwnerFirstName() {
 		Assert.isTrue(currentEObject instanceof Owner);
-		return ((Owner)currentEObject).getFirstName();
+		return ((Owner) currentEObject).getFirstName();
 	}
 
 	private String getOwnerLastName() {
 		Assert.isTrue(currentEObject instanceof Owner);
-		return ((Owner)currentEObject).getLastName();
+		return ((Owner) currentEObject).getLastName();
 	}
 
 	@Override

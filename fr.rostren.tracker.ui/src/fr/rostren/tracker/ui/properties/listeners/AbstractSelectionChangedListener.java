@@ -6,14 +6,14 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 public abstract class AbstractSelectionChangedListener implements ISelectionChangedListener {
 
-    @Override
-    public void selectionChanged(SelectionChangedEvent event) {
-	ISelection selection = event.getSelection();
-	if (selection == null || selection.isEmpty())
-	    return;
+	@Override
+	public void selectionChanged(SelectionChangedEvent event) {
+		ISelection selection = event.getSelection();
+		if (selection == null || selection.isEmpty())
+			return;
 
-	executeSelectionChanged(selection);
-    }
+		executeSelectionChanged(selection);
+	}
 
-    protected abstract void executeSelectionChanged(ISelection selection);
+	protected abstract void executeSelectionChanged(ISelection selection);
 }

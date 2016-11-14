@@ -34,67 +34,66 @@ import fr.rostren.tracker.ui.properties.wizards.AddCheckOperationWizard;
 
 public class CheckingOperationsPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider=new CheckingOperationsContentProvider();
-	private final ILabelProvider labelProvider=new OperationLabelProvider();
+	private final ITreeContentProvider contentProvider = new CheckingOperationsContentProvider();
+	private final ILabelProvider labelProvider = new OperationLabelProvider();
 
-	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
+			EObject currentEObject = getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof CheckingAccount);
-			CheckingAccount checking=(CheckingAccount)currentEObject;
+			CheckingAccount checking = (CheckingAccount) currentEObject;
 
-			String pageTitle=checking.getName();
-			Tracker tracker=(Tracker)checking.eContainer().eContainer();
+			String pageTitle = checking.getName();
+			Tracker tracker = (Tracker) checking.eContainer().eContainer();
 
-			AddCheckOperationWizard wizard=new AddCheckOperationWizard(pageTitle, tracker);
-			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			AddCheckOperationWizard wizard = new AddCheckOperationWizard(pageTitle, tracker);
+			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Operation newOperation=null;
+				Operation newOperation = null;
 				if (wizard.isCredit()) {
-					newOperation=TrackerFactory.eINSTANCE.createCredit();
-				}
-				else if (wizard.isDebit()) {
-					newOperation=TrackerFactory.eINSTANCE.createDebit();
-				}
-				else if (wizard.isIncoming()) {
-					newOperation=TrackerFactory.eINSTANCE.createIncoming();
-				}
-				else if (wizard.isOutgoing()) {
-					newOperation=TrackerFactory.eINSTANCE.createOutgoing();
+					newOperation = TrackerFactory.eINSTANCE.createCredit();
+				} else if (wizard.isDebit()) {
+					newOperation = TrackerFactory.eINSTANCE.createDebit();
+				} else if (wizard.isIncoming()) {
+					newOperation = TrackerFactory.eINSTANCE.createIncoming();
+				} else if (wizard.isOutgoing()) {
+					newOperation = TrackerFactory.eINSTANCE.createOutgoing();
 				}
 
 				if (newOperation == null) {
 					return;
 				}
 
-				OperationTitle operationTitle=wizard.getOperationTitle();
+				OperationTitle operationTitle = wizard.getOperationTitle();
 				if (operationTitle != null) {
 					newOperation.setOperationTitle(operationTitle);
 				}
 
-				Origin operationOrigin=wizard.getOperationOrigin();
+				Origin operationOrigin = wizard.getOperationOrigin();
 				if (operationOrigin != null) {
 					newOperation.setOrigin(operationOrigin);
 				}
 
-				ListenersUtils.executeAddCommand(checking, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newOperation);
+				ListenersUtils.executeAddCommand(checking, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
+						newOperation);
 				refresh();
 			}
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
+			EObject currentEObject = getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof CheckingAccount);
-			CheckingAccount account=(CheckingAccount)currentEObject;
+			CheckingAccount account = (CheckingAccount) currentEObject;
 
-			ISelection selection=tableViewer.getSelection();
+			ISelection selection = tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, elementToRemove);
+			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS,
+					elementToRemove);
 			refresh();
 		}
 	};
@@ -103,8 +102,8 @@ public class CheckingOperationsPropertySection extends AbstractTablePropertySect
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer=new TableViewer(table);
+		table = createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer = new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -124,7 +123,7 @@ public class CheckingOperationsPropertySection extends AbstractTablePropertySect
 
 	private List<Operation> getOperations() {
 		Assert.isTrue(currentEObject instanceof CheckingAccount);
-		EList<Operation> operations=((CheckingAccount)currentEObject).getOperations();
+		EList<Operation> operations = ((CheckingAccount) currentEObject).getOperations();
 		if (operations == null || operations.isEmpty()) {
 			return Collections.emptyList();
 		}

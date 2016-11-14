@@ -6,10 +6,10 @@ import fr.rostren.tracker.Date;
 
 public class DatePropertySectionFilter implements IFilter {
 
-    @Override
-    public boolean select(Object object) {
-	if (object instanceof Date)
-	    return true;
-	return false;
-    }
+	@Override
+	public boolean select(Object object) {
+		if (object instanceof Date)
+			return true;
+		return false;
+	}
 }

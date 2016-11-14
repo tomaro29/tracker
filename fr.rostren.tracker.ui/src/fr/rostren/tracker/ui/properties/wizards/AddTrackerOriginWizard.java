@@ -17,7 +17,7 @@ public class AddTrackerOriginWizard extends Wizard {
 
 	public AddTrackerOriginWizard(String pageTitle, Tracker tracker) {
 		super();
-		page=new AddTrackerOriginWizardPage(pageTitle, tracker);
+		page = new AddTrackerOriginWizardPage(pageTitle, tracker);
 	}
 
 	@Override

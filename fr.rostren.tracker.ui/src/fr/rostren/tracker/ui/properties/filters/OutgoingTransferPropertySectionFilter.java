@@ -6,10 +6,10 @@ import fr.rostren.tracker.Outgoing;
 
 public class OutgoingTransferPropertySectionFilter implements IFilter {
 
-    @Override
-    public boolean select(Object object) {
-	if (object instanceof Outgoing)
-	    return true;
-	return false;
-    }
+	@Override
+	public boolean select(Object object) {
+		if (object instanceof Outgoing)
+			return true;
+		return false;
+	}
 }

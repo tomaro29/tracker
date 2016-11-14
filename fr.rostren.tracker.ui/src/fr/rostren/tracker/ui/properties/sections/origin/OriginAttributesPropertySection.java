@@ -18,14 +18,14 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 	protected Text idText;
 	protected Text typeText;
 
-	private final ModifyListener listener=new OriginAttributesModifyListener(this);
+	private final ModifyListener listener = new OriginAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		idText=createLabeledText(body, null, "Identifier:"); //$NON-NLS-1$
-		typeText=createLabeledText(body, idText, "Type:"); //$NON-NLS-1$
+		idText = createLabeledText(body, null, "Identifier:"); //$NON-NLS-1$
+		typeText = createLabeledText(body, idText, "Type:"); //$NON-NLS-1$
 		addListeners();
 	}
 
@@ -41,7 +41,7 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 
 	private String getOriginIdentifier() {
 		Assert.isTrue(currentEObject instanceof Origin);
-		String id=((Origin)currentEObject).getIdentifier();
+		String id = ((Origin) currentEObject).getIdentifier();
 		if (id == null) {
 			return StringUtils.EMPTY;
 		}
@@ -50,7 +50,7 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 
 	private String getOriginType() {
 		Assert.isTrue(currentEObject instanceof Origin);
-		OriginType type=((Origin)currentEObject).getType();
+		OriginType type = ((Origin) currentEObject).getType();
 		if (type == null) {
 			return StringUtils.EMPTY;
 		}

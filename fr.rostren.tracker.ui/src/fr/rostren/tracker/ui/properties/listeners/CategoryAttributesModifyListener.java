@@ -9,18 +9,18 @@ import fr.rostren.tracker.ui.properties.sections.category.CategoryAttributesProp
 
 public class CategoryAttributesModifyListener extends AbstractModifyListener {
 
-    private final CategoryAttributesPropertySection section;
+	private final CategoryAttributesPropertySection section;
 
-    public CategoryAttributesModifyListener(CategoryAttributesPropertySection section) {
-	this.section = section;
-    }
+	public CategoryAttributesModifyListener(CategoryAttributesPropertySection section) {
+		this.section = section;
+	}
 
-    @Override
-    protected void executeModify(Widget widget) {
-	EObject eObject = section.getCurrentEObject();
-	Text text = section.getDescriptionText();
+	@Override
+	protected void executeModify(Widget widget) {
+		EObject eObject = section.getCurrentEObject();
+		Text text = section.getDescriptionText();
 
-	if (widget.equals(text))
-	    ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.CATEGORY__DESCRIPTION, text.getText());
-    }
+		if (widget.equals(text))
+			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.CATEGORY__DESCRIPTION, text.getText());
+	}
 }

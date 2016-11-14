@@ -43,10 +43,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	/** The refinement table group title. */
 	private static final String REFINEMENT_GROUP_TITLE = "Operation Sub Amounts"; //$NON-NLS-1$
 
+	protected Amount lastSelection;
+	
 	private final Operation operation;
 	private final String operationTitle;
 
-	Amount lastSelection;
 	// TableEditor editor;
 	private Table table;
 

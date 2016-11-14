@@ -24,89 +24,89 @@ import fr.rostren.tracker.Tracker;
 
 public abstract class AbstractAddWizardPage extends WizardPage {
 
-    protected AbstractAddWizardPage(String pageName) {
-	super(pageName);
-    }
-
-    @Override
-    public void createControl(Composite parent) {
-	Composite container = new Composite(parent, SWT.NONE);
-	GridLayout layout = new GridLayout();
-	layout.numColumns = 2;
-	layout.makeColumnsEqualWidth = false;
-	layout.marginWidth = 0;
-	layout.marginHeight = 0;
-	container.setLayout(layout);
-
-	createContainer(container);
-
-	setControl(container);
-	setPageComplete(true);
-    }
-
-    abstract protected void createContainer(Composite parent);
-
-    protected List<Object> getOperations(Tracker tracker) {
-	List<Object> operations = new ArrayList<>();
-	for (Owner owner : tracker.getOwners()) {
-	    for (Account account : owner.getAccounts()) {
-		if (account instanceof CheckingAccount)
-		    operations.addAll(((CheckingAccount) account).getOperations());
-	    }
+	protected AbstractAddWizardPage(String pageName) {
+		super(pageName);
 	}
-	return operations;
-    }
 
-    protected List<Object> getOperationsTitles(Tracker tracker) {
-	return new ArrayList<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
-    }
+	@Override
+	public void createControl(Composite parent) {
+		Composite container = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 2;
+		layout.makeColumnsEqualWidth = false;
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		container.setLayout(layout);
 
-    protected List<Object> getOrigins(Tracker tracker) {
-	return new ArrayList<>(tracker.getOriginsRepository().getOrigins());
-    }
+		createContainer(container);
 
-    protected List<Object> getCategories(Tracker tracker) {
-	return new ArrayList<>(tracker.getCategoriesRepository().getCategories());
-    }
+		setControl(container);
+		setPageComplete(true);
+	}
 
-    protected Text createText(Composite composite, String label, String content, ModifyListener modifyListener) {
-	createLabel(composite, label);
-	Text text = new Text(composite, SWT.BORDER);
-	text.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
-	text.setText(content);
+	abstract protected void createContainer(Composite parent);
 
-	text.addModifyListener(modifyListener);
-	return text;
-    }
+	protected List<Object> getOperations(Tracker tracker) {
+		List<Object> operations = new ArrayList<>();
+		for (Owner owner : tracker.getOwners()) {
+			for (Account account : owner.getAccounts()) {
+				if (account instanceof CheckingAccount)
+					operations.addAll(((CheckingAccount) account).getOperations());
+			}
+		}
+		return operations;
+	}
 
-    protected Combo createCombo(Composite composite, String label, String[] items, ModifyListener modifyListener) {
-	createLabel(composite, label);
-	Combo combo = new Combo(composite, SWT.READ_ONLY);
-	combo.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
-	combo.setItems(items);
-	combo.select(0);
+	protected List<Object> getOperationsTitles(Tracker tracker) {
+		return new ArrayList<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
+	}
 
-	combo.addModifyListener(modifyListener);
-	return combo;
-    }
+	protected List<Object> getOrigins(Tracker tracker) {
+		return new ArrayList<>(tracker.getOriginsRepository().getOrigins());
+	}
 
-    protected ComboViewer createComboViewer(Composite composite, String label, List<Object> input,
-	    IContentProvider contentProvider, ILabelProvider labelProvider, ISelectionChangedListener listener) {
-	createLabel(composite, label);
-	ComboViewer viewer = new ComboViewer(composite, SWT.READ_ONLY);
-	viewer.setContentProvider(contentProvider);
-	viewer.setLabelProvider(labelProvider);
-	viewer.setInput(input);
-	viewer.getCombo().select(0);
+	protected List<Object> getCategories(Tracker tracker) {
+		return new ArrayList<>(tracker.getCategoriesRepository().getCategories());
+	}
 
-	viewer.addSelectionChangedListener(listener);
-	return viewer;
-    }
+	protected Text createText(Composite composite, String label, String content, ModifyListener modifyListener) {
+		createLabel(composite, label);
+		Text text = new Text(composite, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+		text.setText(content);
 
-    private void createLabel(Composite composite, String label) {
-	if (label == null)
-	    return;
-	Label textLabel = new Label(composite, SWT.NONE);
-	textLabel.setText(label);
-    }
+		text.addModifyListener(modifyListener);
+		return text;
+	}
+
+	protected Combo createCombo(Composite composite, String label, String[] items, ModifyListener modifyListener) {
+		createLabel(composite, label);
+		Combo combo = new Combo(composite, SWT.READ_ONLY);
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+		combo.setItems(items);
+		combo.select(0);
+
+		combo.addModifyListener(modifyListener);
+		return combo;
+	}
+
+	protected ComboViewer createComboViewer(Composite composite, String label, List<Object> input,
+			IContentProvider contentProvider, ILabelProvider labelProvider, ISelectionChangedListener listener) {
+		createLabel(composite, label);
+		ComboViewer viewer = new ComboViewer(composite, SWT.READ_ONLY);
+		viewer.setContentProvider(contentProvider);
+		viewer.setLabelProvider(labelProvider);
+		viewer.setInput(input);
+		viewer.getCombo().select(0);
+
+		viewer.addSelectionChangedListener(listener);
+		return viewer;
+	}
+
+	private void createLabel(Composite composite, String label) {
+		if (label == null)
+			return;
+		Label textLabel = new Label(composite, SWT.NONE);
+		textLabel.setText(label);
+	}
 }

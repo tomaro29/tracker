@@ -19,7 +19,7 @@ public class AddCheckOperationWizard extends Wizard {
 
 	public AddCheckOperationWizard(String pageTitle, Tracker tracker) {
 		super();
-		page=new AddCheckOperationWizardPage(pageTitle, tracker);
+		page = new AddCheckOperationWizardPage(pageTitle, tracker);
 	}
 
 	@Override

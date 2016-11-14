@@ -12,19 +12,18 @@ public class OwnerAttributesModifyListener extends AbstractModifyListener {
 	private final OwnerAttributesPropertySection section;
 
 	public OwnerAttributesModifyListener(OwnerAttributesPropertySection section) {
-		this.section=section;
+		this.section = section;
 	}
 
 	@Override
 	protected void executeModify(Widget widget) {
-		EObject eObject=section.getCurrentEObject();
-		Text firstName=section.getFirstNameText();
-		Text lastName=section.getLastNameText();
+		EObject eObject = section.getCurrentEObject();
+		Text firstName = section.getFirstNameText();
+		Text lastName = section.getLastNameText();
 
 		if (widget.equals(firstName)) {
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OWNER__FIRST_NAME, firstName.getText());
-		}
-		else if (widget.equals(lastName)) {
+		} else if (widget.equals(lastName)) {
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OWNER__LAST_NAME, lastName.getText());
 		}
 	}

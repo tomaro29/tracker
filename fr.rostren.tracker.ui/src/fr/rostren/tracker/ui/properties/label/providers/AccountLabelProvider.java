@@ -5,13 +5,14 @@ import org.apache.commons.lang.StringUtils;
 import fr.rostren.tracker.Account;
 
 public class AccountLabelProvider extends AbstractLabelProvider {
-	protected static final String STRING_UNDEFINED_NAME="UNDEFINED Name"; //$NON-NLS-1$
-	protected static final String STRING_UNDEFINED_IDENTIFIER="UNDEFINED Identifier"; //$NON-NLS-1$
+	protected static final String STRING_UNDEFINED_NAME = "UNDEFINED Name"; //$NON-NLS-1$
+	protected static final String STRING_UNDEFINED_IDENTIFIER = "UNDEFINED Identifier"; //$NON-NLS-1$
 
 	@Override
 	public String getText(Object element) {
 		if (element instanceof Account) {
-			return getAccountName((Account)element) + AbstractLabelProvider.STRING_SEPARATOR + getAccountIdentifier((Account)element);
+			return getAccountName((Account) element) + AbstractLabelProvider.STRING_SEPARATOR
+					+ getAccountIdentifier((Account) element);
 		}
 		return super.getText(element);
 	}
@@ -21,6 +22,7 @@ public class AccountLabelProvider extends AbstractLabelProvider {
 	}
 
 	private String getAccountIdentifier(Account account) {
-		return account.getIdentifier() == 0 ? AccountLabelProvider.STRING_UNDEFINED_IDENTIFIER : String.valueOf(account.getIdentifier());
+		return account.getIdentifier() == 0 ? AccountLabelProvider.STRING_UNDEFINED_IDENTIFIER
+				: String.valueOf(account.getIdentifier());
 	}
 }

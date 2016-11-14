@@ -16,7 +16,7 @@ public class AddTrackerCategoryWizard extends Wizard {
 
 	public AddTrackerCategoryWizard(String pageTitle, Tracker tracker) {
 		super();
-		page=new AddTrackerCategoryWizardPage(pageTitle, tracker);
+		page = new AddTrackerCategoryWizardPage(pageTitle, tracker);
 	}
 
 	@Override

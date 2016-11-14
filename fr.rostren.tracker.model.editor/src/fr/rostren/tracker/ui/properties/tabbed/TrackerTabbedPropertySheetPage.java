@@ -5,8 +5,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 public class TrackerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 
-    public TrackerTabbedPropertySheetPage(ITabbedPropertySheetPageContributor contributor) {
-	super(contributor);
-    }
+	public TrackerTabbedPropertySheetPage(ITabbedPropertySheetPageContributor contributor) {
+		super(contributor);
+	}
 
 }

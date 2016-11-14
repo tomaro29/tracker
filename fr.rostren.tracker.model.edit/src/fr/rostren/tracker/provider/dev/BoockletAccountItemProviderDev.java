@@ -24,61 +24,61 @@ import fr.rostren.tracker.provider.BoockletAccountItemProvider;
  */
 public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider {
 
-    /**
-     * This constructs an instance from a factory and a notifier. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     */
-    public BoockletAccountItemProviderDev(AdapterFactory adapterFactory) {
-	super(adapterFactory);
-    }
-
-    /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing the children that can be created under this object. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     */
-    @Override
-    protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-	// create newIncoming
-	Incoming newIncoming = createNewIncoming();
-
-	newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newIncoming));
-
-	// create newOutgoing
-	Outgoing newOutgoing = createNewOutgoing();
-
-	newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newOutgoing));
-    }
-
-    private Incoming createNewIncoming() {
-	Incoming newIncoming = TrackerFactory.eINSTANCE.createIncoming();
-	// Add a default sub amount
-	List<Amount> amounts = newIncoming.getSubAmounts();
-
-	if (amounts.isEmpty()) {
-	    Amount amount = TrackerFactory.eINSTANCE.createAmount();
-	    amounts.add(amount);
+	/**
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 */
+	public BoockletAccountItemProviderDev(AdapterFactory adapterFactory) {
+		super(adapterFactory);
 	}
 
-	// Add a default operation title
-	OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
-	newIncoming.setOperationTitle(operationTitle);
-	return newIncoming;
-    }
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 */
+	@Override
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+		// create newIncoming
+		Incoming newIncoming = createNewIncoming();
 
-    private Outgoing createNewOutgoing() {
-	Outgoing newOutgoing = TrackerFactory.eINSTANCE.createOutgoing();
-	// Add a default sub amount
-	List<Amount> amounts = newOutgoing.getSubAmounts();
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newIncoming));
 
-	if (amounts.isEmpty()) {
-	    Amount amount = TrackerFactory.eINSTANCE.createAmount();
-	    amounts.add(amount);
+		// create newOutgoing
+		Outgoing newOutgoing = createNewOutgoing();
+
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newOutgoing));
 	}
 
-	// Add a default operation title
-	OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
-	newOutgoing.setOperationTitle(operationTitle);
-	return newOutgoing;
-    }
+	private Incoming createNewIncoming() {
+		Incoming newIncoming = TrackerFactory.eINSTANCE.createIncoming();
+		// Add a default sub amount
+		List<Amount> amounts = newIncoming.getSubAmounts();
+
+		if (amounts.isEmpty()) {
+			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			amounts.add(amount);
+		}
+
+		// Add a default operation title
+		OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+		newIncoming.setOperationTitle(operationTitle);
+		return newIncoming;
+	}
+
+	private Outgoing createNewOutgoing() {
+		Outgoing newOutgoing = TrackerFactory.eINSTANCE.createOutgoing();
+		// Add a default sub amount
+		List<Amount> amounts = newOutgoing.getSubAmounts();
+
+		if (amounts.isEmpty()) {
+			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			amounts.add(amount);
+		}
+
+		// Add a default operation title
+		OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+		newOutgoing.setOperationTitle(operationTitle);
+		return newOutgoing;
+	}
 }

@@ -6,10 +6,10 @@ import fr.rostren.tracker.Tracker;
 
 public class TrackerPropertySectionFilter implements IFilter {
 
-    @Override
-    public boolean select(Object object) {
-	if (object instanceof Tracker)
-	    return true;
-	return false;
-    }
+	@Override
+	public boolean select(Object object) {
+		if (object instanceof Tracker)
+			return true;
+		return false;
+	}
 }

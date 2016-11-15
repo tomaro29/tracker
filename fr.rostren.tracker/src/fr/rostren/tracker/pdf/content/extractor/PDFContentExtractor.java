@@ -56,8 +56,8 @@ public class PDFContentExtractor {
 	 * Extracts all operations from a pdf file
 	 *
 	 * @return the list of all operations extracted from the pdf file.
-	 * @throws ExtractorException
-	 * @throws IOException
+	 * @throws ExtractorException if an {@link ExtractorException} is thrown
+	 * @throws IOException if an {@link IOException} is thrown
 	 */
 	public List<Operation> extractOperations() throws ExtractorException, IOException {
 		if (account == null) {
@@ -85,6 +85,10 @@ public class PDFContentExtractor {
 		return operations;
 	}
 
+	/**
+	 * Returns Uris
+	 * @return uris as a table
+	 */
 	private String[] getURISFromText() {
 		if (uriText != null && uriText.contains(" ")) { //$NON-NLS-1$
 			return uriText.split(" "); //$NON-NLS-1$
@@ -98,8 +102,8 @@ public class PDFContentExtractor {
 	 * @param src
 	 *            the original PDF document path
 	 * @return the list of all the extracted operation
-	 * @throws ExtractorException
-	 * @throws IOException
+	 * @throws ExtractorException if an {@link ExtractorException} is thrown
+	 * @throws IOException if an {@link IOException} is thrown
 	 */
 	private List<Operation> extractOperations(String src) throws ExtractorException, IOException {
 		List<Operation> operations=new ArrayList<>();
@@ -146,8 +150,8 @@ public class PDFContentExtractor {
 	 *
 	 * @param tracker
 	 *            the current tracker model root
-	 * @param src
-	 *            the pdf source uri
+	 * @param originIdentifier
+	 *            the pdf origin identifier
 	 * @return the created origin
 	 */
 	private Origin createLinkedOrigin(Tracker tracker, String originIdentifier) {

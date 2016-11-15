@@ -10,6 +10,11 @@ import fr.rostren.tracker.Operation;
 public class CheckOperationDialog extends Dialog {
 	private Operation operation;
 
+	/**
+	 * Constructor
+	 * @param shell the parent shell
+	 * @param operation the operation
+	 */
 	public CheckOperationDialog(Shell shell, Operation operation) {
 		super(shell);
 		this.setOperation(operation);

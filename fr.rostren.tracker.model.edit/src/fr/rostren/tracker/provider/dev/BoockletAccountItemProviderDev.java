@@ -27,6 +27,7 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param adapterFactory the {@link AdapterFactory}
 	 */
 	public BoockletAccountItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);
@@ -50,6 +51,10 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newOutgoing));
 	}
 
+	/**
+	 * Creates a new {@link Incoming} instance
+	 * @return the created {@link Incoming} instance
+	 */
 	private Incoming createNewIncoming() {
 		Incoming newIncoming=TrackerFactory.eINSTANCE.createIncoming();
 		// Add a default sub amount
@@ -66,6 +71,10 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 		return newIncoming;
 	}
 
+	/**
+	 * Creates a new {@link Outgoing} instance
+	 * @return the created {@link Outgoing} instance
+	 */
 	private Outgoing createNewOutgoing() {
 		Outgoing newOutgoing=TrackerFactory.eINSTANCE.createOutgoing();
 		// Add a default sub amount

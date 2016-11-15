@@ -29,6 +29,7 @@ public class DebitItemProviderDev extends DebitItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param adapterFactory the {@link AdapterFactory}
 	 */
 	public DebitItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);

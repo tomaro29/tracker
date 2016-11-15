@@ -26,9 +26,10 @@ public class ExtractOperationsAction extends Action {
 	private boolean done=false;
 
 	/**
-	 * @param shell
-	 * @param pdfURIText
-	 * @param account
+	 * Constructor
+	 * @param shell the parent shell
+	 * @param pdfURIText the pdf uri as a {@link String}
+	 * @param account the checking account
 	 */
 	public ExtractOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
 		this.shell=shell;
@@ -48,7 +49,8 @@ public class ExtractOperationsAction extends Action {
 	}
 
 	/**
-	 * @param extractor
+	 * Extracts the operations
+	 * @param extractor the extractor
 	 */
 	private void extractOperations(PDFContentExtractor extractor) {
 		try {
@@ -75,10 +77,18 @@ public class ExtractOperationsAction extends Action {
 		return extractor;
 	}
 
+	/**
+	 * Returns the added operations
+	 * @return the added operations
+	 */
 	public List<Operation> getAddedOperations() {
 		return addedOperations;
 	}
 
+	/**
+	 * Returns the added origins
+	 * @return the added origins
+	 */
 	public Set<Origin> getAddedOrigins() {
 		return addedOrigins;
 	}

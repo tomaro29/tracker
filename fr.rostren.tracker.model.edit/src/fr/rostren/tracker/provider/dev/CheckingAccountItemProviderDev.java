@@ -35,6 +35,7 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param adapterFactory the {@link AdapterFactory}
 	 */
 	public CheckingAccountItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);
@@ -53,6 +54,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewOutgoing(object)));
 	}
 
+	/**
+	 * Creates a new {@link Credit} instance
+	 * @param object the given account
+	 * @return the created {@link Credit} instance
+	 */
 	private Credit createNewCredit(Object object) {
 		Credit operation=TrackerFactory.eINSTANCE.createCredit();
 		// Add a default sub amount
@@ -67,6 +73,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		return operation;
 	}
 
+	/**
+	 * Adds an {@link OperationTitle} instance to the given operation
+	 * @param object the given account
+	 * @param operation the given operation
+	 */
 	private void addOperationTitle(Object object, Operation operation) {
 		if (!(object instanceof CheckingAccount)) {
 			return;
@@ -90,6 +101,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		operation.setOperationTitle(CheckingAccountItemProviderDev.defaultOperationTitle);
 	}
 
+	/**
+	 * Creates a new {@link Debit} instance
+	 * @param object the given account
+	 * @return the created {@link Debit} instance
+	 */
 	private Debit createNewDebit(Object object) {
 		Debit operation=TrackerFactory.eINSTANCE.createDebit();
 		// Add a default sub amount
@@ -104,6 +120,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		return operation;
 	}
 
+	/**
+	 * Creates a new {@link Incoming} instance
+	 * @param object the given account
+	 * @return the created {@link Incoming} instance
+	 */
 	private Incoming createNewIncoming(Object object) {
 		Incoming operation=TrackerFactory.eINSTANCE.createIncoming();
 		// Add a default sub amount
@@ -118,6 +139,11 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		return operation;
 	}
 
+	/**
+	 * Creates a new {@link Outgoing} instance
+	 * @param object the given account
+	 * @return the created {@link Outgoing} instance
+	 */
 	private Outgoing createNewOutgoing(Object object) {
 		Outgoing operation=TrackerFactory.eINSTANCE.createOutgoing();
 		// Add a default sub amount

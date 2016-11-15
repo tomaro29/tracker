@@ -11,27 +11,50 @@ public class ExtractorException extends Exception {
 	private Level level;
 	private Throwable cause=null;
 
+	/**
+	 * Constructor
+	 */
 	public ExtractorException() {
 		setMessage(StringUtils.EMPTY);
 		setLevel(ExtractorException.DEFAULT_LEVEL);
 	}
 
+	/**
+	 * Constructor
+	 * @param message the message
+	 */
 	ExtractorException(String message) {
 		setMessage(message);
 		setLevel(ExtractorException.DEFAULT_LEVEL);
 	}
 
+	/**
+	 * Constructor
+	 * @param message the message
+	 * @param cause the cause
+	 */
 	ExtractorException(String message, Throwable cause) {
 		setMessage(message);
 		setLevel(ExtractorException.DEFAULT_LEVEL);
 		setCause(cause);
 	}
 
+	/**
+	 * Constructor
+	 * @param level the level
+	 * @param message the message
+	 */
 	ExtractorException(Level level, String message) {
 		setMessage(message);
 		setLevel(level);
 	}
 
+	/**
+	 * Constructor
+	 * @param level the level
+	 * @param message the message
+	 * @param cause the cause
+	 */
 	ExtractorException(Level level, String message, Throwable cause) {
 		setMessage(message);
 		setLevel(level);

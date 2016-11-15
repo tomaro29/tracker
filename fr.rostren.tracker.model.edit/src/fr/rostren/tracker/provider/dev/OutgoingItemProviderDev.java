@@ -28,6 +28,7 @@ public class OutgoingItemProviderDev extends OutgoingItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param adapterFactory the {@link AdapterFactory}
 	 */
 	public OutgoingItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);

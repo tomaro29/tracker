@@ -24,6 +24,10 @@ public class TrackerEditorDev extends TrackerEditor implements ITabbedPropertySh
 		return super.getAdapter(adapter);
 	}
 
+	/**
+	 * Returns the edited {@link Tracker} instance
+	 * @return the edited {@link Tracker} instance
+	 */
 	public Tracker getEditedTracker() {
 		if (editingDomain != null) {
 			ResourceSet resourceSet=editingDomain.getResourceSet();

@@ -15,26 +15,56 @@ public class TrackerUtils {
 
 	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$
 
+	/**
+	 * Returns the category title
+	 * @param amount the amount
+	 * @return the category title
+	 */
 	public static String getCategoryTitle(Amount amount) {
 		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
 	}
 
+	/**
+	 * Returns the amount value
+	 * @param amount the amount
+	 * @return the amount value
+	 */
 	public static String getAmountValue(Amount amount) {
 		return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
 	}
 
+	/**
+	 * Returns the operation title as a {@link String}
+	 * @param operation the operation
+	 * @return the operation title as a {@link String}
+	 */
 	public static String getOperationTitleAsString(Operation operation) {
 		return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
 	}
 
+	/**
+	 * Returns the operation total amount as a {@link String}
+	 * @param operation the operation
+	 * @return the operation total amount as a {@link String}
+	 */
 	public static String getOperationTotalAmount(Operation operation) {
 		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
 	}
 
+	/**
+	 * Returns the operation date as a {@link String}
+	 * @param operation the operation
+	 * @return the operation date as a {@link String}
+	 */
 	public static String getOperationDate(Operation operation) {
 		return operation.getDate() == null ? StringUtils.EMPTY : operation.getDate().toString();
 	}
 
+	/**
+	 * Returns the tracker
+	 * @param eObject the {@link EObject} instance
+	 * @return the tracker
+	 */
 	public static Tracker getTracker(EObject eObject) {
 		EObject parent=eObject;
 		while (parent != null && !(parent instanceof Tracker)) {
@@ -43,6 +73,12 @@ public class TrackerUtils {
 		return parent == null ? null : (Tracker)parent;
 	}
 
+	/**
+	 * Returns the operation origin
+	 * @param operation the operation
+	 * @param originId the origin Id
+	 * @return the operation origin
+	 */
 	public static Origin getOperationOrigin(Operation operation, String originId) {
 		Tracker tracker=TrackerUtils.getTracker(operation);
 		EList<Origin> origins=tracker.getOriginsRepository().getOrigins();
@@ -54,6 +90,12 @@ public class TrackerUtils {
 		return null;
 	}
 
+	/**
+	 * Returns the {@link OperationTitle} instance
+	 * @param operation the operation
+	 * @param operationTitleString the operation title as a {@link String}
+	 * @return the {@link OperationTitle} instance
+	 */
 	public static OperationTitle getOperationTitle(Operation operation, String operationTitleString) {
 		Tracker tracker=TrackerUtils.getTracker(operation);
 		EList<OperationTitle> operationTitles=tracker.getOperationsTitlesRepositories().getOperationsTitles();
@@ -65,6 +107,12 @@ public class TrackerUtils {
 		return null;
 	}
 
+	/**
+	 * Returns the amount category
+	 * @param amount the amount
+	 * @param categoryTitle the category title as a {@link String}
+	 * @return the amount category
+	 */
 	public static Category getAmountCategory(Amount amount, String categoryTitle) {
 		Tracker tracker=TrackerUtils.getTracker(amount);
 		EList<Category> categories=tracker.getCategoriesRepository().getCategories();

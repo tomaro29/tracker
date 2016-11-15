@@ -134,8 +134,9 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 	}
 
 	/**
-	 * @param amount
-	 * @return
+	 * Returns the amount as {@link BigDecimal}
+	 * @param amount the amount as a string
+	 * @return the {@link BigDecimal}amount
 	 */
 	private BigDecimal getAmountAsDecimal(String amount) {
 		return new BigDecimal(amount.replaceAll(" ", StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

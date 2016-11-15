@@ -18,6 +18,11 @@ public class CheckAndEditOperationWizard extends Wizard {
 	private List<Operation> operations=new ArrayList<>();
 	private boolean canFinish=false;
 
+	/**
+	 * Constructor
+	 * @param operations the operations
+	 * @param account the checking account
+	 */
 	public CheckAndEditOperationWizard(List<Operation> operations, CheckingAccount account) {
 		super();
 		setNeedsProgressMonitor(true);
@@ -77,10 +82,20 @@ public class CheckAndEditOperationWizard extends Wizard {
 		return super.getNextPage(page);
 	}
 
+	/**
+	 * Returns <code>true</code> if it is the last page, <code>false</code> otherwise
+	 * @param index the page index
+	 * @return <code>true</code> if it is the last page, <code>false</code> otherwise
+	 */
 	private boolean isLastPage(int index) {
 		return operations.size() > 0 && operations.size() - 1 == index;
 	}
 
+	/**
+	 * Returns <code>true</code> if it is the first page, <code>false</code> otherwise
+	 * @param index the page index
+	 * @return <code>true</code> if it is the first page, <code>false</code> otherwise
+	 */
 	private boolean isFirstPage(int index) {
 		return operations.size() > 0 && index == 0;
 	}

@@ -51,6 +51,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	// TableEditor editor;
 	private Table table;
 
+	/**
+	 * Constructor
+	 * @param operation the operation
+	 */
 	public CheckAndEditOperationWizardPage(Operation operation) {
 		super(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_NAME, operation.getOperationTitle().getTitle()));
 
@@ -76,6 +80,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		setPageComplete(true);
 	}
 
+	/**
+	 * Creates the container
+	 * @param parent the composite parent of the container to create
+	 */
 	private void createOperationInfContainer(Composite parent) {
 		Composite composite=new Composite(parent, SWT.NONE);
 		GridLayout layout=new GridLayout();
@@ -85,6 +93,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		createOperationLabels(composite, operation);
 	}
 
+	/**
+	 * Creates the refinement table
+	 * @param parent the composite parent of the table to create
+	 * @return the refinement table
+	 */
 	private Table createRefinementTable(Composite parent) {
 		final Composite container=createContainer(parent, 2, 1, 0);
 		final Composite group=createGroup(container, CheckAndEditOperationWizardPage.REFINEMENT_GROUP_TITLE);
@@ -146,6 +159,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		return table;
 	}
 
+	/**
+	 * Creates the table
+	 * @param parent the composite parent of the table to create
+	 * @return the created table
+	 */
 	private Table createTable(final Composite parent) {
 		Table table=new Table(parent, SWT.FILL | SWT.CHECK | SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.H_SCROLL);
 
@@ -164,6 +182,14 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		return table;
 	}
 
+	/**
+	 * Creates a container
+	 * @param parent the composite parent of the container to create
+	 * @param columnsNumber the columns number
+	 * @param horizontalSpan the horizontal span
+	 * @param marginHeight the margin left
+	 * @return the created container
+	 */
 	private Composite createContainer(Composite parent, int columnsNumber, int horizontalSpan, int marginHeight) {
 		final Composite container=new Composite(parent, SWT.NONE | SWT.NULL);
 		GridLayout gLayout=new GridLayout();
@@ -188,6 +214,12 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		return container;
 	}
 
+	/**
+	 * Created a group
+	 * @param parent the composite parent of the group to create
+	 * @param label the label
+	 * @return the group
+	 */
 	private Composite createGroup(Composite parent, String label) {
 		Group group=new Group(parent, SWT.NONE);
 		group.setText(label);
@@ -196,6 +228,12 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		return group;
 	}
 
+	/**
+	 * Creates a button
+	 * @param parent the composite parent of the button to create
+	 * @param label the label
+	 * @return the created button
+	 */
 	private Button createButton(Composite parent, String label) {
 		final Button button=new Button(parent, SWT.PUSH | SWT.CENTER);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -243,6 +281,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		return button;
 	}
 
+	/**
+	 * Adds buttons to the given container
+	 * @param composite the given container
+	 */
 	private void addButtons(Composite composite) {
 		// Add button
 		createButton(composite, CheckAndEditOperationWizardPage.ADD_BUTTON_LABEL);
@@ -259,12 +301,23 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	// currentEditor.dispose();
 	// }
 
+	/**
+	 * Creates operation labels
+	 * @param subContainer the sub container
+	 * @param operation the operation
+	 */
 	private void createOperationLabels(Composite subContainer, Operation operation) {
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, operation.eClass().getName());
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, TrackerUtils.getOperationDate(operation));
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL, TrackerUtils.getOperationTotalAmount(operation));
 	}
 
+	/**
+	 * Creates label
+	 * @param subContainer the sub container
+	 * @param labelContent the label content
+	 * @param textLabelContent the label text
+	 */
 	private void createLabel(Composite subContainer, String labelContent, String textLabelContent) {
 		Label label=new Label(subContainer, SWT.NONE);
 		label.setText(labelContent);

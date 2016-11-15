@@ -39,6 +39,10 @@
     <module name="FinalClass">
       <property name="severity" value="warning"/>
     </module>
+    <module name="JavadocMethod">
+      <property name="severity" value="error"/>
+      <property name="suppressLoadErrors" value="true"/>
+    </module>
   </module>
   <module name="RegexpHeader">
     <property name="severity" value="error"/>

@@ -22,6 +22,13 @@ public class EditOperationsAction extends Action {
 	private final Set<Origin> addedOrigins;
 	private boolean aborted=false;
 
+	/**
+	 * Constructor
+	 * @param shell the parent shell
+	 * @param account the checking account
+	 * @param addedOperations the added operations
+	 * @param addedOrigins the added origins
+	 */
 	public EditOperationsAction(Shell shell, CheckingAccount account, List<Operation> addedOperations, Set<Origin> addedOrigins) {
 		this.shell=shell;
 		this.account=account;
@@ -31,24 +38,41 @@ public class EditOperationsAction extends Action {
 
 	@Override
 	public void run() {
-		editOperations();
+		aborted=editOperations();
 		if (aborted) {
-			TrackerUtils.getTracker(account).getOriginsRepository().getOrigins().removeAll(addedOrigins);
-			account.getOperations().removeAll(addedOperations);
-			MessageDialog.openInformation(shell, "Abort PDF Import Action", //$NON-NLS-1$
-					"The Current PDF Import Action is aborted! All new origins and operations will be cleaned from the model."); //$NON-NLS-1$
-			return;
+			removeAll();
+			displayInformationMessage();
 		}
 	}
 
-	private void editOperations() {
-		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations, account);
-		WizardDialog wizardDialog=new WizardDialog(shell, wizard);
-		aborted=wizardDialog.open() == Window.CANCEL;
+	/**
+	 * Displays an information message to inform that the action was aborted.
+	 */
+	private void displayInformationMessage() {
+		MessageDialog.openInformation(shell, "Abort PDF Import Action", //$NON-NLS-1$
+				"The Current PDF Import Action is aborted! All new origins and operations will be cleaned from the model."); //$NON-NLS-1$
 	}
 
 	/**
-	 * @return the aborted
+	 * Removes all extracted operations. Used when the action is aborted.
+	 */
+	private void removeAll() {
+		TrackerUtils.getTracker(account).getOriginsRepository().getOrigins().removeAll(addedOrigins);
+		account.getOperations().removeAll(addedOperations);
+	}
+
+	/**
+	 * Edits operations.
+	 * @return whether the edit action is aborted or not.
+	 */
+	private boolean editOperations() {
+		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations, account);
+		WizardDialog wizardDialog=new WizardDialog(shell, wizard);
+		return wizardDialog.open() == Window.CANCEL;
+	}
+
+	/**
+	 * @return <code>true</code> if aborted, <code>false</code> otherwise.
 	 */
 	public boolean isAborted() {
 		return aborted;

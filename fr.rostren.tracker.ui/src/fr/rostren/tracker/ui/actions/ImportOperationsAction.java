@@ -19,9 +19,10 @@ public class ImportOperationsAction extends Action {
 	private final CheckingAccount account;
 
 	/**
-	 * @param shell
-	 * @param pdfURIText
-	 * @param account
+	 * Constructor
+	 * @param shell the parent shell
+	 * @param pdfURIText the pdf uri as a {@link String}
+	 * @param account the checking account
 	 */
 	public ImportOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
 		this.shell=shell;
@@ -34,20 +35,26 @@ public class ImportOperationsAction extends Action {
 		// Reads the pdf file, Extracts data
 		ExtractOperationsAction extractAction=new ExtractOperationsAction(shell, pdfURIText, account);
 		extractAction.run();
-
+		if (!extractAction.isDone()) {
+			return;
+		}
 		// Edits operations SubAmounts and categories
 		EditOperationsAction editAction=new EditOperationsAction(shell, account, extractAction.getAddedOperations(), extractAction.getAddedOrigins());
 		editAction.run();
-
-		if (extractAction.isDone() && editAction.isAborted()) {
-			// display information if the pdf file is already scanned
-			Set<String> alreadyParsedFiles=extractAction.getExtractor().getAlreadyParsedFiles();
-			if (!alreadyParsedFiles.isEmpty()) {
-				displayInformation(alreadyParsedFiles);
-			}
+		if (!editAction.isAborted()) {
+			return;
+		}
+		// display information if the pdf file is already scanned
+		Set<String> alreadyParsedFiles=extractAction.getExtractor().getAlreadyParsedFiles();
+		if (!alreadyParsedFiles.isEmpty()) {
+			displayInformation(alreadyParsedFiles);
 		}
 	}
 
+	/**
+	 * Displays information
+	 * @param alreadyParsedFiles the set of already parsed files uris
+	 */
 	private void displayInformation(Set<String> alreadyParsedFiles) {
 		StringBuilder sb=new StringBuilder();
 		for (String parsedOrigin: alreadyParsedFiles) {

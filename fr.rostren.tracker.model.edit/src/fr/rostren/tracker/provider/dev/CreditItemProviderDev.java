@@ -29,6 +29,7 @@ public class CreditItemProviderDev extends CreditItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param adapterFactory the {@link AdapterFactory}
 	 */
 	public CreditItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);

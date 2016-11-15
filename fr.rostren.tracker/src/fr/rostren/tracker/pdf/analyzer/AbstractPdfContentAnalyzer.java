@@ -122,6 +122,10 @@ public abstract class AbstractPdfContentAnalyzer {
 	 */
 	protected abstract Date extractDateFromCurrentLine();
 
+	/**
+	 * Extracts the year
+	 * @return the extracted year
+	 */
 	protected int extractYearFromCurrentLine() {
 		String year=currentLine.subSequence(9, 13).toString();
 		return Integer.parseInt(year);
@@ -130,8 +134,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	/**
 	 * Sets the Month basing on the current content
 	 *
-	 * @param date
-	 * @param content
+	 * @param date the date
+	 * @param content the content
 	 */
 	protected void setMonthFromContent(Date date, String content) {
 		switch (Integer.parseInt(content)) {

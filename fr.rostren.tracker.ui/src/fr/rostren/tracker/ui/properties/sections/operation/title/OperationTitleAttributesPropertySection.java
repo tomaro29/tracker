@@ -35,6 +35,10 @@ public class OperationTitleAttributesPropertySection extends AbstractAttributesP
 		addListeners();
 	}
 
+	/**
+	 * Returns the operation title value
+	 * @return the operation title value
+	 */
 	private String getOperationTileValue() {
 		Assert.isTrue(currentEObject instanceof OperationTitle);
 		String title=((OperationTitle)currentEObject).getTitle();
@@ -54,6 +58,10 @@ public class OperationTitleAttributesPropertySection extends AbstractAttributesP
 		titleText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the title {@link Text}
+	 * @return the title {@link Text}
+	 */
 	public Text getTitleText() {
 		return titleText;
 	}

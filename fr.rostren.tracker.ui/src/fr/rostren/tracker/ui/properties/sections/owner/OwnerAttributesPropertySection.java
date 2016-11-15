@@ -44,11 +44,19 @@ public class OwnerAttributesPropertySection extends AbstractAttributesPropertySe
 		addListeners();
 	}
 
+	/**
+	 * Returns the owner first name
+	 * @return the owner first name
+	 */
 	private String getOwnerFirstName() {
 		Assert.isTrue(currentEObject instanceof Owner);
 		return ((Owner)currentEObject).getFirstName();
 	}
 
+	/**
+	 * Returns the owner last name
+	 * @return the owner last name
+	 */
 	private String getOwnerLastName() {
 		Assert.isTrue(currentEObject instanceof Owner);
 		return ((Owner)currentEObject).getLastName();
@@ -66,10 +74,18 @@ public class OwnerAttributesPropertySection extends AbstractAttributesPropertySe
 		lastNameText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the first name {@link Text}
+	 * @return the first name {@link Text}
+	 */
 	public Text getFirstNameText() {
 		return firstNameText;
 	}
 
+	/**
+	 * Returns the last name {@link Text}
+	 * @return the last name {@link Text}
+	 */
 	public Text getLastNameText() {
 		return lastNameText;
 	}

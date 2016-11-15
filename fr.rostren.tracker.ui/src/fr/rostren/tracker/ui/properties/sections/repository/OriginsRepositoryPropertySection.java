@@ -101,6 +101,10 @@ public class OriginsRepositoryPropertySection extends AbstractTablePropertySecti
 		addListeners();
 	}
 
+	/**
+	 * Returns the origins list
+	 * @return the origins list
+	 */
 	private List<Origin> getOrigins() {
 		Assert.isTrue(currentEObject instanceof OriginsRepository);
 		List<Origin> origins=((OriginsRepository)currentEObject).getOrigins();

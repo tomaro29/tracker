@@ -122,6 +122,10 @@ public class CheckingOperationsPropertySection extends AbstractTablePropertySect
 		addListeners();
 	}
 
+	/**
+	 * Returns the operations
+	 * @return the operations
+	 */
 	private List<Operation> getOperations() {
 		Assert.isTrue(currentEObject instanceof CheckingAccount);
 		EList<Operation> operations=((CheckingAccount)currentEObject).getOperations();

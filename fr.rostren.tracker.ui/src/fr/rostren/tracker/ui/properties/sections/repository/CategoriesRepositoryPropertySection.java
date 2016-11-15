@@ -101,6 +101,10 @@ public class CategoriesRepositoryPropertySection extends AbstractTablePropertySe
 		addListeners();
 	}
 
+	/**
+	 * Returns the categories list
+	 * @return the categories list
+	 */
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof CategoriesRepository);
 		List<Category> categories=((CategoriesRepository)currentEObject).getCategories();

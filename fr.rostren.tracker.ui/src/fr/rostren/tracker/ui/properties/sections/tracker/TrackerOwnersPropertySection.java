@@ -98,6 +98,10 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 		addListeners();
 	}
 
+	/**
+	 * Returns the owners list
+	 * @return the owners list
+	 */
 	private List<Owner> getOwners() {
 		Assert.isTrue(currentEObject instanceof Tracker);
 		List<Owner> owners=((Tracker)currentEObject).getOwners();

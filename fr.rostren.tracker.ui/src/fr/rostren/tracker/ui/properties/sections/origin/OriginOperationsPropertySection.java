@@ -92,6 +92,10 @@ public class OriginOperationsPropertySection extends AbstractTablePropertySectio
 		addListeners();
 	}
 
+	/**
+	 * Returns the operations list
+	 * @return the operations list
+	 */
 	private List<Operation> getOperations() {
 		Assert.isTrue(currentEObject instanceof Origin);
 		List<Operation> operations=((Origin)currentEObject).getOperations();

@@ -35,6 +35,10 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
 		addListeners();
 	}
 
+	/**
+	 * Returns the description value
+	 * @return the description value
+	 */
 	private String getDescriptionValue() {
 		Assert.isTrue(currentEObject instanceof Category);
 		String description=((Category)currentEObject).getDescription();
@@ -54,6 +58,10 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
 		descriptionText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the description {@link Text}
+	 * @return the description {@link Text}
+	 */
 	public Text getDescriptionText() {
 		return descriptionText;
 	}

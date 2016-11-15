@@ -77,19 +77,35 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		originCombo.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the title {@link CCombo}
+	 * @return the title {@link CCombo}
+	 */
 	public CCombo getTitleCombo() {
 		return titleCombo;
 	}
 
+	/**
+	 * Returns the origin {@link CCombo}
+	 * @return the origin {@link CCombo}
+	 */
 	public CCombo getOriginCombo() {
 		return originCombo;
 	}
 
+	/**
+	 * Returns the OperationTitle
+	 * @return the OperationTitle
+	 */
 	private OperationTitle getOperationTitle() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		return ((Operation)currentEObject).getOperationTitle();
 	}
 
+	/**
+	 * Returns the sorted operations titles
+	 * @return the sorted operations titles
+	 */
 	private List<OperationTitle> getSortedTitles() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
@@ -101,6 +117,10 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		return getSortedList(operationTitles, new OperationTitleComparator());
 	}
 
+	/**
+	 * Returns the operations titles as an array
+	 * @return the operations titles  as an array
+	 */
 	private String[] getOperationTitlesItems() {
 		List<OperationTitle> operationTitles=getSortedTitles();
 		List<String> titles=new ArrayList<>();
@@ -111,11 +131,19 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		return titles.toArray(new String[0]);
 	}
 
+	/**
+	 * Returns the operation origin
+	 * @return the operation origin
+	 */
 	private Origin getOperationOriginItem() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		return ((Operation)currentEObject).getOrigin();
 	}
 
+	/**
+	 * Returns the sorted origins
+	 * @return the sorted origins
+	 */
 	private List<Origin> getSortedOrgins() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
@@ -130,6 +158,10 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		return origins;
 	}
 
+	/**
+	 * Returns the origins items as an array
+	 * @return the origins items as an array
+	 */
 	private String[] getOriginsItems() {
 		List<Origin> origins=getSortedOrgins();
 		String[] items=new String[origins.size()];

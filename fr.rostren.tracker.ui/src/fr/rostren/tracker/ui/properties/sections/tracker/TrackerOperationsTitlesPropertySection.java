@@ -97,6 +97,10 @@ public class TrackerOperationsTitlesPropertySection extends AbstractTablePropert
 		addListeners();
 	}
 
+	/**
+	 * Returns the operations titles list
+	 * @return the operations titles list
+	 */
 	private List<OperationTitle> getOperationsTitles() {
 		Assert.isTrue(currentEObject instanceof Tracker);
 		List<OperationTitle> titles=((Tracker)currentEObject).getOperationsTitlesRepositories().getOperationsTitles();

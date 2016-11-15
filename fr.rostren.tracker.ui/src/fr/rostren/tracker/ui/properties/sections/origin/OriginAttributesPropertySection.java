@@ -39,6 +39,10 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 		addListeners();
 	}
 
+	/**
+	 * Returns the origins identifier
+	 * @return the origins identifier
+	 */
 	private String getOriginIdentifier() {
 		Assert.isTrue(currentEObject instanceof Origin);
 		String id=((Origin)currentEObject).getIdentifier();
@@ -48,6 +52,10 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 		return id;
 	}
 
+	/**
+	 * Returns the origin type
+	 * @return the origin type
+	 */
 	private String getOriginType() {
 		Assert.isTrue(currentEObject instanceof Origin);
 		OriginType type=((Origin)currentEObject).getType();
@@ -69,10 +77,18 @@ public class OriginAttributesPropertySection extends AbstractAttributesPropertyS
 		typeText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the id {@link Text}
+	 * @return the id {@link Text}
+	 */
 	public Text getIdText() {
 		return idText;
 	}
 
+	/**
+	 * Returns the type {@link Text}
+	 * @return the type {@link Text}
+	 */
 	public Text getTypeText() {
 		return typeText;
 	}

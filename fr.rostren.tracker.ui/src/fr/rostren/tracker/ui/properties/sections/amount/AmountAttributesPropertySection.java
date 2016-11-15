@@ -55,6 +55,10 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		addListeners();
 	}
 
+	/**
+	 * Sets the combo selection
+	 * @param items the selection items
+	 */
 	private void setComboSelection(String[] items) {
 		Category category=getAmountCategoryItem();
 		if (category != null) {
@@ -63,6 +67,10 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		}
 	}
 
+	/**
+	 * Returns the amount value as a {@link String}
+	 * @return the amount value as a {@link String}
+	 */
 	private String getAmountvalue() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		BigDecimal value=((Amount)currentEObject).getValue();
@@ -82,24 +90,45 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		valueText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the value {@link Text}
+	 * @return the value {@link Text}
+	 */
 	public Text getValueText() {
 		return valueText;
 	}
 
+	/**
+	 * Returns the category {@link CCombo}
+	 * @return the category {@link CCombo}
+	 */
 	public CCombo getCategoryCombo() {
 		return categoryCombo;
 	}
 
+	/**
+	 * Returns the amount category
+	 * @return the amount category
+	 */
 	private Category getAmountCategoryItem() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		return ((Amount)currentEObject).getCategory();
 	}
 
+	/**
+	 * Returns the category item index
+	 * @param category the given category
+	 * @return the category item index
+	 */
 	private int getAmountCategoryItemIndex(Category category) {
 		List<Category> sortedCategories=getSortedCategories();
 		return sortedCategories.indexOf(category);
 	}
 
+	/**
+	 * Returns the sorted categories
+	 * @return the sorted categories
+	 */
 	private List<Category> getSortedCategories() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
@@ -107,6 +136,10 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		return getSortedList(categories, new CategoryComparator());
 	}
 
+	/**
+	 * Returns items
+	 * @return items
+	 */
 	private String[] getItems() {
 		List<Category> categories=getSortedCategories();
 		List<String> titles=new ArrayList<>();

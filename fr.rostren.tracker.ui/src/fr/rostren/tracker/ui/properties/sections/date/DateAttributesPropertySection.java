@@ -40,16 +40,28 @@ public class DateAttributesPropertySection extends AbstractAttributesPropertySec
 		addListeners();
 	}
 
+	/**
+	 * Returns the year
+	 * @return the year
+	 */
 	private String getDateYear() {
 		Assert.isTrue(currentEObject instanceof Date);
 		return String.valueOf(((Date)currentEObject).getYear());
 	}
 
+	/**
+	 * Returns the month
+	 * @return the month
+	 */
 	private String getDateMonth() {
 		Assert.isTrue(currentEObject instanceof Date);
 		return ((Date)currentEObject).getMonth().toString();
 	}
 
+	/**
+	 * Returns the day
+	 * @return the day
+	 */
 	private String getDateDay() {
 		Assert.isTrue(currentEObject instanceof Date);
 		return String.valueOf(((Date)currentEObject).getDay());
@@ -69,14 +81,26 @@ public class DateAttributesPropertySection extends AbstractAttributesPropertySec
 		yearText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the day {@link Text}
+	 * @return the day {@link Text}
+	 */
 	public Text getDayText() {
 		return dayText;
 	}
 
+	/**
+	 * Returns the month {@link Text}
+	 * @return the month {@link Text}
+	 */
 	public Text getMonthText() {
 		return monthText;
 	}
 
+	/**
+	 * Returns the year {@link Text}
+	 * @return the year {@link Text}
+	 */
 	public Text getYearText() {
 		return yearText;
 	}

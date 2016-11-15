@@ -97,6 +97,10 @@ public class OperationsTitlesRepositoryPropertySection extends AbstractTableProp
 		addListeners();
 	}
 
+	/**
+	 * Returns the operations titles list
+	 * @return the operations titles list
+	 */
 	private List<OperationTitle> getOperationsTitles() {
 		Assert.isTrue(currentEObject instanceof OperationsTitleRepository);
 		List<OperationTitle> operationsTitles=((OperationsTitleRepository)currentEObject).getOperationsTitles();

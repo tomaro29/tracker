@@ -102,6 +102,10 @@ public class TrackerOriginsPropertySection extends AbstractTablePropertySection 
 		addListeners();
 	}
 
+	/**
+	 * Returns the origins list
+	 * @return the origins list
+	 */
 	private List<Origin> getOrigins() {
 		Assert.isTrue(currentEObject instanceof Tracker);
 		List<Origin> origins=((Tracker)currentEObject).getOriginsRepository().getOrigins();

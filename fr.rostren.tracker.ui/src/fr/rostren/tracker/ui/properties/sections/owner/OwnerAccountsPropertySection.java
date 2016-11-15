@@ -74,6 +74,10 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 		addListeners();
 	}
 
+	/**
+	 * Returns the accounts list
+	 * @return the accounts list
+	 */
 	private List<Account> getAccounts() {
 		Assert.isTrue(currentEObject instanceof Owner);
 		List<Account> accounts=((Owner)currentEObject).getAccounts();

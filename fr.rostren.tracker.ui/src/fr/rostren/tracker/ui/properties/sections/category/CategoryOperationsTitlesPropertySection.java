@@ -93,6 +93,10 @@ public class CategoryOperationsTitlesPropertySection extends AbstractTableProper
 		addListeners();
 	}
 
+	/**
+	 * Retursn the list of operations titles
+	 * @return the list of operations titles
+	 */
 	private List<OperationTitle> getOperationsTitles() {
 		Assert.isTrue(currentEObject instanceof Category);
 		List<OperationTitle> operationsTitles=((Category)currentEObject).getOperationTitles();

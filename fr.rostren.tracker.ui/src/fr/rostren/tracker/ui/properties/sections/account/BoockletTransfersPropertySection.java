@@ -118,6 +118,10 @@ public class BoockletTransfersPropertySection extends AbstractTablePropertySecti
 		addListeners();
 	}
 
+	/**
+	 * Returns the transfers
+	 * @return the transfers
+	 */
 	private List<Transfer> getTransfers() {
 		Assert.isTrue(currentEObject instanceof BoockletAccount);
 		EList<Transfer> transfers=((BoockletAccount)currentEObject).getTransfers();

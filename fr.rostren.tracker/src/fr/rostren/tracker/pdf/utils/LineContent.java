@@ -14,7 +14,8 @@ import fr.rostren.tracker.TrackerFactory;
 
 public class LineContent {
 	public enum OperationType {
-		CREDIT, DEBIT
+		CREDIT,
+		DEBIT
 	}
 
 	private Operation operation;
@@ -25,7 +26,7 @@ public class LineContent {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param date
 	 *            the date of the operation
 	 * @param title
@@ -40,20 +41,21 @@ public class LineContent {
 	public LineContent(Date date, String title, BigDecimal amount, OperationType type, Origin origin) {
 		this.setTitle(formatTitle(title));
 		if (OperationType.CREDIT.equals(type)) {
-			this.operation = TrackerFactory.eINSTANCE.createCredit();
-			this.operation.setDate(date);
-			this.operation.setTotalAmount(amount);
-		} else if (OperationType.DEBIT.equals(type)) {
-			this.operation = TrackerFactory.eINSTANCE.createDebit();
-			this.operation.setDate(date);
-			this.operation.setTotalAmount(amount);
+			operation=TrackerFactory.eINSTANCE.createCredit();
+			operation.setDate(date);
+			operation.setTotalAmount(amount);
 		}
-		this.operation.setOrigin(origin);
+		else if (OperationType.DEBIT.equals(type)) {
+			operation=TrackerFactory.eINSTANCE.createDebit();
+			operation.setDate(date);
+			operation.setTotalAmount(amount);
+		}
+		operation.setOrigin(origin);
 	}
 
 	/**
 	 * Formats the title
-	 * 
+	 *
 	 * @param currentTitle
 	 *            the current title
 	 * @return the formatted title.
@@ -61,11 +63,14 @@ public class LineContent {
 	private String formatTitle(String currentTitle) {
 		if (currentTitle.startsWith("ECH PRET")) { //$NON-NLS-1$
 			return "ECH PRET"; //$NON-NLS-1$
-		} else if (currentTitle.startsWith("INTERETS CREDITEURS")) { //$NON-NLS-1$
+		}
+		else if (currentTitle.startsWith("INTERETS CREDITEURS")) { //$NON-NLS-1$
 			return "INTERETS CREDITEURS"; //$NON-NLS-1$
-		} else if (currentTitle.startsWith("CB LA POSTE")) { //$NON-NLS-1$
+		}
+		else if (currentTitle.startsWith("CB LA POSTE")) { //$NON-NLS-1$
 			return "CB LA POSTE"; //$NON-NLS-1$
-		} else if (currentTitle.startsWith("CHEQUE")) { //$NON-NLS-1$
+		}
+		else if (currentTitle.startsWith("CHEQUE")) { //$NON-NLS-1$
 			return "CHEQUE"; //$NON-NLS-1$
 		}
 		return currentTitle;
@@ -73,7 +78,7 @@ public class LineContent {
 
 	/**
 	 * Complete the operation
-	 * 
+	 *
 	 * @param tracker
 	 *            the tracker root
 	 * @param operation
@@ -88,13 +93,13 @@ public class LineContent {
 		operation.setOperationTitle(getLinkedOperationTitle());
 
 		// Adds the total amount as a subAmount to the operation
-		Amount newAmountObject = createCategoryAmount(operation.getTotalAmount(), getLinkedCategory());
+		Amount newAmountObject=createCategoryAmount(operation.getTotalAmount(), getLinkedCategory());
 		operation.getSubAmounts().add(newAmountObject);
 	}
 
 	/**
 	 * Creates an amount
-	 * 
+	 *
 	 * @param amount
 	 *            amount to create
 	 * @param linkedCategory
@@ -102,7 +107,7 @@ public class LineContent {
 	 * @return the created amount
 	 */
 	public Amount createCategoryAmount(BigDecimal amount, Category linkedCategory) {
-		Amount amountObject = TrackerFactory.eINSTANCE.createAmount();
+		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setValue(amount);
 		amountObject.setCategory(linkedCategory);
 		return amountObject;
@@ -112,7 +117,7 @@ public class LineContent {
 	 * Finds a category given an operation title in the categories repository of
 	 * the tracker model. It creates a new category if the corresponding one
 	 * does not exist already in the model.
-	 * 
+	 *
 	 * @param title
 	 *            the title of the category to find
 	 * @param tracker
@@ -121,15 +126,15 @@ public class LineContent {
 	 *         category otherwise.
 	 */
 	public Category findCategoryInTrackerModel(String title, Tracker tracker) {
-		List<Category> categories = tracker.getCategoriesRepository().getCategories();
-		List<OperationTitle> titles = tracker.getOperationsTitlesRepositories().getOperationsTitles();
-		Category undefinedCategory = null;
+		List<Category> categories=tracker.getCategoriesRepository().getCategories();
+		List<OperationTitle> titles=tracker.getOperationsTitlesRepositories().getOperationsTitles();
+		Category undefinedCategory=null;
 
-		for (Category category : categories) {
+		for (Category category: categories) {
 			if (TrackerUtils.UNDEFINED_TITLE.equals(category.getTitle())) {
-				undefinedCategory = category;
+				undefinedCategory=category;
 			}
-			for (OperationTitle existingOperationTitle : category.getOperationTitles()) {
+			for (OperationTitle existingOperationTitle: category.getOperationTitles()) {
 				if (existingOperationTitle.getTitle().equals(title)) {
 					setLinkedOperationTitle(existingOperationTitle);
 					return category;
@@ -137,7 +142,7 @@ public class LineContent {
 			}
 		}
 		if (undefinedCategory == null) {
-			undefinedCategory = TrackerFactory.eINSTANCE.createCategory();
+			undefinedCategory=TrackerFactory.eINSTANCE.createCategory();
 			undefinedCategory.setTitle(TrackerUtils.UNDEFINED_TITLE);
 			tracker.getCategoriesRepository().getCategories().add(undefinedCategory);
 		}
@@ -150,11 +155,11 @@ public class LineContent {
 
 	/**
 	 * Returns the operation
-	 * 
+	 *
 	 * @return the operation
 	 */
 	public Operation getOperation() {
-		return this.operation;
+		return operation;
 	}
 
 	/**
@@ -162,14 +167,14 @@ public class LineContent {
 	 *            the operation to set
 	 */
 	public void setOperation(Operation operation) {
-		this.operation = operation;
+		this.operation=operation;
 	}
 
 	/**
 	 * @return the linkedCategory
 	 */
 	public Category getLinkedCategory() {
-		return this.linkedCategory;
+		return linkedCategory;
 	}
 
 	/**
@@ -177,14 +182,14 @@ public class LineContent {
 	 *            the linkedCategory to set
 	 */
 	public void setLinkedCategory(Category linkedCategory) {
-		this.linkedCategory = linkedCategory;
+		this.linkedCategory=linkedCategory;
 	}
 
 	/**
 	 * @return the linkedOperationTitle
 	 */
 	public OperationTitle getLinkedOperationTitle() {
-		return this.linkedOperationTitle;
+		return linkedOperationTitle;
 	}
 
 	/**
@@ -192,14 +197,14 @@ public class LineContent {
 	 *            the linkedOperationTitle to set
 	 */
 	public void setLinkedOperationTitle(OperationTitle linkedOperationTitle) {
-		this.linkedOperationTitle = linkedOperationTitle;
+		this.linkedOperationTitle=linkedOperationTitle;
 	}
 
 	/**
 	 * @return the title
 	 */
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	/**
@@ -207,6 +212,6 @@ public class LineContent {
 	 *            the title to set
 	 */
 	public void setTitle(String title) {
-		this.title = title;
+		this.title=title;
 	}
 }

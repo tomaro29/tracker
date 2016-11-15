@@ -21,9 +21,9 @@ public class ExtractOperationsAction extends Action {
 	private final String pdfURIText;
 	private final PDFContentExtractor extractor;
 
-	private List<Operation> addedOperations = new ArrayList<Operation>();
-	private Set<Origin> addedOrigins = new HashSet<Origin>();
-	private boolean done = false;
+	private List<Operation> addedOperations=new ArrayList<>();
+	private final Set<Origin> addedOrigins=new HashSet<>();
+	private boolean done=false;
 
 	/**
 	 * @param shell
@@ -31,9 +31,9 @@ public class ExtractOperationsAction extends Action {
 	 * @param account
 	 */
 	public ExtractOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
-		this.shell = shell;
-		this.pdfURIText = pdfURIText;
-		this.extractor = new PDFContentExtractor(pdfURIText, account);
+		this.shell=shell;
+		this.pdfURIText=pdfURIText;
+		extractor=new PDFContentExtractor(pdfURIText, account);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class ExtractOperationsAction extends Action {
 		if (done && addedOperations.isEmpty()) {
 			MessageDialog.openError(shell, "Cannot Import PDF", //$NON-NLS-1$
 					"The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
-							+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
+																+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
 			return;
 		}
 	}
@@ -52,14 +52,17 @@ public class ExtractOperationsAction extends Action {
 	 */
 	private void extractOperations(PDFContentExtractor extractor) {
 		try {
-			addedOperations = extractor.extractOperations();
-			for (Operation operation : addedOperations)
+			addedOperations=extractor.extractOperations();
+			for (Operation operation: addedOperations) {
 				addedOrigins.add(operation.getOrigin());
-			done = true;
-		} catch (ExtractorException e) {
+			}
+			done=true;
+		}
+		catch (ExtractorException e) {
 			MessageDialog.openError(shell, "Problem while extracting operations", //$NON-NLS-1$
 					e.getMessage());
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			MessageDialog.openError(shell, "Problem while opening the PDF File", //$NON-NLS-1$
 					e.getMessage());
 		}

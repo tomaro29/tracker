@@ -8,9 +8,10 @@ public abstract class AbstractSelectionChangedListener implements ISelectionChan
 
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
-		ISelection selection = event.getSelection();
-		if (selection == null || selection.isEmpty())
+		ISelection selection=event.getSelection();
+		if (selection == null || selection.isEmpty()) {
 			return;
+		}
 
 		executeSelectionChanged(selection);
 	}

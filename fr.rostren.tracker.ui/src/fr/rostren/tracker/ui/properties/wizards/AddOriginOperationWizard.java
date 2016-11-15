@@ -19,7 +19,7 @@ public class AddOriginOperationWizard extends Wizard {
 
 	public AddOriginOperationWizard(String pageTitle, Tracker tracker) {
 		super();
-		page = new AddOriginOperationWizardPage(pageTitle, tracker);
+		page=new AddOriginOperationWizardPage(pageTitle, tracker);
 	}
 
 	@Override

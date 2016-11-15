@@ -32,51 +32,49 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOriginWizard;
 
 public class TrackerOriginsPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider = new TrackerOriginsContentProvider();
-	private final ILabelProvider labelProvider = new OriginLabelProvider();
+	private final ITreeContentProvider contentProvider=new TrackerOriginsContentProvider();
+	private final ILabelProvider labelProvider=new OriginLabelProvider();
 
-	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
-			Tracker tracker = (Tracker) currentEObject;
-			OriginsRepository repository = tracker.getOriginsRepository();
+			Tracker tracker=(Tracker)currentEObject;
+			OriginsRepository repository=tracker.getOriginsRepository();
 
-			AddTrackerOriginWizard wizard = new AddTrackerOriginWizard("Origins Repository", tracker); //$NON-NLS-1$
-			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
+			AddTrackerOriginWizard wizard=new AddTrackerOriginWizard("Origins Repository", tracker); //$NON-NLS-1$
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Origin newOrigin = TrackerFactory.eINSTANCE.createOrigin();
+				Origin newOrigin=TrackerFactory.eINSTANCE.createOrigin();
 
-				String identifier = wizard.getIdentifier();
+				String identifier=wizard.getIdentifier();
 				if (identifier != null) {
 					newOrigin.setIdentifier(identifier);
 				}
-				OriginType type = wizard.getType();
+				OriginType type=wizard.getType();
 				if (type != null) {
 					newOrigin.setType(type);
 				}
 
-				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS,
-						newOrigin);
+				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
 				refresh();
 			}
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
-			Tracker tracker = (Tracker) currentEObject;
-			OriginsRepository repository = tracker.getOriginsRepository();
+			Tracker tracker=(Tracker)currentEObject;
+			OriginsRepository repository=tracker.getOriginsRepository();
 
-			ISelection selection = tableViewer.getSelection();
+			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS,
-					elementToRemove);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, elementToRemove);
 			refresh();
 		}
 	};
@@ -85,8 +83,8 @@ public class TrackerOriginsPropertySection extends AbstractTablePropertySection 
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table = createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer = new TableViewer(table);
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -106,7 +104,7 @@ public class TrackerOriginsPropertySection extends AbstractTablePropertySection 
 
 	private List<Origin> getOrigins() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<Origin> origins = ((Tracker) currentEObject).getOriginsRepository().getOrigins();
+		List<Origin> origins=((Tracker)currentEObject).getOriginsRepository().getOrigins();
 		if (origins == null || origins.isEmpty()) {
 			return Collections.emptyList();
 		}

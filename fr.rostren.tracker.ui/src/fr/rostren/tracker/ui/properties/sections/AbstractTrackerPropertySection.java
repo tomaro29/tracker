@@ -24,24 +24,24 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
-		body = getWidgetFactory().createFlatFormComposite(parent);
+		body=getWidgetFactory().createFlatFormComposite(parent);
 	}
 
 	@Override
 	public void setInput(IWorkbenchPart part, ISelection selection) {
 		super.setInput(part, selection);
 		Assert.isTrue(selection instanceof IStructuredSelection);
-		Object input = ((IStructuredSelection) selection).getFirstElement();
+		Object input=((IStructuredSelection)selection).getFirstElement();
 		Assert.isTrue(input instanceof EObject);
-		currentEObject = (EObject) input;
+		currentEObject=(EObject)input;
 	}
 
 	public Shell getShell() {
-		Object currentShell = Display.getDefault().getActiveShell();
+		Object currentShell=Display.getDefault().getActiveShell();
 		if (!(currentShell instanceof Shell)) {
 			return null;
 		}
-		return (Shell) currentShell;
+		return (Shell)currentShell;
 	}
 
 	public EObject getCurrentEObject() {
@@ -49,7 +49,7 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 	}
 
 	public <T> List<T> getSortedList(Set<T> set, Comparator<T> comparator) {
-		List<T> list = new ArrayList<>(set);
+		List<T> list=new ArrayList<>(set);
 		Collections.sort(list, comparator);
 		list.removeAll(Collections.singleton(null));
 		return list;

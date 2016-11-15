@@ -12,15 +12,16 @@ public class OperationTitleAttributesModifyListener extends AbstractModifyListen
 	private final OperationTitleAttributesPropertySection section;
 
 	public OperationTitleAttributesModifyListener(OperationTitleAttributesPropertySection section) {
-		this.section = section;
+		this.section=section;
 	}
 
 	@Override
 	protected void executeModify(Widget widget) {
-		EObject eObject = section.getCurrentEObject();
-		Text text = section.getTitleText();
+		EObject eObject=section.getCurrentEObject();
+		Text text=section.getTitleText();
 
-		if (widget.equals(text))
+		if (widget.equals(text)) {
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.TITLE__TITLE, text.getText());
+		}
 	}
 }

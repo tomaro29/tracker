@@ -30,12 +30,12 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 
 	@Override
 	public void createControl(Composite parent) {
-		Composite container = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.numColumns = 2;
-		layout.makeColumnsEqualWidth = false;
-		layout.marginWidth = 0;
-		layout.marginHeight = 0;
+		Composite container=new Composite(parent, SWT.NONE);
+		GridLayout layout=new GridLayout();
+		layout.numColumns=2;
+		layout.makeColumnsEqualWidth=false;
+		layout.marginWidth=0;
+		layout.marginHeight=0;
 		container.setLayout(layout);
 
 		createContainer(container);
@@ -47,11 +47,12 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	abstract protected void createContainer(Composite parent);
 
 	protected List<Object> getOperations(Tracker tracker) {
-		List<Object> operations = new ArrayList<>();
-		for (Owner owner : tracker.getOwners()) {
-			for (Account account : owner.getAccounts()) {
-				if (account instanceof CheckingAccount)
-					operations.addAll(((CheckingAccount) account).getOperations());
+		List<Object> operations=new ArrayList<>();
+		for (Owner owner: tracker.getOwners()) {
+			for (Account account: owner.getAccounts()) {
+				if (account instanceof CheckingAccount) {
+					operations.addAll(((CheckingAccount)account).getOperations());
+				}
 			}
 		}
 		return operations;
@@ -71,7 +72,7 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 
 	protected Text createText(Composite composite, String label, String content, ModifyListener modifyListener) {
 		createLabel(composite, label);
-		Text text = new Text(composite, SWT.BORDER);
+		Text text=new Text(composite, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 		text.setText(content);
 
@@ -81,7 +82,7 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 
 	protected Combo createCombo(Composite composite, String label, String[] items, ModifyListener modifyListener) {
 		createLabel(composite, label);
-		Combo combo = new Combo(composite, SWT.READ_ONLY);
+		Combo combo=new Combo(composite, SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 		combo.setItems(items);
 		combo.select(0);
@@ -90,10 +91,10 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		return combo;
 	}
 
-	protected ComboViewer createComboViewer(Composite composite, String label, List<Object> input,
-			IContentProvider contentProvider, ILabelProvider labelProvider, ISelectionChangedListener listener) {
+	protected ComboViewer createComboViewer(Composite composite, String label, List<Object> input, IContentProvider contentProvider, ILabelProvider labelProvider,
+			ISelectionChangedListener listener) {
 		createLabel(composite, label);
-		ComboViewer viewer = new ComboViewer(composite, SWT.READ_ONLY);
+		ComboViewer viewer=new ComboViewer(composite, SWT.READ_ONLY);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
 		viewer.setInput(input);
@@ -104,9 +105,10 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	}
 
 	private void createLabel(Composite composite, String label) {
-		if (label == null)
+		if (label == null) {
 			return;
-		Label textLabel = new Label(composite, SWT.NONE);
+		}
+		Label textLabel=new Label(composite, SWT.NONE);
 		textLabel.setText(label);
 	}
 }

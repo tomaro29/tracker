@@ -30,78 +30,81 @@ import fr.rostren.tracker.ui.properties.label.providers.OriginLabelProvider;
  * {@link BoockletAccount} instance.
  */
 public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
-	protected static final String[] TRANSFER_TYPES = new String[] { Incoming.class.getSimpleName(),
-			Outgoing.class.getSimpleName() };
+	protected static final String[] TRANSFER_TYPES=new String[] {Incoming.class.getSimpleName(), Outgoing.class.getSimpleName()};
 
-	private static final String PAGE_NAME = "Add tranfer to ''{0}'' Page"; //$NON-NLS-1$
-	private static final String PAGE_TITLE = "Add Transfer"; //$NON-NLS-1$
-	private static final String WIZARD_DESCRIPTION = "Wizard to add a new transfer to the selected boocklet account."; //$NON-NLS-1$
+	private static final String PAGE_NAME="Add tranfer to ''{0}'' Page"; //$NON-NLS-1$
+	private static final String PAGE_TITLE="Add Transfer"; //$NON-NLS-1$
+	private static final String WIZARD_DESCRIPTION="Wizard to add a new transfer to the selected boocklet account."; //$NON-NLS-1$
 
 	protected final Tracker tracker;
 
-	protected boolean isIncoming = true;
-	protected boolean isOutgoing = false;
+	protected boolean isIncoming=true;
+	protected boolean isOutgoing=false;
 	protected OperationTitle title;
 	protected Origin origin;
 
-	private ModifyListener modifyTransferTypeListener = new ModifyListener() {
+	private final ModifyListener modifyTransferTypeListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
-			String text = ((Combo) event.widget).getText();
-			isIncoming = TRANSFER_TYPES[0].equals(text);
-			isOutgoing = TRANSFER_TYPES[1].equals(text);
+			String text=((Combo)event.widget).getText();
+			isIncoming=AddBoockletTransferWizardPage.TRANSFER_TYPES[0].equals(text);
+			isOutgoing=AddBoockletTransferWizardPage.TRANSFER_TYPES[1].equals(text);
 		}
 	};
 
-	private ISelectionChangedListener titleListener = new ISelectionChangedListener() {
+	private final ISelectionChangedListener titleListener=new ISelectionChangedListener() {
 
 		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection = event.getSelection();
+			ISelection selection=event.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss = (StructuredSelection) selection;
-			Object firstElement = ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof OperationTitle)
-				title = (OperationTitle) firstElement;
+			StructuredSelection ss=(StructuredSelection)selection;
+			Object firstElement=ss.getFirstElement();
+			if (firstElement != null && firstElement instanceof OperationTitle) {
+				title=(OperationTitle)firstElement;
+			}
 		}
 	};
 
-	private ISelectionChangedListener originListener = new ISelectionChangedListener() {
+	private final ISelectionChangedListener originListener=new ISelectionChangedListener() {
 
 		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 
-			ISelection selection = event.getSelection();
+			ISelection selection=event.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss = (StructuredSelection) selection;
-			Object firstElement = ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof Origin)
-				origin = (Origin) firstElement;
+			StructuredSelection ss=(StructuredSelection)selection;
+			Object firstElement=ss.getFirstElement();
+			if (firstElement != null && firstElement instanceof Origin) {
+				origin=(Origin)firstElement;
+			}
 		}
 	};
 
 	public AddBoockletTransferWizardPage(String pageTitle, Tracker tracker) {
-		super(MessageFormat.format(PAGE_NAME, pageTitle));
-		this.tracker = tracker;
-		setTitle(PAGE_TITLE);
-		setDescription(WIZARD_DESCRIPTION);
+		super(MessageFormat.format(AddBoockletTransferWizardPage.PAGE_NAME, pageTitle));
+		this.tracker=tracker;
+		setTitle(AddBoockletTransferWizardPage.PAGE_TITLE);
+		setDescription(AddBoockletTransferWizardPage.WIZARD_DESCRIPTION);
 	}
 
 	@Override
 	protected void createContainer(Composite parent) {
-		createCombo(parent, "Transfer Type: ", TRANSFER_TYPES, modifyTransferTypeListener); //$NON-NLS-1$
+		createCombo(parent, "Transfer Type: ", AddBoockletTransferWizardPage.TRANSFER_TYPES, modifyTransferTypeListener); //$NON-NLS-1$
 
-		List<Object> operationsTitles = getOperationsTitles(tracker);
+		List<Object> operationsTitles=getOperationsTitles(tracker);
 		createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
 				new OperationTitleLabelProvider(), titleListener);
-		if (!operationsTitles.isEmpty())
-			title = (OperationTitle) operationsTitles.get(0);
+		if (!operationsTitles.isEmpty()) {
+			title=(OperationTitle)operationsTitles.get(0);
+		}
 
-		List<Object> origins = getOrigins(tracker);
+		List<Object> origins=getOrigins(tracker);
 		createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
 				new OriginLabelProvider(), originListener);
-		if (!origins.isEmpty())
-			origin = (Origin) origins.get(0);
+		if (!origins.isEmpty()) {
+			origin=(Origin)origins.get(0);
+		}
 	}
 
 	public boolean isIncoming() {

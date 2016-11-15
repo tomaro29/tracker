@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -22,22 +21,22 @@ public class EditOperationHandler extends AbstractHandler {
 	private Shell shell;
 
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Object applicationContext = event.getApplicationContext();
-		Object currentShell = HandlerUtil.getVariable(applicationContext, ISources.ACTIVE_SHELL_NAME);
-		if (!(currentShell instanceof Shell))
+	public Object execute(ExecutionEvent event) {
+		Object applicationContext=event.getApplicationContext();
+		Object currentShell=HandlerUtil.getVariable(applicationContext, ISources.ACTIVE_SHELL_NAME);
+		if (!(currentShell instanceof Shell)) {
 			return null;
+		}
 
-		setShell((Shell) currentShell);
-		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
+		setShell((Shell)currentShell);
+		IStructuredSelection selection=(IStructuredSelection)HandlerUtil.getCurrentSelection(event);
 		if (selection instanceof StructuredSelection) {
-			Operation selectedOperation = (Operation) selection.getFirstElement();
+			Operation selectedOperation=(Operation)selection.getFirstElement();
 
-			List<Operation> operations = new ArrayList<Operation>();
+			List<Operation> operations=new ArrayList<>();
 			operations.add(selectedOperation);
-			CheckAndEditOperationWizard wizard = new CheckAndEditOperationWizard(operations,
-					(CheckingAccount) selectedOperation.eContainer());
-			WizardDialog wizardDialog = new WizardDialog(shell, wizard);
+			CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(operations, (CheckingAccount)selectedOperation.eContainer());
+			WizardDialog wizardDialog=new WizardDialog(shell, wizard);
 			if (wizardDialog.open() == Window.OK) {
 				// FIXME apply changes in the model use a command
 			}
@@ -46,6 +45,6 @@ public class EditOperationHandler extends AbstractHandler {
 	}
 
 	private void setShell(Shell shell) {
-		this.shell = shell;
+		this.shell=shell;
 	}
 }

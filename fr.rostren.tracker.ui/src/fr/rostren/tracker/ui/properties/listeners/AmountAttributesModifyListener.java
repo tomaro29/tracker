@@ -18,21 +18,20 @@ public class AmountAttributesModifyListener extends AbstractModifyListener {
 	private final AmountAttributesPropertySection section;
 
 	public AmountAttributesModifyListener(AmountAttributesPropertySection section) {
-		this.section = section;
+		this.section=section;
 	}
 
 	@Override
 	protected void executeModify(Widget widget) {
-		EObject eObject = section.getCurrentEObject();
-		Text text = section.getValueText();
-		CCombo combo = section.getCategoryCombo();
+		EObject eObject=section.getCurrentEObject();
+		Text text=section.getValueText();
+		CCombo combo=section.getCategoryCombo();
 
 		if (widget.equals(text)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE,
-					new BigDecimal(text.getText()));
+			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, new BigDecimal(text.getText()));
 		}
 		if (widget.equals(combo)) {
-			Category category = TrackerUtils.getAmountCategory((Amount) eObject, combo.getText());
+			Category category=TrackerUtils.getAmountCategory((Amount)eObject, combo.getText());
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__CATEGORY, category);
 		}
 	}

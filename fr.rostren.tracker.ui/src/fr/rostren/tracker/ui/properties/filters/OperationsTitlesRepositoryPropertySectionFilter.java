@@ -8,8 +8,9 @@ public class OperationsTitlesRepositoryPropertySectionFilter implements IFilter 
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof OperationsTitleRepository)
+		if (object instanceof OperationsTitleRepository) {
 			return true;
+		}
 		return false;
 	}
 }

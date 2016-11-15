@@ -16,13 +16,13 @@ import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySecti
 public class CategoryAttributesPropertySection extends AbstractAttributesPropertySection {
 	protected Text descriptionText;
 
-	private final ModifyListener listener = new CategoryAttributesModifyListener(this);
+	private final ModifyListener listener=new CategoryAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		descriptionText = createLabeledText(body, null, "Description:"); //$NON-NLS-1$
+		descriptionText=createLabeledText(body, null, "Description:"); //$NON-NLS-1$
 		addListeners();
 	}
 
@@ -37,7 +37,7 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
 
 	private String getDescriptionValue() {
 		Assert.isTrue(currentEObject instanceof Category);
-		String description = ((Category) currentEObject).getDescription();
+		String description=((Category)currentEObject).getDescription();
 		if (description == null) {
 			return StringUtils.EMPTY;
 		}

@@ -34,30 +34,33 @@ public class OutgoingItemProviderDev extends OutgoingItemProvider {
 	}
 
 	@Override
-	protected Command createSetCommand(EditingDomain domain, final EObject owner, EStructuralFeature feature,
-			Object value, int index) {
-		if (feature == null)
+	protected Command createSetCommand(EditingDomain domain, final EObject owner, EStructuralFeature feature, Object value, int index) {
+		if (feature == null) {
 			return super.createSetCommand(domain, owner, feature, value, index);
+		}
 
-		final int featureId = feature.getFeatureID();
-		if (featureId != TrackerPackage.OUTGOING__TOTAL_AMOUNT)
+		final int featureId=feature.getFeatureID();
+		if (featureId != TrackerPackage.OUTGOING__TOTAL_AMOUNT) {
 			return super.createSetCommand(domain, owner, feature, value, index);
+		}
 
-		final Outgoing outgoing = (Outgoing) owner;
-		final BigDecimal newTotalAmount = (BigDecimal) value;
+		final Outgoing outgoing=(Outgoing)owner;
+		final BigDecimal newTotalAmount=(BigDecimal)value;
 
-		if (outgoing.getTotalAmount() == newTotalAmount)
+		if (outgoing.getTotalAmount() == newTotalAmount) {
 			return super.createSetCommand(domain, owner, feature, value, index);
+		}
 
 		// The total Amount has changed, we have to update existing value if
 		// any
-		final List<Command> commands = new ArrayList<>();
+		final List<Command> commands=new ArrayList<>();
 
-		List<Amount> subAmounts = outgoing.getSubAmounts();
+		List<Amount> subAmounts=outgoing.getSubAmounts();
 		if (subAmounts.size() == 1) {
-			Amount subAmount = outgoing.getSubAmounts().get(0);
+			Amount subAmount=outgoing.getSubAmounts().get(0);
 			subAmount.setValue(newTotalAmount);
-		} else {
+		}
+		else {
 			// TODO Afficher un message de warning pour mettre � jour les
 			// subAmounts
 		}

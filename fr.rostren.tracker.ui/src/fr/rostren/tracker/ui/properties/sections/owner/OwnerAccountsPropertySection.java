@@ -26,26 +26,26 @@ import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 
 public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider = new OwnerAccountsContentProvider();
-	private final ILabelProvider labelProvider = new AccountLabelProvider();
+	private final ITreeContentProvider contentProvider=new OwnerAccountsContentProvider();
+	private final ILabelProvider labelProvider=new AccountLabelProvider();
 
-	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
 			// TODO
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Owner);
-			Owner owner = (Owner) currentEObject;
+			Owner owner=(Owner)currentEObject;
 
-			ISelection selection = tableViewer.getSelection();
+			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
 			ListenersUtils.executeRemoveCommand(owner, TrackerPackage.Literals.OWNER__ACCOUNTS, elementToRemove);
 			refresh();
 		}
@@ -55,8 +55,8 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table = createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer = new TableViewer(table);
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -76,7 +76,7 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 
 	private List<Account> getAccounts() {
 		Assert.isTrue(currentEObject instanceof Owner);
-		List<Account> accounts = ((Owner) currentEObject).getAccounts();
+		List<Account> accounts=((Owner)currentEObject).getAccounts();
 		if (accounts == null || accounts.isEmpty()) {
 			return Collections.emptyList();
 		}

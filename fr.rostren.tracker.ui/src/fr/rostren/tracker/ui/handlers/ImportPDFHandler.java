@@ -21,56 +21,58 @@ import fr.rostren.tracker.ui.actions.ImportOperationsAction;
 
 public class ImportPDFHandler extends AbstractHandler {
 	private Shell shell;
-	private String pdfURIText;
-	private CheckingAccount account;
 
 	@Override
 	public Object execute(ExecutionEvent event) {
-		Object applicationContext = event.getApplicationContext();
-		Object currentShell = HandlerUtil.getVariable(applicationContext, ISources.ACTIVE_SHELL_NAME);
-		if (!(currentShell instanceof Shell))
+		Object applicationContext=event.getApplicationContext();
+		Object currentShell=HandlerUtil.getVariable(applicationContext, ISources.ACTIVE_SHELL_NAME);
+		if (!(currentShell instanceof Shell)) {
 			return null;
-		this.shell = (Shell) currentShell;
+		}
+		shell=(Shell)currentShell;
 
-		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
-		if (!(selection instanceof StructuredSelection))
+		IStructuredSelection selection=(IStructuredSelection)HandlerUtil.getCurrentSelection(event);
+		if (!(selection instanceof StructuredSelection)) {
 			return null;
+		}
 
-		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
-			Object selectedElement = AdapterFactoryEditingDomain.unwrap(objects.next());
-			if (!(selectedElement instanceof CheckingAccount))
+		String pdfURIText;
+		CheckingAccount account;
+		for (Iterator<?> objects=selection.iterator(); objects.hasNext();) {
+			Object selectedElement=AdapterFactoryEditingDomain.unwrap(objects.next());
+			if (!(selectedElement instanceof CheckingAccount)) {
 				continue;
+			}
 
-			this.account = (CheckingAccount) selectedElement;
+			account=(CheckingAccount)selectedElement;
 			// opens dialog to load a pdf
-			// TODO implement the LoadResourceDialog to set the PDF URI
-			// Text field content.
-			LoadResourceDialog dialog = new LoadResourceDialog(shell);
-			if (dialog.open() != Window.OK)
+			// TODO extend the LoadResourceDialog to set the PDF URI Text field
+			// content.
+			LoadResourceDialog dialog=new LoadResourceDialog(shell);
+			if (dialog.open() != Window.OK) {
 				continue;
+			}
 
-			this.pdfURIText = dialog.getURIText();
+			pdfURIText=dialog.getURIText();
 			if (pdfURIText.isEmpty()) {
 				MessageDialog.openError(shell, "Empty PDF URI.", //$NON-NLS-1$
 						"The pdf uri cannot be empty."); //$NON-NLS-1$
 				return null;
 			}
-			runImportOperationsToModel();
+			runImportOperationsAction(pdfURIText, account);
 		}
-		saveAndReset(event);
+		save(event);
 		return null;
 	}
 
-	private void saveAndReset(ExecutionEvent event) {
+	private void save(ExecutionEvent event) {
 		// FIXME use EMF Commands instead of saving directly the model!
-		TrackerEditorDev editor = (TrackerEditorDev) HandlerUtil.getActiveEditor(event);
+		TrackerEditorDev editor=(TrackerEditorDev)HandlerUtil.getActiveEditor(event);
 		editor.doSave(new NullProgressMonitor());
-		account = null;
-		pdfURIText = null;
 	}
 
-	private void runImportOperationsToModel() {
-		ImportOperationsAction action = new ImportOperationsAction(shell, pdfURIText, account);
+	private void runImportOperationsAction(String pdfURIText, CheckingAccount account) {
+		ImportOperationsAction action=new ImportOperationsAction(shell, pdfURIText, account);
 		action.run();
 	}
 }

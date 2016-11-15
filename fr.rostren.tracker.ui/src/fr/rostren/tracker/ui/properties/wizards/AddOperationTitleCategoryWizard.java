@@ -17,7 +17,7 @@ public class AddOperationTitleCategoryWizard extends Wizard {
 
 	public AddOperationTitleCategoryWizard(String pageTitle, Tracker tracker) {
 		super();
-		page = new AddOperationTitleCategoryWizardPage(pageTitle, tracker);
+		page=new AddOperationTitleCategoryWizardPage(pageTitle, tracker);
 	}
 
 	@Override

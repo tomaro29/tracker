@@ -8,8 +8,9 @@ public class OwnerPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Owner)
+		if (object instanceof Owner) {
 			return true;
+		}
 		return false;
 	}
 }

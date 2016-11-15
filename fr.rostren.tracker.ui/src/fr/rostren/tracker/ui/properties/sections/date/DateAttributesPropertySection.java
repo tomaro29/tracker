@@ -17,15 +17,15 @@ public class DateAttributesPropertySection extends AbstractAttributesPropertySec
 	protected Text monthText;
 	protected Text yearText;
 
-	private final ModifyListener listener = new DateAttributesModifyListener(this);
+	private final ModifyListener listener=new DateAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		dayText = createLabeledText(body, null, "Day:"); //$NON-NLS-1$
-		monthText = createLabeledText(body, dayText, "Month:"); //$NON-NLS-1$
-		yearText = createLabeledText(body, monthText, "Year:"); //$NON-NLS-1$
+		dayText=createLabeledText(body, null, "Day:"); //$NON-NLS-1$
+		monthText=createLabeledText(body, dayText, "Month:"); //$NON-NLS-1$
+		yearText=createLabeledText(body, monthText, "Year:"); //$NON-NLS-1$
 		addListeners();
 	}
 
@@ -42,17 +42,17 @@ public class DateAttributesPropertySection extends AbstractAttributesPropertySec
 
 	private String getDateYear() {
 		Assert.isTrue(currentEObject instanceof Date);
-		return String.valueOf(((Date) currentEObject).getYear());
+		return String.valueOf(((Date)currentEObject).getYear());
 	}
 
 	private String getDateMonth() {
 		Assert.isTrue(currentEObject instanceof Date);
-		return ((Date) currentEObject).getMonth().toString();
+		return ((Date)currentEObject).getMonth().toString();
 	}
 
 	private String getDateDay() {
 		Assert.isTrue(currentEObject instanceof Date);
-		return String.valueOf(((Date) currentEObject).getDay());
+		return String.valueOf(((Date)currentEObject).getDay());
 	}
 
 	@Override

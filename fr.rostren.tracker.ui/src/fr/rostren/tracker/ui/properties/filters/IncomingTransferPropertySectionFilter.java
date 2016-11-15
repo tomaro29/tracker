@@ -8,8 +8,9 @@ public class IncomingTransferPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Incoming)
+		if (object instanceof Incoming) {
 			return true;
+		}
 		return false;
 	}
 }

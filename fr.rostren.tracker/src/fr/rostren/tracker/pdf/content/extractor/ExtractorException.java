@@ -5,25 +5,25 @@ import java.util.logging.Level;
 import org.apache.commons.lang.StringUtils;
 
 public class ExtractorException extends Exception {
-	private static final long serialVersionUID = 1L;
-	private static final Level DEFAULT_LEVEL = Level.SEVERE;
+	private static final long serialVersionUID=1L;
+	private static final Level DEFAULT_LEVEL=Level.SEVERE;
 	private String message;
 	private Level level;
-	private Throwable cause = null;
+	private Throwable cause=null;
 
 	public ExtractorException() {
 		setMessage(StringUtils.EMPTY);
-		setLevel(DEFAULT_LEVEL);
+		setLevel(ExtractorException.DEFAULT_LEVEL);
 	}
 
 	ExtractorException(String message) {
 		setMessage(message);
-		setLevel(DEFAULT_LEVEL);
+		setLevel(ExtractorException.DEFAULT_LEVEL);
 	}
 
 	ExtractorException(String message, Throwable cause) {
 		setMessage(message);
-		setLevel(DEFAULT_LEVEL);
+		setLevel(ExtractorException.DEFAULT_LEVEL);
 		setCause(cause);
 	}
 
@@ -43,7 +43,7 @@ public class ExtractorException extends Exception {
 	 */
 	@Override
 	public String getMessage() {
-		return this.message;
+		return message;
 	}
 
 	/**
@@ -51,14 +51,14 @@ public class ExtractorException extends Exception {
 	 *            the message to set
 	 */
 	public void setMessage(String message) {
-		this.message = message;
+		this.message=message;
 	}
 
 	/**
 	 * @return the level
 	 */
 	public Level getLevel() {
-		return this.level;
+		return level;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ExtractorException extends Exception {
 	 *            the level to set
 	 */
 	public void setLevel(Level level) {
-		this.level = level;
+		this.level=level;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class ExtractorException extends Exception {
 	 */
 	@Override
 	public Throwable getCause() {
-		return this.cause;
+		return cause;
 	}
 
 	/**
@@ -82,6 +82,6 @@ public class ExtractorException extends Exception {
 	 *            the cause to set
 	 */
 	public void setCause(Throwable cause) {
-		this.cause = cause;
+		this.cause=cause;
 	}
 }

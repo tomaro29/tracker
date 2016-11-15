@@ -35,30 +35,33 @@ public class DebitItemProviderDev extends DebitItemProvider {
 	}
 
 	@Override
-	protected Command createSetCommand(EditingDomain domain, final EObject owner, EStructuralFeature feature,
-			Object value, int index) {
-		if (feature == null)
+	protected Command createSetCommand(EditingDomain domain, final EObject owner, EStructuralFeature feature, Object value, int index) {
+		if (feature == null) {
 			return super.createSetCommand(domain, owner, feature, value, index);
+		}
 
-		final int featureId = feature.getFeatureID();
-		if (featureId != TrackerPackage.DEBIT__TOTAL_AMOUNT)
+		final int featureId=feature.getFeatureID();
+		if (featureId != TrackerPackage.DEBIT__TOTAL_AMOUNT) {
 			return super.createSetCommand(domain, owner, feature, value, index);
+		}
 
-		final Debit debit = (Debit) owner;
-		final BigDecimal newTotalAmount = (BigDecimal) value;
+		final Debit debit=(Debit)owner;
+		final BigDecimal newTotalAmount=(BigDecimal)value;
 
-		if (debit.getTotalAmount() == newTotalAmount)
+		if (debit.getTotalAmount() == newTotalAmount) {
 			return super.createSetCommand(domain, owner, feature, value, index);
+		}
 
 		// The total Amount has changed, we have to update existing value if
 		// any
-		final List<Command> commands = new ArrayList<>();
+		final List<Command> commands=new ArrayList<>();
 
-		List<Amount> subAmounts = debit.getSubAmounts();
+		List<Amount> subAmounts=debit.getSubAmounts();
 		if (subAmounts.size() == 1) {
-			Amount subAmount = debit.getSubAmounts().get(0);
+			Amount subAmount=debit.getSubAmounts().get(0);
 			subAmount.setValue(newTotalAmount);
-		} else {
+		}
+		else {
 			// TODO Afficher un message de warning pour mettre a jour les
 			// subAmounts
 		}

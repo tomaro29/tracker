@@ -18,7 +18,9 @@ import com.google.common.collect.Sets;
 
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.OriginsRepository;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.OperationTitleComparator;
@@ -30,14 +32,14 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	protected CCombo titleCombo;
 	protected CCombo originCombo;
 
-	private final ModifyListener listener = new OperationAttributesModifyListener(this);
+	private final ModifyListener listener=new OperationAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		titleCombo = createLabeledCombo(body, null, "Title:"); //$NON-NLS-1$
-		originCombo = createLabeledCombo(body, titleCombo, "Origin:"); //$NON-NLS-1$
+		titleCombo=createLabeledCombo(body, null, "Title:"); //$NON-NLS-1$
+		originCombo=createLabeledCombo(body, titleCombo, "Origin:"); //$NON-NLS-1$
 		addListeners();
 	}
 
@@ -46,18 +48,18 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		super.setInput(part, selection);
 
 		disposeListeners();
-		OperationTitle operationTitle = getOperationTitle();
-		String[] items = getOperationTitlesItems();
+		OperationTitle operationTitle=getOperationTitle();
+		String[] items=getOperationTitlesItems();
 		titleCombo.setItems(items);
 		if (operationTitle != null) {
-			String title = operationTitle.getTitle();
+			String title=operationTitle.getTitle();
 			titleCombo.setItem(Arrays.asList(items).indexOf(title), title);
 		}
-		items = getOriginsItems();
+		items=getOriginsItems();
 		originCombo.setItems(items);
-		Origin origin = getOperationOriginItem();
+		Origin origin=getOperationOriginItem();
 		if (origin != null) {
-			String identifier = origin.getIdentifier();
+			String identifier=origin.getIdentifier();
 			originCombo.setItem(Arrays.asList(items).indexOf(identifier), identifier);
 		}
 		addListeners();
@@ -85,21 +87,24 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 
 	private OperationTitle getOperationTitle() {
 		Assert.isTrue(currentEObject instanceof Operation);
-		return ((Operation) currentEObject).getOperationTitle();
+		return ((Operation)currentEObject).getOperationTitle();
 	}
 
 	private List<OperationTitle> getSortedTitles() {
 		Assert.isTrue(currentEObject instanceof Operation);
-		Tracker tracker = TrackerUtils.getTracker(currentEObject);
-		Set<OperationTitle> operationTitles = Sets
-				.newHashSet(tracker.getOperationsTitlesRepositories().getOperationsTitles());
+		Tracker tracker=TrackerUtils.getTracker(currentEObject);
+		OperationsTitleRepository repository=tracker.getOperationsTitlesRepositories();
+		if (repository == null) {
+			return new ArrayList<>();
+		}
+		Set<OperationTitle> operationTitles=Sets.newHashSet(repository.getOperationsTitles());
 		return getSortedList(operationTitles, new OperationTitleComparator());
 	}
 
 	private String[] getOperationTitlesItems() {
-		List<OperationTitle> operationTitles = getSortedTitles();
-		List<String> titles = new ArrayList<>();
-		for (OperationTitle operationTitle : operationTitles) {
+		List<OperationTitle> operationTitles=getSortedTitles();
+		List<String> titles=new ArrayList<>();
+		for (OperationTitle operationTitle: operationTitles) {
 			titles.add(operationTitle.getTitle());
 		}
 		titles.removeAll(Collections.singleton(null));
@@ -108,22 +113,28 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 
 	private Origin getOperationOriginItem() {
 		Assert.isTrue(currentEObject instanceof Operation);
-		return ((Operation) currentEObject).getOrigin();
+		return ((Operation)currentEObject).getOrigin();
 	}
 
 	private List<Origin> getSortedOrgins() {
 		Assert.isTrue(currentEObject instanceof Operation);
-		Tracker tracker = TrackerUtils.getTracker(currentEObject);
-		List<Origin> origins = tracker.getOriginsRepository().getOrigins();
+		Tracker tracker=TrackerUtils.getTracker(currentEObject);
+
+		OriginsRepository repository=tracker.getOriginsRepository();
+		if (repository == null) {
+			return new ArrayList<>();
+		}
+
+		List<Origin> origins=tracker.getOriginsRepository().getOrigins();
 		Collections.sort(origins, new OriginComparator());
 		return origins;
 	}
 
 	private String[] getOriginsItems() {
-		List<Origin> origins = getSortedOrgins();
-		String[] items = new String[origins.size()];
-		for (int i = 0; i < origins.size(); i++) {
-			items[i] = origins.get(i).getIdentifier();
+		List<Origin> origins=getSortedOrgins();
+		String[] items=new String[origins.size()];
+		for (int i=0; i < origins.size(); i++) {
+			items[i]=origins.get(i).getIdentifier();
 		}
 		return items;
 	}

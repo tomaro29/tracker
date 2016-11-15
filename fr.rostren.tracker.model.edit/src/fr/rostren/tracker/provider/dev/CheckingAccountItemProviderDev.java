@@ -17,6 +17,7 @@ import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.Incoming;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Outgoing;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
@@ -46,23 +47,19 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		newChildDescriptors.add(
-				createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewCredit(object)));
-		newChildDescriptors.add(
-				createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewDebit(object)));
-		newChildDescriptors.add(
-				createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewIncoming(object)));
-		newChildDescriptors.add(
-				createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewOutgoing(object)));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewCredit(object)));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewDebit(object)));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewIncoming(object)));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, createNewOutgoing(object)));
 	}
 
 	private Credit createNewCredit(Object object) {
-		Credit operation = TrackerFactory.eINSTANCE.createCredit();
+		Credit operation=TrackerFactory.eINSTANCE.createCredit();
 		// Add a default sub amount
-		List<Amount> amounts = operation.getSubAmounts();
+		List<Amount> amounts=operation.getSubAmounts();
 
 		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
 
@@ -71,29 +68,35 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	}
 
 	private void addOperationTitle(Object object, Operation operation) {
-		if (!(object instanceof CheckingAccount))
+		if (!(object instanceof CheckingAccount)) {
 			return;
-		EObject rootContainer = EcoreUtil.getRootContainer((CheckingAccount) object);
-		if (!(rootContainer instanceof Tracker))
+		}
+		EObject rootContainer=EcoreUtil.getRootContainer((CheckingAccount)object);
+		if (!(rootContainer instanceof Tracker)) {
 			return;
+		}
 
 		// Add a default operation title
-		EList<OperationTitle> operationsTitles = ((Tracker) rootContainer).getOperationsTitlesRepositories()
-				.getOperationsTitles();
-		if (defaultOperationTitle == null || !operationsTitles.contains(defaultOperationTitle)) {
-			defaultOperationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
-			operationsTitles.add(defaultOperationTitle);
+		OperationsTitleRepository repository=((Tracker)rootContainer).getOperationsTitlesRepositories();
+		if (repository == null) {
+			return;
 		}
-		operation.setOperationTitle(defaultOperationTitle);
+
+		EList<OperationTitle> operationsTitles=repository.getOperationsTitles();
+		if (CheckingAccountItemProviderDev.defaultOperationTitle == null || !operationsTitles.contains(CheckingAccountItemProviderDev.defaultOperationTitle)) {
+			CheckingAccountItemProviderDev.defaultOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
+			operationsTitles.add(CheckingAccountItemProviderDev.defaultOperationTitle);
+		}
+		operation.setOperationTitle(CheckingAccountItemProviderDev.defaultOperationTitle);
 	}
 
 	private Debit createNewDebit(Object object) {
-		Debit operation = TrackerFactory.eINSTANCE.createDebit();
+		Debit operation=TrackerFactory.eINSTANCE.createDebit();
 		// Add a default sub amount
-		List<Amount> amounts = operation.getSubAmounts();
+		List<Amount> amounts=operation.getSubAmounts();
 
 		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
 
@@ -102,12 +105,12 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	}
 
 	private Incoming createNewIncoming(Object object) {
-		Incoming operation = TrackerFactory.eINSTANCE.createIncoming();
+		Incoming operation=TrackerFactory.eINSTANCE.createIncoming();
 		// Add a default sub amount
-		List<Amount> amounts = operation.getSubAmounts();
+		List<Amount> amounts=operation.getSubAmounts();
 
 		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
 
@@ -116,12 +119,12 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	}
 
 	private Outgoing createNewOutgoing(Object object) {
-		Outgoing operation = TrackerFactory.eINSTANCE.createOutgoing();
+		Outgoing operation=TrackerFactory.eINSTANCE.createOutgoing();
 		// Add a default sub amount
-		List<Amount> amounts = operation.getSubAmounts();
+		List<Amount> amounts=operation.getSubAmounts();
 
 		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
 

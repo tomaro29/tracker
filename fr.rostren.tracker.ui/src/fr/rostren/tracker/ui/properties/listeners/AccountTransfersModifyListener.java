@@ -14,17 +14,17 @@ public class AccountTransfersModifyListener extends AbstractSelectionChangedList
 	private final BoockletTransfersPropertySection section;
 
 	public AccountTransfersModifyListener(BoockletTransfersPropertySection section) {
-		this.section = section;
+		this.section=section;
 	}
 
 	@Override
 	public void executeSelectionChanged(ISelection selection) {
 		Assert.isTrue(selection instanceof Transfer);
-		Transfer transfer = (Transfer) selection;
+		Transfer transfer=(Transfer)selection;
 
-		EObject currentEObject = section.getCurrentEObject();
+		EObject currentEObject=section.getCurrentEObject();
 		Assert.isTrue(currentEObject instanceof BoockletAccount);
-		BoockletAccount bookclet = (BoockletAccount) currentEObject;
+		BoockletAccount bookclet=(BoockletAccount)currentEObject;
 
 		ListenersUtils.executeAddCommand(bookclet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, transfer);
 	}

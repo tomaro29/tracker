@@ -14,19 +14,19 @@ import fr.rostren.tracker.Operation;
 
 public class CheckAndEditOperationWizard extends Wizard {
 	protected BiMap<Operation, CheckAndEditOperationWizardPage> pages;
-	
-	private List<Operation> operations = new ArrayList<>();
-	private boolean canFinish = false;
+
+	private List<Operation> operations=new ArrayList<>();
+	private boolean canFinish=false;
 
 	public CheckAndEditOperationWizard(List<Operation> operations, CheckingAccount account) {
 		super();
 		setNeedsProgressMonitor(true);
-		this.operations = operations;
+		this.operations=operations;
 
 		account.getOperations().addAll(operations);
-		this.pages = HashBiMap.create();
-		for (Operation operation : operations) {
-			CheckAndEditOperationWizardPage page = new CheckAndEditOperationWizardPage(operation);
+		pages=HashBiMap.create();
+		for (Operation operation: operations) {
+			CheckAndEditOperationWizardPage page=new CheckAndEditOperationWizardPage(operation);
 			pages.put(operation, page);
 		}
 	}
@@ -48,30 +48,32 @@ public class CheckAndEditOperationWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		for (Operation operation : operations) {
+		for (Operation operation: operations) {
 			addPage(pages.get(operation));
 		}
 	}
 
 	@Override
 	public IWizardPage getPreviousPage(IWizardPage page) {
-		Operation operation = pages.inverse().get(page);
-		int previousIndex = operations.indexOf(operation) - 1;
-		canFinish = isFirstPage(previousIndex) && isLastPage(previousIndex);
+		Operation operation=pages.inverse().get(page);
+		int previousIndex=operations.indexOf(operation) - 1;
+		canFinish=isFirstPage(previousIndex) && isLastPage(previousIndex);
 
-		if (previousIndex > 0 && operations.size() > previousIndex)
+		if (previousIndex > 0 && operations.size() > previousIndex) {
 			return pages.get(operations.get(previousIndex));
+		}
 		return super.getPreviousPage(page);
 	}
 
 	@Override
 	public IWizardPage getNextPage(IWizardPage page) {
-		Operation operation = pages.inverse().get(page);
-		int nextIndex = operations.indexOf(operation) + 1;
-		canFinish = isLastPage(nextIndex);
+		Operation operation=pages.inverse().get(page);
+		int nextIndex=operations.indexOf(operation) + 1;
+		canFinish=isLastPage(nextIndex);
 
-		if (operations.size() > nextIndex)
+		if (operations.size() > nextIndex) {
 			return pages.get(operations.get(nextIndex));
+		}
 		return super.getNextPage(page);
 	}
 

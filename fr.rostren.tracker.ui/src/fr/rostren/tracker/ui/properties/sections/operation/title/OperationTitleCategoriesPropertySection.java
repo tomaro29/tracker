@@ -30,44 +30,42 @@ import fr.rostren.tracker.ui.properties.wizards.AddOperationTitleCategoryWizard;
 
 public class OperationTitleCategoriesPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider = new OperationTitleCategoriesContentProvider();
-	private final ILabelProvider labelProvider = new CategoryLabelProvider();
+	private final ITreeContentProvider contentProvider=new OperationTitleCategoriesContentProvider();
+	private final ILabelProvider labelProvider=new CategoryLabelProvider();
 
-	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof OperationTitle);
-			OperationTitle operationTitle = (OperationTitle) currentEObject;
+			OperationTitle operationTitle=(OperationTitle)currentEObject;
 
-			String pageTitle = operationTitle.getTitle();
-			Tracker tracker = (Tracker) operationTitle.eContainer().eContainer();
+			String pageTitle=operationTitle.getTitle();
+			Tracker tracker=(Tracker)operationTitle.eContainer().eContainer();
 
-			AddOperationTitleCategoryWizard wizard = new AddOperationTitleCategoryWizard(pageTitle, tracker);
-			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
+			AddOperationTitleCategoryWizard wizard=new AddOperationTitleCategoryWizard(pageTitle, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Category category = wizard.getCategory();
+				Category category=wizard.getCategory();
 				if (category != null) {
-					ListenersUtils.executeAddCommand(operationTitle,
-							TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, category);
+					ListenersUtils.executeAddCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, category);
 					refresh();
 				}
 			}
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof OperationTitle);
-			OperationTitle operationTitle = (OperationTitle) currentEObject;
+			OperationTitle operationTitle=(OperationTitle)currentEObject;
 
-			ISelection selection = tableViewer.getSelection();
+			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES,
-					elementToRemove);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, elementToRemove);
 			refresh();
 		}
 	};
@@ -76,8 +74,8 @@ public class OperationTitleCategoriesPropertySection extends AbstractTableProper
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table = createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer = new TableViewer(table);
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -97,7 +95,7 @@ public class OperationTitleCategoriesPropertySection extends AbstractTableProper
 
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof OperationTitle);
-		List<Category> categories = ((OperationTitle) currentEObject).getCategories();
+		List<Category> categories=((OperationTitle)currentEObject).getCategories();
 		if (categories == null || categories.isEmpty()) {
 			return Collections.emptyList();
 		}

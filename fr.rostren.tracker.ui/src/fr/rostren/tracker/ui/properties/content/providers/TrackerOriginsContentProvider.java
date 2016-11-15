@@ -12,21 +12,24 @@ public class TrackerOriginsContentProvider extends AbstractContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof Tracker)
+		if (element instanceof Tracker) {
 			return getChildren(element).length > 0;
+		}
 		return false;
 	}
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		List<Origin> children = new ArrayList<>();
+		List<Origin> children=new ArrayList<>();
 		if (parentElement instanceof List<?>) {
-			for (Object element : (List<?>) parentElement) {
-				if (element instanceof Origin)
-					children.add((Origin) element);
+			for (Object element: (List<?>)parentElement) {
+				if (element instanceof Origin) {
+					children.add((Origin)element);
+				}
 			}
-		} else if (parentElement instanceof Tracker) {
-			children.addAll(((Tracker) parentElement).getOriginsRepository().getOrigins());
+		}
+		else if (parentElement instanceof Tracker) {
+			children.addAll(((Tracker)parentElement).getOriginsRepository().getOrigins());
 		}
 		Collections.sort(children, new OriginComparator());
 		return children.toArray();

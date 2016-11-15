@@ -18,15 +18,15 @@ public class AccountAttributesPropertySection extends AbstractAttributesProperty
 	protected Text amountText;
 	protected Text identifierText;
 
-	private final ModifyListener listener = new AccountAttributesModifyListener(this);
+	private final ModifyListener listener=new AccountAttributesModifyListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		nameText = createLabeledText(body, null, "Name:"); //$NON-NLS-1$
-		identifierText = createLabeledText(body, nameText, "Identifier:"); //$NON-NLS-1$
-		amountText = createLabeledText(body, identifierText, "Amount:"); //$NON-NLS-1$
+		nameText=createLabeledText(body, null, "Name:"); //$NON-NLS-1$
+		identifierText=createLabeledText(body, nameText, "Identifier:"); //$NON-NLS-1$
+		amountText=createLabeledText(body, identifierText, "Amount:"); //$NON-NLS-1$
 
 		addListeners();
 	}
@@ -44,20 +44,20 @@ public class AccountAttributesPropertySection extends AbstractAttributesProperty
 
 	private String getAccountIdentifier() {
 		Assert.isTrue(currentEObject instanceof Account);
-		return String.valueOf(((Account) currentEObject).getIdentifier());
+		return String.valueOf(((Account)currentEObject).getIdentifier());
 	}
 
 	private String getAccountAmount() {
 		Assert.isTrue(currentEObject instanceof Account);
-		return String.valueOf(((Account) currentEObject).getAmount());
+		return String.valueOf(((Account)currentEObject).getAmount());
 	}
 
 	private String getAccountName() {
 		Assert.isTrue(currentEObject instanceof Account);
-		if (((Account) currentEObject).getName() == null) {
+		if (((Account)currentEObject).getName() == null) {
 			return StringUtils.EMPTY;
 		}
-		return ((Account) currentEObject).getName();
+		return ((Account)currentEObject).getName();
 	}
 
 	@Override

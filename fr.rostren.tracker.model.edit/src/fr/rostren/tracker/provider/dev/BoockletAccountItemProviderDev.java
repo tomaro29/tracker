@@ -19,7 +19,7 @@ import fr.rostren.tracker.provider.BoockletAccountItemProvider;
  * This is the item provider adapter for a
  * {@link fr.rostren.tracker.BoockletAccount} object. <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider {
@@ -40,44 +40,44 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		// create newIncoming
-		Incoming newIncoming = createNewIncoming();
+		Incoming newIncoming=createNewIncoming();
 
 		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newIncoming));
 
 		// create newOutgoing
-		Outgoing newOutgoing = createNewOutgoing();
+		Outgoing newOutgoing=createNewOutgoing();
 
 		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newOutgoing));
 	}
 
 	private Incoming createNewIncoming() {
-		Incoming newIncoming = TrackerFactory.eINSTANCE.createIncoming();
+		Incoming newIncoming=TrackerFactory.eINSTANCE.createIncoming();
 		// Add a default sub amount
-		List<Amount> amounts = newIncoming.getSubAmounts();
+		List<Amount> amounts=newIncoming.getSubAmounts();
 
 		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
 
 		// Add a default operation title
-		OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+		OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 		newIncoming.setOperationTitle(operationTitle);
 		return newIncoming;
 	}
 
 	private Outgoing createNewOutgoing() {
-		Outgoing newOutgoing = TrackerFactory.eINSTANCE.createOutgoing();
+		Outgoing newOutgoing=TrackerFactory.eINSTANCE.createOutgoing();
 		// Add a default sub amount
-		List<Amount> amounts = newOutgoing.getSubAmounts();
+		List<Amount> amounts=newOutgoing.getSubAmounts();
 
 		if (amounts.isEmpty()) {
-			Amount amount = TrackerFactory.eINSTANCE.createAmount();
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
 
 		// Add a default operation title
-		OperationTitle operationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+		OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 		newOutgoing.setOperationTitle(operationTitle);
 		return newOutgoing;
 	}

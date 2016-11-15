@@ -16,7 +16,7 @@ public class AddTrackerOperationTitleWizard extends Wizard {
 
 	public AddTrackerOperationTitleWizard(String pageTitle, Tracker tracker) {
 		super();
-		page = new AddTrackerOperationTitleWizardPage(pageTitle, tracker);
+		page=new AddTrackerOperationTitleWizardPage(pageTitle, tracker);
 	}
 
 	@Override

@@ -8,8 +8,9 @@ public class OriginPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Origin)
+		if (object instanceof Origin) {
 			return true;
+		}
 		return false;
 	}
 }

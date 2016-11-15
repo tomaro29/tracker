@@ -25,31 +25,32 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) {
-		Object applicationContext = event.getApplicationContext();
-		Object currentShell = HandlerUtil.getVariable(applicationContext, ISources.ACTIVE_SHELL_NAME);
-		if (!(currentShell instanceof Shell))
+		Object applicationContext=event.getApplicationContext();
+		Object currentShell=HandlerUtil.getVariable(applicationContext, ISources.ACTIVE_SHELL_NAME);
+		if (!(currentShell instanceof Shell)) {
 			return null;
+		}
 
-		setShell((Shell) currentShell);
-		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
-		TrackerEditorDev editor = (TrackerEditorDev) HandlerUtil.getActiveEditor(event);
+		setShell((Shell)currentShell);
+		IStructuredSelection selection=(IStructuredSelection)HandlerUtil.getCurrentSelection(event);
+		TrackerEditorDev editor=(TrackerEditorDev)HandlerUtil.getActiveEditor(event);
 
-		boolean clean = MessageDialog.openQuestion(getShell(), "Clean Model's Content", //$NON-NLS-1$
+		boolean clean=MessageDialog.openQuestion(getShell(), "Clean Model's Content", //$NON-NLS-1$
 				"This action will delete all operations and origins in the current tracker model.\n" //$NON-NLS-1$
-						+ "Are you sure you want to delete all ?"); //$NON-NLS-1$
-		if (!clean)
+																						+ "Are you sure you want to delete all ?"); //$NON-NLS-1$
+		if (!clean) {
 			return null;
+		}
 
 		if (selection instanceof StructuredSelection) {
 			@SuppressWarnings("unchecked")
-			List<Object> list = new ArrayList<>(selection.toList());
+			List<Object> list=new ArrayList<>(selection.toList());
 			list.stream()//
-					.map(selElement -> AdapterFactoryEditingDomain.unwrap(selElement))
-					.filter(CheckingAccount.class::isInstance)//
+					.map(selElement -> AdapterFactoryEditingDomain.unwrap(selElement)).filter(CheckingAccount.class::isInstance)//
 					.forEach(selectedElement -> {
 						// delete all the account content and the pdf origins
-						CheckingAccount account = (CheckingAccount) selectedElement;
-						Tracker tracker = TrackerUtils.getTracker(account);
+						CheckingAccount account=(CheckingAccount)selectedElement;
+						Tracker tracker=TrackerUtils.getTracker(account);
 						tracker.getOriginsRepository().getOrigins().clear();
 						account.getOperations().clear();
 					});
@@ -74,10 +75,10 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 	}
 
 	public Shell getShell() {
-		return this.shell;
+		return shell;
 	}
 
 	private void setShell(Shell shell) {
-		this.shell = shell;
+		this.shell=shell;
 	}
 }

@@ -13,19 +13,20 @@ public class OriginAttributesModifyListener extends AbstractModifyListener {
 	private final OriginAttributesPropertySection section;
 
 	public OriginAttributesModifyListener(OriginAttributesPropertySection section) {
-		this.section = section;
+		this.section=section;
 	}
 
 	@Override
 	protected void executeModify(Widget widget) {
-		EObject eObject = section.getCurrentEObject();
-		Text id = section.getIdText();
-		Text type = section.getTypeText();
+		EObject eObject=section.getCurrentEObject();
+		Text id=section.getIdText();
+		Text type=section.getTypeText();
 
-		if (widget.equals(id))
+		if (widget.equals(id)) {
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__IDENTIFIER, id.getText());
-		else if (widget.equals(type))
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__TYPE,
-					OriginType.valueOf(type.getText()));
+		}
+		else if (widget.equals(type)) {
+			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__TYPE, OriginType.valueOf(type.getText()));
+		}
 	}
 }

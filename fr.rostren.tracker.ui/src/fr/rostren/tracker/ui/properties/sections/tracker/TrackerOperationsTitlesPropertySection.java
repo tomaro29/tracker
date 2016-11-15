@@ -31,47 +31,45 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
 
 public class TrackerOperationsTitlesPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider = new TrackerOperationsTitlesContentProvider();
-	private final ILabelProvider labelProvider = new OperationTitleLabelProvider();
+	private final ITreeContentProvider contentProvider=new TrackerOperationsTitlesContentProvider();
+	private final ILabelProvider labelProvider=new OperationTitleLabelProvider();
 
-	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
-			Tracker tracker = (Tracker) currentEObject;
-			OperationsTitleRepository repository = tracker.getOperationsTitlesRepositories();
+			Tracker tracker=(Tracker)currentEObject;
+			OperationsTitleRepository repository=tracker.getOperationsTitlesRepositories();
 
-			AddTrackerOperationTitleWizard wizard = new AddTrackerOperationTitleWizard("Tracker", tracker); //$NON-NLS-1$
-			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
+			AddTrackerOperationTitleWizard wizard=new AddTrackerOperationTitleWizard("Tracker", tracker); //$NON-NLS-1$
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				OperationTitle newOperationTitle = TrackerFactory.eINSTANCE.createOperationTitle();
+				OperationTitle newOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 
-				String operationTitle = wizard.getOperationTitle();
+				String operationTitle=wizard.getOperationTitle();
 				if (operationTitle != null) {
 					newOperationTitle.setTitle(operationTitle);
 				}
 
-				ListenersUtils.executeAddCommand(repository,
-						TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
+				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
 				refresh();
 			}
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
-			Tracker tracker = (Tracker) currentEObject;
-			OperationsTitleRepository repository = tracker.getOperationsTitlesRepositories();
+			Tracker tracker=(Tracker)currentEObject;
+			OperationsTitleRepository repository=tracker.getOperationsTitlesRepositories();
 
-			ISelection selection = tableViewer.getSelection();
+			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(repository,
-					TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, elementToRemove);
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, elementToRemove);
 			refresh();
 		}
 	};
@@ -80,8 +78,8 @@ public class TrackerOperationsTitlesPropertySection extends AbstractTablePropert
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table = createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer = new TableViewer(table);
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -101,8 +99,7 @@ public class TrackerOperationsTitlesPropertySection extends AbstractTablePropert
 
 	private List<OperationTitle> getOperationsTitles() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<OperationTitle> titles = ((Tracker) currentEObject).getOperationsTitlesRepositories()
-				.getOperationsTitles();
+		List<OperationTitle> titles=((Tracker)currentEObject).getOperationsTitlesRepositories().getOperationsTitles();
 		if (titles == null || titles.isEmpty()) {
 			return Collections.emptyList();
 		}

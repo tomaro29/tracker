@@ -12,21 +12,24 @@ public class BoockletTransfersContentProvider extends AbstractContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof BoockletAccount)
+		if (element instanceof BoockletAccount) {
 			return getChildren(element).length > 0;
+		}
 		return false;
 	}
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		List<Transfer> children = new ArrayList<>();
+		List<Transfer> children=new ArrayList<>();
 		if (parentElement instanceof List<?>) {
-			for (Object element : (List<?>) parentElement) {
-				if (element instanceof Transfer)
-					children.add((Transfer) element);
+			for (Object element: (List<?>)parentElement) {
+				if (element instanceof Transfer) {
+					children.add((Transfer)element);
+				}
 			}
-		} else if (parentElement instanceof BoockletAccount) {
-			children.addAll(((BoockletAccount) parentElement).getTransfers());
+		}
+		else if (parentElement instanceof BoockletAccount) {
+			children.addAll(((BoockletAccount)parentElement).getTransfers());
 		}
 		Collections.sort(children, new TransferComparator());
 		return children.toArray();

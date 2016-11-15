@@ -8,8 +8,9 @@ public class AccountPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Account)
+		if (object instanceof Account) {
 			return true;
+		}
 		return false;
 	}
 }

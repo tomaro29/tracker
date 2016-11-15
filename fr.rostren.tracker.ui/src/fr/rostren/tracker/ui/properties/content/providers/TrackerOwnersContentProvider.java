@@ -12,21 +12,24 @@ public class TrackerOwnersContentProvider extends AbstractContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof Tracker)
+		if (element instanceof Tracker) {
 			return getChildren(element).length > 0;
+		}
 		return false;
 	}
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		List<Owner> children = new ArrayList<>();
+		List<Owner> children=new ArrayList<>();
 		if (parentElement instanceof List<?>) {
-			for (Object element : (List<?>) parentElement) {
-				if (element instanceof Owner)
-					children.add((Owner) element);
+			for (Object element: (List<?>)parentElement) {
+				if (element instanceof Owner) {
+					children.add((Owner)element);
+				}
 			}
-		} else if (parentElement instanceof Tracker) {
-			children.addAll(((Tracker) parentElement).getOwners());
+		}
+		else if (parentElement instanceof Tracker) {
+			children.addAll(((Tracker)parentElement).getOwners());
 		}
 		Collections.sort(children, new OwnerComparator());
 		return children.toArray();

@@ -14,34 +14,34 @@ import fr.rostren.tracker.Tracker;
  * Page to add a {@link Owner} instance to an existing {@link Tracker} instance.
  */
 public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
-	private static final String PAGE_NAME = "Add owner to ''{0}'' Page"; //$NON-NLS-1$
-	private static final String PAGE_TITLE = "Add Owner"; //$NON-NLS-1$
-	private static final String WIZARD_DESCRIPTION = "Wizard to add a new owner to the selected tracker."; //$NON-NLS-1$
+	private static final String PAGE_NAME="Add owner to ''{0}'' Page"; //$NON-NLS-1$
+	private static final String PAGE_TITLE="Add Owner"; //$NON-NLS-1$
+	private static final String WIZARD_DESCRIPTION="Wizard to add a new owner to the selected tracker."; //$NON-NLS-1$
 
 	protected final Tracker tracker;
 
-	protected String firstName = "first name"; //$NON-NLS-1$
-	protected String lastName = "last name"; //$NON-NLS-1$
+	protected String firstName="first name"; //$NON-NLS-1$
+	protected String lastName="last name"; //$NON-NLS-1$
 
-	private ModifyListener modifyFirstNameListener = new ModifyListener() {
+	private final ModifyListener modifyFirstNameListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
-			firstName = ((Text) event.widget).getText();
+			firstName=((Text)event.widget).getText();
 		}
 	};
 
-	private ModifyListener modifyLastNameListener = new ModifyListener() {
+	private final ModifyListener modifyLastNameListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
-			lastName = ((Text) event.widget).getText();
+			lastName=((Text)event.widget).getText();
 		}
 	};
 
 	public AddTrackerOwnerWizardPage(String pageTitle, Tracker tracker) {
-		super(MessageFormat.format(PAGE_NAME, pageTitle));
-		this.tracker = tracker;
-		setTitle(PAGE_TITLE);
-		setDescription(WIZARD_DESCRIPTION);
+		super(MessageFormat.format(AddTrackerOwnerWizardPage.PAGE_NAME, pageTitle));
+		this.tracker=tracker;
+		setTitle(AddTrackerOwnerWizardPage.PAGE_TITLE);
+		setDescription(AddTrackerOwnerWizardPage.WIZARD_DESCRIPTION);
 	}
 
 	@Override

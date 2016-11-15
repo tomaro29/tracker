@@ -5,14 +5,13 @@ import org.apache.commons.lang.StringUtils;
 import fr.rostren.tracker.Origin;
 
 public class OriginLabelProvider extends AbstractLabelProvider {
-	protected static final String STRING_UNDEFINED_TYPE = "UNDEFINED TYPE"; //$NON-NLS-1$
-	protected static final String STRING_UNDEFINED_ID = "UNDEFINED ID"; //$NON-NLS-1$
+	protected static final String STRING_UNDEFINED_TYPE="UNDEFINED TYPE"; //$NON-NLS-1$
+	protected static final String STRING_UNDEFINED_ID="UNDEFINED ID"; //$NON-NLS-1$
 
 	@Override
 	public String getText(Object element) {
 		if (element instanceof Origin) {
-			return getOriginType((Origin) element) + AbstractLabelProvider.STRING_SEPARATOR
-					+ AbstractLabelProvider.QUOTES + getOriginIdentifier((Origin) element)
+			return getOriginType((Origin)element)	+ AbstractLabelProvider.STRING_SEPARATOR + AbstractLabelProvider.QUOTES + getOriginIdentifier((Origin)element)
 					+ AbstractLabelProvider.QUOTES;
 		}
 		return super.getText(element);
@@ -23,7 +22,6 @@ public class OriginLabelProvider extends AbstractLabelProvider {
 	}
 
 	private String getOriginIdentifier(Origin origin) {
-		return StringUtils.isEmpty(origin.getIdentifier()) ? OriginLabelProvider.STRING_UNDEFINED_ID
-				: origin.getIdentifier();
+		return StringUtils.isEmpty(origin.getIdentifier()) ? OriginLabelProvider.STRING_UNDEFINED_ID : origin.getIdentifier();
 	}
 }

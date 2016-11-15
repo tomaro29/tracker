@@ -31,7 +31,7 @@ public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAda
 	@Override
 	public Adapter createBoockletAccountAdapter() {
 		if (boockletAccountItemProvider == null) {
-			boockletAccountItemProvider = new BoockletAccountItemProviderDev(this);
+			boockletAccountItemProvider=new BoockletAccountItemProviderDev(this);
 		}
 
 		return boockletAccountItemProvider;
@@ -44,7 +44,7 @@ public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAda
 	@Override
 	public Adapter createCheckingAccountAdapter() {
 		if (checkingAccountItemProvider == null) {
-			checkingAccountItemProvider = new CheckingAccountItemProviderDev(this);
+			checkingAccountItemProvider=new CheckingAccountItemProviderDev(this);
 		}
 
 		return checkingAccountItemProvider;
@@ -57,7 +57,7 @@ public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAda
 	@Override
 	public Adapter createCreditAdapter() {
 		if (creditItemProvider == null) {
-			creditItemProvider = new CreditItemProviderDev(this);
+			creditItemProvider=new CreditItemProviderDev(this);
 		}
 
 		return creditItemProvider;
@@ -70,7 +70,7 @@ public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAda
 	@Override
 	public Adapter createDebitAdapter() {
 		if (debitItemProvider == null) {
-			debitItemProvider = new DebitItemProviderDev(this);
+			debitItemProvider=new DebitItemProviderDev(this);
 		}
 
 		return debitItemProvider;
@@ -83,7 +83,7 @@ public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAda
 	@Override
 	public Adapter createIncomingAdapter() {
 		if (incomingItemProvider == null) {
-			incomingItemProvider = new IncomingItemProviderDev(this);
+			incomingItemProvider=new IncomingItemProviderDev(this);
 		}
 
 		return incomingItemProvider;
@@ -96,7 +96,7 @@ public class TrackerItemProviderAdapterFactoryDev extends TrackerItemProviderAda
 	@Override
 	public Adapter createOutgoingAdapter() {
 		if (outgoingItemProvider == null) {
-			outgoingItemProvider = new OutgoingItemProviderDev(this);
+			outgoingItemProvider=new OutgoingItemProviderDev(this);
 		}
 
 		return outgoingItemProvider;

@@ -8,9 +8,10 @@ public abstract class AbstractModifyListener implements ModifyListener {
 
 	@Override
 	public void modifyText(ModifyEvent event) {
-		Widget widget = event.widget;
-		if (widget == null || widget.isDisposed())
+		Widget widget=event.widget;
+		if (widget == null || widget.isDisposed()) {
 			return;
+		}
 
 		executeModify(widget);
 	}

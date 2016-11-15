@@ -31,39 +31,39 @@ import fr.rostren.tracker.ui.properties.wizards.AddOriginOperationWizard;
 
 public class OriginOperationsPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider = new OriginOperationsContentProvider();
-	private final ILabelProvider labelProvider = new OperationLabelProvider();
+	private final ITreeContentProvider contentProvider=new OriginOperationsContentProvider();
+	private final ILabelProvider labelProvider=new OperationLabelProvider();
 
-	private final SelectionAdapter addButtonlistener = new SelectionAdapter() {
+	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Origin);
-			Origin origin = (Origin) currentEObject;
+			Origin origin=(Origin)currentEObject;
 
-			String pageTitle = origin.getIdentifier();
-			Tracker tracker = (Tracker) origin.eContainer().eContainer();
+			String pageTitle=origin.getIdentifier();
+			Tracker tracker=(Tracker)origin.eContainer().eContainer();
 
-			AddOriginOperationWizard wizard = new AddOriginOperationWizard(pageTitle, tracker);
-			WizardDialog wizardDialog = new WizardDialog(getShell(), wizard);
+			AddOriginOperationWizard wizard=new AddOriginOperationWizard(pageTitle, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Optional<Operation> operation = wizard.getOperation();
+				Optional<Operation> operation=wizard.getOperation();
 				ListenersUtils.executeAddCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, operation);
 				refresh();
 			}
 		}
 	};
 
-	private final SelectionAdapter removeButtonListener = new SelectionAdapter() {
+	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject = getCurrentEObject();
+			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Origin);
-			Origin origin = (Origin) currentEObject;
+			Origin origin=(Origin)currentEObject;
 
-			ISelection selection = tableViewer.getSelection();
+			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove = ((StructuredSelection) selection).getFirstElement();
+			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
 			ListenersUtils.executeRemoveCommand(origin, TrackerPackage.Literals.ORIGIN__OPERATIONS, elementToRemove);
 			refresh();
 		}
@@ -73,8 +73,8 @@ public class OriginOperationsPropertySection extends AbstractTablePropertySectio
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table = createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer = new TableViewer(table);
+		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		tableViewer=new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
 		addListeners();
@@ -94,7 +94,7 @@ public class OriginOperationsPropertySection extends AbstractTablePropertySectio
 
 	private List<Operation> getOperations() {
 		Assert.isTrue(currentEObject instanceof Origin);
-		List<Operation> operations = ((Origin) currentEObject).getOperations();
+		List<Operation> operations=((Origin)currentEObject).getOperations();
 		if (operations == null || operations.isEmpty()) {
 			return Collections.emptyList();
 		}

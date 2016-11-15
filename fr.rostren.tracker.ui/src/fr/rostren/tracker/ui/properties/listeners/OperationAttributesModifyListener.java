@@ -16,22 +16,22 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 	private final OperationAttributesPropertySection section;
 
 	public OperationAttributesModifyListener(OperationAttributesPropertySection section) {
-		this.section = section;
+		this.section=section;
 	}
 
 	@Override
 
 	protected void executeModify(Widget widget) {
-		EObject eObject = section.getCurrentEObject();
-		CCombo titleCombo = section.getTitleCombo();
-		CCombo originCombo = section.getOriginCombo();
+		EObject eObject=section.getCurrentEObject();
+		CCombo titleCombo=section.getTitleCombo();
+		CCombo originCombo=section.getOriginCombo();
 
 		if (widget.equals(titleCombo)) {
-			OperationTitle title = TrackerUtils.getOperationTitle((Operation) eObject, titleCombo.getText());
+			OperationTitle title=TrackerUtils.getOperationTitle((Operation)eObject, titleCombo.getText());
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
 		}
 		if (widget.equals(originCombo)) {
-			Origin origin = TrackerUtils.getOperationOrigin((Operation) eObject, originCombo.getText());
+			Origin origin=TrackerUtils.getOperationOrigin((Operation)eObject, originCombo.getText());
 			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
 		}
 	}

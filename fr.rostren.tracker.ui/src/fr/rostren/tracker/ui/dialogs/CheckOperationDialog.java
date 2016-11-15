@@ -50,7 +50,7 @@ public class CheckOperationDialog extends Dialog {
 	 *            the operation to set
 	 */
 	public void setOperation(Operation operation) {
-		this.operation = operation;
+		this.operation=operation;
 	}
 
 }

@@ -16,7 +16,7 @@ public class AddTrackerOwnerWizard extends Wizard {
 
 	public AddTrackerOwnerWizard(String pageTitle, Tracker tracker) {
 		super();
-		page = new AddTrackerOwnerWizardPage(pageTitle, tracker);
+		page=new AddTrackerOwnerWizardPage(pageTitle, tracker);
 	}
 
 	@Override

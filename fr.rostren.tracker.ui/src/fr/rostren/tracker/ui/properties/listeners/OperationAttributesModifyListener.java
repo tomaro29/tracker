@@ -15,6 +15,10 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 
 	private final OperationAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public OperationAttributesModifyListener(OperationAttributesPropertySection section) {
 		this.section=section;
 	}

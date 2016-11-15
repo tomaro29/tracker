@@ -12,6 +12,10 @@ public class OriginAttributesModifyListener extends AbstractModifyListener {
 
 	private final OriginAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public OriginAttributesModifyListener(OriginAttributesPropertySection section) {
 		this.section=section;
 	}

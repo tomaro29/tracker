@@ -16,10 +16,20 @@ public class OwnerLabelProvider extends AbstractLabelProvider {
 		return super.getText(element);
 	}
 
+	/**
+	 * Returns the {@link Owner} first name
+	 * @param owner the {@link Owner} instance
+	 * @return the {@link Owner} first name
+	 */
 	private String getOwnerFirstName(Owner owner) {
 		return StringUtils.isEmpty(owner.getFirstName()) ? OwnerLabelProvider.STRING_UNDEFINED_FIRST_NAME : owner.getFirstName();
 	}
 
+	/**
+	 * Returns the {@link Owner} last name
+	 * @param owner the {@link Owner} instance
+	 * @return the {@link Owner} last name
+	 */
 	private String getOwnerLastName(Owner owner) {
 		return StringUtils.isEmpty(owner.getLastName()) ? OwnerLabelProvider.STRING_UNDEFINED_LAST_NAME : owner.getLastName();
 	}

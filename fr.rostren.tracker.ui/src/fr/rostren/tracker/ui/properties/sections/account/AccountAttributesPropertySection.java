@@ -42,16 +42,28 @@ public class AccountAttributesPropertySection extends AbstractAttributesProperty
 		addListeners();
 	}
 
+	/**
+	 * Returns the account identifier
+	 * @return the account identifier
+	 */
 	private String getAccountIdentifier() {
 		Assert.isTrue(currentEObject instanceof Account);
 		return String.valueOf(((Account)currentEObject).getIdentifier());
 	}
 
+	/**
+	 * Returns the account amount
+	 * @return the account amount
+	 */
 	private String getAccountAmount() {
 		Assert.isTrue(currentEObject instanceof Account);
 		return String.valueOf(((Account)currentEObject).getAmount());
 	}
 
+	/**
+	 * Returns the account name
+	 * @return the account name
+	 */
 	private String getAccountName() {
 		Assert.isTrue(currentEObject instanceof Account);
 		if (((Account)currentEObject).getName() == null) {
@@ -74,14 +86,26 @@ public class AccountAttributesPropertySection extends AbstractAttributesProperty
 		identifierText.removeModifyListener(listener);
 	}
 
+	/**
+	 * Returns the name text
+	 * @return the name text
+	 */
 	public Text getNameText() {
 		return nameText;
 	}
 
+	/**
+	 * Returns the amount text
+	 * @return the amount text
+	 */
 	public Text getAmountText() {
 		return amountText;
 	}
 
+	/**
+	 * Returns the identifier text
+	 * @return the identifier text
+	 */
 	public Text getIdentifierText() {
 		return identifierText;
 	}

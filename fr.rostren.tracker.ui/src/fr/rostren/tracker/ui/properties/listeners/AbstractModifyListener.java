@@ -16,5 +16,9 @@ public abstract class AbstractModifyListener implements ModifyListener {
 		executeModify(widget);
 	}
 
+	/**
+	 * Executes the modify action
+	 * @param widget the widget
+	 */
 	abstract protected void executeModify(Widget widget);
 }

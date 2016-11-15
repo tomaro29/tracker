@@ -38,6 +38,11 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddTrackerCategoryWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddTrackerCategoryWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -51,10 +56,18 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 		createText(parent, "Description: ", description, modifyDescriptionListener); //$NON-NLS-1$
 	}
 
+	/**
+	 * Returns the category title
+	 * @return the category title
+	 */
 	public String getCategoryTitle() {
 		return title;
 	}
 
+	/**
+	 * Returns the category description
+	 * @return the category description
+	 */
 	public String getCategoryDescription() {
 		return description;
 	}

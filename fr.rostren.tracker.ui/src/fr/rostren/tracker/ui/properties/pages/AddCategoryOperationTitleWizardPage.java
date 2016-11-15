@@ -43,6 +43,11 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddCategoryOperationTitleWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddCategoryOperationTitleWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -60,6 +65,10 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 		}
 	}
 
+	/**
+	 * Returns the operation title
+	 * @return the operation title
+	 */
 	public OperationTitle getOperationTitle() {
 		return title;
 	}

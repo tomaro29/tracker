@@ -88,6 +88,11 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddCheckOperationWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddCheckOperationWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -114,26 +119,50 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 		}
 	}
 
+	/**
+	 * Returns <code>true</code> if is {@link Incoming}, <code>false</code> otherwise.
+	 * @return <code>true</code> if is {@link Incoming}, <code>false</code> otherwise.
+	 */
 	public boolean isIncoming() {
 		return isIncoming;
 	}
 
+	/**
+	 * Returns <code>true</code> if is {@link Outgoing}, <code>false</code> otherwise.
+	 * @return <code>true</code> if is {@link Outgoing}, <code>false</code> otherwise.
+	 */
 	public boolean isOutgoing() {
 		return isOutgoing;
 	}
 
+	/**
+	 * Returns <code>true</code> if is {@link Credit}, <code>false</code> otherwise.
+	 * @return <code>true</code> if is {@link Credit}, <code>false</code> otherwise.
+	 */
 	public boolean isCredit() {
 		return isCredit;
 	}
 
+	/**
+	 * Returns <code>true</code> if is {@link Debit}, <code>false</code> otherwise.
+	 * @return <code>true</code> if is {@link Debit}, <code>false</code> otherwise.
+	 */
 	public boolean isDebit() {
 		return isDebit;
 	}
 
+	/**
+	 * Returns the operation title
+	 * @return the operation title
+	 */
 	public OperationTitle getOperationTitle() {
 		return title;
 	}
 
+	/**
+	 * Returns the origin
+	 * @return the origin
+	 */
 	public Origin getOperationOrigin() {
 		return origin;
 	}

@@ -36,6 +36,10 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 		currentEObject=(EObject)input;
 	}
 
+	/**
+	 * Returns the shell
+	 * @return the shell
+	 */
 	public Shell getShell() {
 		Object currentShell=Display.getDefault().getActiveShell();
 		if (!(currentShell instanceof Shell)) {
@@ -44,10 +48,21 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 		return (Shell)currentShell;
 	}
 
+	/**
+	 * Returns the current {@link EObject}
+	 * @return the current {@link EObject}
+	 */
 	public EObject getCurrentEObject() {
 		return currentEObject;
 	}
 
+	/**
+	 * Returns the sorted list
+	 * @param <T> any type
+	 * @param set the set
+	 * @param comparator the comparator
+	 * @return the sorted list
+	 */
 	public <T> List<T> getSortedList(Set<T> set, Comparator<T> comparator) {
 		List<T> list=new ArrayList<>(set);
 		Collections.sort(list, comparator);
@@ -55,7 +70,13 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 		return list;
 	}
 
+	/**
+	 * Adds listeners
+	 */
 	abstract protected void addListeners();
 
+	/**
+	 * Disposes listeners
+	 */
 	abstract protected void disposeListeners();
 }

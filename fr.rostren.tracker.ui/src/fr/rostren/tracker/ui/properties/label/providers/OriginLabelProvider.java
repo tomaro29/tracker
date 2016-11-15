@@ -17,10 +17,20 @@ public class OriginLabelProvider extends AbstractLabelProvider {
 		return super.getText(element);
 	}
 
+	/**
+	 * The origin type
+	 * @param origin the given {@link Origin}
+	 * @return the origin type
+	 */
 	private String getOriginType(Origin origin) {
 		return origin.getType() == null ? OriginLabelProvider.STRING_UNDEFINED_TYPE : origin.getType().getLiteral();
 	}
 
+	/**
+	 * The origin identifier
+	 * @param origin the given {@link Origin}
+	 * @return the origin identifier
+	 */
 	private String getOriginIdentifier(Origin origin) {
 		return StringUtils.isEmpty(origin.getIdentifier()) ? OriginLabelProvider.STRING_UNDEFINED_ID : origin.getIdentifier();
 	}

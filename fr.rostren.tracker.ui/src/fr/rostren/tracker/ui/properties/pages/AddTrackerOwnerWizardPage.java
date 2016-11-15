@@ -37,6 +37,11 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddTrackerOwnerWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddTrackerOwnerWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -50,10 +55,18 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 		createText(parent, "Last Name: ", lastName, modifyLastNameListener); //$NON-NLS-1$
 	}
 
+	/**
+	 * Returns the first name
+	 * @return the first name
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/**
+	 * Returns the last name
+	 * @return the last name
+	 */
 	public String getLastName() {
 		return lastName;
 	}

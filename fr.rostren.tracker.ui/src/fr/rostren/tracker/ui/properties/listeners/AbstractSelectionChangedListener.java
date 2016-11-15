@@ -16,5 +16,9 @@ public abstract class AbstractSelectionChangedListener implements ISelectionChan
 		executeSelectionChanged(selection);
 	}
 
+	/**
+	 * Executes the selection changed action
+	 * @param selection the selection
+	 */
 	protected abstract void executeSelectionChanged(ISelection selection);
 }

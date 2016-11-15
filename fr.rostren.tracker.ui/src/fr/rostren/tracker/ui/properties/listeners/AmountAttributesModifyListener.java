@@ -17,6 +17,10 @@ public class AmountAttributesModifyListener extends AbstractModifyListener {
 
 	private final AmountAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public AmountAttributesModifyListener(AmountAttributesPropertySection section) {
 		this.section=section;
 	}

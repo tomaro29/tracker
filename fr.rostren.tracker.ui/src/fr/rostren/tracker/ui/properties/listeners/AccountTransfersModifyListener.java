@@ -13,6 +13,10 @@ public class AccountTransfersModifyListener extends AbstractSelectionChangedList
 
 	private final BoockletTransfersPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public AccountTransfersModifyListener(BoockletTransfersPropertySection section) {
 		this.section=section;
 	}

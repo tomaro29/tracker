@@ -50,6 +50,11 @@ public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddOriginOperationWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddOriginOperationWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -63,6 +68,10 @@ public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
 				new OperationLabelProvider(), listener);
 	}
 
+	/**
+	 * Returns the operation
+	 * @return the operation
+	 */
 	public Optional<Operation> getOperation() {
 		return operation;
 	}

@@ -11,6 +11,10 @@ public class CategoryAttributesModifyListener extends AbstractModifyListener {
 
 	private final CategoryAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public CategoryAttributesModifyListener(CategoryAttributesPropertySection section) {
 		this.section=section;
 	}

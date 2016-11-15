@@ -11,6 +11,10 @@ public class DateAttributesModifyListener extends AbstractModifyListener {
 
 	private final DateAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public DateAttributesModifyListener(DateAttributesPropertySection section) {
 		this.section=section;
 	}

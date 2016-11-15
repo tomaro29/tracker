@@ -14,11 +14,21 @@ public class TransferLabelProvider extends AbstractLabelProvider {
 		return super.getText(element);
 	}
 
-	private String getTransferTitle(Transfer operation) {
-		return operation.getOperationTitle() == null || StringUtils.isEmpty(operation.getOperationTitle().getTitle())	? OperationLabelProvider.STRING_UNDEFINED_TITLE
-																														: operation.getOperationTitle().getTitle();
+	/**
+	 * Returns the transfer title
+	 * @param transfer the {@link Transfer} instance
+	 * @return the transfer title
+	 */
+	private String getTransferTitle(Transfer transfer) {
+		return transfer.getOperationTitle() == null || StringUtils.isEmpty(transfer.getOperationTitle().getTitle())	? OperationLabelProvider.STRING_UNDEFINED_TITLE
+																														: transfer.getOperationTitle().getTitle();
 	}
 
+	/**
+	 * Returns the transfer date
+	 * @param operation the {@link Transfer} instance
+	 * @return the transfer date
+	 */
 	private String getTransferDate(Transfer operation) {
 		return operation.getDate() == null ? OperationLabelProvider.STRING_UNDEFINED_DATE : operation.getDate().toString();
 	}

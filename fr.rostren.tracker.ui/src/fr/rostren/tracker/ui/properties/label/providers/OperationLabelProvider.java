@@ -16,11 +16,21 @@ public class OperationLabelProvider extends AbstractLabelProvider {
 		return super.getText(element);
 	}
 
+	/**
+	 * Returns operation title
+	 * @param operation the given {@link Operation}
+	 * @return the operation title
+	 */
 	private String getOperationTitle(Operation operation) {
 		return operation.getOperationTitle() == null || StringUtils.isEmpty(operation.getOperationTitle().getTitle())	? OperationLabelProvider.STRING_UNDEFINED_TITLE
 																														: operation.getOperationTitle().getTitle();
 	}
 
+	/**
+	 * Returns operation date
+	 * @param operation the given {@link Operation}
+	 * @return the operation date
+	 */
 	private String getOperationDate(Operation operation) {
 		return operation.getDate() == null ? OperationLabelProvider.STRING_UNDEFINED_DATE : operation.getDate().toString();
 	}

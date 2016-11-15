@@ -11,6 +11,10 @@ public class OwnerAttributesModifyListener extends AbstractModifyListener {
 
 	private final OwnerAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public OwnerAttributesModifyListener(OwnerAttributesPropertySection section) {
 		this.section=section;
 	}

@@ -33,6 +33,11 @@ public class AddTrackerOperationTitleWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddTrackerOperationTitleWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddTrackerOperationTitleWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -45,8 +50,11 @@ public class AddTrackerOperationTitleWizardPage extends AbstractAddWizardPage {
 		createText(parent, "Title: ", title, modifyTitleListener); //$NON-NLS-1$
 	}
 
+	/**
+	 * Returns the operation title
+	 * @return the operation title
+	 */
 	public String getOperationTitle() {
 		return title;
 	}
-
 }

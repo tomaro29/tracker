@@ -18,6 +18,14 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 	protected Button removeButton;
 	protected Table table;
 
+	/**
+	 * Creates a table
+	 * @param composite the composite parent of the {@link Table} to create
+	 * @param control the control
+	 * @param addButtonlistener the add button listener
+	 * @param removeButtonListener the remove button listener
+	 * @return the created table
+	 */
 	protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
 		Table table=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
@@ -55,6 +63,11 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		return table;
 	}
 
+	/**
+	 * Disposes buttons listeners
+	 * @param addButtonlistener the add listener
+	 * @param removeButtonListener the remove listener
+	 */
 	protected void disposeButtonsListeners(SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
 		if (addButton != null && !addButton.isDisposed()) {
 			addButton.removeSelectionListener(addButtonlistener);

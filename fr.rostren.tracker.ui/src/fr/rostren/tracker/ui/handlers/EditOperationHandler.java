@@ -44,6 +44,10 @@ public class EditOperationHandler extends AbstractHandler {
 		return null;
 	}
 
+	/**
+	 * Sets the shell
+	 * @param shell the shell
+	 */
 	private void setShell(Shell shell) {
 		this.shell=shell;
 	}

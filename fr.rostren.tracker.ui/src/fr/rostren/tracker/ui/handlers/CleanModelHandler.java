@@ -74,10 +74,18 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 		return null;
 	}
 
+	/**
+	 * Returns the shell
+	 * @return the shell
+	 */
 	public Shell getShell() {
 		return shell;
 	}
 
+	/**
+	 * Sets the shell
+	 * @param shell the shell
+	 */
 	private void setShell(Shell shell) {
 		this.shell=shell;
 	}

@@ -11,6 +11,10 @@ public class AccountAttributesModifyListener extends AbstractModifyListener {
 
 	private final AccountAttributesPropertySection section;
 
+	/**
+	 * Constructor
+	 * @param section the section
+	 */
 	public AccountAttributesModifyListener(AccountAttributesPropertySection section) {
 		this.section=section;
 	}

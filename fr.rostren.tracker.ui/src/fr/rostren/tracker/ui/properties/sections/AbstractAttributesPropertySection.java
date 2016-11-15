@@ -15,6 +15,13 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
 public abstract class AbstractAttributesPropertySection extends AbstractTrackerPropertySection {
 
+	/**
+	 * Creates a label text
+	 * @param composite the composite parent of the label to create
+	 * @param control the control
+	 * @param label the label
+	 * @return the created {@link Text}
+	 */
 	protected Text createLabeledText(Composite composite, Control control, String label) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
 		Text attributeText=widgetFactory.createText(composite, StringUtils.EMPTY);
@@ -40,6 +47,13 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		return attributeText;
 	}
 
+	/**
+	 * Creates a labeled combo
+	 * @param composite the composite parent of the combo to create
+	 * @param control the control
+	 * @param label the label
+	 * @return the created {@link CCombo}
+	 */
 	protected CCombo createLabeledCombo(Composite composite, Control control, String label) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
 		CCombo refCombo=widgetFactory.createCCombo(composite);

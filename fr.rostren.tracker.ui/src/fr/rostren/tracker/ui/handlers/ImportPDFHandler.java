@@ -65,12 +65,21 @@ public class ImportPDFHandler extends AbstractHandler {
 		return null;
 	}
 
+	/**
+	 * Saves the editor
+	 * @param event the {@link ExecutionEvent} instance
+	 */
 	private void save(ExecutionEvent event) {
 		// FIXME use EMF Commands instead of saving directly the model!
 		TrackerEditorDev editor=(TrackerEditorDev)HandlerUtil.getActiveEditor(event);
 		editor.doSave(new NullProgressMonitor());
 	}
 
+	/**
+	 * Runs the import operations action
+	 * @param pdfURIText the pdf file uri
+	 * @param account the {@link CheckingAccount} instance
+	 */
 	private void runImportOperationsAction(String pdfURIText, CheckingAccount account) {
 		ImportOperationsAction action=new ImportOperationsAction(shell, pdfURIText, account);
 		action.run();

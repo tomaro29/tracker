@@ -48,6 +48,11 @@ public class AddTrackerOriginWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddTrackerOriginWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddTrackerOriginWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -61,10 +66,18 @@ public class AddTrackerOriginWizardPage extends AbstractAddWizardPage {
 		createCombo(parent, "Type: ", AddTrackerOriginWizardPage.ORIGIN_TYPES, modifyOriginTypeListener); //$NON-NLS-1$
 	}
 
+	/**
+	 * Returns the identifier
+	 * @return the identifier
+	 */
 	public String getIdentifier() {
 		return identifier;
 	}
 
+	/**
+	 * Returns the type
+	 * @return the type
+	 */
 	public OriginType getType() {
 		return type;
 	}

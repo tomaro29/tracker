@@ -81,6 +81,11 @@ public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
 		}
 	};
 
+	/**
+	 * Constructor
+	 * @param pageTitle the page title
+	 * @param tracker the given tracker
+	 */
 	public AddBoockletTransferWizardPage(String pageTitle, Tracker tracker) {
 		super(MessageFormat.format(AddBoockletTransferWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
@@ -107,18 +112,34 @@ public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
 		}
 	}
 
+	/**
+	 * Returns <code>true</code> if is {@link Incoming}, <code>false</code> otherwise
+	 * @return <code>true</code> if is {@link Incoming}, <code>false</code> otherwise
+	 */
 	public boolean isIncoming() {
 		return isIncoming;
 	}
 
+	/**
+	 * Returns <code>true</code> if is {@link Outgoing}, <code>false</code> otherwise
+	 * @return <code>true</code> if is {@link Outgoing}, <code>false</code> otherwise
+	 */
 	public boolean isOutgoing() {
 		return isOutgoing;
 	}
 
+	/**
+	 * Returns the transfer title
+	 * @return the transfer title
+	 */
 	public OperationTitle getTransferTitle() {
 		return title;
 	}
 
+	/**
+	 * Returns the transfer origin
+	 * @return the transfer origin
+	 */
 	public Origin getTransferOrigin() {
 		return origin;
 	}

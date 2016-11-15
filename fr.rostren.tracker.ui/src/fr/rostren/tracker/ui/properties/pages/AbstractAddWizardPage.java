@@ -24,6 +24,10 @@ import fr.rostren.tracker.Tracker;
 
 public abstract class AbstractAddWizardPage extends WizardPage {
 
+	/**
+	 * Constructor
+	 * @param pageName the page name
+	 */
 	protected AbstractAddWizardPage(String pageName) {
 		super(pageName);
 	}
@@ -44,8 +48,17 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		setPageComplete(true);
 	}
 
+	/**
+	 * Creates a container
+	 * @param parent the composite parent of the container to create
+	 */
 	abstract protected void createContainer(Composite parent);
 
+	/**
+	 * Returns the list of operations related to all checking accounts
+	 * @param tracker the given tracker object
+	 * @return the list of operations in checking accounts
+	 */
 	protected List<Object> getOperations(Tracker tracker) {
 		List<Object> operations=new ArrayList<>();
 		for (Owner owner: tracker.getOwners()) {
@@ -58,18 +71,41 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		return operations;
 	}
 
+	/**
+	 * Returns the operations titles
+	 * @param tracker the {@link Tracker} instance
+	 * @return the operations titles list
+	 */
 	protected List<Object> getOperationsTitles(Tracker tracker) {
 		return new ArrayList<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
 	}
 
+	/**
+	 * Returns the origins
+	 * @param tracker the {@link Tracker} instance
+	 * @return the origins
+	 */
 	protected List<Object> getOrigins(Tracker tracker) {
 		return new ArrayList<>(tracker.getOriginsRepository().getOrigins());
 	}
 
+	/**
+	 * Returns the categories
+	 * @param tracker the {@link Tracker} instance
+	 * @return the categories
+	 */
 	protected List<Object> getCategories(Tracker tracker) {
 		return new ArrayList<>(tracker.getCategoriesRepository().getCategories());
 	}
 
+	/**
+	 * Creates text field
+	 * @param composite the composite parent of the text to create
+	 * @param label the text label
+	 * @param content the content
+	 * @param modifyListener the linked listener
+	 * @return the created text field
+	 */
 	protected Text createText(Composite composite, String label, String content, ModifyListener modifyListener) {
 		createLabel(composite, label);
 		Text text=new Text(composite, SWT.BORDER);
@@ -80,6 +116,14 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		return text;
 	}
 
+	/**
+	 * Creates combo
+	 * @param composite the composite parent of the combo to create
+	 * @param label the combo label
+	 * @param items the combo content
+	 * @param modifyListener the linked listener
+	 * @return the created combo field
+	 */
 	protected Combo createCombo(Composite composite, String label, String[] items, ModifyListener modifyListener) {
 		createLabel(composite, label);
 		Combo combo=new Combo(composite, SWT.READ_ONLY);
@@ -91,6 +135,16 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		return combo;
 	}
 
+	/**
+	 * Creates combo viewer
+	 * @param composite the composite parent of the combo to create
+	 * @param label the combo label
+	 * @param input the combo input
+	 * @param contentProvider the content provider
+	 * @param labelProvider the label Provider
+	 * @param listener the linked listener
+	 * @return the created combo viewer
+	 */
 	protected ComboViewer createComboViewer(Composite composite, String label, List<Object> input, IContentProvider contentProvider, ILabelProvider labelProvider,
 			ISelectionChangedListener listener) {
 		createLabel(composite, label);
@@ -104,6 +158,11 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		return viewer;
 	}
 
+	/**
+	 * Creates a label
+	 * @param composite the composite parent of the label to create
+	 * @param label the label
+	 */
 	private void createLabel(Composite composite, String label) {
 		if (label == null) {
 			return;

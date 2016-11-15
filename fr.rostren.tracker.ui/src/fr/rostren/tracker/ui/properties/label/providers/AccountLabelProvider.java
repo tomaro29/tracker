@@ -16,10 +16,20 @@ public class AccountLabelProvider extends AbstractLabelProvider {
 		return super.getText(element);
 	}
 
+	/**
+	 * Returns the {@link Account} name
+	 * @param account the given account
+	 * @return the {@link Account} name
+	 */
 	private String getAccountName(Account account) {
 		return StringUtils.isEmpty(account.getName()) ? AccountLabelProvider.STRING_UNDEFINED_NAME : account.getName();
 	}
 
+	/**
+	 * Returns the account identifier
+	 * @param account the given account
+	 * @return the account identifier
+	 */
 	private String getAccountIdentifier(Account account) {
 		return account.getIdentifier() == 0 ? AccountLabelProvider.STRING_UNDEFINED_IDENTIFIER : String.valueOf(account.getIdentifier());
 	}

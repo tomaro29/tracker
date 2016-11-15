@@ -16,10 +16,20 @@ public class CategoryLabelProvider extends AbstractLabelProvider {
 		return super.getText(element);
 	}
 
+	/**
+	 * Returns the category title
+	 * @param category the given {@link Category}
+	 * @return the category title
+	 */
 	private String getCategoryTitle(Category category) {
 		return StringUtils.isEmpty(category.getTitle()) ? CategoryLabelProvider.STRING_UNDEFINED_TITLE : category.getTitle();
 	}
 
+	/**
+	 * Returns the category description
+	 * @param category the given {@link Category}
+	 * @return the category description
+	 */
 	private String getCategoryDescription(Category category) {
 		return StringUtils.isEmpty(category.getDescription()) ? CategoryLabelProvider.STRING_UNDEFINED_DESCRIPTION : category.getDescription();
 	}

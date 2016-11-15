@@ -13,28 +13,54 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 
 public final class ListenersUtils {
+	/**
+	 * Constructor
+	 */
 	private ListenersUtils() {
 		// Do Nothing
 	}
 
+	/**
+	 * Executes the remove command
+	 * @param eObject the given eobject
+	 * @param feature the given feature
+	 * @param value the value
+	 */
 	public static void executeRemoveCommand(EObject eObject, EStructuralFeature feature, Object value) {
 		EditingDomain editingDomain=getEditingDomain(eObject);
 		Command cmd=RemoveCommand.create(editingDomain, eObject, feature, value);
 		editingDomain.getCommandStack().execute(cmd);
 	}
 
+	/**
+	 * Executes the add command
+	 * @param eObject the given eobject
+	 * @param feature the given feature
+	 * @param value the value
+	 */
 	public static void executeAddCommand(EObject eObject, EStructuralFeature feature, Object value) {
 		EditingDomain editingDomain=getEditingDomain(eObject);
 		Command cmd=AddCommand.create(editingDomain, eObject, feature, value);
 		editingDomain.getCommandStack().execute(cmd);
 	}
 
+	/**
+	 * Executes the set command
+	 * @param eObject the given eobject
+	 * @param feature the given feature
+	 * @param value the value
+	 */
 	public static void executeSetCommand(EObject eObject, EStructuralFeature feature, Object value) {
 		EditingDomain editingDomain=getEditingDomain(eObject);
 		Command cmd=SetCommand.create(editingDomain, eObject, feature, value);
 		editingDomain.getCommandStack().execute(cmd);
 	}
 
+	/**
+	 * Returns the editing domain
+	 * @param object the given object
+	 * @return the editing domain
+	 */
 	public static EditingDomain getEditingDomain(EObject object) {
 		Resource resource=object.eResource();
 		if (resource == null) {

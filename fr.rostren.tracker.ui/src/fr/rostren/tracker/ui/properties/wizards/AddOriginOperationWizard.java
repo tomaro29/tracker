@@ -17,6 +17,11 @@ public class AddOriginOperationWizard extends Wizard {
 
 	protected AddOriginOperationWizardPage page;
 
+	/**
+	 * Constructor.
+	 * @param pageTitle the page title
+	 * @param tracker the tracker
+	 */
 	public AddOriginOperationWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddOriginOperationWizardPage(pageTitle, tracker);
@@ -37,6 +42,10 @@ public class AddOriginOperationWizard extends Wizard {
 		addPage(page);
 	}
 
+	/**
+	 * Returns the operation
+	 * @return the operation
+	 */
 	public Optional<Operation> getOperation() {
 		return page.getOperation();
 	}

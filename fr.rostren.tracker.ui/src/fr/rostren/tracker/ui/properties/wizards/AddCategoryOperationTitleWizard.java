@@ -15,6 +15,11 @@ public class AddCategoryOperationTitleWizard extends Wizard {
 
 	protected AddCategoryOperationTitleWizardPage page;
 
+	/**
+	 * Constructor.
+	 * @param pageTitle the page title
+	 * @param tracker the tracker
+	 */
 	public AddCategoryOperationTitleWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddCategoryOperationTitleWizardPage(pageTitle, tracker);
@@ -35,6 +40,10 @@ public class AddCategoryOperationTitleWizard extends Wizard {
 		addPage(page);
 	}
 
+	/**
+	 * Returns the operation title
+	 * @return the operation title
+	 */
 	public OperationTitle getOperationTitle() {
 		return page.getOperationTitle();
 	}

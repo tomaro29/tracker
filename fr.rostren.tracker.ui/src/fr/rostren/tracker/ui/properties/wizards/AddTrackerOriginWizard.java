@@ -15,6 +15,11 @@ public class AddTrackerOriginWizard extends Wizard {
 
 	protected AddTrackerOriginWizardPage page;
 
+	/**
+	 * Constructor.
+	 * @param pageTitle the page title
+	 * @param tracker the tracker
+	 */
 	public AddTrackerOriginWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddTrackerOriginWizardPage(pageTitle, tracker);
@@ -35,10 +40,18 @@ public class AddTrackerOriginWizard extends Wizard {
 		addPage(page);
 	}
 
+	/**
+	 * Returns the identifier
+	 * @return the identifier
+	 */
 	public String getIdentifier() {
 		return page.getIdentifier();
 	}
 
+	/**
+	 * Returns the type
+	 * @return the type
+	 */
 	public OriginType getType() {
 		return page.getType();
 	}

@@ -14,6 +14,11 @@ public class AddTrackerOwnerWizard extends Wizard {
 
 	protected AddTrackerOwnerWizardPage page;
 
+	/**
+	 * Constructor.
+	 * @param pageTitle the page title
+	 * @param tracker the tracker
+	 */
 	public AddTrackerOwnerWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddTrackerOwnerWizardPage(pageTitle, tracker);
@@ -34,10 +39,18 @@ public class AddTrackerOwnerWizard extends Wizard {
 		addPage(page);
 	}
 
+	/**
+	 * Returns the first name
+	 * @return the first name
+	 */
 	public String getFirstName() {
 		return page.getFirstName();
 	}
 
+	/**
+	 * Returns the last name
+	 * @return the last name
+	 */
 	public String getLastName() {
 		return page.getLastName();
 	}

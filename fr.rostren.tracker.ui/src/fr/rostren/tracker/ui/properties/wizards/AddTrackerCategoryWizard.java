@@ -14,6 +14,11 @@ public class AddTrackerCategoryWizard extends Wizard {
 
 	protected AddTrackerCategoryWizardPage page;
 
+	/**
+	 * Constructor.
+	 * @param pageTitle the page title
+	 * @param tracker the tracker
+	 */
 	public AddTrackerCategoryWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddTrackerCategoryWizardPage(pageTitle, tracker);
@@ -34,10 +39,18 @@ public class AddTrackerCategoryWizard extends Wizard {
 		addPage(page);
 	}
 
+	/**
+	 * Returns the category title
+	 * @return the category title
+	 */
 	public String getCategoryTitle() {
 		return page.getCategoryTitle();
 	}
 
+	/**
+	 * Returns the category description
+	 * @return the category description
+	 */
 	public String getCategoryDescription() {
 		return page.getCategoryDescription();
 	}

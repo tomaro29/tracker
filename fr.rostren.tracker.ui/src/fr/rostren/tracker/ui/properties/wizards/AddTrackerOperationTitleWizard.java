@@ -14,6 +14,11 @@ public class AddTrackerOperationTitleWizard extends Wizard {
 
 	protected AddTrackerOperationTitleWizardPage page;
 
+	/**
+	 * Constructor.
+	 * @param pageTitle the page title
+	 * @param tracker the tracker
+	 */
 	public AddTrackerOperationTitleWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddTrackerOperationTitleWizardPage(pageTitle, tracker);
@@ -34,6 +39,10 @@ public class AddTrackerOperationTitleWizard extends Wizard {
 		addPage(page);
 	}
 
+	/**
+	 * Returns the operation title
+	 * @return the operation title
+	 */
 	public String getOperationTitle() {
 		return page.getOperationTitle();
 	}

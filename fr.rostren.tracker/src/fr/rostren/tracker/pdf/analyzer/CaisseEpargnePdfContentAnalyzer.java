@@ -18,15 +18,15 @@ import fr.rostren.tracker.pdf.utils.LineContent;
  */
 public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 
-	private final Pattern DATE_LINE_PATTREN=Pattern.compile("au (0[1-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - N� [1-9]{2} Page [1-9] / [1-9][\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern VIREMENTS_RECUS_LINE_PATTREN=Pattern.compile("Virements re�us[\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern PAIEMENT_CHEQUE_LINE_PATTREN=Pattern.compile("Paiements ch�ques[\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern FRAIS_BANCAIRES_LINE_PATTREN=Pattern.compile("Frais bancaires et cotisations : [+|-][0-9]+,[0-9]{2}\\s�[\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern PAIEMENTS_CARTES_BANCAIRES_LINE_PATTREN=Pattern.compile("Paiements carte bancaire N�\\s[0-9]+[A-Z\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern RETRAITS_CARTES_BANCAIRES_LINE_PATTREN=Pattern.compile("Retraits carte bancaire N�\\s[0-9]+[A-Z\\s\\n\\r]*"); //$NON-NLS-1$
-	private final Pattern PRELEVEMENTS_LINE_PATTREN=Pattern.compile("Pr�l�vements"); //$NON-NLS-1$
-	private final Pattern OPERATIONS_DIVERSES_LINE_PATTREN=Pattern.compile("Op�rations diverses"); //$NON-NLS-1$
-	private final Pattern OPERATIONS_DEPOT_LINE_PATTREN=Pattern.compile("Op�rations de d�p�t"); //$NON-NLS-1$
+	private final Pattern DATE_LINE_PATTREN=Pattern.compile("au (0[1-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - N\u00B0 [1-9]{2} Page [1-9] / [1-9][\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern VIREMENTS_RECUS_LINE_PATTREN=Pattern.compile("Virements re\u00E7us[\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern PAIEMENT_CHEQUE_LINE_PATTREN=Pattern.compile("Paiements ch\u00E8ques[\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern FRAIS_BANCAIRES_LINE_PATTREN=Pattern.compile("Frais bancaires et cotisations : [+|-][0-9]+,[0-9]{2}\\s\u20AC[\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern PAIEMENTS_CARTES_BANCAIRES_LINE_PATTREN=Pattern.compile("Paiements carte bancaire N\u00B0\\s[0-9]+[A-Z\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern RETRAITS_CARTES_BANCAIRES_LINE_PATTREN=Pattern.compile("Retraits carte bancaire N\u00B0\\s[0-9]+[A-Z\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern PRELEVEMENTS_LINE_PATTREN=Pattern.compile("Pr\u00E9l\u00E8vements"); //$NON-NLS-1$
+	private final Pattern OPERATIONS_DIVERSES_LINE_PATTREN=Pattern.compile("Op\u00E9rations diverses"); //$NON-NLS-1$
+	private final Pattern OPERATIONS_DEPOT_LINE_PATTREN=Pattern.compile("Op\u00E9rations de d\u00E9p\u00F4t"); //$NON-NLS-1$
 
 	private final Pattern DATE_SEPARATOR_PATTREN=Pattern.compile("/"); //$NON-NLS-1$
 	private final Pattern COMPLETE_LINE_PATTERN=Pattern.compile(PART_1_DATE_PATTREN.pattern().concat(DATE_SEPARATOR_PATTREN.pattern()).concat(PART_2_DATE_PATTREN.pattern())
@@ -49,7 +49,7 @@ public class CaisseEpargnePdfContentAnalyzer extends AbstractPdfContentAnalyzer 
 		Matcher prelevementsMatcher=PRELEVEMENTS_LINE_PATTREN.matcher(getCurrentLine());
 		Matcher operationsDiversesMatcher=OPERATIONS_DIVERSES_LINE_PATTREN.matcher(getCurrentLine());
 
-		if (dateMatcher.matches()) {
+		if (getCurrentYear() == 0 && dateMatcher.matches()) {
 			setCurrentYear(extractYearFromCurrentLine());
 			setLastToken(PdfToken.DATE);
 		}

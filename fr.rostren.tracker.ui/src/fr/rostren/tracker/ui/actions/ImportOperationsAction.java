@@ -7,12 +7,21 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.OperationsTitleRepository;
+import fr.rostren.tracker.OriginsRepository;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 public class ImportOperationsAction extends Action {
 	private static final String FILES_ALREADY_IMPORTED_BEFORE="The files:\n" //$NON-NLS-1$
 																	+ "''{0}''\n" //$NON-NLS-1$
 																+ "are already imported before!"; //$NON-NLS-1$
+
+	private static final String REPOSITORY_DOES_NOT_EXIST="The ''{0}'' repository does not exist, can we create it automatically ?"; //$NON-NLS-1$
+	private static final String REPOSITORY_MISSING="Some repositories are missing. User is invited to create all repositories in the tracker manually before asking for importing any file!"; //$NON-NLS-1$
 
 	private final Shell shell;
 	private final String pdfURIText;
@@ -32,6 +41,8 @@ public class ImportOperationsAction extends Action {
 
 	@Override
 	public void run() {
+		validate();
+
 		// Reads the pdf file, Extracts data
 		ExtractOperationsAction extractAction=new ExtractOperationsAction(shell, pdfURIText, account);
 		extractAction.run();
@@ -49,6 +60,59 @@ public class ImportOperationsAction extends Action {
 		if (!alreadyParsedFiles.isEmpty()) {
 			displayInformation(alreadyParsedFiles);
 		}
+	}
+
+	/**
+	 * This validates that the account repositories are not null. Otherwise, we ask the user if automatical creation is authorized.
+	 */
+	private void validate() {
+		Tracker tracker=TrackerUtils.getTracker(account);
+		boolean missing=false;
+		if (tracker.getCategoriesRepository() == null) {
+			missing=true;
+			if (askForAuthorization("categories")) { //$NON-NLS-1$
+				CategoriesRepository repository=TrackerFactory.eINSTANCE.createCategoriesRepository();
+				tracker.setCategoriesRepository(repository);
+				missing=false;
+			}
+		}
+		if (tracker.getOperationsTitlesRepositories() == null) {
+			missing=true;
+			if (askForAuthorization("operation titles")) { //$NON-NLS-1$
+				OperationsTitleRepository repository=TrackerFactory.eINSTANCE.createOperationsTitleRepository();
+				tracker.setOperationsTitlesRepositories(repository);
+				missing=false;
+			}
+		}
+		if (tracker.getOriginsRepository() == null) {
+			missing=true;
+			if (askForAuthorization("origins")) { //$NON-NLS-1$
+				OriginsRepository repository=TrackerFactory.eINSTANCE.createOriginsRepository();
+				tracker.setOriginsRepository(repository);
+				missing=false;
+			}
+		}
+
+		if (missing) {
+			displayWarning();
+		}
+	}
+
+	/**
+	 * <code>true</code> if the user allows to create automatically, <code>false</code> otherwise.
+	 * @param missingRepository the missing repository identifier
+	 * @return <code>true</code> if the user allows to create automatically, <code>false</code> otherwise.
+	 */
+	private boolean askForAuthorization(String missingRepository) {
+		return MessageDialog.openQuestion(shell, "Authorization", MessageFormat.format(ImportOperationsAction.REPOSITORY_DOES_NOT_EXIST, missingRepository)); //$NON-NLS-1$
+	}
+
+	/**
+	 * Displays warning
+	 */
+	private void displayWarning() {
+		MessageDialog.openWarning(shell, "Missing Repository", //$NON-NLS-1$
+				ImportOperationsAction.REPOSITORY_MISSING);
 	}
 
 	/**

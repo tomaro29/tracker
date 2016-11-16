@@ -123,7 +123,8 @@ public class PDFContentExtractor {
 
 					String[] lines=page.split("\n"); //$NON-NLS-1$
 					for (int j=0; j < lines.length; j++) {
-						LineContent currentLineContent=analyzer.parseLine(lines[j], origin);
+						String line=lines[j];
+						LineContent currentLineContent=analyzer.parseLine(line, origin);
 						if (currentLineContent != null && account != null && account instanceof CheckingAccount) {
 							currentLineContent.completeOperation(tracker, currentLineContent.getOperation());
 							operations.add(currentLineContent.getOperation());

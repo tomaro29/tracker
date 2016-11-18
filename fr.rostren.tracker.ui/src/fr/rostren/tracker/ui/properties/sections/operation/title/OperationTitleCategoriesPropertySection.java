@@ -22,9 +22,9 @@ import fr.rostren.tracker.Category;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationTitleCategoriesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddOperationTitleCategoryWizard;
 
@@ -48,7 +48,7 @@ public class OperationTitleCategoriesPropertySection extends AbstractTableProper
 			if (Window.OK == wizardDialog.open()) {
 				Category category=wizard.getCategory();
 				if (category != null) {
-					ListenersUtils.executeAddCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, category);
+					DomainUtils.executeAddCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, category);
 					refresh();
 				}
 			}
@@ -65,7 +65,7 @@ public class OperationTitleCategoriesPropertySection extends AbstractTableProper
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, elementToRemove);
+			DomainUtils.executeRemoveCommand(operationTitle, TrackerPackage.Literals.OPERATION_TITLE__CATEGORIES, elementToRemove);
 			refresh();
 		}
 	};

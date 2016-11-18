@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.date.DateAttributesPropertySection;
 
 public class DateAttributesModifyListener extends AbstractModifyListener {
@@ -27,13 +28,13 @@ public class DateAttributesModifyListener extends AbstractModifyListener {
 		Text yearText=section.getYearText();
 
 		if (widget.equals(dayText)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__DAY, Integer.parseInt(dayText.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__DAY, Integer.parseInt(dayText.getText()));
 		}
 		if (widget.equals(monthText)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__MONTH, monthText.getText());
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__MONTH, monthText.getText());
 		}
 		if (widget.equals(yearText)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__YEAR, Integer.parseInt(yearText.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.DATE__YEAR, Integer.parseInt(yearText.getText()));
 		}
 	}
 }

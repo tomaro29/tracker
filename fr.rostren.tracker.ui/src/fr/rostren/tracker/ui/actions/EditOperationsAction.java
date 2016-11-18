@@ -12,7 +12,9 @@ import org.eclipse.swt.widgets.Shell;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.dialogs.CheckAndEditOperationWizard;
 
 public class EditOperationsAction extends Action {
@@ -42,6 +44,18 @@ public class EditOperationsAction extends Action {
 		if (aborted) {
 			removeAll();
 			displayInformationMessage();
+			return;
+		}
+
+		addOperationsToAccount();
+	}
+
+	/**
+	 * Adds operations to the checking account.
+	 */
+	private void addOperationsToAccount() {
+		for (Operation operation: addedOperations) {
+			DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operation);
 		}
 	}
 
@@ -66,7 +80,7 @@ public class EditOperationsAction extends Action {
 	 * @return whether the edit action is aborted or not.
 	 */
 	private boolean editOperations() {
-		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations, account);
+		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations);
 		WizardDialog wizardDialog=new WizardDialog(shell, wizard);
 		return wizardDialog.open() == Window.CANCEL;
 	}

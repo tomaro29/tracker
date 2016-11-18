@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.account.AccountAttributesPropertySection;
 
 public class AccountAttributesModifyListener extends AbstractModifyListener {
@@ -27,13 +28,13 @@ public class AccountAttributesModifyListener extends AbstractModifyListener {
 		Text identifierText=section.getIdentifierText();
 
 		if (widget.equals(nameText)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__NAME, nameText.getText());
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__NAME, nameText.getText());
 		}
 		else if (widget.equals(amountText)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__AMOUNT, Float.parseFloat(amountText.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__AMOUNT, Float.parseFloat(amountText.getText()));
 		}
 		else if (widget.equals(identifierText)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__IDENTIFIER, Integer.parseInt(identifierText.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.ACCOUNT__IDENTIFIER, Integer.parseInt(identifierText.getText()));
 		}
 	}
 }

@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -16,7 +15,6 @@ import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
 import fr.rostren.tracker.ui.actions.ImportOperationsAction;
 
 public class ImportPDFHandler extends AbstractHandler {
@@ -46,8 +44,6 @@ public class ImportPDFHandler extends AbstractHandler {
 
 			account=(CheckingAccount)selectedElement;
 			// opens dialog to load a pdf
-			// TODO extend the LoadResourceDialog to set the PDF URI Text field
-			// content.
 			LoadResourceDialog dialog=new LoadResourceDialog(shell);
 			if (dialog.open() != Window.OK) {
 				continue;
@@ -61,18 +57,7 @@ public class ImportPDFHandler extends AbstractHandler {
 			}
 			runImportOperationsAction(pdfURIText, account);
 		}
-		save(event);
 		return null;
-	}
-
-	/**
-	 * Saves the editor
-	 * @param event the {@link ExecutionEvent} instance
-	 */
-	private void save(ExecutionEvent event) {
-		// FIXME use EMF Commands instead of saving directly the model!
-		TrackerEditorDev editor=(TrackerEditorDev)HandlerUtil.getActiveEditor(event);
-		editor.doSave(new NullProgressMonitor());
 	}
 
 	/**

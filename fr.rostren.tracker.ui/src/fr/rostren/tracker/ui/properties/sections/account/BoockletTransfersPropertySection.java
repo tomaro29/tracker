@@ -26,10 +26,10 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.BoockletTransfersContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.TransferLabelProvider;
 import fr.rostren.tracker.ui.properties.listeners.AccountTransfersModifyListener;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddBoockletTransferWizard;
 
@@ -75,7 +75,7 @@ public class BoockletTransfersPropertySection extends AbstractTablePropertySecti
 					newTansfer.setOrigin(transferOrigin);
 				}
 
-				ListenersUtils.executeAddCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newTansfer);
+				DomainUtils.executeAddCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newTansfer);
 				refresh();
 			}
 		}
@@ -90,7 +90,7 @@ public class BoockletTransfersPropertySection extends AbstractTablePropertySecti
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, elementToRemove);
+			DomainUtils.executeRemoveCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, elementToRemove);
 			refresh();
 		}
 	};

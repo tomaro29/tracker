@@ -1,5 +1,8 @@
 package fr.rostren.tracker.pdf.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -14,6 +17,7 @@ import fr.rostren.tracker.Tracker;
 public class TrackerUtils {
 
 	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$
+	private static Map<String, OperationTitle> operationTitlesMap=new HashMap<>();
 
 	/**
 	 * Returns the category title
@@ -71,6 +75,28 @@ public class TrackerUtils {
 			parent=parent.eContainer();
 		}
 		return parent == null ? null : (Tracker)parent;
+	}
+
+	/**
+	 * Returns the titles map
+	 * @param tracker the tracker
+	 * @return the titles map
+	 */
+	public static Map<String, OperationTitle> getOperationTitlesMap(Tracker tracker) {
+		if (TrackerUtils.operationTitlesMap.isEmpty()) {
+			for (OperationTitle title: tracker.getOperationsTitlesRepositories().getOperationsTitles()) {
+				TrackerUtils.operationTitlesMap.put(title.getTitle(), title);
+			}
+		}
+		return TrackerUtils.operationTitlesMap;
+	}
+
+	/**
+	 * Adds an operation title to the map
+	 * @param title the title to add
+	 */
+	public static void addOperationTitleToMap(OperationTitle title) {
+		TrackerUtils.operationTitlesMap.put(title.getTitle(), title);
 	}
 
 	/**

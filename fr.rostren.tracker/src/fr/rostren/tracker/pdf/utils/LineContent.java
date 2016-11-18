@@ -24,6 +24,8 @@ public class LineContent {
 	private Category linkedCategory;
 	private OperationTitle linkedOperationTitle;
 
+	private Category undefinedCategory;
+
 	/**
 	 * Constructor
 	 *
@@ -126,31 +128,52 @@ public class LineContent {
 	 *         category otherwise.
 	 */
 	public Category findCategoryInTrackerModel(String title, Tracker tracker) {
-		List<Category> categories=tracker.getCategoriesRepository().getCategories();
-		List<OperationTitle> titles=tracker.getOperationsTitlesRepositories().getOperationsTitles();
-		Category undefinedCategory=null;
+		OperationTitle existingTitle=getExistingTitle(title, tracker);
+		if (existingTitle != null) {
+			return existingTitle.getCategories().get(0);
+		}
+		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
+		setLinkedOperationTitle(newTitle);
+		newTitle.setTitle(title);
+		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
+		TrackerUtils.addOperationTitleToMap(newTitle);
 
+		undefinedCategory=undefinedCategory != null ? undefinedCategory : getUndefinedCategory(tracker);
+		undefinedCategory.getOperationTitles().add(newTitle);
+		return undefinedCategory;
+	}
+
+	/**
+	 * Returns the undefined category
+	 * @param tracker the tracker
+	 * @return the undefined category
+	 */
+	private Category getUndefinedCategory(Tracker tracker) {
+		List<Category> categories=tracker.getCategoriesRepository().getCategories();
 		for (Category category: categories) {
 			if (TrackerUtils.UNDEFINED_TITLE.equals(category.getTitle())) {
-				undefinedCategory=category;
-			}
-			for (OperationTitle existingOperationTitle: category.getOperationTitles()) {
-				if (existingOperationTitle.getTitle().equals(title)) {
-					setLinkedOperationTitle(existingOperationTitle);
-					return category;
-				}
+				return category;
 			}
 		}
-		if (undefinedCategory == null) {
-			undefinedCategory=TrackerFactory.eINSTANCE.createCategory();
-			undefinedCategory.setTitle(TrackerUtils.UNDEFINED_TITLE);
-			tracker.getCategoriesRepository().getCategories().add(undefinedCategory);
-		}
-		setLinkedOperationTitle(TrackerFactory.eINSTANCE.createOperationTitle());
-		getLinkedOperationTitle().setTitle(title);
-		titles.add(getLinkedOperationTitle());
-		undefinedCategory.getOperationTitles().add(getLinkedOperationTitle());
+		Category undefinedCategory=TrackerFactory.eINSTANCE.createCategory();
+		undefinedCategory.setTitle(TrackerUtils.UNDEFINED_TITLE);
+		tracker.getCategoriesRepository().getCategories().add(undefinedCategory);
 		return undefinedCategory;
+	}
+
+	/**
+	 * Returns the existing title
+	 * @param title the title to seek
+	 * @param tracker the tracker
+	 * @return the existing title
+	 */
+	private OperationTitle getExistingTitle(String title, Tracker tracker) {
+		if (TrackerUtils.getOperationTitlesMap(tracker).containsKey(title)) {
+			OperationTitle existingOperationTitle=TrackerUtils.getOperationTitlesMap(tracker).get(title);
+			setLinkedOperationTitle(existingOperationTitle);
+			return existingOperationTitle;
+		}
+		return null;
 	}
 
 	/**

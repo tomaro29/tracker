@@ -19,9 +19,9 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OwnerAccountsContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.AccountLabelProvider;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 
 public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
@@ -46,7 +46,7 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(owner, TrackerPackage.Literals.OWNER__ACCOUNTS, elementToRemove);
+			DomainUtils.executeRemoveCommand(owner, TrackerPackage.Literals.OWNER__ACCOUNTS, elementToRemove);
 			refresh();
 		}
 	};

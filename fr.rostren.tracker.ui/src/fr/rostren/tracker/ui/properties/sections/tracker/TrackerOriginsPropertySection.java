@@ -24,9 +24,9 @@ import fr.rostren.tracker.OriginsRepository;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.TrackerOriginsContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OriginLabelProvider;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddTrackerOriginWizard;
 
@@ -57,7 +57,7 @@ public class TrackerOriginsPropertySection extends AbstractTablePropertySection 
 					newOrigin.setType(type);
 				}
 
-				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
+				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
 				refresh();
 			}
 		}
@@ -74,7 +74,7 @@ public class TrackerOriginsPropertySection extends AbstractTablePropertySection 
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, elementToRemove);
+			DomainUtils.executeRemoveCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, elementToRemove);
 			refresh();
 		}
 	};

@@ -11,6 +11,7 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.amount.AmountAttributesPropertySection;
 
 public class AmountAttributesModifyListener extends AbstractModifyListener {
@@ -32,11 +33,11 @@ public class AmountAttributesModifyListener extends AbstractModifyListener {
 		CCombo combo=section.getCategoryCombo();
 
 		if (widget.equals(text)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, new BigDecimal(text.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, new BigDecimal(text.getText()));
 		}
 		if (widget.equals(combo)) {
 			Category category=TrackerUtils.getAmountCategory((Amount)eObject, combo.getText());
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__CATEGORY, category);
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__CATEGORY, category);
 		}
 	}
 }

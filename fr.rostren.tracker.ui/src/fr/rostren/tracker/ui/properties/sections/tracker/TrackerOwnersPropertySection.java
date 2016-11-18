@@ -22,9 +22,9 @@ import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.TrackerOwnersContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OwnerLabelProvider;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddTrackerOwnerWizard;
 
@@ -54,7 +54,7 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 					newOwner.setLastName(ownerLastName);
 				}
 
-				ListenersUtils.executeAddCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, newOwner);
+				DomainUtils.executeAddCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, newOwner);
 				refresh();
 			}
 		}
@@ -70,7 +70,7 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, elementToRemove);
+			DomainUtils.executeRemoveCommand(tracker, TrackerPackage.Literals.TRACKER__OWNERS, elementToRemove);
 			refresh();
 		}
 	};

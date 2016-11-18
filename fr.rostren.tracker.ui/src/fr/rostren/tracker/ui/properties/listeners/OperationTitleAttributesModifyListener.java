@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.operation.title.OperationTitleAttributesPropertySection;
 
 public class OperationTitleAttributesModifyListener extends AbstractModifyListener {
@@ -25,7 +26,7 @@ public class OperationTitleAttributesModifyListener extends AbstractModifyListen
 		Text text=section.getTitleText();
 
 		if (widget.equals(text)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.TITLE__TITLE, text.getText());
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.TITLE__TITLE, text.getText());
 		}
 	}
 }

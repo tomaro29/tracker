@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.ISelection;
 import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.account.BoockletTransfersPropertySection;
 
 public class AccountTransfersModifyListener extends AbstractSelectionChangedListener {
@@ -30,6 +31,6 @@ public class AccountTransfersModifyListener extends AbstractSelectionChangedList
 		Assert.isTrue(currentEObject instanceof BoockletAccount);
 		BoockletAccount bookclet=(BoockletAccount)currentEObject;
 
-		ListenersUtils.executeAddCommand(bookclet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, transfer);
+		DomainUtils.executeAddCommand(bookclet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, transfer);
 	}
 }

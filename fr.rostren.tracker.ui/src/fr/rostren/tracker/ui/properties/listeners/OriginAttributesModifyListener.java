@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Widget;
 
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.origin.OriginAttributesPropertySection;
 
 public class OriginAttributesModifyListener extends AbstractModifyListener {
@@ -27,10 +28,10 @@ public class OriginAttributesModifyListener extends AbstractModifyListener {
 		Text type=section.getTypeText();
 
 		if (widget.equals(id)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__IDENTIFIER, id.getText());
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__IDENTIFIER, id.getText());
 		}
 		else if (widget.equals(type)) {
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__TYPE, OriginType.valueOf(type.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.ORIGIN__TYPE, OriginType.valueOf(type.getText()));
 		}
 	}
 }

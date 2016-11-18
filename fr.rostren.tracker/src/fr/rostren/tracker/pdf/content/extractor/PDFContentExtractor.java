@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 
@@ -24,7 +25,7 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.pdf.analyzer.CaisseEpargnePdfContentAnalyzer;
+import fr.rostren.tracker.pdf.analyzer.CEPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
@@ -54,18 +55,20 @@ public class PDFContentExtractor {
 
 	/**
 	 * Extracts all operations from a pdf file
+	 * @param monitor the progress monitor
 	 *
 	 * @return the list of all operations extracted from the pdf file.
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
 	 * @throws IOException if an {@link IOException} is thrown
 	 */
-	public List<Operation> extractOperations() throws ExtractorException, IOException {
+	public List<Operation> extractOperations(IProgressMonitor monitor) throws ExtractorException, IOException {
 		if (account == null) {
 			throw new ExtractorException("Cannot get the selected account from the Traker editor!"); //$NON-NLS-1$
 		}
 
 		List<Operation> operations=new ArrayList<>();
 		for (String uri: getURISFromText()) {
+			monitor.subTask(uri);
 			if (StringUtils.isEmpty(uri)) {
 				continue;
 			}
@@ -80,7 +83,7 @@ public class PDFContentExtractor {
 				uri=selectedFileURI.toFileString();
 			}
 
-			operations.addAll(extractOperations(uri));
+			operations.addAll(extractOperations(uri, monitor));
 		}
 		return operations;
 	}
@@ -101,40 +104,44 @@ public class PDFContentExtractor {
 	 *
 	 * @param src
 	 *            the original PDF document path
+	 * @param monitor the progress monitor
 	 * @return the list of all the extracted operation
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
 	 * @throws IOException if an {@link IOException} is thrown
 	 */
-	private List<Operation> extractOperations(String src) throws ExtractorException, IOException {
+	private List<Operation> extractOperations(String src, IProgressMonitor monitor) throws ExtractorException, IOException {
 		List<Operation> operations=new ArrayList<>();
 
 		PdfReader reader=new PdfReader(src);
 		try {
 			Tracker tracker=TrackerUtils.getTracker(account);
-			CaisseEpargnePdfContentAnalyzer analyzer=new CaisseEpargnePdfContentAnalyzer();
+			CEPdfContentAnalyzer analyzer=new CEPdfContentAnalyzer();
 			for (int i=0; i < reader.getNumberOfPages(); i++) {
 				int index=src.lastIndexOf("/") + 1; //$NON-NLS-1$
 				String fileName=src.substring(index, src.length());
-				String originId=fileName	+ "_page_" //$NON-NLS-1$
-								+ (i + 1);
+				String originId=fileName + "_page_" + (i + 1);//$NON-NLS-1$
 				if (!isAlreadyParsed(tracker, originId)) {
 					Origin origin=createLinkedOrigin(tracker, originId);
 					String page=PdfTextExtractor.getTextFromPage(reader, i + 1);
 
 					String[] lines=page.split("\n"); //$NON-NLS-1$
+					monitor.beginTask(src + " page " + i, lines.length); //$NON-NLS-1$
 					for (int j=0; j < lines.length; j++) {
 						String line=lines[j];
+						monitor.subTask(" parsing line: " + line); //$NON-NLS-1$
 						LineContent currentLineContent=analyzer.parseLine(line, origin);
 						if (currentLineContent != null && account != null && account instanceof CheckingAccount) {
 							currentLineContent.completeOperation(tracker, currentLineContent.getOperation());
 							operations.add(currentLineContent.getOperation());
 						}
+						monitor.worked(1);
 					}
 				}
 				else {
 					alreadyParsedFiles.add(fileName);
 				}
 			}
+			monitor.done();
 		}
 		catch (IOException exception) {
 			throw new ExtractorException(Level.SEVERE, "Problem while extracting the pdf datas: Cannot get datas from the imported pdf!", //$NON-NLS-1$

@@ -9,6 +9,7 @@ import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.operation.OperationAttributesPropertySection;
 
 public class OperationAttributesModifyListener extends AbstractModifyListener {
@@ -32,11 +33,11 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 
 		if (widget.equals(titleCombo)) {
 			OperationTitle title=TrackerUtils.getOperationTitle((Operation)eObject, titleCombo.getText());
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
 		}
 		if (widget.equals(originCombo)) {
 			Origin origin=TrackerUtils.getOperationOrigin((Operation)eObject, originCombo.getText());
-			ListenersUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
 		}
 	}
 }

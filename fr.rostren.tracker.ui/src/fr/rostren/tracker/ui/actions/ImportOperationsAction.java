@@ -1,11 +1,18 @@
 package fr.rostren.tracker.ui.actions;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.Set;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.CheckingAccount;
@@ -23,7 +30,7 @@ public class ImportOperationsAction extends Action {
 	private static final String REPOSITORY_DOES_NOT_EXIST="The ''{0}'' repository does not exist, can we create it automatically ?"; //$NON-NLS-1$
 	private static final String REPOSITORY_MISSING="Some repositories are missing. User is invited to create all repositories in the tracker manually before asking for importing any file!"; //$NON-NLS-1$
 
-	private final Shell shell;
+	protected final Shell shell;
 	private final String pdfURIText;
 	private final CheckingAccount account;
 
@@ -43,12 +50,10 @@ public class ImportOperationsAction extends Action {
 	public void run() {
 		validate();
 
-		// Reads the pdf file, Extracts data
+		// Reads the pdf file and extracts data using a progress monitor
 		ExtractOperationsAction extractAction=new ExtractOperationsAction(shell, pdfURIText, account);
-		extractAction.run();
-		if (!extractAction.isDone()) {
-			return;
-		}
+		runJobInDialog(extractAction);
+
 		// Edits operations SubAmounts and categories
 		EditOperationsAction editAction=new EditOperationsAction(shell, account, extractAction.getAddedOperations(), extractAction.getAddedOrigins());
 		editAction.run();
@@ -60,6 +65,33 @@ public class ImportOperationsAction extends Action {
 		if (!alreadyParsedFiles.isEmpty()) {
 			displayInformation(alreadyParsedFiles);
 		}
+	}
+
+	/**
+	 * Runs the given job in the progress monitor view
+	 * @param job the job to run
+	 */
+	public void runJobInDialog(final IRunnableWithProgress job) {
+		Runnable runnable=new Runnable() {
+			@Override
+			public void run() {
+				IWorkbench workench=PlatformUI.getWorkbench();
+				IWorkbenchWindow window=workench.getActiveWorkbenchWindow();
+				Shell shell=window != null ? window.getShell() : null;
+				try {
+					ProgressMonitorDialog dialog=new ProgressMonitorDialog(shell);
+					dialog.run(true, true, job);
+				}
+				catch (InterruptedException e) {
+					return;
+				}
+				catch (InvocationTargetException e) {
+					MessageDialog.openWarning(shell, "Extraction interruption", "The extraction action has been interrupted for a technical reason."); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
+		};
+
+		Display.getDefault().syncExec(runnable);
 	}
 
 	/**

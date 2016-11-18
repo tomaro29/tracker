@@ -1,13 +1,15 @@
 package fr.rostren.tracker.ui.actions;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.jface.action.Action;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
@@ -16,14 +18,13 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
 
-public class ExtractOperationsAction extends Action {
+public class ExtractOperationsAction implements IRunnableWithProgress {
 	private final Shell shell;
 	private final String pdfURIText;
 	private final PDFContentExtractor extractor;
 
 	private List<Operation> addedOperations=new ArrayList<>();
 	private final Set<Origin> addedOrigins=new HashSet<>();
-	private boolean done=false;
 
 	/**
 	 * Constructor
@@ -38,27 +39,33 @@ public class ExtractOperationsAction extends Action {
 	}
 
 	@Override
-	public void run() {
-		extractOperations(extractor);
-		if (done && addedOperations.isEmpty()) {
+	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+		boolean done=false;
+		monitor.beginTask("Extract Operations", 1); //$NON-NLS-1$
+		if (!monitor.isCanceled()) {
+			done=extractOperations(extractor, monitor);
+		}
+		if (!monitor.isCanceled() && done && addedOperations.isEmpty()) {
 			MessageDialog.openError(shell, "Cannot Import PDF", //$NON-NLS-1$
 					"The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
 																+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
-			return;
 		}
+		monitor.done();
 	}
 
 	/**
 	 * Extracts the operations
 	 * @param extractor the extractor
+	 * @param monitor the progress monitor
+	 * @return <code>true</code> if it is done, <code>false</code> otherwise.
 	 */
-	private void extractOperations(PDFContentExtractor extractor) {
+	private boolean extractOperations(PDFContentExtractor extractor, IProgressMonitor monitor) {
 		try {
-			addedOperations=extractor.extractOperations();
+			addedOperations=extractor.extractOperations(monitor);
 			for (Operation operation: addedOperations) {
 				addedOrigins.add(operation.getOrigin());
 			}
-			done=true;
+			return true;
 		}
 		catch (ExtractorException e) {
 			MessageDialog.openError(shell, "Problem while extracting operations", //$NON-NLS-1$
@@ -68,6 +75,7 @@ public class ExtractOperationsAction extends Action {
 			MessageDialog.openError(shell, "Problem while opening the PDF File", //$NON-NLS-1$
 					e.getMessage());
 		}
+		return false;
 	}
 
 	/**
@@ -91,12 +99,5 @@ public class ExtractOperationsAction extends Action {
 	 */
 	public Set<Origin> getAddedOrigins() {
 		return addedOrigins;
-	}
-
-	/**
-	 * @return the done
-	 */
-	public boolean isDone() {
-		return done;
 	}
 }

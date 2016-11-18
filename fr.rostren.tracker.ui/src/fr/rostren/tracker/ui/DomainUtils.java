@@ -1,4 +1,4 @@
-package fr.rostren.tracker.ui.properties.listeners;
+package fr.rostren.tracker.ui;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
@@ -12,11 +12,11 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 
-public final class ListenersUtils {
+public final class DomainUtils {
 	/**
 	 * Constructor
 	 */
-	private ListenersUtils() {
+	private DomainUtils() {
 		// Do Nothing
 	}
 

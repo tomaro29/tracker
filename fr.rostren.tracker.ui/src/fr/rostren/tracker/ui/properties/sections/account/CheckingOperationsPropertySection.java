@@ -26,9 +26,9 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CheckingOperationsContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationLabelProvider;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddCheckOperationWizard;
 
@@ -78,7 +78,7 @@ public class CheckingOperationsPropertySection extends AbstractTablePropertySect
 					newOperation.setOrigin(operationOrigin);
 				}
 
-				ListenersUtils.executeAddCommand(checking, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newOperation);
+				DomainUtils.executeAddCommand(checking, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, newOperation);
 				refresh();
 			}
 		}
@@ -94,7 +94,7 @@ public class CheckingOperationsPropertySection extends AbstractTablePropertySect
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, elementToRemove);
+			DomainUtils.executeRemoveCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, elementToRemove);
 			refresh();
 		}
 	};

@@ -94,6 +94,13 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 		}
 
 		EList<OperationTitle> operationsTitles=repository.getOperationsTitles();
+		if (!operationsTitles.isEmpty()) {
+			for (OperationTitle operationTitle: operationsTitles) {
+				if (operationTitle.getTitle() == null) {
+					CheckingAccountItemProviderDev.defaultOperationTitle=operationTitle;
+				}
+			}
+		}
 		if (CheckingAccountItemProviderDev.defaultOperationTitle == null || !operationsTitles.contains(CheckingAccountItemProviderDev.defaultOperationTitle)) {
 			CheckingAccountItemProviderDev.defaultOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 			operationsTitles.add(CheckingAccountItemProviderDev.defaultOperationTitle);

@@ -23,9 +23,9 @@ import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTitlesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvider;
-import fr.rostren.tracker.ui.properties.listeners.ListenersUtils;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
 
@@ -53,7 +53,7 @@ public class OperationsTitlesRepositoryPropertySection extends AbstractTableProp
 					newOperationTitle.setTitle(title);
 				}
 
-				ListenersUtils.executeAddCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
+				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
 				refresh();
 			}
 		}
@@ -69,7 +69,7 @@ public class OperationsTitlesRepositoryPropertySection extends AbstractTableProp
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			ListenersUtils.executeRemoveCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, elementToRemove);
+			DomainUtils.executeRemoveCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, elementToRemove);
 			refresh();
 		}
 	};

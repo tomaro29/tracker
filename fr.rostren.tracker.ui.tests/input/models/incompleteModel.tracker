@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tracker:Tracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tracker="http://fr.rostren.tracker/1.0">
+  <owners firstName="first" lastName="last"/>
+</tracker:Tracker>

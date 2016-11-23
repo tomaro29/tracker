@@ -14,15 +14,16 @@ import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.ui.AbortEditActionException;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.dialogs.CheckAndEditOperationWizard;
 
 public class EditOperationsAction extends Action {
+	private static final String ACTION_ABORTED_MESSAGE="The Current PDF Import Action is aborted! All new origins and operations will be cleaned from the model."; //$NON-NLS-1$
 	private final Shell shell;
 	private final CheckingAccount account;
 	private final List<Operation> addedOperations;
 	private final Set<Origin> addedOrigins;
-	private boolean aborted=false;
 
 	/**
 	 * Constructor
@@ -40,14 +41,14 @@ public class EditOperationsAction extends Action {
 
 	@Override
 	public void run() {
-		aborted=editOperations();
-		if (aborted) {
-			removeAll();
-			displayInformationMessage();
-			return;
+		try {
+			editOperations();
+			addOperationsToAccount();
 		}
-
-		addOperationsToAccount();
+		catch (AbortEditActionException e) {
+			removeAll();
+			MessageDialog.openInformation(shell, "Abort PDF Import Action", e.getMessage());//$NON-NLS-1$
+		}
 	}
 
 	/**
@@ -60,14 +61,6 @@ public class EditOperationsAction extends Action {
 	}
 
 	/**
-	 * Displays an information message to inform that the action was aborted.
-	 */
-	private void displayInformationMessage() {
-		MessageDialog.openInformation(shell, "Abort PDF Import Action", //$NON-NLS-1$
-				"The Current PDF Import Action is aborted! All new origins and operations will be cleaned from the model."); //$NON-NLS-1$
-	}
-
-	/**
 	 * Removes all extracted operations. Used when the action is aborted.
 	 */
 	private void removeAll() {
@@ -77,18 +70,13 @@ public class EditOperationsAction extends Action {
 
 	/**
 	 * Edits operations.
-	 * @return whether the edit action is aborted or not.
+	 * @throws AbortEditActionException if the action is aborted
 	 */
-	private boolean editOperations() {
+	private void editOperations() throws AbortEditActionException {
 		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations);
 		WizardDialog wizardDialog=new WizardDialog(shell, wizard);
-		return wizardDialog.open() == Window.CANCEL;
-	}
-
-	/**
-	 * @return <code>true</code> if aborted, <code>false</code> otherwise.
-	 */
-	public boolean isAborted() {
-		return aborted;
+		if (wizardDialog.open() == Window.CANCEL) {
+			throw new AbortEditActionException(EditOperationsAction.ACTION_ABORTED_MESSAGE);
+		}
 	}
 }

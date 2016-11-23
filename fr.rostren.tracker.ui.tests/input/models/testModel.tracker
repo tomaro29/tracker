@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tracker:Tracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tracker="http://fr.rostren.tracker/1.0">
+  <owners firstName="first name" lastName="last name">
+    <accounts xsi:type="tracker:CheckingAccount" name="checking">
+      <operations xsi:type="tracker:Credit" totalAmount="18.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="18.26"/>
+        <date day="12" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="8.40" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="8.40"/>
+        <date day="15" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="25.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.1" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="25.20"/>
+        <date day="17" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="10.13" operationTitle="//@operationsTitlesRepositories/@operationsTitles.2" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="10.13"/>
+        <date day="19" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="15.10" operationTitle="//@operationsTitlesRepositories/@operationsTitles.3" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="15.10"/>
+        <date day="24" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="2089.39" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="2089.39"/>
+        <date day="29" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="13.80" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="13.80"/>
+        <date day="30" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="17.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.5" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="17.20"/>
+        <date day="30" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="33.90" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="33.90"/>
+        <date day="31" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="6.90" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="6.90"/>
+        <date day="2" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="2412.69" operationTitle="//@operationsTitlesRepositories/@operationsTitles.6" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="2412.69"/>
+        <date day="2" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="1100.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="1100.00"/>
+        <date day="5" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="40.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="40.00"/>
+        <date day="24" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="60.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="60.00"/>
+        <date day="31" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="36.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="36.00"/>
+        <date day="30" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="28.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="28.00"/>
+        <date day="15" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="25.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="25.00"/>
+        <date day="22" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="20.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="20.00"/>
+        <date day="8" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Credit" totalAmount="2.43" operationTitle="//@operationsTitlesRepositories/@operationsTitles.8" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="2.43"/>
+        <date day="16" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="12.78" operationTitle="//@operationsTitlesRepositories/@operationsTitles.9" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="12.78"/>
+        <date day="16" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="239.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.10" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="239.00"/>
+        <date day="10" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="335.42" operationTitle="//@operationsTitlesRepositories/@operationsTitles.11" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="335.42"/>
+        <date day="10" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="71.48" operationTitle="//@operationsTitlesRepositories/@operationsTitles.12" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="71.48"/>
+        <date day="10" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="1.58" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="1.58"/>
+        <date day="11" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="18.10" operationTitle="//@operationsTitlesRepositories/@operationsTitles.14" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="18.10"/>
+        <date day="12" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="8.95" operationTitle="//@operationsTitlesRepositories/@operationsTitles.15" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="8.95"/>
+        <date day="12" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="9.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="9.20"/>
+        <date day="13" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="9.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="9.20"/>
+        <date day="16" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="46.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.16" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="46.00"/>
+        <date day="16" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="8.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.17" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="8.00"/>
+        <date day="16" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="64.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.18" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="64.00"/>
+        <date day="17" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="119.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.19" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="119.00"/>
+        <date day="18" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="85.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.20" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="85.00"/>
+        <date day="19" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="8.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.21" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="8.26"/>
+        <date day="20" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="55.59" operationTitle="//@operationsTitlesRepositories/@operationsTitles.22" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="55.59"/>
+        <date day="23" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="56.50" operationTitle="//@operationsTitlesRepositories/@operationsTitles.23" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="56.50"/>
+        <date day="24" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="7.60" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="7.60"/>
+        <date day="26" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="18.10" operationTitle="//@operationsTitlesRepositories/@operationsTitles.24" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="18.10"/>
+        <date day="31" month="Dec" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="134.98" operationTitle="//@operationsTitlesRepositories/@operationsTitles.25" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="134.98"/>
+        <date day="6" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="86.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.26" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="86.00"/>
+        <date day="6" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="345.81" operationTitle="//@operationsTitlesRepositories/@operationsTitles.27" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="345.81"/>
+        <date day="8" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="123.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.28" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="123.00"/>
+        <date day="8" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="12.35" operationTitle="//@operationsTitlesRepositories/@operationsTitles.21" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="12.35"/>
+        <date day="8" year="2016"/>
+      </operations>
+      <operations xsi:type="tracker:Debit" totalAmount="8.80" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1">
+        <subAmounts category="//@categoriesRepository/@categories.0" value="8.80"/>
+        <date day="8" year="2016"/>
+      </operations>
+    </accounts>
+  </owners>
+  <originsRepository>
+    <origins identifier="TEST.pdf_page_1" operations="//@owners.0/@accounts.0/@operations.0 //@owners.0/@accounts.0/@operations.1 //@owners.0/@accounts.0/@operations.2 //@owners.0/@accounts.0/@operations.3 //@owners.0/@accounts.0/@operations.4 //@owners.0/@accounts.0/@operations.5 //@owners.0/@accounts.0/@operations.6 //@owners.0/@accounts.0/@operations.7 //@owners.0/@accounts.0/@operations.8 //@owners.0/@accounts.0/@operations.9"/>
+    <origins identifier="TEST.pdf_page_2" operations="//@owners.0/@accounts.0/@operations.10 //@owners.0/@accounts.0/@operations.11 //@owners.0/@accounts.0/@operations.12 //@owners.0/@accounts.0/@operations.13 //@owners.0/@accounts.0/@operations.14 //@owners.0/@accounts.0/@operations.15 //@owners.0/@accounts.0/@operations.16 //@owners.0/@accounts.0/@operations.17 //@owners.0/@accounts.0/@operations.18 //@owners.0/@accounts.0/@operations.19 //@owners.0/@accounts.0/@operations.20 //@owners.0/@accounts.0/@operations.21 //@owners.0/@accounts.0/@operations.22 //@owners.0/@accounts.0/@operations.23 //@owners.0/@accounts.0/@operations.24 //@owners.0/@accounts.0/@operations.25 //@owners.0/@accounts.0/@operations.26 //@owners.0/@accounts.0/@operations.27 //@owners.0/@accounts.0/@operations.28 //@owners.0/@accounts.0/@operations.29 //@owners.0/@accounts.0/@operations.30 //@owners.0/@accounts.0/@operations.31 //@owners.0/@accounts.0/@operations.32 //@owners.0/@accounts.0/@operations.33 //@owners.0/@accounts.0/@operations.34 //@owners.0/@accounts.0/@operations.35 //@owners.0/@accounts.0/@operations.36 //@owners.0/@accounts.0/@operations.37 //@owners.0/@accounts.0/@operations.38 //@owners.0/@accounts.0/@operations.39 //@owners.0/@accounts.0/@operations.40 //@owners.0/@accounts.0/@operations.41 //@owners.0/@accounts.0/@operations.42 //@owners.0/@accounts.0/@operations.43"/>
+  </originsRepository>
+  <categoriesRepository>
+    <categories title="UNDEFINED" operationTitles="//@operationsTitlesRepositories/@operationsTitles.0 //@operationsTitlesRepositories/@operationsTitles.1 //@operationsTitlesRepositories/@operationsTitles.2 //@operationsTitlesRepositories/@operationsTitles.3 //@operationsTitlesRepositories/@operationsTitles.5 //@operationsTitlesRepositories/@operationsTitles.6 //@operationsTitlesRepositories/@operationsTitles.7 //@operationsTitlesRepositories/@operationsTitles.8 //@operationsTitlesRepositories/@operationsTitles.9 //@operationsTitlesRepositories/@operationsTitles.10 //@operationsTitlesRepositories/@operationsTitles.11 //@operationsTitlesRepositories/@operationsTitles.12 //@operationsTitlesRepositories/@operationsTitles.13 //@operationsTitlesRepositories/@operationsTitles.14 //@operationsTitlesRepositories/@operationsTitles.15 //@operationsTitlesRepositories/@operationsTitles.16 //@operationsTitlesRepositories/@operationsTitles.17 //@operationsTitlesRepositories/@operationsTitles.18 //@operationsTitlesRepositories/@operationsTitles.19 //@operationsTitlesRepositories/@operationsTitles.20 //@operationsTitlesRepositories/@operationsTitles.21 //@operationsTitlesRepositories/@operationsTitles.22 //@operationsTitlesRepositories/@operationsTitles.23 //@operationsTitlesRepositories/@operationsTitles.24 //@operationsTitlesRepositories/@operationsTitles.25 //@operationsTitlesRepositories/@operationsTitles.26 //@operationsTitlesRepositories/@operationsTitles.27 //@operationsTitlesRepositories/@operationsTitles.28"/>
+    <categories title="RECETTES" operationTitles="//@operationsTitlesRepositories/@operationsTitles.4"/>
+  </categoriesRepository>
+  <operationsTitlesRepositories>
+    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@categories.1"/>
+    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB WEEKENDESK.FR FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB HOP FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB EASYJET ENH FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB P TITS DELICES FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB STYL'FLEURS FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB EURL HAREL FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB DR BERTHELIN FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB PEAGE PT DE RE FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB ANTOINE TAXI FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB EUREKA INN FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB ANTO TAXI FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB INTERMARCHE FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB YVES ROCHER FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB PARECOIF FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB GUILLOU FRANCOI FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB BATA FRANCE FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB CAFE DE LA FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB THY - WWW.THY.C FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+    <operationsTitles title="CB SNCF INTERNET FACT 000000 " categories="//@categoriesRepository/@categories.0"/>
+  </operationsTitlesRepositories>
+</tracker:Tracker>

@@ -53,14 +53,14 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		titleCombo.setItems(items);
 		if (operationTitle != null) {
 			String title=operationTitle.getTitle();
-			titleCombo.setItem(Arrays.asList(items).indexOf(title), title);
+			titleCombo.select(Arrays.asList(items).indexOf(title));
 		}
 		items=getOriginsItems();
 		originCombo.setItems(items);
 		Origin origin=getOperationOriginItem();
 		if (origin != null) {
 			String identifier=origin.getIdentifier();
-			originCombo.setItem(Arrays.asList(items).indexOf(identifier), identifier);
+			originCombo.select(Arrays.asList(items).indexOf(identifier));
 		}
 		addListeners();
 	}

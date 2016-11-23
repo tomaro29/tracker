@@ -11,8 +11,10 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
 
 public class TrackerUtils {
 
@@ -78,17 +80,26 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * Returns the titles map
+	 * Returns the operation title
 	 * @param tracker the tracker
-	 * @return the titles map
+	 * @param title the title
+	 * @return the operation title
 	 */
-	public static Map<String, OperationTitle> getOperationTitlesMap(Tracker tracker) {
-		if (TrackerUtils.operationTitlesMap.isEmpty()) {
-			for (OperationTitle title: tracker.getOperationsTitlesRepositories().getOperationsTitles()) {
-				TrackerUtils.operationTitlesMap.put(title.getTitle(), title);
+	public static OperationTitle getOperationTitle(Tracker tracker, String title) {
+		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
+			return null;
+		}
+		OperationsTitleRepository repository=tracker.getOperationsTitlesRepositories();
+		if (repository == null) {
+			repository=TrackerFactory.eINSTANCE.createOperationsTitleRepository();
+			tracker.setOperationsTitlesRepositories(repository);
+		}
+		for (OperationTitle operationTitle: repository.getOperationsTitles()) {
+			if (operationTitle.getTitle().equals(title)) {
+				return operationTitle;
 			}
 		}
-		return TrackerUtils.operationTitlesMap;
+		return null;
 	}
 
 	/**
@@ -148,5 +159,17 @@ public class TrackerUtils {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <code>true</code> if the category is the undefined category, <code>false</code> otherwise.
+	 * @param category the category
+	 * @return <code>true</code> if the category is the undefined category, <code>false</code> otherwise.
+	 */
+	public static boolean isUndefinedCategory(Category category) {
+		if (TrackerUtils.UNDEFINED_TITLE.equals(category.getTitle())) {
+			return true;
+		}
+		return false;
 	}
 }

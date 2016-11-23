@@ -19,7 +19,8 @@ import fr.rostren.tracker.pdf.utils.LineContent;
 public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 
 	private final Pattern ONLY_NUMBERS=Pattern.compile("[0-9]*"); //$NON-NLS-1$
-	private final Pattern DATE_LINE_PATTREN=Pattern.compile("au (0[1-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4} - N\u00B0 [1-9]{2} Page [1-9] / [1-9][\\s\\n\\r]*"); //$NON-NLS-1$
+	private final Pattern DATE_LINE_PATTREN=Pattern
+			.compile("au (0[1-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4}[\\s]*-[\\s]*N\u00B0[\\s]*[1-9]{2}[\\s]*Page[\\s]*[1-9][\\s]*/[\\s]*[1-9][\\s\\n\\r]*"); //$NON-NLS-1$
 	private final Pattern VIREMENTS_RECUS_LINE_PATTREN=Pattern.compile("Virements re\u00E7us[\\s\\n\\r]*"); //$NON-NLS-1$
 	private final Pattern PAIEMENT_CHEQUE_LINE_PATTREN=Pattern.compile("Paiements ch\u00E8ques[\\s\\n\\r]*"); //$NON-NLS-1$
 	private final Pattern FRAIS_BANCAIRES_LINE_PATTREN=Pattern.compile("Frais bancaires et cotisations : [+|-][0-9]+,[0-9]{2}\\s\u20AC[\\s\\n\\r]*"); //$NON-NLS-1$

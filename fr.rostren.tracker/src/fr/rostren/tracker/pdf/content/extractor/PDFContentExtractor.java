@@ -131,7 +131,7 @@ public class PDFContentExtractor {
 						monitor.subTask(" parsing line: " + line); //$NON-NLS-1$
 						LineContent currentLineContent=analyzer.parseLine(line, origin);
 						if (currentLineContent != null && account != null && account instanceof CheckingAccount) {
-							currentLineContent.completeOperation(tracker, currentLineContent.getOperation());
+							currentLineContent.completeOperation(tracker);
 							operations.add(currentLineContent.getOperation());
 						}
 						monitor.worked(1);
@@ -144,7 +144,11 @@ public class PDFContentExtractor {
 			monitor.done();
 		}
 		catch (IOException exception) {
-			throw new ExtractorException(Level.SEVERE, "Problem while extracting the pdf datas: Cannot get datas from the imported pdf!", //$NON-NLS-1$
+			throw new ExtractorException(Level.SEVERE, "Problem while extracting the pdf datas: Cannot get data from the imported pdf!", //$NON-NLS-1$
+					exception);
+		}
+		catch (Exception exception) {
+			throw new ExtractorException(Level.SEVERE, "Problem while extracting the pdf datas: Cannot get data from the imported pdf!", //$NON-NLS-1$
 					exception);
 		}
 		finally {

@@ -2,7 +2,6 @@ package fr.rostren.tracker.ui.actions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
-import java.util.Set;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -53,17 +52,10 @@ public class ImportOperationsAction extends Action {
 		// Reads the pdf file and extracts data using a progress monitor
 		ExtractOperationsAction extractAction=new ExtractOperationsAction(shell, pdfURIText, account);
 		runJobInDialog(extractAction);
-
-		// Edits operations SubAmounts and categories
-		EditOperationsAction editAction=new EditOperationsAction(shell, account, extractAction.getAddedOperations(), extractAction.getAddedOrigins());
-		editAction.run();
-		if (!editAction.isAborted()) {
-			return;
-		}
-		// display information if the pdf file is already scanned
-		Set<String> alreadyParsedFiles=extractAction.getExtractor().getAlreadyParsedFiles();
-		if (!alreadyParsedFiles.isEmpty()) {
-			displayInformation(alreadyParsedFiles);
+		if (!extractAction.getAddedOperations().isEmpty()) {
+			// Edits operations SubAmounts and categories
+			EditOperationsAction editAction=new EditOperationsAction(shell, account, extractAction.getAddedOperations(), extractAction.getAddedOrigins());
+			editAction.run();
 		}
 	}
 
@@ -83,7 +75,7 @@ public class ImportOperationsAction extends Action {
 					dialog.run(true, true, job);
 				}
 				catch (InterruptedException e) {
-					return;
+					MessageDialog.openInformation(shell, "Unable to Import Files", e.getMessage());//$NON-NLS-1$
 				}
 				catch (InvocationTargetException e) {
 					MessageDialog.openWarning(shell, "Extraction interruption", "The extraction action has been interrupted for a technical reason."); //$NON-NLS-1$ //$NON-NLS-2$
@@ -145,21 +137,5 @@ public class ImportOperationsAction extends Action {
 	private void displayWarning() {
 		MessageDialog.openWarning(shell, "Missing Repository", //$NON-NLS-1$
 				ImportOperationsAction.REPOSITORY_MISSING);
-	}
-
-	/**
-	 * Displays information
-	 * @param alreadyParsedFiles the set of already parsed files uris
-	 */
-	private void displayInformation(Set<String> alreadyParsedFiles) {
-		StringBuilder sb=new StringBuilder();
-		for (String parsedOrigin: alreadyParsedFiles) {
-			if (!sb.toString().isEmpty()) {
-				sb.append("',\n'"); //$NON-NLS-1$
-			}
-			sb.append(parsedOrigin);
-		}
-		MessageDialog.openInformation(shell, "Unable to Import Files", //$NON-NLS-1$
-				MessageFormat.format(ImportOperationsAction.FILES_ALREADY_IMPORTED_BEFORE, sb.toString()));
 	}
 }

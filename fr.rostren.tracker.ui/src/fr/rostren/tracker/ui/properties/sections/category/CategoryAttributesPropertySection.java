@@ -14,6 +14,7 @@ import fr.rostren.tracker.ui.properties.listeners.CategoryAttributesModifyListen
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
 public class CategoryAttributesPropertySection extends AbstractAttributesPropertySection {
+	protected Text titleText;
 	protected Text descriptionText;
 
 	private final ModifyListener listener=new CategoryAttributesModifyListener(this);
@@ -22,7 +23,8 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		descriptionText=createLabeledText(body, null, "Description:"); //$NON-NLS-1$
+		titleText=createLabeledText(body, null, "Title:"); //$NON-NLS-1$
+		descriptionText=createLabeledText(body, titleText, "Description:"); //$NON-NLS-1$
 		addListeners();
 	}
 
@@ -31,8 +33,22 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
 		super.setInput(part, selection);
 
 		disposeListeners();
+		titleText.setText(getOperationTileValue());
 		descriptionText.setText(getDescriptionValue());
 		addListeners();
+	}
+
+	/**
+	 * Returns the operation title value
+	 * @return the operation title value
+	 */
+	private String getOperationTileValue() {
+		Assert.isTrue(currentEObject instanceof Category);
+		String title=((Category)currentEObject).getTitle();
+		if (title == null) {
+			return StringUtils.EMPTY;
+		}
+		return title;
 	}
 
 	/**
@@ -50,12 +66,22 @@ public class CategoryAttributesPropertySection extends AbstractAttributesPropert
 
 	@Override
 	protected void addListeners() {
+		titleText.addModifyListener(listener);
 		descriptionText.addModifyListener(listener);
 	}
 
 	@Override
 	protected void disposeListeners() {
+		titleText.removeModifyListener(listener);
 		descriptionText.removeModifyListener(listener);
+	}
+
+	/**
+	 * Returns the title {@link Text}
+	 * @return the title {@link Text}
+	 */
+	public Text getTitleText() {
+		return titleText;
 	}
 
 	/**

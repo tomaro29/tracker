@@ -23,10 +23,14 @@ public class CategoryAttributesModifyListener extends AbstractModifyListener {
 	@Override
 	protected void executeModify(Widget widget) {
 		EObject eObject=section.getCurrentEObject();
-		Text text=section.getDescriptionText();
+		Text title=section.getTitleText();
+		Text description=section.getDescriptionText();
 
-		if (widget.equals(text)) {
-			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.CATEGORY__DESCRIPTION, text.getText());
+		if (widget.equals(title)) {
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.TITLE__TITLE, title.getText());
+		}
+		if (widget.equals(description)) {
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.CATEGORY__DESCRIPTION, description.getText());
 		}
 	}
 }

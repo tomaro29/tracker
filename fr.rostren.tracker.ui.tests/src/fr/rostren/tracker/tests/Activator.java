@@ -1,4 +1,4 @@
-package fr.rostren.tracker.ui.tests;
+package fr.rostren.tracker.tests;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

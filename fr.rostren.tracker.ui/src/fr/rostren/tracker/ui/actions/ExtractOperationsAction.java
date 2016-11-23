@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
 
@@ -46,9 +45,12 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 			done=extractOperations(extractor, monitor);
 		}
 		if (!monitor.isCanceled() && done && addedOperations.isEmpty()) {
-			MessageDialog.openError(shell, "Cannot Import PDF", //$NON-NLS-1$
-					"The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
-																+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
+			if (!extractor.getAlreadyParsedFiles().isEmpty()) {
+				throw new InterruptedException("The PDF file : '" //$NON-NLS-1$
+												+ pdfURIText + "' is already parsed."); //$NON-NLS-1$
+			}
+			throw new InterruptedException("The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
+											+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$
 		}
 		monitor.done();
 	}
@@ -58,8 +60,9 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	 * @param extractor the extractor
 	 * @param monitor the progress monitor
 	 * @return <code>true</code> if it is done, <code>false</code> otherwise.
+	 * @throws InterruptedException if extraction action is interrupted for a known reason
 	 */
-	private boolean extractOperations(PDFContentExtractor extractor, IProgressMonitor monitor) {
+	private boolean extractOperations(PDFContentExtractor extractor, IProgressMonitor monitor) throws InterruptedException {
 		try {
 			addedOperations=extractor.extractOperations(monitor);
 			for (Operation operation: addedOperations) {
@@ -68,14 +71,13 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 			return true;
 		}
 		catch (ExtractorException e) {
-			MessageDialog.openError(shell, "Problem while extracting operations", //$NON-NLS-1$
-					e.getMessage());
+			throw new InterruptedException("Problem while extracting operations: "	+ //$NON-NLS-1$
+											e.getMessage());
 		}
 		catch (IOException e) {
-			MessageDialog.openError(shell, "Problem while opening the PDF File", //$NON-NLS-1$
-					e.getMessage());
+			throw new InterruptedException("Problem while opening the PDF File: "	+ //$NON-NLS-1$
+											e.getMessage());
 		}
-		return false;
 	}
 
 	/**

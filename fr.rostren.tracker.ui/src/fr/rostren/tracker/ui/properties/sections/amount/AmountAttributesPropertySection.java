@@ -63,7 +63,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		Category category=getAmountCategoryItem();
 		if (category != null) {
 			String title=category.getTitle();
-			categoryCombo.setItem(Arrays.asList(items).indexOf(title), title);
+			categoryCombo.select(Arrays.asList(items).indexOf(title));
 		}
 	}
 

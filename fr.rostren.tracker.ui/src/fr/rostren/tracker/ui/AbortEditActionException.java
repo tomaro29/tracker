@@ -1,10 +1,10 @@
-package fr.rostren.tracker.pdf.content.extractor;
+package fr.rostren.tracker.ui;
 
 import java.util.logging.Level;
 
 import org.apache.commons.lang.StringUtils;
 
-public class ExtractorException extends Exception {
+public class AbortEditActionException extends Exception {
 	private static final long serialVersionUID=1L;
 	private static final Level DEFAULT_LEVEL=Level.SEVERE;
 	private String message;
@@ -14,18 +14,18 @@ public class ExtractorException extends Exception {
 	/**
 	 * Constructor
 	 */
-	public ExtractorException() {
+	public AbortEditActionException() {
 		setMessage(StringUtils.EMPTY);
-		setLevel(ExtractorException.DEFAULT_LEVEL);
+		setLevel(AbortEditActionException.DEFAULT_LEVEL);
 	}
 
 	/**
 	 * Constructor
 	 * @param message the message
 	 */
-	public ExtractorException(String message) {
+	public AbortEditActionException(String message) {
 		setMessage(message);
-		setLevel(ExtractorException.DEFAULT_LEVEL);
+		setLevel(AbortEditActionException.DEFAULT_LEVEL);
 	}
 
 	/**
@@ -33,9 +33,9 @@ public class ExtractorException extends Exception {
 	 * @param message the message
 	 * @param cause the cause
 	 */
-	public ExtractorException(String message, Throwable cause) {
+	public AbortEditActionException(String message, Throwable cause) {
 		setMessage(message);
-		setLevel(ExtractorException.DEFAULT_LEVEL);
+		setLevel(AbortEditActionException.DEFAULT_LEVEL);
 		setCause(cause);
 	}
 
@@ -44,7 +44,7 @@ public class ExtractorException extends Exception {
 	 * @param level the level
 	 * @param message the message
 	 */
-	public ExtractorException(Level level, String message) {
+	public AbortEditActionException(Level level, String message) {
 		setMessage(message);
 		setLevel(level);
 	}
@@ -55,7 +55,7 @@ public class ExtractorException extends Exception {
 	 * @param message the message
 	 * @param cause the cause
 	 */
-	public ExtractorException(Level level, String message, Throwable cause) {
+	public AbortEditActionException(Level level, String message, Throwable cause) {
 		setMessage(message);
 		setLevel(level);
 		setCause(cause);

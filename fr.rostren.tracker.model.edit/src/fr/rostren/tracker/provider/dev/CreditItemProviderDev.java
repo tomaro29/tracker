@@ -53,7 +53,7 @@ public class CreditItemProviderDev extends CreditItemProvider {
 			return super.createSetCommand(domain, owner, feature, value, index);
 		}
 
-		// The total Amount has changed, we have to update existing value if
+		// The total Amount has been changed, we have to update existing value if
 		// any
 		final List<Command> commands=new ArrayList<>();
 

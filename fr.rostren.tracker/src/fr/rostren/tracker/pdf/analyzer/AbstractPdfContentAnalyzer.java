@@ -16,7 +16,7 @@ import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
  */
 public abstract class AbstractPdfContentAnalyzer {
 
-	protected enum PdfToken {
+	public enum PdfToken {
 		DATE,
 		OPERATIONS_DEPOT,
 		VIR_RECU,
@@ -31,13 +31,13 @@ public abstract class AbstractPdfContentAnalyzer {
 	protected final Pattern SPACE_STRING_PATTREN=Pattern.compile("(\\s)+"); //$NON-NLS-1$
 	protected final Pattern EMPTY_STRING_PATTREN=Pattern.compile("(\\s)*"); //$NON-NLS-1$
 	protected final Pattern PART_1_DATE_PATTREN=Pattern.compile("(0[0-9]|1[0-9]|2[0-9]|3[0-1])"); //$NON-NLS-1$
-	protected final Pattern PART_2_DATE_PATTREN=Pattern.compile("(0[1-9]|1[0-2])"); //$NON-NLS-1$
+	protected final Pattern PART_2_DATE_PATTREN=Pattern.compile("([1-9]|0[1-9]|1[0-2])"); //$NON-NLS-1$
 	protected final Pattern OPERATION_TITLE_PATTREN=Pattern.compile("(.)*"); //$NON-NLS-1$
 	protected final Pattern AMOUNT_NUMBER_PATTREN=Pattern.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
 	protected final Pattern NUMBER_PATTREN=Pattern.compile("([0-9]*)"); //$NON-NLS-1$
 	protected final Pattern FACT_PATTREN=Pattern.compile("FACT\\s+([0-9]*)"); //$NON-NLS-1$
 
-	private int currentYear;
+	private int currentYear=0;
 	private String currentLine;
 	private String[] currentSplitLine;
 	private PdfToken lastToken;
@@ -176,7 +176,7 @@ public abstract class AbstractPdfContentAnalyzer {
 				date.setMonth(Month.DEC);
 				break;
 			default:
-				break;
+				throw new IllegalArgumentException("Invalid date, the month must be [1-12]"); //$NON-NLS-1$
 		}
 	}
 

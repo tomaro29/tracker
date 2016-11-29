@@ -1,15 +1,20 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
@@ -19,11 +24,16 @@ import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Outgoing;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTitlesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.content.providers.OriginsRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OriginLabelProvider;
+import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
+import fr.rostren.tracker.ui.properties.wizards.AddTrackerOriginWizard;
 
 /**
  * Page to add a {@link Transfer} instance to an existing
@@ -42,6 +52,48 @@ public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
 	protected boolean isOutgoing=false;
 	protected OperationTitle title;
 	protected Origin origin;
+
+	protected ComboViewer titlesComboViewer;
+	protected ComboViewer originsComboViewer;
+
+	private final SelectionAdapter addOperationTitleButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			AddTrackerOperationTitleWizard wizard=new AddTrackerOperationTitleWizard("Operations Titles Repository", //$NON-NLS-1$
+					tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				OperationTitle newOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
+
+				String title=wizard.getOperationTitle();
+				if (title != null) {
+					newOperationTitle.setTitle(title);
+				}
+
+				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
+				refreshComboViewerContent(titlesComboViewer, getOperationsTitles(tracker), newOperationTitle.getTitle());
+			}
+		}
+	};
+	private final SelectionAdapter addOriginButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			AddTrackerOriginWizard wizard=new AddTrackerOriginWizard("Origins Repository", //$NON-NLS-1$
+					tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Origin newOrigin=TrackerFactory.eINSTANCE.createOrigin();
+
+				String identifier=wizard.getIdentifier();
+				if (identifier != null) {
+					newOrigin.setIdentifier(identifier);
+				}
+
+				DomainUtils.executeAddCommand(tracker.getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
+				refreshComboViewerContent(originsComboViewer, getOrigins(tracker), newOrigin);
+			}
+		}
+	};
 
 	private final ModifyListener modifyTransferTypeListener=new ModifyListener() {
 		@Override
@@ -97,18 +149,18 @@ public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createCombo(parent, "Transfer Type: ", AddBoockletTransferWizardPage.TRANSFER_TYPES, modifyTransferTypeListener); //$NON-NLS-1$
 
-		List<Object> operationsTitles=getOperationsTitles(tracker);
-		createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
-				new OperationTitleLabelProvider(), titleListener);
+		Set<Object> operationsTitles=getOperationsTitles(tracker);
+		titlesComboViewer=createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
+				new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
-			title=(OperationTitle)operationsTitles.get(0);
+			title=(OperationTitle)operationsTitles.iterator().next();
 		}
 
-		List<Object> origins=getOrigins(tracker);
-		createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
-				new OriginLabelProvider(), originListener);
+		Set<Object> origins=getOrigins(tracker);
+		originsComboViewer=createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
+				new OriginLabelProvider(), originListener, addOriginButtonlistener);
 		if (!origins.isEmpty()) {
-			origin=(Origin)origins.get(0);
+			origin=(Origin)origins.iterator().next();
 		}
 	}
 

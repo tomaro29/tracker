@@ -7,6 +7,8 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
@@ -29,6 +31,13 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 	protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
 		Table table=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
+
+		table.addListener(SWT.MouseWheel, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				table.getVerticalBar().setIncrement(event.count * 3);
+			}
+		});
 
 		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
 		addButton.addSelectionListener(addButtonlistener);

@@ -51,14 +51,14 @@ public class CategoriesRepositoryPropertySection extends AbstractTablePropertySe
 				String title=wizard.getCategoryTitle();
 				if (title != null) {
 					newCategory.setTitle(title);
-				}
-				String description=wizard.getCategoryDescription();
-				if (title != null) {
-					newCategory.setDescription(description);
-				}
+					String description=wizard.getCategoryDescription();
+					if (description != null) {
+						newCategory.setDescription(description);
+					}
 
-				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
-				refresh();
+					DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
+					refresh();
+				}
 			}
 		}
 	};

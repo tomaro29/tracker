@@ -51,10 +51,9 @@ public class OperationsTitlesRepositoryPropertySection extends AbstractTableProp
 				String title=wizard.getOperationTitle();
 				if (title != null) {
 					newOperationTitle.setTitle(title);
+					DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
+					refresh();
 				}
-
-				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-				refresh();
 			}
 		}
 	};

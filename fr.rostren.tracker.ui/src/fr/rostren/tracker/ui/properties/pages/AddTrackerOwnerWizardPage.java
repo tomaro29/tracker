@@ -2,6 +2,7 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
@@ -9,6 +10,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * Page to add a {@link Owner} instance to an existing {@link Tracker} instance.
@@ -20,13 +22,14 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 
 	protected final Tracker tracker;
 
-	protected String firstName="first name"; //$NON-NLS-1$
-	protected String lastName="last name"; //$NON-NLS-1$
+	protected String firstName;
+	protected String lastName;
 
 	private final ModifyListener modifyFirstNameListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
 			firstName=((Text)event.widget).getText();
+			setPageComplete(isPageComplete());
 		}
 	};
 
@@ -34,6 +37,7 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 		@Override
 		public void modifyText(ModifyEvent event) {
 			lastName=((Text)event.widget).getText();
+			setPageComplete(isPageComplete());
 		}
 	};
 
@@ -69,5 +73,26 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 	 */
 	public String getLastName() {
 		return lastName;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.WizardPage#isPageComplete()
+	 */
+	@Override
+	public boolean isPageComplete() {
+		if (StringUtils.isEmpty(firstName) || StringUtils.isBlank(firstName)) {
+			setErrorMessage("The Owner First Name cannot be empty or blank !"); //$NON-NLS-1$
+			return false;
+		}
+		if (StringUtils.isEmpty(lastName) || StringUtils.isBlank(lastName)) {
+			setErrorMessage("The Owner Last Name cannot be empty or blank !"); //$NON-NLS-1$
+			return false;
+		}
+		if (!TrackerUtils.isOwnerIdentifierUnique(tracker, firstName, lastName)) {
+			setErrorMessage("The owner must be unique !"); //$NON-NLS-1$
+			return false;
+		}
+		setErrorMessage(null);
+		return true;
 	}
 }

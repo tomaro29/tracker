@@ -1,20 +1,29 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTitlesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvider;
+import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
 
 /**
  * Page to add an {@link OperationTitle} instance to an existing
@@ -29,6 +38,27 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 
 	protected OperationTitle title;
 
+	protected ComboViewer titlesComboViewer;
+
+	private final SelectionAdapter addOperationTitleButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			AddTrackerOperationTitleWizard wizard=new AddTrackerOperationTitleWizard("Operations Titles Repository", //$NON-NLS-1$
+					tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				OperationTitle newOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
+
+				String title=wizard.getOperationTitle();
+				if (title != null) {
+					newOperationTitle.setTitle(title);
+				}
+
+				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
+				refreshComboViewerContent(titlesComboViewer, getOperationsTitles(tracker), newOperationTitle);
+			}
+		}
+	};
 	private final ISelectionChangedListener titleListener=new ISelectionChangedListener() {
 
 		@Override
@@ -57,11 +87,11 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		List<Object> operationsTitles=getOperationsTitles(tracker);
-		createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
-				new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener);
+		Set<Object> operationsTitles=getOperationsTitles(tracker);
+		titlesComboViewer=createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
+				new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
-			title=(OperationTitle)operationsTitles.get(0);
+			title=(OperationTitle)operationsTitles.iterator().next();
 		}
 	}
 

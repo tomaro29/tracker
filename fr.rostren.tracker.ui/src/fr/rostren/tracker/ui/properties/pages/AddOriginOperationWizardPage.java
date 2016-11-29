@@ -65,7 +65,7 @@ public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
 	@Override
 	protected void createContainer(Composite parent) {
 		createComboViewer(parent, "Operations: ", getOperations(tracker), new OriginOperationsContentProvider(), //$NON-NLS-1$
-				new OperationLabelProvider(), listener);
+				new OperationLabelProvider(), listener, null);
 	}
 
 	/**

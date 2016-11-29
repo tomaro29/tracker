@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.actions;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -72,10 +71,6 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 		}
 		catch (ExtractorException e) {
 			throw new InterruptedException("Problem while extracting operations: "	+ //$NON-NLS-1$
-											e.getMessage());
-		}
-		catch (IOException e) {
-			throw new InterruptedException("Problem while opening the PDF File: "	+ //$NON-NLS-1$
 											e.getMessage());
 		}
 	}

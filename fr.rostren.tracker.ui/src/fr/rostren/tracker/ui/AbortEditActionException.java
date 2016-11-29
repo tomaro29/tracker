@@ -73,7 +73,7 @@ public class AbortEditActionException extends Exception {
 	 * @param message
 	 *            the message to set
 	 */
-	public void setMessage(String message) {
+	private void setMessage(String message) {
 		this.message=message;
 	}
 
@@ -88,7 +88,7 @@ public class AbortEditActionException extends Exception {
 	 * @param level
 	 *            the level to set
 	 */
-	public void setLevel(Level level) {
+	private void setLevel(Level level) {
 		this.level=level;
 	}
 
@@ -104,7 +104,7 @@ public class AbortEditActionException extends Exception {
 	 * @param cause
 	 *            the cause to set
 	 */
-	public void setCause(Throwable cause) {
+	private void setCause(Throwable cause) {
 		this.cause=cause;
 	}
 }

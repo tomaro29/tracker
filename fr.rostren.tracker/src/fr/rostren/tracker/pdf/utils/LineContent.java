@@ -155,7 +155,6 @@ public class LineContent {
 		setLinkedOperationTitle(newTitle);
 		newTitle.setTitle(title);
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
-		TrackerUtils.addOperationTitleToMap(newTitle);
 
 		undefinedCategory=undefinedCategory != null ? undefinedCategory : getUndefinedCategory(tracker);
 		undefinedCategory.getOperationTitles().add(newTitle);

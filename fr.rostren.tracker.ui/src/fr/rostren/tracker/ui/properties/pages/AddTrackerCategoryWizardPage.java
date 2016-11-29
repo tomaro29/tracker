@@ -2,6 +2,7 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
@@ -9,6 +10,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * Page to add a {@link Category} instance to an existing {@link Tracker}
@@ -21,13 +23,14 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 
 	protected final Tracker tracker;
 
-	protected String title="identifier"; //$NON-NLS-1$
-	protected String description="description"; //$NON-NLS-1$
+	protected String title;
+	protected String description;
 
 	private final ModifyListener modifyTitleListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
 			title=((Text)event.widget).getText();
+			setPageComplete(isPageComplete());
 		}
 	};
 
@@ -70,5 +73,22 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 	 */
 	public String getCategoryDescription() {
 		return description;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.WizardPage#isPageComplete()
+	 */
+	@Override
+	public boolean isPageComplete() {
+		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
+			setErrorMessage("The Category title cannot be empty or blank !"); //$NON-NLS-1$
+			return false;
+		}
+		if (!TrackerUtils.isCategoryTitleUnique(tracker, title)) {
+			setErrorMessage("The Category title must be unique !"); //$NON-NLS-1$
+			return false;
+		}
+		setErrorMessage(null);
+		return true;
 	}
 }

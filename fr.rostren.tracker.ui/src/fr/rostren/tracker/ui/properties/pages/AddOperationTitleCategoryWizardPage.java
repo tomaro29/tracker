@@ -1,20 +1,29 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
+import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
 
 /**
  * Page to add a {@link Category} instance to an existing {@link OperationTitle}
@@ -29,6 +38,27 @@ public class AddOperationTitleCategoryWizardPage extends AbstractAddWizardPage {
 
 	protected Category category;
 
+	protected ComboViewer categoriesComboViewer;
+
+	private final SelectionAdapter addCategoryButtonlistener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Categories Repository", //$NON-NLS-1$
+					tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+
+				String title=wizard.getCategoryTitle();
+				if (title != null) {
+					newCategory.setTitle(title);
+				}
+
+				DomainUtils.executeAddCommand(tracker.getCategoriesRepository(), TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
+				refreshComboViewerContent(categoriesComboViewer, getCategories(tracker), newCategory);
+			}
+		}
+	};
 	private final ISelectionChangedListener listener=new ISelectionChangedListener() {
 
 		@Override
@@ -57,11 +87,11 @@ public class AddOperationTitleCategoryWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		List<Object> categories=getCategories(tracker);
-		createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
-				new CategoryLabelProvider(), listener);
+		Set<Object> categories=getCategories(tracker);
+		categoriesComboViewer=createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
+				new CategoryLabelProvider(), listener, addCategoryButtonlistener);
 		if (!categories.isEmpty()) {
-			category=(Category)categories.get(0);
+			category=(Category)categories.iterator().next();
 		}
 	}
 

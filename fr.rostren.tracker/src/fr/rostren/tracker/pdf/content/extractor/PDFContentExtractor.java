@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 
-import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 import fr.rostren.tracker.Account;
@@ -27,6 +26,7 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.analyzer.CEPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.pdf.utils.TrackerPdfReader;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
@@ -49,6 +49,12 @@ public class PDFContentExtractor {
 	 *            the account where we extract data
 	 */
 	public PDFContentExtractor(String uriText, Account account) {
+		if (StringUtils.isEmpty(uriText) || StringUtils.isBlank(uriText)) {
+			throw new IllegalArgumentException("The uri cannot be null or empty or blank."); //$NON-NLS-1$
+		}
+		if (account == null) {
+			throw new IllegalArgumentException("The account cannot be null."); //$NON-NLS-1$
+		}
 		this.uriText=uriText;
 		this.account=account;
 	}
@@ -59,13 +65,11 @@ public class PDFContentExtractor {
 	 *
 	 * @return the list of all operations extracted from the pdf file.
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
-	 * @throws IOException if an {@link IOException} is thrown
 	 */
-	public List<Operation> extractOperations(IProgressMonitor monitor) throws ExtractorException, IOException {
-		if (account == null) {
-			throw new ExtractorException("Cannot get the selected account from the Traker editor!"); //$NON-NLS-1$
+	public List<Operation> extractOperations(IProgressMonitor monitor) throws ExtractorException {
+		if (monitor == null) {
+			throw new IllegalArgumentException("The monitor cannot be null."); //$NON-NLS-1$
 		}
-
 		List<Operation> operations=new ArrayList<>();
 		for (String uri: getURISFromText()) {
 			monitor.subTask(uri);
@@ -89,11 +93,11 @@ public class PDFContentExtractor {
 	}
 
 	/**
-	 * Returns Uris
+	 * Returns the list of Uris
 	 * @return uris as a table
 	 */
 	private String[] getURISFromText() {
-		if (uriText != null && uriText.contains(" ")) { //$NON-NLS-1$
+		if (uriText.contains(" ")) { //$NON-NLS-1$
 			return uriText.split(" "); //$NON-NLS-1$
 		}
 		return new String[] {uriText,};
@@ -107,13 +111,11 @@ public class PDFContentExtractor {
 	 * @param monitor the progress monitor
 	 * @return the list of all the extracted operation
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
-	 * @throws IOException if an {@link IOException} is thrown
 	 */
-	private List<Operation> extractOperations(String src, IProgressMonitor monitor) throws ExtractorException, IOException {
+	private List<Operation> extractOperations(String src, IProgressMonitor monitor) throws ExtractorException {
 		List<Operation> operations=new ArrayList<>();
 
-		PdfReader reader=new PdfReader(src);
-		try {
+		try (TrackerPdfReader reader=new TrackerPdfReader(src)) {
 			Tracker tracker=TrackerUtils.getTracker(account);
 			CEPdfContentAnalyzer analyzer=new CEPdfContentAnalyzer();
 			for (int i=0; i < reader.getNumberOfPages(); i++) {
@@ -144,17 +146,12 @@ public class PDFContentExtractor {
 			monitor.done();
 		}
 		catch (IOException exception) {
+			alreadyParsedFiles.clear();
 			throw new ExtractorException(Level.SEVERE, "Problem while extracting the pdf datas: Cannot get data from the imported pdf!", //$NON-NLS-1$
 					exception);
-		}
-		catch (Exception exception) {
-			throw new ExtractorException(Level.SEVERE, "Problem while extracting the pdf datas: Cannot get data from the imported pdf!", //$NON-NLS-1$
-					exception);
-		}
-		finally {
-			reader.close();
 		}
 		return operations;
+
 	}
 
 	/**
@@ -180,15 +177,20 @@ public class PDFContentExtractor {
 	 * @param tracker
 	 *            the current tracker root
 	 * @param originId
-	 *            the origin Identifier of the current page
+	 *            the origin Identifier of the current page, this is never null
 	 *
 	 * @return true if the current pdf is already parsed, false otherwise.
 	 */
 	private boolean isAlreadyParsed(Tracker tracker, String originId) {
+		if (tracker == null) {
+			throw new IllegalArgumentException("The tracker cannot be null."); //$NON-NLS-1$
+		}
+		if (tracker.getOriginsRepository() == null) {
+			tracker.setOriginsRepository(TrackerFactory.eINSTANCE.createOriginsRepository());
+		}
 		List<Origin> existingOrigins=tracker.getOriginsRepository().getOrigins();
 		for (Origin existingOrigin: existingOrigins) {
-			if (existingOrigin != null	&& existingOrigin.getIdentifier() != null && existingOrigin.getIdentifier().equals(originId)
-				&& existingOrigin.getType().equals(OriginType.PDF_FILE)) {
+			if (existingOrigin != null && originId.equals(existingOrigin.getIdentifier()) && OriginType.PDF_FILE.equals(existingOrigin.getType())) {
 				return true;
 			}
 		}

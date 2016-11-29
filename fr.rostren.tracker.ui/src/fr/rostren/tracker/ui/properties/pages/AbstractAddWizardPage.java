@@ -1,8 +1,10 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -10,8 +12,10 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -59,8 +63,8 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	 * @param tracker the given tracker object
 	 * @return the list of operations in checking accounts
 	 */
-	protected List<Object> getOperations(Tracker tracker) {
-		List<Object> operations=new ArrayList<>();
+	protected Set<Object> getOperations(Tracker tracker) {
+		Set<Object> operations=new HashSet<>();
 		for (Owner owner: tracker.getOwners()) {
 			for (Account account: owner.getAccounts()) {
 				if (account instanceof CheckingAccount) {
@@ -76,8 +80,8 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the operations titles list
 	 */
-	protected List<Object> getOperationsTitles(Tracker tracker) {
-		return new ArrayList<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
+	protected Set<Object> getOperationsTitles(Tracker tracker) {
+		return new HashSet<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
 	}
 
 	/**
@@ -85,8 +89,8 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the origins
 	 */
-	protected List<Object> getOrigins(Tracker tracker) {
-		return new ArrayList<>(tracker.getOriginsRepository().getOrigins());
+	protected Set<Object> getOrigins(Tracker tracker) {
+		return new HashSet<>(tracker.getOriginsRepository().getOrigins());
 	}
 
 	/**
@@ -94,8 +98,8 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the categories
 	 */
-	protected List<Object> getCategories(Tracker tracker) {
-		return new ArrayList<>(tracker.getCategoriesRepository().getCategories());
+	protected Set<Object> getCategories(Tracker tracker) {
+		return new HashSet<>(tracker.getCategoriesRepository().getCategories());
 	}
 
 	/**
@@ -110,7 +114,9 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		createLabel(composite, label);
 		Text text=new Text(composite, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
-		text.setText(content);
+		if (!StringUtils.isEmpty(content) && !StringUtils.isBlank(content)) {
+			text.setText(content);
+		}
 
 		text.addModifyListener(modifyListener);
 		return text;
@@ -143,19 +149,48 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	 * @param contentProvider the content provider
 	 * @param labelProvider the label Provider
 	 * @param listener the linked listener
+	 * @param addButtonlistener the "Add" button listener
 	 * @return the created combo viewer
 	 */
-	protected ComboViewer createComboViewer(Composite composite, String label, List<Object> input, IContentProvider contentProvider, ILabelProvider labelProvider,
-			ISelectionChangedListener listener) {
+	protected ComboViewer createComboViewer(Composite composite, String label, Set<Object> input, IContentProvider contentProvider, ILabelProvider labelProvider,
+			ISelectionChangedListener listener, SelectionAdapter addButtonlistener) {
 		createLabel(composite, label);
-		ComboViewer viewer=new ComboViewer(composite, SWT.READ_ONLY);
+
+		Composite parent=new Composite(composite, SWT.NONE);
+		parent.setLayout(new GridLayout(3, false));
+
+		ComboViewer viewer=new ComboViewer(parent, SWT.READ_ONLY);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
-		viewer.setInput(input);
+		viewer.setInput(new ArrayList<>(input));
 		viewer.getCombo().select(0);
 
 		viewer.addSelectionChangedListener(listener);
+
+		if (addButtonlistener != null) {
+			Button addButton=new Button(parent, SWT.PUSH);
+			addButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 2, 0));
+			addButton.setText("Add"); //$NON-NLS-1$
+			addButton.addSelectionListener(addButtonlistener);
+		}
 		return viewer;
+	}
+
+	/**
+	 * Refreshes the Combo viewer content by setting the input, and selects the last element in the combo.
+	 * @param comboViewer the combo to refresh
+	 * @param input the input to set
+	 * @param selection the new selection
+	 */
+	protected void refreshComboViewerContent(ComboViewer comboViewer, Set<Object> input, Object selection) {
+		comboViewer.setInput(new ArrayList<>(input));
+		String[] items=comboViewer.getCombo().getItems();
+		for (int i=0; i < items.length; i++) {
+			if (items[i].equals(selection)) {
+				comboViewer.getCombo().select(i);
+				return;
+			}
+		}
 	}
 
 	/**

@@ -55,10 +55,9 @@ public class OriginsRepositoryPropertySection extends AbstractTablePropertySecti
 				OriginType type=wizard.getType();
 				if (type != null) {
 					newOrigin.setType(type);
+					DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
+					refresh();
 				}
-
-				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
-				refresh();
 			}
 		}
 	};

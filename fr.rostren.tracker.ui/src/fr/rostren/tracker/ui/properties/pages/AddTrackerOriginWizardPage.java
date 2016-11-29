@@ -2,6 +2,7 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
@@ -11,6 +12,7 @@ import org.eclipse.swt.widgets.Text;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * Page to add a {@link Origin} instance to an existing {@link Tracker}
@@ -25,13 +27,14 @@ public class AddTrackerOriginWizardPage extends AbstractAddWizardPage {
 
 	protected final Tracker tracker;
 
-	protected String identifier="identifier"; //$NON-NLS-1$
+	protected String identifier;
 	protected OriginType type=OriginType.MANUAL;
 
 	private final ModifyListener modifyIdentifierListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
 			identifier=((Text)event.widget).getText();
+			setPageComplete(isPageComplete());
 		}
 	};
 
@@ -80,5 +83,22 @@ public class AddTrackerOriginWizardPage extends AbstractAddWizardPage {
 	 */
 	public OriginType getType() {
 		return type;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.WizardPage#isPageComplete()
+	 */
+	@Override
+	public boolean isPageComplete() {
+		if (StringUtils.isEmpty(identifier) || StringUtils.isBlank(identifier)) {
+			setErrorMessage("The origin identifier cannot be empty or blank !"); //$NON-NLS-1$
+			return false;
+		}
+		if (!TrackerUtils.isOriginIdentifierUnique(tracker, identifier)) {
+			setErrorMessage("The origin identifier must be unique !"); //$NON-NLS-1$
+			return false;
+		}
+		setErrorMessage(null);
+		return true;
 	}
 }

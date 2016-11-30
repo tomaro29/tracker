@@ -13,4 +13,8 @@ public class TrackerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 		super(contributor);
 	}
 
+	@Override
+	public void resizeScrolledComposite() {
+		// DO NOTHING
+	}
 }

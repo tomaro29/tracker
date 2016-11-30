@@ -2,12 +2,14 @@ package fr.rostren.tracker.ui.dialogs;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -35,7 +37,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	private static final String EDIT_BUTTON_LABEL="Edit"; //$NON-NLS-1$
 	private static final String REMOVE_BUTTON_LABEL="Remove"; //$NON-NLS-1$
 	private static final String CATEGORY_COLUMN_TITLE="Category"; //$NON-NLS-1$
-	private static final String SUB_AMOUNT_COLUMN_TITLE="SubAmount"; //$NON-NLS-1$
+	private static final String SUB_AMOUNT_COLUMN_TITLE="Value"; //$NON-NLS-1$
 	private static final String OPERATION_TOTAL_AMOUNT_LABEL="Operation Total Amount :"; //$NON-NLS-1$
 	private static final String OPERATION_DATE_LABEL="Operation Date :"; //$NON-NLS-1$
 	private static final String OPERATION_TYPE_LABEL="Operation Type :"; //$NON-NLS-1$
@@ -60,6 +62,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 
 		this.operation=operation;
 		operationTitle=operation.getOperationTitle().getTitle();
+
 		setTitle(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_TITLE, operationTitle));
 		setDescription(CheckAndEditOperationWizardPage.WIZARD_DESCRIPTION);
 	}
@@ -74,7 +77,8 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		createOperationInfContainer(container);
 
 		// The operation sub amounts and category
-		createRefinementTable(container);
+		createSubAmountsTable(container);
+		populateTable();
 
 		setControl(container);
 		setPageComplete(true);
@@ -94,43 +98,26 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	}
 
 	/**
-	 * Creates the refinement table
+	 * Creates the sub-amounts table
 	 * @param parent the composite parent of the table to create
-	 * @return the refinement table
+	 * @return the sub-amounts table
 	 */
-	private Table createRefinementTable(Composite parent) {
-		final Composite container=createContainer(parent, 2, 1, 0);
-		final Composite group=createGroup(container, CheckAndEditOperationWizardPage.REFINEMENT_GROUP_TITLE);
+	private Table createSubAmountsTable(Composite parent) {
+		final Composite subAmoutsGroup=createGroup(parent, CheckAndEditOperationWizardPage.REFINEMENT_GROUP_TITLE);
+		final Composite container=createContainer(subAmoutsGroup, 2, 1, 0);
+		final Composite group=createGroup(container, StringUtils.EMPTY);
 
 		table=createTable(group);
-
-		// editor = new TableEditor(table);
-		// // The editor must have the same size as the cell and must
-		// // not be any smaller than 50 pixels.
-		// editor.horizontalAlignment = SWT.LEFT;
-		// editor.grabHorizontal = true;
-		// editor.minimumWidth = 50;
-
 		table.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent event) {
-				// disposeTextEditor();
-
 				// the selected row
 				final TableItem item=(TableItem)event.item;
 				if (item == null) {
 					return;
 				}
 				lastSelection=(Amount)item.getData();
-
-				// Text newEditor = new Text(table, SWT.NONE);
-				// newEditor.setText(item.getText(0));
-				// newEditor.addModifyListener(new EditorModifyListener(editor,
-				// item));
-				// newEditor.selectAll();
-				// newEditor.setFocus();
-				// editor.setEditor(newEditor, item, 0);
 			}
 
 			@Override
@@ -165,19 +152,21 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 * @return the created table
 	 */
 	private Table createTable(final Composite parent) {
-		Table table=new Table(parent, SWT.FILL | SWT.CHECK | SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.H_SCROLL);
+		Table table=new Table(parent, SWT.FILL | SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setVisible(true);
 
-		TableColumn subAmountCol=new TableColumn(table, SWT.NONE);
-		subAmountCol.setWidth(100);
-		subAmountCol.setText(CheckAndEditOperationWizardPage.SUB_AMOUNT_COLUMN_TITLE);
+		table.setFont(new Font(table.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
-		TableColumn categoryCol=new TableColumn(table, SWT.NONE);
-		categoryCol.setWidth(200);
-		categoryCol.setText(CheckAndEditOperationWizardPage.CATEGORY_COLUMN_TITLE);
+		TableColumn subAmountColumn=new TableColumn(table, SWT.NONE);
+		subAmountColumn.setWidth(100);
+		subAmountColumn.setText(CheckAndEditOperationWizardPage.SUB_AMOUNT_COLUMN_TITLE);
+
+		TableColumn categoryColumn=new TableColumn(table, SWT.NONE);
+		categoryColumn.setWidth(200);
+		categoryColumn.setText(CheckAndEditOperationWizardPage.CATEGORY_COLUMN_TITLE);
 
 		return table;
 	}
@@ -295,12 +284,6 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		composite.pack();
 	}
 
-	// void disposeTextEditor() {
-	// Control currentEditor = editor.getEditor();
-	// if (currentEditor != null)
-	// currentEditor.dispose();
-	// }
-
 	/**
 	 * Creates operation labels
 	 * @param subContainer the sub container
@@ -326,27 +309,15 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		textLabel.setText(textLabelContent);
 	}
 
-	// private static class EditorModifyListener implements ModifyListener {
-	// private final TableEditor editor;
-	// private final TableItem item;
-	//
-	// public EditorModifyListener(TableEditor editor, TableItem item) {
-	// this.editor = editor;
-	// this.item = item;
-	// }
-	//
-	// @Override
-	// public void modifyText(ModifyEvent me) {
-	// Text text = (Text) editor.getEditor();
-	// Amount amount = (Amount) item.getData();
-	//
-	// String newText = text.getText();
-	// if (newText != null && !newText.isEmpty())
-	// editor.getItem().setText(0, newText);
-	// else
-	// text.setText(TrackerUtils.UNDEFINED_TITLE);
-	// // TODO Set an amount data to the new text value
-	// // model.set?(amount, newText);
-	// }
-	// }
+	/**
+	 * Populates the table with all operation sub amounts.
+	 */
+	private void populateTable() {
+		for (Amount amount: operation.getSubAmounts()) {
+			TableItem item=new TableItem(table, SWT.NONE);
+			Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
+			item.setFont(font);
+			item.setText(new String[] {amount.getValue().toString(), amount.getCategory().getTitle()});
+		}
+	}
 }

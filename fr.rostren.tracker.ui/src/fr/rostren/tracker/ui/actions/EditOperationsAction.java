@@ -73,7 +73,7 @@ public class EditOperationsAction extends Action {
 	 * @throws AbortEditActionException if the action is aborted
 	 */
 	private void editOperations() throws AbortEditActionException {
-		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations);
+		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations, account);
 		WizardDialog wizardDialog=new WizardDialog(shell, wizard);
 		if (wizardDialog.open() == Window.CANCEL) {
 			throw new AbortEditActionException(EditOperationsAction.ACTION_ABORTED_MESSAGE);

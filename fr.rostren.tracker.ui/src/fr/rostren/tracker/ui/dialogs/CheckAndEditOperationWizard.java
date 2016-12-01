@@ -9,6 +9,7 @@ import org.eclipse.jface.wizard.Wizard;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Operation;
 
 public class CheckAndEditOperationWizard extends Wizard {
@@ -20,15 +21,16 @@ public class CheckAndEditOperationWizard extends Wizard {
 	/**
 	 * Constructor
 	 * @param operations the operations
+	 * @param account the checking account
 	 */
-	public CheckAndEditOperationWizard(List<Operation> operations) {
+	public CheckAndEditOperationWizard(List<Operation> operations, Account account) {
 		super();
 		setNeedsProgressMonitor(true);
 		this.operations=operations;
 
 		pages=HashBiMap.create();
 		for (Operation operation: operations) {
-			CheckAndEditOperationWizardPage page=new CheckAndEditOperationWizardPage(operation);
+			CheckAndEditOperationWizardPage page=new CheckAndEditOperationWizardPage(operation, account);
 			pages.put(operation, page);
 		}
 	}

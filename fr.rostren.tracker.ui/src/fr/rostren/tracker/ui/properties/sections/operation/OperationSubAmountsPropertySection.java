@@ -31,7 +31,7 @@ import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationSubAmountContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationSubAmountLabelProvider;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
-import fr.rostren.tracker.ui.properties.wizards.AddOperationSubAmountWizard;
+import fr.rostren.tracker.ui.properties.wizards.OperationSubAmountWizard;
 
 public class OperationSubAmountsPropertySection extends AbstractTablePropertySection {
 
@@ -46,7 +46,7 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 			String pageTitle=operation.getOperationTitle().getTitle();
 			Tracker tracker=TrackerUtils.getTracker(operation);
 
-			AddOperationSubAmountWizard wizard=new AddOperationSubAmountWizard(pageTitle, tracker);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(pageTitle, tracker, operation, null);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				Amount newAmount=TrackerFactory.eINSTANCE.createAmount();

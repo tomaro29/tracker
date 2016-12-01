@@ -8,24 +8,26 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.ui.properties.pages.AddOperationSubAmountWizardPage;
+import fr.rostren.tracker.ui.properties.pages.OperationSubAmountWizardPage;
 
 /**
  * Wizard to add an {@link Amount} instance to an existing
  * {@link Operation} instance.
  */
-public class AddOperationSubAmountWizard extends Wizard {
+public class OperationSubAmountWizard extends Wizard {
 
-	protected AddOperationSubAmountWizardPage page;
+	protected OperationSubAmountWizardPage page;
 
 	/**
 	 * Constructor.
 	 * @param pageTitle the page title
 	 * @param tracker the tracker
+	 * @param operation the operation
+	 * @param amount the amount to edit if any, <code>null</code> otherwise
 	 */
-	public AddOperationSubAmountWizard(String pageTitle, Tracker tracker) {
+	public OperationSubAmountWizard(String pageTitle, Tracker tracker, Operation operation, Amount amount) {
 		super();
-		page=new AddOperationSubAmountWizardPage(pageTitle, tracker);
+		page=new OperationSubAmountWizardPage(pageTitle, tracker, operation, amount);
 	}
 
 	@Override

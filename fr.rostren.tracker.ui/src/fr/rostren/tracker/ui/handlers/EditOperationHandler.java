@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.ui.dialogs.CheckAndEditOperationWizard;
 
@@ -34,7 +35,7 @@ public class EditOperationHandler extends AbstractHandler {
 
 			List<Operation> operations=new ArrayList<>();
 			operations.add(selectedOperation);
-			CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(operations);
+			CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(operations, (Account)selectedOperation.eContainer());
 			WizardDialog wizardDialog=new WizardDialog(shell, wizard);
 			if (wizardDialog.open() == Window.OK) {
 				// FIXME apply changes in the model use a command

@@ -1,5 +1,7 @@
 package fr.rostren.tracker.pdf.utils;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -307,5 +309,27 @@ public class TrackerUtils {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
+	 * @param operation the operation
+	 * @return <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
+	 */
+	public static boolean isValidOperationAmounts(Operation operation) {
+		return operation.getTotalAmount().equals(getSum(operation.getSubAmounts()));
+	}
+
+	/**
+	 * Returns the sum of sub amounts values
+	 * @param subAmounts the sub amounts
+	 * @return the sum of sub amounts values
+	 */
+	private static BigDecimal getSum(EList<Amount> subAmounts) {
+		BigDecimal sum=new BigDecimal(0);
+		for (Amount amount: subAmounts) {
+			sum=sum.add(amount.getValue());
+		}
+		return sum;
 	}
 }

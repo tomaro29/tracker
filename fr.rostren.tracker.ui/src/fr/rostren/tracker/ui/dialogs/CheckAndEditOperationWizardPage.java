@@ -1,8 +1,11 @@
 package fr.rostren.tracker.ui.dialogs;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
@@ -23,12 +26,17 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.ui.properties.wizards.OperationSubAmountWizard;
 
 public class CheckAndEditOperationWizardPage extends WizardPage {
+	private static final String AMOUNTS_VALUES_ERROR_MESSAGE="The total amount is:{0} euros. Please edit sub amounts accordingly."; //$NON-NLS-1$
 	private static final String PAGE_NAME="Edit ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Validate ''{0}'' Operation"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to validate and edit operations."; //$NON-NLS-1$
@@ -46,21 +54,28 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	private static final String REFINEMENT_GROUP_TITLE="Operation Sub Amounts"; //$NON-NLS-1$
 
 	protected Amount lastSelection;
+	protected Operation operation;
+	protected Account account;
+	protected Table table;
+	protected Button addButton;
+	protected Button editButton;
+	protected Button removeButton;
 
-	private final Operation operation;
+	private final int TEXT_MARGIN=3;
+	private final int FONT_WIDTH=10;
+
 	private final String operationTitle;
-
-	// TableEditor editor;
-	private Table table;
 
 	/**
 	 * Constructor
 	 * @param operation the operation
+	 * @param account the {@link Account} instance to use
 	 */
-	public CheckAndEditOperationWizardPage(Operation operation) {
+	public CheckAndEditOperationWizardPage(Operation operation, Account account) {
 		super(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_NAME, operation.getOperationTitle().getTitle()));
 
 		this.operation=operation;
+		this.account=account;
 		operationTitle=operation.getOperationTitle().getTitle();
 
 		setTitle(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_TITLE, operationTitle));
@@ -108,23 +123,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		final Composite group=createGroup(container, StringUtils.EMPTY);
 
 		table=createTable(group);
-		table.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent event) {
-				// the selected row
-				final TableItem item=(TableItem)event.item;
-				if (item == null) {
-					return;
-				}
-				lastSelection=(Amount)item.getData();
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// Do Nothing
-			}
-		});
+		table.addSelectionListener(new AmountsTableSelectionListener());
 
 		final Composite buttonsContainer=createContainer(container, 1, 1, 45);
 
@@ -153,20 +152,21 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 */
 	private Table createTable(final Composite parent) {
 		Table table=new Table(parent, SWT.FILL | SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setVisible(true);
 
-		table.setFont(new Font(table.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+		table.setFont(new Font(table.getDisplay(), "Arial", FONT_WIDTH, SWT.BOLD)); //$NON-NLS-1$
 
 		TableColumn subAmountColumn=new TableColumn(table, SWT.NONE);
-		subAmountColumn.setWidth(100);
 		subAmountColumn.setText(CheckAndEditOperationWizardPage.SUB_AMOUNT_COLUMN_TITLE);
+		subAmountColumn.setWidth(100);
 
 		TableColumn categoryColumn=new TableColumn(table, SWT.NONE);
-		categoryColumn.setWidth(200);
 		categoryColumn.setText(CheckAndEditOperationWizardPage.CATEGORY_COLUMN_TITLE);
+		categoryColumn.setWidth(200);
 
 		return table;
 	}
@@ -230,43 +230,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 
 		// keep the same buttons width after resizing
 		button.addListener(SWT.Resize, event -> button.setSize(90, button.getSize().y));
-		button.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				String label=button.getText();
-				if (SWT.Selection == event.type) {
-					if (CheckAndEditOperationWizardPage.ADD_BUTTON_LABEL.equals(label)) {
-						performAdd();
-					}
-					else if (CheckAndEditOperationWizardPage.EDIT_BUTTON_LABEL.equals(label)) {
-						performEdit(lastSelection);
-					}
-					else if (CheckAndEditOperationWizardPage.REMOVE_BUTTON_LABEL.equals(label)) {
-						performRemove(lastSelection);
-					}
-				}
-			}
-
-			private void performAdd() {
-				// disposeTextEditor();
-
-				// TODO open a wizard to fill the subAmount informations
-				// TODO set the table input with the updated list of subAmounts
-				table.redraw();
-
-				Amount newSubAmount=TrackerFactory.eINSTANCE.createAmount();
-				operation.getSubAmounts().add(newSubAmount);
-			}
-
-			private void performEdit(Amount amount) {
-				// FIXME implement this
-			}
-
-			private void performRemove(Amount amount) {
-				// FIXME implement this
-			}
-		});
-
+		button.addListener(SWT.Selection, new TableButtonListener(button));
 		return button;
 	}
 
@@ -276,11 +240,16 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 */
 	private void addButtons(Composite composite) {
 		// Add button
-		createButton(composite, CheckAndEditOperationWizardPage.ADD_BUTTON_LABEL);
+		addButton=createButton(composite, CheckAndEditOperationWizardPage.ADD_BUTTON_LABEL);
+
 		// Edit button
-		createButton(composite, CheckAndEditOperationWizardPage.EDIT_BUTTON_LABEL);
+		editButton=createButton(composite, CheckAndEditOperationWizardPage.EDIT_BUTTON_LABEL);
+		editButton.setEnabled(false);
+
 		// Remove button
-		createButton(composite, CheckAndEditOperationWizardPage.REMOVE_BUTTON_LABEL);
+		removeButton=createButton(composite, CheckAndEditOperationWizardPage.REMOVE_BUTTON_LABEL);
+		removeButton.setEnabled(false);
+
 		composite.pack();
 	}
 
@@ -312,12 +281,161 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	/**
 	 * Populates the table with all operation sub amounts.
 	 */
-	private void populateTable() {
+	protected void populateTable() {
+		table.removeAll();
 		for (Amount amount: operation.getSubAmounts()) {
 			TableItem item=new TableItem(table, SWT.NONE);
 			Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
 			item.setFont(font);
+			item.setData(amount);
 			item.setText(new String[] {amount.getValue().toString(), amount.getCategory().getTitle()});
+		}
+	}
+
+	@Override
+	public boolean isPageComplete() {
+		return TrackerUtils.isValidOperationAmounts(operation);
+	}
+
+	private class TableButtonListener implements Listener {
+		private final Button button;
+
+		/**
+		 * Constructor.
+		 * @param button the pushed button
+		 */
+		public TableButtonListener(Button button) {
+			this.button=button;
+		}
+
+		@Override
+		public void handleEvent(Event event) {
+			if (SWT.Selection == event.type) {
+				if (button.equals(addButton)) {
+					performAdd();
+				}
+				else if (button.equals(editButton)) {
+					performEdit(lastSelection);
+				}
+				else if (button.equals(removeButton)) {
+					performRemove(lastSelection);
+				}
+			}
+		}
+
+		/**
+		 * Performs the add action.
+		 */
+		private void performAdd() {
+			String pageTitle=operation.getOperationTitle().getTitle();
+			Tracker tracker=TrackerUtils.getTracker(account);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(pageTitle, tracker, operation, null);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Amount newAmount=TrackerFactory.eINSTANCE.createAmount();
+
+				Category category=wizard.getAmountCategory();
+				if (category != null) {
+					newAmount.setCategory(category);
+				}
+
+				BigDecimal value=wizard.getAmountValue();
+				if (value != null) {
+					newAmount.setValue(value);
+				}
+				adaptAndValidateValues(newAmount);
+				populateTable();
+			}
+		}
+
+		/**
+		 * Performs the edit action.
+		 * @param amount the amount to edit
+		 */
+		private void performEdit(Amount amount) {
+			String pageTitle=operation.getOperationTitle().getTitle();
+			Tracker tracker=TrackerUtils.getTracker(account);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(pageTitle, tracker, operation, amount);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				amount.setValue(wizard.getAmountValue());
+				amount.setCategory(wizard.getAmountCategory());
+				setPageComplete(isPageComplete());
+				if (!isPageComplete()) {
+					setErrorMessage(MessageFormat.format(CheckAndEditOperationWizardPage.AMOUNTS_VALUES_ERROR_MESSAGE, operation.getTotalAmount()));
+				}
+				else {
+					setErrorMessage(null);
+				}
+				populateTable();
+			}
+		}
+
+		/**
+		 * Performs the remove action.
+		 * @param amount the amount to remove
+		 */
+		private void performRemove(Amount amount) {
+			if (operation.getSubAmounts().size() > 2) {
+				operation.getSubAmounts().remove(amount);
+				setErrorMessage(MessageFormat.format(CheckAndEditOperationWizardPage.AMOUNTS_VALUES_ERROR_MESSAGE, operation.getTotalAmount()));
+				populateTable();
+			}
+			else if (operation.getSubAmounts().size() == 2) {
+				operation.getSubAmounts().remove(amount);
+				Amount totalAmount=operation.getSubAmounts().get(0);
+				totalAmount.setValue(operation.getTotalAmount());
+				populateTable();
+			}
+			else {
+				setMessage("The operation must have at least one sub amount illustrating it's total amount :" + operation.getTotalAmount() + " euros."); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
+
+		/**
+		 * Adapts the existing amount value.
+		 * @param newAmount the new added amount
+		 */
+		private void adaptAndValidateValues(Amount newAmount) {
+			if (operation.getSubAmounts().size() == 1) {
+				Amount amount=operation.getSubAmounts().get(0);
+				BigDecimal lastValue=amount.getValue();
+				BigDecimal newValue=lastValue.subtract(newAmount.getValue());
+				amount.setValue(newValue);
+			}
+
+			operation.getSubAmounts().add(newAmount);
+			setPageComplete(isPageComplete());
+			if (!isPageComplete()) {
+				setErrorMessage(MessageFormat.format(CheckAndEditOperationWizardPage.AMOUNTS_VALUES_ERROR_MESSAGE, operation.getTotalAmount()));
+			}
+		}
+	}
+
+	private class AmountsTableSelectionListener implements SelectionListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			// the selected row
+			final TableItem item=(TableItem)event.item;
+			if (item == null) {
+				return;
+			}
+			lastSelection=(Amount)item.getData();
+			if (lastSelection == null) {
+				editButton.setEnabled(false);
+				removeButton.setEnabled(false);
+				return;
+			}
+			editButton.setEnabled(true);
+			if (operation.getSubAmounts().size() > 1) {
+				removeButton.setEnabled(true);
+			}
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent arg0) {
+			// Do Nothing
 		}
 	}
 }

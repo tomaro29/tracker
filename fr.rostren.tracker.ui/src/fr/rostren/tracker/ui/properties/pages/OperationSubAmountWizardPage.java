@@ -20,6 +20,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Operation;
@@ -35,13 +36,15 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
  * Page to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class AddOperationSubAmountWizardPage extends AbstractAddWizardPage {
+public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 	private static final String PAGE_NAME="Add sub-amount to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add sub-amount"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new sub-amount to the selected operation."; //$NON-NLS-1$
 
 	protected final Tracker tracker;
+	protected final Operation operation;
+	protected final Amount amount;
 
 	protected Category category;
 	protected String value;
@@ -92,12 +95,20 @@ public class AddOperationSubAmountWizardPage extends AbstractAddWizardPage {
 	 * Constructor
 	 * @param pageTitle the page title
 	 * @param tracker the given tracker
+	 * @param operation the operation
+	 * @param amount the amount to edit if any, <code>null</code> otherwise.
 	 */
-	public AddOperationSubAmountWizardPage(String pageTitle, Tracker tracker) {
-		super(MessageFormat.format(AddOperationSubAmountWizardPage.PAGE_NAME, pageTitle));
+	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, Operation operation, Amount amount) {
+		super(MessageFormat.format(OperationSubAmountWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
-		setTitle(AddOperationSubAmountWizardPage.PAGE_TITLE);
-		setDescription(AddOperationSubAmountWizardPage.WIZARD_DESCRIPTION);
+		this.operation=operation;
+		this.amount=amount;
+		setTitle(OperationSubAmountWizardPage.PAGE_TITLE);
+		setDescription(OperationSubAmountWizardPage.WIZARD_DESCRIPTION);
+		if (amount != null) {
+			value=amount.getValue().toString();
+			category=amount.getCategory();
+		}
 	}
 
 	@Override
@@ -128,9 +139,6 @@ public class AddOperationSubAmountWizardPage extends AbstractAddWizardPage {
 		return new BigDecimal(value);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.wizard.WizardPage#isPageComplete()
-	 */
 	@Override
 	public boolean isPageComplete() {
 		if (!StringUtils.isEmpty(value) && !StringUtils.isBlank(value)) {
@@ -138,10 +146,15 @@ public class AddOperationSubAmountWizardPage extends AbstractAddWizardPage {
 				Float.parseFloat(value);
 			}
 			catch (NumberFormatException e) {
-				setErrorMessage("The Account amount must be a number !"); //$NON-NLS-1$
+				setErrorMessage("The operation amount must be a number !"); //$NON-NLS-1$
+				return false;
+			}
+			if (getAmountValue().compareTo(operation.getTotalAmount()) == 1) {
+				setErrorMessage("The operation sub amount value must be less than it's total amount !"); //$NON-NLS-1$
 				return false;
 			}
 		}
+
 		setErrorMessage(null);
 		return true;
 	}

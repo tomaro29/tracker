@@ -1,13 +1,26 @@
-h1. sp�cification du suivi d'op�rations bancaires
+h1. Spécification du suivi d'opérations bancaires
 
-L'outil de suivi est utilis� pour r�aliser des statistiques et une sorte de suivie et statistiques personnalis�e des op�rations bancaires li�es aux comptes ch�ques et aux livrets.
+L'outil de suivi sera utilisé pour réaliser des calculs statistiques et une sorte de suivie et calculs personnalisée des opérations bancaires liées aux comptes chèques et livrets.
 
-h2. mod�le de suivi
+h2. Modèle de suivi
 
-Le mod�le de suivi est donn� dans l'image ci-dessous:
+Le modèle de suivi est illustré dans l'image ci-dessous:
 
 !images/Tracker.png!
 
-Un propri�taire d'un compte ch�que peut avoir un ou plusieurs comptes � g�rer:
-* "CheckingAccount": les comptes ch�ques
-* "BoockletAccount":: les livrets li�s aux comptes ch�ques
+Un propriètaire d'un compte chèque peut avoir un ou plusieurs comptes à gérer:
+* "CheckingAccount": les comptes chèques
+* "BoockletAccount":: les livrets liés aux comptes chèques
+
+Un propriètaire de compte a également son propre repertoire de categories.
+Une categorie englobe plusieurs titres d'opérations.
+
+Un compte chèque est specifié par un ensemble d'opérations qui peuvent être:
+* des débits
+* des crédits
+* des transferts entre comptes
+
+Une opération a un montant qui peut être dispatché en plusieurs sous-montants. La somme des sous-montants doit évidemment être égal au montant total de l'opération.
+Chaque opération a une date qui correspond à la date de réalisation de celle ci.
+Chaque opération a un titre categorisé.
+Chaque montant est categorisé.

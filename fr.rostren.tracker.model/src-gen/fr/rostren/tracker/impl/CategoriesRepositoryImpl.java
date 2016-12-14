@@ -23,128 +23,119 @@ import fr.rostren.tracker.TrackerPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link fr.rostren.tracker.impl.CategoriesRepositoryImpl#getCategories
- * <em>Categories</em>}</li>
+ *   <li>{@link fr.rostren.tracker.impl.CategoriesRepositoryImpl#getCategories <em>Categories</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CategoriesRepositoryImpl extends EObjectImpl implements CategoriesRepository {
-    /**
-     * The cached value of the '{@link #getCategories() <em>Categories</em>}'
-     * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getCategories()
-     * @generated
-     * @ordered
-     */
-    protected EList<Category> categories;
+	/**
+	 * The cached value of the '{@link #getCategories() <em>Categories</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCategories()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Category> categories;
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected CategoriesRepositoryImpl() {
-	super();
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-	return TrackerPackage.Literals.CATEGORIES_REPOSITORY;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public EList<Category> getCategories() {
-	if (categories == null) {
-	    categories = new EObjectContainmentEList<Category>(Category.class, this,
-		    TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CategoriesRepositoryImpl() {
+		super();
 	}
-	return categories;
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-	switch (featureID) {
-	case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-	    return ((InternalEList<?>) getCategories()).basicRemove(otherEnd, msgs);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TrackerPackage.Literals.CATEGORIES_REPOSITORY;
 	}
-	return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-	switch (featureID) {
-	case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-	    return getCategories();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Category> getCategories() {
+		if (categories == null) {
+			categories=new EObjectContainmentEList<Category>(Category.class, this, TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES);
+		}
+		return categories;
 	}
-	return super.eGet(featureID, resolve, coreType);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
-	switch (featureID) {
-	case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-	    getCategories().clear();
-	    getCategories().addAll((Collection<? extends Category>) newValue);
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+				return ((InternalEList<?>)getCategories()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-	super.eSet(featureID, newValue);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-	    getCategories().clear();
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+				return getCategories();
+		}
+		return super.eGet(featureID, resolve, coreType);
 	}
-	super.eUnset(featureID);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
-	    return categories != null && !categories.isEmpty();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+				getCategories().clear();
+				getCategories().addAll((Collection<? extends Category>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
 	}
-	return super.eIsSet(featureID);
-    }
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+				getCategories().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+				return categories != null && !categories.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // CategoriesRepositoryImpl

@@ -6,6 +6,7 @@ import java.util.List;
 
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 
 public class CategoriesRepositoryContentProvider extends AbstractContentProvider {
@@ -29,7 +30,9 @@ public class CategoriesRepositoryContentProvider extends AbstractContentProvider
 			}
 		}
 		else if (parentElement instanceof CategoriesRepository) {
-			children.addAll(((CategoriesRepository)parentElement).getCategories());
+			for (Category category: ((CategoriesRepository)parentElement).getCategories()) {
+				children.addAll(TrackerUtils.getCategories(category));
+			}
 		}
 		Collections.sort(children, new CategoryComparator());
 		return children.toArray();

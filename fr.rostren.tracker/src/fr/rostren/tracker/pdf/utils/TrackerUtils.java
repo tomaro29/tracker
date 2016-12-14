@@ -1,6 +1,10 @@
 package fr.rostren.tracker.pdf.utils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
@@ -8,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
@@ -20,6 +25,64 @@ import fr.rostren.tracker.TrackerFactory;
 public class TrackerUtils {
 
 	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$
+
+	/**
+	 * Returns the operations titles
+	 * @param tracker the {@link Tracker} instance
+	 * @return the operations titles list
+	 */
+	public static Set<Object> getOperationsTitles(Tracker tracker) {
+		return new HashSet<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
+	}
+
+	/**
+	 * Returns the origins
+	 * @param tracker the {@link Tracker} instance
+	 * @return the origins
+	 */
+	public static Set<Object> getOrigins(Tracker tracker) {
+		return new HashSet<>(tracker.getOriginsRepository().getOrigins());
+	}
+
+	/**
+	 * Returns the categories
+	 * @param repository the {@link CategoriesRepository} instance
+	 * @return the categories
+	 */
+	public static List<Category> getCategories(CategoriesRepository repository) {
+		List<Category> categories=new ArrayList<>();
+		for (Category category: repository.getCategories()) {
+			categories.addAll(getCategories(category));
+		}
+		return categories;
+	}
+
+	/**
+	 * Returns the categories
+	 * @param category the {@link Category} instance
+	 * @return the categories
+	 */
+	public static List<Category> getCategories(Category category) {
+		List<Category> categories=new ArrayList<>();
+		categories.add(category);
+		for (Category subCategory: category.getSubCategories()) {
+			categories.addAll(getCategories(subCategory));
+		}
+		return categories;
+	}
+
+	/**
+	 * Returns the categories
+	 * @param tracker the {@link Tracker} instance
+	 * @return the categories
+	 */
+	public static Set<Object> getCategories(Tracker tracker) {
+		Set<Object> categories=new HashSet<>();
+		for (Category category: tracker.getCategoriesRepository().getCategories()) {
+			categories.addAll(getCategories(category));
+		}
+		return categories;
+	}
 
 	/**
 	 * Returns the category title
@@ -189,11 +252,24 @@ public class TrackerUtils {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
-		EList<Category> categories=tracker.getCategoriesRepository().getCategories();
-		for (Category category: categories) {
-			if (title.equals(category.getTitle())) {
-				return category;
-			}
+		for (Category category: tracker.getCategoriesRepository().getCategories()) {
+			return getCategory(category, title);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the concerned category
+	 * @param category the category to test
+	 * @param title the category title as a {@link String}
+	 * @return the category
+	 */
+	private static Category getCategory(Category category, String title) {
+		if (title.equals(category.getTitle())) {
+			return category;
+		}
+		for (Category subCategory: category.getSubCategories()) {
+			return getCategory(subCategory, title);
 		}
 		return null;
 	}
@@ -243,9 +319,23 @@ public class TrackerUtils {
 			throw new IllegalArgumentException("The title to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
 		for (Category category: tracker.getCategoriesRepository().getCategories()) {
-			if (StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
-				return false;
-			}
+			isCategoryTitleUnique(category, title);
+		}
+		return true;
+	}
+
+	/**
+	 * <code>true</code> if is unique, <code>false</code> otherwise.
+	 * @param category the category
+	 * @param title the title
+	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
+	 */
+	private static boolean isCategoryTitleUnique(Category category, String title) {
+		if (StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
+			return false;
+		}
+		for (Category subCategory: category.getSubCategories()) {
+			return isCategoryTitleUnique(subCategory, title);
 		}
 		return true;
 	}

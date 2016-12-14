@@ -22,143 +22,132 @@ import fr.rostren.tracker.TrackerPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link fr.rostren.tracker.impl.OperationTitleImpl#getCategories
- * <em>Categories</em>}</li>
+ *   <li>{@link fr.rostren.tracker.impl.OperationTitleImpl#getCategories <em>Categories</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class OperationTitleImpl extends TitleImpl implements OperationTitle {
-    /**
-     * The cached value of the '{@link #getCategories() <em>Categories</em>}'
-     * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getCategories()
-     * @generated
-     * @ordered
-     */
-    protected EList<Category> categories;
+	/**
+	 * The cached value of the '{@link #getCategories() <em>Categories</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getCategories()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Category> categories;
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected OperationTitleImpl() {
-	super();
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-	return TrackerPackage.Literals.OPERATION_TITLE;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public EList<Category> getCategories() {
-	if (categories == null) {
-	    categories = new EObjectWithInverseResolvingEList.ManyInverse<Category>(Category.class, this,
-		    TrackerPackage.OPERATION_TITLE__CATEGORIES, TrackerPackage.CATEGORY__OPERATION_TITLES);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OperationTitleImpl() {
+		super();
 	}
-	return categories;
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-	switch (featureID) {
-	case TrackerPackage.OPERATION_TITLE__CATEGORIES:
-	    return ((InternalEList<InternalEObject>) (InternalEList<?>) getCategories()).basicAdd(otherEnd, msgs);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TrackerPackage.Literals.OPERATION_TITLE;
 	}
-	return super.eInverseAdd(otherEnd, featureID, msgs);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-	switch (featureID) {
-	case TrackerPackage.OPERATION_TITLE__CATEGORIES:
-	    return ((InternalEList<?>) getCategories()).basicRemove(otherEnd, msgs);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Category> getCategories() {
+		if (categories == null) {
+			categories=new EObjectWithInverseResolvingEList.ManyInverse<Category>(Category.class, this, TrackerPackage.OPERATION_TITLE__CATEGORIES,
+					TrackerPackage.CATEGORY__OPERATION_TITLES);
+		}
+		return categories;
 	}
-	return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-	switch (featureID) {
-	case TrackerPackage.OPERATION_TITLE__CATEGORIES:
-	    return getCategories();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.OPERATION_TITLE__CATEGORIES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCategories()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
-	return super.eGet(featureID, resolve, coreType);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
-	switch (featureID) {
-	case TrackerPackage.OPERATION_TITLE__CATEGORIES:
-	    getCategories().clear();
-	    getCategories().addAll((Collection<? extends Category>) newValue);
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.OPERATION_TITLE__CATEGORIES:
+				return ((InternalEList<?>)getCategories()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-	super.eSet(featureID, newValue);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.OPERATION_TITLE__CATEGORIES:
-	    getCategories().clear();
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TrackerPackage.OPERATION_TITLE__CATEGORIES:
+				return getCategories();
+		}
+		return super.eGet(featureID, resolve, coreType);
 	}
-	super.eUnset(featureID);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.OPERATION_TITLE__CATEGORIES:
-	    return categories != null && !categories.isEmpty();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TrackerPackage.OPERATION_TITLE__CATEGORIES:
+				getCategories().clear();
+				getCategories().addAll((Collection<? extends Category>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
 	}
-	return super.eIsSet(featureID);
-    }
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.OPERATION_TITLE__CATEGORIES:
+				getCategories().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.OPERATION_TITLE__CATEGORIES:
+				return categories != null && !categories.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // OperationTitleImpl

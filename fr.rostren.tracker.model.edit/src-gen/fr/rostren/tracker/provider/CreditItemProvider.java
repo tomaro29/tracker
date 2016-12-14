@@ -10,12 +10,12 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
- * This is the item provider adapter for a {@link fr.rostren.tracker.Credit}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- *
+ * This is the item provider adapter for a {@link fr.rostren.tracker.Credit} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class CreditItemProvider extends OperationItemProvider {
@@ -45,8 +45,8 @@ public class CreditItemProvider extends OperationItemProvider {
 	}
 
 	/**
-	 * This returns Credit.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Credit.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -77,11 +77,10 @@ public class CreditItemProvider extends OperationItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -100,6 +99,25 @@ public class CreditItemProvider extends OperationItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature=feature;
+		Object childObject=child;
+
+		boolean qualify=childFeature == TrackerPackage.Literals.OPERATION__DATE || childFeature == TrackerPackage.Literals.OPERATION__WISHED_DATE;
+
+		if (qualify) {
+			return getString("_UI_CreateChild_text2", new Object[] {getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner)});
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

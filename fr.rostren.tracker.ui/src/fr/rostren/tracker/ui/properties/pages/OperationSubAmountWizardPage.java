@@ -27,6 +27,7 @@ import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
@@ -73,7 +74,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getCategoriesRepository(), TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
-				refreshComboViewerContent(categoriesComboViewer, getCategories(tracker), newCategory);
+				refreshComboViewerContent(categoriesComboViewer, TrackerUtils.getCategories(tracker), newCategory);
 			}
 		}
 	};
@@ -115,7 +116,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createText(parent, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
-		Set<Object> categories=getCategories(tracker);
+		Set<Object> categories=TrackerUtils.getCategories(tracker);
 		categoriesComboViewer=createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
 				new CategoryLabelProvider(), categoryListener, addCategoryButtonlistener);
 		if (!categories.isEmpty()) {

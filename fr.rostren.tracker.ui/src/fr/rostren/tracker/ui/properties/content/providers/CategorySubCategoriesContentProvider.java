@@ -5,15 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 
-public class TrackerCategoriesContentProvider extends AbstractContentProvider {
+public class CategorySubCategoriesContentProvider extends AbstractContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof Tracker) {
+		if (element instanceof Category) {
 			return getChildren(element).length > 0;
 		}
 		return false;
@@ -29,10 +27,8 @@ public class TrackerCategoriesContentProvider extends AbstractContentProvider {
 				}
 			}
 		}
-		else if (parentElement instanceof Tracker) {
-			for (Category category: ((Tracker)parentElement).getCategoriesRepository().getCategories()) {
-				children.addAll(TrackerUtils.getCategories(category));
-			}
+		else if (parentElement instanceof Category) {
+			children.addAll(((Category)parentElement).getSubCategories());
 		}
 		Collections.sort(children, new CategoryComparator());
 		return children.toArray();

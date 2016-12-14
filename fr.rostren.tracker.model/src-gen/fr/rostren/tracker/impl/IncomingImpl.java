@@ -14,23 +14,21 @@ import fr.rostren.tracker.TrackerPackage;
  * @generated
  */
 public class IncomingImpl extends TransferImpl implements Incoming {
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected IncomingImpl() {
-	super();
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IncomingImpl() {
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-	return TrackerPackage.Literals.INCOMING;
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TrackerPackage.Literals.INCOMING;
+	}
 
 } // IncomingImpl

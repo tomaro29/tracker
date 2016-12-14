@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,8 +17,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-
-import com.google.common.collect.Sets;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
@@ -132,7 +131,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	private List<Category> getSortedCategories() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
-		Set<Category> categories=Sets.newHashSet(tracker.getCategoriesRepository().getCategories());
+		Set<Category> categories=new HashSet(TrackerUtils.getCategories(tracker));
 		return getSortedList(categories, new CategoryComparator());
 	}
 

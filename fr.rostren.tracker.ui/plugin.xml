@@ -373,6 +373,11 @@
                afterTab="1"
                id="category.property.tab.CategoryOperationsTitlesPropertySection"
                label="Operations Titles"/>
+		<propertyTab
+               category="categoryProperties"
+               afterTab="2"
+               id="category.property.tab.CategorySubCategoriesPropertySection"
+               label="Sub Categories"/>
 	</propertyTabs>
    </extension>
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
@@ -390,6 +395,13 @@
                filter="fr.rostren.tracker.ui.properties.filters.CategoryPropertySectionFilter"
                id="category.property.tab.CategoryOperationsTitlesPropertySection"
                tab="category.property.tab.CategoryOperationsTitlesPropertySection">
+         </propertySection>
+         <propertySection
+               class="fr.rostren.tracker.ui.properties.sections.category.CategorySubCategoriesPropertySection"
+               enablesFor="1"
+               filter="fr.rostren.tracker.ui.properties.filters.CategoryPropertySectionFilter"
+               id="category.property.tab.CategorySubCategoriesPropertySection"
+               tab="category.property.tab.CategorySubCategoriesPropertySection">
          </propertySection>
      </propertySections>
    </extension>

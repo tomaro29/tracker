@@ -23,128 +23,117 @@ import fr.rostren.tracker.TrackerPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link fr.rostren.tracker.impl.OriginsRepositoryImpl#getOrigins
- * <em>Origins</em>}</li>
+ *   <li>{@link fr.rostren.tracker.impl.OriginsRepositoryImpl#getOrigins <em>Origins</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class OriginsRepositoryImpl extends EObjectImpl implements OriginsRepository {
-    /**
-     * The cached value of the '{@link #getOrigins() <em>Origins</em>}'
-     * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getOrigins()
-     * @generated
-     * @ordered
-     */
-    protected EList<Origin> origins;
+	/**
+	 * The cached value of the '{@link #getOrigins() <em>Origins</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getOrigins()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Origin> origins;
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected OriginsRepositoryImpl() {
-	super();
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-	return TrackerPackage.Literals.ORIGINS_REPOSITORY;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public EList<Origin> getOrigins() {
-	if (origins == null) {
-	    origins = new EObjectContainmentEList<Origin>(Origin.class, this,
-		    TrackerPackage.ORIGINS_REPOSITORY__ORIGINS);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OriginsRepositoryImpl() {
+		super();
 	}
-	return origins;
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-	switch (featureID) {
-	case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
-	    return ((InternalEList<?>) getOrigins()).basicRemove(otherEnd, msgs);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TrackerPackage.Literals.ORIGINS_REPOSITORY;
 	}
-	return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-	switch (featureID) {
-	case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
-	    return getOrigins();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Origin> getOrigins() {
+		if (origins == null) {
+			origins=new EObjectContainmentEList<Origin>(Origin.class, this, TrackerPackage.ORIGINS_REPOSITORY__ORIGINS);
+		}
+		return origins;
 	}
-	return super.eGet(featureID, resolve, coreType);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
-	switch (featureID) {
-	case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
-	    getOrigins().clear();
-	    getOrigins().addAll((Collection<? extends Origin>) newValue);
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
+				return ((InternalEList<?>)getOrigins()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-	super.eSet(featureID, newValue);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
-	    getOrigins().clear();
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
+				return getOrigins();
+		}
+		return super.eGet(featureID, resolve, coreType);
 	}
-	super.eUnset(featureID);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
-	    return origins != null && !origins.isEmpty();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
+				getOrigins().clear();
+				getOrigins().addAll((Collection<? extends Origin>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
 	}
-	return super.eIsSet(featureID);
-    }
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
+				getOrigins().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.ORIGINS_REPOSITORY__ORIGINS:
+				return origins != null && !origins.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // OriginsRepositoryImpl

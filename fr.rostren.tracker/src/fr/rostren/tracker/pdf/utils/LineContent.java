@@ -1,7 +1,6 @@
 package fr.rostren.tracker.pdf.utils;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -172,15 +171,17 @@ public class LineContent {
 			repository=TrackerFactory.eINSTANCE.createCategoriesRepository();
 			tracker.setCategoriesRepository(repository);
 		}
-		List<Category> categories=repository.getCategories();
-		for (Category category: categories) {
+
+		// return the undefined category in the existing undefined group
+		for (Category category: repository.getCategories()) {
 			if (TrackerUtils.isUndefinedCategory(category)) {
 				return category;
 			}
 		}
+
+		// return the undefined category in a new undefined group
 		Category undefinedCategory=TrackerFactory.eINSTANCE.createCategory();
 		undefinedCategory.setTitle(TrackerUtils.UNDEFINED_TITLE);
-		repository.getCategories().add(undefinedCategory);
 		return undefinedCategory;
 	}
 

@@ -12,10 +12,9 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link fr.rostren.tracker.Category#getOperationTitles
- * <em>Operation Titles</em>}</li>
- * <li>{@link fr.rostren.tracker.Category#getDescription <em>Description</em>}
- * </li>
+ *   <li>{@link fr.rostren.tracker.Category#getOperationTitles <em>Operation Titles</em>}</li>
+ *   <li>{@link fr.rostren.tracker.Category#getDescription <em>Description</em>}</li>
+ *   <li>{@link fr.rostren.tracker.Category#getSubCategories <em>Sub Categories</em>}</li>
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getCategory()
@@ -23,53 +22,65 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Category extends Title {
-    /**
-     * Returns the value of the '<em><b>Operation Titles</b></em>' reference
-     * list. The list contents are of type
-     * {@link fr.rostren.tracker.OperationTitle}. It is bidirectional and its
-     * opposite is '{@link fr.rostren.tracker.OperationTitle#getCategories
-     * <em>Categories</em>}'. <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Operation Titles</em>' reference list isn't
-     * clear, there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Operation Titles</em>' reference list.
-     * @see fr.rostren.tracker.TrackerPackage#getCategory_OperationTitles()
-     * @see fr.rostren.tracker.OperationTitle#getCategories
-     * @model opposite="categories"
-     * @generated
-     */
-    EList<OperationTitle> getOperationTitles();
+	/**
+	 * Returns the value of the '<em><b>Operation Titles</b></em>' reference list.
+	 * The list contents are of type {@link fr.rostren.tracker.OperationTitle}.
+	 * It is bidirectional and its opposite is '{@link fr.rostren.tracker.OperationTitle#getCategories <em>Categories</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operation Titles</em>' reference list isn't
+	 * clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operation Titles</em>' reference list.
+	 * @see fr.rostren.tracker.TrackerPackage#getCategory_OperationTitles()
+	 * @see fr.rostren.tracker.OperationTitle#getCategories
+	 * @model opposite="categories"
+	 * @generated
+	 */
+	EList<OperationTitle> getOperationTitles();
 
-    /**
-     * Returns the value of the '<em><b>Description</b></em>' attribute. <!--
-     * begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Description</em>' attribute isn't clear, there
-     * really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Description</em>' attribute.
-     * @see #setDescription(String)
-     * @see fr.rostren.tracker.TrackerPackage#getCategory_Description()
-     * @model
-     * @generated
-     */
-    String getDescription();
+	/**
+	 * Returns the value of the '<em><b>Description</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see fr.rostren.tracker.TrackerPackage#getCategory_Description()
+	 * @model
+	 * @generated
+	 */
+	String getDescription();
 
-    /**
-     * Sets the value of the '{@link fr.rostren.tracker.Category#getDescription
-     * <em>Description</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Description</em>' attribute.
-     * @see #getDescription()
-     * @generated
-     */
-    void setDescription(String value);
+	/**
+	 * Sets the value of the '{@link fr.rostren.tracker.Category#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Sub Categories</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.rostren.tracker.Category}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub Categories</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub Categories</em>' containment reference list.
+	 * @see fr.rostren.tracker.TrackerPackage#getCategory_SubCategories()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Category> getSubCategories();
 
 } // Category

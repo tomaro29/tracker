@@ -14,20 +14,18 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface OperationTitleService extends EObject {
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model
-     * @generated
-     */
-    void addTitle(String title);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addTitle(String title);
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model
-     * @generated
-     */
-    void deleteTitle(String title);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void deleteTitle(String title);
 
 } // OperationTitleService

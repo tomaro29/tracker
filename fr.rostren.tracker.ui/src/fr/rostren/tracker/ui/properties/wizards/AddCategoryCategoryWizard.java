@@ -4,29 +4,29 @@ import org.eclipse.jface.wizard.Wizard;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.ui.properties.pages.AddTrackerCategoryWizardPage;
+import fr.rostren.tracker.ui.properties.pages.AddCategoryCategoryWizardPage;
 
 /**
  * Wizard to add an {@link Category} instance to an existing {@link Tracker}
  * instance.
  */
-public class AddTrackerCategoryWizard extends Wizard {
+public class AddCategoryCategoryWizard extends Wizard {
 
-	protected AddTrackerCategoryWizardPage page;
+	protected AddCategoryCategoryWizardPage page;
 
 	/**
 	 * Constructor.
 	 * @param pageTitle the page title
-	 * @param tracker the tracker
+	 * @param category the category
 	 */
-	public AddTrackerCategoryWizard(String pageTitle, Tracker tracker) {
+	public AddCategoryCategoryWizard(String pageTitle, Category category) {
 		super();
-		page=new AddTrackerCategoryWizardPage(pageTitle, tracker);
+		page=new AddCategoryCategoryWizardPage(pageTitle, category);
 	}
 
 	@Override
 	public String getWindowTitle() {
-		return "Add Category to tracker."; //$NON-NLS-1$
+		return "Add Category to category."; //$NON-NLS-1$
 	}
 
 	@Override

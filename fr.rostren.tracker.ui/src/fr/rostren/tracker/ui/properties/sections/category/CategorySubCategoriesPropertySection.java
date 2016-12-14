@@ -19,20 +19,17 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
-import fr.rostren.tracker.ui.properties.content.providers.CategoryOperationsTitlesContentProvider;
-import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvider;
+import fr.rostren.tracker.ui.properties.content.providers.CategorySubCategoriesContentProvider;
+import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
-import fr.rostren.tracker.ui.properties.wizards.AddCategoryOperationTitleWizard;
+import fr.rostren.tracker.ui.properties.wizards.AddCategorySubCategoryWizard;
 
-public class CategoryOperationsTitlesPropertySection extends AbstractTablePropertySection {
+public class CategorySubCategoriesPropertySection extends AbstractTablePropertySection {
 
-	private final ITreeContentProvider contentProvider=new CategoryOperationsTitlesContentProvider();
-	private final ILabelProvider labelProvider=new OperationTitleLabelProvider();
+	private final ITreeContentProvider contentProvider=new CategorySubCategoriesContentProvider();
+	private final ILabelProvider labelProvider=new CategoryLabelProvider();
 
 	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
 		@Override
@@ -42,14 +39,13 @@ public class CategoryOperationsTitlesPropertySection extends AbstractTableProper
 			Category category=(Category)currentEObject;
 
 			String pageTitle=category.getTitle();
-			Tracker tracker=TrackerUtils.getTracker(category);
 
-			AddCategoryOperationTitleWizard wizard=new AddCategoryOperationTitleWizard(pageTitle, tracker);
+			AddCategorySubCategoryWizard wizard=new AddCategorySubCategoryWizard(pageTitle, category);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				OperationTitle title=wizard.getOperationTitle();
-				if (title != null) {
-					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__OPERATION_TITLES, title);
+				Category subCategory=wizard.getSubCategory();
+				if (subCategory != null) {
+					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, subCategory);
 					refresh();
 				}
 			}
@@ -66,7 +62,7 @@ public class CategoryOperationsTitlesPropertySection extends AbstractTableProper
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			DomainUtils.executeRemoveCommand(category, TrackerPackage.Literals.CATEGORY__OPERATION_TITLES, elementToRemove);
+			DomainUtils.executeRemoveCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, elementToRemove);
 			refresh();
 		}
 	};
@@ -90,21 +86,21 @@ public class CategoryOperationsTitlesPropertySection extends AbstractTableProper
 	@Override
 	public void refresh() {
 		disposeListeners();
-		tableViewer.setInput(getOperationsTitles());
+		tableViewer.setInput(getSubCategories());
 		addListeners();
 	}
 
 	/**
-	 * Retursn the list of operations titles
-	 * @return the list of operations titles
+	 * Retursn the list of sub categories
+	 * @return the list of sub categories
 	 */
-	private List<OperationTitle> getOperationsTitles() {
+	private List<Category> getSubCategories() {
 		Assert.isTrue(currentEObject instanceof Category);
-		List<OperationTitle> operationsTitles=((Category)currentEObject).getOperationTitles();
-		if (operationsTitles == null || operationsTitles.isEmpty()) {
+		List<Category> subCategories=((Category)currentEObject).getSubCategories();
+		if (subCategories == null || subCategories.isEmpty()) {
 			return Collections.emptyList();
 		}
-		return operationsTitles;
+		return subCategories;
 	}
 
 	@Override

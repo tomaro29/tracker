@@ -22,128 +22,117 @@ import fr.rostren.tracker.TrackerPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link fr.rostren.tracker.impl.CheckingAccountImpl#getOperations
- * <em>Operations</em>}</li>
+ *   <li>{@link fr.rostren.tracker.impl.CheckingAccountImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CheckingAccountImpl extends AccountImpl implements CheckingAccount {
-    /**
-     * The cached value of the '{@link #getOperations() <em>Operations</em>}'
-     * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getOperations()
-     * @generated
-     * @ordered
-     */
-    protected EList<Operation> operations;
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Operation> operations;
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected CheckingAccountImpl() {
-	super();
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-	return TrackerPackage.Literals.CHECKING_ACCOUNT;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public EList<Operation> getOperations() {
-	if (operations == null) {
-	    operations = new EObjectContainmentEList<Operation>(Operation.class, this,
-		    TrackerPackage.CHECKING_ACCOUNT__OPERATIONS);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CheckingAccountImpl() {
+		super();
 	}
-	return operations;
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-	switch (featureID) {
-	case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
-	    return ((InternalEList<?>) getOperations()).basicRemove(otherEnd, msgs);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TrackerPackage.Literals.CHECKING_ACCOUNT;
 	}
-	return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-	switch (featureID) {
-	case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
-	    return getOperations();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Operation> getOperations() {
+		if (operations == null) {
+			operations=new EObjectContainmentEList<Operation>(Operation.class, this, TrackerPackage.CHECKING_ACCOUNT__OPERATIONS);
+		}
+		return operations;
 	}
-	return super.eGet(featureID, resolve, coreType);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
-	switch (featureID) {
-	case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
-	    getOperations().clear();
-	    getOperations().addAll((Collection<? extends Operation>) newValue);
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
+				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-	super.eSet(featureID, newValue);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
-	    getOperations().clear();
-	    return;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
+				return getOperations();
+		}
+		return super.eGet(featureID, resolve, coreType);
 	}
-	super.eUnset(featureID);
-    }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-	switch (featureID) {
-	case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
-	    return operations != null && !operations.isEmpty();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection<? extends Operation>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
 	}
-	return super.eIsSet(featureID);
-    }
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
+				getOperations().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TrackerPackage.CHECKING_ACCOUNT__OPERATIONS:
+				return operations != null && !operations.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // CheckingAccountImpl

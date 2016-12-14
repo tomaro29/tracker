@@ -29,6 +29,7 @@ import fr.rostren.tracker.Outgoing;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTitlesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.content.providers.OriginsRepositoryContentProvider;
@@ -76,7 +77,7 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-				refreshComboViewerContent(titlesComboViewer, getOperationsTitles(tracker), newOperationTitle);
+				refreshComboViewerContent(titlesComboViewer, TrackerUtils.getOperationsTitles(tracker), newOperationTitle);
 			}
 		}
 	};
@@ -95,7 +96,7 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
-				refreshComboViewerContent(originsComboViewer, getOrigins(tracker), newOrigin);
+				refreshComboViewerContent(originsComboViewer, TrackerUtils.getOrigins(tracker), newOrigin);
 			}
 		}
 	};
@@ -155,14 +156,14 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createCombo(parent, "Operation Type: ", AddCheckOperationWizardPage.OPERATION_TYPES, modifyOperationTypeListener); //$NON-NLS-1$
 
-		Set<Object> operationsTitles=getOperationsTitles(tracker);
+		Set<Object> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
 		titlesComboViewer=createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
 				new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
 			title=(OperationTitle)operationsTitles.iterator().next();
 		}
 
-		Set<Object> origins=getOrigins(tracker);
+		Set<Object> origins=TrackerUtils.getOrigins(tracker);
 		originsComboViewer=createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
 				new OriginLabelProvider(), originListener, addOriginButtonlistener);
 		if (!origins.isEmpty()) {

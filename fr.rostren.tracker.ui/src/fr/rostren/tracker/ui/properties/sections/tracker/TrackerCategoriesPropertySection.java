@@ -23,6 +23,7 @@ import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.TrackerCategoriesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
@@ -108,7 +109,7 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 	 */
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<Category> categories=((Tracker)currentEObject).getCategoriesRepository().getCategories();
+		List<Category> categories=TrackerUtils.getCategories((CategoriesRepository)currentEObject);
 		if (categories == null || categories.isEmpty()) {
 			return Collections.emptyList();
 		}

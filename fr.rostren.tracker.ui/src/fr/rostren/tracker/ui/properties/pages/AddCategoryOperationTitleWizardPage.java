@@ -20,6 +20,7 @@ import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTitlesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvider;
@@ -55,7 +56,7 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-				refreshComboViewerContent(titlesComboViewer, getOperationsTitles(tracker), newOperationTitle);
+				refreshComboViewerContent(titlesComboViewer, TrackerUtils.getOperationsTitles(tracker), newOperationTitle);
 			}
 		}
 	};
@@ -87,7 +88,7 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		Set<Object> operationsTitles=getOperationsTitles(tracker);
+		Set<Object> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
 		titlesComboViewer=createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
 				new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {

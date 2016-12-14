@@ -15,47 +15,43 @@ import fr.rostren.tracker.TrackerPackage;
  * @generated
  */
 public class OperationTitleServiceImpl extends EObjectImpl implements OperationTitleService {
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected OperationTitleServiceImpl() {
-	super();
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OperationTitleServiceImpl() {
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-	return TrackerPackage.Literals.OPERATION_TITLE_SERVICE;
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return TrackerPackage.Literals.OPERATION_TITLE_SERVICE;
+	}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void addTitle(String title) {
-	// TODO: implement this method
-	// Ensure that you remove @generated or mark it @generated NOT
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void addTitle(String title) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void deleteTitle(String title) {
-	// TODO: implement this method
-	// Ensure that you remove @generated or mark it @generated NOT
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void deleteTitle(String title) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
 
 } // OperationTitleServiceImpl

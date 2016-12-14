@@ -14,28 +14,25 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface CategoryService extends EObject {
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model
-     * @generated
-     */
-    void addCategory(String title);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addCategory(String title);
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model
-     * @generated
-     */
-    void deleteCategory(Category category);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void deleteCategory(Category category);
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model
-     * @generated
-     */
-    void addCategoryOperation(String operationTitle);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addCategoryOperation(String operationTitle);
 
 } // CategoryService

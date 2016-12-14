@@ -76,33 +76,6 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	}
 
 	/**
-	 * Returns the operations titles
-	 * @param tracker the {@link Tracker} instance
-	 * @return the operations titles list
-	 */
-	protected Set<Object> getOperationsTitles(Tracker tracker) {
-		return new HashSet<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
-	}
-
-	/**
-	 * Returns the origins
-	 * @param tracker the {@link Tracker} instance
-	 * @return the origins
-	 */
-	protected Set<Object> getOrigins(Tracker tracker) {
-		return new HashSet<>(tracker.getOriginsRepository().getOrigins());
-	}
-
-	/**
-	 * Returns the categories
-	 * @param tracker the {@link Tracker} instance
-	 * @return the categories
-	 */
-	protected Set<Object> getCategories(Tracker tracker) {
-		return new HashSet<>(tracker.getCategoriesRepository().getCategories());
-	}
-
-	/**
 	 * Creates text field
 	 * @param composite the composite parent of the text to create
 	 * @param label the text label

@@ -23,6 +23,7 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
+import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.tests.TestUtils;
 
 public class LineContentTest {
@@ -32,8 +33,10 @@ public class LineContentTest {
 	private static final String INCOMPLETE_MODEL_PATH="input/models/incompleteModel.tracker"; //$NON-NLS-1$
 
 	private final Date testDate=TrackerFactory.eINSTANCE.createDate();
-	private final String testTitle="any title"; //$NON-NLS-1$
-	private final String existingTitle="VIR SEPA OBNA "; //$NON-NLS-1$
+	private final String testTitle="any title1"; //$NON-NLS-1$
+	private final String testTitle2="any title2"; //$NON-NLS-1$
+	private final String existingCreditTitle="VIR SEPA OBNA "; //$NON-NLS-1$
+	private final String existingDebitTitle="VIR LIB "; //$NON-NLS-1$
 	private final String existingCategory="RECETTES"; //$NON-NLS-1$
 	private final String ECHPRETTitle="ECH PRET any other string"; //$NON-NLS-1$
 	private final String INTERETSTitle="INTERETS CREDITEURS any other string"; //$NON-NLS-1$
@@ -160,13 +163,19 @@ public class LineContentTest {
 		assertNotNull(lineContent.getLinkedOperationTitle());
 		assertEquals(testTitle, lineContent.getLinkedOperationTitle().getTitle());
 
-		lineContent=new LineContent(testDate, existingTitle, testAmount, creditType, testOrigin);
+		lineContent=new LineContent(testDate, existingCreditTitle, testAmount, creditType, testOrigin);
 
 		lineContent.completeOperation((Tracker)eObject);
 		assertNotNull(lineContent.getLinkedCategory());
-		assertEquals("UNDEFINED", lineContent.getLinkedCategory().getTitle()); //$NON-NLS-1$
+		assertEquals(TrackerUtils.INCOME_TITLE, lineContent.getLinkedCategory().getTitle());
 		assertNotNull(lineContent.getLinkedOperationTitle());
-		assertEquals(existingTitle, lineContent.getLinkedOperationTitle().getTitle());
+		assertEquals(existingCreditTitle, lineContent.getLinkedOperationTitle().getTitle());
+
+		lineContent=new LineContent(testDate, existingDebitTitle, testAmount, debitType, testOrigin);
+
+		lineContent.completeOperation((Tracker)eObject);
+		assertNotNull(lineContent.getLinkedCategory());
+		assertEquals(TrackerUtils.SPENDING_TITLE, lineContent.getLinkedCategory().getTitle());
 
 		/*Test using an incomplete model*/
 		eObject=TestUtils.load(LineContentTest.INCOMPLETE_MODEL_PATH);
@@ -181,13 +190,13 @@ public class LineContentTest {
 		assertNotNull(lineContent.getLinkedOperationTitle());
 		assertEquals(testTitle, lineContent.getLinkedOperationTitle().getTitle());
 
-		lineContent=new LineContent(testDate, existingTitle, testAmount, creditType, testOrigin);
+		lineContent=new LineContent(testDate, existingCreditTitle, testAmount, creditType, testOrigin);
 
 		lineContent.completeOperation((Tracker)eObject);
 		assertNotNull(lineContent.getLinkedCategory());
-		assertEquals("UNDEFINED", lineContent.getLinkedCategory().getTitle()); //$NON-NLS-1$
+		assertEquals(TrackerUtils.INCOME_TITLE, lineContent.getLinkedCategory().getTitle());
 		assertNotNull(lineContent.getLinkedOperationTitle());
-		assertEquals(existingTitle, lineContent.getLinkedOperationTitle().getTitle());
+		assertEquals(existingCreditTitle, lineContent.getLinkedOperationTitle().getTitle());
 
 		/*Test using a non empty model*/
 		eObject=TestUtils.load(LineContentTest.TEST_MODEL_PATH);
@@ -202,13 +211,13 @@ public class LineContentTest {
 		assertNotNull(lineContent.getLinkedOperationTitle());
 		assertEquals(testTitle, lineContent.getLinkedOperationTitle().getTitle());
 
-		lineContent=new LineContent(testDate, existingTitle, testAmount, creditType, testOrigin);
+		lineContent=new LineContent(testDate, existingCreditTitle, testAmount, creditType, testOrigin);
 
 		lineContent.completeOperation((Tracker)eObject);
 		assertNotNull(lineContent.getLinkedCategory());
 		assertEquals(existingCategory, lineContent.getLinkedCategory().getTitle());
 		assertNotNull(lineContent.getLinkedOperationTitle());
-		assertEquals(existingTitle, lineContent.getLinkedOperationTitle().getTitle());
+		assertEquals(existingCreditTitle, lineContent.getLinkedOperationTitle().getTitle());
 	}
 
 	/**

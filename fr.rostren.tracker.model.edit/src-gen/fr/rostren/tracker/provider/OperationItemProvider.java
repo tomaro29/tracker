@@ -97,7 +97,6 @@ public class OperationItemProvider extends ItemProviderAdapter
 			childrenFeatures.add(TrackerPackage.Literals.OPERATION__OPERATION_TITLE);
 			childrenFeatures.add(TrackerPackage.Literals.OPERATION__SUB_AMOUNTS);
 			childrenFeatures.add(TrackerPackage.Literals.OPERATION__DATE);
-			childrenFeatures.add(TrackerPackage.Literals.OPERATION__WISHED_DATE);
 		}
 		return childrenFeatures;
 	}
@@ -145,7 +144,6 @@ public class OperationItemProvider extends ItemProviderAdapter
 			case TrackerPackage.OPERATION__OPERATION_TITLE:
 			case TrackerPackage.OPERATION__SUB_AMOUNTS:
 			case TrackerPackage.OPERATION__DATE:
-			case TrackerPackage.OPERATION__WISHED_DATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -168,27 +166,6 @@ public class OperationItemProvider extends ItemProviderAdapter
 		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.OPERATION__SUB_AMOUNTS, TrackerFactory.eINSTANCE.createAmount()));
 
 		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.OPERATION__DATE, TrackerFactory.eINSTANCE.createDate()));
-
-		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.OPERATION__WISHED_DATE, TrackerFactory.eINSTANCE.createDate()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature=feature;
-		Object childObject=child;
-
-		boolean qualify=childFeature == TrackerPackage.Literals.OPERATION__DATE || childFeature == TrackerPackage.Literals.OPERATION__WISHED_DATE;
-
-		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner)});
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link fr.rostren.tracker.Amount#getCategory <em>Category</em>}</li>
  *   <li>{@link fr.rostren.tracker.Amount#getValue <em>Value</em>}</li>
+ *   <li>{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}</li>
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getAmount()
@@ -77,5 +78,31 @@ public interface Amount extends EObject {
 	 * @generated
 	 */
 	void setValue(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Wished Date</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Wished Date</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Wished Date</em>' containment reference.
+	 * @see #setWishedDate(Date)
+	 * @see fr.rostren.tracker.TrackerPackage#getAmount_WishedDate()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Date getWishedDate();
+
+	/**
+	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Wished Date</em>' containment reference.
+	 * @see #getWishedDate()
+	 * @generated
+	 */
+	void setWishedDate(Date value);
 
 } // Amount

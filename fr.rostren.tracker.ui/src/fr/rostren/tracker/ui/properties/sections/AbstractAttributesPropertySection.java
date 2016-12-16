@@ -8,6 +8,7 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
@@ -45,6 +46,38 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		data.top=new FormAttachment(attributeText, 0, SWT.CENTER);
 		attributeLabel.setLayoutData(data);
 		return attributeText;
+	}
+
+	/**
+	 * Creates a date time zone
+	 * @param composite the composite parent of the label to create
+	 * @param control the control
+	 * @param label the label
+	 * @return the created {@link Text}
+	 */
+	protected DateTime createDateTime(Composite composite, Control control, String label) {
+		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
+		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
+
+		FormData data=new FormData();
+		data=new FormData();
+		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
+		if (control == null) {
+			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
+		}
+		else {
+			data.top=new FormAttachment(control, ITabbedPropertyConstants.VSPACE);
+		}
+		data.right=new FormAttachment(100, 0);
+		dateTime.setLayoutData(data);
+
+		CLabel dateTimeLabel=widgetFactory.createCLabel(composite, label);
+		data=new FormData();
+		data.left=new FormAttachment(0, 0);
+		data.right=new FormAttachment(dateTime, -ITabbedPropertyConstants.HSPACE);
+		data.top=new FormAttachment(dateTime, 0, SWT.CENTER);
+		dateTimeLabel.setLayoutData(data);
+		return dateTime;
 	}
 
 	/**

@@ -6,7 +6,6 @@ import fr.rostren.tracker.Category;
 
 public class CategoryLabelProvider extends AbstractLabelProvider {
 	protected static final String STRING_UNDEFINED_TITLE="UNDEFINED TITLE"; //$NON-NLS-1$
-	protected static final String STRING_UNDEFINED_DESCRIPTION="UNDEFINED DESCRIPTION"; //$NON-NLS-1$
 
 	@Override
 	public String getText(Object element) {
@@ -31,6 +30,6 @@ public class CategoryLabelProvider extends AbstractLabelProvider {
 	 * @return the category description
 	 */
 	private String getCategoryDescription(Category category) {
-		return StringUtils.isEmpty(category.getDescription()) ? CategoryLabelProvider.STRING_UNDEFINED_DESCRIPTION : category.getDescription();
+		return StringUtils.isEmpty(category.getDescription()) ? StringUtils.EMPTY : category.getDescription();
 	}
 }

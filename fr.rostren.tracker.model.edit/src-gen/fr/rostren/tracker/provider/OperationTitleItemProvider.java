@@ -22,9 +22,14 @@ import fr.rostren.tracker.TrackerPackage;
  */
 public class OperationTitleItemProvider extends TitleItemProvider {
 	/**
+	 * @generated NOT
+	 */
+	public static final String STRING_UNDEFINED_OPERATION_TITLE="UNDEFINED OPERATION TITLE"; //$NON-NLS-1$
+
+	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public OperationTitleItemProvider(AdapterFactory adapterFactory) {
@@ -34,7 +39,7 @@ public class OperationTitleItemProvider extends TitleItemProvider {
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -50,7 +55,7 @@ public class OperationTitleItemProvider extends TitleItemProvider {
 	/**
 	 * This adds a property descriptor for the Categories feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void addCategoriesPropertyDescriptor(Object object) {
@@ -74,13 +79,13 @@ public class OperationTitleItemProvider extends TitleItemProvider {
 	/**
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label=((OperationTitle)object).getTitle();
-		return label == null || label.length() == 0 ? "***Undefined Operation Title***" : label;
+		return label == null || label.length() == 0 ? OperationTitleItemProvider.STRING_UNDEFINED_OPERATION_TITLE : label;
 	}
 
 	/**
@@ -88,7 +93,7 @@ public class OperationTitleItemProvider extends TitleItemProvider {
 	 * update any cached children and by creating a viewer notification, which
 	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	@Override
@@ -115,7 +120,7 @@ public class OperationTitleItemProvider extends TitleItemProvider {
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

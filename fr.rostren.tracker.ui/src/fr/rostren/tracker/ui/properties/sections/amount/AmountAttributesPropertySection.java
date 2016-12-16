@@ -13,31 +13,38 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 import fr.rostren.tracker.ui.properties.listeners.AmountAttributesModifyListener;
+import fr.rostren.tracker.ui.properties.listeners.DateSelectionListener;
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
 
 public class AmountAttributesPropertySection extends AbstractAttributesPropertySection {
 	protected Text valueText;
+	protected DateTime dateTime;
 	protected CCombo categoryCombo;
 
 	private final ModifyListener listener=new AmountAttributesModifyListener(this);
+	private final SelectionListener datelistener=new DateSelectionListener(this, dateTime);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
 		valueText=createLabeledText(body, null, "Value:"); //$NON-NLS-1$
-		categoryCombo=createLabeledCombo(body, valueText, "Category:"); //$NON-NLS-1$
+		dateTime=createDateTime(body, valueText, "Date:"); //$NON-NLS-1$
+		categoryCombo=createLabeledCombo(body, dateTime, "Category:"); //$NON-NLS-1$
 
 		addListeners();
 	}
@@ -48,6 +55,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 
 		disposeListeners();
 		valueText.setText(getAmountvalue());
+		dateTime.setDate(getYear(), getMonth(), getDay());
 		String[] items=getItems();
 		categoryCombo.setItems(items);
 		setComboSelection(items);
@@ -79,14 +87,46 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		return String.valueOf(value);
 	}
 
+	/**
+	 * Returns the amount wished date year
+	 * @return the amount wished date year
+	 */
+	private int getYear() {
+		Assert.isTrue(currentEObject instanceof Amount);
+		Date wishedDate=((Amount)currentEObject).getWishedDate();
+		return wishedDate == null ? 0 : wishedDate.getYear();
+	}
+
+	/**
+	 * Returns the amount wished date month
+	 * @return the amount wished date month
+	 */
+	private int getMonth() {
+		Assert.isTrue(currentEObject instanceof Amount);
+		Date wishedDate=((Amount)currentEObject).getWishedDate();
+		return wishedDate == null ? 0 : wishedDate.getMonth().getValue();
+	}
+
+	/**
+	 * Returns the amount wished date day
+	 * @return the amount wished date day
+	 */
+	private int getDay() {
+		Assert.isTrue(currentEObject instanceof Amount);
+		Date wishedDate=((Amount)currentEObject).getWishedDate();
+		return wishedDate == null ? 0 : wishedDate.getDay();
+	}
+
 	@Override
 	protected void addListeners() {
 		valueText.addModifyListener(listener);
+		dateTime.addSelectionListener(datelistener);
 	}
 
 	@Override
 	protected void disposeListeners() {
 		valueText.removeModifyListener(listener);
+		dateTime.removeSelectionListener(datelistener);
 	}
 
 	/**

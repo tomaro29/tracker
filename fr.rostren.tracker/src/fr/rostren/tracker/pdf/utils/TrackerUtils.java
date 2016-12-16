@@ -25,6 +25,8 @@ import fr.rostren.tracker.TrackerFactory;
 public class TrackerUtils {
 
 	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$
+	public static final String INCOME_TITLE="INCOME"; //$NON-NLS-1$
+	public static final String SPENDING_TITLE="SPENDING"; //$NON-NLS-1$
 
 	/**
 	 * Returns the operations titles
@@ -272,6 +274,36 @@ public class TrackerUtils {
 			return getCategory(subCategory, title);
 		}
 		return null;
+	}
+
+	/**
+	 * <code>true</code> if the category is the income category, <code>false</code> otherwise.
+	 * @param category the category
+	 * @return <code>true</code> if the category is the income category, <code>false</code> otherwise.
+	 */
+	public static boolean isIncomeCategory(Category category) {
+		if (category == null) {
+			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
+		}
+		if (TrackerUtils.INCOME_TITLE.equals(category.getTitle())) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * <code>true</code> if the category is the spending category, <code>false</code> otherwise.
+	 * @param category the category
+	 * @return <code>true</code> if the category is the spending category, <code>false</code> otherwise.
+	 */
+	public static boolean isSpendingCategory(Category category) {
+		if (category == null) {
+			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
+		}
+		if (TrackerUtils.SPENDING_TITLE.equals(category.getTitle())) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

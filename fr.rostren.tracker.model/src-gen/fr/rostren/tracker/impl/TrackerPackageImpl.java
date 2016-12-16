@@ -401,16 +401,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getOperation_WishedDate() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -598,6 +588,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	@Override
 	public EAttribute getAmount_Value() {
 		return (EAttribute)amountEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAmount_WishedDate() {
+		return (EReference)amountEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -876,7 +876,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(operationEClass, OPERATION__SUB_AMOUNTS);
 		createEReference(operationEClass, OPERATION__DATE);
 		createEReference(operationEClass, OPERATION__ORIGIN);
-		createEReference(operationEClass, OPERATION__WISHED_DATE);
 
 		creditEClass=createEClass(CREDIT);
 
@@ -904,6 +903,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		amountEClass=createEClass(AMOUNT);
 		createEReference(amountEClass, AMOUNT__CATEGORY);
 		createEAttribute(amountEClass, AMOUNT__VALUE);
+		createEReference(amountEClass, AMOUNT__WISHED_DATE);
 
 		operationTitleServiceEClass=createEClass(OPERATION_TITLE_SERVICE);
 
@@ -1017,8 +1017,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_Origin(), this.getOrigin(), this.getOrigin_Operations(), "origin", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_WishedDate(), this.getDate(), null, "wishedDate", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(creditEClass, Credit.class, "Credit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1055,6 +1053,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAmount_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAmount_WishedDate(), this.getDate(), null, "wishedDate", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationTitleServiceEClass, OperationTitleService.class, "OperationTitleService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -310,22 +310,13 @@ public interface TrackerPackage extends EPackage {
 	int OPERATION__ORIGIN=4;
 
 	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__WISHED_DATE=5;
-
-	/**
 	 * The number of structural features of the '<em>Operation</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT=6;
+	int OPERATION_FEATURE_COUNT=5;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.CreditImpl <em>Credit</em>}' class.
@@ -379,15 +370,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CREDIT__ORIGIN=OPERATION__ORIGIN;
-
-	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CREDIT__WISHED_DATE=OPERATION__WISHED_DATE;
 
 	/**
 	 * The number of structural features of the '<em>Credit</em>' class. <!--
@@ -452,15 +434,6 @@ public interface TrackerPackage extends EPackage {
 	int DEBIT__ORIGIN=OPERATION__ORIGIN;
 
 	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEBIT__WISHED_DATE=OPERATION__WISHED_DATE;
-
-	/**
 	 * The number of structural features of the '<em>Debit</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -521,15 +494,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFER__ORIGIN=OPERATION__ORIGIN;
-
-	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFER__WISHED_DATE=OPERATION__WISHED_DATE;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Account</b></em>' reference. <!--
@@ -612,15 +576,6 @@ public interface TrackerPackage extends EPackage {
 	int INCOMING__ORIGIN=TRANSFER__ORIGIN;
 
 	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOMING__WISHED_DATE=TRANSFER__WISHED_DATE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Account</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -699,15 +654,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OUTGOING__ORIGIN=TRANSFER__ORIGIN;
-
-	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OUTGOING__WISHED_DATE=TRANSFER__WISHED_DATE;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Account</b></em>' reference. <!--
@@ -871,13 +817,22 @@ public interface TrackerPackage extends EPackage {
 	int AMOUNT__VALUE=1;
 
 	/**
+	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMOUNT__WISHED_DATE=2;
+
+	/**
 	 * The number of structural features of the '<em>Amount</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int AMOUNT_FEATURE_COUNT=2;
+	int AMOUNT_FEATURE_COUNT=3;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationTitleServiceImpl <em>Operation Title Service</em>}' class.
@@ -1353,17 +1308,6 @@ public interface TrackerPackage extends EPackage {
 	EReference getOperation_Origin();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link fr.rostren.tracker.Operation#getWishedDate <em>Wished Date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Wished Date</em>'.
-	 * @see fr.rostren.tracker.Operation#getWishedDate()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EReference getOperation_WishedDate();
-
-	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.Credit <em>Credit</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Credit</em>'.
@@ -1582,6 +1526,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAmount_Value();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Wished Date</em>'.
+	 * @see fr.rostren.tracker.Amount#getWishedDate()
+	 * @see #getAmount()
+	 * @generated
+	 */
+	EReference getAmount_WishedDate();
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.OperationTitleService <em>Operation Title Service</em>}'.
@@ -1992,14 +1947,6 @@ public interface TrackerPackage extends EPackage {
 		EReference OPERATION__ORIGIN=eINSTANCE.getOperation_Origin();
 
 		/**
-		 * The meta object literal for the '<em><b>Wished Date</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPERATION__WISHED_DATE=eINSTANCE.getOperation_WishedDate();
-
-		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.CreditImpl <em>Credit</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see fr.rostren.tracker.impl.CreditImpl
@@ -2170,6 +2117,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AMOUNT__VALUE=eINSTANCE.getAmount_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Wished Date</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AMOUNT__WISHED_DATE=eINSTANCE.getAmount_WishedDate();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationTitleServiceImpl <em>Operation Title Service</em>}' class.

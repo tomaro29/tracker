@@ -31,8 +31,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="date" eType="#//Date" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//Origin" eOpposite="#//Origin/operations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="wishedDate" eType="#//Date"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Credit" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Debit" eSuperTypes="#//Operation"/>
@@ -60,6 +58,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
         eType="#//Category"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wishedDate" eType="#//Date"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationTitleService">
     <eOperations name="addTitle">

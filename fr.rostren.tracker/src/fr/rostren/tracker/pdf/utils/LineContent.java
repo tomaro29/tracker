@@ -7,7 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.Credit;
 import fr.rostren.tracker.Date;
+import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
@@ -15,6 +17,8 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
 public class LineContent {
+	private static final String FACT=" FACT "; //$NON-NLS-1$
+
 	public enum OperationType {
 		CREDIT,
 		DEBIT
@@ -26,7 +30,9 @@ public class LineContent {
 	private Category linkedCategory;
 	private OperationTitle linkedOperationTitle;
 
-	private Category undefinedCategory;
+	private Category income;
+	private Category spending;
+	private Category undefined;
 
 	/**
 	 * Constructor
@@ -93,6 +99,9 @@ public class LineContent {
 		else if (currentTitle.startsWith("CHEQUE")) { //$NON-NLS-1$
 			return "CHEQUE"; //$NON-NLS-1$
 		}
+		else if (currentTitle.contains(LineContent.FACT)) {
+			return currentTitle.split(LineContent.FACT)[0];
+		}
 		return currentTitle;
 	}
 
@@ -130,12 +139,17 @@ public class LineContent {
 		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setValue(amount);
 		amountObject.setCategory(linkedCategory);
+		Date wishedDate=TrackerFactory.eINSTANCE.createDate();
+		wishedDate.setYear(operation.getDate().getYear());
+		wishedDate.setMonth(operation.getDate().getMonth());
+		wishedDate.setDay(operation.getDate().getDay());
+		amountObject.setWishedDate(wishedDate);
 		return amountObject;
 	}
 
 	/**
-	 * Finds a category given an operation title in the categories repository of
-	 * the tracker model. It creates a new category if the corresponding one
+	 * Finds a category based on the given operation title.
+	 * It creates a new category if the corresponding one
 	 * does not exist already in the model.
 	 *
 	 * @param title
@@ -150,28 +164,85 @@ public class LineContent {
 		if (existingTitle != null && !existingTitle.getCategories().isEmpty()) {
 			return existingTitle.getCategories().get(0);
 		}
+
+		//creates new
 		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 		setLinkedOperationTitle(newTitle);
 		newTitle.setTitle(title);
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
 
-		undefinedCategory=undefinedCategory != null ? undefinedCategory : getUndefinedCategory(tracker);
-		undefinedCategory.getOperationTitles().add(newTitle);
-		return undefinedCategory;
+		if (operation instanceof Credit) {
+			income=income != null ? income : getIncomeCategory(getCategoriesRepository(tracker));
+			income.getOperationTitles().add(newTitle);
+			return income;
+		}
+		if (operation instanceof Debit) {
+			spending=spending != null ? spending : getSpendingCategory(getCategoriesRepository(tracker));
+			spending.getOperationTitles().add(newTitle);
+			return spending;
+		}
+		undefined=undefined != null ? undefined : getUndefinedCategory(getCategoriesRepository(tracker));
+		undefined.getOperationTitles().add(newTitle);
+		return undefined;
 	}
 
 	/**
-	 * Returns the undefined category
 	 * @param tracker the tracker
-	 * @return the undefined category
+	 * @return the categories repository if any, a new one otherwise.
 	 */
-	private Category getUndefinedCategory(Tracker tracker) {
+	private CategoriesRepository getCategoriesRepository(Tracker tracker) {
 		CategoriesRepository repository=tracker.getCategoriesRepository();
 		if (repository == null) {
 			repository=TrackerFactory.eINSTANCE.createCategoriesRepository();
 			tracker.setCategoriesRepository(repository);
 		}
+		return repository;
+	}
 
+	/**
+	 * Returns the income category
+	 * @param repository the categories repository
+	 * @return the income category
+	 */
+	private Category getIncomeCategory(CategoriesRepository repository) {
+		// return the income category in the existing undefined group
+		for (Category category: repository.getCategories()) {
+			if (TrackerUtils.isIncomeCategory(category)) {
+				return category;
+			}
+		}
+		// return the income category in a new spending group
+		Category category=TrackerFactory.eINSTANCE.createCategory();
+		category.setTitle(TrackerUtils.INCOME_TITLE);
+		repository.getCategories().add(category);
+		return category;
+	}
+
+	/**
+	 * Returns the spending category
+	 * @param repository the categories repository
+	 * @return the spending category
+	 */
+	private Category getSpendingCategory(CategoriesRepository repository) {
+		// return the spending category in the existing undefined group
+		for (Category category: repository.getCategories()) {
+			if (TrackerUtils.isSpendingCategory(category)) {
+				return category;
+			}
+		}
+		// return the spending category in a new spending group
+		Category category=TrackerFactory.eINSTANCE.createCategory();
+		category.setTitle(TrackerUtils.SPENDING_TITLE);
+		repository.getCategories().add(category);
+		return category;
+	}
+
+	/**
+	 * Returns the undefined category
+	 * @param repository the repository
+	 * @return the undefined category
+	 */
+	private Category getUndefinedCategory(CategoriesRepository repository) {
 		// return the undefined category in the existing undefined group
 		for (Category category: repository.getCategories()) {
 			if (TrackerUtils.isUndefinedCategory(category)) {
@@ -180,9 +251,10 @@ public class LineContent {
 		}
 
 		// return the undefined category in a new undefined group
-		Category undefinedCategory=TrackerFactory.eINSTANCE.createCategory();
-		undefinedCategory.setTitle(TrackerUtils.UNDEFINED_TITLE);
-		return undefinedCategory;
+		Category category=TrackerFactory.eINSTANCE.createCategory();
+		category.setTitle(TrackerUtils.UNDEFINED_TITLE);
+		repository.getCategories().add(category);
+		return category;
 	}
 
 	/**

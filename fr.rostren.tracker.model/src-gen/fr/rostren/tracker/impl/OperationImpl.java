@@ -34,7 +34,6 @@ import fr.rostren.tracker.TrackerPackage;
  *   <li>{@link fr.rostren.tracker.impl.OperationImpl#getSubAmounts <em>Sub Amounts</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.OperationImpl#getDate <em>Date</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.OperationImpl#getOrigin <em>Origin</em>}</li>
- *   <li>{@link fr.rostren.tracker.impl.OperationImpl#getWishedDate <em>Wished Date</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,16 +93,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @ordered
 	 */
 	protected Origin origin;
-
-	/**
-	 * The cached value of the '{@link #getWishedDate() <em>Wished Date</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWishedDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date wishedDate;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -231,55 +220,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Date getWishedDate() {
-		return wishedDate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetWishedDate(Date newWishedDate, NotificationChain msgs) {
-		Date oldWishedDate=wishedDate;
-		wishedDate=newWishedDate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification=new ENotificationImpl(this, Notification.SET, TrackerPackage.OPERATION__WISHED_DATE, oldWishedDate, newWishedDate);
-			if (msgs == null)
-				msgs=notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setWishedDate(Date newWishedDate) {
-		if (newWishedDate != wishedDate) {
-			NotificationChain msgs=null;
-			if (wishedDate != null)
-				msgs=((InternalEObject)wishedDate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.OPERATION__WISHED_DATE, null, msgs);
-			if (newWishedDate != null)
-				msgs=((InternalEObject)newWishedDate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.OPERATION__WISHED_DATE, null, msgs);
-			msgs=basicSetWishedDate(newWishedDate, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OPERATION__WISHED_DATE, newWishedDate, newWishedDate));
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -377,8 +317,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return basicSetDate(null, msgs);
 			case TrackerPackage.OPERATION__ORIGIN:
 				return basicSetOrigin(null, msgs);
-			case TrackerPackage.OPERATION__WISHED_DATE:
-				return basicSetWishedDate(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -404,8 +342,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				if (resolve)
 					return getOrigin();
 				return basicGetOrigin();
-			case TrackerPackage.OPERATION__WISHED_DATE:
-				return getWishedDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -434,9 +370,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 			case TrackerPackage.OPERATION__ORIGIN:
 				setOrigin((Origin)newValue);
 				return;
-			case TrackerPackage.OPERATION__WISHED_DATE:
-				setWishedDate((Date)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -463,9 +396,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 			case TrackerPackage.OPERATION__ORIGIN:
 				setOrigin((Origin)null);
 				return;
-			case TrackerPackage.OPERATION__WISHED_DATE:
-				setWishedDate((Date)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -487,8 +417,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return date != null;
 			case TrackerPackage.OPERATION__ORIGIN:
 				return origin != null;
-			case TrackerPackage.OPERATION__WISHED_DATE:
-				return wishedDate != null;
 		}
 		return super.eIsSet(featureID);
 	}

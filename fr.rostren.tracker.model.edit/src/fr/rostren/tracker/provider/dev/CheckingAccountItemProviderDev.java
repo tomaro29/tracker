@@ -101,10 +101,6 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 				}
 			}
 		}
-		if (CheckingAccountItemProviderDev.defaultOperationTitle == null || !operationsTitles.contains(CheckingAccountItemProviderDev.defaultOperationTitle)) {
-			CheckingAccountItemProviderDev.defaultOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
-			operationsTitles.add(CheckingAccountItemProviderDev.defaultOperationTitle);
-		}
 		operation.setOperationTitle(CheckingAccountItemProviderDev.defaultOperationTitle);
 	}
 

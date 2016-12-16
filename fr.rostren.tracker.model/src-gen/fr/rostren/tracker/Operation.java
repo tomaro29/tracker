@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.rostren.tracker.Operation#getSubAmounts <em>Sub Amounts</em>}</li>
  *   <li>{@link fr.rostren.tracker.Operation#getDate <em>Date</em>}</li>
  *   <li>{@link fr.rostren.tracker.Operation#getOrigin <em>Origin</em>}</li>
- *   <li>{@link fr.rostren.tracker.Operation#getWishedDate <em>Wished Date</em>}</li>
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getOperation()
@@ -83,32 +82,6 @@ public interface Operation extends EObject {
 	 * @generated
 	 */
 	void setOrigin(Origin value);
-
-	/**
-	 * Returns the value of the '<em><b>Wished Date</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wished Date</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Wished Date</em>' containment reference.
-	 * @see #setWishedDate(Date)
-	 * @see fr.rostren.tracker.TrackerPackage#getOperation_WishedDate()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Date getWishedDate();
-
-	/**
-	 * Sets the value of the '{@link fr.rostren.tracker.Operation#getWishedDate <em>Wished Date</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Wished Date</em>' containment reference.
-	 * @see #getWishedDate()
-	 * @generated
-	 */
-	void setWishedDate(Date value);
 
 	/**
 	 * Returns the value of the '<em><b>Total Amount</b></em>' attribute. <!--

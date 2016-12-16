@@ -5,6 +5,7 @@ package fr.rostren.tracker.impl;
 import java.math.BigDecimal;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -12,6 +13,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.Date;
 import fr.rostren.tracker.TrackerPackage;
 
 /**
@@ -23,6 +25,7 @@ import fr.rostren.tracker.TrackerPackage;
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.AmountImpl#getCategory <em>Category</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.AmountImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link fr.rostren.tracker.impl.AmountImpl#getWishedDate <em>Wished Date</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,6 +57,16 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @ordered
 	 */
 	protected BigDecimal value=VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getWishedDate() <em>Wished Date</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWishedDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date wishedDate;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -131,6 +144,69 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Date getWishedDate() {
+		return wishedDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetWishedDate(Date newWishedDate, NotificationChain msgs) {
+		Date oldWishedDate=wishedDate;
+		wishedDate=newWishedDate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification=new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__WISHED_DATE, oldWishedDate, newWishedDate);
+			if (msgs == null)
+				msgs=notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setWishedDate(Date newWishedDate) {
+		if (newWishedDate != wishedDate) {
+			NotificationChain msgs=null;
+			if (wishedDate != null)
+				msgs=((InternalEObject)wishedDate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.AMOUNT__WISHED_DATE, null, msgs);
+			if (newWishedDate != null)
+				msgs=((InternalEObject)newWishedDate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.AMOUNT__WISHED_DATE, null, msgs);
+			msgs=basicSetWishedDate(newWishedDate, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__WISHED_DATE, newWishedDate, newWishedDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.AMOUNT__WISHED_DATE:
+				return basicSetWishedDate(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -143,6 +219,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				return basicGetCategory();
 			case TrackerPackage.AMOUNT__VALUE:
 				return getValue();
+			case TrackerPackage.AMOUNT__WISHED_DATE:
+				return getWishedDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +237,9 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				return;
 			case TrackerPackage.AMOUNT__VALUE:
 				setValue((BigDecimal)newValue);
+				return;
+			case TrackerPackage.AMOUNT__WISHED_DATE:
+				setWishedDate((Date)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,6 +258,9 @@ public class AmountImpl extends EObjectImpl implements Amount {
 			case TrackerPackage.AMOUNT__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case TrackerPackage.AMOUNT__WISHED_DATE:
+				setWishedDate((Date)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -192,6 +276,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				return category != null;
 			case TrackerPackage.AMOUNT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case TrackerPackage.AMOUNT__WISHED_DATE:
+				return wishedDate != null;
 		}
 		return super.eIsSet(featureID);
 	}

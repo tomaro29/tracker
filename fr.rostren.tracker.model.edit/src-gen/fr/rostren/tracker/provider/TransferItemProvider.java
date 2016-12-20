@@ -23,7 +23,7 @@ public class TransferItemProvider extends OperationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public TransferItemProvider(AdapterFactory adapterFactory) {
@@ -33,7 +33,7 @@ public class TransferItemProvider extends OperationItemProvider {
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -50,7 +50,7 @@ public class TransferItemProvider extends OperationItemProvider {
 	/**
 	 * This adds a property descriptor for the Incoming Account feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void addIncomingAccountPropertyDescriptor(Object object) {
@@ -62,7 +62,7 @@ public class TransferItemProvider extends OperationItemProvider {
 	/**
 	 * This adds a property descriptor for the Outgoing Account feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void addOutgoingAccountPropertyDescriptor(Object object) {
@@ -101,7 +101,7 @@ public class TransferItemProvider extends OperationItemProvider {
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

@@ -264,7 +264,7 @@
                category="operationTitleProperties"
                afterTab="1"
                id="operation.title.property.tab.OperationTitleCategoriesPropertySection"
-               label="Category"/>
+               label="Categories"/>
 	</propertyTabs>
    </extension>
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">

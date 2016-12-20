@@ -58,6 +58,7 @@ public class ImportPDFHandler extends AbstractHandler {
 			runImportOperationsAction(pdfURIText, account);
 		}
 		return null;
+
 	}
 
 	/**

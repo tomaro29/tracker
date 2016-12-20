@@ -39,7 +39,9 @@ public abstract class AbstractPdfContentAnalyzer {
 
 	private int currentYear=0;
 	private String currentLine;
+	/** The current split line. */
 	private String[] currentSplitLine;
+	/** The last parsed token. */
 	private PdfToken lastToken;
 
 	private Date lastPotentialDate=null;
@@ -104,7 +106,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	/**
 	 * Resets the date, the operationTitle and the amount.
 	 */
-	protected void reset() {
+	private void reset() {
 		setLastPotentialDate(null);
 		setLastPotentialOperationTitle(null);
 		setLastPotentialAmount(null);
@@ -181,60 +183,77 @@ public abstract class AbstractPdfContentAnalyzer {
 	}
 
 	/**
-	 * @return the currentLine
+	 * Returns the current line.
+	 *
+	 * @return the currentLine.
 	 */
+
 	public String getCurrentLine() {
 		return currentLine;
 	}
 
 	/**
-	 * @param currentLine
-	 *            the currentLine to set
+	 * Sets the line.
+	 *
+	 * @param line
+	 *            the line to set.
 	 */
 	public void setCurrentLine(String currentLine) {
 		this.currentLine=currentLine;
 	}
 
 	/**
-	 * @param lastPotentialOperationTitle
-	 *            the lastPotentialOperationTitle to set
+	 * Sets the operation title.
+	 *
+	 * @param operationTitle
+	 *            the operation Title to set as a last potential title.
 	 */
 	public void setLastPotentialOperationTitle(String lastPotentialOperationTitle) {
 		this.lastPotentialOperationTitle=lastPotentialOperationTitle;
 	}
 
 	/**
-	 * @param lastPotentialAmount
-	 *            the lastPotentialAmount to set
+	 * Sets the amount.
+	 *
+	 * @param amount
+	 *            the amount to set as a last parsed amount.
 	 */
 	public void setLastPotentialAmount(BigDecimal lastPotentialAmount) {
 		this.lastPotentialAmount=lastPotentialAmount;
 	}
 
 	/**
-	 * @return the currentYear
+	 * Returns the current year.
+	 *
+	 * @return the current year.
 	 */
 	public int getCurrentYear() {
 		return currentYear;
 	}
 
 	/**
-	 * @param currentYear
-	 *            the currentYear to set
+	 * Sets the current year.
+	 *
+	 * @param year
+	 *            the year to set.
 	 */
 	public void setCurrentYear(int currentYear) {
 		this.currentYear=currentYear;
 	}
 
 	/**
-	 * @param lastPotentialDate
-	 *            the lastPotentialDate to set
+	 * Sets the last potential date.
+	 *
+	 * @param date
+	 *            the date to set as a last potential date.
 	 */
 	public void setLastPotentialDate(Date lastPotentialDate) {
 		this.lastPotentialDate=lastPotentialDate;
 	}
 
 	/**
+	 * Returns the current split line.
+	 *
 	 * @return the currentSplitLine
 	 */
 	public String[] getCurrentSplitLine() {
@@ -242,14 +261,18 @@ public abstract class AbstractPdfContentAnalyzer {
 	}
 
 	/**
-	 * @param currentSplitLine
-	 *            the currentSplitLine to set
+	 * Sets the split line.
+	 *
+	 * @param splitLine
+	 *            the splitLine to set
 	 */
 	public void setCurrentSplitLine(String[] currentSplitLine) {
 		this.currentSplitLine=currentSplitLine;
 	}
 
 	/**
+	 * Returns the last token.
+	 *
 	 * @return the lastToken
 	 */
 	public PdfToken getLastToken() {
@@ -257,8 +280,10 @@ public abstract class AbstractPdfContentAnalyzer {
 	}
 
 	/**
-	 * @param lastToken
-	 *            the lastToken to set
+	 * Sets the last parsed token.
+	 *
+	 * @param token
+	 *            the token to set as a last parsed token
 	 */
 	public void setLastToken(PdfToken lastToken) {
 		this.lastToken=lastToken;

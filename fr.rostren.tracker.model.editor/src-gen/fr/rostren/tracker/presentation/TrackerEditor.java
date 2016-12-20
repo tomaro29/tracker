@@ -116,6 +116,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
+
 import fr.rostren.tracker.provider.dev.TrackerItemProviderAdapterFactoryDev;
 
 /**
@@ -168,13 +169,13 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected List<PropertySheetPage> propertySheetPages=new ArrayList<PropertySheetPage>();
+	protected List<PropertySheetPage> propertySheetPages=new ArrayList<>();
 
 	/**
 	 * This is the viewer that shadows the selection in the content outline. The
 	 * parent relation must be correctly defined for this to work. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected TreeViewer selectionViewer;
@@ -221,7 +222,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This keeps track of the active viewer pane, in the book. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ViewerPane currentViewerPane;
@@ -230,7 +231,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	 * This keeps track of the active content viewer, which may be either one of
 	 * the viewers in the pages or the content outline viewer. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected Viewer currentViewer;
@@ -248,12 +249,12 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<ISelectionChangedListener> selectionChangedListeners=new ArrayList<ISelectionChangedListener>();
+	protected Collection<ISelectionChangedListener> selectionChangedListeners=new ArrayList<>();
 
 	/**
 	 * This keeps track of the selection of the editor as a whole. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ISelection editorSelection=StructuredSelection.EMPTY;
@@ -318,39 +319,39 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * Resources that have been removed since last activation. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
-	protected Collection<Resource> removedResources=new ArrayList<Resource>();
+	protected Collection<Resource> removedResources=new ArrayList<>();
 
 	/**
 	 * Resources that have been changed since last activation. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
-	protected Collection<Resource> changedResources=new ArrayList<Resource>();
+	protected Collection<Resource> changedResources=new ArrayList<>();
 
 	/**
 	 * Resources that have been saved. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
-	protected Collection<Resource> savedResources=new ArrayList<Resource>();
+	protected Collection<Resource> savedResources=new ArrayList<>();
 
 	/**
 	 * Map to store the diagnostic associated with a resource. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
-	protected Map<Resource, Diagnostic> resourceToDiagnosticMap=new LinkedHashMap<Resource, Diagnostic>();
+	protected Map<Resource, Diagnostic> resourceToDiagnosticMap=new LinkedHashMap<>();
 
 	/**
 	 * Controls whether the problem indication should be updated. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected boolean updateProblemIndication=true;
@@ -427,8 +428,8 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 			try {
 				class ResourceDeltaVisitor implements IResourceDeltaVisitor {
 					protected ResourceSet resourceSet=editingDomain.getResourceSet();
-					protected Collection<Resource> changedResources=new ArrayList<Resource>();
-					protected Collection<Resource> removedResources=new ArrayList<Resource>();
+					protected Collection<Resource> changedResources=new ArrayList<>();
+					protected Collection<Resource> removedResources=new ArrayList<>();
 
 					@Override
 					public boolean visit(IResourceDelta delta) {
@@ -495,7 +496,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * Handles activation of the editor or it's associated views. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void handleActivate() {
@@ -530,7 +531,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * Handles what to do with changed resources on activation. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void handleChangedResources() {
@@ -617,7 +618,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * Shows a dialog that asks if conflicting changes should be discarded. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected boolean handleDirtyConflict() {
@@ -627,7 +628,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This creates a model editor. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public TrackerEditor() {
@@ -638,7 +639,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This sets up the editing domain for the model editor. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	protected void initializeEditingDomain() {
@@ -702,7 +703,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This sets the selection into whichever viewer is active. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void setSelectionToViewer(Collection<?> collection) {
@@ -807,7 +808,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	 * This makes sure that one content viewer, either for the current page or
 	 * the outline view, if it has focus, is the current one. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void setCurrentViewer(Viewer viewer) {
@@ -983,6 +984,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 			//
 			{
 				ViewerPane viewerPane=new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+
 					@Override
 					public Viewer createViewer(Composite composite) {
 						Tree tree=new Tree(composite, SWT.MULTI);
@@ -1004,13 +1006,16 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 				parentViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 
 				createContextMenuFor(parentViewer);
+
 				int pageIndex=addPage(viewerPane.getControl());
+
 				setPageText(pageIndex, getString("_UI_ParentPage_label"));
 			}
 
 			// This is the page for the list viewer
 			//
 			{
+
 				ViewerPane viewerPane=new ViewerPane(getSite().getPage(), TrackerEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
@@ -1030,6 +1035,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 
 				createContextMenuFor(listViewer);
 				int pageIndex=addPage(viewerPane.getControl());
+
 				setPageText(pageIndex, getString("_UI_ListPage_label"));
 			}
 
@@ -1230,7 +1236,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This is how the framework determines which interfaces we implement. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("rawtypes")
@@ -1253,7 +1259,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This accesses a cached version of the content outliner. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public IContentOutlinePage getContentOutlinePage() {
@@ -1356,7 +1362,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 				// If it's the selection viewer, then we want it to select the same selection as this selection.
 				//
 				if (currentViewerPane.getViewer() == selectionViewer) {
-					ArrayList<Object> selectionList=new ArrayList<Object>();
+					ArrayList<Object> selectionList=new ArrayList<>();
 					selectionList.add(selectedElement);
 					while (selectedElements.hasNext()) {
 						selectionList.add(selectedElements.next());
@@ -1397,7 +1403,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	public void doSave(IProgressMonitor progressMonitor) {
 		// Save only resources that have actually changed.
 		//
-		final Map<Object, Object> saveOptions=new HashMap<Object, Object>();
+		final Map<Object, Object> saveOptions=new HashMap<>();
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 
@@ -1474,7 +1480,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This always returns true because it is not currently supported. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -1506,7 +1512,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	 * @generated
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
-		(editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
+		editingDomain.getResourceSet().getResources().get(0).setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor=getActionBars().getStatusLineManager() != null ? getActionBars().getStatusLineManager().getProgressMonitor() : new NullProgressMonitor();
@@ -1528,7 +1534,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This is called during startup. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -1638,7 +1644,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This looks up a string in the plugin's plugin.properties file. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	private static String getString(String key) {
@@ -1648,7 +1654,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * This looks up a string in plugin.properties, making a substitution. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
@@ -1659,7 +1665,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	 * This implements {@link org.eclipse.jface.action.IMenuListener} to help
 	 * fill the context menus with contributions from the Edit menu. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -1723,7 +1729,7 @@ public class TrackerEditor extends MultiPageEditorPart implements IEditingDomain
 	/**
 	 * Returns whether the outline view should be presented to the user. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected boolean showOutlineView() {

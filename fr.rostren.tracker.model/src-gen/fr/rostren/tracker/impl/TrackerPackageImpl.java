@@ -210,14 +210,14 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * method {@link #init init()}, which also performs initialization of the
 	 * package, or returns the registered package, if one already exists. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see fr.rostren.tracker.TrackerPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
 	private TrackerPackageImpl() {
-		super(eNS_URI, TrackerFactory.eINSTANCE);
+		super(TrackerPackage.eNS_URI, TrackerFactory.eINSTANCE);
 	}
 
 	/**
@@ -229,27 +229,30 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model,
 	 * and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>
 	 * This method is used to initialize {@link TrackerPackage#eINSTANCE} when
 	 * that field is accessed. Clients should not invoke it directly. Instead,
 	 * they should simply access that field to obtain the package. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
 	public static TrackerPackage init() {
-		if (isInited)
+		if (TrackerPackageImpl.isInited) {
 			return (TrackerPackage)EPackage.Registry.INSTANCE.getEPackage(TrackerPackage.eNS_URI);
+		}
 
 		// Obtain or create and register package
-		TrackerPackageImpl theTrackerPackage=(TrackerPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TrackerPackageImpl	? EPackage.Registry.INSTANCE.get(eNS_URI)
-																																		: new TrackerPackageImpl());
+		TrackerPackageImpl theTrackerPackage=(TrackerPackageImpl)(EPackage.Registry.INSTANCE.get(TrackerPackage.eNS_URI) instanceof TrackerPackageImpl
+																																							? EPackage.Registry.INSTANCE
+																																								.get(TrackerPackage.eNS_URI)
+																																						: new TrackerPackageImpl());
 
-		isInited=true;
+		TrackerPackageImpl.isInited=true;
 
 		// Create package meta-data objects
 		theTrackerPackage.createPackageContents();
@@ -849,98 +852,99 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated)
+		if (isCreated) {
 			return;
+		}
 		isCreated=true;
 
 		// Create classes and their features
-		ownerEClass=createEClass(OWNER);
-		createEReference(ownerEClass, OWNER__ACCOUNTS);
-		createEAttribute(ownerEClass, OWNER__FIRST_NAME);
-		createEAttribute(ownerEClass, OWNER__LAST_NAME);
+		ownerEClass=createEClass(TrackerPackage.OWNER);
+		createEReference(ownerEClass, TrackerPackage.OWNER__ACCOUNTS);
+		createEAttribute(ownerEClass, TrackerPackage.OWNER__FIRST_NAME);
+		createEAttribute(ownerEClass, TrackerPackage.OWNER__LAST_NAME);
 
-		accountEClass=createEClass(ACCOUNT);
-		createEAttribute(accountEClass, ACCOUNT__NAME);
-		createEAttribute(accountEClass, ACCOUNT__AMOUNT);
-		createEAttribute(accountEClass, ACCOUNT__IDENTIFIER);
+		accountEClass=createEClass(TrackerPackage.ACCOUNT);
+		createEAttribute(accountEClass, TrackerPackage.ACCOUNT__NAME);
+		createEAttribute(accountEClass, TrackerPackage.ACCOUNT__AMOUNT);
+		createEAttribute(accountEClass, TrackerPackage.ACCOUNT__IDENTIFIER);
 
-		checkingAccountEClass=createEClass(CHECKING_ACCOUNT);
-		createEReference(checkingAccountEClass, CHECKING_ACCOUNT__OPERATIONS);
+		checkingAccountEClass=createEClass(TrackerPackage.CHECKING_ACCOUNT);
+		createEReference(checkingAccountEClass, TrackerPackage.CHECKING_ACCOUNT__OPERATIONS);
 
-		boockletAccountEClass=createEClass(BOOCKLET_ACCOUNT);
-		createEReference(boockletAccountEClass, BOOCKLET_ACCOUNT__TRANSFERS);
+		boockletAccountEClass=createEClass(TrackerPackage.BOOCKLET_ACCOUNT);
+		createEReference(boockletAccountEClass, TrackerPackage.BOOCKLET_ACCOUNT__TRANSFERS);
 
-		operationEClass=createEClass(OPERATION);
-		createEAttribute(operationEClass, OPERATION__TOTAL_AMOUNT);
-		createEReference(operationEClass, OPERATION__OPERATION_TITLE);
-		createEReference(operationEClass, OPERATION__SUB_AMOUNTS);
-		createEReference(operationEClass, OPERATION__DATE);
-		createEReference(operationEClass, OPERATION__ORIGIN);
+		operationEClass=createEClass(TrackerPackage.OPERATION);
+		createEAttribute(operationEClass, TrackerPackage.OPERATION__TOTAL_AMOUNT);
+		createEReference(operationEClass, TrackerPackage.OPERATION__OPERATION_TITLE);
+		createEReference(operationEClass, TrackerPackage.OPERATION__SUB_AMOUNTS);
+		createEReference(operationEClass, TrackerPackage.OPERATION__DATE);
+		createEReference(operationEClass, TrackerPackage.OPERATION__ORIGIN);
 
-		creditEClass=createEClass(CREDIT);
+		creditEClass=createEClass(TrackerPackage.CREDIT);
 
-		debitEClass=createEClass(DEBIT);
+		debitEClass=createEClass(TrackerPackage.DEBIT);
 
-		transferEClass=createEClass(TRANSFER);
-		createEReference(transferEClass, TRANSFER__INCOMING_ACCOUNT);
-		createEReference(transferEClass, TRANSFER__OUTGOING_ACCOUNT);
+		transferEClass=createEClass(TrackerPackage.TRANSFER);
+		createEReference(transferEClass, TrackerPackage.TRANSFER__INCOMING_ACCOUNT);
+		createEReference(transferEClass, TrackerPackage.TRANSFER__OUTGOING_ACCOUNT);
 
-		incomingEClass=createEClass(INCOMING);
+		incomingEClass=createEClass(TrackerPackage.INCOMING);
 
-		outgoingEClass=createEClass(OUTGOING);
+		outgoingEClass=createEClass(TrackerPackage.OUTGOING);
 
-		titleEClass=createEClass(TITLE);
-		createEAttribute(titleEClass, TITLE__TITLE);
+		titleEClass=createEClass(TrackerPackage.TITLE);
+		createEAttribute(titleEClass, TrackerPackage.TITLE__TITLE);
 
-		categoryEClass=createEClass(CATEGORY);
-		createEReference(categoryEClass, CATEGORY__OPERATION_TITLES);
-		createEAttribute(categoryEClass, CATEGORY__DESCRIPTION);
-		createEReference(categoryEClass, CATEGORY__SUB_CATEGORIES);
+		categoryEClass=createEClass(TrackerPackage.CATEGORY);
+		createEReference(categoryEClass, TrackerPackage.CATEGORY__OPERATION_TITLES);
+		createEAttribute(categoryEClass, TrackerPackage.CATEGORY__DESCRIPTION);
+		createEReference(categoryEClass, TrackerPackage.CATEGORY__SUB_CATEGORIES);
 
-		operationTitleEClass=createEClass(OPERATION_TITLE);
-		createEReference(operationTitleEClass, OPERATION_TITLE__CATEGORIES);
+		operationTitleEClass=createEClass(TrackerPackage.OPERATION_TITLE);
+		createEReference(operationTitleEClass, TrackerPackage.OPERATION_TITLE__CATEGORIES);
 
-		amountEClass=createEClass(AMOUNT);
-		createEReference(amountEClass, AMOUNT__CATEGORY);
-		createEAttribute(amountEClass, AMOUNT__VALUE);
-		createEReference(amountEClass, AMOUNT__WISHED_DATE);
+		amountEClass=createEClass(TrackerPackage.AMOUNT);
+		createEReference(amountEClass, TrackerPackage.AMOUNT__CATEGORY);
+		createEAttribute(amountEClass, TrackerPackage.AMOUNT__VALUE);
+		createEReference(amountEClass, TrackerPackage.AMOUNT__WISHED_DATE);
 
-		operationTitleServiceEClass=createEClass(OPERATION_TITLE_SERVICE);
+		operationTitleServiceEClass=createEClass(TrackerPackage.OPERATION_TITLE_SERVICE);
 
-		categoryServiceEClass=createEClass(CATEGORY_SERVICE);
+		categoryServiceEClass=createEClass(TrackerPackage.CATEGORY_SERVICE);
 
-		accountServiceEClass=createEClass(ACCOUNT_SERVICE);
+		accountServiceEClass=createEClass(TrackerPackage.ACCOUNT_SERVICE);
 
-		operationServiceEClass=createEClass(OPERATION_SERVICE);
+		operationServiceEClass=createEClass(TrackerPackage.OPERATION_SERVICE);
 
-		categoriesRepositoryEClass=createEClass(CATEGORIES_REPOSITORY);
-		createEReference(categoriesRepositoryEClass, CATEGORIES_REPOSITORY__CATEGORIES);
+		categoriesRepositoryEClass=createEClass(TrackerPackage.CATEGORIES_REPOSITORY);
+		createEReference(categoriesRepositoryEClass, TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES);
 
-		dateEClass=createEClass(DATE);
-		createEAttribute(dateEClass, DATE__DAY);
-		createEAttribute(dateEClass, DATE__MONTH);
-		createEAttribute(dateEClass, DATE__YEAR);
+		dateEClass=createEClass(TrackerPackage.DATE);
+		createEAttribute(dateEClass, TrackerPackage.DATE__DAY);
+		createEAttribute(dateEClass, TrackerPackage.DATE__MONTH);
+		createEAttribute(dateEClass, TrackerPackage.DATE__YEAR);
 
-		originEClass=createEClass(ORIGIN);
-		createEAttribute(originEClass, ORIGIN__TYPE);
-		createEAttribute(originEClass, ORIGIN__IDENTIFIER);
-		createEReference(originEClass, ORIGIN__OPERATIONS);
+		originEClass=createEClass(TrackerPackage.ORIGIN);
+		createEAttribute(originEClass, TrackerPackage.ORIGIN__TYPE);
+		createEAttribute(originEClass, TrackerPackage.ORIGIN__IDENTIFIER);
+		createEReference(originEClass, TrackerPackage.ORIGIN__OPERATIONS);
 
-		originsRepositoryEClass=createEClass(ORIGINS_REPOSITORY);
-		createEReference(originsRepositoryEClass, ORIGINS_REPOSITORY__ORIGINS);
+		originsRepositoryEClass=createEClass(TrackerPackage.ORIGINS_REPOSITORY);
+		createEReference(originsRepositoryEClass, TrackerPackage.ORIGINS_REPOSITORY__ORIGINS);
 
-		trackerEClass=createEClass(TRACKER);
-		createEReference(trackerEClass, TRACKER__OWNERS);
-		createEReference(trackerEClass, TRACKER__ORIGINS_REPOSITORY);
-		createEReference(trackerEClass, TRACKER__CATEGORIES_REPOSITORY);
-		createEReference(trackerEClass, TRACKER__OPERATIONS_TITLES_REPOSITORIES);
+		trackerEClass=createEClass(TrackerPackage.TRACKER);
+		createEReference(trackerEClass, TrackerPackage.TRACKER__OWNERS);
+		createEReference(trackerEClass, TrackerPackage.TRACKER__ORIGINS_REPOSITORY);
+		createEReference(trackerEClass, TrackerPackage.TRACKER__CATEGORIES_REPOSITORY);
+		createEReference(trackerEClass, TrackerPackage.TRACKER__OPERATIONS_TITLES_REPOSITORIES);
 
-		operationsTitleRepositoryEClass=createEClass(OPERATIONS_TITLE_REPOSITORY);
-		createEReference(operationsTitleRepositoryEClass, OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES);
+		operationsTitleRepositoryEClass=createEClass(TrackerPackage.OPERATIONS_TITLE_REPOSITORY);
+		createEReference(operationsTitleRepositoryEClass, TrackerPackage.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES);
 
 		// Create enums
-		monthEEnum=createEEnum(MONTH);
-		originTypeEEnum=createEEnum(ORIGIN_TYPE);
+		monthEEnum=createEEnum(TrackerPackage.MONTH);
+		originTypeEEnum=createEEnum(TrackerPackage.ORIGIN_TYPE);
 	}
 
 	/**
@@ -953,18 +957,19 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * Complete the initialization of the package and its meta-model. This
 	 * method is guarded to have no affect on any invocation but its first. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized)
+		if (isInitialized) {
 			return;
+		}
 		isInitialized=true;
 
 		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
+		setName(TrackerPackage.eNAME);
+		setNsPrefix(TrackerPackage.eNS_PREFIX);
+		setNsURI(TrackerPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -982,155 +987,185 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		operationTitleEClass.getESuperTypes().add(this.getTitle());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(ownerEClass, Owner.class, "Owner", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOwner_Accounts(), this.getAccount(), null, "accounts", null, 1, -1, Owner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOwner_FirstName(), ecorePackage.getEString(), "firstName", null, 0, 1, Owner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOwner_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Owner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(ownerEClass, Owner.class, "Owner", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOwner_Accounts(), this.getAccount(), null, "accounts", null, 1, -1, Owner.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getOwner_FirstName(), ecorePackage.getEString(), "firstName", null, 0, 1, Owner.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getOwner_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Owner.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(accountEClass, Account.class, "Account", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAccount_Name(), ecorePackage.getEString(), "name", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAccount_Amount(), ecorePackage.getEFloat(), "amount", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAccount_Identifier(), ecorePackage.getEInt(), "identifier", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(accountEClass, Account.class, "Account", EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAccount_Name(), ecorePackage.getEString(), "name", null, 0, 1, Account.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getAccount_Amount(), ecorePackage.getEFloat(), "amount", null, 0, 1, Account.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getAccount_Identifier(), ecorePackage.getEInt(), "identifier", null, 0, 1, Account.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(checkingAccountEClass, CheckingAccount.class, "CheckingAccount", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCheckingAccount_Operations(), this.getOperation(), null, "operations", null, 0, -1, CheckingAccount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(checkingAccountEClass, CheckingAccount.class, "CheckingAccount", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCheckingAccount_Operations(), this.getOperation(), null, "operations", null, 0, -1, CheckingAccount.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(boockletAccountEClass, BoockletAccount.class, "BoockletAccount", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBoockletAccount_Transfers(), this.getTransfer(), null, "transfers", null, 0, -1, BoockletAccount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(boockletAccountEClass, BoockletAccount.class, "BoockletAccount", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBoockletAccount_Transfers(), this.getTransfer(), null, "transfers", null, 0, -1, BoockletAccount.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(operationEClass, Operation.class, "Operation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOperation_TotalAmount(), ecorePackage.getEBigDecimal(), "totalAmount", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_OperationTitle(), this.getOperationTitle(), null, "operationTitle", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_SubAmounts(), this.getAmount(), null, "subAmounts", null, 1, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_Date(), this.getDate(), null, "date", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_Origin(), this.getOrigin(), this.getOrigin_Operations(), "origin", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(operationEClass, Operation.class, "Operation", EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOperation_TotalAmount(), ecorePackage.getEBigDecimal(), "totalAmount", null, 0, 1, Operation.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getOperation_OperationTitle(), this.getOperationTitle(), null, "operationTitle", null, 1, 1, Operation.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getOperation_SubAmounts(), this.getAmount(), null, "subAmounts", null, 1, -1, Operation.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getOperation_Date(), this.getDate(), null, "date", null, 0, 1, Operation.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getOperation_Origin(), this.getOrigin(), this.getOrigin_Operations(), "origin", null, 1, 1, Operation.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(creditEClass, Credit.class, "Credit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(creditEClass, Credit.class, "Credit", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(debitEClass, Debit.class, "Debit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(debitEClass, Debit.class, "Debit", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(transferEClass, Transfer.class, "Transfer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTransfer_IncomingAccount(), this.getAccount(), null, "incomingAccount", null, 0, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransfer_OutgoingAccount(), this.getAccount(), null, "outgoingAccount", null, 0, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(transferEClass, Transfer.class, "Transfer", EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTransfer_IncomingAccount(), this.getAccount(), null, "incomingAccount", null, 0, 1, Transfer.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getTransfer_OutgoingAccount(), this.getAccount(), null, "outgoingAccount", null, 0, 1, Transfer.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(incomingEClass, Incoming.class, "Incoming", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(incomingEClass, Incoming.class, "Incoming", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(outgoingEClass, Outgoing.class, "Outgoing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(outgoingEClass, Outgoing.class, "Outgoing", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(titleEClass, Title.class, "Title", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTitle_Title(), ecorePackage.getEString(), "title", null, 0, 1, Title.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(titleEClass, Title.class, "Title", EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTitle_Title(), ecorePackage.getEString(), "title", null, 0, 1, Title.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(categoryEClass, Category.class, "Category", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCategory_OperationTitles(), this.getOperationTitle(), this.getOperationTitle_Categories(), "operationTitles", null, 0, -1, Category.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_Description(), ecorePackage.getEString(), "description", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCategory_SubCategories(), this.getCategory(), null, "subCategories", null, 0, -1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(categoryEClass, Category.class, "Category", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCategory_OperationTitles(), this.getOperationTitle(), this.getOperationTitle_Categories(), "operationTitles", null, 0, -1, Category.class,
+				!EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES,
+				!EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getCategory_Description(), ecorePackage.getEString(), "description", null, 0, 1, Category.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getCategory_SubCategories(), this.getCategory(), null, "subCategories", null, 0, -1, Category.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(operationTitleEClass, OperationTitle.class, "OperationTitle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOperationTitle_Categories(), this.getCategory(), this.getCategory_OperationTitles(), "categories", null, 0, -1, OperationTitle.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(operationTitleEClass, OperationTitle.class, "OperationTitle", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationTitle_Categories(), this.getCategory(), this.getCategory_OperationTitles(), "categories", null, 0, -1, OperationTitle.class,
+				!EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES,
+				!EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(amountEClass, Amount.class, "Amount", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAmount_Category(), this.getCategory(), null, "category", null, 1, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAmount_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAmount_WishedDate(), this.getDate(), null, "wishedDate", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(amountEClass, Amount.class, "Amount", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAmount_Category(), this.getCategory(), null, "category", null, 1, 1, Amount.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getAmount_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, Amount.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getAmount_WishedDate(), this.getDate(), null, "wishedDate", null, 0, 1, Amount.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(operationTitleServiceEClass, OperationTitleService.class, "OperationTitleService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(operationTitleServiceEClass, OperationTitleService.class, "OperationTitleService", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op=addEOperation(operationTitleServiceEClass, null, "addTitle", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op=addEOperation(operationTitleServiceEClass, null, "addTitle", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		op=addEOperation(operationTitleServiceEClass, null, "deleteTitle", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(operationTitleServiceEClass, null, "deleteTitle", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		initEClass(categoryServiceEClass, CategoryService.class, "CategoryService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(categoryServiceEClass, CategoryService.class, "CategoryService", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		op=addEOperation(categoryServiceEClass, null, "addCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(categoryServiceEClass, null, "addCategory", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		op=addEOperation(categoryServiceEClass, null, "deleteCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(categoryServiceEClass, null, "deleteCategory", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getCategory(), "category", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		op=addEOperation(categoryServiceEClass, null, "addCategoryOperation", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "operationTitle", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(categoryServiceEClass, null, "addCategoryOperation", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "operationTitle", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		initEClass(accountServiceEClass, AccountService.class, "AccountService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(accountServiceEClass, AccountService.class, "AccountService", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		op=addEOperation(accountServiceEClass, ecorePackage.getEFloat(), "sumPerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getAccount(), "account", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(accountServiceEClass, ecorePackage.getEFloat(), "sumPerCategory", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getAccount(), "account", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getCategory(), "category", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getMonth(), "month", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		op=addEOperation(accountServiceEClass, ecorePackage.getEFloat(), "averagePerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getAccount(), "account", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(accountServiceEClass, ecorePackage.getEFloat(), "averagePerCategory", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getAccount(), "account", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getCategory(), "category", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getMonth(), "month", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		initEClass(operationServiceEClass, OperationService.class, "OperationService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(operationServiceEClass, OperationService.class, "OperationService", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 
-		op=addEOperation(operationServiceEClass, ecorePackage.getEFloat(), "sumAmounts", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getOperation(), "operation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(operationServiceEClass, ecorePackage.getEFloat(), "sumAmounts", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
+		addEParameter(op, this.getOperation(), "operation", 0, 1, EPackageImpl.IS_UNIQUE, EPackageImpl.IS_ORDERED);
 
-		initEClass(categoriesRepositoryEClass, CategoriesRepository.class, "CategoriesRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCategoriesRepository_Categories(), this.getCategory(), null, "categories", null, 0, -1, CategoriesRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(categoriesRepositoryEClass, CategoriesRepository.class, "CategoriesRepository", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCategoriesRepository_Categories(), this.getCategory(), null, "categories", null, 0, -1, CategoriesRepository.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(dateEClass, Date.class, "Date", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDate_Day(), ecorePackage.getEInt(), "day", null, 0, 1, Date.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDate_Month(), this.getMonth(), "month", null, 0, 1, Date.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDate_Year(), ecorePackage.getEInt(), "year", null, 0, 1, Date.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(dateEClass, Date.class, "Date", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDate_Day(), ecorePackage.getEInt(), "day", null, 0, 1, Date.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE,
+				!EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getDate_Month(), this.getMonth(), "month", null, 0, 1, Date.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE,
+				!EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getDate_Year(), ecorePackage.getEInt(), "year", null, 0, 1, Date.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE,
+				!EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(originEClass, Origin.class, "Origin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOrigin_Type(), this.getOriginType(), "type", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOrigin_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOrigin_Operations(), this.getOperation(), this.getOperation_Origin(), "operations", null, 0, -1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(originEClass, Origin.class, "Origin", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOrigin_Type(), this.getOriginType(), "type", null, 0, 1, Origin.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE,
+				!EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEAttribute(getOrigin_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, Origin.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_UNSETTABLE, !EPackageImpl.IS_ID, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getOrigin_Operations(), this.getOperation(), this.getOperation_Origin(), "operations", null, 0, -1, Origin.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, !EPackageImpl.IS_COMPOSITE, EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(originsRepositoryEClass, OriginsRepository.class, "OriginsRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOriginsRepository_Origins(), this.getOrigin(), null, "origins", null, 0, -1, OriginsRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(originsRepositoryEClass, OriginsRepository.class, "OriginsRepository", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOriginsRepository_Origins(), this.getOrigin(), null, "origins", null, 0, -1, OriginsRepository.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(trackerEClass, Tracker.class, "Tracker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTracker_Owners(), this.getOwner(), null, "owners", null, 0, -1, Tracker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTracker_OriginsRepository(), this.getOriginsRepository(), null, "originsRepository", null, 1, 1, Tracker.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTracker_CategoriesRepository(), this.getCategoriesRepository(), null, "categoriesRepository", null, 1, 1, Tracker.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(trackerEClass, Tracker.class, "Tracker", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE, EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTracker_Owners(), this.getOwner(), null, "owners", null, 0, -1, Tracker.class, !EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE,
+				EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE,
+				!EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getTracker_OriginsRepository(), this.getOriginsRepository(), null, "originsRepository", null, 1, 1, Tracker.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
+		initEReference(getTracker_CategoriesRepository(), this.getCategoriesRepository(), null, "categoriesRepository", null, 1, 1, Tracker.class, !EPackageImpl.IS_TRANSIENT,
+				!EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES, !EPackageImpl.IS_UNSETTABLE,
+				EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 		initEReference(getTracker_OperationsTitlesRepositories(), this.getOperationsTitleRepository(), null, "operationsTitlesRepositories", null, 1, 1, Tracker.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				!EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES,
+				!EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
-		initEClass(operationsTitleRepositoryEClass, OperationsTitleRepository.class, "OperationsTitleRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(operationsTitleRepositoryEClass, OperationsTitleRepository.class, "OperationsTitleRepository", !EPackageImpl.IS_ABSTRACT, !EPackageImpl.IS_INTERFACE,
+				EPackageImpl.IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationsTitleRepository_OperationsTitles(), this.getOperationTitle(), null, "operationsTitles", null, 0, -1, OperationsTitleRepository.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				!EPackageImpl.IS_TRANSIENT, !EPackageImpl.IS_VOLATILE, EPackageImpl.IS_CHANGEABLE, EPackageImpl.IS_COMPOSITE, !EPackageImpl.IS_RESOLVE_PROXIES,
+				!EPackageImpl.IS_UNSETTABLE, EPackageImpl.IS_UNIQUE, !EPackageImpl.IS_DERIVED, EPackageImpl.IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(monthEEnum, Month.class, "Month");
@@ -1152,7 +1187,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(originTypeEEnum, OriginType.MANUAL);
 
 		// Create resource
-		createResource(eNS_URI);
+		createResource(TrackerPackage.eNS_URI);
 
 		// Create annotations
 		// isUnique

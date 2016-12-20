@@ -22,6 +22,12 @@ import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
+/**
+ * A util Class.
+ *
+ * @author maro
+ *
+ */
 public class TrackerUtils {
 
 	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$

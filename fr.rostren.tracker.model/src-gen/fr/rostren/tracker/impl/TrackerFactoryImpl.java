@@ -359,8 +359,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public Month createMonthFromString(EDataType eDataType, String initialValue) {
 		Month result=Month.get(initialValue);
-		if (result == null)
+		if (result == null) {
 			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 
@@ -378,8 +379,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public OriginType createOriginTypeFromString(EDataType eDataType, String initialValue) {
 		OriginType result=OriginType.get(initialValue);
-		if (result == null)
+		if (result == null) {
 			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 

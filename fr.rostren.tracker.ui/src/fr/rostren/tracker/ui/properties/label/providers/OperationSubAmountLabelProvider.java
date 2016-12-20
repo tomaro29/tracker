@@ -22,6 +22,9 @@ public class OperationSubAmountLabelProvider extends AbstractLabelProvider {
 	 * @return the amount value
 	 */
 	private String getAmountValue(Amount amount) {
+		if (amount == null || amount.getValue() == null) {
+			return null;
+		}
 		return StringUtils.isEmpty(amount.getValue().toString()) ? OperationSubAmountLabelProvider.STRING_UNDEFINED_AMOUNT_VALUE : amount.getValue().toString() + " euros"; //$NON-NLS-1$
 	}
 
@@ -31,6 +34,9 @@ public class OperationSubAmountLabelProvider extends AbstractLabelProvider {
 	 * @return the amount category
 	 */
 	private String getAmountCategory(Amount amount) {
+		if (amount == null) {
+			return null;
+		}
 		return amount.getCategory() == null ? OperationSubAmountLabelProvider.STRING_UNDEFINED_AMOUNT_CATEGORY : amount.getCategory().getTitle();
 	}
 }

@@ -62,6 +62,8 @@ public class ExtractorException extends Exception {
 	}
 
 	/**
+	 * Returns the message.
+	 *
 	 * @return the message
 	 */
 	@Override

@@ -20,7 +20,14 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
 
+/**
+ * The Clean Model action handler.
+ *
+ * @author maro
+ *
+ */
 public class CleanModelHandler extends AbstractHandler implements IHandler {
+	/** The parent shell. */
 	private Shell shell;
 
 	@Override

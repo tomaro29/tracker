@@ -26,8 +26,11 @@ public class LineContent {
 
 	private Operation operation;
 
+	/** The title. */
 	private String title;
+	/** The category. */
 	private Category linkedCategory;
+	/** The operation title. */
 	private OperationTitle linkedOperationTitle;
 
 	private Category income;

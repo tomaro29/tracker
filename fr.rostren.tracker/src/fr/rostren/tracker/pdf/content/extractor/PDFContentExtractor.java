@@ -198,6 +198,8 @@ public class PDFContentExtractor {
 	}
 
 	/**
+	 * Return all parsed files.
+	 *
 	 * @return the alreadyParsedOrigins
 	 */
 	public Set<String> getAlreadyParsedFiles() {

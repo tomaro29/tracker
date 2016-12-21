@@ -17,12 +17,16 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Date;
+import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
@@ -49,6 +53,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 	protected Category category;
 	protected String value;
+	protected Date wishedDate;
 
 	protected ComboViewer categoriesComboViewer;
 
@@ -91,6 +96,23 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 			}
 		}
 	};
+	private final SelectionListener wishedDateKeyListener=new SelectionListener() {
+
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			Object source=event.getSource();
+			Assert.isTrue(source instanceof DateTime);
+			DateTime date=(DateTime)source;
+			wishedDate.setDay(date.getDay());
+			wishedDate.setMonth(Month.get(date.getMonth()));
+			wishedDate.setYear(date.getYear());
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent event) {
+			// Do Nothing
+		}
+	};
 
 	/**
 	 * Constructor
@@ -109,6 +131,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 		if (amount != null) {
 			value=amount.getValue().toString();
 			category=amount.getCategory();
+			wishedDate=amount.getWishedDate();
 		}
 	}
 
@@ -122,6 +145,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 		if (!categories.isEmpty()) {
 			category=(Category)categories.iterator().next();
 		}
+		createDateTime(parent, "Wished Date", wishedDate, wishedDateKeyListener);//$NON-NLS-1$
 	}
 
 	/**
@@ -138,6 +162,14 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	 */
 	public BigDecimal getAmountValue() {
 		return new BigDecimal(value);
+	}
+
+	/**
+	 * Returns the amount wished date
+	 * @return the amount wished date
+	 */
+	public Date getAmountWishedDate() {
+		return wishedDate;
 	}
 
 	@Override

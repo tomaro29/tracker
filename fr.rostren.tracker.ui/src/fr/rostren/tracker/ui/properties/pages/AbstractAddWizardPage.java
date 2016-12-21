@@ -13,16 +13,19 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 
@@ -93,6 +96,25 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 
 		text.addModifyListener(modifyListener);
 		return text;
+	}
+
+	/**
+	 * Creates a date time zone
+	 * @param composite the composite parent of the label to create
+	 * @param label the label
+	 * @param content the content
+	 * @param selectionListener the selection listener
+	 * @return the created {@link Text}
+	 */
+	protected DateTime createDateTime(Composite composite, String label, Date content, SelectionListener selectionListener) {
+		createLabel(composite, label);
+		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
+		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+		if (content != null) {
+			dateTime.setDate(content.getYear(), content.getMonth().getValue(), content.getDay());
+		}
+		dateTime.addSelectionListener(selectionListener);
+		return dateTime;
 	}
 
 	/**

@@ -45,6 +45,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	private static final String EDIT_BUTTON_LABEL="Edit"; //$NON-NLS-1$
 	private static final String REMOVE_BUTTON_LABEL="Remove"; //$NON-NLS-1$
 	private static final String CATEGORY_COLUMN_TITLE="Category"; //$NON-NLS-1$
+	private static final String WISHED_DATE_COLUMN_TITLE="Wished Date"; //$NON-NLS-1$
 	private static final String SUB_AMOUNT_COLUMN_TITLE="Value"; //$NON-NLS-1$
 	private static final String OPERATION_TOTAL_AMOUNT_LABEL="Operation Total Amount :"; //$NON-NLS-1$
 	private static final String OPERATION_DATE_LABEL="Operation Date :"; //$NON-NLS-1$
@@ -166,7 +167,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 
 		TableColumn categoryColumn=new TableColumn(table, SWT.NONE);
 		categoryColumn.setText(CheckAndEditOperationWizardPage.CATEGORY_COLUMN_TITLE);
-		categoryColumn.setWidth(200);
+		categoryColumn.setWidth(100);
+
+		TableColumn wishedDateColumn=new TableColumn(table, SWT.NONE);
+		wishedDateColumn.setText(CheckAndEditOperationWizardPage.WISHED_DATE_COLUMN_TITLE);
+		wishedDateColumn.setWidth(100);
 
 		return table;
 	}
@@ -288,7 +293,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
 			item.setFont(font);
 			item.setData(amount);
-			item.setText(new String[] {amount.getValue().toString(), amount.getCategory().getTitle()});
+			item.setText(new String[] {amount.getValue().toString(), amount.getCategory().getTitle(), amount.getWishedDate().toString()});
 		}
 	}
 

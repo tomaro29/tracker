@@ -11,9 +11,19 @@ public class OperationLabelProvider extends AbstractLabelProvider {
 	@Override
 	public String getText(Object element) {
 		if (element instanceof Operation) {
-			return getOperationTitle((Operation)element) + AbstractLabelProvider.STRING_SEPARATOR + getOperationDate((Operation)element);
+			return getOperationDate((Operation)element)	+ AbstractLabelProvider.DASH + getOperationType((Operation)element) + AbstractLabelProvider.DASH
+					+ getOperationTitle((Operation)element);
 		}
 		return super.getText(element);
+	}
+
+	/**
+	 * Returns the operation class name
+	 * @param operation the operation
+	 * @return the operation type
+	 */
+	private String getOperationType(Operation operation) {
+		return operation.eClass().getName();
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jface.wizard.WizardPage;
@@ -410,6 +411,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			}
 
 			operation.getSubAmounts().add(newAmount);
+			EList<Category> categories=operation.getOperationTitle().getCategories();
+			if (!categories.contains(newAmount.getCategory())) {
+				categories.add(newAmount.getCategory());
+			}
 			setPageComplete(isPageComplete());
 			if (!isPageComplete()) {
 				setErrorMessage(MessageFormat.format(CheckAndEditOperationWizardPage.AMOUNTS_VALUES_ERROR_MESSAGE, operation.getTotalAmount()));

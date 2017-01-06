@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.properties.sections.operation;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +14,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
@@ -36,6 +38,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	protected CCombo titleCombo;
 	protected DateTime dateTime;
 	protected CCombo originCombo;
+	protected Text totalAmount;
 
 	private final ModifyListener listener=new OperationAttributesModifyListener(this);
 	private final SelectionListener datelistener=new DateSelectionListener(this, dateTime);
@@ -47,6 +50,8 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		titleCombo=createLabeledCombo(body, null, "Title:"); //$NON-NLS-1$
 		dateTime=createDateTime(body, titleCombo, "Date:"); //$NON-NLS-1$
 		originCombo=createLabeledCombo(body, dateTime, "Origin:"); //$NON-NLS-1$
+		totalAmount=createLabeledText(body, originCombo, "Total Amount:"); //$NON-NLS-1$
+		totalAmount.setEnabled(false);
 		addListeners();
 	}
 
@@ -70,6 +75,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 			String identifier=origin.getIdentifier();
 			originCombo.select(Arrays.asList(items).indexOf(identifier));
 		}
+		totalAmount.setText(getOperationTotalAmount().toString());
 		addListeners();
 	}
 
@@ -140,6 +146,15 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	private OperationTitle getOperationTitle() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		return ((Operation)currentEObject).getOperationTitle();
+	}
+
+	/**
+	 * Returns the operation total amount
+	 * @return the operation total amount
+	 */
+	private BigDecimal getOperationTotalAmount() {
+		Assert.isTrue(currentEObject instanceof Operation);
+		return ((Operation)currentEObject).getTotalAmount();
 	}
 
 	/**

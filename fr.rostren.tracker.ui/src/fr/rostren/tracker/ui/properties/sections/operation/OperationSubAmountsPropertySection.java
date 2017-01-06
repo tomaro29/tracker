@@ -61,6 +61,11 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 					newAmount.setValue(value);
 				}
 
+				EList<Category> categories=operation.getOperationTitle().getCategories();
+				if (!categories.contains(newAmount.getCategory())) {
+					categories.add(newAmount.getCategory());
+				}
+
 				DomainUtils.executeAddCommand(operation, TrackerPackage.Literals.OPERATION__SUB_AMOUNTS, newAmount);
 				refresh();
 			}

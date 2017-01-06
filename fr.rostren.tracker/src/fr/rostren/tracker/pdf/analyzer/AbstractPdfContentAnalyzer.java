@@ -198,8 +198,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param line
 	 *            the line to set.
 	 */
-	public void setCurrentLine(String currentLine) {
-		this.currentLine=currentLine;
+	public void setCurrentLine(String line) {
+		this.currentLine=line;
 	}
 
 	/**
@@ -208,8 +208,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param operationTitle
 	 *            the operation Title to set as a last potential title.
 	 */
-	public void setLastPotentialOperationTitle(String lastPotentialOperationTitle) {
-		this.lastPotentialOperationTitle=lastPotentialOperationTitle;
+	public void setLastPotentialOperationTitle(String operationTitle) {
+		this.lastPotentialOperationTitle=operationTitle;
 	}
 
 	/**
@@ -218,8 +218,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param amount
 	 *            the amount to set as a last parsed amount.
 	 */
-	public void setLastPotentialAmount(BigDecimal lastPotentialAmount) {
-		this.lastPotentialAmount=lastPotentialAmount;
+	public void setLastPotentialAmount(BigDecimal amount) {
+		this.lastPotentialAmount=amount;
 	}
 
 	/**
@@ -237,8 +237,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param year
 	 *            the year to set.
 	 */
-	public void setCurrentYear(int currentYear) {
-		this.currentYear=currentYear;
+	public void setCurrentYear(int year) {
+		this.currentYear=year;
 	}
 
 	/**
@@ -247,8 +247,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param date
 	 *            the date to set as a last potential date.
 	 */
-	public void setLastPotentialDate(Date lastPotentialDate) {
-		this.lastPotentialDate=lastPotentialDate;
+	public void setLastPotentialDate(Date date) {
+		this.lastPotentialDate=date;
 	}
 
 	/**
@@ -266,8 +266,8 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param splitLine
 	 *            the splitLine to set
 	 */
-	public void setCurrentSplitLine(String[] currentSplitLine) {
-		this.currentSplitLine=currentSplitLine;
+	public void setCurrentSplitLine(String[] splitLine) {
+		this.currentSplitLine=splitLine;
 	}
 
 	/**
@@ -285,7 +285,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param token
 	 *            the token to set as a last parsed token
 	 */
-	public void setLastToken(PdfToken lastToken) {
-		this.lastToken=lastToken;
+	public void setLastToken(PdfToken token) {
+		this.lastToken=token;
 	}
 }

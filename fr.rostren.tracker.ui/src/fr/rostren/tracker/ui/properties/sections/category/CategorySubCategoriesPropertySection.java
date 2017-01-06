@@ -3,6 +3,7 @@ package fr.rostren.tracker.ui.properties.sections.category;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -19,12 +20,13 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategorySubCategoriesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
 import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
-import fr.rostren.tracker.ui.properties.wizards.AddCategorySubCategoryWizard;
+import fr.rostren.tracker.ui.properties.wizards.AddCategoryCategoryWizard;
 
 public class CategorySubCategoriesPropertySection extends AbstractTablePropertySection {
 
@@ -40,14 +42,22 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 
 			String pageTitle=category.getTitle();
 
-			AddCategorySubCategoryWizard wizard=new AddCategorySubCategoryWizard(pageTitle, category);
+			AddCategoryCategoryWizard wizard=new AddCategoryCategoryWizard(pageTitle, category);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Category subCategory=wizard.getSubCategory();
-				if (subCategory != null) {
-					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, subCategory);
-					refresh();
+				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+
+				String title=wizard.getCategoryTitle();
+				if (!StringUtils.isEmpty(title)) {
+					newCategory.setTitle(title);
 				}
+				String description=wizard.getCategoryDescription();
+				if (!StringUtils.isEmpty(description)) {
+					newCategory.setDescription(description);
+				}
+
+				DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, newCategory);
+				refresh();
 			}
 		}
 	};

@@ -3,6 +3,7 @@ package fr.rostren.tracker.ui.properties.pages;
 import java.text.MessageFormat;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
@@ -51,8 +52,12 @@ public class AddOperationTitleCategoryWizardPage extends AbstractAddWizardPage {
 				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
 
 				String title=wizard.getCategoryTitle();
-				if (title != null) {
+				if (!StringUtils.isEmpty(title)) {
 					newCategory.setTitle(title);
+				}
+				String description=wizard.getCategoryDescription();
+				if (!StringUtils.isEmpty(description)) {
+					newCategory.setDescription(description);
 				}
 
 				DomainUtils.executeAddCommand(tracker.getCategoriesRepository(), TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);

@@ -3,6 +3,7 @@ package fr.rostren.tracker.ui.properties.sections.repository;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -50,16 +51,16 @@ public class CategoriesRepositoryPropertySection extends AbstractTablePropertySe
 				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
 
 				String title=wizard.getCategoryTitle();
-				if (title != null) {
+				if (!StringUtils.isEmpty(title)) {
 					newCategory.setTitle(title);
-					String description=wizard.getCategoryDescription();
-					if (description != null) {
-						newCategory.setDescription(description);
-					}
-
-					DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
-					refresh();
 				}
+				String description=wizard.getCategoryDescription();
+				if (!StringUtils.isEmpty(description)) {
+					newCategory.setDescription(description);
+				}
+
+				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
+				refresh();
 			}
 		}
 	};

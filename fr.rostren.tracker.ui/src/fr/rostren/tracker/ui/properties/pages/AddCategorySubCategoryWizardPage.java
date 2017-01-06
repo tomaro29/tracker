@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
@@ -50,8 +51,12 @@ public class AddCategorySubCategoryWizardPage extends AbstractAddWizardPage {
 				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
 
 				String title=wizard.getCategoryTitle();
-				if (title != null) {
+				if (!StringUtils.isEmpty(title)) {
 					newCategory.setTitle(title);
+				}
+				String description=wizard.getCategoryDescription();
+				if (!StringUtils.isEmpty(description)) {
+					newCategory.setDescription(description);
 				}
 
 				DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, newCategory);

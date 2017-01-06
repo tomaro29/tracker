@@ -74,8 +74,12 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
 
 				String title=wizard.getCategoryTitle();
-				if (title != null) {
+				if (!StringUtils.isEmpty(title)) {
 					newCategory.setTitle(title);
+				}
+				String description=wizard.getCategoryDescription();
+				if (!StringUtils.isEmpty(description)) {
+					newCategory.setDescription(description);
 				}
 
 				DomainUtils.executeAddCommand(tracker.getCategoriesRepository(), TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);

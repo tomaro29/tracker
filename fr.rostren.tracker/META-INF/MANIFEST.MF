@@ -17,6 +17,7 @@ Bundle-ClassPath: .,
  lib/org.swtchart_0.10.0.v20160212.jar,
  lib/org.swtchart.ext_0.10.0.v20160212.jar
 Bundle-ActivationPolicy: lazy
-Export-Package: fr.rostren.tracker.pdf.analyzer,
+Export-Package: fr.rostren.tracker.histogram,
+ fr.rostren.tracker.pdf.analyzer,
  fr.rostren.tracker.pdf.content.extractor,
  fr.rostren.tracker.pdf.utils

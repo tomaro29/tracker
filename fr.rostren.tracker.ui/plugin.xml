@@ -469,4 +469,19 @@
          </propertySection>
      </propertySections>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="fr.rostren.tracker.ui.views.category"
+            name="Tracker">
+      </category>
+      <view
+      		category="fr.rostren.tracker.ui.views.category"
+            class="fr.rostren.tracker.ui.views.TrackerHistogramView"
+            icon="icons/histogram.gif"
+            id="fr.rostren.tracker.ui.view"
+            name="Histogram"
+            restorable="true">
+      </view>
+   </extension>
 </plugin>

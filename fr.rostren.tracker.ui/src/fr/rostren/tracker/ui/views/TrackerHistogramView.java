@@ -1,6 +1,8 @@
 package fr.rostren.tracker.ui.views;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,15 +41,14 @@ import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.histogram.Histogram;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.TrackerEditor;
+import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
 
 public class TrackerHistogramView extends ViewPart {
-	private static final String FILTER_BY_OPERATION_CHECK_BUTTON_TITLE="Filter By Operation:"; //$NON-NLS-1$
-	private static final String FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE="Filter By Category:"; //$NON-NLS-1$
+	private static final String ALL_CATEGORIES_ITEM="All Categories"; //$NON-NLS-1$
+	private static final String ALL_OPERATIONS_ITEM="All Operations"; //$NON-NLS-1$
+	private static final String FILTER_BY_OPERATION_CHECK_BUTTON_TITLE="By Operation:"; //$NON-NLS-1$
+	private static final String FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE="By Category:"; //$NON-NLS-1$
 	private static final String VIEW_TITLE="Histogram"; //$NON-NLS-1$
-	private static final String[] YEAR_TITLES=new String[] {Month.JAN.toString(), Month.FEB.toString(), Month.MARS.toString(), Month.APR.toString(), Month.MAY.toString(),
-		Month.JUNE.toString(), Month.JULY.toString(), Month.AUG.toString(), Month.SEPT.toString(), Month.OCT.toString(), Month.NOV.toString(), Month.DEC.toString()};
-	private static final double[] INCOME_VALUES=new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-	private static final double[] SPENDING_VALUES=new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 	private static final String FILTER_SECTION="Filter"; //$NON-NLS-1$
 	private static final String HISTOGRAM_SECTION="Balance"; //$NON-NLS-1$
 
@@ -67,6 +68,10 @@ public class TrackerHistogramView extends ViewPart {
 
 	/**The histogram object*/
 	private Histogram histogram;
+	private Button operationCheckButton;
+	private Button categoryCheckButton;
+	private Combo categoriesCombo;
+	private Combo operationsCombo;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -127,12 +132,10 @@ public class TrackerHistogramView extends ViewPart {
 
 		toolkit.paintBordersFor(filterForm);
 		filterSection.setClient(filterForm);
-		filterSection.setVisible(true);
-		filterVisible=true;
+		filterSection.setVisible(filterVisible);
 
 		filterForm.layout();
 		filterSection.layout();
-		//FIXME addListeners
 	}
 
 	/**
@@ -160,37 +163,84 @@ public class TrackerHistogramView extends ViewPart {
 		histogramSection.layout();
 
 		populateHistogram();
-		//FIXME addListeners
 	}
 
 	/**
 	 * Populates the histogram according to the filter selection
 	 */
-	private void populateHistogram() {
-		//TODO according to filters selection
-		histogram.populateHistogram(TrackerHistogramView.YEAR_TITLES, TrackerHistogramView.INCOME_VALUES, TrackerHistogramView.SPENDING_VALUES, false);
+	public void populateHistogram() {
+		List<String> dates=getHistogramDates();
+		List<Double> incomeValues=new ArrayList<>();
+		List<Double> spendingValues=new ArrayList<>();
+
+		if (categoryCheckButton.getSelection()) {
+			String item=categoriesCombo.getItem(categoriesCombo.getSelectionIndex());
+			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
+				incomeValues=TrackerUtils.getAllIncomeCategoryAmount(dates);
+				spendingValues=TrackerUtils.getAllSpendingCategoryAmount(dates);
+			}
+			else {
+				incomeValues=TrackerUtils.getIncomeCategoryAmount(item, dates);
+				spendingValues=TrackerUtils.getSpendingCategoryAmount(item, dates);
+			}
+		}
+		else if (operationCheckButton.getSelection()) {
+			String item=operationsCombo.getItem(operationsCombo.getSelectionIndex());
+			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
+				incomeValues=TrackerUtils.getAllIncomeCategoryAmount(dates);
+				spendingValues=TrackerUtils.getAllSpendingCategoryAmount(dates);
+			}
+			else {
+				incomeValues=TrackerUtils.getOperationAmount(item, dates);
+				spendingValues=TrackerUtils.getOperationAmount(item, dates);
+			}
+		}
+
+		histogram.populateHistogram(dates, incomeValues, spendingValues, false);
+	}
+
+	/**
+	 * @return the list of dates
+	 */
+	private List<String> getHistogramDates() {
+		List<String> dates=new ArrayList<>();
+		for (Month month: Month.VALUES) {
+			dates.add(month.getLiteral());
+		}
+		return dates;
 	}
 
 	/**
 	 * @param parent the composite parent of widgets
 	 */
 	private void createFilterContent(Composite parent) {
-		Button categoryCheckButton=new Button(parent, SWT.CHECK);
-		categoryCheckButton.setText(TrackerHistogramView.FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE);
-		categoryCheckButton.setEnabled(true);
-		categoryCheckButton.setSelection(true);
-
-		Combo categoriesCombo=new Combo(parent, SWT.NONE);
+		categoryCheckButton=createFilterButton(parent, TrackerHistogramView.FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE, true, true);
+		categoriesCombo=new Combo(parent, SWT.NONE);
 		populateCategoriesCombo(categoriesCombo);
 
-		Button operationCheckButton=new Button(parent, SWT.CHECK);
-		operationCheckButton.setText(TrackerHistogramView.FILTER_BY_OPERATION_CHECK_BUTTON_TITLE);
-		operationCheckButton.setEnabled(false);
-		operationCheckButton.setSelection(false);
-
-		Combo operationsCombo=new Combo(parent, SWT.NONE);
-		populateOperationsCombo(operationsCombo);
+		operationCheckButton=createFilterButton(parent, TrackerHistogramView.FILTER_BY_OPERATION_CHECK_BUTTON_TITLE, true, false);
+		operationsCombo=new Combo(parent, SWT.NONE);
 		operationsCombo.setEnabled(false);
+		populateOperationsCombo(operationsCombo);
+
+		categoryCheckButton.addSelectionListener(new FilterSelectionListener(operationCheckButton, categoriesCombo, operationsCombo, this));
+		operationCheckButton.addSelectionListener(new FilterSelectionListener(categoryCheckButton, operationsCombo, categoriesCombo, this));
+	}
+
+	/**
+	 * Creates a filter button
+	 * @param parent the composite parent
+	 * @param title the button title
+	 * @param isEnabled <code>true</code> if the button is enabled, <code>false</code> otherwise
+	 * @param isSelected <code>true</code> if the button is selected, <code>false</code> otherwise
+	 * @return the created button
+	 */
+	private Button createFilterButton(Composite parent, String title, boolean isEnabled, boolean isSelected) {
+		Button button=new Button(parent, SWT.CHECK);
+		button.setText(title);
+		button.setEnabled(isEnabled);
+		button.setSelection(isSelected);
+		return button;
 	}
 
 	/**
@@ -222,7 +272,7 @@ public class TrackerHistogramView extends ViewPart {
 	 */
 	private String[] getCategoriesItems(Set<Object> categories) {
 		String[] items=new String[categories.size() + 1];
-		items[0]="All Categories"; //$NON-NLS-1$
+		items[0]=TrackerHistogramView.ALL_CATEGORIES_ITEM;
 		int i=1;
 		Iterator<Object> iterator=categories.iterator();
 		while (iterator.hasNext()) {
@@ -240,7 +290,7 @@ public class TrackerHistogramView extends ViewPart {
 	 */
 	private String[] getOperationsItems(Set<Object> Operations) {
 		String[] items=new String[Operations.size() + 1];
-		items[0]="All Operations"; //$NON-NLS-1$
+		items[0]=TrackerHistogramView.ALL_OPERATIONS_ITEM;
 		int i=1;
 		Iterator<Object> iterator=Operations.iterator();
 		while (iterator.hasNext()) {

@@ -63,7 +63,6 @@
     <genClasses ecoreClass="Tracker.ecore#//Category">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Category/operationTitles"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Category/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Category/subCategories"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//OperationTitle">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//OperationTitle/categories"/>
@@ -112,7 +111,8 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//CategoriesRepository">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoriesRepository/categories"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoriesRepository/income"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoriesRepository/spending"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//Date">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Date/day"/>
@@ -136,6 +136,12 @@
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//OperationsTitleRepository">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//OperationsTitleRepository/operationsTitles"/>
+    </genClasses>
+    <genClasses ecoreClass="Tracker.ecore#//IncomeCategory">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//IncomeCategory/incomes"/>
+    </genClasses>
+    <genClasses ecoreClass="Tracker.ecore#//SpendingCategory">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//SpendingCategory/spendings"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

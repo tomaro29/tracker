@@ -1,6 +1,7 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,7 +19,9 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.ui.DomainUtils;
@@ -48,19 +51,34 @@ public class AddCategorySubCategoryWizardPage extends AbstractAddWizardPage {
 					category);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+				if (category instanceof IncomeCategory) {
+					IncomeCategory newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
 
-				String title=wizard.getCategoryTitle();
-				if (!StringUtils.isEmpty(title)) {
-					newCategory.setTitle(title);
+					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
+					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(((IncomeCategory)category).getIncomes()), newCategory);
 				}
-				String description=wizard.getCategoryDescription();
-				if (!StringUtils.isEmpty(description)) {
-					newCategory.setDescription(description);
-				}
+				else if (category instanceof SpendingCategory) {
+					SpendingCategory newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
 
-				DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, newCategory);
-				refreshComboViewerContent(categoriesComboViewer, new HashSet<>(category.getSubCategories()), newCategory);
+					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(((SpendingCategory)category).getSpendings()), newCategory);
+				}
 			}
 		}
 	};
@@ -92,7 +110,13 @@ public class AddCategorySubCategoryWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		List<Category> categories=category.getSubCategories();
+		List<Category> categories=new ArrayList<>();
+		if (category instanceof IncomeCategory) {
+			categories=new ArrayList<>(((IncomeCategory)category).getIncomes());
+		}
+		else {
+			categories=new ArrayList<>(((SpendingCategory)category).getSpendings());
+		}
 		categoriesComboViewer=createComboViewer(parent, "Category: ", new HashSet<>(categories), //$NON-NLS-1$
 				new CategoriesRepositoryContentProvider(), new CategoryLabelProvider(), categoryListener, addSubCategoryButtonlistener);
 		if (!categories.isEmpty()) {

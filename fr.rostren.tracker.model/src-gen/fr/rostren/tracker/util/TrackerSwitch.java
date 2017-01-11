@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker.util;
 
+import fr.rostren.tracker.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -272,6 +273,28 @@ public class TrackerSwitch<T> extends Switch<T> {
 			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY: {
 				OperationsTitleRepository operationsTitleRepository=(OperationsTitleRepository)theEObject;
 				T result=caseOperationsTitleRepository(operationsTitleRepository);
+				if (result == null)
+					result=defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.INCOME_CATEGORY: {
+				IncomeCategory incomeCategory=(IncomeCategory)theEObject;
+				T result=caseIncomeCategory(incomeCategory);
+				if (result == null)
+					result=caseCategory(incomeCategory);
+				if (result == null)
+					result=caseTitle(incomeCategory);
+				if (result == null)
+					result=defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.SPENDING_CATEGORY: {
+				SpendingCategory spendingCategory=(SpendingCategory)theEObject;
+				T result=caseSpendingCategory(spendingCategory);
+				if (result == null)
+					result=caseCategory(spendingCategory);
+				if (result == null)
+					result=caseTitle(spendingCategory);
 				if (result == null)
 					result=defaultCase(theEObject);
 				return result;
@@ -617,6 +640,36 @@ public class TrackerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperationsTitleRepository(OperationsTitleRepository object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Income Category</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Income Category</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIncomeCategory(IncomeCategory object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Spending Category</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Spending Category</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSpendingCategory(SpendingCategory object) {
 		return null;
 	}
 

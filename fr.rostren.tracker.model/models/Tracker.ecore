@@ -43,12 +43,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Title" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Category" eSuperTypes="#//Title">
+  <eClassifiers xsi:type="ecore:EClass" name="Category" abstract="true" eSuperTypes="#//Title">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationTitles" upperBound="-1"
         eType="#//OperationTitle" eOpposite="#//OperationTitle/categories"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subCategories" upperBound="-1"
-        eType="#//Category" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationTitle" eSuperTypes="#//Title">
     <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"
@@ -114,8 +112,10 @@
     <eLiterals name="Dec" value="11"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoriesRepository">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"
-        eType="#//Category" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
+        eType="#//IncomeCategory" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spending" lowerBound="1"
+        eType="#//SpendingCategory" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Date">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
@@ -159,5 +159,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="OperationsTitleRepository">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationsTitles" upperBound="-1"
         eType="#//OperationTitle" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IncomeCategory" eSuperTypes="#//Category">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomes" upperBound="-1"
+        eType="#//IncomeCategory" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpendingCategory" eSuperTypes="#//Category">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spendings" upperBound="-1"
+        eType="#//SpendingCategory" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

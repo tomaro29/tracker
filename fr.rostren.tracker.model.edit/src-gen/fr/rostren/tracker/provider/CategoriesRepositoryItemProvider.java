@@ -66,7 +66,8 @@ public class CategoriesRepositoryItemProvider extends ItemProviderAdapter
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES);
+			childrenFeatures.add(TrackerPackage.Literals.CATEGORIES_REPOSITORY__INCOME);
+			childrenFeatures.add(TrackerPackage.Literals.CATEGORIES_REPOSITORY__SPENDING);
 		}
 		return childrenFeatures;
 	}
@@ -117,7 +118,8 @@ public class CategoriesRepositoryItemProvider extends ItemProviderAdapter
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CategoriesRepository.class)) {
-			case TrackerPackage.CATEGORIES_REPOSITORY__CATEGORIES:
+			case TrackerPackage.CATEGORIES_REPOSITORY__INCOME:
+			case TrackerPackage.CATEGORIES_REPOSITORY__SPENDING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -135,7 +137,9 @@ public class CategoriesRepositoryItemProvider extends ItemProviderAdapter
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, TrackerFactory.eINSTANCE.createCategory()));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CATEGORIES_REPOSITORY__INCOME, TrackerFactory.eINSTANCE.createIncomeCategory()));
+
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.CATEGORIES_REPOSITORY__SPENDING, TrackerFactory.eINSTANCE.createSpendingCategory()));
 	}
 
 	/**

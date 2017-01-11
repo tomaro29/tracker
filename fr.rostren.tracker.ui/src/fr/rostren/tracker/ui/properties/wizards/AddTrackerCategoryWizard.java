@@ -54,4 +54,18 @@ public class AddTrackerCategoryWizard extends Wizard {
 	public String getCategoryDescription() {
 		return page.getCategoryDescription();
 	}
+
+	/**
+	 * @return <code>true</code> is the category is an income one, <code>false</code> otherwise.
+	 */
+	public boolean isIncome() {
+		return page.isIncome();
+	}
+
+	/**
+	 * @return <code>true</code> is the category is an spending one, <code>false</code> otherwise.
+	 */
+	public boolean isSpending() {
+		return page.isSpending();
+	}
 }

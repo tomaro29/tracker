@@ -2,37 +2,13 @@
  */
 package fr.rostren.tracker.impl;
 
+import fr.rostren.tracker.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import fr.rostren.tracker.AccountService;
-import fr.rostren.tracker.Amount;
-import fr.rostren.tracker.BoockletAccount;
-import fr.rostren.tracker.CategoriesRepository;
-import fr.rostren.tracker.Category;
-import fr.rostren.tracker.CategoryService;
-import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Date;
-import fr.rostren.tracker.Debit;
-import fr.rostren.tracker.Incoming;
-import fr.rostren.tracker.Month;
-import fr.rostren.tracker.OperationService;
-import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.OperationTitleService;
-import fr.rostren.tracker.OperationsTitleRepository;
-import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.OriginType;
-import fr.rostren.tracker.OriginsRepository;
-import fr.rostren.tracker.Outgoing;
-import fr.rostren.tracker.Owner;
-import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.TrackerPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
@@ -90,8 +66,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createIncoming();
 			case TrackerPackage.OUTGOING:
 				return createOutgoing();
-			case TrackerPackage.CATEGORY:
-				return createCategory();
 			case TrackerPackage.OPERATION_TITLE:
 				return createOperationTitle();
 			case TrackerPackage.AMOUNT:
@@ -116,6 +90,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createTracker();
 			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY:
 				return createOperationsTitleRepository();
+			case TrackerPackage.INCOME_CATEGORY:
+				return createIncomeCategory();
+			case TrackerPackage.SPENDING_CATEGORY:
+				return createSpendingCategory();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -221,16 +199,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Outgoing createOutgoing() {
 		OutgoingImpl outgoing=new OutgoingImpl();
 		return outgoing;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Category createCategory() {
-		CategoryImpl category=new CategoryImpl();
-		return category;
 	}
 
 	/**
@@ -354,14 +322,35 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public IncomeCategory createIncomeCategory() {
+		IncomeCategoryImpl incomeCategory=new IncomeCategoryImpl();
+		return incomeCategory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SpendingCategory createSpendingCategory() {
+		SpendingCategoryImpl spendingCategory=new SpendingCategoryImpl();
+		return spendingCategory;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Month createMonthFromString(EDataType eDataType, String initialValue) {
 		Month result=Month.get(initialValue);
-		if (result == null) {
+		if (result == null)
 			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
 		return result;
 	}
 
@@ -379,9 +368,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public OriginType createOriginTypeFromString(EDataType eDataType, String initialValue) {
 		OriginType result=OriginType.get(initialValue);
-		if (result == null) {
+		if (result == null)
 			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
 		return result;
 	}
 

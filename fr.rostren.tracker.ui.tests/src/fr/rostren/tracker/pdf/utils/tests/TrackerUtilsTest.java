@@ -21,6 +21,7 @@ import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Date;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
@@ -28,6 +29,7 @@ import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginsRepository;
 import fr.rostren.tracker.Owner;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
@@ -41,7 +43,8 @@ public class TrackerUtilsTest {
 	private final Owner owner=TrackerFactory.eINSTANCE.createOwner();
 	private final Tracker tracker=TrackerFactory.eINSTANCE.createTracker();
 	private final Amount amount=TrackerFactory.eINSTANCE.createAmount();
-	private final Category category=TrackerFactory.eINSTANCE.createCategory();
+	private final IncomeCategory incomeCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
+	private final SpendingCategory spendingCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
 	private final Operation credit=TrackerFactory.eINSTANCE.createCredit();
 	private final OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 	private final Origin origin=TrackerFactory.eINSTANCE.createOrigin();
@@ -58,12 +61,12 @@ public class TrackerUtilsTest {
 		assertEquals(StringUtils.EMPTY, TrackerUtils.getCategoryTitle(amount));
 
 		/*Test with an amount with no category title.*/
-		amount.setCategory(category);
+		amount.setCategory(incomeCategory);
 		assertNull(TrackerUtils.getCategoryTitle(amount));
 
 		/*Test with an amount with category title.*/
-		category.setTitle(title);
-		amount.setCategory(category);
+		incomeCategory.setTitle(title);
+		amount.setCategory(incomeCategory);
 		String categoryTitle=TrackerUtils.getCategoryTitle(amount);
 		assertNotNull(categoryTitle);
 		assertEquals(title, categoryTitle);
@@ -167,7 +170,7 @@ public class TrackerUtilsTest {
 
 		/*Test with an operation with date without value.*/
 		credit.setDate(operationDate);
-		assertEquals("0/Jan/0", TrackerUtils.getOperationDate(credit)); //$NON-NLS-1$
+		assertEquals("00 / Jan / 0", TrackerUtils.getOperationDate(credit)); //$NON-NLS-1$
 
 		/*Test with an operation with date value.*/
 		credit.setDate(operationDate);
@@ -176,7 +179,7 @@ public class TrackerUtilsTest {
 		operationDate.setYear(2001);
 		String date=TrackerUtils.getOperationDate(credit);
 		assertNotNull(date);
-		assertEquals("1/Apr/2001", date); //$NON-NLS-1$
+		assertEquals("01 / Apr / 2001", date); //$NON-NLS-1$
 	}
 
 	/**
@@ -196,7 +199,8 @@ public class TrackerUtilsTest {
 		assertEquals(null, TrackerUtils.getTracker(operationTitle));
 		assertEquals(null, TrackerUtils.getTracker(operationDate));
 		assertEquals(null, TrackerUtils.getTracker(amount));
-		assertEquals(null, TrackerUtils.getTracker(category));
+		assertEquals(null, TrackerUtils.getTracker(incomeCategory));
+		assertEquals(null, TrackerUtils.getTracker(spendingCategory));
 
 		assertEquals(tracker, TrackerUtils.getTracker(tracker));
 
@@ -330,11 +334,13 @@ public class TrackerUtilsTest {
 		account.getOperations().add(credit);
 		credit.getSubAmounts().add(amount);
 		tracker.setCategoriesRepository(categoriesRepository);
-		categoriesRepository.getCategories().add(category);
+		IncomeCategory income=TrackerFactory.eINSTANCE.createIncomeCategory();
+		categoriesRepository.setIncome(income);
+		categoriesRepository.getIncome().getIncomes().add(incomeCategory);
 		assertEquals(null, TrackerUtils.getAmountCategory(amount, title));
 
-		category.setTitle(title);
-		assertEquals(category, TrackerUtils.getAmountCategory(amount, title));
+		incomeCategory.setTitle(title);
+		assertEquals(incomeCategory, TrackerUtils.getAmountCategory(amount, title));
 	}
 
 	/**
@@ -359,15 +365,25 @@ public class TrackerUtilsTest {
 	 */
 	@Test
 	public void isUndefinedCategoryTest() {
-		assertFalse(TrackerUtils.isUndefinedCategory(category));
+		assertFalse(TrackerUtils.isUndefinedCategory(incomeCategory));
 
 		/*Test with an amount with category title.*/
-		category.setTitle(title);
-		assertFalse(TrackerUtils.isUndefinedCategory(category));
+		incomeCategory.setTitle(title);
+		assertFalse(TrackerUtils.isUndefinedCategory(incomeCategory));
 
 		/*Test with an amount with UNDEFINED category title.*/
-		category.setTitle(TrackerUtils.UNDEFINED_TITLE);
-		assertTrue(TrackerUtils.isUndefinedCategory(category));
+		incomeCategory.setTitle(TrackerUtils.UNDEFINED_INCOME_TITLE);
+		assertTrue(TrackerUtils.isUndefinedCategory(incomeCategory));
+
+		assertFalse(TrackerUtils.isUndefinedCategory(spendingCategory));
+
+		/*Test with an amount with category title.*/
+		spendingCategory.setTitle(title);
+		assertFalse(TrackerUtils.isUndefinedCategory(spendingCategory));
+
+		/*Test with an amount with UNDEFINED category title.*/
+		spendingCategory.setTitle(TrackerUtils.UNDEFINED_SPENDING_TITLE);
+		assertTrue(TrackerUtils.isUndefinedCategory(spendingCategory));
 	}
 
 	/**

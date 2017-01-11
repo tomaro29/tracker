@@ -736,22 +736,13 @@ public interface TrackerPackage extends EPackage {
 	int CATEGORY__DESCRIPTION=TITLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Sub Categories</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__SUB_CATEGORIES=TITLE_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Category</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT=TITLE_FEATURE_COUNT + 3;
+	int CATEGORY_FEATURE_COUNT=TITLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationTitleImpl <em>Operation Title</em>}' class.
@@ -918,13 +909,22 @@ public interface TrackerPackage extends EPackage {
 	int CATEGORIES_REPOSITORY=18;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Income</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORIES_REPOSITORY__CATEGORIES=0;
+	int CATEGORIES_REPOSITORY__INCOME=0;
+
+	/**
+	 * The feature id for the '<em><b>Spending</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORIES_REPOSITORY__SPENDING=1;
 
 	/**
 	 * The number of structural features of the '<em>Categories Repository</em>' class.
@@ -932,7 +932,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORIES_REPOSITORY_FEATURE_COUNT=1;
+	int CATEGORIES_REPOSITORY_FEATURE_COUNT=2;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.DateImpl <em>Date</em>}' class.
@@ -1128,13 +1128,123 @@ public interface TrackerPackage extends EPackage {
 	int OPERATIONS_TITLE_REPOSITORY_FEATURE_COUNT=1;
 
 	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.IncomeCategoryImpl <em>Income Category</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.IncomeCategoryImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncomeCategory()
+	 * @generated
+	 */
+	int INCOME_CATEGORY=24;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOME_CATEGORY__TITLE=CATEGORY__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Operation Titles</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOME_CATEGORY__OPERATION_TITLES=CATEGORY__OPERATION_TITLES;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOME_CATEGORY__DESCRIPTION=CATEGORY__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Incomes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOME_CATEGORY__INCOMES=CATEGORY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Income Category</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOME_CATEGORY_FEATURE_COUNT=CATEGORY_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.SpendingCategoryImpl <em>Spending Category</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.SpendingCategoryImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getSpendingCategory()
+	 * @generated
+	 */
+	int SPENDING_CATEGORY=25;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPENDING_CATEGORY__TITLE=CATEGORY__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Operation Titles</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPENDING_CATEGORY__OPERATION_TITLES=CATEGORY__OPERATION_TITLES;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPENDING_CATEGORY__DESCRIPTION=CATEGORY__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Spendings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPENDING_CATEGORY__SPENDINGS=CATEGORY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Spending Category</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPENDING_CATEGORY_FEATURE_COUNT=CATEGORY_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.Month <em>Month</em>}' enum.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see fr.rostren.tracker.Month
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getMonth()
 	 * @generated
 	 */
-	int MONTH=24;
+	int MONTH=26;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.OriginType
@@ -1145,7 +1255,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOriginType()
 	 * @generated
 	 */
-	int ORIGIN_TYPE=25;
+	int ORIGIN_TYPE=27;
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.Owner <em>Owner</em>}'.
@@ -1463,17 +1573,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getCategory_Description();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.rostren.tracker.Category#getSubCategories <em>Sub Categories</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sub Categories</em>'.
-	 * @see fr.rostren.tracker.Category#getSubCategories()
-	 * @see #getCategory()
-	 * @generated
-	 */
-	EReference getCategory_SubCategories();
-
-	/**
 	 * Returns the meta object for class '
 	 * {@link fr.rostren.tracker.OperationTitle <em>Operation Title</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -1588,15 +1687,26 @@ public interface TrackerPackage extends EPackage {
 	EClass getCategoriesRepository();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.rostren.tracker.CategoriesRepository#getCategories <em>Categories</em>}'.
+	 * Returns the meta object for the containment reference '{@link fr.rostren.tracker.CategoriesRepository#getIncome <em>Income</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Categories</em>'.
-	 * @see fr.rostren.tracker.CategoriesRepository#getCategories()
+	 * @return the meta object for the containment reference '<em>Income</em>'.
+	 * @see fr.rostren.tracker.CategoriesRepository#getIncome()
 	 * @see #getCategoriesRepository()
 	 * @generated
 	 */
-	EReference getCategoriesRepository_Categories();
+	EReference getCategoriesRepository_Income();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link fr.rostren.tracker.CategoriesRepository#getSpending <em>Spending</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Spending</em>'.
+	 * @see fr.rostren.tracker.CategoriesRepository#getSpending()
+	 * @see #getCategoriesRepository()
+	 * @generated
+	 */
+	EReference getCategoriesRepository_Spending();
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.Date <em>Date</em>}'.
@@ -1783,6 +1893,48 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperationsTitleRepository_OperationsTitles();
+
+	/**
+	 * Returns the meta object for class '{@link fr.rostren.tracker.IncomeCategory <em>Income Category</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Income Category</em>'.
+	 * @see fr.rostren.tracker.IncomeCategory
+	 * @generated
+	 */
+	EClass getIncomeCategory();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.rostren.tracker.IncomeCategory#getIncomes <em>Incomes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Incomes</em>'.
+	 * @see fr.rostren.tracker.IncomeCategory#getIncomes()
+	 * @see #getIncomeCategory()
+	 * @generated
+	 */
+	EReference getIncomeCategory_Incomes();
+
+	/**
+	 * Returns the meta object for class '{@link fr.rostren.tracker.SpendingCategory <em>Spending Category</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Spending Category</em>'.
+	 * @see fr.rostren.tracker.SpendingCategory
+	 * @generated
+	 */
+	EClass getSpendingCategory();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.rostren.tracker.SpendingCategory#getSpendings <em>Spendings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Spendings</em>'.
+	 * @see fr.rostren.tracker.SpendingCategory#getSpendings()
+	 * @see #getSpendingCategory()
+	 * @generated
+	 */
+	EReference getSpendingCategory_Spendings();
 
 	/**
 	 * Returns the meta object for enum '{@link fr.rostren.tracker.Month <em>Month</em>}'.
@@ -2071,14 +2223,6 @@ public interface TrackerPackage extends EPackage {
 		EAttribute CATEGORY__DESCRIPTION=eINSTANCE.getCategory_Description();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Categories</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CATEGORY__SUB_CATEGORIES=eINSTANCE.getCategory_SubCategories();
-
-		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationTitleImpl <em>Operation Title</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -2177,12 +2321,20 @@ public interface TrackerPackage extends EPackage {
 		EClass CATEGORIES_REPOSITORY=eINSTANCE.getCategoriesRepository();
 
 		/**
-		 * The meta object literal for the '<em><b>Categories</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Income</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CATEGORIES_REPOSITORY__CATEGORIES=eINSTANCE.getCategoriesRepository_Categories();
+		EReference CATEGORIES_REPOSITORY__INCOME=eINSTANCE.getCategoriesRepository_Income();
+
+		/**
+		 * The meta object literal for the '<em><b>Spending</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CATEGORIES_REPOSITORY__SPENDING=eINSTANCE.getCategoriesRepository_Spending();
 
 		/**
 		 * The meta object literal for the '
@@ -2318,6 +2470,42 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES=eINSTANCE.getOperationsTitleRepository_OperationsTitles();
+
+		/**
+		 * The meta object literal for the '{@link fr.rostren.tracker.impl.IncomeCategoryImpl <em>Income Category</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.rostren.tracker.impl.IncomeCategoryImpl
+		 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncomeCategory()
+		 * @generated
+		 */
+		EClass INCOME_CATEGORY=eINSTANCE.getIncomeCategory();
+
+		/**
+		 * The meta object literal for the '<em><b>Incomes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INCOME_CATEGORY__INCOMES=eINSTANCE.getIncomeCategory_Incomes();
+
+		/**
+		 * The meta object literal for the '{@link fr.rostren.tracker.impl.SpendingCategoryImpl <em>Spending Category</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.rostren.tracker.impl.SpendingCategoryImpl
+		 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getSpendingCategory()
+		 * @generated
+		 */
+		EClass SPENDING_CATEGORY=eINSTANCE.getSpendingCategory();
+
+		/**
+		 * The meta object literal for the '<em><b>Spendings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPENDING_CATEGORY__SPENDINGS=eINSTANCE.getSpendingCategory_Spendings();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.Month <em>Month</em>}' enum.

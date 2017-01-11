@@ -14,11 +14,10 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link fr.rostren.tracker.Category#getOperationTitles <em>Operation Titles</em>}</li>
  *   <li>{@link fr.rostren.tracker.Category#getDescription <em>Description</em>}</li>
- *   <li>{@link fr.rostren.tracker.Category#getSubCategories <em>Sub Categories</em>}</li>
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getCategory()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Category extends Title {
@@ -66,21 +65,5 @@ public interface Category extends Title {
 	 * @generated
 	 */
 	void setDescription(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Sub Categories</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.rostren.tracker.Category}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sub Categories</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Categories</em>' containment reference list.
-	 * @see fr.rostren.tracker.TrackerPackage#getCategory_SubCategories()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Category> getSubCategories();
 
 } // Category

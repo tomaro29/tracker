@@ -83,15 +83,6 @@ public interface TrackerFactory extends EFactory {
 	Outgoing createOutgoing();
 
 	/**
-	 * Returns a new object of class '<em>Category</em>'.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @return a new object of class '<em>Category</em>'.
-	 * @generated
-	 */
-	Category createCategory();
-
-	/**
 	 * Returns a new object of class '<em>Operation Title</em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -197,6 +188,24 @@ public interface TrackerFactory extends EFactory {
 	 * @generated
 	 */
 	OperationsTitleRepository createOperationsTitleRepository();
+
+	/**
+	 * Returns a new object of class '<em>Income Category</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Income Category</em>'.
+	 * @generated
+	 */
+	IncomeCategory createIncomeCategory();
+
+	/**
+	 * Returns a new object of class '<em>Spending Category</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Spending Category</em>'.
+	 * @generated
+	 */
+	SpendingCategory createSpendingCategory();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -82,12 +82,13 @@ public class PDFContentExtractor {
 				IPath resourcePath=new Path(selectedFileURI.toPlatformString(true));
 				IFile iFile=ResourcesPlugin.getWorkspace().getRoot().getFile(resourcePath);
 				uri=iFile.getLocationURI().getPath();
+				String fileName=iFile.getProjectRelativePath().toOSString();
+				operations.addAll(extractOperations(uri, fileName, monitor));
 			}
 			else {
 				uri=selectedFileURI.toFileString();
+				operations.addAll(extractOperations(uri, uri, monitor));
 			}
-
-			operations.addAll(extractOperations(uri, monitor));
 		}
 		return operations;
 	}
@@ -108,19 +109,19 @@ public class PDFContentExtractor {
 	 *
 	 * @param src
 	 *            the original PDF document path
+	 * @param fileName
+	 * 			  the file name
 	 * @param monitor the progress monitor
 	 * @return the list of all the extracted operation
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
 	 */
-	private List<Operation> extractOperations(String src, IProgressMonitor monitor) throws ExtractorException {
+	private List<Operation> extractOperations(String src, String fileName, IProgressMonitor monitor) throws ExtractorException {
 		List<Operation> operations=new ArrayList<>();
 
 		try (TrackerPdfReader reader=new TrackerPdfReader(src)) {
 			Tracker tracker=TrackerUtils.getTracker(account);
 			CEPdfContentAnalyzer analyzer=new CEPdfContentAnalyzer();
 			for (int i=0; i < reader.getNumberOfPages(); i++) {
-				int index=src.lastIndexOf("/") + 1; //$NON-NLS-1$
-				String fileName=src.substring(index, src.length());
 				String originId=fileName + "_page_" + (i + 1);//$NON-NLS-1$
 				if (!isAlreadyParsed(tracker, originId)) {
 					Origin origin=createLinkedOrigin(tracker, originId);

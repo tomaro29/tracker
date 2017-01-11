@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker.util;
 
+import fr.rostren.tracker.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -204,6 +205,16 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseOperationsTitleRepository(OperationsTitleRepository object) {
 			return createOperationsTitleRepositoryAdapter();
+		}
+
+		@Override
+		public Adapter caseIncomeCategory(IncomeCategory object) {
+			return createIncomeCategoryAdapter();
+		}
+
+		@Override
+		public Adapter caseSpendingCategory(SpendingCategory object) {
+			return createSpendingCategoryAdapter();
 		}
 
 		@Override
@@ -560,6 +571,34 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationsTitleRepositoryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.rostren.tracker.IncomeCategory <em>Income Category</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.rostren.tracker.IncomeCategory
+	 * @generated
+	 */
+	public Adapter createIncomeCategoryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.rostren.tracker.SpendingCategory <em>Spending Category</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.rostren.tracker.SpendingCategory
+	 * @generated
+	 */
+	public Adapter createSpendingCategoryAdapter() {
 		return null;
 	}
 

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 
 public class CategorySubCategoriesContentProvider extends AbstractContentProvider {
@@ -27,8 +29,11 @@ public class CategorySubCategoriesContentProvider extends AbstractContentProvide
 				}
 			}
 		}
-		else if (parentElement instanceof Category) {
-			children.addAll(((Category)parentElement).getSubCategories());
+		else if (parentElement instanceof IncomeCategory) {
+			children.addAll(((IncomeCategory)parentElement).getIncomes());
+		}
+		else if (parentElement instanceof SpendingCategory) {
+			children.addAll(((SpendingCategory)parentElement).getSpendings());
 		}
 		Collections.sort(children, new CategoryComparator());
 		return children.toArray();

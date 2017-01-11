@@ -44,7 +44,7 @@ public class DateImpl extends EObjectImpl implements Date {
 	 * @generated
 	 * @ordered
 	 */
-	protected int day=DateImpl.DAY_EDEFAULT;
+	protected int day=DAY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMonth() <em>Month</em>}' attribute.
@@ -62,7 +62,7 @@ public class DateImpl extends EObjectImpl implements Date {
 	 * @generated
 	 * @ordered
 	 */
-	protected Month month=DateImpl.MONTH_EDEFAULT;
+	protected Month month=MONTH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
@@ -80,7 +80,7 @@ public class DateImpl extends EObjectImpl implements Date {
 	 * @generated
 	 * @ordered
 	 */
-	protected int year=DateImpl.YEAR_EDEFAULT;
+	protected int year=YEAR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -116,9 +116,8 @@ public class DateImpl extends EObjectImpl implements Date {
 	public void setDay(int newDay) {
 		int oldDay=day;
 		day=newDay;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.DATE__DAY, oldDay, day));
-		}
 	}
 
 	/**
@@ -137,10 +136,9 @@ public class DateImpl extends EObjectImpl implements Date {
 	@Override
 	public void setMonth(Month newMonth) {
 		Month oldMonth=month;
-		month=newMonth == null ? DateImpl.MONTH_EDEFAULT : newMonth;
-		if (eNotificationRequired()) {
+		month=newMonth == null ? MONTH_EDEFAULT : newMonth;
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.DATE__MONTH, oldMonth, month));
-		}
 	}
 
 	/**
@@ -160,9 +158,8 @@ public class DateImpl extends EObjectImpl implements Date {
 	public void setYear(int newYear) {
 		int oldYear=year;
 		year=newYear;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.DATE__YEAR, oldYear, year));
-		}
 	}
 
 	/**
@@ -210,13 +207,13 @@ public class DateImpl extends EObjectImpl implements Date {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.DATE__DAY:
-				setDay(DateImpl.DAY_EDEFAULT);
+				setDay(DAY_EDEFAULT);
 				return;
 			case TrackerPackage.DATE__MONTH:
-				setMonth(DateImpl.MONTH_EDEFAULT);
+				setMonth(MONTH_EDEFAULT);
 				return;
 			case TrackerPackage.DATE__YEAR:
-				setYear(DateImpl.YEAR_EDEFAULT);
+				setYear(YEAR_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -230,11 +227,11 @@ public class DateImpl extends EObjectImpl implements Date {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.DATE__DAY:
-				return day != DateImpl.DAY_EDEFAULT;
+				return day != DAY_EDEFAULT;
 			case TrackerPackage.DATE__MONTH:
-				return month != DateImpl.MONTH_EDEFAULT;
+				return month != MONTH_EDEFAULT;
 			case TrackerPackage.DATE__YEAR:
-				return year != DateImpl.YEAR_EDEFAULT;
+				return year != YEAR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

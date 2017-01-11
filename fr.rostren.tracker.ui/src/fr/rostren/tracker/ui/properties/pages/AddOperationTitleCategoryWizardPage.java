@@ -49,19 +49,35 @@ public class AddOperationTitleCategoryWizardPage extends AbstractAddWizardPage {
 					tracker);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+				if (wizard.isIncome()) {
+					Category newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
 
-				String title=wizard.getCategoryTitle();
-				if (!StringUtils.isEmpty(title)) {
-					newCategory.setTitle(title);
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
+					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getIncome(), TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
+					refreshComboViewerContent(categoriesComboViewer, TrackerUtils.getCategories(tracker), newCategory);
 				}
-				String description=wizard.getCategoryDescription();
-				if (!StringUtils.isEmpty(description)) {
-					newCategory.setDescription(description);
+				else if (wizard.isSpending()) {
+					Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
+
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
+					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getSpending(), TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+					refreshComboViewerContent(categoriesComboViewer, TrackerUtils.getCategories(tracker), newCategory);
 				}
 
-				DomainUtils.executeAddCommand(tracker.getCategoriesRepository(), TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
-				refreshComboViewerContent(categoriesComboViewer, TrackerUtils.getCategories(tracker), newCategory);
 			}
 		}
 	};

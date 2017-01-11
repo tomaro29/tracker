@@ -330,7 +330,7 @@ public enum Month implements Enumerator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<Month> VALUES=Collections.unmodifiableList(Arrays.asList(Month.VALUES_ARRAY));
+	public static final List<Month> VALUES=Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Month</b></em>' literal with the specified literal value.
@@ -340,8 +340,8 @@ public enum Month implements Enumerator {
 	 * @generated
 	 */
 	public static Month get(String literal) {
-		for (int i=0; i < Month.VALUES_ARRAY.length; ++i) {
-			Month result=Month.VALUES_ARRAY[i];
+		for (int i=0; i < VALUES_ARRAY.length; ++i) {
+			Month result=VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -359,8 +359,8 @@ public enum Month implements Enumerator {
 	 * @generated
 	 */
 	public static Month getByName(String name) {
-		for (int i=0; i < Month.VALUES_ARRAY.length; ++i) {
-			Month result=Month.VALUES_ARRAY[i];
+		for (int i=0; i < VALUES_ARRAY.length; ++i) {
+			Month result=VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}

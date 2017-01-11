@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.properties.sections.category;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.ui.DomainUtils;
@@ -45,18 +48,35 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 			AddCategoryCategoryWizard wizard=new AddCategoryCategoryWizard(pageTitle, category);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+				if (category instanceof IncomeCategory) {
+					Category newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
 
-				String title=wizard.getCategoryTitle();
-				if (!StringUtils.isEmpty(title)) {
-					newCategory.setTitle(title);
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
+
+					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
 				}
-				String description=wizard.getCategoryDescription();
-				if (!StringUtils.isEmpty(description)) {
-					newCategory.setDescription(description);
+				else if (category instanceof SpendingCategory) {
+					Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
+
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
+
+					DomainUtils.executeAddCommand(category, TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
 				}
 
-				DomainUtils.executeAddCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, newCategory);
 				refresh();
 			}
 		}
@@ -72,7 +92,12 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			DomainUtils.executeRemoveCommand(category, TrackerPackage.Literals.CATEGORY__SUB_CATEGORIES, elementToRemove);
+			if (category instanceof IncomeCategory) {
+				DomainUtils.executeRemoveCommand(category, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, elementToRemove);
+			}
+			else if (category instanceof SpendingCategory) {
+				DomainUtils.executeRemoveCommand(category, TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, elementToRemove);
+			}
 			refresh();
 		}
 	};
@@ -106,11 +131,15 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 	 */
 	private List<Category> getSubCategories() {
 		Assert.isTrue(currentEObject instanceof Category);
-		List<Category> subCategories=((Category)currentEObject).getSubCategories();
-		if (subCategories == null || subCategories.isEmpty()) {
-			return Collections.emptyList();
+		List<Category> subCategories=new ArrayList<>();
+		if (currentEObject instanceof IncomeCategory) {
+			subCategories.addAll(((IncomeCategory)currentEObject).getIncomes());
 		}
-		return subCategories;
+		if (currentEObject instanceof SpendingCategory) {
+			subCategories.addAll(((SpendingCategory)currentEObject).getSpendings());
+		}
+
+		return subCategories.isEmpty() ? Collections.emptyList() : subCategories;
 	}
 
 	@Override

@@ -10,9 +10,11 @@ import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Credit;
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
@@ -32,10 +34,6 @@ public class LineContent {
 	private Category linkedCategory;
 	/** The operation title. */
 	private OperationTitle linkedOperationTitle;
-
-	private Category income;
-	private Category spending;
-	private Category undefined;
 
 	/**
 	 * Constructor
@@ -175,18 +173,17 @@ public class LineContent {
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
 
 		if (operation instanceof Credit) {
-			income=income != null ? income : getIncomeCategory(getCategoriesRepository(tracker));
-			income.getOperationTitles().add(newTitle);
-			return income;
+			Category undefined=getUndefinedIncomeCategory(getCategoriesRepository(tracker));
+			undefined.getOperationTitles().add(newTitle);
+			return undefined;
 		}
 		if (operation instanceof Debit) {
-			spending=spending != null ? spending : getSpendingCategory(getCategoriesRepository(tracker));
-			spending.getOperationTitles().add(newTitle);
-			return spending;
+			Category undefined=getUndefinedSpendingCategory(getCategoriesRepository(tracker));
+			undefined.getOperationTitles().add(newTitle);
+			return undefined;
 		}
-		undefined=undefined != null ? undefined : getUndefinedCategory(getCategoriesRepository(tracker));
-		undefined.getOperationTitles().add(newTitle);
-		return undefined;
+
+		return null;
 	}
 
 	/**
@@ -203,60 +200,50 @@ public class LineContent {
 	}
 
 	/**
-	 * Returns the income category
-	 * @param repository the categories repository
-	 * @return the income category
-	 */
-	private Category getIncomeCategory(CategoriesRepository repository) {
-		// return the income category in the existing undefined group
-		for (Category category: repository.getCategories()) {
-			if (TrackerUtils.isIncomeCategory(category)) {
-				return category;
-			}
-		}
-		// return the income category in a new spending group
-		Category category=TrackerFactory.eINSTANCE.createCategory();
-		category.setTitle(TrackerUtils.INCOME_TITLE);
-		repository.getCategories().add(category);
-		return category;
-	}
-
-	/**
-	 * Returns the spending category
-	 * @param repository the categories repository
-	 * @return the spending category
-	 */
-	private Category getSpendingCategory(CategoriesRepository repository) {
-		// return the spending category in the existing undefined group
-		for (Category category: repository.getCategories()) {
-			if (TrackerUtils.isSpendingCategory(category)) {
-				return category;
-			}
-		}
-		// return the spending category in a new spending group
-		Category category=TrackerFactory.eINSTANCE.createCategory();
-		category.setTitle(TrackerUtils.SPENDING_TITLE);
-		repository.getCategories().add(category);
-		return category;
-	}
-
-	/**
-	 * Returns the undefined category
+	 * Returns the undefined income category
 	 * @param repository the repository
-	 * @return the undefined category
+	 * @return the undefined income category
 	 */
-	private Category getUndefinedCategory(CategoriesRepository repository) {
-		// return the undefined category in the existing undefined group
-		for (Category category: repository.getCategories()) {
+	private Category getUndefinedIncomeCategory(CategoriesRepository repository) {
+		IncomeCategory income=repository.getIncome();
+		if (income == null) {
+			income=TrackerFactory.eINSTANCE.createIncomeCategory();
+			repository.setIncome(income);
+		}
+		for (Category category: income.getIncomes()) {
 			if (TrackerUtils.isUndefinedCategory(category)) {
 				return category;
 			}
 		}
 
 		// return the undefined category in a new undefined group
-		Category category=TrackerFactory.eINSTANCE.createCategory();
-		category.setTitle(TrackerUtils.UNDEFINED_TITLE);
-		repository.getCategories().add(category);
+		IncomeCategory category=TrackerFactory.eINSTANCE.createIncomeCategory();
+		category.setTitle(TrackerUtils.UNDEFINED_INCOME_TITLE);
+		income.getIncomes().add(category);
+		return category;
+	}
+
+	/**
+	 * Returns the undefined spending category
+	 * @param repository the repository
+	 * @return the undefined spending category
+	 */
+	private Category getUndefinedSpendingCategory(CategoriesRepository repository) {
+		SpendingCategory spending=repository.getSpending();
+		if (spending == null) {
+			spending=TrackerFactory.eINSTANCE.createSpendingCategory();
+			repository.setSpending(spending);
+		}
+		for (Category category: spending.getSpendings()) {
+			if (TrackerUtils.isUndefinedCategory(category)) {
+				return category;
+			}
+		}
+
+		// return the undefined category in a new undefined group
+		SpendingCategory category=TrackerFactory.eINSTANCE.createSpendingCategory();
+		category.setTitle(TrackerUtils.UNDEFINED_SPENDING_TITLE);
+		spending.getSpendings().add(category);
 		return category;
 	}
 

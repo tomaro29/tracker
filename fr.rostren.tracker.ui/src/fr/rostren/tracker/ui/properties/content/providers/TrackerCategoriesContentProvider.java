@@ -30,7 +30,7 @@ public class TrackerCategoriesContentProvider extends AbstractContentProvider {
 			}
 		}
 		else if (parentElement instanceof Tracker) {
-			for (Category category: ((Tracker)parentElement).getCategoriesRepository().getCategories()) {
+			for (Category category: TrackerUtils.getAllCategories(((Tracker)parentElement).getCategoriesRepository())) {
 				children.addAll(TrackerUtils.getCategories(category));
 			}
 		}

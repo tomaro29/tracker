@@ -230,29 +230,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Category} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CategoryItemProvider categoryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.Category}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createCategoryAdapter() {
-		if (categoryItemProvider == null) {
-			categoryItemProvider=new CategoryItemProvider(this);
-		}
-
-		return categoryItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.OperationTitle} instances.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
@@ -530,6 +507,52 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.IncomeCategory} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IncomeCategoryItemProvider incomeCategoryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.rostren.tracker.IncomeCategory}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIncomeCategoryAdapter() {
+		if (incomeCategoryItemProvider == null) {
+			incomeCategoryItemProvider=new IncomeCategoryItemProvider(this);
+		}
+
+		return incomeCategoryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.SpendingCategory} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SpendingCategoryItemProvider spendingCategoryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.rostren.tracker.SpendingCategory}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSpendingCategoryAdapter() {
+		if (spendingCategoryItemProvider == null) {
+			spendingCategoryItemProvider=new SpendingCategoryItemProvider(this);
+		}
+
+		return spendingCategoryItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -644,8 +667,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 			incomingItemProvider.dispose();
 		if (outgoingItemProvider != null)
 			outgoingItemProvider.dispose();
-		if (categoryItemProvider != null)
-			categoryItemProvider.dispose();
 		if (operationTitleItemProvider != null)
 			operationTitleItemProvider.dispose();
 		if (amountItemProvider != null)
@@ -670,6 +691,10 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 			trackerItemProvider.dispose();
 		if (operationsTitleRepositoryItemProvider != null)
 			operationsTitleRepositoryItemProvider.dispose();
+		if (incomeCategoryItemProvider != null)
+			incomeCategoryItemProvider.dispose();
+		if (spendingCategoryItemProvider != null)
+			spendingCategoryItemProvider.dispose();
 	}
 
 }

@@ -30,7 +30,7 @@ public class CategoriesRepositoryContentProvider extends AbstractContentProvider
 			}
 		}
 		else if (parentElement instanceof CategoriesRepository) {
-			for (Category category: ((CategoriesRepository)parentElement).getCategories()) {
+			for (Category category: TrackerUtils.getAllCategories((CategoriesRepository)parentElement)) {
 				children.addAll(TrackerUtils.getCategories(category));
 			}
 		}

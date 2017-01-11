@@ -18,12 +18,13 @@ import org.junit.Test;
 import fr.rostren.tracker.Credit;
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.tests.TestUtils;
 
 public class LineContentTest {
@@ -37,7 +38,7 @@ public class LineContentTest {
 	private final String testTitle2="any title2"; //$NON-NLS-1$
 	private final String existingCreditTitle="VIR SEPA OBNA "; //$NON-NLS-1$
 	private final String existingDebitTitle="VIR LIB "; //$NON-NLS-1$
-	private final String existingCategory="RECETTES"; //$NON-NLS-1$
+	private final String existingCategory="UNDEFINED INCOME"; //$NON-NLS-1$
 	private final String ECHPRETTitle="ECH PRET any other string"; //$NON-NLS-1$
 	private final String INTERETSTitle="INTERETS CREDITEURS any other string"; //$NON-NLS-1$
 	private final String POSTETitle="CB LA POSTE any other string"; //$NON-NLS-1$
@@ -167,7 +168,7 @@ public class LineContentTest {
 
 		lineContent.completeOperation((Tracker)eObject);
 		assertNotNull(lineContent.getLinkedCategory());
-		assertEquals(TrackerUtils.INCOME_TITLE, lineContent.getLinkedCategory().getTitle());
+		assertTrue(lineContent.getLinkedCategory() instanceof IncomeCategory);
 		assertNotNull(lineContent.getLinkedOperationTitle());
 		assertEquals(existingCreditTitle, lineContent.getLinkedOperationTitle().getTitle());
 
@@ -175,7 +176,7 @@ public class LineContentTest {
 
 		lineContent.completeOperation((Tracker)eObject);
 		assertNotNull(lineContent.getLinkedCategory());
-		assertEquals(TrackerUtils.SPENDING_TITLE, lineContent.getLinkedCategory().getTitle());
+		assertTrue(lineContent.getLinkedCategory() instanceof SpendingCategory);
 
 		/*Test using an incomplete model*/
 		eObject=TestUtils.load(LineContentTest.INCOMPLETE_MODEL_PATH);
@@ -194,7 +195,7 @@ public class LineContentTest {
 
 		lineContent.completeOperation((Tracker)eObject);
 		assertNotNull(lineContent.getLinkedCategory());
-		assertEquals(TrackerUtils.INCOME_TITLE, lineContent.getLinkedCategory().getTitle());
+		assertTrue(lineContent.getLinkedCategory() instanceof IncomeCategory);
 		assertNotNull(lineContent.getLinkedOperationTitle());
 		assertEquals(existingCreditTitle, lineContent.getLinkedOperationTitle().getTitle());
 

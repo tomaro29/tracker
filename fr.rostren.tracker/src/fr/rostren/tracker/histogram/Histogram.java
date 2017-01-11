@@ -4,6 +4,9 @@
  *******************************************************************************/
 package fr.rostren.tracker.histogram;
 
+import java.util.List;
+
+import org.apache.commons.lang.ArrayUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
@@ -55,19 +58,19 @@ public class Histogram {
 	 * @param spendingSeriesValues the spending series values
 	 * @param enableStack <code>true</code> if the stack configuration is enabled, <code>false</code> otherwise.
 	 */
-	public void populateHistogram(String[] titles, double[] incomeSeriesValues, double[] spendingSeriesValues, boolean enableStack) {
-		xAxis.setCategorySeries(titles);
+	public void populateHistogram(List<String> titles, List<Double> incomeSeriesValues, List<Double> spendingSeriesValues, boolean enableStack) {
+		xAxis.setCategorySeries(convertToStringArray(titles));
 		xAxis.enableCategory(true);
 
 		//create income bar series
 		IBarSeries incomeSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.INCOME);
 		incomeSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
-		incomeSeries.setYSeries(incomeSeriesValues);
+		incomeSeries.setYSeries(convertToPrimitiveDoubleArray(incomeSeriesValues));
 
 		//create spending bar series
 		IBarSeries spendingSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.SPENDING);
 		spendingSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		spendingSeries.setYSeries(spendingSeriesValues);
+		spendingSeries.setYSeries(convertToPrimitiveDoubleArray(spendingSeriesValues));
 
 		//Set Labels font, format and make visible
 		ISeriesLabel incomeSeriesLabel=incomeSeries.getLabel();
@@ -86,5 +89,23 @@ public class Histogram {
 
 		// adjust the axis range
 		chart.getAxisSet().adjustRange();
+	}
+
+	/**
+	 * Converts to primitive {@link Double} array
+	 * @param list the given list
+	 * @return the converted array
+	 */
+	private double[] convertToPrimitiveDoubleArray(List<Double> list) {
+		return ArrayUtils.toPrimitive(list.toArray(new Double[list.size()]));
+	}
+
+	/**
+	 * Converts to {@link String} array
+	 * @param list the given list
+	 * @return the converted array
+	 */
+	private String[] convertToStringArray(List<String> list) {
+		return list.toArray(new String[list.size()]);
 	}
 }

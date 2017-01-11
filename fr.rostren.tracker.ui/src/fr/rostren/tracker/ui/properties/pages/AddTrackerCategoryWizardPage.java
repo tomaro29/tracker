@@ -5,6 +5,9 @@ import java.text.MessageFormat;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -26,6 +29,9 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 	protected String title;
 	protected String description;
 
+	protected Button incomeCheckButton;
+	protected Button spendingCheckButton;
+
 	private final ModifyListener modifyTitleListener=new ModifyListener() {
 		@Override
 		public void modifyText(ModifyEvent event) {
@@ -38,6 +44,33 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 		@Override
 		public void modifyText(ModifyEvent event) {
 			description=((Text)event.widget).getText();
+		}
+	};
+
+	private final SelectionListener selectionIncomeListener=new SelectionListener() {
+
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			Button button=(Button)event.getSource();
+			spendingCheckButton.setSelection(!button.getSelection());
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent event) {
+			// Do Nothing
+		}
+	};
+	private final SelectionListener selectionSpendingListener=new SelectionListener() {
+
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			Button button=(Button)event.getSource();
+			incomeCheckButton.setSelection(!button.getSelection());
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent event) {
+			// Do Nothing
 		}
 	};
 
@@ -57,6 +90,8 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createText(parent, "Title: ", title, modifyTitleListener); //$NON-NLS-1$
 		createText(parent, "Description: ", description, modifyDescriptionListener); //$NON-NLS-1$
+		incomeCheckButton=createCheckButton(parent, "Is Income", selectionIncomeListener); //$NON-NLS-1$
+		spendingCheckButton=createCheckButton(parent, "Is Spending", selectionSpendingListener); //$NON-NLS-1$
 	}
 
 	/**
@@ -73,6 +108,20 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 	 */
 	public String getCategoryDescription() {
 		return description;
+	}
+
+	/**
+	 * @return <code>true</code> if the category is an income one, <code>false</code> otherwise.
+	 */
+	public boolean isIncome() {
+		return incomeCheckButton.getSelection();
+	}
+
+	/**
+	 * @return <code>true</code> if the category is an spending one, <code>false</code> otherwise.
+	 */
+	public boolean isSpending() {
+		return spendingCheckButton.getSelection();
 	}
 
 	/* (non-Javadoc)

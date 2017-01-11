@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -27,12 +26,11 @@ import fr.rostren.tracker.TrackerPackage;
  * <ul>
  *   <li>{@link fr.rostren.tracker.impl.CategoryImpl#getOperationTitles <em>Operation Titles</em>}</li>
  *   <li>{@link fr.rostren.tracker.impl.CategoryImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link fr.rostren.tracker.impl.CategoryImpl#getSubCategories <em>Sub Categories</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CategoryImpl extends TitleImpl implements Category {
+public abstract class CategoryImpl extends TitleImpl implements Category {
 	/**
 	 * The cached value of the '{@link #getOperationTitles() <em>Operation Titles</em>}' reference list.
 	 * <!-- begin-user-doc --> <!--
@@ -60,16 +58,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 	 * @ordered
 	 */
 	protected String description=DESCRIPTION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSubCategories() <em>Sub Categories</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubCategories()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Category> subCategories;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -123,19 +111,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Category> getSubCategories() {
-		if (subCategories == null) {
-			subCategories=new EObjectContainmentEList<Category>(Category.class, this, TrackerPackage.CATEGORY__SUB_CATEGORIES);
-		}
-		return subCategories;
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -158,8 +133,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 		switch (featureID) {
 			case TrackerPackage.CATEGORY__OPERATION_TITLES:
 				return ((InternalEList<?>)getOperationTitles()).basicRemove(otherEnd, msgs);
-			case TrackerPackage.CATEGORY__SUB_CATEGORIES:
-				return ((InternalEList<?>)getSubCategories()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -175,8 +148,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 				return getOperationTitles();
 			case TrackerPackage.CATEGORY__DESCRIPTION:
 				return getDescription();
-			case TrackerPackage.CATEGORY__SUB_CATEGORIES:
-				return getSubCategories();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -196,10 +167,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 			case TrackerPackage.CATEGORY__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
-			case TrackerPackage.CATEGORY__SUB_CATEGORIES:
-				getSubCategories().clear();
-				getSubCategories().addAll((Collection<? extends Category>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -217,9 +184,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 			case TrackerPackage.CATEGORY__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case TrackerPackage.CATEGORY__SUB_CATEGORIES:
-				getSubCategories().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -235,8 +199,6 @@ public class CategoryImpl extends TitleImpl implements Category {
 				return operationTitles != null && !operationTitles.isEmpty();
 			case TrackerPackage.CATEGORY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case TrackerPackage.CATEGORY__SUB_CATEGORIES:
-				return subCategories != null && !subCategories.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -13,7 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link fr.rostren.tracker.CategoriesRepository#getCategories <em>Categories</em>}</li>
+ *   <li>{@link fr.rostren.tracker.CategoriesRepository#getIncome <em>Income</em>}</li>
+ *   <li>{@link fr.rostren.tracker.CategoriesRepository#getSpending <em>Spending</em>}</li>
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getCategoriesRepository()
@@ -22,19 +22,55 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface CategoriesRepository extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Categories</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.rostren.tracker.Category}.
+	 * Returns the value of the '<em><b>Income</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Categories</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Income</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Categories</em>' containment reference list.
-	 * @see fr.rostren.tracker.TrackerPackage#getCategoriesRepository_Categories()
-	 * @model containment="true"
+	 * @return the value of the '<em>Income</em>' containment reference.
+	 * @see #setIncome(IncomeCategory)
+	 * @see fr.rostren.tracker.TrackerPackage#getCategoriesRepository_Income()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Category> getCategories();
+	IncomeCategory getIncome();
+
+	/**
+	 * Sets the value of the '{@link fr.rostren.tracker.CategoriesRepository#getIncome <em>Income</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Income</em>' containment reference.
+	 * @see #getIncome()
+	 * @generated
+	 */
+	void setIncome(IncomeCategory value);
+
+	/**
+	 * Returns the value of the '<em><b>Spending</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Spending</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Spending</em>' containment reference.
+	 * @see #setSpending(SpendingCategory)
+	 * @see fr.rostren.tracker.TrackerPackage#getCategoriesRepository_Spending()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	SpendingCategory getSpending();
+
+	/**
+	 * Sets the value of the '{@link fr.rostren.tracker.CategoriesRepository#getSpending <em>Spending</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Spending</em>' containment reference.
+	 * @see #getSpending()
+	 * @generated
+	 */
+	void setSpending(SpendingCategory value);
 
 } // CategoriesRepository

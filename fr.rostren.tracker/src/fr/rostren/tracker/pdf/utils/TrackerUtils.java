@@ -14,11 +14,13 @@ import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Owner;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
@@ -30,9 +32,8 @@ import fr.rostren.tracker.TrackerFactory;
  */
 public class TrackerUtils {
 
-	public static final String UNDEFINED_TITLE="UNDEFINED"; //$NON-NLS-1$
-	public static final String INCOME_TITLE="INCOME"; //$NON-NLS-1$
-	public static final String SPENDING_TITLE="SPENDING"; //$NON-NLS-1$
+	public static final String UNDEFINED_INCOME_TITLE="UNDEFINED INCOME"; //$NON-NLS-1$
+	public static final String UNDEFINED_SPENDING_TITLE="UNDEFINED SPENDING"; //$NON-NLS-1$
 
 	/**
 	 * Returns the operations titles
@@ -57,10 +58,35 @@ public class TrackerUtils {
 	 * @param repository the {@link CategoriesRepository} instance
 	 * @return the categories
 	 */
+	public static List<Category> getAllCategories(CategoriesRepository repository) {
+		List<Category> categories=new ArrayList<>();
+		if (repository.getIncome() != null) {
+			categories.add(repository.getIncome());
+			for (Category category: repository.getIncome().getIncomes()) {
+				categories.addAll(getCategories(category));
+			}
+		}
+		if (repository.getSpending() != null) {
+			categories.add(repository.getSpending());
+			for (Category category: repository.getSpending().getSpendings()) {
+				categories.addAll(getCategories(category));
+			}
+		}
+		return categories;
+	}
+
+	/**
+	 * Returns the categories
+	 * @param repository the {@link CategoriesRepository} instance
+	 * @return the categories
+	 */
 	public static List<Category> getCategories(CategoriesRepository repository) {
 		List<Category> categories=new ArrayList<>();
-		for (Category category: repository.getCategories()) {
-			categories.addAll(getCategories(category));
+		if (repository.getIncome() != null) {
+			categories.add(repository.getIncome());
+		}
+		if (repository.getSpending() != null) {
+			categories.add(repository.getSpending());
 		}
 		return categories;
 	}
@@ -73,8 +99,15 @@ public class TrackerUtils {
 	public static List<Category> getCategories(Category category) {
 		List<Category> categories=new ArrayList<>();
 		categories.add(category);
-		for (Category subCategory: category.getSubCategories()) {
-			categories.addAll(getCategories(subCategory));
+		if (category instanceof IncomeCategory) {
+			for (Category subCategory: ((IncomeCategory)category).getIncomes()) {
+				categories.addAll(getCategories(subCategory));
+			}
+		}
+		if (category instanceof SpendingCategory) {
+			for (Category subCategory: ((SpendingCategory)category).getSpendings()) {
+				categories.addAll(getCategories(subCategory));
+			}
 		}
 		return categories;
 	}
@@ -86,9 +119,7 @@ public class TrackerUtils {
 	 */
 	public static Set<Object> getCategories(Tracker tracker) {
 		Set<Object> categories=new HashSet<>();
-		for (Category category: tracker.getCategoriesRepository().getCategories()) {
-			categories.addAll(getCategories(category));
-		}
+		categories.addAll(getAllCategories(tracker.getCategoriesRepository()));
 		return categories;
 	}
 
@@ -260,7 +291,7 @@ public class TrackerUtils {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
-		for (Category category: tracker.getCategoriesRepository().getCategories()) {
+		for (Category category: getAllCategories(tracker.getCategoriesRepository())) {
 			return getCategory(category, title);
 		}
 		return null;
@@ -276,40 +307,17 @@ public class TrackerUtils {
 		if (title.equals(category.getTitle())) {
 			return category;
 		}
-		for (Category subCategory: category.getSubCategories()) {
-			return getCategory(subCategory, title);
+		if (category instanceof IncomeCategory) {
+			for (IncomeCategory subCategory: ((IncomeCategory)category).getIncomes()) {
+				return getCategory(subCategory, title);
+			}
+		}
+		if (category instanceof SpendingCategory) {
+			for (SpendingCategory subCategory: ((SpendingCategory)category).getSpendings()) {
+				return getCategory(subCategory, title);
+			}
 		}
 		return null;
-	}
-
-	/**
-	 * <code>true</code> if the category is the income category, <code>false</code> otherwise.
-	 * @param category the category
-	 * @return <code>true</code> if the category is the income category, <code>false</code> otherwise.
-	 */
-	public static boolean isIncomeCategory(Category category) {
-		if (category == null) {
-			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
-		}
-		if (TrackerUtils.INCOME_TITLE.equals(category.getTitle())) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * <code>true</code> if the category is the spending category, <code>false</code> otherwise.
-	 * @param category the category
-	 * @return <code>true</code> if the category is the spending category, <code>false</code> otherwise.
-	 */
-	public static boolean isSpendingCategory(Category category) {
-		if (category == null) {
-			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
-		}
-		if (TrackerUtils.SPENDING_TITLE.equals(category.getTitle())) {
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -321,7 +329,7 @@ public class TrackerUtils {
 		if (category == null) {
 			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
 		}
-		if (TrackerUtils.UNDEFINED_TITLE.equals(category.getTitle())) {
+		if (TrackerUtils.UNDEFINED_INCOME_TITLE.equals(category.getTitle()) || TrackerUtils.UNDEFINED_SPENDING_TITLE.equals(category.getTitle())) {
 			return true;
 		}
 		return false;
@@ -356,7 +364,7 @@ public class TrackerUtils {
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The title to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
-		for (Category category: tracker.getCategoriesRepository().getCategories()) {
+		for (Category category: getAllCategories(tracker.getCategoriesRepository())) {
 			isCategoryTitleUnique(category, title);
 		}
 		return true;
@@ -372,8 +380,16 @@ public class TrackerUtils {
 		if (StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
 			return false;
 		}
-		for (Category subCategory: category.getSubCategories()) {
-			return isCategoryTitleUnique(subCategory, title);
+
+		if (category instanceof IncomeCategory) {
+			for (IncomeCategory subCategory: ((IncomeCategory)category).getIncomes()) {
+				return isCategoryTitleUnique(subCategory, title);
+			}
+		}
+		if (category instanceof SpendingCategory) {
+			for (SpendingCategory subCategory: ((SpendingCategory)category).getSpendings()) {
+				return isCategoryTitleUnique(subCategory, title);
+			}
 		}
 		return true;
 	}
@@ -459,5 +475,53 @@ public class TrackerUtils {
 			sum=sum.add(amount.getValue());
 		}
 		return sum;
+	}
+
+	/**
+	 * @param dates the dates to witch we need to extract all income categories amount
+	 * @return all the income categories amount
+	 */
+	public static List<Double> getAllIncomeCategoryAmount(List<String> dates) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @param dates the dates to witch we need to extract all spending categories amount
+	 * @return all the spending categories amount
+	 */
+	public static List<Double> getAllSpendingCategoryAmount(List<String> dates) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @param item the category item
+	 * @param dates the dates to witch we need to extract spending category amount
+	 * @return the spending category amount of the given item and its children
+	 */
+	public static List<Double> getSpendingCategoryAmount(String item, List<String> dates) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @param item the opertaion item
+	 * @param dates the dates to witch we need to extract the amount
+	 * @return the operation amounts
+	 */
+	public static List<Double> getOperationAmount(String item, List<String> dates) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @param item the category item
+	 * @param dates the dates to witch we need to extract income category amount
+	 * @return the income category amount of the given item and its children
+	 */
+	public static List<Double> getIncomeCategoryAmount(String item, List<String> dates) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

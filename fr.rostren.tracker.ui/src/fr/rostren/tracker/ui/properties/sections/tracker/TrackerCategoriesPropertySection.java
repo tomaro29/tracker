@@ -21,6 +21,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
@@ -47,18 +49,34 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Tracker", tracker); //$NON-NLS-1$
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
-				Category newCategory=TrackerFactory.eINSTANCE.createCategory();
+				if (wizard.isIncome()) {
+					Category newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
 
-				String title=wizard.getCategoryTitle();
-				if (!StringUtils.isEmpty(title)) {
-					newCategory.setTitle(title);
-				}
-				String description=wizard.getCategoryDescription();
-				if (!StringUtils.isEmpty(description)) {
-					newCategory.setDescription(description);
-				}
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
 
-				DomainUtils.executeAddCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, newCategory);
+					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getIncome(), TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
+				}
+				else if (wizard.isSpending()) {
+					Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
+
+					String title=wizard.getCategoryTitle();
+					if (!StringUtils.isEmpty(title)) {
+						newCategory.setTitle(title);
+					}
+					String description=wizard.getCategoryDescription();
+					if (!StringUtils.isEmpty(description)) {
+						newCategory.setDescription(description);
+					}
+
+					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getSpending(), TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+				}
 				refresh();
 			}
 		}
@@ -74,8 +92,13 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 
 			ISelection selection=tableViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			DomainUtils.executeRemoveCommand(repository, TrackerPackage.Literals.CATEGORIES_REPOSITORY__CATEGORIES, elementToRemove);
+			Category elementToRemove=(Category)((StructuredSelection)selection).getFirstElement();
+			if (elementToRemove.eContainer() instanceof IncomeCategory) {
+				DomainUtils.executeRemoveCommand(repository.getIncome(), TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, elementToRemove);
+			}
+			else if (elementToRemove.eContainer() instanceof SpendingCategory) {
+				DomainUtils.executeRemoveCommand(repository.getSpending(), TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, elementToRemove);
+			}
 			refresh();
 		}
 	};
@@ -109,7 +132,7 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 	 */
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<Category> categories=TrackerUtils.getCategories((CategoriesRepository)currentEObject);
+		List<Category> categories=TrackerUtils.getAllCategories((CategoriesRepository)currentEObject);
 		if (categories == null || categories.isEmpty()) {
 			return Collections.emptyList();
 		}

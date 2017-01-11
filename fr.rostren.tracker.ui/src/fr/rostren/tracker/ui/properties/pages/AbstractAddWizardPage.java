@@ -99,6 +99,20 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	}
 
 	/**
+	 * Creates check button
+	 * @param composite the composite parent of the button to create
+	 * @param label the text label
+	 * @param selectionListener the linked selection listener
+	 * @return the created check button
+	 */
+	protected Button createCheckButton(Composite composite, String label, SelectionListener selectionListener) {
+		Button button=new Button(composite, SWT.RADIO);
+		button.setText(label);
+		button.addSelectionListener(selectionListener);
+		return button;
+	}
+
+	/**
 	 * Creates a date time zone
 	 * @param composite the composite parent of the label to create
 	 * @param label the label

@@ -2,9 +2,11 @@ package fr.rostren.tracker.pdf.utils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
@@ -527,10 +529,16 @@ public class TrackerUtils {
 	public static List<Double> getAllIncomeCategoryAmount(Account account, List<String> dates, int year, boolean wishedEnabled) {
 		List<Double> incomes=new ArrayList<>();
 		for (String date: dates) {
-			List<Amount> amounts=getAllIncomeAmounts(account, Month.get(date), year, wishedEnabled);
+			//List<Amount> amounts=getAllIncomeAmounts(account, Month.get(date), year, wishedEnabled);
+			List<Amount> amounts=getAllAmounts(account, Month.get(date), year, wishedEnabled, IncomeCategory.class);
 			incomes.add(getTotalAmount(amounts));
 		}
 		return incomes;
+	}
+
+	private static boolean isDateValid(Amount amount, Operation operation, int year, Month month, boolean wishedEnabled) {
+		Date comparisonDate=wishedEnabled && amount.getWishedDate() != null ? amount.getWishedDate() : operation.getDate();
+		return month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear();
 	}
 
 	/**
@@ -542,8 +550,9 @@ public class TrackerUtils {
 	 */
 	public static List<Double> getAllSpendingCategoryAmount(Account account, List<String> dates, int year, boolean wishedEnabled) {
 		List<Double> spendings=new ArrayList<>();
+		//FIXME Java 8
 		for (String date: dates) {
-			List<Amount> amounts=getAllSpendingAmounts(account, Month.get(date), year, wishedEnabled);
+			List<Amount> amounts=getAllAmounts(account, Month.get(date), year, wishedEnabled, SpendingCategory.class);
 			spendings.add(getTotalAmount(amounts));
 		}
 		return spendings;
@@ -597,54 +606,19 @@ public class TrackerUtils {
 		return Double.parseDouble(totalAmount.toString());
 	}
 
-	/**
-	* @param account the concerned account
-	* @param month the month
-	* @param year the year
-	* @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
-	* @return the list of amounts related to the given category
-	*/
-	private static List<Amount> getAllIncomeAmounts(Account account, Month month, int year, boolean wishedEnabled) {
-		List<Amount> amounts=new ArrayList<>();
+	private static List<Amount> getAllAmounts(Account account, Month month, int year, boolean wishedEnabled, Class<?> clazz) {
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checking=(CheckingAccount)account;
-			for (Operation operation: checking.getOperations()) {
-				for (Amount amount: operation.getSubAmounts()) {
-					if (amount.getCategory() instanceof IncomeCategory) {
-						Date comparisonDate=wishedEnabled ? amount.getWishedDate() : operation.getDate();
-						if (month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear()) {
-							amounts.add(amount);
-						}
-					}
-				}
-			}
+			return checking.getOperations()//
+					.stream()//
+					.flatMap(op -> op.getSubAmounts()//
+							.stream()//
+							.filter(amount -> clazz.isInstance(amount.getCategory()))//
+							.filter(amount -> isDateValid(amount, op, year, month, wishedEnabled)))//
+					.collect(Collectors.toList());
 		}
-		return amounts;
-	}
+		return Collections.emptyList();
 
-	/**
-	* @param account the concerned account
-	* @param month the month
-	* @param year the year
-	* @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
-	* @return the list of amounts related to the given category
-	*/
-	private static List<Amount> getAllSpendingAmounts(Account account, Month month, int year, boolean wishedEnabled) {
-		List<Amount> amounts=new ArrayList<>();
-		if (account instanceof CheckingAccount) {
-			CheckingAccount checking=(CheckingAccount)account;
-			for (Operation operation: checking.getOperations()) {
-				for (Amount amount: operation.getSubAmounts()) {
-					if (amount.getCategory() instanceof SpendingCategory) {
-						Date comparisonDate=wishedEnabled ? amount.getWishedDate() : operation.getDate();
-						if (month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear()) {
-							amounts.add(amount);
-						}
-					}
-				}
-			}
-		}
-		return amounts;
 	}
 
 	/**

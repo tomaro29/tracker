@@ -12,9 +12,13 @@ import org.eclipse.emf.ecore.EObject;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Date;
 import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.OperationsTitleRepository;
@@ -23,6 +27,7 @@ import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.Transfer;
 
 /**
  * A util Class.
@@ -113,6 +118,19 @@ public class TrackerUtils {
 	}
 
 	/**
+	 * Returns the accounts
+	 * @param tracker the {@link Tracker} instance
+	 * @return the accounts
+	 */
+	public static Set<Object> getAccounts(Tracker tracker) {
+		Set<Object> accounts=new HashSet<>();
+		for (Owner owner: tracker.getOwners()) {
+			accounts.addAll(owner.getAccounts());
+		}
+		return accounts;
+	}
+
+	/**
 	 * Returns the categories
 	 * @param tracker the {@link Tracker} instance
 	 * @return the categories
@@ -121,6 +139,28 @@ public class TrackerUtils {
 		Set<Object> categories=new HashSet<>();
 		categories.addAll(getAllCategories(tracker.getCategoriesRepository()));
 		return categories;
+	}
+
+	/**
+	 * Returns the available years
+	 * @param tracker the {@link Tracker} instance
+	 * @return the years
+	 */
+	public static Set<Integer> getYears(Tracker tracker) {
+		Set<Integer> years=new HashSet<>();
+		for (Object account: getAccounts(tracker)) {
+			if (account instanceof CheckingAccount) {
+				for (Operation operation: ((CheckingAccount)account).getOperations()) {
+					years.add(operation.getDate().getYear());
+				}
+			}
+			else if (account instanceof BoockletAccount) {
+				for (Transfer transfer: ((BoockletAccount)account).getTransfers()) {
+					years.add(transfer.getDate().getYear());
+				}
+			}
+		}
+		return years;
 	}
 
 	/**
@@ -478,50 +518,213 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * @param dates the dates to witch we need to extract all income categories amount
-	 * @return all the income categories amount
+	 * @param account the concerned account
+	 * @param dates the dates to witch we need to extract income category amount
+	 * @param year the year for witch we need to extract data
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @return the income category amount of the given item and its children
 	 */
-	public static List<Double> getAllIncomeCategoryAmount(List<String> dates) {
-		// TODO Auto-generated method stub
-		return null;
+	public static List<Double> getAllIncomeCategoryAmount(Account account, List<String> dates, int year, boolean wishedEnabled) {
+		List<Double> incomes=new ArrayList<>();
+		for (String date: dates) {
+			List<Amount> amounts=getAllIncomeAmounts(account, Month.get(date), year, wishedEnabled);
+			incomes.add(getTotalAmount(amounts));
+		}
+		return incomes;
 	}
 
 	/**
-	 * @param dates the dates to witch we need to extract all spending categories amount
-	 * @return all the spending categories amount
+	 * @param account the concerned account
+	 * @param dates the dates to witch we need to extract income category amount
+	 * @param year the year for witch we need to extract data
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @return the income category amount of the given item and its children
 	 */
-	public static List<Double> getAllSpendingCategoryAmount(List<String> dates) {
-		// TODO Auto-generated method stub
-		return null;
+	public static List<Double> getAllSpendingCategoryAmount(Account account, List<String> dates, int year, boolean wishedEnabled) {
+		List<Double> spendings=new ArrayList<>();
+		for (String date: dates) {
+			List<Amount> amounts=getAllSpendingAmounts(account, Month.get(date), year, wishedEnabled);
+			spendings.add(getTotalAmount(amounts));
+		}
+		return spendings;
 	}
 
 	/**
+	 * @param account the concerned account
+	 * @param item the category item
+	 * @param dates the dates to witch we need to extract income category amount
+	 * @param year the year for witch we need to extract data
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @return the income category amount of the given item and its children
+	 */
+	public static List<Double> getIncomeCategoryAmount(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+		List<Double> incomes=new ArrayList<>();
+		Category incomeCategory=getIncomeCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item);
+		for (String date: dates) {
+			List<Amount> amounts=getCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled);
+			incomes.add(getTotalAmount(amounts));
+		}
+		return incomes;
+	}
+
+	/**
+	 * @param account the concerned account
 	 * @param item the category item
 	 * @param dates the dates to witch we need to extract spending category amount
+	 * @param year the year
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the spending category amount of the given item and its children
 	 */
-	public static List<Double> getSpendingCategoryAmount(String item, List<String> dates) {
-		// TODO Auto-generated method stub
+	public static List<Double> getSpendingCategoryAmount(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+		List<Double> spendings=new ArrayList<>();
+		Category spendingCategory=getSpendingCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item);
+		for (String date: dates) {
+			List<Amount> amounts=getCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled);
+			spendings.add(getTotalAmount(amounts));
+		}
+		return spendings;
+	}
+
+	/**
+	 * @param amounts the list of amounts to addition
+	 * @return the total amount value
+	 */
+	private static Double getTotalAmount(List<Amount> amounts) {
+		BigDecimal totalAmount=new BigDecimal(0);
+		for (Amount amount: amounts) {
+			totalAmount=totalAmount.add(amount.getValue());
+		}
+		return Double.parseDouble(totalAmount.toString());
+	}
+
+	/**
+	* @param account the concerned account
+	* @param month the month
+	* @param year the year
+	* @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	* @return the list of amounts related to the given category
+	*/
+	private static List<Amount> getAllIncomeAmounts(Account account, Month month, int year, boolean wishedEnabled) {
+		List<Amount> amounts=new ArrayList<>();
+		if (account instanceof CheckingAccount) {
+			CheckingAccount checking=(CheckingAccount)account;
+			for (Operation operation: checking.getOperations()) {
+				for (Amount amount: operation.getSubAmounts()) {
+					if (amount.getCategory() instanceof IncomeCategory) {
+						Date comparisonDate=wishedEnabled ? amount.getWishedDate() : operation.getDate();
+						if (month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear()) {
+							amounts.add(amount);
+						}
+					}
+				}
+			}
+		}
+		return amounts;
+	}
+
+	/**
+	* @param account the concerned account
+	* @param month the month
+	* @param year the year
+	* @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	* @return the list of amounts related to the given category
+	*/
+	private static List<Amount> getAllSpendingAmounts(Account account, Month month, int year, boolean wishedEnabled) {
+		List<Amount> amounts=new ArrayList<>();
+		if (account instanceof CheckingAccount) {
+			CheckingAccount checking=(CheckingAccount)account;
+			for (Operation operation: checking.getOperations()) {
+				for (Amount amount: operation.getSubAmounts()) {
+					if (amount.getCategory() instanceof SpendingCategory) {
+						Date comparisonDate=wishedEnabled ? amount.getWishedDate() : operation.getDate();
+						if (month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear()) {
+							amounts.add(amount);
+						}
+					}
+				}
+			}
+		}
+		return amounts;
+	}
+
+	/**
+	 * @param account the concerned account
+	 * @param category the category
+	 * @param month the month
+	 * @param year the year
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @return the list of amounts related to the given category
+	 */
+	private static List<Amount> getCategoryAmounts(Account account, Category category, Month month, int year, boolean wishedEnabled) {
+		List<Amount> amounts=new ArrayList<>();
+		if (account instanceof CheckingAccount) {
+			CheckingAccount checking=(CheckingAccount)account;
+			for (Operation operation: checking.getOperations()) {
+				for (Amount amount: operation.getSubAmounts()) {
+					if (category.equals(amount.getCategory())) {
+						Date comparisonDate=wishedEnabled ? amount.getWishedDate() : operation.getDate();
+						if (month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear()) {
+							amounts.add(amount);
+						}
+					}
+				}
+			}
+		}
+		return amounts;
+	}
+
+	/**
+	 * @param spendingCategory the spending category, root of all spendings
+	 * @param title the category title
+	 * @return the spending category
+	 */
+	private static SpendingCategory getSpendingCategory(SpendingCategory spendingCategory, String title) {
+		for (SpendingCategory spending: spendingCategory.getSpendings()) {
+			if (spending.getTitle().equals(title)) {
+				return spending;
+			}
+			return getSpendingCategory(spending, title);
+		}
 		return null;
 	}
 
 	/**
+	 * @param incomeCategory the income category, root of all incomes
+	 * @param title the category title
+	 * @return the income category
+	 */
+	private static IncomeCategory getIncomeCategory(IncomeCategory incomeCategory, String title) {
+		for (IncomeCategory income: incomeCategory.getIncomes()) {
+			if (income.getTitle().equals(title)) {
+				return income;
+			}
+			return getIncomeCategory(income, title);
+		}
+		return null;
+	}
+
+	/**
+	 * @param tracker the opened tracker root
 	 * @param item the opertaion item
 	 * @param dates the dates to witch we need to extract the amount
 	 * @return the operation amounts
 	 */
-	public static List<Double> getOperationAmount(String item, List<String> dates) {
+	public static List<Double> getOperationAmount(Tracker tracker, String item, List<String> dates) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/**
-	 * @param item the category item
-	 * @param dates the dates to witch we need to extract income category amount
-	 * @return the income category amount of the given item and its children
+	 * @param tracker the opened tracker root
+	 * @param accountName the account name
+	 * @return the account
 	 */
-	public static List<Double> getIncomeCategoryAmount(String item, List<String> dates) {
-		// TODO Auto-generated method stub
+	public static Account getAccount(Tracker tracker, String accountName) {
+		for (Object account: getAccounts(tracker)) {
+			if (accountName.equals(((Account)account).getName())) {
+				return (Account)account;
+			}
+		}
 		return null;
 	}
 }

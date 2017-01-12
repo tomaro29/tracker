@@ -65,12 +65,18 @@ public class Histogram {
 		//create income bar series
 		IBarSeries incomeSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.INCOME);
 		incomeSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
-		incomeSeries.setYSeries(convertToPrimitiveDoubleArray(incomeSeriesValues));
+		double[] primitiveDoubleArray=convertToPrimitiveDoubleArray(incomeSeriesValues);
+		if (primitiveDoubleArray != null) {
+			incomeSeries.setYSeries(primitiveDoubleArray);
+		}
 
 		//create spending bar series
 		IBarSeries spendingSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.SPENDING);
 		spendingSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		spendingSeries.setYSeries(convertToPrimitiveDoubleArray(spendingSeriesValues));
+		primitiveDoubleArray=convertToPrimitiveDoubleArray(spendingSeriesValues);
+		if (primitiveDoubleArray != null) {
+			spendingSeries.setYSeries(primitiveDoubleArray);
+		}
 
 		//Set Labels font, format and make visible
 		ISeriesLabel incomeSeriesLabel=incomeSeries.getLabel();
@@ -97,7 +103,7 @@ public class Histogram {
 	 * @return the converted array
 	 */
 	private double[] convertToPrimitiveDoubleArray(List<Double> list) {
-		return ArrayUtils.toPrimitive(list.toArray(new Double[list.size()]));
+		return list == null ? null : ArrayUtils.toPrimitive(list.toArray(new Double[list.size()]));
 	}
 
 	/**
@@ -106,6 +112,6 @@ public class Histogram {
 	 * @return the converted array
 	 */
 	private String[] convertToStringArray(List<String> list) {
-		return list.toArray(new String[list.size()]);
+		return list == null ? null : list.toArray(new String[list.size()]);
 	}
 }

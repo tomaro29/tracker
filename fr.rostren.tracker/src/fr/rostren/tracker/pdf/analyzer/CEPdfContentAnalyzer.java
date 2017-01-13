@@ -13,8 +13,6 @@ import fr.rostren.tracker.pdf.utils.LineContent;
 
 /**
  * This class parses all caisse epargne Pdf format.
- *
- * @author maro
  */
 public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 

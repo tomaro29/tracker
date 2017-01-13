@@ -11,8 +11,6 @@ import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
 
 /**
  * An abstract Class to parse banks pdf format.
- *
- * @author maro
  */
 public abstract class AbstractPdfContentAnalyzer {
 
@@ -199,7 +197,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the line to set.
 	 */
 	public void setCurrentLine(String line) {
-		this.currentLine=line;
+		currentLine=line;
 	}
 
 	/**
@@ -209,7 +207,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the operation Title to set as a last potential title.
 	 */
 	public void setLastPotentialOperationTitle(String operationTitle) {
-		this.lastPotentialOperationTitle=operationTitle;
+		lastPotentialOperationTitle=operationTitle;
 	}
 
 	/**
@@ -219,7 +217,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the amount to set as a last parsed amount.
 	 */
 	public void setLastPotentialAmount(BigDecimal amount) {
-		this.lastPotentialAmount=amount;
+		lastPotentialAmount=amount;
 	}
 
 	/**
@@ -238,7 +236,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the year to set.
 	 */
 	public void setCurrentYear(int year) {
-		this.currentYear=year;
+		currentYear=year;
 	}
 
 	/**
@@ -248,7 +246,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the date to set as a last potential date.
 	 */
 	public void setLastPotentialDate(Date date) {
-		this.lastPotentialDate=date;
+		lastPotentialDate=date;
 	}
 
 	/**
@@ -267,7 +265,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the splitLine to set
 	 */
 	public void setCurrentSplitLine(String[] splitLine) {
-		this.currentSplitLine=splitLine;
+		currentSplitLine=splitLine;
 	}
 
 	/**
@@ -286,6 +284,6 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the token to set as a last parsed token
 	 */
 	public void setLastToken(PdfToken token) {
-		this.lastToken=token;
+		lastToken=token;
 	}
 }

@@ -34,8 +34,6 @@ import fr.rostren.tracker.Transfer;
 
 /**
  * A util Class.
- *
- * @author maro
  */
 public class TrackerUtils {
 

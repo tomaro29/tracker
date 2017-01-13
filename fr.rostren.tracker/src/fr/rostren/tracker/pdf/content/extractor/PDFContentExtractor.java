@@ -31,8 +31,6 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * Extracts the content of a pdf file.
- *
- * @author maro
  */
 public class PDFContentExtractor {
 	private Set<String> alreadyParsedFiles=new HashSet<>();

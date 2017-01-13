@@ -177,6 +177,18 @@ public class TrackerUtils {
 	 * @return the years
 	 */
 	public static Set<Integer> getYears(Tracker tracker) {
+		//FIXME write java 8 code
+		//		getAccounts(tracker)//
+		//		.stream()//
+		//		.flatMap(account -> {
+		//			if (account instanceof CheckingAccount){
+		//			((CheckingAccount)account).getOperations().stream().map(operation -> operation.getDate().getYear())
+		//			} else if (account instanceof BoockletAccount) {
+		//				((BoockletAccount)account).getTransfers().stream().map(transfer -> transfer.getDate().getYear())
+		//			}
+		//		}
+		//		).collect(Collectors.toList());
+
 		Set<Integer> years=new HashSet<>();
 		for (Object account: getAccounts(tracker)) {
 			if (account instanceof CheckingAccount) {

@@ -3,6 +3,7 @@ package fr.rostren.tracker.pdf.utils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.DoubleSummaryStatistics;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,6 @@ import fr.rostren.tracker.Transfer;
  * A util Class.
  *
  * @author maro
- *
  */
 public class TrackerUtils {
 
@@ -507,16 +507,31 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * Returns the sum of sub amounts values
-	 * @param subAmounts the sub amounts
-	 * @return the sum of sub amounts values
+	 * Returns the sum of sub amounts values as {@link BigDecimal} instance
+	 * @param subAmounts the sub amounts to addition
+	 * @return the sum of sub amounts values as {@link BigDecimal} instance
 	 */
 	private static BigDecimal getSum(EList<Amount> subAmounts) {
-		BigDecimal sum=new BigDecimal(0);
-		for (Amount amount: subAmounts) {
-			sum=sum.add(amount.getValue());
-		}
-		return sum;
+		return new BigDecimal(getTotalAmount(subAmounts));
+	}
+
+	/**
+	 * REturns the total amount of all given amounts as {@link Double} instance.
+	 * @param amounts the list of amounts to addition
+	 * @return the total amount value, sum of all given amounts as {@link Double} instance.
+	 */
+	private static Double getTotalAmount(List<Amount> amounts) {
+		//FIXME validate the next java8 code
+		DoubleSummaryStatistics stats=amounts.stream()//
+				.map(amount -> Double.parseDouble(amount.getValue().toString()))//
+				.mapToDouble((d) -> d)//
+				.summaryStatistics();
+		return stats.getSum();
+		//		BigDecimal totalAmount=new BigDecimal(0);
+		//		for (Amount amount: amounts) {
+		//			totalAmount=totalAmount.add(amount.getValue());
+		//		}
+		//		return Double.parseDouble(totalAmount.toString());
 	}
 
 	/**
@@ -536,6 +551,15 @@ public class TrackerUtils {
 		return incomes;
 	}
 
+	/**
+	 * <code>true</code> if the amount has a valid date; <code>false</code> otherwise.
+	 * @param amount the amount to check
+	 * @param operation the operation container of the given amount
+	 * @param year the selected year
+	 * @param month the selected month
+	 * @param wishedEnabled <code>true</code> if the comparison is based on the wished date, <code>false</code> otherwise
+	 * @return <code>true</code> if the amount has a valid date; <code>false</code> otherwise.
+	 */
 	private static boolean isDateValid(Amount amount, Operation operation, int year, Month month, boolean wishedEnabled) {
 		Date comparisonDate=wishedEnabled && amount.getWishedDate() != null ? amount.getWishedDate() : operation.getDate();
 		return month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear();
@@ -595,17 +619,14 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * @param amounts the list of amounts to addition
-	 * @return the total amount value
+	 * Returns all valid amounts vs comparison year and month.
+	 * @param account the account.
+	 * @param month the selected month.
+	 * @param year the selected year.
+	 * @param wishedEnabled <code>true</code> is the wished date is enabled, <code>false</code> otherwise.
+	 * @param clazz the class type of the amount {@link Category}.
+	 * @return all valid amounts vs comparison year and month.
 	 */
-	private static Double getTotalAmount(List<Amount> amounts) {
-		BigDecimal totalAmount=new BigDecimal(0);
-		for (Amount amount: amounts) {
-			totalAmount=totalAmount.add(amount.getValue());
-		}
-		return Double.parseDouble(totalAmount.toString());
-	}
-
 	private static List<Amount> getAllAmounts(Account account, Month month, int year, boolean wishedEnabled, Class<?> clazz) {
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checking=(CheckingAccount)account;
@@ -618,33 +639,28 @@ public class TrackerUtils {
 					.collect(Collectors.toList());
 		}
 		return Collections.emptyList();
-
 	}
 
 	/**
-	 * @param account the concerned account
-	 * @param category the category
-	 * @param month the month
-	 * @param year the year
+	 * @param account the concerned account.
+	 * @param category the category.
+	 * @param month the month.
+	 * @param year the year.
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
-	 * @return the list of amounts related to the given category
+	 * @return the list of amounts related to the given category.
 	 */
 	private static List<Amount> getCategoryAmounts(Account account, Category category, Month month, int year, boolean wishedEnabled) {
-		List<Amount> amounts=new ArrayList<>();
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checking=(CheckingAccount)account;
-			for (Operation operation: checking.getOperations()) {
-				for (Amount amount: operation.getSubAmounts()) {
-					if (category.equals(amount.getCategory())) {
-						Date comparisonDate=wishedEnabled ? amount.getWishedDate() : operation.getDate();
-						if (month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear()) {
-							amounts.add(amount);
-						}
-					}
-				}
-			}
+			return checking.getOperations()//
+					.stream()//
+					.flatMap(op -> op.getSubAmounts()//
+							.stream()//
+							.filter(amount -> category.equals(amount.getCategory()))//
+							.filter(amount -> isDateValid(amount, op, year, month, wishedEnabled)))//
+					.collect(Collectors.toList());
 		}
-		return amounts;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -653,6 +669,9 @@ public class TrackerUtils {
 	 * @return the spending category
 	 */
 	private static SpendingCategory getSpendingCategory(SpendingCategory spendingCategory, String title) {
+		// FIXME to validate java 8 code migration
+		//		return spendingCategory.getSpendings().stream().filter(spending -> spending.getTitle().equals(title));
+
 		for (SpendingCategory spending: spendingCategory.getSpendings()) {
 			if (spending.getTitle().equals(title)) {
 				return spending;
@@ -694,11 +713,18 @@ public class TrackerUtils {
 	 * @return the account
 	 */
 	public static Account getAccount(Tracker tracker, String accountName) {
-		for (Object account: getAccounts(tracker)) {
-			if (accountName.equals(((Account)account).getName())) {
-				return (Account)account;
-			}
-		}
-		return null;
+		//FIXME to validate Java 8 code migration
+		List<Object> accounts=getAccounts(tracker)//
+				.stream()//
+				.filter(account -> accountName.equals(((Account)account).getName()))//
+				.collect(Collectors.toList());
+		return accounts.isEmpty() ? null : (Account)accounts.iterator().next();
+
+		//		for (Object account: getAccounts(tracker)) {
+		//			if (accountName.equals(((Account)account).getName())) {
+		//				return (Account)account;
+		//			}
+		//		}
+		//		return null;
 	}
 }

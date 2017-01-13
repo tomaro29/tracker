@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -37,8 +39,10 @@ import org.eclipse.ui.part.ViewPart;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Month;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.histogram.Histogram;
@@ -189,8 +193,8 @@ public class TrackerHistogramView extends ViewPart {
 		if (categoryCheckButton.getSelection()) {
 			String item=categoriesCombo.getItem(categoriesCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
-				incomeValues=TrackerUtils.getAllIncomeCategoryAmount(account, dates, year, true);
-				spendingValues=TrackerUtils.getAllSpendingCategoryAmount(account, dates, year, true);
+				incomeValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, SpendingCategory.class);
 			}
 			else {
 				incomeValues=TrackerUtils.getIncomeCategoryAmount(account, item, dates, year, true);
@@ -200,8 +204,8 @@ public class TrackerHistogramView extends ViewPart {
 		else if (operationCheckButton.getSelection()) {
 			String item=operationsCombo.getItem(operationsCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
-				incomeValues=TrackerUtils.getAllIncomeCategoryAmount(account, dates, year, true);
-				spendingValues=TrackerUtils.getAllSpendingCategoryAmount(account, dates, year, true);
+				incomeValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, SpendingCategory.class);
 			}
 			else {
 				incomeValues=TrackerUtils.getOperationAmount(tracker, item, dates);
@@ -216,11 +220,14 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the list of dates
 	 */
 	private List<String> getHistogramDates() {
-		List<String> dates=new ArrayList<>();
-		for (Month month: Month.VALUES) {
-			dates.add(month.getLiteral());
-		}
-		return dates;
+		// FIXME to validate java 8 code migration
+		return Month.VALUES.stream().map(month -> month.getLiteral()).collect(Collectors.toList());
+
+		//		List<String> dates=new ArrayList<>();
+		//		for (Month month: Month.VALUES) {
+		//			dates.add(month.getLiteral());
+		//		}
+		//		return dates;
 	}
 
 	/**
@@ -312,15 +319,22 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the array of items
 	 */
 	private String[] getYearsItems(Set<Integer> years) {
-		String[] items=new String[years.size()];
-		int i=0;
-		Iterator<Integer> iterator=years.iterator();
-		while (iterator.hasNext()) {
-			int year=iterator.next();
-			items[i]=Integer.toString(year);
-			i++;
-		}
-		return items;
+		// FIXME to validate java 8 code migration
+		return years//
+				.stream()//
+				.map(year -> Integer.toString(year))//
+				.collect(Collectors.toList())//
+				.toArray(new String[years.size()]);
+
+		//		String[] items=new String[years.size()];
+		//		int i=0;
+		//		Iterator<Integer> iterator=years.iterator();
+		//		while (iterator.hasNext()) {
+		//			int year=iterator.next();
+		//			items[i]=Integer.toString(year);
+		//			i++;
+		//		}
+		//		return items;
 	}
 
 	/**

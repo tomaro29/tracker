@@ -2,6 +2,7 @@ package fr.rostren.tracker.ui.dialogs;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
@@ -266,8 +267,8 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 */
 	private void createOperationLabels(Composite subContainer, Operation operation) {
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, operation.eClass().getName());
-		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, TrackerUtils.getOperationDate(operation));
-		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL, TrackerUtils.getOperationTotalAmount(operation));
+		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, TrackerUtils.getOperationDate(Optional.of(operation)));
+		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL, TrackerUtils.getOperationTotalAmount(Optional.of(operation)));
 	}
 
 	/**

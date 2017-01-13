@@ -4,6 +4,7 @@ package fr.rostren.tracker.provider;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -21,7 +22,7 @@ public class CreditItemProvider extends OperationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public CreditItemProvider(AdapterFactory adapterFactory) {
@@ -31,7 +32,7 @@ public class CreditItemProvider extends OperationItemProvider {
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -56,13 +57,13 @@ public class CreditItemProvider extends OperationItemProvider {
 	/**
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String operationTitle=TrackerUtils.getOperationTitleAsString((Credit)object);
-		String operationAmount=TrackerUtils.getOperationTotalAmount((Credit)object);
+		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Credit)object));
+		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Credit)object));
 
 		if (operationTitle == null) {
 			return "New " + getString("_UI_CreditOperation_type");
@@ -92,7 +93,7 @@ public class CreditItemProvider extends OperationItemProvider {
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

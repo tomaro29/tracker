@@ -4,6 +4,7 @@ package fr.rostren.tracker.provider;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -21,7 +22,7 @@ public class IncomingItemProvider extends TransferItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public IncomingItemProvider(AdapterFactory adapterFactory) {
@@ -31,7 +32,7 @@ public class IncomingItemProvider extends TransferItemProvider {
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -56,13 +57,13 @@ public class IncomingItemProvider extends TransferItemProvider {
 	/**
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String operationTitle=TrackerUtils.getOperationTitleAsString((Incoming)object);
-		String operationAmount=TrackerUtils.getOperationTotalAmount((Incoming)object);
+		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Incoming)object));
+		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Incoming)object));
 
 		if (operationTitle == null) {
 			return "New " + getString("_UI_Incoming_type");
@@ -90,7 +91,7 @@ public class IncomingItemProvider extends TransferItemProvider {
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
@@ -54,16 +55,16 @@ public class TrackerUtilsTest {
 	@Test
 	public void getCategoryTitleTest() {
 		/*Test with an amount with no category.*/
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getCategoryTitle(amount));
+		assertEquals(StringUtils.EMPTY, TrackerUtils.getCategoryTitle(Optional.of(amount)));
 
 		/*Test with an amount with no category title.*/
 		amount.setCategory(incomeCategory);
-		assertNull(TrackerUtils.getCategoryTitle(amount));
+		assertNull(TrackerUtils.getCategoryTitle(Optional.of(amount)));
 
 		/*Test with an amount with category title.*/
 		incomeCategory.setTitle(title);
 		amount.setCategory(incomeCategory);
-		String categoryTitle=TrackerUtils.getCategoryTitle(amount);
+		String categoryTitle=TrackerUtils.getCategoryTitle(Optional.of(amount));
 		assertNotNull(categoryTitle);
 		assertEquals(title, categoryTitle);
 	}
@@ -82,12 +83,12 @@ public class TrackerUtilsTest {
 	@Test
 	public void getAmountValueTest() {
 		/*Test with an amount with no value.*/
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getAmountValue(amount));
+		assertEquals(StringUtils.EMPTY, TrackerUtils.getAmountValue(Optional.of(amount)));
 
 		/*Test with an amount with value.*/
 		BigDecimal amountValue=new BigDecimal(20.0);
 		amount.setValue(amountValue);
-		String value=TrackerUtils.getAmountValue(amount);
+		String value=TrackerUtils.getAmountValue(Optional.of(amount));
 		assertNotNull(value);
 		assertEquals(amountValue.toString(), value);
 	}
@@ -106,16 +107,16 @@ public class TrackerUtilsTest {
 	@Test
 	public void getOperationTitleAsStringTest() {
 		/*Test with an operation with no title.*/
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTitleAsString(credit));
+		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTitleAsString(Optional.of(credit)));
 
 		/*Test with an operation with operation title without title.*/
 		credit.setOperationTitle(operationTitle);
-		assertNull(TrackerUtils.getOperationTitleAsString(credit));
+		assertNull(TrackerUtils.getOperationTitleAsString(Optional.of(credit)));
 
 		/*Test with an operation with operation title with title.*/
 		operationTitle.setTitle(title);
 		credit.setOperationTitle(operationTitle);
-		String operationTitleAsString=TrackerUtils.getOperationTitleAsString(credit);
+		String operationTitleAsString=TrackerUtils.getOperationTitleAsString(Optional.of(credit));
 		assertNotNull(operationTitleAsString);
 		assertEquals(title, operationTitleAsString);
 	}
@@ -134,16 +135,16 @@ public class TrackerUtilsTest {
 	@Test
 	public void getOperationTotalAmountTest() {
 		/*Test with an operation with no total amount.*/
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTotalAmount(credit));
+		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTotalAmount(Optional.of(credit)));
 
 		/*Test with an operation with no total amount value.*/
 		credit.setTotalAmount(amount.getValue());
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTotalAmount(credit));
+		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTotalAmount(Optional.of(credit)));
 
 		/*Test with an operation with total amount value.*/
 		BigDecimal amountValue=new BigDecimal(20.0);
 		credit.setTotalAmount(amountValue);
-		String operationTotalAmount=TrackerUtils.getOperationTotalAmount(credit);
+		String operationTotalAmount=TrackerUtils.getOperationTotalAmount(Optional.of(credit));
 		assertNotNull(operationTotalAmount);
 		assertEquals(amountValue.toString(), operationTotalAmount);
 	}
@@ -162,18 +163,18 @@ public class TrackerUtilsTest {
 	@Test
 	public void getOperationDateTest() {
 		/*Test with an operation with no date.*/
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationDate(credit));
+		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationDate(Optional.of(credit)));
 
 		/*Test with an operation with date without value.*/
 		credit.setDate(operationDate);
-		assertEquals("00 / Jan / 0", TrackerUtils.getOperationDate(credit)); //$NON-NLS-1$
+		assertEquals("00 / Jan / 0", TrackerUtils.getOperationDate(Optional.of(credit))); //$NON-NLS-1$
 
 		/*Test with an operation with date value.*/
 		credit.setDate(operationDate);
 		operationDate.setDay(1);
 		operationDate.setMonth(Month.APR);
 		operationDate.setYear(2001);
-		String date=TrackerUtils.getOperationDate(credit);
+		String date=TrackerUtils.getOperationDate(Optional.of(credit));
 		assertNotNull(date);
 		assertEquals("01 / Apr / 2001", date); //$NON-NLS-1$
 	}

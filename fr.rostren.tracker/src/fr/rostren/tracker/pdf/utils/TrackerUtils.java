@@ -26,11 +26,9 @@ import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.Transfer;
 
 /**
  * A util Class.
@@ -94,26 +92,13 @@ public class TrackerUtils {
 	 */
 	public static List<Category> getCategories(CategoriesRepository repository) {
 		//FIXME validate Java 8 code migration
-		Optional<IncomeCategory> income=Optional.of(repository.getIncome());
-		Optional<SpendingCategory> spending=Optional.of(repository.getSpending());
+		Optional<IncomeCategory> incomeOpt=Optional.of(repository.getIncome());
+		Optional<SpendingCategory> spendingOpt=Optional.of(repository.getSpending());
 
 		List<Category> categories=new ArrayList<>();
-		if (income.isPresent()) {
-			categories.add(income.get());
-		}
-		if (spending.isPresent()) {
-			categories.add(spending.get());
-		}
+		incomeOpt.ifPresent(income -> categories.add(income));
+		spendingOpt.ifPresent(spending -> categories.add(spending));
 		return categories;
-
-		//		List<Category> categories=new ArrayList<>();
-		//		if (repository.getIncome() != null) {
-		//			categories.add(repository.getIncome());
-		//		}
-		//		if (repository.getSpending() != null) {
-		//			categories.add(repository.getSpending());
-		//		}
-		//		return categories;
 	}
 
 	/**
@@ -143,17 +128,10 @@ public class TrackerUtils {
 	 * @return the accounts
 	 */
 	public static Set<Object> getAccounts(Tracker tracker) {
-		//FIXME validate Java 8 code migration
 		return tracker.getOwners()//
 				.stream()//
 				.flatMap(owner -> owner.getAccounts().stream())//
 				.collect(Collectors.toSet());
-
-		//		Set<Object> accounts=new HashSet<>();
-		//		for (Owner owner: tracker.getOwners()) {
-		//			accounts.addAll(owner.getAccounts());
-		//		}
-		//		return accounts;
 	}
 
 	/**
@@ -162,13 +140,8 @@ public class TrackerUtils {
 	 * @return the set of all categories
 	 */
 	public static Set<Object> getCategories(Tracker tracker) {
-		//FIXME validate Java 8 code migration
 		return getAllCategories(tracker.getCategoriesRepository()).stream()//
 				.collect(Collectors.toSet());
-
-		//		Set<Object> categories=new HashSet<>();
-		//		categories.addAll(getAllCategories(tracker.getCategoriesRepository()));
-		//		return categories;
 	}
 
 	/**
@@ -177,127 +150,93 @@ public class TrackerUtils {
 	 * @return the years
 	 */
 	public static Set<Integer> getYears(Tracker tracker) {
-		//FIXME write java 8 code
-		//		getAccounts(tracker)//
-		//		.stream()//
-		//		.flatMap(account -> {
-		//			if (account instanceof CheckingAccount){
-		//			((CheckingAccount)account).getOperations().stream().map(operation -> operation.getDate().getYear())
-		//			} else if (account instanceof BoockletAccount) {
-		//				((BoockletAccount)account).getTransfers().stream().map(transfer -> transfer.getDate().getYear())
-		//			}
-		//		}
-		//		).collect(Collectors.toList());
-
+		//FIXME validate Java 8 code migration
 		Set<Integer> years=new HashSet<>();
-		for (Object account: getAccounts(tracker)) {
-			if (account instanceof CheckingAccount) {
-				for (Operation operation: ((CheckingAccount)account).getOperations()) {
-					years.add(operation.getDate().getYear());
-				}
-			}
-			else if (account instanceof BoockletAccount) {
-				for (Transfer transfer: ((BoockletAccount)account).getTransfers()) {
-					years.add(transfer.getDate().getYear());
-				}
-			}
-		}
+		getAccounts(tracker).stream()//
+				.filter(account -> account instanceof CheckingAccount)//
+				.forEach(account -> years.addAll(((CheckingAccount)account).getOperations().stream()//
+						.mapToInt(operation -> operation.getDate().getYear())//
+						.boxed()//
+						.collect(Collectors.toSet())//
+		));
+		getAccounts(tracker).stream()//
+				.filter(account -> account instanceof BoockletAccount)//
+				.forEach(account -> years.addAll(((BoockletAccount)account).getTransfers().stream()//
+						.mapToInt(transfer -> transfer.getDate().getYear())//
+						.boxed()//
+						.collect(Collectors.toSet())//
+		));
 		return years;
 	}
 
 	/**
 	 * Returns the category title
-	 * @param amount the amount
+	 * @param amountOpt the amount
 	 * @return the category title
 	 */
-	public static String getCategoryTitle(Optional<Amount> amount) {
+	public static String getCategoryTitle(Optional<Amount> amountOpt) {
 		//FIXME validate Java 8 code migration
-		if (!amount.isPresent()) {
+		if (!amountOpt.isPresent()) {
 			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
 		}
-		Optional<Category> category=Optional.of(amount.get().getCategory());
-		return category.isPresent() ? category.get().getTitle() : StringUtils.EMPTY;
-
-		//		if (amount == null) {
-		//			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
-		//		}
-		//		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
+		Amount amount=amountOpt.orElse(null);
+		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
 	}
 
 	/**
 	 * Returns the amount value
-	 * @param amount the amount
+	 * @param amountOpt the amount
 	 * @return the amount value
 	 */
-	public static String getAmountValue(Optional<Amount> amount) {
+	public static String getAmountValue(Optional<Amount> amountOpt) {
 		//FIXME validate Java 8 code migration
-		if (!amount.isPresent()) {
+		if (!amountOpt.isPresent()) {
 			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
 		}
-		Optional<BigDecimal> value=Optional.of(amount.get().getValue());
-		return value.isPresent() ? value.get().toString() : StringUtils.EMPTY;
-
-		//		if (amount == null) {
-		//			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
-		//		}
-		//		return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
+		Amount amount=amountOpt.orElse(null);
+		return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
 	}
 
 	/**
 	 * Returns the operation title as a {@link String}
-	 * @param operation the operation
+	 * @param operationOpt the operation
 	 * @return the operation title as a {@link String}
 	 */
-	public static String getOperationTitleAsString(Optional<Operation> operation) {
+	public static String getOperationTitleAsString(Optional<Operation> operationOpt) {
 		//FIXME validate Java 8 code migration
-		if (!operation.isPresent()) {
+		if (!operationOpt.isPresent()) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
-		Optional<OperationTitle> operationTitle=Optional.of(operation.get().getOperationTitle());
-		return operationTitle.isPresent() ? operationTitle.get().getTitle() : StringUtils.EMPTY;
-
-		//		if (operation == null) {
-		//			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		//		}
-		//		return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
+		Operation operation=operationOpt.orElse(null);
+		return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
 	}
 
 	/**
 	 * Returns the operation total amount as a {@link String}
-	 * @param operation the operation
+	 * @param operationOpt the operation
 	 * @return the operation total amount as a {@link String}
 	 */
-	public static String getOperationTotalAmount(Optional<Operation> operation) {
+	public static String getOperationTotalAmount(Optional<Operation> operationOpt) {
 		//FIXME validate Java 8 code migration
-		if (!operation.isPresent()) {
+		if (!operationOpt.isPresent()) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
-		Optional<BigDecimal> totalAmount=Optional.of(operation.get().getTotalAmount());
-		return totalAmount.isPresent() ? totalAmount.get().toString() : StringUtils.EMPTY;
-
-		//		if (operation == null) {
-		//			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		//		}
-		//		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
+		Operation operation=operationOpt.orElse(null);
+		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
 	}
 
 	/**
 	 * Returns the operation date as a {@link String}
-	 * @param operation the operation
+	 * @param operationOpt the operation
 	 * @return the operation date as a {@link String}
 	 */
-	public static String getOperationDate(Optional<Operation> operation) {
+	public static String getOperationDate(Optional<Operation> operationOpt) {
 		//FIXME validate Java 8 code migration
-		if (!operation.isPresent()) {
+		if (!operationOpt.isPresent()) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
-		Optional<Date> date=Optional.of(operation.get().getDate());
-		return date.isPresent() ? date.get().toString() : StringUtils.EMPTY;
-
-		//		if (operation == null) {
-		//			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		//		}
-		//		return operation.getDate() == null ? StringUtils.EMPTY : operation.getDate().toString();
+		Operation operation=operationOpt.orElse(null);
+		return operation.getDate() == null ? StringUtils.EMPTY : operation.getDate().toString();
 	}
 
 	/**
@@ -478,13 +417,12 @@ public class TrackerUtils {
 	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
 	 */
 	public static boolean isCategoryTitleUnique(Tracker tracker, String title) {
+		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The title to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
-		for (Category category: getAllCategories(tracker.getCategoriesRepository())) {
-			isCategoryTitleUnique(category, title);
-		}
-		return true;
+		return getAllCategories(tracker.getCategoriesRepository()).stream()//
+				.allMatch(category -> isCategoryTitleUnique(category, title));
 	}
 
 	/**
@@ -494,19 +432,18 @@ public class TrackerUtils {
 	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
 	 */
 	private static boolean isCategoryTitleUnique(Category category, String title) {
+		//FIXME validate the next java8 code
 		if (StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
 			return false;
 		}
 
 		if (category instanceof IncomeCategory) {
-			for (IncomeCategory subCategory: ((IncomeCategory)category).getIncomes()) {
-				return isCategoryTitleUnique(subCategory, title);
-			}
+			return ((IncomeCategory)category).getIncomes().stream()//
+					.allMatch(subCategory -> isCategoryTitleUnique(subCategory, title));
 		}
 		if (category instanceof SpendingCategory) {
-			for (SpendingCategory subCategory: ((SpendingCategory)category).getSpendings()) {
-				return isCategoryTitleUnique(subCategory, title);
-			}
+			return ((SpendingCategory)category).getSpendings().stream()//
+					.allMatch(subCategory -> isCategoryTitleUnique(subCategory, title));
 		}
 		return true;
 	}
@@ -518,15 +455,13 @@ public class TrackerUtils {
 	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
 	 */
 	public static boolean isOriginIdentifierUnique(Tracker tracker, String identifier) {
+		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(identifier) || StringUtils.isBlank(identifier)) {
 			throw new IllegalArgumentException("The identifier to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
-		for (Origin origin: tracker.getOriginsRepository().getOrigins()) {
-			if (StringUtils.deleteWhitespace(origin.getIdentifier()).equals(StringUtils.deleteWhitespace(identifier))) {
-				return false;
-			}
-		}
-		return true;
+
+		return tracker.getOriginsRepository().getOrigins().stream()//
+				.noneMatch(origin -> StringUtils.deleteWhitespace(origin.getIdentifier()).equals(StringUtils.deleteWhitespace(identifier)));
 	}
 
 	/**
@@ -537,19 +472,17 @@ public class TrackerUtils {
 	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
 	 */
 	public static boolean isOwnerIdentifierUnique(Tracker tracker, String firstName, String lastName) {
+		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(firstName) || StringUtils.isBlank(firstName)) {
 			throw new IllegalArgumentException("The first name to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
 		if (StringUtils.isEmpty(lastName) || StringUtils.isBlank(lastName)) {
 			throw new IllegalArgumentException("The last name to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
-		for (Owner owner: tracker.getOwners()) {
-			if (StringUtils.deleteWhitespace(firstName).equals(StringUtils.deleteWhitespace(owner.getFirstName()))
-				&& StringUtils.deleteWhitespace(lastName).equals(StringUtils.deleteWhitespace(owner.getLastName()))) {
-				return false;
-			}
-		}
-		return true;
+
+		return tracker.getOwners().stream()//
+				.noneMatch(owner -> StringUtils.deleteWhitespace(firstName).equals(StringUtils.deleteWhitespace(owner.getFirstName()))
+									&& StringUtils.deleteWhitespace(lastName).equals(StringUtils.deleteWhitespace(owner.getLastName())));
 	}
 
 	/**
@@ -559,17 +492,13 @@ public class TrackerUtils {
 	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
 	 */
 	public static boolean isAccountIdentifierUnique(Tracker tracker, String identifier) {
+		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(identifier) || StringUtils.isBlank(identifier)) {
 			throw new IllegalArgumentException("The identifier to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
-		for (Owner owner: tracker.getOwners()) {
-			for (Account account: owner.getAccounts()) {
-				if (account.getIdentifier() == Integer.parseInt(identifier)) {
-					return false;
-				}
-			}
-		}
-		return true;
+		return tracker.getOwners().stream()//
+				.noneMatch(owner -> owner.getAccounts().stream()//
+						.noneMatch(account -> account.getIdentifier() == Integer.parseInt(identifier)));
 	}
 
 	/**
@@ -600,14 +529,7 @@ public class TrackerUtils {
 		return amounts.stream()//
 				.map(amount -> Double.parseDouble(amount.getValue().toString()))//
 				.mapToDouble((d) -> d)//
-				.summaryStatistics()//
-				.getSum();
-
-		//		BigDecimal totalAmount=new BigDecimal(0);
-		//		for (Amount amount: amounts) {
-		//			totalAmount=totalAmount.add(amount.getValue());
-		//		}
-		//		return Double.parseDouble(totalAmount.toString());
+				.sum();
 	}
 
 	/**
@@ -788,17 +710,10 @@ public class TrackerUtils {
 	 */
 	public static Account getAccount(Tracker tracker, String accountName) {
 		//FIXME to validate Java 8 code migration
-		List<Object> accounts=getAccounts(tracker)//
+		return getAccounts(tracker)//
 				.stream()//
 				.filter(account -> accountName.equals(((Account)account).getName()))//
-				.collect(Collectors.toList());
-		return accounts.isEmpty() ? null : (Account)accounts.iterator().next();
-
-		//		for (Object account: getAccounts(tracker)) {
-		//			if (accountName.equals(((Account)account).getName())) {
-		//				return (Account)account;
-		//			}
-		//		}
-		//		return null;
+				.map(Account.class::cast)//
+				.findFirst().orElse(null);
 	}
 }

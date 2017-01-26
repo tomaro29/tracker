@@ -119,7 +119,6 @@ public class TrackerUtils {
 	 * @return the categories
 	 */
 	public static List<Category> getCategories(CategoriesRepository repository) {
-		//FIXME validate Java 8 code migration
 		IncomeCategory income=repository.getIncome();
 		SpendingCategory spending=repository.getSpending();
 
@@ -181,7 +180,7 @@ public class TrackerUtils {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the years
 	 */
-	public static Set<Integer> getYears(Tracker tracker) {
+	public static Set<Integer> findYears(Tracker tracker) {
 		//FIXME validate Java 8 code migration
 		Set<Integer> years=new HashSet<>();
 		getAccounts(tracker).stream()//
@@ -277,7 +276,7 @@ public class TrackerUtils {
 	 * @param title the title
 	 * @return the operation title
 	 */
-	public static Optional<OperationTitle> getOperationTitle(Tracker tracker, String title) {
+	public static Optional<OperationTitle> findOperationTitle(Tracker tracker, String title) {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
@@ -300,7 +299,7 @@ public class TrackerUtils {
 	 * @param originId the origin Id
 	 * @return the operation origin
 	 */
-	public static Optional<Origin> getOperationOrigin(Operation operation, String originId) {
+	public static Optional<Origin> findOperationOrigin(Operation operation, String originId) {
 		if (operation == null) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
@@ -322,7 +321,7 @@ public class TrackerUtils {
 	 * @param title the operation title as a {@link String}
 	 * @return the {@link OperationTitle} instance
 	 */
-	public static Optional<OperationTitle> getOperationTitle(Operation operation, String title) {
+	public static Optional<OperationTitle> findOperationTitle(Operation operation, String title) {
 		if (operation == null) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
@@ -344,7 +343,7 @@ public class TrackerUtils {
 	 * @param title the category title as a {@link String}
 	 * @return the amount category
 	 */
-	public static Optional<Category> getAmountCategory(Amount amount, String title) {
+	public static Optional<Category> findAmountCategory(Amount amount, String title) {
 		if (amount == null) {
 			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
 		}
@@ -357,7 +356,7 @@ public class TrackerUtils {
 		}
 
 		return getAllCategories(tracker.getCategoriesRepository()).stream()//
-				.map(category -> getCategory(category, title))//
+				.map(category -> findCategory(category, title))//
 				.findFirst();
 	}
 
@@ -367,18 +366,18 @@ public class TrackerUtils {
 	 * @param title the category title as a {@link String}
 	 * @return the category
 	 */
-	private static Category getCategory(Category category, String title) {
+	private static Category findCategory(Category category, String title) {
 		if (title.equals(category.getTitle())) {
 			return category;
 		}
 		if (category instanceof IncomeCategory) {
 			for (IncomeCategory subCategory: ((IncomeCategory)category).getIncomes()) {
-				return getCategory(subCategory, title);
+				return findCategory(subCategory, title);
 			}
 		}
 		if (category instanceof SpendingCategory) {
 			for (SpendingCategory subCategory: ((SpendingCategory)category).getSpendings()) {
-				return getCategory(subCategory, title);
+				return findCategory(subCategory, title);
 			}
 		}
 		return null;
@@ -563,10 +562,10 @@ public class TrackerUtils {
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
 	 */
-	public static List<Double> getAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
+	public static List<Double> findAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
 		return dates//
 				.stream()//
-				.mapToDouble(date -> getTotalAmount(getAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
+				.mapToDouble(date -> getTotalAmount(findAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}
@@ -579,10 +578,10 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the income category amount of the given item and its children
 	 */
-	public static List<Double> getIncomeCategoryAmount(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
-		Category incomeCategory=getIncomeCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item);
+	public static List<Double> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item);
 		return dates.stream()//
-				.mapToDouble(date -> getTotalAmount(getCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
+				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}
@@ -595,10 +594,10 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the spending category amount of the given item and its children
 	 */
-	public static List<Double> getSpendingCategoryAmount(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
-		Category spendingCategory=getSpendingCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item);
+	public static List<Double> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item);
 		return dates.stream()//
-				.mapToDouble(date -> getTotalAmount(getCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
+				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}
@@ -612,7 +611,7 @@ public class TrackerUtils {
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return all valid amounts vs comparison year and month.
 	 */
-	private static List<Amount> getAllAmounts(Account account, Month month, int year, boolean wishedEnabled, Class<?> clazz) {
+	private static List<Amount> findAllAmounts(Account account, Month month, int year, boolean wishedEnabled, Class<?> clazz) {
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checking=(CheckingAccount)account;
 			return checking.getOperations()//
@@ -635,7 +634,7 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the list of amounts related to the given category.
 	 */
-	private static List<Amount> getCategoryAmounts(Account account, Category category, Month month, int year, boolean wishedEnabled) {
+	private static List<Amount> findCategoryAmounts(Account account, Category category, Month month, int year, boolean wishedEnabled) {
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checking=(CheckingAccount)account;
 			return checking.getOperations()//
@@ -650,42 +649,12 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * @param spendingCategory the spending category, root of all spendings
-	 * @param title the category title
-	 * @return the spending category
-	 */
-	private static SpendingCategory getSpendingCategory(SpendingCategory spendingCategory, String title) {
-		for (SpendingCategory spending: spendingCategory.getSpendings()) {
-			if (spending.getTitle().equals(title)) {
-				return spending;
-			}
-			return getSpendingCategory(spending, title);
-		}
-		return null;
-	}
-
-	/**
-	 * @param incomeCategory the income category, root of all incomes
-	 * @param title the category title
-	 * @return the income category
-	 */
-	private static IncomeCategory getIncomeCategory(IncomeCategory incomeCategory, String title) {
-		for (IncomeCategory income: incomeCategory.getIncomes()) {
-			if (income.getTitle().equals(title)) {
-				return income;
-			}
-			return getIncomeCategory(income, title);
-		}
-		return null;
-	}
-
-	/**
 	 * @param tracker the opened tracker root
-	 * @param item the opertaion item
+	 * @param item the operation item
 	 * @param dates the dates to witch we need to extract the amount
 	 * @return the operation amounts
 	 */
-	public static List<Double> getOperationAmount(Tracker tracker, String item, List<String> dates) {
+	public static List<Double> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -695,7 +664,7 @@ public class TrackerUtils {
 	 * @param accountName the account name
 	 * @return the account
 	 */
-	public static Account getAccount(Tracker tracker, String accountName) {
+	public static Account findAccount(Tracker tracker, String accountName) {
 		return getAccounts(tracker)//
 				.stream()//
 				.filter(account -> accountName.equals(account.getName()))//

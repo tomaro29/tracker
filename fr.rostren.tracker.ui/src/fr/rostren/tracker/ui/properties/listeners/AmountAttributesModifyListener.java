@@ -36,7 +36,7 @@ public class AmountAttributesModifyListener extends AbstractModifyListener {
 			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, new BigDecimal(text.getText()));
 		}
 		if (widget.equals(combo)) {
-			Category category=TrackerUtils.getAmountCategory((Amount)eObject, combo.getText()).orElseThrow(IllegalArgumentException::new);
+			Category category=TrackerUtils.findAmountCategory((Amount)eObject, combo.getText()).orElseThrow(IllegalArgumentException::new);
 			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__CATEGORY, category);
 		}
 	}

@@ -260,7 +260,7 @@ public class LineContent {
 	 * @return the existing title
 	 */
 	private Optional<OperationTitle> getExistingTitle(String title, Tracker tracker) {
-		Optional<OperationTitle> operationTitleOpt=TrackerUtils.getOperationTitle(tracker, title);
+		Optional<OperationTitle> operationTitleOpt=TrackerUtils.findOperationTitle(tracker, title);
 		operationTitleOpt.ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
 		return operationTitleOpt;
 	}

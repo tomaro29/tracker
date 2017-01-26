@@ -187,28 +187,28 @@ public class TrackerHistogramView extends ViewPart {
 		List<Double> incomeValues=new ArrayList<>();
 		List<Double> spendingValues=new ArrayList<>();
 
-		Account account=TrackerUtils.getAccount(tracker, accountsCombo.getItem(accountsCombo.getSelectionIndex()));
+		Account account=TrackerUtils.findAccount(tracker, accountsCombo.getItem(accountsCombo.getSelectionIndex()));
 		int year=Integer.parseInt(yearsCombo.getItem(accountsCombo.getSelectionIndex()));
 		if (categoryCheckButton.getSelection()) {
 			String item=categoriesCombo.getItem(categoriesCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
-				incomeValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
 			}
 			else {
-				incomeValues=TrackerUtils.getIncomeCategoryAmount(account, item, dates, year, true);
-				spendingValues=TrackerUtils.getSpendingCategoryAmount(account, item, dates, year, true);
+				incomeValues=TrackerUtils.findIncomeCategoryAmounts(account, item, dates, year, true);
+				spendingValues=TrackerUtils.findSpendingCategoryAmounts(account, item, dates, year, true);
 			}
 		}
 		else if (operationCheckButton.getSelection()) {
 			String item=operationsCombo.getItem(operationsCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
-				incomeValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
 			}
 			else {
-				incomeValues=TrackerUtils.getOperationAmount(tracker, item, dates);
-				spendingValues=TrackerUtils.getOperationAmount(tracker, item, dates);
+				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, dates);
+				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, dates);
 			}
 		}
 
@@ -277,7 +277,7 @@ public class TrackerHistogramView extends ViewPart {
 	 * @param combo the years combo
 	 */
 	private void populateYearsCombo(Combo combo) {
-		String[] items=getYearsItems(TrackerUtils.getYears(tracker));
+		String[] items=getYearsItems(TrackerUtils.findYears(tracker));
 		combo.setItems(items);
 		combo.select(0);
 	}

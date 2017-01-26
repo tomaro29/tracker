@@ -215,116 +215,116 @@ public class TrackerUtilsTest {
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationTitle(Tracker, String)} method with a valid and invalid arguments.
+	 *Tests the {@link TrackerUtils#findOperationTitle(Tracker, String)} method with a valid and invalid arguments.
 	 */
 	@Test
 	public void getOperationTitleUsingTrackerTest() {
-		assertEquals(null, TrackerUtils.getOperationTitle(tracker, null));
-		assertEquals(null, TrackerUtils.getOperationTitle(tracker, StringUtils.EMPTY));
-		assertEquals(null, TrackerUtils.getOperationTitle(tracker, " ")); //$NON-NLS-1$
-		assertEquals(null, TrackerUtils.getOperationTitle(tracker, title));
+		assertEquals(null, TrackerUtils.findOperationTitle(tracker, null));
+		assertEquals(null, TrackerUtils.findOperationTitle(tracker, StringUtils.EMPTY));
+		assertEquals(null, TrackerUtils.findOperationTitle(tracker, " ")); //$NON-NLS-1$
+		assertEquals(null, TrackerUtils.findOperationTitle(tracker, title));
 
 		tracker.setOperationsTitlesRepositories(operationTitlesRepository);
 		operationTitlesRepository.getOperationsTitles().add(operationTitle);
-		assertEquals(null, TrackerUtils.getOperationTitle(tracker, title));
+		assertEquals(null, TrackerUtils.findOperationTitle(tracker, title));
 
 		operationTitle.setTitle(title);
-		assertEquals(operationTitle, TrackerUtils.getOperationTitle(tracker, title));
+		assertEquals(operationTitle, TrackerUtils.findOperationTitle(tracker, title));
 
 		operationTitle.setTitle(title);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationTitle(Tracker, String)} method with a null argument.
+	 *Tests the {@link TrackerUtils#findOperationTitle(Tracker, String)} method with a null argument.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getOperationTitleUsingTracker_NullTrackerTest() {
 		Tracker nullTracker=null;
-		TrackerUtils.getOperationTitle(nullTracker, title);
+		TrackerUtils.findOperationTitle(nullTracker, title);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationTitle(Operation, String)} method with a valid and invalid arguments.
+	 *Tests the {@link TrackerUtils#findOperationTitle(Operation, String)} method with a valid and invalid arguments.
 	 */
 	@Test
 	public void getOperationTitleTest() {
-		assertEquals(null, TrackerUtils.getOperationTitle(credit, null));
-		assertEquals(null, TrackerUtils.getOperationTitle(credit, StringUtils.EMPTY));
-		assertEquals(null, TrackerUtils.getOperationTitle(credit, " ")); //$NON-NLS-1$
+		assertEquals(null, TrackerUtils.findOperationTitle(credit, null));
+		assertEquals(null, TrackerUtils.findOperationTitle(credit, StringUtils.EMPTY));
+		assertEquals(null, TrackerUtils.findOperationTitle(credit, " ")); //$NON-NLS-1$
 
 		tracker.getOwners().add(owner);
 		owner.getAccounts().add(account);
 		account.getOperations().add(credit);
 		tracker.setOperationsTitlesRepositories(operationTitlesRepository);
 		operationTitlesRepository.getOperationsTitles().add(operationTitle);
-		assertEquals(null, TrackerUtils.getOperationTitle(credit, title));
+		assertEquals(null, TrackerUtils.findOperationTitle(credit, title));
 
 		operationTitle.setTitle(title);
-		assertEquals(operationTitle, TrackerUtils.getOperationTitle(credit, title));
+		assertEquals(operationTitle, TrackerUtils.findOperationTitle(credit, title));
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationTitle(Operation, String)} method with a null argument.
+	 *Tests the {@link TrackerUtils#findOperationTitle(Operation, String)} method with a null argument.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getOperationTitle_NullOperationTest() {
 		Operation nullOperation=null;
-		TrackerUtils.getOperationTitle(nullOperation, title);
+		TrackerUtils.findOperationTitle(nullOperation, title);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationTitle(Operation, String)} method with a null tracker container of the operation.
+	 *Tests the {@link TrackerUtils#findOperationTitle(Operation, String)} method with a null tracker container of the operation.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getOperationTitle_NullTrackerTest() {
-		TrackerUtils.getOperationTitle(credit, title);
+		TrackerUtils.findOperationTitle(credit, title);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationOrigin(Operation, String)} method with a valid and invalid arguments.
+	 *Tests the {@link TrackerUtils#findOperationOrigin(Operation, String)} method with a valid and invalid arguments.
 	 */
 	@Test
 	public void getOperationOriginTest() {
-		assertEquals(null, TrackerUtils.getOperationOrigin(credit, null));
-		assertEquals(null, TrackerUtils.getOperationOrigin(credit, StringUtils.EMPTY));
-		assertEquals(null, TrackerUtils.getOperationOrigin(credit, " ")); //$NON-NLS-1$
+		assertEquals(null, TrackerUtils.findOperationOrigin(credit, null));
+		assertEquals(null, TrackerUtils.findOperationOrigin(credit, StringUtils.EMPTY));
+		assertEquals(null, TrackerUtils.findOperationOrigin(credit, " ")); //$NON-NLS-1$
 
 		tracker.getOwners().add(owner);
 		owner.getAccounts().add(account);
 		account.getOperations().add(credit);
 		tracker.setOriginsRepository(originsRepository);
 		originsRepository.getOrigins().add(origin);
-		assertEquals(null, TrackerUtils.getOperationOrigin(credit, originId));
+		assertEquals(null, TrackerUtils.findOperationOrigin(credit, originId));
 
 		origin.setIdentifier(originId);
-		assertEquals(origin, TrackerUtils.getOperationOrigin(credit, originId));
+		assertEquals(origin, TrackerUtils.findOperationOrigin(credit, originId));
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationOrigin(Operation, String)} method with a null argument.
+	 *Tests the {@link TrackerUtils#findOperationOrigin(Operation, String)} method with a null argument.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getOperationOrigin_NullOperationTest() {
 		Operation nullOperation=null;
-		TrackerUtils.getOperationOrigin(nullOperation, originId);
+		TrackerUtils.findOperationOrigin(nullOperation, originId);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getOperationOrigin(Operation, String)} method with a null tracker container of the operation.
+	 *Tests the {@link TrackerUtils#findOperationOrigin(Operation, String)} method with a null tracker container of the operation.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getOperationOrigin_NullTrackerTest() {
-		TrackerUtils.getOperationOrigin(credit, originId);
+		TrackerUtils.findOperationOrigin(credit, originId);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getAmountCategory(Amount, String)} method with a valid and invalid arguments.
+	 *Tests the {@link TrackerUtils#findAmountCategory(Amount, String)} method with a valid and invalid arguments.
 	 */
 	@Test
 	public void getAmountCategoryTest() {
-		assertEquals(null, TrackerUtils.getAmountCategory(amount, null));
-		assertEquals(null, TrackerUtils.getAmountCategory(amount, StringUtils.EMPTY));
-		assertEquals(null, TrackerUtils.getAmountCategory(amount, " ")); //$NON-NLS-1$
+		assertEquals(null, TrackerUtils.findAmountCategory(amount, null));
+		assertEquals(null, TrackerUtils.findAmountCategory(amount, StringUtils.EMPTY));
+		assertEquals(null, TrackerUtils.findAmountCategory(amount, " ")); //$NON-NLS-1$
 
 		tracker.getOwners().add(owner);
 		owner.getAccounts().add(account);
@@ -334,27 +334,27 @@ public class TrackerUtilsTest {
 		IncomeCategory income=TrackerFactory.eINSTANCE.createIncomeCategory();
 		categoriesRepository.setIncome(income);
 		categoriesRepository.getIncome().getIncomes().add(incomeCategory);
-		assertEquals(null, TrackerUtils.getAmountCategory(amount, title));
+		assertEquals(null, TrackerUtils.findAmountCategory(amount, title));
 
 		incomeCategory.setTitle(title);
-		assertEquals(incomeCategory, TrackerUtils.getAmountCategory(amount, title));
+		assertEquals(incomeCategory, TrackerUtils.findAmountCategory(amount, title));
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getAmountCategory(Amount, String)} method with a null argument.
+	 *Tests the {@link TrackerUtils#findAmountCategory(Amount, String)} method with a null argument.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getAmountCategory_NullAmountTest() {
 		Amount nullAmount=null;
-		TrackerUtils.getAmountCategory(nullAmount, title);
+		TrackerUtils.findAmountCategory(nullAmount, title);
 	}
 
 	/**
-	 *Tests the {@link TrackerUtils#getAmountCategory(Amount, String)} method with a null tracker container of the amount.
+	 *Tests the {@link TrackerUtils#findAmountCategory(Amount, String)} method with a null tracker container of the amount.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void getAmountCategory_NullTrackerTest() {
-		TrackerUtils.getAmountCategory(amount, title);
+		TrackerUtils.findAmountCategory(amount, title);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package fr.rostren.tracker.pdf.utils;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -161,29 +162,34 @@ public class LineContent {
 	 *         category otherwise.
 	 */
 	private Category findCategoryInTrackerModel(String title, Tracker tracker) {
-		OperationTitle existingTitle=getExistingTitle(title, tracker);
-		if (existingTitle != null && !existingTitle.getCategories().isEmpty()) {
-			return existingTitle.getCategories().get(0);
-		}
+		return getExistingTitle(title, tracker).filter(existingTitle -> !existingTitle.getCategories().isEmpty())//
+				.map(existingTitle -> existingTitle.getCategories().get(0))//
+				.orElse(createNewCategory(tracker).orElseThrow(IllegalArgumentException::new));
+	}
 
-		//creates new
+	/**
+	 * Creates a new category
+	 * @param tracker
+	 *            the tracker model
+	 * @return the newly created category
+	 */
+	private Optional<Category> createNewCategory(Tracker tracker) {
 		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 		setLinkedOperationTitle(newTitle);
 		newTitle.setTitle(title);
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
 
+		Category undefined=null;
 		if (operation instanceof Credit) {
-			Category undefined=getUndefinedIncomeCategory(getCategoriesRepository(tracker));
+			undefined=getUndefinedIncomeCategory(getCategoriesRepository(tracker));
 			undefined.getOperationTitles().add(newTitle);
-			return undefined;
 		}
 		if (operation instanceof Debit) {
-			Category undefined=getUndefinedSpendingCategory(getCategoriesRepository(tracker));
+			undefined=getUndefinedSpendingCategory(getCategoriesRepository(tracker));
 			undefined.getOperationTitles().add(newTitle);
-			return undefined;
 		}
 
-		return null;
+		return Optional.of(undefined);
 	}
 
 	/**
@@ -253,13 +259,10 @@ public class LineContent {
 	 * @param tracker the tracker
 	 * @return the existing title
 	 */
-	private OperationTitle getExistingTitle(String title, Tracker tracker) {
-		OperationTitle existingOperationTitle=TrackerUtils.getOperationTitle(tracker, title);
-		if (existingOperationTitle == null) {
-			return null;
-		}
-		setLinkedOperationTitle(existingOperationTitle);
-		return existingOperationTitle;
+	private Optional<OperationTitle> getExistingTitle(String title, Tracker tracker) {
+		Optional<OperationTitle> operationTitleOpt=TrackerUtils.getOperationTitle(tracker, title);
+		operationTitleOpt.ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
+		return operationTitleOpt;
 	}
 
 	/**

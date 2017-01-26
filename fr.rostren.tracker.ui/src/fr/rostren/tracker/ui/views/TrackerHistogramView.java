@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -193,8 +192,8 @@ public class TrackerHistogramView extends ViewPart {
 		if (categoryCheckButton.getSelection()) {
 			String item=categoriesCombo.getItem(categoriesCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
-				incomeValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
 			}
 			else {
 				incomeValues=TrackerUtils.getIncomeCategoryAmount(account, item, dates, year, true);
@@ -204,8 +203,8 @@ public class TrackerHistogramView extends ViewPart {
 		else if (operationCheckButton.getSelection()) {
 			String item=operationsCombo.getItem(operationsCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
-				incomeValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.getAllCategoriesAmount(Optional.of(account), dates, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.getAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
 			}
 			else {
 				incomeValues=TrackerUtils.getOperationAmount(tracker, item, dates);

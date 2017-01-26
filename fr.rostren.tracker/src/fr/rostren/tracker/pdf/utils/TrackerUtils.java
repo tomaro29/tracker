@@ -62,25 +62,21 @@ public class TrackerUtils {
 	 */
 	public static List<Category> getAllCategories(CategoriesRepository repository) {
 		//FIXME validate Java 8 code migration
-		Optional<IncomeCategory> income=Optional.of(repository.getIncome());
-		Optional<SpendingCategory> spending=Optional.of(repository.getSpending());
+		IncomeCategory income=repository.getIncome();
+		SpendingCategory spending=repository.getSpending();
 
 		List<Category> categories=new ArrayList<>();
-		if (income.isPresent()) {
-			categories.add(income.get());
-			//			income.get().getIncomes()//
-			//					.stream()//
-			//					.map(category -> getCategories(category))//
-			//					.collect(Collectors.toList());
-			for (Category category: repository.getIncome().getIncomes()) {
-				categories.addAll(getCategories(category));
-			}
+		if (income != null) {
+			categories.add(income);
+			categories.addAll(income.getIncomes().stream()//
+					.flatMap(category -> getCategories(category).stream())//
+					.collect(Collectors.toList()));
 		}
-		if (spending.isPresent()) {
-			categories.add(spending.get());
-			for (Category category: repository.getSpending().getSpendings()) {
-				categories.addAll(getCategories(category));
-			}
+		if (spending != null) {
+			categories.add(spending);
+			categories.addAll(spending.getSpendings().stream()//
+					.flatMap(category -> getCategories(category).stream())//
+					.collect(Collectors.toList()));
 		}
 		return categories;
 	}
@@ -92,17 +88,21 @@ public class TrackerUtils {
 	 */
 	public static List<Category> getCategories(CategoriesRepository repository) {
 		//FIXME validate Java 8 code migration
-		Optional<IncomeCategory> incomeOpt=Optional.of(repository.getIncome());
-		Optional<SpendingCategory> spendingOpt=Optional.of(repository.getSpending());
+		IncomeCategory income=repository.getIncome();
+		SpendingCategory spending=repository.getSpending();
 
 		List<Category> categories=new ArrayList<>();
-		incomeOpt.ifPresent(income -> categories.add(income));
-		spendingOpt.ifPresent(spending -> categories.add(spending));
+		if (income != null) {
+			categories.add(income);
+		}
+		if (spending != null) {
+			categories.add(spending);
+		}
 		return categories;
 	}
 
 	/**
-	 * Returns the categories
+	 * Returns a list containing the category itself and all its subCategories.
 	 * @param category the {@link Category} instance
 	 * @return the categories
 	 */
@@ -110,14 +110,14 @@ public class TrackerUtils {
 		List<Category> categories=new ArrayList<>();
 		categories.add(category);
 		if (category instanceof IncomeCategory) {
-			for (Category subCategory: ((IncomeCategory)category).getIncomes()) {
-				categories.addAll(getCategories(subCategory));
-			}
+			categories.addAll(((IncomeCategory)category).getIncomes().stream()//
+					.flatMap(subCategory -> getCategories(category).stream())//
+					.collect(Collectors.toList()));
 		}
 		if (category instanceof SpendingCategory) {
-			for (Category subCategory: ((SpendingCategory)category).getSpendings()) {
-				categories.addAll(getCategories(subCategory));
-			}
+			categories.addAll(((SpendingCategory)category).getSpendings().stream()//
+					.flatMap(subCategory -> getCategories(category).stream())//
+					.collect(Collectors.toList()));
 		}
 		return categories;
 	}
@@ -176,10 +176,7 @@ public class TrackerUtils {
 	 */
 	public static String getCategoryTitle(Optional<Amount> amountOpt) {
 		//FIXME validate Java 8 code migration
-		if (!amountOpt.isPresent()) {
-			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
-		}
-		Amount amount=amountOpt.orElse(null);
+		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
 		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
 	}
 
@@ -190,10 +187,7 @@ public class TrackerUtils {
 	 */
 	public static String getAmountValue(Optional<Amount> amountOpt) {
 		//FIXME validate Java 8 code migration
-		if (!amountOpt.isPresent()) {
-			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
-		}
-		Amount amount=amountOpt.orElse(null);
+		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
 		return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
 	}
 
@@ -204,10 +198,7 @@ public class TrackerUtils {
 	 */
 	public static String getOperationTitleAsString(Optional<Operation> operationOpt) {
 		//FIXME validate Java 8 code migration
-		if (!operationOpt.isPresent()) {
-			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		}
-		Operation operation=operationOpt.orElse(null);
+		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
 		return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
 	}
 
@@ -218,10 +209,7 @@ public class TrackerUtils {
 	 */
 	public static String getOperationTotalAmount(Optional<Operation> operationOpt) {
 		//FIXME validate Java 8 code migration
-		if (!operationOpt.isPresent()) {
-			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		}
-		Operation operation=operationOpt.orElse(null);
+		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
 		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
 	}
 
@@ -232,10 +220,7 @@ public class TrackerUtils {
 	 */
 	public static String getOperationDate(Optional<Operation> operationOpt) {
 		//FIXME validate Java 8 code migration
-		if (!operationOpt.isPresent()) {
-			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		}
-		Operation operation=operationOpt.orElse(null);
+		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
 		return operation.getDate() == null ? StringUtils.EMPTY : operation.getDate().toString();
 	}
 
@@ -258,7 +243,7 @@ public class TrackerUtils {
 	 * @param title the title
 	 * @return the operation title
 	 */
-	public static OperationTitle getOperationTitle(Tracker tracker, String title) {
+	public static Optional<OperationTitle> getOperationTitle(Tracker tracker, String title) {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
@@ -270,12 +255,9 @@ public class TrackerUtils {
 			repository=TrackerFactory.eINSTANCE.createOperationsTitleRepository();
 			tracker.setOperationsTitlesRepositories(repository);
 		}
-		for (OperationTitle operationTitle: repository.getOperationsTitles()) {
-			if (title.equals(operationTitle.getTitle())) {
-				return operationTitle;
-			}
-		}
-		return null;
+		return repository.getOperationsTitles().stream()//
+				.filter(operationTitle -> title.equals(operationTitle.getTitle()))//
+				.findFirst();
 	}
 
 	/**
@@ -284,7 +266,7 @@ public class TrackerUtils {
 	 * @param originId the origin Id
 	 * @return the operation origin
 	 */
-	public static Origin getOperationOrigin(Operation operation, String originId) {
+	public static Optional<Origin> getOperationOrigin(Operation operation, String originId) {
 		if (operation == null) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
@@ -295,13 +277,9 @@ public class TrackerUtils {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
-		EList<Origin> origins=tracker.getOriginsRepository().getOrigins();
-		for (Origin origin: origins) {
-			if (originId.equals(origin.getIdentifier())) {
-				return origin;
-			}
-		}
-		return null;
+		return tracker.getOriginsRepository().getOrigins().stream()//
+				.filter(origin -> originId.equals(origin.getIdentifier()))//
+				.findFirst();
 	}
 
 	/**
@@ -310,7 +288,7 @@ public class TrackerUtils {
 	 * @param title the operation title as a {@link String}
 	 * @return the {@link OperationTitle} instance
 	 */
-	public static OperationTitle getOperationTitle(Operation operation, String title) {
+	public static Optional<OperationTitle> getOperationTitle(Operation operation, String title) {
 		if (operation == null) {
 			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
 		}
@@ -321,13 +299,9 @@ public class TrackerUtils {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
-		EList<OperationTitle> operationTitles=tracker.getOperationsTitlesRepositories().getOperationsTitles();
-		for (OperationTitle opTitle: operationTitles) {
-			if (title.equals(opTitle.getTitle())) {
-				return opTitle;
-			}
-		}
-		return null;
+		return tracker.getOperationsTitlesRepositories().getOperationsTitles().stream()//
+				.filter(opTitle -> title.equals(opTitle.getTitle()))//
+				.findFirst();
 	}
 
 	/**
@@ -336,7 +310,7 @@ public class TrackerUtils {
 	 * @param title the category title as a {@link String}
 	 * @return the amount category
 	 */
-	public static Category getAmountCategory(Amount amount, String title) {
+	public static Optional<Category> getAmountCategory(Amount amount, String title) {
 		if (amount == null) {
 			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
 		}
@@ -347,10 +321,10 @@ public class TrackerUtils {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
 		}
-		for (Category category: getAllCategories(tracker.getCategoriesRepository())) {
-			return getCategory(category, title);
-		}
-		return null;
+
+		return getAllCategories(tracker.getCategoriesRepository()).stream()//
+				.map(category -> getCategory(category, title))//
+				.findFirst();
 	}
 
 	/**
@@ -401,13 +375,10 @@ public class TrackerUtils {
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The title to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
-		for (OperationTitle opTitle: tracker.getOperationsTitlesRepositories().getOperationsTitles()) {
-			String opTitleTitle=opTitle.getTitle();
-			if (!StringUtils.isEmpty(opTitleTitle) && StringUtils.deleteWhitespace(opTitleTitle).equals(StringUtils.deleteWhitespace(title))) {
-				return false;
-			}
-		}
-		return true;
+		return tracker.getOperationsTitlesRepositories().getOperationsTitles().stream()//
+				.map(opTitle -> opTitle.getTitle())//
+				.noneMatch(opTitleTitle -> !StringUtils.isEmpty(opTitleTitle)	&& //
+											StringUtils.deleteWhitespace(opTitleTitle).equals(StringUtils.deleteWhitespace(title)));
 	}
 
 	/**
@@ -527,8 +498,7 @@ public class TrackerUtils {
 	private static Double getTotalAmount(List<Amount> amounts) {
 		//FIXME validate the next java8 code
 		return amounts.stream()//
-				.map(amount -> Double.parseDouble(amount.getValue().toString()))//
-				.mapToDouble((d) -> d)//
+				.mapToDouble(amount -> Double.parseDouble(amount.getValue().toString()))//
 				.sum();
 	}
 
@@ -541,12 +511,12 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the comparison is based on the wished date, <code>false</code> otherwise
 	 * @return <code>true</code> if the amount has a valid date; <code>false</code> otherwise.
 	 */
-	private static boolean isDateValid(Optional<Amount> amount, Optional<Operation> operation, int year, Month month, boolean wishedEnabled) {
+	private static boolean isDateValid(Amount amount, Operation operation, int year, Month month, boolean wishedEnabled) {
 		//FIXME validate the next java8 code
-		Optional<Date> wishedDate=amount.isPresent() ? Optional.of(amount.get().getWishedDate()) : Optional.empty();
-		Optional<Date> operationDate=operation.isPresent() ? Optional.of(operation.get().getDate()) : Optional.empty();
+		Optional<Date> wishedDate=Optional.of(amount.getWishedDate());
+		Optional<Date> operationDate=Optional.of(operation.getDate());
 
-		Date comparisonDate=wishedEnabled && wishedDate.isPresent() ? wishedDate.get() : operationDate.get();
+		Date comparisonDate=wishedEnabled ? wishedDate.orElse(operationDate.orElseThrow(IllegalArgumentException::new)) : operationDate.orElseThrow(IllegalArgumentException::new);
 		return month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear();
 	}
 
@@ -559,23 +529,12 @@ public class TrackerUtils {
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
 	 */
-	public static List<Double> getAllCategoriesAmount(Optional<Account> account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
-		//FIXME validate the next java8 code
-		if (account.isPresent()) {
-			return dates//
-					.stream()//
-					.map(date -> getTotalAmount(getAllAmounts(account.get(), Month.get(date), year, wishedEnabled, clazz)))//
-					.collect(Collectors.toList());
-		}
-		return Collections.emptyList();
-
-		//		List<Double> spendings=new ArrayList<>();
-		//		//FIXME Java 8
-		//		for (String date: dates) {
-		//			List<Amount> amounts=getAllAmounts(account, Month.get(date), year, wishedEnabled, SpendingCategory.class);
-		//			spendings.add(getTotalAmount(amounts));
-		//		}
-		//		return spendings;
+	public static List<Double> getAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
+		return dates//
+				.stream()//
+				.mapToDouble(date -> getTotalAmount(getAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
+				.boxed()//
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -587,13 +546,11 @@ public class TrackerUtils {
 	 * @return the income category amount of the given item and its children
 	 */
 	public static List<Double> getIncomeCategoryAmount(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
-		List<Double> incomes=new ArrayList<>();
 		Category incomeCategory=getIncomeCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item);
-		for (String date: dates) {
-			List<Amount> amounts=getCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled);
-			incomes.add(getTotalAmount(amounts));
-		}
-		return incomes;
+		return dates.stream()//
+				.mapToDouble(date -> getTotalAmount(getCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
+				.boxed()//
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -605,13 +562,11 @@ public class TrackerUtils {
 	 * @return the spending category amount of the given item and its children
 	 */
 	public static List<Double> getSpendingCategoryAmount(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
-		List<Double> spendings=new ArrayList<>();
 		Category spendingCategory=getSpendingCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item);
-		for (String date: dates) {
-			List<Amount> amounts=getCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled);
-			spendings.add(getTotalAmount(amounts));
-		}
-		return spendings;
+		return dates.stream()//
+				.mapToDouble(date -> getTotalAmount(getCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
+				.boxed()//
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -631,13 +586,14 @@ public class TrackerUtils {
 					.flatMap(operation -> operation.getSubAmounts()//
 							.stream()//
 							.filter(amount -> clazz.isInstance(amount.getCategory()))//
-							.filter(amount -> isDateValid(Optional.of(amount), Optional.of(operation), year, month, wishedEnabled)))//
+							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
 					.collect(Collectors.toList());
 		}
 		return Collections.emptyList();
 	}
 
 	/**
+	 * Returns the list of all amounts of operations related to the given category
 	 * @param account the concerned account.
 	 * @param category the category.
 	 * @param month the month.
@@ -653,7 +609,7 @@ public class TrackerUtils {
 					.flatMap(operation -> operation.getSubAmounts()//
 							.stream()//
 							.filter(amount -> category.equals(amount.getCategory()))//
-							.filter(amount -> isDateValid(Optional.of(amount), Optional.of(operation), year, month, wishedEnabled)))//
+							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
 					.collect(Collectors.toList());
 		}
 		return Collections.emptyList();
@@ -665,9 +621,6 @@ public class TrackerUtils {
 	 * @return the spending category
 	 */
 	private static SpendingCategory getSpendingCategory(SpendingCategory spendingCategory, String title) {
-		// FIXME to validate java 8 code migration
-		//		return spendingCategory.getSpendings().stream().filter(spending -> spending.getTitle().equals(title));
-
 		for (SpendingCategory spending: spendingCategory.getSpendings()) {
 			if (spending.getTitle().equals(title)) {
 				return spending;
@@ -709,11 +662,10 @@ public class TrackerUtils {
 	 * @return the account
 	 */
 	public static Account getAccount(Tracker tracker, String accountName) {
-		//FIXME to validate Java 8 code migration
 		return getAccounts(tracker)//
 				.stream()//
 				.filter(account -> accountName.equals(((Account)account).getName()))//
 				.map(Account.class::cast)//
-				.findFirst().orElse(null);
+				.findFirst().orElseThrow(IllegalArgumentException::new);
 	}
 }

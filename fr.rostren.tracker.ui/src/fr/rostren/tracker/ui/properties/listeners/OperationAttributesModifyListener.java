@@ -32,11 +32,11 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 		CCombo originCombo=section.getOriginCombo();
 
 		if (widget.equals(titleCombo)) {
-			OperationTitle title=TrackerUtils.getOperationTitle((Operation)eObject, titleCombo.getText());
+			OperationTitle title=TrackerUtils.getOperationTitle((Operation)eObject, titleCombo.getText()).orElseThrow(IllegalArgumentException::new);
 			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
 		}
 		if (widget.equals(originCombo)) {
-			Origin origin=TrackerUtils.getOperationOrigin((Operation)eObject, originCombo.getText());
+			Origin origin=TrackerUtils.getOperationOrigin((Operation)eObject, originCombo.getText()).orElseThrow(IllegalArgumentException::new);
 			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
 		}
 	}

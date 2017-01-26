@@ -88,11 +88,11 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		Set<Object> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
+		Set<OperationTitle> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
 		titlesComboViewer=createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
 				new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
-			title=(OperationTitle)operationsTitles.iterator().next();
+			title=operationsTitles.iterator().next();
 		}
 	}
 

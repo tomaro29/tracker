@@ -158,11 +158,11 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createText(parent, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
-		Set<Object> categories=TrackerUtils.getCategories(tracker);
+		Set<Category> categories=TrackerUtils.getCategories(tracker);
 		categoriesComboViewer=createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
 				new CategoryLabelProvider(), categoryListener, addCategoryButtonlistener);
 		if (!categories.isEmpty()) {
-			category=(Category)categories.iterator().next();
+			category=categories.iterator().next();
 		}
 		createDateTime(parent, "Wished Date", wishedDate, wishedDateKeyListener);//$NON-NLS-1$
 	}

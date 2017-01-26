@@ -150,18 +150,18 @@ public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createCombo(parent, "Transfer Type: ", AddBoockletTransferWizardPage.TRANSFER_TYPES, modifyTransferTypeListener); //$NON-NLS-1$
 
-		Set<Object> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
+		Set<OperationTitle> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
 		titlesComboViewer=createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
 				new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
-			title=(OperationTitle)operationsTitles.iterator().next();
+			title=operationsTitles.iterator().next();
 		}
 
-		Set<Object> origins=TrackerUtils.getOrigins(tracker);
+		Set<Origin> origins=TrackerUtils.getOrigins(tracker);
 		originsComboViewer=createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
 				new OriginLabelProvider(), originListener, addOriginButtonlistener);
 		if (!origins.isEmpty()) {
-			origin=(Origin)origins.iterator().next();
+			origin=origins.iterator().next();
 		}
 	}
 

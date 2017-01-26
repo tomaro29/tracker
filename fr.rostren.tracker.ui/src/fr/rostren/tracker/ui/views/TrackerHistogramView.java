@@ -341,12 +341,12 @@ public class TrackerHistogramView extends ViewPart {
 	 * @param accounts the set of accounts
 	 * @return the array of items
 	 */
-	private String[] getAccountsItems(Set<Object> accounts) {
+	private String[] getAccountsItems(Set<Account> accounts) {
 		String[] items=new String[accounts.size()];
 		int i=0;
-		Iterator<Object> iterator=accounts.iterator();
+		Iterator<Account> iterator=accounts.iterator();
 		while (iterator.hasNext()) {
-			Account account=(Account)iterator.next();
+			Account account=iterator.next();
 			items[i]=account.getName();
 			i++;
 		}
@@ -358,35 +358,23 @@ public class TrackerHistogramView extends ViewPart {
 	 * @param categories the set of categories
 	 * @return the array of items
 	 */
-	private String[] getCategoriesItems(Set<Object> categories) {
-		String[] items=new String[categories.size() + 1];
-		items[0]=TrackerHistogramView.ALL_CATEGORIES_ITEM;
-		int i=1;
-		Iterator<Object> iterator=categories.iterator();
-		while (iterator.hasNext()) {
-			Category category=(Category)iterator.next();
-			items[i]=category.getTitle();
-			i++;
-		}
-		return items;
+	private String[] getCategoriesItems(Set<Category> categories) {
+		List<String> titles=new ArrayList<>();
+		titles.addAll(categories.stream().map(category -> category.getTitle()).collect(Collectors.toList()));
+		titles.add(0, TrackerHistogramView.ALL_CATEGORIES_ITEM);
+		return titles.toArray(new String[titles.size()]);
 	}
 
 	/**
 	 * Array of operations titles
-	 * @param Operations the set of operations
+	 * @param operationsTitles the set of operations titles
 	 * @return the array of items
 	 */
-	private String[] getOperationsItems(Set<Object> Operations) {
-		String[] items=new String[Operations.size() + 1];
-		items[0]=TrackerHistogramView.ALL_OPERATIONS_ITEM;
-		int i=1;
-		Iterator<Object> iterator=Operations.iterator();
-		while (iterator.hasNext()) {
-			OperationTitle operation=(OperationTitle)iterator.next();
-			items[i]=operation.getTitle();
-			i++;
-		}
-		return items;
+	private String[] getOperationsItems(Set<OperationTitle> operationsTitles) {
+		List<String> titles=new ArrayList<>();
+		titles.addAll(operationsTitles.stream().map(operationTitle -> operationTitle.getTitle()).collect(Collectors.toList()));
+		titles.add(0, TrackerHistogramView.ALL_OPERATIONS_ITEM);
+		return titles.toArray(new String[titles.size()]);
 	}
 
 	@Override

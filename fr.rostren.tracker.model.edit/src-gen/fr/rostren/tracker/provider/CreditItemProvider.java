@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
@@ -62,8 +62,8 @@ public class CreditItemProvider extends OperationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Credit)object));
-		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Credit)object));
+		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Operation)object));
+		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Operation)object));
 
 		if (operationTitle == null) {
 			return "New " + getString("_UI_CreditOperation_type");

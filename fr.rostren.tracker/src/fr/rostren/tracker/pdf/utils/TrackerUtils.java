@@ -42,7 +42,7 @@ public class TrackerUtils {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the operations titles list
 	 */
-	public static Set<Object> getOperationsTitles(Tracker tracker) {
+	public static Set<OperationTitle> getOperationsTitles(Tracker tracker) {
 		return new HashSet<>(tracker.getOperationsTitlesRepositories().getOperationsTitles());
 	}
 
@@ -51,7 +51,7 @@ public class TrackerUtils {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the origins
 	 */
-	public static Set<Object> getOrigins(Tracker tracker) {
+	public static Set<Origin> getOrigins(Tracker tracker) {
 		return new HashSet<>(tracker.getOriginsRepository().getOrigins());
 	}
 
@@ -79,6 +79,38 @@ public class TrackerUtils {
 					.collect(Collectors.toList()));
 		}
 		return categories;
+	}
+
+	/**
+	 * Returns the categories
+	 * @param incomeOpt the {@link IncomeCategory} {@link Optional} instance
+	 * @return the categories
+	 */
+	public static List<Category> getAllIncomeCategories(Optional<IncomeCategory> incomeOpt) {
+		return incomeOpt.map(income -> {
+			List<Category> categories=income.getIncomes()//
+					.stream()//
+					.flatMap(category -> getCategories(category).stream())//
+					.collect(Collectors.toList());
+			categories.add(0, income);
+			return categories;
+		}).orElse(Collections.emptyList());
+	}
+
+	/**
+	 * Returns the categories
+	 * @param spendingOpt the {@link SpendingCategory} {@link Optional} instance
+	 * @return the categories
+	 */
+	public static List<Category> getAllSpendingCategories(Optional<SpendingCategory> spendingOpt) {
+		return spendingOpt.map(spending -> {
+			List<Category> categories=spending.getSpendings()//
+					.stream()//
+					.flatMap(category -> getCategories(category).stream())//
+					.collect(Collectors.toList());
+			categories.add(0, spending);
+			return categories;
+		}).orElse(Collections.emptyList());
 	}
 
 	/**
@@ -127,7 +159,7 @@ public class TrackerUtils {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the accounts
 	 */
-	public static Set<Object> getAccounts(Tracker tracker) {
+	public static Set<Account> getAccounts(Tracker tracker) {
 		return tracker.getOwners()//
 				.stream()//
 				.flatMap(owner -> owner.getAccounts().stream())//
@@ -139,7 +171,7 @@ public class TrackerUtils {
 	 * @param tracker the {@link Tracker} instance
 	 * @return the set of all categories
 	 */
-	public static Set<Object> getCategories(Tracker tracker) {
+	public static Set<Category> getCategories(Tracker tracker) {
 		return getAllCategories(tracker.getCategoriesRepository()).stream()//
 				.collect(Collectors.toSet());
 	}
@@ -154,17 +186,19 @@ public class TrackerUtils {
 		Set<Integer> years=new HashSet<>();
 		getAccounts(tracker).stream()//
 				.filter(account -> account instanceof CheckingAccount)//
-				.forEach(account -> years.addAll(((CheckingAccount)account).getOperations().stream()//
-						.mapToInt(operation -> operation.getDate().getYear())//
-						.boxed()//
-						.collect(Collectors.toSet())//
+				.forEach(account -> years.addAll(//
+						((CheckingAccount)account).getOperations().stream()//
+								.mapToInt(operation -> operation.getDate().getYear())//
+								.boxed()//
+								.collect(Collectors.toSet())//
 		));
 		getAccounts(tracker).stream()//
 				.filter(account -> account instanceof BoockletAccount)//
-				.forEach(account -> years.addAll(((BoockletAccount)account).getTransfers().stream()//
-						.mapToInt(transfer -> transfer.getDate().getYear())//
-						.boxed()//
-						.collect(Collectors.toSet())//
+				.forEach(account -> years.addAll(//
+						((BoockletAccount)account).getTransfers().stream()//
+								.mapToInt(transfer -> transfer.getDate().getYear())//
+								.boxed()//
+								.collect(Collectors.toSet())//
 		));
 		return years;
 	}
@@ -664,7 +698,7 @@ public class TrackerUtils {
 	public static Account getAccount(Tracker tracker, String accountName) {
 		return getAccounts(tracker)//
 				.stream()//
-				.filter(account -> accountName.equals(((Account)account).getName()))//
+				.filter(account -> accountName.equals(account.getName()))//
 				.map(Account.class::cast)//
 				.findFirst().orElseThrow(IllegalArgumentException::new);
 	}

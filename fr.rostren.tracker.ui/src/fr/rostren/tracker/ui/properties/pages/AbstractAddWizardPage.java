@@ -154,15 +154,15 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	 * Creates combo viewer
 	 * @param composite the composite parent of the combo to create
 	 * @param label the combo label
-	 * @param input the combo input
+	 * @param operationsTitles the combo input
 	 * @param contentProvider the content provider
 	 * @param labelProvider the label Provider
 	 * @param listener the linked listener
 	 * @param addButtonlistener the "Add" button listener
 	 * @return the created combo viewer
 	 */
-	protected ComboViewer createComboViewer(Composite composite, String label, Set<Object> input, IContentProvider contentProvider, ILabelProvider labelProvider,
-			ISelectionChangedListener listener, SelectionAdapter addButtonlistener) {
+	protected ComboViewer createComboViewer(Composite composite, String label, Set<? extends Object> operationsTitles, IContentProvider contentProvider,
+			ILabelProvider labelProvider, ISelectionChangedListener listener, SelectionAdapter addButtonlistener) {
 		createLabel(composite, label);
 
 		Composite parent=new Composite(composite, SWT.NONE);
@@ -171,7 +171,7 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 		ComboViewer viewer=new ComboViewer(parent, SWT.READ_ONLY);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
-		viewer.setInput(new ArrayList<>(input));
+		viewer.setInput(new ArrayList<>(operationsTitles));
 		viewer.getCombo().select(0);
 
 		viewer.addSelectionChangedListener(listener);
@@ -188,11 +188,11 @@ public abstract class AbstractAddWizardPage extends WizardPage {
 	/**
 	 * Refreshes the Combo viewer content by setting the input, and selects the last element in the combo.
 	 * @param comboViewer the combo to refresh
-	 * @param input the input to set
+	 * @param set the input to set
 	 * @param selection the new selection
 	 */
-	protected void refreshComboViewerContent(ComboViewer comboViewer, Set<Object> input, Object selection) {
-		comboViewer.setInput(new ArrayList<>(input));
+	protected void refreshComboViewerContent(ComboViewer comboViewer, Set<? extends Object> set, Object selection) {
+		comboViewer.setInput(new ArrayList<>(set));
 		String[] items=comboViewer.getCombo().getItems();
 		for (int i=0; i < items.length; i++) {
 			if (items[i].equals(selection)) {

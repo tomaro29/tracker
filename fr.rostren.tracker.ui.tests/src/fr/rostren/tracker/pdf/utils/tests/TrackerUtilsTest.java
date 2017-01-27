@@ -19,7 +19,6 @@ import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Date;
 import fr.rostren.tracker.IncomeCategory;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.OperationsTitleRepository;
@@ -155,36 +154,6 @@ public class TrackerUtilsTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void getOperationTotalAmount_NullOperationTest() {
 		TrackerUtils.getOperationTotalAmount(null);
-	}
-
-	/**
-	 *Tests the {@link TrackerUtils#getOperationDate(Operation)} method with a valid and invalid arguments.
-	 */
-	@Test
-	public void getOperationDateTest() {
-		/*Test with an operation with no date.*/
-		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationDate(Optional.of(credit)));
-
-		/*Test with an operation with date without value.*/
-		credit.setDate(operationDate);
-		assertEquals("00 / Jan / 0", TrackerUtils.getOperationDate(Optional.of(credit))); //$NON-NLS-1$
-
-		/*Test with an operation with date value.*/
-		credit.setDate(operationDate);
-		operationDate.setDay(1);
-		operationDate.setMonth(Month.APR);
-		operationDate.setYear(2001);
-		String date=TrackerUtils.getOperationDate(Optional.of(credit));
-		assertNotNull(date);
-		assertEquals("01 / Apr / 2001", date); //$NON-NLS-1$
-	}
-
-	/**
-	 *Tests the {@link TrackerUtils#getOperationDate(Operation)} method with a null argument.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void getOperationDate_NullOperationTest() {
-		TrackerUtils.getOperationDate(null);
 	}
 
 	/**

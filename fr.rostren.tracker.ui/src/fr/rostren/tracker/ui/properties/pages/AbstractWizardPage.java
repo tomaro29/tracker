@@ -29,13 +29,13 @@ import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 
-public abstract class AbstractAddWizardPage extends WizardPage {
+public abstract class AbstractWizardPage extends WizardPage {
 
 	/**
 	 * Constructor
 	 * @param pageName the page name
 	 */
-	protected AbstractAddWizardPage(String pageName) {
+	protected AbstractWizardPage(String pageName) {
 		super(pageName);
 	}
 

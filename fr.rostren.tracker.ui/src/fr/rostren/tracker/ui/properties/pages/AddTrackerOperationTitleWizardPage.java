@@ -17,7 +17,7 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
  * Page to add a {@link OperationTitle} instance to an existing {@link Tracker}
  * instance.
  */
-public class AddTrackerOperationTitleWizardPage extends AbstractAddWizardPage {
+public class AddTrackerOperationTitleWizardPage extends AbstractWizardPage {
 	protected static final String[] ORIGIN_TYPES=new String[] {OriginType.MANUAL.getLiteral(), OriginType.PDF_FILE.getLiteral()};
 
 	private static final String PAGE_NAME="Add operation title to ''{0}'' Page"; //$NON-NLS-1$

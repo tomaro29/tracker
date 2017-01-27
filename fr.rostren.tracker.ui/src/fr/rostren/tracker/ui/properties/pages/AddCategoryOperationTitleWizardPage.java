@@ -30,7 +30,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
  * Page to add an {@link OperationTitle} instance to an existing
  * {@link Category} instance.
  */
-public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
+public class AddCategoryOperationTitleWizardPage extends AbstractWizardPage {
 	private static final String PAGE_NAME="Add operation title to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add operation title"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new operation title to the selected category."; //$NON-NLS-1$

@@ -1,6 +1,8 @@
 package fr.rostren.tracker.histogram;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.eclipse.swt.SWT;
@@ -54,7 +56,7 @@ public class Histogram {
 	 * @param spendingSeriesValues the spending series values
 	 * @param enableStack <code>true</code> if the stack configuration is enabled, <code>false</code> otherwise.
 	 */
-	public void populateHistogram(List<String> titles, List<Double> incomeSeriesValues, List<Double> spendingSeriesValues, boolean enableStack) {
+	public void populateHistogram(List<String> titles, List<BigDecimal> incomeSeriesValues, List<BigDecimal> spendingSeriesValues, boolean enableStack) {
 		xAxis.setCategorySeries(convertToStringArray(titles));
 		xAxis.enableCategory(true);
 
@@ -98,8 +100,11 @@ public class Histogram {
 	 * @param list the given list
 	 * @return the converted array
 	 */
-	private double[] convertToPrimitiveDoubleArray(List<Double> list) {
-		return list == null ? null : ArrayUtils.toPrimitive(list.toArray(new Double[list.size()]));
+	private double[] convertToPrimitiveDoubleArray(List<BigDecimal> list) {
+		List<Double> doubles=list.stream()//
+				.map(value -> Double.valueOf(value.toString()))//
+				.collect(Collectors.toList());
+		return doubles == null ? null : ArrayUtils.toPrimitive(doubles.toArray(new Double[doubles.size()]));
 	}
 
 	/**

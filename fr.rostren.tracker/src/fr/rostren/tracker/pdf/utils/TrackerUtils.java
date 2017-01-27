@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.rostren.tracker.Account;
@@ -244,17 +243,6 @@ public class TrackerUtils {
 		//FIXME validate Java 8 code migration
 		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
 		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
-	}
-
-	/**
-	 * Returns the operation date as a {@link String}
-	 * @param operationOpt the operation
-	 * @return the operation date as a {@link String}
-	 */
-	public static String getOperationDate(Optional<Operation> operationOpt) {
-		//FIXME validate Java 8 code migration
-		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
-		return operation.getDate() == null ? StringUtils.EMPTY : operation.getDate().toString();
 	}
 
 	/**
@@ -511,28 +499,19 @@ public class TrackerUtils {
 	 * @return <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
 	 */
 	public static boolean isValidOperationAmounts(Operation operation) {
-		return operation.getTotalAmount().equals(getSum(operation.getSubAmounts()));
+		return operation.getTotalAmount().equals(getTotalAmount(operation.getSubAmounts()));
 	}
 
 	/**
-	 * Returns the sum of sub amounts values as {@link BigDecimal} instance
-	 * @param subAmounts the sub amounts to addition
-	 * @return the sum of sub amounts values as {@link BigDecimal} instance
-	 */
-	private static BigDecimal getSum(EList<Amount> subAmounts) {
-		return new BigDecimal(getTotalAmount(subAmounts));
-	}
-
-	/**
-	 * REturns the total amount of all given amounts as {@link Double} instance.
+	 * REturns the total amount of all given amounts as {@link BigDecimal} instance.
 	 * @param amounts the list of amounts to addition
-	 * @return the total amount value, sum of all given amounts as {@link Double} instance.
+	 * @return the total amount value, sum of all given amounts as {@link BigDecimal} instance.
 	 */
-	private static Double getTotalAmount(List<Amount> amounts) {
-		//FIXME validate the next java8 code
-		return amounts.stream()//
-				.mapToDouble(amount -> Double.parseDouble(amount.getValue().toString()))//
-				.sum();
+	private static BigDecimal getTotalAmount(List<Amount> amounts) {
+		BigDecimal sum=amounts.stream()//
+				.map(amount -> amount.getValue())//
+				.reduce(new BigDecimal(0), BigDecimal::add);
+		return sum;
 	}
 
 	/**
@@ -562,11 +541,10 @@ public class TrackerUtils {
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
 	 */
-	public static List<Double> findAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
+	public static List<BigDecimal> findAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
 		return dates//
 				.stream()//
-				.mapToDouble(date -> getTotalAmount(findAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
-				.boxed()//
+				.map(date -> getTotalAmount(findAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
 				.collect(Collectors.toList());
 	}
 
@@ -578,11 +556,10 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the income category amount of the given item and its children
 	 */
-	public static List<Double> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+	public static List<BigDecimal> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
 		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item);
 		return dates.stream()//
-				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
-				.boxed()//
+				.map(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
 				.collect(Collectors.toList());
 	}
 
@@ -594,11 +571,10 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the spending category amount of the given item and its children
 	 */
-	public static List<Double> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+	public static List<BigDecimal> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
 		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item);
 		return dates.stream()//
-				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
-				.boxed()//
+				.map(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
 				.collect(Collectors.toList());
 	}
 
@@ -654,7 +630,7 @@ public class TrackerUtils {
 	 * @param dates the dates to witch we need to extract the amount
 	 * @return the operation amounts
 	 */
-	public static List<Double> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
+	public static List<BigDecimal> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
 		// TODO Auto-generated method stub
 		return null;
 	}

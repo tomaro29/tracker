@@ -19,7 +19,7 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
  * Page to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class AddAccountWizardPage extends AbstractAddWizardPage {
+public class AddAccountWizardPage extends AbstractWizardPage {
 	protected static final String[] ACCOUNTS_TYPES=new String[] {CheckingAccount.class.getSimpleName(), BoockletAccount.class.getSimpleName()};
 
 	private static final String PAGE_NAME="Add account to ''{0}'' Page"; //$NON-NLS-1$

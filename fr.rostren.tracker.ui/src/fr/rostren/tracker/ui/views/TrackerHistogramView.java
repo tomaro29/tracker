@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.views;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -184,8 +186,8 @@ public class TrackerHistogramView extends ViewPart {
 	 */
 	public void populateHistogram() {
 		List<String> dates=getHistogramDates();
-		List<Double> incomeValues=new ArrayList<>();
-		List<Double> spendingValues=new ArrayList<>();
+		List<BigDecimal> incomeValues=new ArrayList<>();
+		List<BigDecimal> spendingValues=new ArrayList<>();
 
 		Account account=TrackerUtils.findAccount(tracker, accountsCombo.getItem(accountsCombo.getSelectionIndex()));
 		int year=Integer.parseInt(yearsCombo.getItem(accountsCombo.getSelectionIndex()));
@@ -360,7 +362,10 @@ public class TrackerHistogramView extends ViewPart {
 	 */
 	private String[] getCategoriesItems(Set<Category> categories) {
 		List<String> titles=new ArrayList<>();
-		titles.addAll(categories.stream().map(category -> category.getTitle()).collect(Collectors.toList()));
+		titles.addAll(categories.stream()//
+				.filter(category -> !StringUtils.isEmpty(category.getTitle()))//
+				.map(category -> category.getTitle())//
+				.collect(Collectors.toList()));
 		titles.add(0, TrackerHistogramView.ALL_CATEGORIES_ITEM);
 		return titles.toArray(new String[titles.size()]);
 	}

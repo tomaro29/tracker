@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.actions;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	}
 
 	@Override
-	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+	public void run(IProgressMonitor monitor) throws InterruptedException {
 		boolean done=false;
 		monitor.beginTask("Extract Operations", 1); //$NON-NLS-1$
 		if (!monitor.isCanceled()) {

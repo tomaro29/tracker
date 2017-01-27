@@ -16,7 +16,7 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
  * Page to add a {@link Category} instance to an existing {@link Tracker}
  * instance.
  */
-public class AddCategoryCategoryWizardPage extends AbstractAddWizardPage {
+public class AddCategoryCategoryWizardPage extends AbstractWizardPage {
 	private static final String PAGE_NAME="Add Category to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add Category"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new Category to the selected category."; //$NON-NLS-1$

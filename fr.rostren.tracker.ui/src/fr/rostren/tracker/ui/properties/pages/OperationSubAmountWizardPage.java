@@ -41,7 +41,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
  * Page to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
+public class OperationSubAmountWizardPage extends AbstractWizardPage {
 
 	private static final String PAGE_NAME="Add sub-amount to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add sub-amount"; //$NON-NLS-1$

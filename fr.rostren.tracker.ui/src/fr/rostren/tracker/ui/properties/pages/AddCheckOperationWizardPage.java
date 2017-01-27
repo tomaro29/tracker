@@ -42,7 +42,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOriginWizard;
  * Page to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
+public class AddCheckOperationWizardPage extends AbstractWizardPage {
 	protected static final String[] OPERATION_TYPES=new String[] {Credit.class.getSimpleName(), Debit.class.getSimpleName(), Incoming.class.getSimpleName(),
 		Outgoing.class.getSimpleName()};
 

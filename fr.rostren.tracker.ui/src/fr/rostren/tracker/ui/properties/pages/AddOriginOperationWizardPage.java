@@ -24,7 +24,7 @@ import fr.rostren.tracker.ui.properties.label.providers.OperationLabelProvider;
  * Page to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
+public class AddOriginOperationWizardPage extends AbstractWizardPage {
 	protected static final String[] OPERATION_TYPES=new String[] {Credit.class.getSimpleName(), Debit.class.getSimpleName(), Incoming.class.getSimpleName(),
 		Outgoing.class.getSimpleName()};
 

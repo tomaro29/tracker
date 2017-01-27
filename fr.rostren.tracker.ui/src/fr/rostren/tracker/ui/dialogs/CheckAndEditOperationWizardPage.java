@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -20,6 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -27,10 +29,13 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.Date;
+import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
@@ -64,10 +69,65 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	protected Button editButton;
 	protected Button removeButton;
 
+	protected Date date;
+
 	private final int TEXT_MARGIN=3;
 	private final int FONT_WIDTH=10;
 
 	private final String operationTitle;
+
+	private final Listener modifyDateListener=new Listener() {
+
+		@Override
+		public void handleEvent(Event event) {
+			Object source=event.widget;
+			Assert.isTrue(source instanceof DateTime);
+			DateTime dateTime=(DateTime)source;
+			//set operation date to the new selected date
+			date.setDay(dateTime.getDay());
+			date.setMonth(Month.get(dateTime.getMonth()));
+			date.setYear(dateTime.getYear());
+
+			//set all subAmounts wished dates to the new selected date
+			operation.getSubAmounts().stream()//
+					.forEach(subAmount -> {
+						Date wishedDate=subAmount.getWishedDate();
+						wishedDate.setDay(dateTime.getDay());
+						wishedDate.setMonth(Month.get(dateTime.getMonth()));
+						wishedDate.setYear(dateTime.getYear());
+					});
+			populateTable();
+		}
+	};
+
+	private final SelectionListener dateKeyListener=new SelectionListener() {
+
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			Object source=event.getSource();
+			Assert.isTrue(source instanceof DateTime);
+			DateTime dateTime=(DateTime)source;
+			//set operation date to the new selected date
+			date.setDay(dateTime.getDay());
+			date.setMonth(Month.get(dateTime.getMonth()));
+			date.setYear(dateTime.getYear());
+
+			//set all subAmounts wished dates to the new selected date
+			operation.getSubAmounts().stream()//
+					.forEach(subAmount -> {
+						Date wishedDate=subAmount.getWishedDate();
+						wishedDate.setDay(dateTime.getDay());
+						wishedDate.setMonth(Month.get(dateTime.getMonth()));
+						wishedDate.setYear(dateTime.getYear());
+					});
+			populateTable();
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent event) {
+			// Do Nothing
+		}
+	};
 
 	/**
 	 * Constructor
@@ -78,6 +138,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		super(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_NAME, operation.getOperationTitle().getTitle()));
 
 		this.operation=operation;
+		date=operation.getDate();
 		this.account=account;
 		operationTitle=operation.getOperationTitle().getTitle();
 
@@ -267,7 +328,8 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 */
 	private void createOperationLabels(Composite subContainer, Operation operation) {
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, operation.eClass().getName());
-		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, TrackerUtils.getOperationDate(Optional.of(operation)));
+		createDateTime(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, date, dateKeyListener, modifyDateListener);
+		//		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, TrackerUtils.getOperationDate(Optional.of(operation)));
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL, TrackerUtils.getOperationTotalAmount(Optional.of(operation)));
 	}
 
@@ -283,6 +345,40 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 
 		Label textLabel=new Label(subContainer, SWT.NONE);
 		textLabel.setText(textLabelContent);
+	}
+
+	/**
+	 * Creates a date time zone
+	 * @param composite the composite parent of the label to create
+	 * @param label the label
+	 * @param content the content
+	 * @param selectionListener the selection listener
+	 * @param modifyListener the modify listener
+	 * @return the created {@link Text}
+	 */
+	private DateTime createDateTime(Composite composite, String label, Date content, SelectionListener selectionListener, Listener modifyListener) {
+		createLabel(composite, label);
+		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
+		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+		if (content != null) {
+			dateTime.setDate(content.getYear(), content.getMonth().getValue(), content.getDay());
+		}
+		dateTime.addSelectionListener(selectionListener);
+		dateTime.addListener(SWT.Modify, modifyListener);
+		return dateTime;
+	}
+
+	/**
+	 * Creates a label
+	 * @param composite the composite parent of the label to create
+	 * @param label the label
+	 */
+	private void createLabel(Composite composite, String label) {
+		if (label == null) {
+			return;
+		}
+		Label textLabel=new Label(composite, SWT.NONE);
+		textLabel.setText(label);
 	}
 
 	/**

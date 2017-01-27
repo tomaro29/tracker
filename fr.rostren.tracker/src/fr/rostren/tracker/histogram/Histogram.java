@@ -104,7 +104,7 @@ public class Histogram {
 		List<Double> doubles=list.stream()//
 				.map(value -> Double.valueOf(value.toString()))//
 				.collect(Collectors.toList());
-		return doubles == null ? null : ArrayUtils.toPrimitive(doubles.toArray(new Double[doubles.size()]));
+		return doubles == null ? null : ArrayUtils.toPrimitive(doubles.stream().toArray(Double[]::new));
 	}
 
 	/**
@@ -113,6 +113,6 @@ public class Histogram {
 	 * @return the converted array
 	 */
 	private String[] convertToStringArray(List<String> list) {
-		return list == null ? null : list.toArray(new String[list.size()]);
+		return list == null ? null : list.stream().toArray(String[]::new);
 	}
 }

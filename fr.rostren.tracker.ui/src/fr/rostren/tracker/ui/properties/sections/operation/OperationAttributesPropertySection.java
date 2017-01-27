@@ -183,7 +183,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 			titles.add(operationTitle.getTitle());
 		}
 		titles.removeAll(Collections.singleton(null));
-		return titles.toArray(new String[0]);
+		return titles.stream().toArray(String[]::new);
 	}
 
 	/**

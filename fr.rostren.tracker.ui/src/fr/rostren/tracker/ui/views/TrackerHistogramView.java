@@ -2,7 +2,6 @@ package fr.rostren.tracker.ui.views;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -221,14 +220,7 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the list of dates
 	 */
 	private List<String> getHistogramDates() {
-		// FIXME to validate java 8 code migration
 		return Month.VALUES.stream().map(month -> month.getLiteral()).collect(Collectors.toList());
-
-		//		List<String> dates=new ArrayList<>();
-		//		for (Month month: Month.VALUES) {
-		//			dates.add(month.getLiteral());
-		//		}
-		//		return dates;
 	}
 
 	/**
@@ -320,22 +312,11 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the array of items
 	 */
 	private String[] getYearsItems(Set<Integer> years) {
-		// FIXME to validate java 8 code migration
 		return years//
 				.stream()//
 				.map(year -> Integer.toString(year))//
-				.collect(Collectors.toList())//
-				.toArray(new String[years.size()]);
-
-		//		String[] items=new String[years.size()];
-		//		int i=0;
-		//		Iterator<Integer> iterator=years.iterator();
-		//		while (iterator.hasNext()) {
-		//			int year=iterator.next();
-		//			items[i]=Integer.toString(year);
-		//			i++;
-		//		}
-		//		return items;
+				.collect(Collectors.toList()).stream()//
+				.toArray(String[]::new);
 	}
 
 	/**
@@ -344,15 +325,10 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the array of items
 	 */
 	private String[] getAccountsItems(Set<Account> accounts) {
-		String[] items=new String[accounts.size()];
-		int i=0;
-		Iterator<Account> iterator=accounts.iterator();
-		while (iterator.hasNext()) {
-			Account account=iterator.next();
-			items[i]=account.getName();
-			i++;
-		}
-		return items;
+		return accounts.stream()//
+				.map(account -> account.getName())//
+				.collect(Collectors.toList()).stream()//
+				.toArray(String[]::new);
 	}
 
 	/**
@@ -367,7 +343,7 @@ public class TrackerHistogramView extends ViewPart {
 				.map(category -> category.getTitle())//
 				.collect(Collectors.toList()));
 		titles.add(0, TrackerHistogramView.ALL_CATEGORIES_ITEM);
-		return titles.toArray(new String[titles.size()]);
+		return titles.stream().toArray(String[]::new);
 	}
 
 	/**
@@ -379,7 +355,7 @@ public class TrackerHistogramView extends ViewPart {
 		List<String> titles=new ArrayList<>();
 		titles.addAll(operationsTitles.stream().map(operationTitle -> operationTitle.getTitle()).collect(Collectors.toList()));
 		titles.add(0, TrackerHistogramView.ALL_OPERATIONS_ITEM);
-		return titles.toArray(new String[titles.size()]);
+		return titles.stream().toArray(String[]::new);
 	}
 
 	@Override

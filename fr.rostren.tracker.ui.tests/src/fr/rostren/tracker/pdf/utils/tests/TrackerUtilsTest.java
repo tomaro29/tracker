@@ -71,9 +71,17 @@ public class TrackerUtilsTest {
 	/**
 	 *Tests the {@link TrackerUtils#getCategoryTitle(fr.rostren.tracker.Amount)} method with a null argument.
 	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void getCategoryTitle_NullAmountTest() {
+	@Test(expected=NullPointerException.class)
+	public void getCategoryTitle_NullAmountOptTest() {
 		TrackerUtils.getCategoryTitle(null);
+	}
+
+	/**
+	 *Tests the {@link TrackerUtils#getCategoryTitle(fr.rostren.tracker.Amount)} method with a not existing argument.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void getCategoryTitle_NotExistingAmountOptTest() {
+		TrackerUtils.getCategoryTitle(Optional.empty());
 	}
 
 	/**
@@ -95,9 +103,17 @@ public class TrackerUtilsTest {
 	/**
 	 *Tests the {@link TrackerUtils#getAmountValue(fr.rostren.tracker.Amount)} method with a null argument.
 	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void getAmountValue_NullAmountTest() {
+	@Test(expected=NullPointerException.class)
+	public void getAmountValue_NullAmountOptTest() {
 		TrackerUtils.getAmountValue(null);
+	}
+
+	/**
+	 *Tests the {@link TrackerUtils#getAmountValue(fr.rostren.tracker.Amount)} method with a not existing argument.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void getAmountValue_NotExitingAmountOptTest() {
+		TrackerUtils.getAmountValue(Optional.empty());
 	}
 
 	/**
@@ -123,9 +139,17 @@ public class TrackerUtilsTest {
 	/**
 	 *Tests the {@link TrackerUtils#getOperationTitleAsString(Operation)} method with a null argument.
 	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void getOperationTitleAsString_NullOperationTest() {
+	@Test(expected=NullPointerException.class)
+	public void getOperationTitleAsString_NullOperationOptTest() {
 		TrackerUtils.getOperationTitleAsString(null);
+	}
+
+	/**
+	 *Tests the {@link TrackerUtils#getOperationTitleAsString(Operation)} method with a not existing argument.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void getOperationTitleAsString_NotExistingOperationOptTest() {
+		TrackerUtils.getOperationTitleAsString(Optional.empty());
 	}
 
 	/**
@@ -151,9 +175,17 @@ public class TrackerUtilsTest {
 	/**
 	 *Tests the {@link TrackerUtils#getOperationTotalAmount(Operation)} method with a null argument.
 	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void getOperationTotalAmount_NullOperationTest() {
+	@Test(expected=NullPointerException.class)
+	public void getOperationTotalAmount_NullOperationOptTest() {
 		TrackerUtils.getOperationTotalAmount(null);
+	}
+
+	/**
+	 *Tests the {@link TrackerUtils#getOperationTotalAmount(Operation)} method with a not existing argument.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void getOperationTotalAmount_NotExistingOperationOptTest() {
+		TrackerUtils.getOperationTotalAmount(Optional.empty());
 	}
 
 	/**
@@ -191,14 +223,14 @@ public class TrackerUtilsTest {
 		assertEquals(null, TrackerUtils.findOperationTitle(tracker, null));
 		assertEquals(null, TrackerUtils.findOperationTitle(tracker, StringUtils.EMPTY));
 		assertEquals(null, TrackerUtils.findOperationTitle(tracker, " ")); //$NON-NLS-1$
-		assertEquals(null, TrackerUtils.findOperationTitle(tracker, title));
+		assertEquals(Optional.empty(), TrackerUtils.findOperationTitle(tracker, title));
 
 		tracker.setOperationsTitlesRepositories(operationTitlesRepository);
 		operationTitlesRepository.getOperationsTitles().add(operationTitle);
-		assertEquals(null, TrackerUtils.findOperationTitle(tracker, title));
+		assertEquals(Optional.empty(), TrackerUtils.findOperationTitle(tracker, title));
 
 		operationTitle.setTitle(title);
-		assertEquals(operationTitle, TrackerUtils.findOperationTitle(tracker, title));
+		assertEquals(operationTitle, TrackerUtils.findOperationTitle(tracker, title).orElseThrow(IllegalArgumentException::new));
 
 		operationTitle.setTitle(title);
 	}
@@ -226,10 +258,10 @@ public class TrackerUtilsTest {
 		account.getOperations().add(credit);
 		tracker.setOperationsTitlesRepositories(operationTitlesRepository);
 		operationTitlesRepository.getOperationsTitles().add(operationTitle);
-		assertEquals(null, TrackerUtils.findOperationTitle(credit, title));
+		assertEquals(Optional.empty(), TrackerUtils.findOperationTitle(credit, title));
 
 		operationTitle.setTitle(title);
-		assertEquals(operationTitle, TrackerUtils.findOperationTitle(credit, title));
+		assertEquals(operationTitle, TrackerUtils.findOperationTitle(credit, title).orElseThrow(IllegalArgumentException::new));
 	}
 
 	/**
@@ -263,10 +295,10 @@ public class TrackerUtilsTest {
 		account.getOperations().add(credit);
 		tracker.setOriginsRepository(originsRepository);
 		originsRepository.getOrigins().add(origin);
-		assertEquals(null, TrackerUtils.findOperationOrigin(credit, originId));
+		assertEquals(Optional.empty(), TrackerUtils.findOperationOrigin(credit, originId));
 
 		origin.setIdentifier(originId);
-		assertEquals(origin, TrackerUtils.findOperationOrigin(credit, originId));
+		assertEquals(origin, TrackerUtils.findOperationOrigin(credit, originId).orElseThrow(IllegalArgumentException::new));
 	}
 
 	/**
@@ -303,10 +335,10 @@ public class TrackerUtilsTest {
 		IncomeCategory income=TrackerFactory.eINSTANCE.createIncomeCategory();
 		categoriesRepository.setIncome(income);
 		categoriesRepository.getIncome().getIncomes().add(incomeCategory);
-		assertEquals(null, TrackerUtils.findAmountCategory(amount, title));
+		assertEquals(Optional.empty(), TrackerUtils.findAmountCategory(amount, title));
 
 		incomeCategory.setTitle(title);
-		assertEquals(incomeCategory, TrackerUtils.findAmountCategory(amount, title));
+		assertEquals(incomeCategory, TrackerUtils.findAmountCategory(amount, title).orElseThrow(IllegalArgumentException::new));
 	}
 
 	/**

@@ -225,22 +225,20 @@ public class TrackerUtils {
 
 	/**
 	 * Returns the operation title as a {@link String}
-	 * @param operationOpt the operation
+	 * @param operationOpt the operation {@link Optional} instance
 	 * @return the operation title as a {@link String}
 	 */
 	public static String getOperationTitleAsString(Optional<Operation> operationOpt) {
-		//FIXME validate Java 8 code migration
 		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
 		return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
 	}
 
 	/**
 	 * Returns the operation total amount as a {@link String}
-	 * @param operationOpt the operation
+	 * @param operationOpt the operation {@link Optional} instance
 	 * @return the operation total amount as a {@link String}
 	 */
 	public static String getOperationTotalAmount(Optional<Operation> operationOpt) {
-		//FIXME validate Java 8 code migration
 		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
 		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
 	}
@@ -345,6 +343,8 @@ public class TrackerUtils {
 
 		return getAllCategories(tracker.getCategoriesRepository()).stream()//
 				.map(category -> findCategory(category, title))//
+				.filter(opt -> opt.isPresent())//unpack the non-empty values
+				.map(opt -> opt.orElseThrow(IllegalArgumentException::new))//
 				.findFirst();
 	}
 
@@ -354,9 +354,9 @@ public class TrackerUtils {
 	 * @param title the category title as a {@link String}
 	 * @return the category
 	 */
-	private static Category findCategory(Category category, String title) {
+	private static Optional<Category> findCategory(Category category, String title) {
 		if (title.equals(category.getTitle())) {
-			return category;
+			return Optional.of(category);
 		}
 		if (category instanceof IncomeCategory) {
 			for (IncomeCategory subCategory: ((IncomeCategory)category).getIncomes()) {
@@ -368,7 +368,7 @@ public class TrackerUtils {
 				return findCategory(subCategory, title);
 			}
 		}
-		return null;
+		return Optional.empty();
 	}
 
 	/**
@@ -557,7 +557,7 @@ public class TrackerUtils {
 	 * @return the income category amount of the given item and its children
 	 */
 	public static List<BigDecimal> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
-		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item);
+		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item).orElseThrow(IllegalArgumentException::new);
 		return dates.stream()//
 				.map(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
 				.collect(Collectors.toList());
@@ -572,7 +572,7 @@ public class TrackerUtils {
 	 * @return the spending category amount of the given item and its children
 	 */
 	public static List<BigDecimal> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
-		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item);
+		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item).orElseThrow(IllegalArgumentException::new);
 		return dates.stream()//
 				.map(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
 				.collect(Collectors.toList());

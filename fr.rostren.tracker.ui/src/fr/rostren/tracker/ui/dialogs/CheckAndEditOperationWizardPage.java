@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.dialogs;
 
-import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.Optional;
 
@@ -391,7 +390,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
 			item.setFont(font);
 			item.setData(amount);
-			item.setText(new String[] {amount.getValue().toString(), amount.getCategory().getTitle(), amount.getWishedDate().toString()});
+			item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory().getTitle(), amount.getWishedDate().toString()});
 		}
 	}
 
@@ -442,7 +441,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 					newAmount.setCategory(category);
 				}
 
-				BigDecimal value=wizard.getAmountValue();
+				Double value=wizard.getAmountValue();
 				if (value != null) {
 					newAmount.setValue(value);
 				}
@@ -502,8 +501,8 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		private void adaptAndValidateValues(Amount newAmount) {
 			if (operation.getSubAmounts().size() == 1) {
 				Amount amount=operation.getSubAmounts().get(0);
-				BigDecimal lastValue=amount.getValue();
-				BigDecimal newValue=lastValue.subtract(newAmount.getValue());
+				double lastValue=amount.getValue();
+				double newValue=lastValue - newAmount.getValue();
 				amount.setValue(newValue);
 			}
 

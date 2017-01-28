@@ -1,6 +1,5 @@
 package fr.rostren.tracker.pdf.analyzer;
 
-import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,7 +110,7 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 			extractPartialLine();
 		}
 		else if (getCurrentLine().matches(AMOUNT_NUMBER_PATTREN.pattern())) {
-			setLastPotentialAmount(getAmountAsDecimal(getCurrentLine().toString()));
+			setLastPotentialAmount(getAmountAsDouble(getCurrentLine().toString()));
 		}
 	}
 
@@ -144,7 +143,7 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 				titleBuilder.append(STRING_SEPARATOR);
 			}
 
-			setLastPotentialAmount(getAmountAsDecimal(beforeLastPart + lastPart));
+			setLastPotentialAmount(getAmountAsDouble(beforeLastPart + lastPart));
 		}
 		else {
 			for (int index=1; index < getCurrentSplitLine().length - 1; index++) {
@@ -152,18 +151,18 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 				titleBuilder.append(STRING_SEPARATOR);
 			}
 
-			setLastPotentialAmount(getAmountAsDecimal(lastPart.toString()));
+			setLastPotentialAmount(getAmountAsDouble(lastPart.toString()));
 		}
 		setLastPotentialOperationTitle(titleBuilder.toString());
 	}
 
 	/**
-	 * Returns the amount as {@link BigDecimal}
+	 * Returns the amount as {@link Double}
 	 * @param amount the amount as a string
-	 * @return the {@link BigDecimal}amount
+	 * @return the {@link Double} amount
 	 */
-	private BigDecimal getAmountAsDecimal(String amount) {
-		return new BigDecimal(amount.replaceAll(STRING_SEPARATOR, StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+	private Double getAmountAsDouble(String amount) {
+		return new Double(amount.replaceAll(STRING_SEPARATOR, StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override

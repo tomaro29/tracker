@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.junit.Test;
@@ -39,8 +38,8 @@ public class LineContentTest {
 	private final String INTERETSTitle="INTERETS CREDITEURS any other string"; //$NON-NLS-1$
 	private final String POSTETitle="CB LA POSTE any other string"; //$NON-NLS-1$
 	private final String CHEQUETitle="CHEQUE any other string"; //$NON-NLS-1$
-	private final BigDecimal testAmount=new BigDecimal(20.0);
-	private final BigDecimal zeroAmount=new BigDecimal(0.0);
+	private final double testAmount=20.0;
+	private final double zeroAmount=0.0;
 	private final OperationType creditType=OperationType.CREDIT;
 	private final OperationType debitType=OperationType.DEBIT;
 	private final Origin testOrigin=TrackerFactory.eINSTANCE.createOrigin();
@@ -68,14 +67,6 @@ public class LineContentTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void constructor_BlankTitleTest() {
 		new LineContent(testDate, " ", testAmount, creditType, testOrigin); //$NON-NLS-1$
-	}
-
-	/**
-	 * Tests the constructor with null amount.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void constructor_NullAmountTest() {
-		new LineContent(testDate, testTitle, null, creditType, testOrigin);
 	}
 
 	/**

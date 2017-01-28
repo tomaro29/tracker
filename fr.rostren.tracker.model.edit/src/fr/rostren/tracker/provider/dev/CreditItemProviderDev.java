@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker.provider.dev;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -47,7 +46,7 @@ public class CreditItemProviderDev extends CreditItemProvider {
 		}
 
 		final Credit creditOperation=(Credit)owner;
-		final BigDecimal newTotalAmount=(BigDecimal)value;
+		final Double newTotalAmount=(Double)value;
 
 		if (creditOperation.getTotalAmount() == newTotalAmount) {
 			return super.createSetCommand(domain, owner, feature, value, index);

@@ -5,8 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
-
 import org.junit.Test;
 
 import fr.rostren.tracker.Credit;
@@ -50,11 +48,11 @@ public class CEPdfContentAnalyzerTest {
 	private final String decValidLine="12/12 OperationTitle 20,00"; //$NON-NLS-1$
 	private final String inValidMonthLine="12/13 OperationTitle 20,00"; //$NON-NLS-1$
 	private final String validLineWithBigAmount="12/12 OperationTitle 2 120,00"; //$NON-NLS-1$
-	private final BigDecimal expectedBigAmount=new BigDecimal("2120.00"); //$NON-NLS-1$
+	private final double expectedBigAmount=2120.00;
 	private final String partialValidLine="12/12 OperationTitle"; //$NON-NLS-1$
 	private final String amountValidLine="20,00"; //$NON-NLS-1$
 	private final String bigAmountValidLine="2120.00"; //$NON-NLS-1$
-	private final BigDecimal expectedAmount=new BigDecimal("20.00"); //$NON-NLS-1$
+	private final double expectedAmount=20.00;
 	private final String numbersInvalidLine="15787455025875689"; //$NON-NLS-1$
 
 	/**Tokens*/
@@ -264,13 +262,13 @@ public class CEPdfContentAnalyzerTest {
 	 * @param expectedAmount the expected amount to check
 	 * @param expectedMonth the expected month to check
 	 */
-	private void testCreditParsingResult(LineContent content, BigDecimal expectedAmount, Month expectedMonth) {
+	private void testCreditParsingResult(LineContent content, double expectedAmount, Month expectedMonth) {
 		assertNotNull(content);
 		assertEquals("OperationTitle ", content.getTitle()); //$NON-NLS-1$
 		Operation operation=content.getOperation();
 		assertTrue(operation instanceof Credit);
 		assertNull(operation.getOperationTitle());
-		assertEquals(expectedAmount.toString(), operation.getTotalAmount().toString());
+		assertEquals(String.valueOf(expectedAmount), String.valueOf(operation.getTotalAmount()));
 		Date date=operation.getDate();
 		assertNotNull(date);
 		assertEquals(12, date.getDay());
@@ -286,13 +284,13 @@ public class CEPdfContentAnalyzerTest {
 	 * @param expectedAmount the expected amount to check
 	 * @param expectedMonth the expected month to check
 	 */
-	private void testDebitParsingResult(LineContent content, BigDecimal expectedAmount, Month expectedMonth) {
+	private void testDebitParsingResult(LineContent content, double expectedAmount, Month expectedMonth) {
 		assertNotNull(content);
 		assertEquals("OperationTitle ", content.getTitle()); //$NON-NLS-1$
 		Operation operation=content.getOperation();
 		assertTrue(operation instanceof Debit);
 		assertNull(operation.getOperationTitle());
-		assertEquals(expectedAmount.toString(), operation.getTotalAmount().toString());
+		assertEquals(String.valueOf(expectedAmount), String.valueOf(operation.getTotalAmount()));
 		Date date=operation.getDate();
 		assertNotNull(date);
 		assertEquals(12, date.getDay());

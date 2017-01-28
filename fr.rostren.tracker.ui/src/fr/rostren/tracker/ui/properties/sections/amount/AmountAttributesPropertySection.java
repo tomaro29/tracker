@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.properties.sections.amount;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -80,8 +79,8 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	 */
 	private String getAmountvalue() {
 		Assert.isTrue(currentEObject instanceof Amount);
-		BigDecimal value=((Amount)currentEObject).getValue();
-		if (value == null) {
+		double value=((Amount)currentEObject).getValue();
+		if (value == 0) {
 			return StringUtils.EMPTY;
 		}
 		return String.valueOf(value);

@@ -1,6 +1,5 @@
 package fr.rostren.tracker.pdf.utils;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
@@ -50,15 +49,15 @@ public class LineContent {
 	 * @param origin
 	 *            the operation origin
 	 */
-	public LineContent(Date date, String title, BigDecimal amount, OperationType type, Origin origin) {
+	public LineContent(Date date, String title, double amount, OperationType type, Origin origin) {
 		if (date == null) {
 			throw new IllegalArgumentException("The operation date cannot be null."); //$NON-NLS-1$
 		}
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The operation title cannot be empty or null."); //$NON-NLS-1$
 		}
-		if (amount == null || amount.equals(new BigDecimal(0.0))) {
-			throw new IllegalArgumentException("The operation amount cannot be zero or null."); //$NON-NLS-1$
+		if (amount == 0) {
+			throw new IllegalArgumentException("The operation amount cannot be zero."); //$NON-NLS-1$
 		}
 		if (type == null) {
 			throw new IllegalArgumentException("The operation type cannot be null."); //$NON-NLS-1$
@@ -137,7 +136,7 @@ public class LineContent {
 	 *            the linked category
 	 * @return the created amount
 	 */
-	private Amount createCategoryAmount(BigDecimal amount, Category linkedCategory) {
+	private Amount createCategoryAmount(double amount, Category linkedCategory) {
 		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setValue(amount);
 		amountObject.setCategory(linkedCategory);

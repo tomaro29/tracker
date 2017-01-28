@@ -1,7 +1,5 @@
 package fr.rostren.tracker.ui.properties.listeners;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Text;
@@ -33,7 +31,7 @@ public class AmountAttributesModifyListener extends AbstractModifyListener {
 		CCombo combo=section.getCategoryCombo();
 
 		if (widget.equals(text)) {
-			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, new BigDecimal(text.getText()));
+			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.AMOUNT__VALUE, Double.valueOf(text.getText()));
 		}
 		if (widget.equals(combo)) {
 			Category category=TrackerUtils.findAmountCategory((Amount)eObject, combo.getText()).orElseThrow(IllegalArgumentException::new);

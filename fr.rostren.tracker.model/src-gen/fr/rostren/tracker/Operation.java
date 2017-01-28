@@ -98,17 +98,17 @@ public interface Operation extends EObject {
 	 * @model
 	 * @generated
 	 */
-	BigDecimal getTotalAmount();
+	double getTotalAmount();
 
 	/**
 	 * Sets the value of the '{@link fr.rostren.tracker.Operation#getTotalAmount <em>Total Amount</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Total Amount</em>' attribute.
 	 * @see #getTotalAmount()
 	 * @generated
 	 */
-	void setTotalAmount(BigDecimal value);
+	void setTotalAmount(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Operation Title</b></em>' reference.

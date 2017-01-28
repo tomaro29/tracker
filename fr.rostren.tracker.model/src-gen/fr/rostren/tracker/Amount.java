@@ -68,16 +68,17 @@ public interface Amount extends EObject {
 	 * @model
 	 * @generated
 	 */
-	BigDecimal getValue();
+	double getValue();
 
 	/**
 	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(BigDecimal value);
+	void setValue(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Wished Date</b></em>' containment reference.

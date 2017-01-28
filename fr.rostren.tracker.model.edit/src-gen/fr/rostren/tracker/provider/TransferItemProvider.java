@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker.provider;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -79,9 +78,8 @@ public class TransferItemProvider extends OperationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		BigDecimal labelValue=((Transfer)object).getTotalAmount();
-		String label=labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_Transfer_type") : getString("_UI_Transfer_type") + " " + label;
+		Transfer transfer=(Transfer)object;
+		return getString("_UI_Transfer_type") + " " + transfer.getTotalAmount();
 	}
 
 	/**

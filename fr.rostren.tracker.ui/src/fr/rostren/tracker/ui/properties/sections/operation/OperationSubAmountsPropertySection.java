@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.properties.sections.operation;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,8 +55,8 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 					newAmount.setCategory(category);
 				}
 
-				BigDecimal value=wizard.getAmountValue();
-				if (value != null) {
+				double value=wizard.getAmountValue();
+				if (value != 0) {
 					newAmount.setValue(value);
 				}
 

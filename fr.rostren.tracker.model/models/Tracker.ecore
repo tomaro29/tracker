@@ -23,7 +23,7 @@
         eType="#//Transfer" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalAmount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalAmount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationTitle" lowerBound="1"
         eType="#//OperationTitle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subAmounts" lowerBound="1"
@@ -55,7 +55,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Amount">
     <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
         eType="#//Category"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wishedDate" eType="#//Date"
         containment="true"/>
   </eClassifiers>

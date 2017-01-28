@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker.provider;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class OperationItemProvider extends ItemProviderAdapter
 	protected void addTotalAmountPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(), getResourceLocator(),
 				getString("_UI_Operation_totalAmount_feature"), getString("_UI_PropertyDescriptor_description", "_UI_Operation_totalAmount_feature", "_UI_Operation_type"),
-				TrackerPackage.Literals.OPERATION__TOTAL_AMOUNT, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+				TrackerPackage.Literals.OPERATION__TOTAL_AMOUNT, true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -121,9 +120,8 @@ public class OperationItemProvider extends ItemProviderAdapter
 	 */
 	@Override
 	public String getText(Object object) {
-		BigDecimal labelValue=((Operation)object).getTotalAmount();
-		String label=labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_Operation_type") : getString("_UI_Operation_type") + " " + label;
+		Operation operation=(Operation)object;
+		return getString("_UI_Operation_type") + " " + operation.getTotalAmount();
 	}
 
 	/**

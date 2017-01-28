@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.properties.sections.operation;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -75,7 +74,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 			String identifier=origin.getIdentifier();
 			originCombo.select(Arrays.asList(items).indexOf(identifier));
 		}
-		totalAmount.setText(getOperationTotalAmount().toString());
+		totalAmount.setText(String.valueOf(getOperationTotalAmount()));
 		addListeners();
 	}
 
@@ -152,7 +151,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	 * Returns the operation total amount
 	 * @return the operation total amount
 	 */
-	private BigDecimal getOperationTotalAmount() {
+	private double getOperationTotalAmount() {
 		Assert.isTrue(currentEObject instanceof Operation);
 		return ((Operation)currentEObject).getTotalAmount();
 	}

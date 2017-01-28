@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.properties.pages;
 
-import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.Set;
 
@@ -148,7 +147,7 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 		setTitle(OperationSubAmountWizardPage.PAGE_TITLE);
 		setDescription(OperationSubAmountWizardPage.WIZARD_DESCRIPTION);
 		if (amount != null) {
-			value=amount.getValue().toString();
+			value=String.valueOf(amount.getValue());
 			category=amount.getCategory();
 			wishedDate=amount.getWishedDate();
 		}
@@ -179,8 +178,8 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 	 * Returns the amount value
 	 * @return the amount value
 	 */
-	public BigDecimal getAmountValue() {
-		return new BigDecimal(value);
+	public double getAmountValue() {
+		return Double.parseDouble(value);
 	}
 
 	/**
@@ -201,7 +200,7 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 				setErrorMessage("The operation amount must be a number !"); //$NON-NLS-1$
 				return false;
 			}
-			if (getAmountValue().compareTo(operation.getTotalAmount()) == 1) {
+			if (getAmountValue() > operation.getTotalAmount()) {
 				setErrorMessage("The operation sub amount value must be less than it's total amount !"); //$NON-NLS-1$
 				return false;
 			}

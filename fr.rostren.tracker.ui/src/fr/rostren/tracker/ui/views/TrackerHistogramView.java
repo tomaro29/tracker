@@ -1,6 +1,5 @@
 package fr.rostren.tracker.ui.views;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -185,8 +184,8 @@ public class TrackerHistogramView extends ViewPart {
 	 */
 	public void populateHistogram() {
 		List<String> dates=getHistogramDates();
-		List<BigDecimal> incomeValues=new ArrayList<>();
-		List<BigDecimal> spendingValues=new ArrayList<>();
+		List<Double> incomeValues=new ArrayList<>();
+		List<Double> spendingValues=new ArrayList<>();
 
 		Account account=TrackerUtils.findAccount(tracker, accountsCombo.getItem(accountsCombo.getSelectionIndex()));
 		int year=Integer.parseInt(yearsCombo.getItem(accountsCombo.getSelectionIndex()));

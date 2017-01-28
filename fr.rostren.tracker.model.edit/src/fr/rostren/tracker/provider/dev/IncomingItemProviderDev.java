@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker.provider.dev;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -46,7 +45,7 @@ public class IncomingItemProviderDev extends IncomingItemProvider {
 		}
 
 		final Incoming incoming=(Incoming)owner;
-		final BigDecimal newTotalAmount=(BigDecimal)value;
+		final Double newTotalAmount=(Double)value;
 
 		if (incoming.getTotalAmount() == newTotalAmount) {
 			return super.createSetCommand(domain, owner, feature, value, index);

@@ -2,8 +2,6 @@
  */
 package fr.rostren.tracker.impl;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -47,7 +45,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal VALUE_EDEFAULT=null;
+	protected static final double VALUE_EDEFAULT=0.0;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -56,7 +54,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal value=VALUE_EDEFAULT;
+	protected double value=VALUE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getWishedDate() <em>Wished Date</em>}' containment reference.
@@ -127,17 +125,18 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @generated
 	 */
 	@Override
-	public BigDecimal getValue() {
+	public double getValue() {
 		return value;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public void setValue(BigDecimal newValue) {
-		BigDecimal oldValue=value;
+	public void setValue(double newValue) {
+		double oldValue=value;
 		value=newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__VALUE, oldValue, value));
@@ -236,7 +235,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				setCategory((Category)newValue);
 				return;
 			case TrackerPackage.AMOUNT__VALUE:
-				setValue((BigDecimal)newValue);
+				setValue((Double)newValue);
 				return;
 			case TrackerPackage.AMOUNT__WISHED_DATE:
 				setWishedDate((Date)newValue);
@@ -275,7 +274,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 			case TrackerPackage.AMOUNT__CATEGORY:
 				return category != null;
 			case TrackerPackage.AMOUNT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+				return value != VALUE_EDEFAULT;
 			case TrackerPackage.AMOUNT__WISHED_DATE:
 				return wishedDate != null;
 		}

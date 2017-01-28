@@ -11,6 +11,6 @@ public class AmountComparator implements Comparator<Amount> {
 		if (arg1 == null || arg2 == null) {
 			return -1;
 		}
-		return arg1.getValue().compareTo(arg2.getValue());
+		return Double.compare(arg1.getValue(), arg2.getValue());
 	}
 }

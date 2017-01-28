@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker.impl;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -46,7 +45,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal TOTAL_AMOUNT_EDEFAULT=null;
+	protected static final double TOTAL_AMOUNT_EDEFAULT=0.0;
 
 	/**
 	 * The cached value of the '{@link #getTotalAmount() <em>Total Amount</em>}' attribute.
@@ -55,7 +54,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal totalAmount=TOTAL_AMOUNT_EDEFAULT;
+	protected double totalAmount=TOTAL_AMOUNT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOperationTitle() <em>Operation Title</em>}' reference.
@@ -239,17 +238,18 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @generated
 	 */
 	@Override
-	public BigDecimal getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public void setTotalAmount(BigDecimal newTotalAmount) {
-		BigDecimal oldTotalAmount=totalAmount;
+	public void setTotalAmount(double newTotalAmount) {
+		double oldTotalAmount=totalAmount;
 		totalAmount=newTotalAmount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OPERATION__TOTAL_AMOUNT, oldTotalAmount, totalAmount));
@@ -355,7 +355,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.OPERATION__TOTAL_AMOUNT:
-				setTotalAmount((BigDecimal)newValue);
+				setTotalAmount((Double)newValue);
 				return;
 			case TrackerPackage.OPERATION__OPERATION_TITLE:
 				setOperationTitle((OperationTitle)newValue);
@@ -408,7 +408,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.OPERATION__TOTAL_AMOUNT:
-				return TOTAL_AMOUNT_EDEFAULT == null ? totalAmount != null : !TOTAL_AMOUNT_EDEFAULT.equals(totalAmount);
+				return totalAmount != TOTAL_AMOUNT_EDEFAULT;
 			case TrackerPackage.OPERATION__OPERATION_TITLE:
 				return operationTitle != null;
 			case TrackerPackage.OPERATION__SUB_AMOUNTS:

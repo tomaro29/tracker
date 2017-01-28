@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
@@ -93,11 +92,11 @@ public class TrackerUtilsTest {
 		assertEquals(StringUtils.EMPTY, TrackerUtils.getAmountValue(Optional.of(amount)));
 
 		/*Test with an amount with value.*/
-		BigDecimal amountValue=new BigDecimal(20.0);
+		double amountValue=20.0;
 		amount.setValue(amountValue);
 		String value=TrackerUtils.getAmountValue(Optional.of(amount));
 		assertNotNull(value);
-		assertEquals(amountValue.toString(), value);
+		assertEquals(String.valueOf(amountValue), value);
 	}
 
 	/**
@@ -165,11 +164,11 @@ public class TrackerUtilsTest {
 		assertEquals(StringUtils.EMPTY, TrackerUtils.getOperationTotalAmount(Optional.of(credit)));
 
 		/*Test with an operation with total amount value.*/
-		BigDecimal amountValue=new BigDecimal(20.0);
+		double amountValue=20.0;
 		credit.setTotalAmount(amountValue);
 		String operationTotalAmount=TrackerUtils.getOperationTotalAmount(Optional.of(credit));
 		assertNotNull(operationTotalAmount);
-		assertEquals(amountValue.toString(), operationTotalAmount);
+		assertEquals(String.valueOf(amountValue), operationTotalAmount);
 	}
 
 	/**

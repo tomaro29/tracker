@@ -22,10 +22,11 @@ public class OperationSubAmountLabelProvider extends AbstractLabelProvider {
 	 * @return the amount value
 	 */
 	private String getAmountValue(Amount amount) {
-		if (amount == null || amount.getValue() == null) {
+		if (amount == null || amount.getValue() == 0) {
 			return null;
 		}
-		return StringUtils.isEmpty(amount.getValue().toString()) ? OperationSubAmountLabelProvider.STRING_UNDEFINED_AMOUNT_VALUE : amount.getValue().toString() + " euros"; //$NON-NLS-1$
+		return StringUtils.isEmpty(String.valueOf(amount.getValue()))	? OperationSubAmountLabelProvider.STRING_UNDEFINED_AMOUNT_VALUE
+																		: String.valueOf(amount.getValue()) + " euros"; //$NON-NLS-1$
 	}
 
 	/**

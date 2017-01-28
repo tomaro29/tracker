@@ -2,7 +2,6 @@
  */
 package fr.rostren.tracker.provider;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class AmountItemProvider extends ItemProviderAdapter
 	protected void addValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(), getResourceLocator(),
 				getString("_UI_Amount_value_feature"), getString("_UI_PropertyDescriptor_description", "_UI_Amount_value_feature", "_UI_Amount_type"),
-				TrackerPackage.Literals.AMOUNT__VALUE, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+				TrackerPackage.Literals.AMOUNT__VALUE, true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -131,9 +130,8 @@ public class AmountItemProvider extends ItemProviderAdapter
 	 */
 	@Override
 	public String getText(Object object) {
-		BigDecimal labelValue=((Amount)object).getValue();
-		String label=labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_Amount_type") : getString("_UI_Amount_type") + " " + label;
+		Amount amount=(Amount)object;
+		return getString("_UI_Amount_type") + " " + amount.getValue();
 	}
 
 	/**

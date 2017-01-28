@@ -1,6 +1,5 @@
 package fr.rostren.tracker.pdf.analyzer;
 
-import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 import fr.rostren.tracker.Date;
@@ -44,7 +43,7 @@ public abstract class AbstractPdfContentAnalyzer {
 
 	private Date lastPotentialDate=null;
 	private String lastPotentialOperationTitle=null;
-	private BigDecimal lastPotentialAmount=null;
+	private double lastPotentialAmount=0;
 
 	/**
 	 * This parses a single line in the pdf.
@@ -98,7 +97,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *         "false" otherwise.
 	 */
 	protected boolean isCompleted() {
-		return lastPotentialDate != null && lastPotentialOperationTitle != null && lastPotentialAmount != null;
+		return lastPotentialDate != null && lastPotentialOperationTitle != null && lastPotentialAmount != 0;
 	}
 
 	/**
@@ -107,7 +106,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	private void reset() {
 		setLastPotentialDate(null);
 		setLastPotentialOperationTitle(null);
-		setLastPotentialAmount(null);
+		setLastPotentialAmount(0);
 	}
 
 	/**
@@ -216,7 +215,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param amount
 	 *            the amount to set as a last parsed amount.
 	 */
-	public void setLastPotentialAmount(BigDecimal amount) {
+	public void setLastPotentialAmount(double amount) {
 		lastPotentialAmount=amount;
 	}
 

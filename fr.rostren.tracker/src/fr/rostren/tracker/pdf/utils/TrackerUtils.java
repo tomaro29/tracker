@@ -1,6 +1,5 @@
 package fr.rostren.tracker.pdf.utils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -220,7 +219,7 @@ public class TrackerUtils {
 	public static String getAmountValue(Optional<Amount> amountOpt) {
 		//FIXME validate Java 8 code migration
 		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
-		return amount.getValue() == null ? StringUtils.EMPTY : amount.getValue().toString();
+		return amount.getValue() == 0 ? StringUtils.EMPTY : String.valueOf(amount.getValue());
 	}
 
 	/**
@@ -240,7 +239,7 @@ public class TrackerUtils {
 	 */
 	public static String getOperationTotalAmount(Optional<Operation> operationOpt) {
 		Operation operation=operationOpt.orElseThrow(() -> new IllegalArgumentException("The operation cannot be null.")); //$NON-NLS-1$
-		return operation.getTotalAmount() == null ? StringUtils.EMPTY : operation.getTotalAmount().toString();
+		return operation.getTotalAmount() == 0 ? StringUtils.EMPTY : String.valueOf(operation.getTotalAmount());
 	}
 
 	/**
@@ -499,19 +498,18 @@ public class TrackerUtils {
 	 * @return <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
 	 */
 	public static boolean isValidOperationAmounts(Operation operation) {
-		return operation.getTotalAmount().equals(getTotalAmount(operation.getSubAmounts()));
+		return operation.getTotalAmount() == getTotalAmount(operation.getSubAmounts());
 	}
 
 	/**
-	 * REturns the total amount of all given amounts as {@link BigDecimal} instance.
+	 * REturns the total amount of all given amounts as double.
 	 * @param amounts the list of amounts to addition
-	 * @return the total amount value, sum of all given amounts as {@link BigDecimal} instance.
+	 * @return the total amount value, sum of all given amounts as double.
 	 */
-	private static BigDecimal getTotalAmount(List<Amount> amounts) {
-		BigDecimal sum=amounts.stream()//
-				.map(amount -> amount.getValue())//
-				.reduce(new BigDecimal(0), BigDecimal::add);
-		return sum;
+	private static double getTotalAmount(List<Amount> amounts) {
+		return amounts.stream()//
+				.mapToDouble(amount -> amount.getValue())//
+				.sum();
 	}
 
 	/**
@@ -540,10 +538,11 @@ public class TrackerUtils {
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
 	 */
-	public static List<BigDecimal> findAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
+	public static List<Double> findAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
 		return dates//
 				.stream()//
-				.map(date -> getTotalAmount(findAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
+				.mapToDouble(date -> getTotalAmount(findAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
+				.boxed()//
 				.collect(Collectors.toList());
 	}
 
@@ -555,10 +554,11 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the income category amount of the given item and its children
 	 */
-	public static List<BigDecimal> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+	public static List<Double> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
 		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item).orElseThrow(IllegalArgumentException::new);
 		return dates.stream()//
-				.map(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
+				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
+				.boxed()//
 				.collect(Collectors.toList());
 	}
 
@@ -570,10 +570,11 @@ public class TrackerUtils {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the spending category amount of the given item and its children
 	 */
-	public static List<BigDecimal> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+	public static List<Double> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
 		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item).orElseThrow(IllegalArgumentException::new);
 		return dates.stream()//
-				.map(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
+				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
+				.boxed()//
 				.collect(Collectors.toList());
 	}
 
@@ -629,7 +630,7 @@ public class TrackerUtils {
 	 * @param dates the dates to witch we need to extract the amount
 	 * @return the operation amounts
 	 */
-	public static List<BigDecimal> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
+	public static List<Double> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
 		// TODO Auto-generated method stub
 		return null;
 	}

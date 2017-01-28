@@ -1,7 +1,5 @@
 package fr.rostren.tracker.ui.properties.wizards;
 
-import java.math.BigDecimal;
-
 import org.eclipse.jface.wizard.Wizard;
 
 import fr.rostren.tracker.Amount;
@@ -57,7 +55,7 @@ public class OperationSubAmountWizard extends Wizard {
 	 * Returns the amount value
 	 * @return the amount value
 	 */
-	public BigDecimal getAmountValue() {
+	public double getAmountValue() {
 		return page.getAmountValue();
 	}
 }

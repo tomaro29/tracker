@@ -220,7 +220,9 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the list of dates
 	 */
 	private List<String> getHistogramDates() {
-		return Month.VALUES.stream().map(month -> month.getLiteral()).collect(Collectors.toList());
+		return Month.VALUES.stream()//
+				.map(month -> month.getLiteral())//
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -312,8 +314,7 @@ public class TrackerHistogramView extends ViewPart {
 	 * @return the array of items
 	 */
 	private String[] getYearsItems(Set<Integer> years) {
-		return years//
-				.stream()//
+		return years.stream()//
 				.map(year -> Integer.toString(year))//
 				.collect(Collectors.toList()).stream()//
 				.toArray(String[]::new);
@@ -353,7 +354,9 @@ public class TrackerHistogramView extends ViewPart {
 	 */
 	private String[] getOperationsItems(Set<OperationTitle> operationsTitles) {
 		List<String> titles=new ArrayList<>();
-		titles.addAll(operationsTitles.stream().map(operationTitle -> operationTitle.getTitle()).collect(Collectors.toList()));
+		titles.addAll(operationsTitles.stream()//
+				.map(operationTitle -> operationTitle.getTitle())//
+				.collect(Collectors.toList()));
 		titles.add(0, TrackerHistogramView.ALL_OPERATIONS_ITEM);
 		return titles.stream().toArray(String[]::new);
 	}
@@ -419,5 +422,4 @@ public class TrackerHistogramView extends ViewPart {
 
 		return resourceSet.getResource(uri, true);
 	}
-
 }

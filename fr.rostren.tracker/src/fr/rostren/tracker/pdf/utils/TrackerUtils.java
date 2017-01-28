@@ -524,9 +524,8 @@ public class TrackerUtils {
 	 * @return <code>true</code> if the amount has a valid date; <code>false</code> otherwise.
 	 */
 	private static boolean isDateValid(Amount amount, Operation operation, int year, Month month, boolean wishedEnabled) {
-		//FIXME validate the next java8 code
-		Optional<Date> wishedDate=Optional.of(amount.getWishedDate());
-		Optional<Date> operationDate=Optional.of(operation.getDate());
+		Optional<Date> wishedDate=amount.getWishedDate() != null ? Optional.of(amount.getWishedDate()) : Optional.empty();
+		Optional<Date> operationDate=operation.getDate() != null ? Optional.of(operation.getDate()) : Optional.empty();
 
 		Date comparisonDate=wishedEnabled ? wishedDate.orElse(operationDate.orElseThrow(IllegalArgumentException::new)) : operationDate.orElseThrow(IllegalArgumentException::new);
 		return month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear();

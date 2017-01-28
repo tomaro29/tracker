@@ -63,17 +63,17 @@ public class Histogram {
 		//create income bar series
 		IBarSeries incomeSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.INCOME);
 		incomeSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
-		double[] primitiveDoubleArray=convertToPrimitiveDoubleArray(incomeSeriesValues);
-		if (primitiveDoubleArray != null) {
-			incomeSeries.setYSeries(primitiveDoubleArray);
+		double[] primitiveIncomeDoubleArray=convertToPrimitiveDoubleArray(incomeSeriesValues);
+		if (primitiveIncomeDoubleArray != null) {
+			incomeSeries.setYSeries(primitiveIncomeDoubleArray);
 		}
 
 		//create spending bar series
 		IBarSeries spendingSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.SPENDING);
 		spendingSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		primitiveDoubleArray=convertToPrimitiveDoubleArray(spendingSeriesValues);
-		if (primitiveDoubleArray != null) {
-			spendingSeries.setYSeries(primitiveDoubleArray);
+		double[] primitiveSpendingDoubleArray=convertToPrimitiveDoubleArray(spendingSeriesValues);
+		if (primitiveSpendingDoubleArray != null) {
+			spendingSeries.setYSeries(primitiveSpendingDoubleArray);
 		}
 
 		//Set Labels font, format and make visible

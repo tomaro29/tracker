@@ -2,8 +2,6 @@
  */
 package fr.rostren.tracker;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -32,7 +30,7 @@ public interface Amount extends EObject {
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Category</em>' reference.
 	 * @see #setCategory(Category)
 	 * @see fr.rostren.tracker.TrackerPackage#getAmount_Category()
@@ -45,7 +43,7 @@ public interface Amount extends EObject {
 	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getCategory
 	 * <em>Category</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Category</em>' reference.
 	 * @see #getCategory()
@@ -61,9 +59,9 @@ public interface Amount extends EObject {
 	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(BigDecimal)
+	 * @see #setValue(double)
 	 * @see fr.rostren.tracker.TrackerPackage#getAmount_Value()
 	 * @model
 	 * @generated

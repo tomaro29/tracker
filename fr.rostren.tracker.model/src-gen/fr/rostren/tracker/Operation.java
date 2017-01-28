@@ -2,8 +2,6 @@
  */
 package fr.rostren.tracker;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -75,7 +73,7 @@ public interface Operation extends EObject {
 	 * Sets the value of the '{@link fr.rostren.tracker.Operation#getOrigin
 	 * <em>Origin</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Origin</em>' reference.
 	 * @see #getOrigin()
@@ -91,9 +89,9 @@ public interface Operation extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Total Amount</em>' attribute.
-	 * @see #setTotalAmount(BigDecimal)
+	 * @see #setTotalAmount(double)
 	 * @see fr.rostren.tracker.TrackerPackage#getOperation_TotalAmount()
 	 * @model
 	 * @generated

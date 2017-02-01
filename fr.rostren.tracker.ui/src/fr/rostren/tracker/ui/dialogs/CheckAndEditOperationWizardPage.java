@@ -18,6 +18,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.internal.win32.OS;
+import org.eclipse.swt.internal.win32.TCHAR;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -82,11 +84,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Assert.isTrue(source instanceof DateTime);
 			DateTime dateTime=(DateTime)source;
 			//set operation date to the new selected date
-			operation.setDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay()));
+			LocalDate date=LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth() + 1), dateTime.getDay());
+			operation.setDate(date);
 
 			//set all subAmounts wished dates to the new selected date
-			operation.getSubAmounts().stream()//
-					.forEach(subAmount -> subAmount.setWishedDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay())));
+			operation.getSubAmounts().stream().forEach(subAmount -> subAmount.setWishedDate(date));
 			populateTable();
 		}
 	};
@@ -99,11 +101,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Assert.isTrue(source instanceof DateTime);
 			DateTime dateTime=(DateTime)source;
 			//set operation date to the new selected date
-			operation.setDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay()));
+			LocalDate date=LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth() + 1), dateTime.getDay());
+			operation.setDate(date);
 
 			//set all subAmounts wished dates to the new selected date
-			operation.getSubAmounts().stream()//
-					.forEach(subAmount -> subAmount.setWishedDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay())));
+			operation.getSubAmounts().stream().forEach(subAmount -> subAmount.setWishedDate(date));
 			populateTable();
 		}
 
@@ -341,11 +343,13 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	private DateTime createDateTime(Composite composite, String label, LocalDate content, SelectionListener selectionListener, Listener modifyListener) {
 		createLabel(composite, label);
 		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
+
+		TCHAR lpszFormat=new TCHAR(0, "dd/MM/yyyy", true);
+		OS.SendMessage(dateTime.handle, OS.DTM_SETFORMAT, 0, lpszFormat);
+
 		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 		if (content != null) {
-			dateTime.setYear(content.getYear());
-			dateTime.setMonth(content.getMonthValue());
-			dateTime.setDay(content.getDayOfMonth());
+			dateTime.setDate(content.getYear(), content.getMonthValue() - 1, content.getDayOfMonth());
 		}
 		dateTime.addSelectionListener(selectionListener);
 		dateTime.addListener(SWT.Modify, modifyListener);

@@ -541,7 +541,7 @@ public class TrackerUtils {
 	 */
 	public static List<Double> findAllCategoriesAmount(Account account, List<String> months, int year, boolean wishedEnabled, Class<?> clazz) {
 		return months.stream()//
-				.mapToDouble(date -> getTotalAmount(findAllAmounts(account, Month.of(Integer.parseInt(date)), year, wishedEnabled, clazz)))//
+				.mapToDouble(month -> getTotalAmount(findAllAmounts(account, Month.valueOf(month), year, wishedEnabled, clazz)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}

@@ -108,6 +108,6 @@ public class Histogram {
 	 * @return the converted array
 	 */
 	private String[] convertToStringArray(List<String> list) {
-		return list == null ? null : list.stream().toArray(String[]::new);
+		return list.stream().toArray(String[]::new);
 	}
 }

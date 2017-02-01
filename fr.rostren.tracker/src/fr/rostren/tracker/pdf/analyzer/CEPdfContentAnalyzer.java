@@ -1,13 +1,13 @@
 package fr.rostren.tracker.pdf.analyzer;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.LineContent;
 
 /**
@@ -166,19 +166,13 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 	}
 
 	@Override
-	protected Date extractDateFromCurrentLine() {
-		Date date=null;
+	protected LocalDate extractDateFromCurrentLine() {
 		if (getCurrentLine().matches(COMPLETE_LINE_PATTERN.pattern()) || getCurrentLine().matches(PARTIAL_LINE_PATTERN.pattern())) {
-			date=TrackerFactory.eINSTANCE.createDate();
 			String potentialDate=getCurrentSplitLine()[0];
 			String[] split=potentialDate.split(DATE_SEPARATOR_PATTREN.pattern());
 
-			date.setDay(Integer.parseInt(split[0]));
-
-			String month=split[1];
-			setMonthFromContent(date, month);
-			date.setYear(getCurrentYear());
+			return LocalDate.of(getCurrentYear(), Month.of(Integer.parseInt(split[1])), Integer.parseInt(split[0]));
 		}
-		return date;
+		return null;
 	}
 }

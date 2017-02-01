@@ -2,6 +2,8 @@
  */
 package fr.rostren.tracker;
 
+import java.time.LocalDate;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -79,29 +81,29 @@ public interface Amount extends EObject {
 	void setValue(double value);
 
 	/**
-	 * Returns the value of the '<em><b>Wished Date</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Wished Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Wished Date</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Wished Date</em>' containment reference.
-	 * @see #setWishedDate(Date)
+	 * @return the value of the '<em>Wished Date</em>' attribute.
+	 * @see #setWishedDate(LocalDate)
 	 * @see fr.rostren.tracker.TrackerPackage#getAmount_WishedDate()
-	 * @model containment="true"
+	 * @model dataType="fr.rostren.tracker.Date"
 	 * @generated
 	 */
-	Date getWishedDate();
+	LocalDate getWishedDate();
 
 	/**
-	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}' containment reference.
+	 * Sets the value of the '{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Wished Date</em>' containment reference.
+	 * @param value the new value of the '<em>Wished Date</em>' attribute.
 	 * @see #getWishedDate()
 	 * @generated
 	 */
-	void setWishedDate(Date value);
+	void setWishedDate(LocalDate value);
 
 } // Amount

@@ -390,29 +390,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Date} instances.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 */
-	protected DateItemProvider dateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.Date}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createDateAdapter() {
-		if (dateItemProvider == null) {
-			dateItemProvider=new DateItemProvider(this);
-		}
-
-		return dateItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.Origin} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -681,8 +658,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 			operationServiceItemProvider.dispose();
 		if (categoriesRepositoryItemProvider != null)
 			categoriesRepositoryItemProvider.dispose();
-		if (dateItemProvider != null)
-			dateItemProvider.dispose();
 		if (originItemProvider != null)
 			originItemProvider.dispose();
 		if (originsRepositoryItemProvider != null)

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,7 +17,6 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
@@ -43,7 +43,7 @@ public class TrackerUtilsTest {
 	private final Operation credit=TrackerFactory.eINSTANCE.createCredit();
 	private final OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 	private final Origin origin=TrackerFactory.eINSTANCE.createOrigin();
-	private final Date operationDate=TrackerFactory.eINSTANCE.createDate();
+	private final LocalDate operationDate=LocalDate.now();
 	private final String title="title"; //$NON-NLS-1$
 	private final String originId="originId"; //$NON-NLS-1$
 
@@ -194,7 +194,6 @@ public class TrackerUtilsTest {
 	public void getTrackerTest() {
 		assertEquals(null, TrackerUtils.getTracker(credit));
 		assertEquals(null, TrackerUtils.getTracker(operationTitle));
-		assertEquals(null, TrackerUtils.getTracker(operationDate));
 		assertEquals(null, TrackerUtils.getTracker(amount));
 		assertEquals(null, TrackerUtils.getTracker(incomeCategory));
 		assertEquals(null, TrackerUtils.getTracker(spendingCategory));

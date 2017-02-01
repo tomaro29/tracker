@@ -2,6 +2,8 @@ package fr.rostren.tracker.ui.properties.label.providers;
 
 import org.apache.commons.lang.StringUtils;
 
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
 
 public class TransferLabelProvider extends AbstractLabelProvider {
@@ -21,7 +23,7 @@ public class TransferLabelProvider extends AbstractLabelProvider {
 	 */
 	private String getTransferTitle(Transfer transfer) {
 		return transfer.getOperationTitle() == null || StringUtils.isEmpty(transfer.getOperationTitle().getTitle())	? OperationLabelProvider.STRING_UNDEFINED_TITLE
-																														: transfer.getOperationTitle().getTitle();
+																													: transfer.getOperationTitle().getTitle();
 	}
 
 	/**
@@ -30,6 +32,7 @@ public class TransferLabelProvider extends AbstractLabelProvider {
 	 * @return the transfer date
 	 */
 	private String getTransferDate(Transfer operation) {
-		return operation.getDate() == null ? OperationLabelProvider.STRING_UNDEFINED_DATE : operation.getDate().toString();
+		return operation.getDate() == null	? OperationLabelProvider.STRING_UNDEFINED_DATE
+											: TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(), operation.getDate());
 	}
 }

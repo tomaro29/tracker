@@ -1,6 +1,8 @@
 package fr.rostren.tracker.ui.views;
 
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +41,6 @@ import org.eclipse.ui.part.ViewPart;
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.IncomeCategory;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
@@ -183,7 +184,7 @@ public class TrackerHistogramView extends ViewPart {
 	 * Populates the histogram according to the filter selection
 	 */
 	public void populateHistogram() {
-		List<String> dates=getHistogramDates();
+		List<String> months=getHistogramMonths();
 		List<Double> incomeValues=new ArrayList<>();
 		List<Double> spendingValues=new ArrayList<>();
 
@@ -192,35 +193,35 @@ public class TrackerHistogramView extends ViewPart {
 		if (categoryCheckButton.getSelection()) {
 			String item=categoriesCombo.getItem(categoriesCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
-				incomeValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, SpendingCategory.class);
 			}
 			else {
-				incomeValues=TrackerUtils.findIncomeCategoryAmounts(account, item, dates, year, true);
-				spendingValues=TrackerUtils.findSpendingCategoryAmounts(account, item, dates, year, true);
+				incomeValues=TrackerUtils.findIncomeCategoryAmounts(account, item, months, year, true);
+				spendingValues=TrackerUtils.findSpendingCategoryAmounts(account, item, months, year, true);
 			}
 		}
 		else if (operationCheckButton.getSelection()) {
 			String item=operationsCombo.getItem(operationsCombo.getSelectionIndex());
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
-				incomeValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.findAllCategoriesAmount(account, dates, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, SpendingCategory.class);
 			}
 			else {
-				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, dates);
-				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, dates);
+				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, months);
+				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, months);
 			}
 		}
 
-		histogram.populateHistogram(dates, incomeValues, spendingValues, false);
+		histogram.populateHistogram(months, incomeValues, spendingValues, false);
 	}
 
 	/**
 	 * @return the list of dates
 	 */
-	private List<String> getHistogramDates() {
-		return Month.VALUES.stream()//
-				.map(month -> month.getLiteral())//
+	private List<String> getHistogramMonths() {
+		return Arrays.asList(Month.values()).stream()//
+				.map(month -> month.toString())//
 				.collect(Collectors.toList());
 	}
 

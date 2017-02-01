@@ -8,32 +8,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.rostren.tracker.Account;
-import fr.rostren.tracker.AccountService;
-import fr.rostren.tracker.Amount;
-import fr.rostren.tracker.BoockletAccount;
-import fr.rostren.tracker.CategoriesRepository;
-import fr.rostren.tracker.Category;
-import fr.rostren.tracker.CategoryService;
-import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Date;
-import fr.rostren.tracker.Debit;
-import fr.rostren.tracker.Incoming;
-import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.OperationService;
-import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.OperationTitleService;
-import fr.rostren.tracker.OperationsTitleRepository;
-import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.OriginsRepository;
-import fr.rostren.tracker.Outgoing;
-import fr.rostren.tracker.Owner;
-import fr.rostren.tracker.Title;
-import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.Transfer;
-
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
@@ -180,11 +154,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseCategoriesRepository(CategoriesRepository object) {
 			return createCategoriesRepositoryAdapter();
-		}
-
-		@Override
-		public Adapter caseDate(Date object) {
-			return createDateAdapter();
 		}
 
 		@Override
@@ -502,20 +471,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCategoriesRepositoryAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.rostren.tracker.Date <em>Date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore
-	 * cases; it's useful to ignore a case when inheritance will catch all the
-	 * cases anyway. <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.rostren.tracker.Date
-	 * @generated
-	 */
-	public Adapter createDateAdapter() {
 		return null;
 	}
 

@@ -146,15 +146,6 @@ public interface TrackerFactory extends EFactory {
 	CategoriesRepository createCategoriesRepository();
 
 	/**
-	 * Returns a new object of class '<em>Date</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Date</em>'.
-	 * @generated
-	 */
-	Date createDate();
-
-	/**
 	 * Returns a new object of class '<em>Origin</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

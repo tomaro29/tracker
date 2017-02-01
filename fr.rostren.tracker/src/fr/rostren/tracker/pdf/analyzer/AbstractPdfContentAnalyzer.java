@@ -1,9 +1,8 @@
 package fr.rostren.tracker.pdf.analyzer;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
-import fr.rostren.tracker.Date;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
@@ -41,7 +40,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	/** The last parsed token. */
 	private PdfToken lastToken;
 
-	private Date lastPotentialDate=null;
+	private LocalDate lastPotentialDate=null;
 	private String lastPotentialOperationTitle=null;
 	private double lastPotentialAmount=0;
 
@@ -119,7 +118,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *
 	 * @return the Date from the current line
 	 */
-	protected abstract Date extractDateFromCurrentLine();
+	protected abstract LocalDate extractDateFromCurrentLine();
 
 	/**
 	 * Extracts the year
@@ -128,55 +127,6 @@ public abstract class AbstractPdfContentAnalyzer {
 	protected int extractYearFromCurrentLine() {
 		String year=currentLine.subSequence(9, 13).toString();
 		return Integer.parseInt(year);
-	}
-
-	/**
-	 * Sets the Month basing on the current content
-	 *
-	 * @param date the date
-	 * @param content the content
-	 */
-	protected void setMonthFromContent(Date date, String content) {
-		switch (Integer.parseInt(content)) {
-			case 1:
-				date.setMonth(Month.JAN);
-				break;
-			case 2:
-				date.setMonth(Month.FEB);
-				break;
-			case 3:
-				date.setMonth(Month.MARS);
-				break;
-			case 4:
-				date.setMonth(Month.APR);
-				break;
-			case 5:
-				date.setMonth(Month.MAY);
-				break;
-			case 6:
-				date.setMonth(Month.JUNE);
-				break;
-			case 7:
-				date.setMonth(Month.JULY);
-				break;
-			case 8:
-				date.setMonth(Month.AUG);
-				break;
-			case 9:
-				date.setMonth(Month.SEPT);
-				break;
-			case 10:
-				date.setMonth(Month.OCT);
-				break;
-			case 11:
-				date.setMonth(Month.NOV);
-				break;
-			case 12:
-				date.setMonth(Month.DEC);
-				break;
-			default:
-				throw new IllegalArgumentException("Invalid date, the month must be [1-12]"); //$NON-NLS-1$
-		}
 	}
 
 	/**
@@ -244,7 +194,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @param date
 	 *            the date to set as a last potential date.
 	 */
-	public void setLastPotentialDate(Date date) {
+	public void setLastPotentialDate(LocalDate date) {
 		lastPotentialDate=date;
 	}
 

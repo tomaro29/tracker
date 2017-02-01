@@ -1,9 +1,13 @@
 package fr.rostren.tracker.ui.properties.sections;
 
+import java.time.LocalDate;
+
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.internal.win32.OS;
+import org.eclipse.swt.internal.win32.TCHAR;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
@@ -29,7 +33,7 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 
 		FormData data=new FormData();
 		data=new FormData();
-		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
+		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH + 15);
 		if (control == null) {
 			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		}
@@ -59,9 +63,12 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
 		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
 
+		TCHAR lpszFormat=new TCHAR(0, "dd/MM/yyyy", true);
+		OS.SendMessage(dateTime.handle, OS.DTM_SETFORMAT, 0, lpszFormat);
+
 		FormData data=new FormData();
 		data=new FormData();
-		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
+		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH + 15);
 		if (control == null) {
 			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		}
@@ -93,7 +100,7 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 
 		FormData data=new FormData();
 		data=new FormData();
-		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH);
+		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH + 15);
 		if (control == null) {
 			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		}
@@ -110,5 +117,32 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		data.top=new FormAttachment(refCombo, 0, SWT.CENTER);
 		comboLabel.setLayoutData(data);
 		return refCombo;
+	}
+
+	/**
+	 * Returns the Operation wished date year
+	 * @param date the operation date
+	 * @return the Operation wished date year
+	 */
+	protected int getYear(LocalDate date) {
+		return date == null ? 0 : date.getYear();
+	}
+
+	/**
+	 * Returns the Operation wished date month
+	 * @param date the operation date
+	 * @return the Operation wished date month
+	 */
+	protected int getMonth(LocalDate date) {
+		return date == null ? 0 : date.getMonth().getValue() - 1;
+	}
+
+	/**
+	 * Returns the Operation wished date day
+	 * @param date the operation date
+	 * @return the Operation wished date day
+	 */
+	protected int getDay(LocalDate date) {
+		return date == null ? 0 : date.getDayOfMonth();
 	}
 }

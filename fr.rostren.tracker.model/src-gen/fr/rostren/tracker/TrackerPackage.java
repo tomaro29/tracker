@@ -4,6 +4,7 @@ package fr.rostren.tracker;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -292,22 +293,22 @@ public interface TrackerPackage extends EPackage {
 	int OPERATION__SUB_AMOUNTS=2;
 
 	/**
-	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__DATE=3;
-
-	/**
 	 * The feature id for the '<em><b>Origin</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__ORIGIN=4;
+	int OPERATION__ORIGIN=3;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__DATE=4;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class. <!--
@@ -354,15 +355,6 @@ public interface TrackerPackage extends EPackage {
 	int CREDIT__SUB_AMOUNTS=OPERATION__SUB_AMOUNTS;
 
 	/**
-	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CREDIT__DATE=OPERATION__DATE;
-
-	/**
 	 * The feature id for the '<em><b>Origin</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -370,6 +362,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CREDIT__ORIGIN=OPERATION__ORIGIN;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CREDIT__DATE=OPERATION__DATE;
 
 	/**
 	 * The number of structural features of the '<em>Credit</em>' class. <!--
@@ -416,15 +417,6 @@ public interface TrackerPackage extends EPackage {
 	int DEBIT__SUB_AMOUNTS=OPERATION__SUB_AMOUNTS;
 
 	/**
-	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int DEBIT__DATE=OPERATION__DATE;
-
-	/**
 	 * The feature id for the '<em><b>Origin</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -432,6 +424,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEBIT__ORIGIN=OPERATION__ORIGIN;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DEBIT__DATE=OPERATION__DATE;
 
 	/**
 	 * The number of structural features of the '<em>Debit</em>' class. <!--
@@ -478,15 +479,6 @@ public interface TrackerPackage extends EPackage {
 	int TRANSFER__SUB_AMOUNTS=OPERATION__SUB_AMOUNTS;
 
 	/**
-	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFER__DATE=OPERATION__DATE;
-
-	/**
 	 * The feature id for the '<em><b>Origin</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -494,6 +486,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSFER__ORIGIN=OPERATION__ORIGIN;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFER__DATE=OPERATION__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Account</b></em>' reference. <!--
@@ -558,15 +559,6 @@ public interface TrackerPackage extends EPackage {
 	int INCOMING__SUB_AMOUNTS=TRANSFER__SUB_AMOUNTS;
 
 	/**
-	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int INCOMING__DATE=TRANSFER__DATE;
-
-	/**
 	 * The feature id for the '<em><b>Origin</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -574,6 +566,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int INCOMING__ORIGIN=TRANSFER__ORIGIN;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int INCOMING__DATE=TRANSFER__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Account</b></em>' reference. <!--
@@ -638,15 +639,6 @@ public interface TrackerPackage extends EPackage {
 	int OUTGOING__SUB_AMOUNTS=TRANSFER__SUB_AMOUNTS;
 
 	/**
-	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int OUTGOING__DATE=TRANSFER__DATE;
-
-	/**
 	 * The feature id for the '<em><b>Origin</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -654,6 +646,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OUTGOING__ORIGIN=TRANSFER__ORIGIN;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int OUTGOING__DATE=TRANSFER__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Account</b></em>' reference. <!--
@@ -808,7 +809,7 @@ public interface TrackerPackage extends EPackage {
 	int AMOUNT__VALUE=1;
 
 	/**
-	 * The feature id for the '<em><b>Wished Date</b></em>' containment reference.
+	 * The feature id for the '<em><b>Wished Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -935,49 +936,13 @@ public interface TrackerPackage extends EPackage {
 	int CATEGORIES_REPOSITORY_FEATURE_COUNT=2;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.DateImpl <em>Date</em>}' class.
+	 * The meta object id for the '<em>Date</em>' data type.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.DateImpl
+	 * @see java.time.LocalDate
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDate()
 	 * @generated
 	 */
-	int DATE=19;
-
-	/**
-	 * The feature id for the '<em><b>Day</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int DATE__DAY=0;
-
-	/**
-	 * The feature id for the '<em><b>Month</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int DATE__MONTH=1;
-
-	/**
-	 * The feature id for the '<em><b>Year</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int DATE__YEAR=2;
-
-	/**
-	 * The number of structural features of the '<em>Date</em>' class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FEATURE_COUNT=3;
+	int DATE=26;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.OriginImpl <em>Origin</em>}' class.
@@ -986,7 +951,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOrigin()
 	 * @generated
 	 */
-	int ORIGIN=20;
+	int ORIGIN=19;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute. <!--
@@ -1032,7 +997,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOriginsRepository()
 	 * @generated
 	 */
-	int ORIGINS_REPOSITORY=21;
+	int ORIGINS_REPOSITORY=20;
 
 	/**
 	 * The feature id for the '<em><b>Origins</b></em>' containment reference list.
@@ -1057,7 +1022,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTracker()
 	 * @generated
 	 */
-	int TRACKER=22;
+	int TRACKER=21;
 
 	/**
 	 * The feature id for the '<em><b>Owners</b></em>' containment reference list.
@@ -1108,7 +1073,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationsTitleRepository()
 	 * @generated
 	 */
-	int OPERATIONS_TITLE_REPOSITORY=23;
+	int OPERATIONS_TITLE_REPOSITORY=22;
 
 	/**
 	 * The feature id for the '<em><b>Operations Titles</b></em>' containment reference list.
@@ -1135,7 +1100,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncomeCategory()
 	 * @generated
 	 */
-	int INCOME_CATEGORY=24;
+	int INCOME_CATEGORY=23;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -1190,7 +1155,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getSpendingCategory()
 	 * @generated
 	 */
-	int SPENDING_CATEGORY=25;
+	int SPENDING_CATEGORY=24;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -1238,13 +1203,13 @@ public interface TrackerPackage extends EPackage {
 	int SPENDING_CATEGORY_FEATURE_COUNT=CATEGORY_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.Month <em>Month</em>}' enum.
+	 * The meta object id for the '<em>Month</em>' data type.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.Month
+	 * @see java.time.Month
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getMonth()
 	 * @generated
 	 */
-	int MONTH=26;
+	int MONTH=27;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.OriginType
@@ -1255,7 +1220,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOriginType()
 	 * @generated
 	 */
-	int ORIGIN_TYPE=27;
+	int ORIGIN_TYPE=25;
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.Owner <em>Owner</em>}'.
@@ -1403,7 +1368,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see #getOperation()
 	 * @generated
 	 */
-	EReference getOperation_Date();
+	EAttribute getOperation_Date();
 
 	/**
 	 * Returns the meta object for the reference '
@@ -1627,15 +1592,15 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAmount_Value();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.rostren.tracker.Amount#getWishedDate <em>Wished Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Wished Date</em>'.
+	 * @return the meta object for the attribute '<em>Wished Date</em>'.
 	 * @see fr.rostren.tracker.Amount#getWishedDate()
 	 * @see #getAmount()
 	 * @generated
 	 */
-	EReference getAmount_WishedDate();
+	EAttribute getAmount_WishedDate();
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.OperationTitleService <em>Operation Title Service</em>}'.
@@ -1709,48 +1674,14 @@ public interface TrackerPackage extends EPackage {
 	EReference getCategoriesRepository_Spending();
 
 	/**
-	 * Returns the meta object for class '{@link fr.rostren.tracker.Date <em>Date</em>}'.
+	 * Returns the meta object for data type '{@link java.time.LocalDate <em>Date</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Date</em>'.
-	 * @see fr.rostren.tracker.Date
+	 * @return the meta object for data type '<em>Date</em>'.
+	 * @see java.time.LocalDate
+	 * @model instanceClass="java.time.LocalDate"
 	 * @generated
 	 */
-	EClass getDate();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.rostren.tracker.Date#getDay <em>Day</em>}'.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Day</em>'.
-	 * @see fr.rostren.tracker.Date#getDay()
-	 * @see #getDate()
-	 * @generated
-	 */
-	EAttribute getDate_Day();
-
-	/**
-	 * Returns the meta object for the attribute '
-	 * {@link fr.rostren.tracker.Date#getMonth <em>Month</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Month</em>'.
-	 * @see fr.rostren.tracker.Date#getMonth()
-	 * @see #getDate()
-	 * @generated
-	 */
-	EAttribute getDate_Month();
-
-	/**
-	 * Returns the meta object for the attribute '
-	 * {@link fr.rostren.tracker.Date#getYear <em>Year</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Year</em>'.
-	 * @see fr.rostren.tracker.Date#getYear()
-	 * @see #getDate()
-	 * @generated
-	 */
-	EAttribute getDate_Year();
+	EDataType getDate();
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.Origin <em>Origin</em>}'.
@@ -1937,13 +1868,14 @@ public interface TrackerPackage extends EPackage {
 	EReference getSpendingCategory_Spendings();
 
 	/**
-	 * Returns the meta object for enum '{@link fr.rostren.tracker.Month <em>Month</em>}'.
+	 * Returns the meta object for data type '{@link java.time.Month <em>Month</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Month</em>'.
-	 * @see fr.rostren.tracker.Month
+	 * @return the meta object for data type '<em>Month</em>'.
+	 * @see java.time.Month
+	 * @model instanceClass="java.time.Month"
 	 * @generated
 	 */
-	EEnum getMonth();
+	EDataType getMonth();
 
 	/**
 	 * Returns the meta object for enum '{@link fr.rostren.tracker.OriginType <em>Origin Type</em>}'.
@@ -2085,11 +2017,11 @@ public interface TrackerPackage extends EPackage {
 		EClass OPERATION=eINSTANCE.getOperation();
 
 		/**
-		 * The meta object literal for the '<em><b>Date</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION__DATE=eINSTANCE.getOperation_Date();
+		EAttribute OPERATION__DATE=eINSTANCE.getOperation_Date();
 
 		/**
 		 * The meta object literal for the '<em><b>Origin</b></em>' reference feature.
@@ -2263,12 +2195,12 @@ public interface TrackerPackage extends EPackage {
 		EAttribute AMOUNT__VALUE=eINSTANCE.getAmount_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Wished Date</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Wished Date</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference AMOUNT__WISHED_DATE=eINSTANCE.getAmount_WishedDate();
+		EAttribute AMOUNT__WISHED_DATE=eINSTANCE.getAmount_WishedDate();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationTitleServiceImpl <em>Operation Title Service</em>}' class.
@@ -2345,28 +2277,7 @@ public interface TrackerPackage extends EPackage {
 		 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDate()
 		 * @generated
 		 */
-		EClass DATE=eINSTANCE.getDate();
-
-		/**
-		 * The meta object literal for the '<em><b>Day</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATE__DAY=eINSTANCE.getDate_Day();
-
-		/**
-		 * The meta object literal for the '<em><b>Month</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATE__MONTH=eINSTANCE.getDate_Month();
-
-		/**
-		 * The meta object literal for the '<em><b>Year</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATE__YEAR=eINSTANCE.getDate_Year();
+		EDataType DATE=eINSTANCE.getDate();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OriginImpl <em>Origin</em>}' class.
@@ -2508,13 +2419,13 @@ public interface TrackerPackage extends EPackage {
 		EReference SPENDING_CATEGORY__SPENDINGS=eINSTANCE.getSpendingCategory_Spendings();
 
 		/**
-		 * The meta object literal for the '{@link fr.rostren.tracker.Month <em>Month</em>}' enum.
+		 * The meta object literal for the '<em>Month</em>' data type.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @see fr.rostren.tracker.Month
+		 * @see java.time.Month
 		 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getMonth()
 		 * @generated
 		 */
-		EEnum MONTH=eINSTANCE.getMonth();
+		EDataType MONTH=eINSTANCE.getMonth();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.OriginType <em>Origin Type</em>}' enum.

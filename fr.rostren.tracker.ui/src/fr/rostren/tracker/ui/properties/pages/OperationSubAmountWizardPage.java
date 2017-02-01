@@ -1,6 +1,8 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -24,8 +26,6 @@ import org.eclipse.swt.widgets.Text;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Date;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
@@ -52,7 +52,7 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 
 	protected Category category;
 	protected String value;
-	protected Date wishedDate;
+	protected LocalDate wishedDate;
 
 	protected ComboViewer categoriesComboViewer;
 
@@ -121,9 +121,7 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 			Object source=event.getSource();
 			Assert.isTrue(source instanceof DateTime);
 			DateTime date=(DateTime)source;
-			wishedDate.setDay(date.getDay());
-			wishedDate.setMonth(Month.get(date.getMonth()));
-			wishedDate.setYear(date.getYear());
+			wishedDate=LocalDate.of(date.getYear(), Month.of(date.getMonth()), date.getDay());
 		}
 
 		@Override
@@ -186,7 +184,7 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 	 * Returns the amount wished date
 	 * @return the amount wished date
 	 */
-	public Date getAmountWishedDate() {
+	public LocalDate getAmountWishedDate() {
 		return wishedDate;
 	}
 

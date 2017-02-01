@@ -8,24 +8,12 @@
   <foreignModel>Tracker.ecore</foreignModel>
   <genPackages prefix="Tracker" basePackage="fr.rostren" disposableProviderFactory="true"
       ecorePackage="Tracker.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Tracker.ecore#//Month">
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Jan"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Feb"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Mars"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Apr"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/May"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/June"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/July"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Aug"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Sept"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Oct"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Nov"/>
-      <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//Month/Dec"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Tracker.ecore#//OriginType">
       <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//OriginType/PDF_FILE"/>
       <genEnumLiterals ecoreEnumLiteral="Tracker.ecore#//OriginType/MANUAL"/>
     </genEnums>
+    <genDataTypes ecoreDataType="Tracker.ecore#//Date"/>
+    <genDataTypes ecoreDataType="Tracker.ecore#//Month"/>
     <genClasses ecoreClass="Tracker.ecore#//Owner">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Owner/accounts"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Owner/firstName"/>
@@ -46,8 +34,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Operation/totalAmount"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/operationTitle"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/subAmounts"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/date"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/origin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Tracker.ecore#//Operation/date"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//Credit"/>
     <genClasses ecoreClass="Tracker.ecore#//Debit"/>
@@ -70,7 +58,7 @@
     <genClasses ecoreClass="Tracker.ecore#//Amount">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Amount/category"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Amount/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Amount/wishedDate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Tracker.ecore#//Amount/wishedDate"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//OperationTitleService">
       <genOperations ecoreOperation="Tracker.ecore#//OperationTitleService/addTitle">
@@ -113,11 +101,6 @@
     <genClasses ecoreClass="Tracker.ecore#//CategoriesRepository">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoriesRepository/income"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoriesRepository/spending"/>
-    </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//Date">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Date/day"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Date/month"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Date/year"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//Origin">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Origin/type"/>

@@ -2,13 +2,40 @@
  */
 package fr.rostren.tracker.impl;
 
-import fr.rostren.tracker.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import fr.rostren.tracker.AccountService;
+import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.BoockletAccount;
+import fr.rostren.tracker.CategoriesRepository;
+import fr.rostren.tracker.CategoryService;
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.Incoming;
+import fr.rostren.tracker.OperationService;
+import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationTitleService;
+import fr.rostren.tracker.OperationsTitleRepository;
+import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.OriginType;
+import fr.rostren.tracker.OriginsRepository;
+import fr.rostren.tracker.Outgoing;
+import fr.rostren.tracker.Owner;
+import fr.rostren.tracker.SpendingCategory;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
@@ -80,8 +107,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createOperationService();
 			case TrackerPackage.CATEGORIES_REPOSITORY:
 				return createCategoriesRepository();
-			case TrackerPackage.DATE:
-				return createDate();
 			case TrackerPackage.ORIGIN:
 				return createOrigin();
 			case TrackerPackage.ORIGINS_REPOSITORY:
@@ -106,10 +131,12 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case TrackerPackage.MONTH:
-				return createMonthFromString(eDataType, initialValue);
 			case TrackerPackage.ORIGIN_TYPE:
 				return createOriginTypeFromString(eDataType, initialValue);
+			case TrackerPackage.DATE:
+				return createDateFromString(eDataType, initialValue);
+			case TrackerPackage.MONTH:
+				return createMonthFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -122,10 +149,12 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case TrackerPackage.MONTH:
-				return convertMonthToString(eDataType, instanceValue);
 			case TrackerPackage.ORIGIN_TYPE:
 				return convertOriginTypeToString(eDataType, instanceValue);
+			case TrackerPackage.DATE:
+				return convertDateToString(eDataType, instanceValue);
+			case TrackerPackage.MONTH:
+				return convertMonthToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -276,16 +305,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	@Override
-	public Date createDate() {
-		DateImpl date=new DateImpl();
-		return date;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Origin createOrigin() {
 		OriginImpl origin=new OriginImpl();
 		return origin;
@@ -348,10 +367,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public Month createMonthFromString(EDataType eDataType, String initialValue) {
-		Month result=Month.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
+		return (Month)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -359,7 +375,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public String convertMonthToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
@@ -368,8 +384,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public OriginType createOriginTypeFromString(EDataType eDataType, String initialValue) {
 		OriginType result=OriginType.get(initialValue);
-		if (result == null)
+		if (result == null) {
 			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 
@@ -379,6 +396,26 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public String convertOriginTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public LocalDate createDateFromString(EDataType eDataType, String initialValue) {
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("d/MM/yyyy");
+		return initialValue == null ? LocalDate.now() : LocalDate.parse(initialValue, formatter);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String convertDateToString(EDataType eDataType, Object instanceValue) {
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("d/MM/yyyy");
+		return ((LocalDate)instanceValue).format(formatter);
 	}
 
 	/**

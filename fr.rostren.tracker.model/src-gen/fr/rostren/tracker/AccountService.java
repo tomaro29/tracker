@@ -2,6 +2,7 @@
  */
 package fr.rostren.tracker;
 
+import java.time.Month;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,16 +17,16 @@ import org.eclipse.emf.ecore.EObject;
 public interface AccountService extends EObject {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
+	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	float sumPerCategory(Account account, Category category, Month month, int year);
+	double sumPerCategory(Account account, Category category, Month month, int year);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
+	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	float averagePerCategory(Account account, Category category, Month month, int year);
+	double averagePerCategory(Account account, Category category, Month month, int year);
 
 } // AccountService

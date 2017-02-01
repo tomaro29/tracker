@@ -345,26 +345,6 @@
 	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
 	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
 		<propertyTab
-               category="dateProperties"
-               id="date.property.tab.DateAttributesPropertySection"
-               label="Attributes"/>
-	</propertyTabs>
-   </extension>
-   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
-   	<propertySections contributorId="fr.rostren.tracker.ui.common">
-         <propertySection
-               class="fr.rostren.tracker.ui.properties.sections.date.DateAttributesPropertySection"
-               enablesFor="1"
-               filter="fr.rostren.tracker.ui.properties.filters.DatePropertySectionFilter"
-               id="date.property.tab.DateAttributesPropertySection"
-               tab="date.property.tab.DateAttributesPropertySection">
-         </propertySection>
-     </propertySections>
-   </extension>
-   
-	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
-	<propertyTabs contributorId="fr.rostren.tracker.ui.common">
-		<propertyTab
                category="categoryProperties"
                id="category.property.tab.CategoryAttributesPropertySection"
                label="Attributes"/>

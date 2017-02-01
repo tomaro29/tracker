@@ -1,5 +1,6 @@
 package fr.rostren.tracker.pdf.utils;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
@@ -8,7 +9,6 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Operation;
@@ -49,7 +49,7 @@ public class LineContent {
 	 * @param origin
 	 *            the operation origin
 	 */
-	public LineContent(Date date, String title, double amount, OperationType type, Origin origin) {
+	public LineContent(LocalDate date, String title, double amount, OperationType type, Origin origin) {
 		if (date == null) {
 			throw new IllegalArgumentException("The operation date cannot be null."); //$NON-NLS-1$
 		}
@@ -140,11 +140,7 @@ public class LineContent {
 		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
 		amountObject.setValue(amount);
 		amountObject.setCategory(linkedCategory);
-		Date wishedDate=TrackerFactory.eINSTANCE.createDate();
-		wishedDate.setYear(operation.getDate().getYear());
-		wishedDate.setMonth(operation.getDate().getMonth());
-		wishedDate.setDay(operation.getDate().getDay());
-		amountObject.setWishedDate(wishedDate);
+		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
 		return amountObject;
 	}
 

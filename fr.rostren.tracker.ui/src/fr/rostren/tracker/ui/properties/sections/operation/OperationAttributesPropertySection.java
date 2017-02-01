@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.properties.sections.operation;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +20,6 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import com.google.common.collect.Sets;
 
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.OperationsTitleRepository;
@@ -66,7 +66,11 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 			String title=operationTitle.getTitle();
 			titleCombo.select(Arrays.asList(items).indexOf(title));
 		}
-		dateTime.setDate(getYear(), getMonth(), getDay());
+
+		Assert.isTrue(currentEObject instanceof Operation);
+		LocalDate date=((Operation)currentEObject).getDate();
+
+		dateTime.setDate(getYear(date), getMonth(date), getDay(date));
 		items=getOriginsItems();
 		originCombo.setItems(items);
 		Origin origin=getOperationOriginItem();
@@ -98,36 +102,6 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	 */
 	public CCombo getTitleCombo() {
 		return titleCombo;
-	}
-
-	/**
-	 * Returns the Operation wished date year
-	 * @return the Operation wished date year
-	 */
-	private int getYear() {
-		Assert.isTrue(currentEObject instanceof Operation);
-		Date date=((Operation)currentEObject).getDate();
-		return date == null ? 0 : date.getYear();
-	}
-
-	/**
-	 * Returns the Operation wished date month
-	 * @return the Operation wished date month
-	 */
-	private int getMonth() {
-		Assert.isTrue(currentEObject instanceof Operation);
-		Date date=((Operation)currentEObject).getDate();
-		return date == null ? 0 : date.getMonth().getValue();
-	}
-
-	/**
-	 * Returns the Operation wished date day
-	 * @return the Operation wished date day
-	 */
-	private int getDay() {
-		Assert.isTrue(currentEObject instanceof Operation);
-		Date date=((Operation)currentEObject).getDate();
-		return date == null ? 0 : date.getDay();
 	}
 
 	/**

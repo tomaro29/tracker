@@ -2,269 +2,137 @@
 <tracker:Tracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tracker="http://fr.rostren.tracker/1.0">
   <owners firstName="first name" lastName="last name">
     <accounts xsi:type="tracker:CheckingAccount" name="checking">
-      <operations xsi:type="tracker:Credit" totalAmount="18.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.205" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="18.26">
-          <wishedDate day="12" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="12" month="Dec" year="2016"/>
+        <operations xsi:type="tracker:Credit" totalAmount="18.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0" date="12/10/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="18.26" wishedDate="12/10/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="8.40" operationTitle="//@operationsTitlesRepositories/@operationsTitles.206" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="8.40">
-          <wishedDate day="15" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="15" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="8.4" operationTitle="//@operationsTitlesRepositories/@operationsTitles.1" origin="//@originsRepository/@origins.0" date="15/10/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="8.4" wishedDate="15/10/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="25.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.207" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="25.20">
-          <wishedDate day="17" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="17" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="25.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.2" origin="//@originsRepository/@origins.0" date="17/10/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="25.2" wishedDate="17/10/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="10.13" operationTitle="//@operationsTitlesRepositories/@operationsTitles.208" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="10.13">
-          <wishedDate day="19" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="19" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="10.13" operationTitle="//@operationsTitlesRepositories/@operationsTitles.3" origin="//@originsRepository/@origins.0" date="19/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="10.13" wishedDate="19/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="15.10" operationTitle="//@operationsTitlesRepositories/@operationsTitles.209" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="15.10">
-          <wishedDate day="24" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="24" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="15.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.0" date="24/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="15.1" wishedDate="24/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="2089.39" operationTitle="//@operationsTitlesRepositories/@operationsTitles.210" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2089.39">
-          <wishedDate day="29" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="29" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="2089.39" operationTitle="//@operationsTitlesRepositories/@operationsTitles.5" origin="//@originsRepository/@origins.0" date="29/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2089.39" wishedDate="29/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="13.80" operationTitle="//@operationsTitlesRepositories/@operationsTitles.211" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="13.80">
-          <wishedDate day="30" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="30" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="13.8" operationTitle="//@operationsTitlesRepositories/@operationsTitles.6" origin="//@originsRepository/@origins.0" date="30/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="13.8" wishedDate="30/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="17.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.212" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="17.20">
-          <wishedDate day="30" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="30" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="17.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.0" date="30/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="17.2" wishedDate="30/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="33.90" operationTitle="//@operationsTitlesRepositories/@operationsTitles.213" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="33.90">
-          <wishedDate day="31" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="31" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="33.9" operationTitle="//@operationsTitlesRepositories/@operationsTitles.8" origin="//@originsRepository/@origins.0" date="31/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="33.9" wishedDate="31/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="6.90" operationTitle="//@operationsTitlesRepositories/@operationsTitles.214" origin="//@originsRepository/@origins.0">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="6.90">
-          <wishedDate day="2" year="2016"/>
-        </subAmounts>
-        <date day="2" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="6.9" operationTitle="//@operationsTitlesRepositories/@operationsTitles.9" origin="//@originsRepository/@origins.0" date="2/01/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="6.9" wishedDate="2/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="2412.69" operationTitle="//@operationsTitlesRepositories/@operationsTitles.215" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2412.69">
-          <wishedDate day="2" year="2016"/>
-        </subAmounts>
-        <date day="2" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="2412.69" operationTitle="//@operationsTitlesRepositories/@operationsTitles.10" origin="//@originsRepository/@origins.1" date="2/01/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2412.69" wishedDate="2/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="1100.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.216" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="1100.00">
-          <wishedDate day="5" year="2016"/>
-        </subAmounts>
-        <date day="5" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="1100.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.11" origin="//@originsRepository/@origins.1" date="5/01/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="1100.0" wishedDate="5/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="40.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.217" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="40.00">
-          <wishedDate day="24" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="24" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="40.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.12" origin="//@originsRepository/@origins.1" date="24/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="40.0" wishedDate="24/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="60.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.218" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="60.00">
-          <wishedDate day="31" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="31" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="60.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1" date="31/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="60.0" wishedDate="31/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="36.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.219" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="36.00">
-          <wishedDate day="30" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="30" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="36.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.14" origin="//@originsRepository/@origins.1" date="30/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="36.0" wishedDate="30/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="28.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.220" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="28.00">
-          <wishedDate day="15" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="15" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="28.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.15" origin="//@originsRepository/@origins.1" date="15/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="28.0" wishedDate="15/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="25.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.221" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="25.00">
-          <wishedDate day="22" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="22" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="25.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.16" origin="//@originsRepository/@origins.1" date="22/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="25.0" wishedDate="22/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="20.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.222" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="20.00">
-          <wishedDate day="8" year="2016"/>
-        </subAmounts>
-        <date day="8" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="20.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.17" origin="//@originsRepository/@origins.1" date="8/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="20.0" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="2.43" operationTitle="//@operationsTitlesRepositories/@operationsTitles.223" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2.43">
-          <wishedDate day="16" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="16" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Credit" totalAmount="2.43" operationTitle="//@operationsTitlesRepositories/@operationsTitles.18" origin="//@originsRepository/@origins.1" date="16/12/2016">
+        <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2.43" wishedDate="16/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="12.78" operationTitle="//@operationsTitlesRepositories/@operationsTitles.224" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="12.78">
-          <wishedDate day="16" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="16" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="12.78" operationTitle="//@operationsTitlesRepositories/@operationsTitles.19" origin="//@originsRepository/@origins.1" date="16/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="12.78" wishedDate="16/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="239.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.225" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="239.00">
-          <wishedDate day="10" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="10" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="239.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.20" origin="//@originsRepository/@origins.1" date="10/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="239.0" wishedDate="10/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="335.42" operationTitle="//@operationsTitlesRepositories/@operationsTitles.226" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="335.42">
-          <wishedDate day="10" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="10" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="335.42" operationTitle="//@operationsTitlesRepositories/@operationsTitles.21" origin="//@originsRepository/@origins.1" date="10/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="335.42" wishedDate="10/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="71.48" operationTitle="//@operationsTitlesRepositories/@operationsTitles.227" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="71.48">
-          <wishedDate day="10" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="10" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="71.48" operationTitle="//@operationsTitlesRepositories/@operationsTitles.22" origin="//@originsRepository/@origins.1" date="10/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="71.48" wishedDate="10/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="1.58" operationTitle="//@operationsTitlesRepositories/@operationsTitles.228" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="1.58">
-          <wishedDate day="11" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="11" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="1.58" operationTitle="//@operationsTitlesRepositories/@operationsTitles.23" origin="//@originsRepository/@origins.1" date="11/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="1.58" wishedDate="11/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="18.10" operationTitle="//@operationsTitlesRepositories/@operationsTitles.229" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="18.10">
-          <wishedDate day="12" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="12" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="18.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.24" origin="//@originsRepository/@origins.1" date="12/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="18.1" wishedDate="12/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.95" operationTitle="//@operationsTitlesRepositories/@operationsTitles.230" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.95">
-          <wishedDate day="12" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="12" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="8.95" operationTitle="//@operationsTitlesRepositories/@operationsTitles.25" origin="//@originsRepository/@origins.1" date="12/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.95" wishedDate="12/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="9.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.231" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="9.20">
-          <wishedDate day="13" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="13" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="9.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.26" origin="//@originsRepository/@origins.1" date="13/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="9.2" wishedDate="13/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="9.20" operationTitle="//@operationsTitlesRepositories/@operationsTitles.232" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="9.20">
-          <wishedDate day="16" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="16" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="9.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.27" origin="//@originsRepository/@origins.1" date="16/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="9.2" wishedDate="16/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="46.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.233" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="46.00">
-          <wishedDate day="16" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="16" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="46.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.28" origin="//@originsRepository/@origins.1" date="16/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="46.0" wishedDate="16/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.234" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.00">
-          <wishedDate day="16" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="16" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="8.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.29" origin="//@originsRepository/@origins.1" date="16/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.0" wishedDate="16/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="64.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.235" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="64.00">
-          <wishedDate day="17" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="17" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="64.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.30" origin="//@originsRepository/@origins.1" date="17/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="64.0" wishedDate="17/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="119.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.236" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="119.00">
-          <wishedDate day="18" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="18" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="119.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.31" origin="//@originsRepository/@origins.1" date="18/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="119.0" wishedDate="18/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="85.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.237" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="85.00">
-          <wishedDate day="19" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="19" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="85.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.32" origin="//@originsRepository/@origins.1" date="19/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="85.0" wishedDate="19/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.238" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.26">
-          <wishedDate day="20" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="20" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="8.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.33" origin="//@originsRepository/@origins.1" date="20/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.26" wishedDate="20/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="55.59" operationTitle="//@operationsTitlesRepositories/@operationsTitles.239" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="55.59">
-          <wishedDate day="23" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="23" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="55.59" operationTitle="//@operationsTitlesRepositories/@operationsTitles.34" origin="//@originsRepository/@origins.1" date="23/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="55.59" wishedDate="23/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="56.50" operationTitle="//@operationsTitlesRepositories/@operationsTitles.240" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="56.50">
-          <wishedDate day="24" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="24" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="56.5" operationTitle="//@operationsTitlesRepositories/@operationsTitles.35" origin="//@originsRepository/@origins.1" date="24/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="56.5" wishedDate="24/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="7.60" operationTitle="//@operationsTitlesRepositories/@operationsTitles.241" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="7.60">
-          <wishedDate day="26" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="26" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="7.6" operationTitle="//@operationsTitlesRepositories/@operationsTitles.36" origin="//@originsRepository/@origins.1" date="26/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="7.6" wishedDate="26/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="18.10" operationTitle="//@operationsTitlesRepositories/@operationsTitles.242" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="18.10">
-          <wishedDate day="31" month="Dec" year="2016"/>
-        </subAmounts>
-        <date day="31" month="Dec" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="18.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.37" origin="//@originsRepository/@origins.1" date="31/12/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="18.1" wishedDate="31/12/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="134.98" operationTitle="//@operationsTitlesRepositories/@operationsTitles.243" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="134.98">
-          <wishedDate day="6" year="2016"/>
-        </subAmounts>
-        <date day="6" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="134.98" operationTitle="//@operationsTitlesRepositories/@operationsTitles.38" origin="//@originsRepository/@origins.1" date="6/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="134.98" wishedDate="6/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="86.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.244" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="86.00">
-          <wishedDate day="6" year="2016"/>
-        </subAmounts>
-        <date day="6" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="86.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.39" origin="//@originsRepository/@origins.1" date="6/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="86.0" wishedDate="6/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="345.81" operationTitle="//@operationsTitlesRepositories/@operationsTitles.245" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="345.81">
-          <wishedDate day="8" year="2016"/>
-        </subAmounts>
-        <date day="8" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="345.81" operationTitle="//@operationsTitlesRepositories/@operationsTitles.40" origin="//@originsRepository/@origins.1" date="8/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="345.81" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="123.00" operationTitle="//@operationsTitlesRepositories/@operationsTitles.246" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="123.00">
-          <wishedDate day="8" year="2016"/>
-        </subAmounts>
-        <date day="8" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="123.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.41" origin="//@originsRepository/@origins.1" date="8/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="123.0" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="12.35" operationTitle="//@operationsTitlesRepositories/@operationsTitles.247" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="12.35">
-          <wishedDate day="8" year="2016"/>
-        </subAmounts>
-        <date day="8" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="12.35" operationTitle="//@operationsTitlesRepositories/@operationsTitles.42" origin="//@originsRepository/@origins.1" date="8/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="12.35" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.80" operationTitle="//@operationsTitlesRepositories/@operationsTitles.248" origin="//@originsRepository/@origins.1">
-        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.80">
-          <wishedDate day="8" year="2016"/>
-        </subAmounts>
-        <date day="8" year="2016"/>
+      <operations xsi:type="tracker:Debit" totalAmount="8.8" operationTitle="//@operationsTitlesRepositories/@operationsTitles.43" origin="//@originsRepository/@origins.1" date="8/01/2016">
+        <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.8" wishedDate="8/01/2016"/>
       </operations>
     </accounts>
   </owners>

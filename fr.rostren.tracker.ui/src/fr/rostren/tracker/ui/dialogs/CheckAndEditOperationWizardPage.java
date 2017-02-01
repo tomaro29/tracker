@@ -1,6 +1,8 @@
 package fr.rostren.tracker.ui.dialogs;
 
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
@@ -33,11 +35,10 @@ import org.eclipse.swt.widgets.Text;
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Date;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.wizards.OperationSubAmountWizard;
 
@@ -68,8 +69,6 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	protected Button editButton;
 	protected Button removeButton;
 
-	protected Date date;
-
 	private final int TEXT_MARGIN=3;
 	private final int FONT_WIDTH=10;
 
@@ -83,18 +82,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Assert.isTrue(source instanceof DateTime);
 			DateTime dateTime=(DateTime)source;
 			//set operation date to the new selected date
-			date.setDay(dateTime.getDay());
-			date.setMonth(Month.get(dateTime.getMonth()));
-			date.setYear(dateTime.getYear());
+			operation.setDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay()));
 
 			//set all subAmounts wished dates to the new selected date
 			operation.getSubAmounts().stream()//
-					.forEach(subAmount -> {
-						Date wishedDate=subAmount.getWishedDate();
-						wishedDate.setDay(dateTime.getDay());
-						wishedDate.setMonth(Month.get(dateTime.getMonth()));
-						wishedDate.setYear(dateTime.getYear());
-					});
+					.forEach(subAmount -> subAmount.setWishedDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay())));
 			populateTable();
 		}
 	};
@@ -107,18 +99,11 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Assert.isTrue(source instanceof DateTime);
 			DateTime dateTime=(DateTime)source;
 			//set operation date to the new selected date
-			date.setDay(dateTime.getDay());
-			date.setMonth(Month.get(dateTime.getMonth()));
-			date.setYear(dateTime.getYear());
+			operation.setDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay()));
 
 			//set all subAmounts wished dates to the new selected date
 			operation.getSubAmounts().stream()//
-					.forEach(subAmount -> {
-						Date wishedDate=subAmount.getWishedDate();
-						wishedDate.setDay(dateTime.getDay());
-						wishedDate.setMonth(Month.get(dateTime.getMonth()));
-						wishedDate.setYear(dateTime.getYear());
-					});
+					.forEach(subAmount -> subAmount.setWishedDate(LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth()), dateTime.getDay())));
 			populateTable();
 		}
 
@@ -137,7 +122,6 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		super(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_NAME, operation.getOperationTitle().getTitle()));
 
 		this.operation=operation;
-		date=operation.getDate();
 		this.account=account;
 		operationTitle=operation.getOperationTitle().getTitle();
 
@@ -327,8 +311,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 */
 	private void createOperationLabels(Composite subContainer, Operation operation) {
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, operation.eClass().getName());
-		createDateTime(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, date, dateKeyListener, modifyDateListener);
-		//		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, TrackerUtils.getOperationDate(Optional.of(operation)));
+		createDateTime(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, operation.getDate(), dateKeyListener, modifyDateListener);
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL, TrackerUtils.getOperationTotalAmount(Optional.of(operation)));
 	}
 
@@ -355,12 +338,14 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 * @param modifyListener the modify listener
 	 * @return the created {@link Text}
 	 */
-	private DateTime createDateTime(Composite composite, String label, Date content, SelectionListener selectionListener, Listener modifyListener) {
+	private DateTime createDateTime(Composite composite, String label, LocalDate content, SelectionListener selectionListener, Listener modifyListener) {
 		createLabel(composite, label);
 		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
 		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 		if (content != null) {
-			dateTime.setDate(content.getYear(), content.getMonth().getValue(), content.getDay());
+			dateTime.setYear(content.getYear());
+			dateTime.setMonth(content.getMonthValue());
+			dateTime.setDay(content.getDayOfMonth());
 		}
 		dateTime.addSelectionListener(selectionListener);
 		dateTime.addListener(SWT.Modify, modifyListener);
@@ -390,7 +375,8 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
 			item.setFont(font);
 			item.setData(amount);
-			item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory().getTitle(), amount.getWishedDate().toString()});
+			item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory().getTitle(),
+				TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.AMOUNT__WISHED_DATE.getEAttributeType(), amount.getWishedDate())});
 		}
 	}
 
@@ -441,8 +427,8 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 					newAmount.setCategory(category);
 				}
 
-				Double value=wizard.getAmountValue();
-				if (value != null) {
+				double value=wizard.getAmountValue();
+				if (value != 0) {
 					newAmount.setValue(value);
 				}
 				adaptAndValidateValues(newAmount);

@@ -5,12 +5,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.Test;
 
 import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Debit;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerFactory;
@@ -131,13 +133,13 @@ public class CEPdfContentAnalyzerTest {
 		analyzer.setCurrentYear(2014);
 		analyzer.setLastToken(PdfToken.VIR_RECU);
 		LineContent content=analyzer.parseLine(janValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.JAN);
+		testCreditParsingResult(content, expectedAmount, Month.JANUARY);
 		content=analyzer.parseLine(febValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.FEB);
+		testCreditParsingResult(content, expectedAmount, Month.FEBRUARY);
 		content=analyzer.parseLine(marValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.MARS);
+		testCreditParsingResult(content, expectedAmount, Month.MARCH);
 		content=analyzer.parseLine(aprValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.APR);
+		testCreditParsingResult(content, expectedAmount, Month.APRIL);
 		content=analyzer.parseLine(mayValidLine, testOrigin);
 		testCreditParsingResult(content, expectedAmount, Month.MAY);
 		content=analyzer.parseLine(junValidLine, testOrigin);
@@ -145,21 +147,21 @@ public class CEPdfContentAnalyzerTest {
 		content=analyzer.parseLine(julValidLine, testOrigin);
 		testCreditParsingResult(content, expectedAmount, Month.JULY);
 		content=analyzer.parseLine(augValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.AUG);
+		testCreditParsingResult(content, expectedAmount, Month.AUGUST);
 		content=analyzer.parseLine(septValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.SEPT);
+		testCreditParsingResult(content, expectedAmount, Month.SEPTEMBER);
 		content=analyzer.parseLine(octValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.OCT);
+		testCreditParsingResult(content, expectedAmount, Month.OCTOBER);
 		content=analyzer.parseLine(novValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.NOV);
+		testCreditParsingResult(content, expectedAmount, Month.NOVEMBER);
 		content=analyzer.parseLine(decValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.DEC);
+		testCreditParsingResult(content, expectedAmount, Month.DECEMBER);
 	}
 
 	/**
 	* Tests the {@link AbstractPdfContentAnalyzer#parseLine(String, Origin)} method
 	*/
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=DateTimeException.class)
 	public void invalidDateParsingTest() {
 		//valid complete parsing
 		analyzer.setCurrentYear(2014);
@@ -197,63 +199,63 @@ public class CEPdfContentAnalyzerTest {
 		content=analyzer.parseLine(partialValidLine, testOrigin);
 		assertNull(content);
 		content=analyzer.parseLine(amountValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.DEC);
+		testCreditParsingResult(content, expectedAmount, Month.DECEMBER);
 
 		//valid complete parsing
 		content=analyzer.parseLine(decValidLine, testOrigin);
-		testCreditParsingResult(content, expectedAmount, Month.DEC);
+		testCreditParsingResult(content, expectedAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testCreditParsingResult(content, expectedBigAmount, Month.DEC);
+		testCreditParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		//parse tokens
 		content=analyzer.parseLine(virementsRecusLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.VIR_RECU, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testCreditParsingResult(content, expectedBigAmount, Month.DEC);
+		testCreditParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(paiementChequeLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.PAIE_CHEQUE, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testDebitParsingResult(content, expectedBigAmount, Month.DEC);
+		testDebitParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(fraisBancairesLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.FRAIS_BANCAIRES, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testDebitParsingResult(content, expectedBigAmount, Month.DEC);
+		testDebitParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(paiementsCartesBancairesLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.PAIEMENTS_CARTES, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testDebitParsingResult(content, expectedBigAmount, Month.DEC);
+		testDebitParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(retraitsCartesBancairesLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.RETRAITS_CARTES, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testDebitParsingResult(content, expectedBigAmount, Month.DEC);
+		testDebitParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(prelevementsLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.PRELEVEMENTS, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testDebitParsingResult(content, expectedBigAmount, Month.DEC);
+		testDebitParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(operationsDiversesLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.OPERATIONS_DIVERSES, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testDebitParsingResult(content, expectedBigAmount, Month.DEC);
+		testDebitParsingResult(content, expectedBigAmount, Month.DECEMBER);
 
 		content=analyzer.parseLine(operationsDepotLine, testOrigin);
 		assertNull(content);
 		assertEquals(PdfToken.OPERATIONS_DEPOT, analyzer.getLastToken());
 		content=analyzer.parseLine(validLineWithBigAmount, testOrigin);
-		testCreditParsingResult(content, expectedBigAmount, Month.DEC);
+		testCreditParsingResult(content, expectedBigAmount, Month.DECEMBER);
 	}
 
 	/**
@@ -269,9 +271,9 @@ public class CEPdfContentAnalyzerTest {
 		assertTrue(operation instanceof Credit);
 		assertNull(operation.getOperationTitle());
 		assertEquals(String.valueOf(expectedAmount), String.valueOf(operation.getTotalAmount()));
-		Date date=operation.getDate();
+		LocalDate date=operation.getDate();
 		assertNotNull(date);
-		assertEquals(12, date.getDay());
+		assertEquals(12, date.getDayOfMonth());
 		assertEquals(expectedMonth, date.getMonth());
 		assertEquals(2014, date.getYear());
 		assertNull(content.getLinkedOperationTitle());
@@ -291,9 +293,9 @@ public class CEPdfContentAnalyzerTest {
 		assertTrue(operation instanceof Debit);
 		assertNull(operation.getOperationTitle());
 		assertEquals(String.valueOf(expectedAmount), String.valueOf(operation.getTotalAmount()));
-		Date date=operation.getDate();
+		LocalDate date=operation.getDate();
 		assertNotNull(date);
-		assertEquals(12, date.getDay());
+		assertEquals(12, date.getDayOfMonth());
 		assertEquals(expectedMonth, date.getMonth());
 		assertEquals(2014, date.getYear());
 		assertNull(content.getLinkedOperationTitle());

@@ -1,5 +1,7 @@
 package fr.rostren.tracker.pdf.utils;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,9 +19,7 @@ import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.IncomeCategory;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.OperationsTitleRepository;
@@ -522,26 +522,26 @@ public class TrackerUtils {
 	 * @return <code>true</code> if the amount has a valid date; <code>false</code> otherwise.
 	 */
 	private static boolean isDateValid(Amount amount, Operation operation, int year, Month month, boolean wishedEnabled) {
-		Optional<Date> wishedDate=amount.getWishedDate() != null ? Optional.of(amount.getWishedDate()) : Optional.empty();
-		Optional<Date> operationDate=operation.getDate() != null ? Optional.of(operation.getDate()) : Optional.empty();
+		Optional<LocalDate> wishedDate=amount.getWishedDate() != null ? Optional.of(amount.getWishedDate()) : Optional.empty();
+		Optional<LocalDate> operationDate=operation.getDate() != null ? Optional.of(operation.getDate()) : Optional.empty();
 
-		Date comparisonDate=wishedEnabled ? wishedDate.orElse(operationDate.orElseThrow(IllegalArgumentException::new)) : operationDate.orElseThrow(IllegalArgumentException::new);
+		LocalDate comparisonDate=wishedEnabled	? wishedDate.orElse(operationDate.orElseThrow(IllegalArgumentException::new))
+												: operationDate.orElseThrow(IllegalArgumentException::new);
 		return month.equals(comparisonDate.getMonth()) && year == comparisonDate.getYear();
 	}
 
 	/**
 	 * Returns the total amount
 	 * @param account the concerned account
-	 * @param dates the dates to witch we need to extract income category amount
+	 * @param months the months to witch we need to extract income category amount
 	 * @param year the year for witch we need to extract data
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
 	 */
-	public static List<Double> findAllCategoriesAmount(Account account, List<String> dates, int year, boolean wishedEnabled, Class<?> clazz) {
-		return dates//
-				.stream()//
-				.mapToDouble(date -> getTotalAmount(findAllAmounts(account, Month.get(date), year, wishedEnabled, clazz)))//
+	public static List<Double> findAllCategoriesAmount(Account account, List<String> months, int year, boolean wishedEnabled, Class<?> clazz) {
+		return months.stream()//
+				.mapToDouble(date -> getTotalAmount(findAllAmounts(account, Month.of(Integer.parseInt(date)), year, wishedEnabled, clazz)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}
@@ -549,15 +549,15 @@ public class TrackerUtils {
 	/**
 	 * @param account the concerned account
 	 * @param item the category item
-	 * @param dates the dates to witch we need to extract income category amount
+	 * @param months the months to witch we need to extract income category amount
 	 * @param year the year for witch we need to extract data
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the income category amount of the given item and its children
 	 */
-	public static List<Double> findIncomeCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+	public static List<Double> findIncomeCategoryAmounts(Account account, String item, List<String> months, int year, boolean wishedEnabled) {
 		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item).orElseThrow(IllegalArgumentException::new);
-		return dates.stream()//
-				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.get(date), year, wishedEnabled)))//
+		return months.stream()//
+				.mapToDouble(month -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.of(Integer.parseInt(month)), year, wishedEnabled)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}
@@ -565,15 +565,15 @@ public class TrackerUtils {
 	/**
 	 * @param account the concerned account
 	 * @param item the category item
-	 * @param dates the dates to witch we need to extract spending category amount
+	 * @param months the months to witch we need to extract spending category amount
 	 * @param year the year
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @return the spending category amount of the given item and its children
 	 */
-	public static List<Double> findSpendingCategoryAmounts(Account account, String item, List<String> dates, int year, boolean wishedEnabled) {
+	public static List<Double> findSpendingCategoryAmounts(Account account, String item, List<String> months, int year, boolean wishedEnabled) {
 		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item).orElseThrow(IllegalArgumentException::new);
-		return dates.stream()//
-				.mapToDouble(date -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.get(date), year, wishedEnabled)))//
+		return months.stream()//
+				.mapToDouble(month -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.of(Integer.parseInt(month)), year, wishedEnabled)))//
 				.boxed()//
 				.collect(Collectors.toList());
 	}

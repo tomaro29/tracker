@@ -2,6 +2,8 @@
  */
 package fr.rostren.tracker;
 
+import java.time.LocalDate;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.rostren.tracker.Operation#getTotalAmount <em>Total Amount</em>}</li>
  *   <li>{@link fr.rostren.tracker.Operation#getOperationTitle <em>Operation Title</em>}</li>
  *   <li>{@link fr.rostren.tracker.Operation#getSubAmounts <em>Sub Amounts</em>}</li>
- *   <li>{@link fr.rostren.tracker.Operation#getDate <em>Date</em>}</li>
  *   <li>{@link fr.rostren.tracker.Operation#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link fr.rostren.tracker.Operation#getDate <em>Date</em>}</li>
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getOperation()
@@ -26,30 +28,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Operation extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Date</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Date</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Date</em>' containment reference.
-	 * @see #setDate(Date)
+	 * @return the value of the '<em>Date</em>' attribute.
+	 * @see #setDate(LocalDate)
 	 * @see fr.rostren.tracker.TrackerPackage#getOperation_Date()
-	 * @model containment="true"
+	 * @model dataType="fr.rostren.tracker.Date"
 	 * @generated
 	 */
-	Date getDate();
+	LocalDate getDate();
 
 	/**
-	 * Sets the value of the '{@link fr.rostren.tracker.Operation#getDate <em>Date</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @param value the new value of the '<em>Date</em>' containment reference.
+	 * Sets the value of the '{@link fr.rostren.tracker.Operation#getDate <em>Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Date</em>' attribute.
 	 * @see #getDate()
 	 * @generated
 	 */
-	void setDate(Date value);
+	void setDate(LocalDate value);
 
 	/**
 	 * Returns the value of the '<em><b>Origin</b></em>' reference.

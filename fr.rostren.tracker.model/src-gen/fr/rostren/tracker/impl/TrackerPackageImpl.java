@@ -2,8 +2,12 @@
  */
 package fr.rostren.tracker.impl;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -19,11 +23,9 @@ import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CategoryService;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Incoming;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.OperationTitle;
@@ -165,12 +167,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dateEClass=null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass originEClass=null;
 
 	/**
@@ -209,13 +205,21 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum monthEEnum=null;
+	private EEnum originTypeEEnum=null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum originTypeEEnum=null;
+	private EDataType dateEDataType=null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType monthEDataType=null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -403,8 +407,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOperation_Date() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(3);
+	public EAttribute getOperation_Date() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -413,7 +417,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	@Override
 	public EReference getOperation_Origin() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(4);
+		return (EReference)operationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -602,8 +606,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getAmount_WishedDate() {
-		return (EReference)amountEClass.getEStructuralFeatures().get(2);
+	public EAttribute getAmount_WishedDate() {
+		return (EAttribute)amountEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -676,35 +680,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getDate() {
-		return dateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDate_Day() {
-		return (EAttribute)dateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDate_Month() {
-		return (EAttribute)dateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDate_Year() {
-		return (EAttribute)dateEClass.getEStructuralFeatures().get(2);
+	public EDataType getDate() {
+		return dateEDataType;
 	}
 
 	/**
@@ -869,8 +846,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	@Override
-	public EEnum getMonth() {
-		return monthEEnum;
+	public EDataType getMonth() {
+		return monthEDataType;
 	}
 
 	/**
@@ -930,8 +907,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(operationEClass, OPERATION__TOTAL_AMOUNT);
 		createEReference(operationEClass, OPERATION__OPERATION_TITLE);
 		createEReference(operationEClass, OPERATION__SUB_AMOUNTS);
-		createEReference(operationEClass, OPERATION__DATE);
 		createEReference(operationEClass, OPERATION__ORIGIN);
+		createEAttribute(operationEClass, OPERATION__DATE);
 
 		creditEClass=createEClass(CREDIT);
 
@@ -958,7 +935,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		amountEClass=createEClass(AMOUNT);
 		createEReference(amountEClass, AMOUNT__CATEGORY);
 		createEAttribute(amountEClass, AMOUNT__VALUE);
-		createEReference(amountEClass, AMOUNT__WISHED_DATE);
+		createEAttribute(amountEClass, AMOUNT__WISHED_DATE);
 
 		operationTitleServiceEClass=createEClass(OPERATION_TITLE_SERVICE);
 
@@ -971,11 +948,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		categoriesRepositoryEClass=createEClass(CATEGORIES_REPOSITORY);
 		createEReference(categoriesRepositoryEClass, CATEGORIES_REPOSITORY__INCOME);
 		createEReference(categoriesRepositoryEClass, CATEGORIES_REPOSITORY__SPENDING);
-
-		dateEClass=createEClass(DATE);
-		createEAttribute(dateEClass, DATE__DAY);
-		createEAttribute(dateEClass, DATE__MONTH);
-		createEAttribute(dateEClass, DATE__YEAR);
 
 		originEClass=createEClass(ORIGIN);
 		createEAttribute(originEClass, ORIGIN__TYPE);
@@ -1001,8 +973,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(spendingCategoryEClass, SPENDING_CATEGORY__SPENDINGS);
 
 		// Create enums
-		monthEEnum=createEEnum(MONTH);
 		originTypeEEnum=createEEnum(ORIGIN_TYPE);
+
+		// Create data types
+		dateEDataType=createEDataType(DATE);
+		monthEDataType=createEDataType(MONTH);
 	}
 
 	/**
@@ -1077,10 +1052,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_SubAmounts(), this.getAmount(), null, "subAmounts", null, 1, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_Date(), this.getDate(), null, "date", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_Origin(), this.getOrigin(), this.getOrigin_Operations(), "origin", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_Date(), this.getDate(), "date", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(creditEClass, Credit.class, "Credit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1115,8 +1090,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAmount_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAmount_WishedDate(), this.getDate(), null, "wishedDate", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAmount_WishedDate(), this.getDate(), "wishedDate", null, 0, 1, Amount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationTitleServiceEClass, OperationTitleService.class, "OperationTitleService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1139,13 +1114,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(accountServiceEClass, AccountService.class, "AccountService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op=addEOperation(accountServiceEClass, ecorePackage.getEFloat(), "sumPerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "sumPerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAccount(), "account", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op=addEOperation(accountServiceEClass, ecorePackage.getEFloat(), "averagePerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "averagePerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAccount(), "account", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1153,7 +1128,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(operationServiceEClass, OperationService.class, "OperationService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op=addEOperation(operationServiceEClass, ecorePackage.getEFloat(), "sumAmounts", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op=addEOperation(operationServiceEClass, ecorePackage.getEDouble(), "sumAmounts", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getOperation(), "operation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(categoriesRepositoryEClass, CategoriesRepository.class, "CategoriesRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1161,14 +1136,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCategoriesRepository_Spending(), this.getSpendingCategory(), null, "spending", null, 1, 1, CategoriesRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dateEClass, Date.class, "Date", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDate_Day(), ecorePackage.getEInt(), "day", null, 0, 1, Date.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDate_Month(), this.getMonth(), "month", null, 0, 1, Date.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDate_Year(), ecorePackage.getEInt(), "year", null, 0, 1, Date.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(originEClass, Origin.class, "Origin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOrigin_Type(), this.getOriginType(), "type", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
@@ -1205,23 +1172,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(monthEEnum, Month.class, "Month");
-		addEEnumLiteral(monthEEnum, Month.JAN);
-		addEEnumLiteral(monthEEnum, Month.FEB);
-		addEEnumLiteral(monthEEnum, Month.MARS);
-		addEEnumLiteral(monthEEnum, Month.APR);
-		addEEnumLiteral(monthEEnum, Month.MAY);
-		addEEnumLiteral(monthEEnum, Month.JUNE);
-		addEEnumLiteral(monthEEnum, Month.JULY);
-		addEEnumLiteral(monthEEnum, Month.AUG);
-		addEEnumLiteral(monthEEnum, Month.SEPT);
-		addEEnumLiteral(monthEEnum, Month.OCT);
-		addEEnumLiteral(monthEEnum, Month.NOV);
-		addEEnumLiteral(monthEEnum, Month.DEC);
-
 		initEEnum(originTypeEEnum, OriginType.class, "OriginType");
 		addEEnumLiteral(originTypeEEnum, OriginType.PDF_FILE);
 		addEEnumLiteral(originTypeEEnum, OriginType.MANUAL);
+
+		// Initialize data types
+		initEDataType(dateEDataType, LocalDate.class, "Date", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(monthEDataType, Month.class, "Month", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1229,8 +1186,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		// Create annotations
 		// isUnique
 		createIsUniqueAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
 	}
 
 	/**
@@ -1243,18 +1198,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		String source="isUnique";
 		addAnnotation(getAccount_Identifier(), source, new String[] {});
 		addAnnotation(getOrigin_Identifier(), source, new String[] {});
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source="http://www.eclipse.org/emf/2002/Ecore";
-		addAnnotation(getDate_Day(), source, new String[] {"constraints", "ValidateDayLength"});
-		addAnnotation(getDate_Year(), source, new String[] {"constraints", "ValidateYearLength"});
 	}
 
 } // TrackerPackageImpl

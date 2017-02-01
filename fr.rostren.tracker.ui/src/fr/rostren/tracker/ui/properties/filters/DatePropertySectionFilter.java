@@ -1,14 +1,14 @@
 package fr.rostren.tracker.ui.properties.filters;
 
-import org.eclipse.jface.viewers.IFilter;
+import java.time.LocalDate;
 
-import fr.rostren.tracker.Date;
+import org.eclipse.jface.viewers.IFilter;
 
 public class DatePropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Date) {
+		if (object instanceof LocalDate) {
 			return true;
 		}
 		return false;

@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.AccountService;
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Month;
 import fr.rostren.tracker.TrackerPackage;
+import java.time.Month;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -36,22 +36,24 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public float sumPerCategory(Account account, Category category, Month month, int year) {
+	public double sumPerCategory(Account account, Category category, Month month, int year) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public float averagePerCategory(Account account, Category category, Month month, int year) {
+	public double averagePerCategory(Account account, Category category, Month month, int year) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

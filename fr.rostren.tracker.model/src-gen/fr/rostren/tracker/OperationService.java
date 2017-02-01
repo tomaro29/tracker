@@ -19,6 +19,6 @@ public interface OperationService extends EObject {
 	 * @model
 	 * @generated
 	 */
-	float sumAmounts(Operation operation);
+	double sumAmounts(Operation operation);
 
 } // OperationService

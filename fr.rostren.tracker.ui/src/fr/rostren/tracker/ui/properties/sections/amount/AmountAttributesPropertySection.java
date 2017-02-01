@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.properties.sections.amount;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +22,6 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
@@ -42,7 +42,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 		super.createControls(parent, aTabbedPropertySheetPage);
 
 		valueText=createLabeledText(body, null, "Value:"); //$NON-NLS-1$
-		dateTime=createDateTime(body, valueText, "Date:"); //$NON-NLS-1$
+		dateTime=createDateTime(body, valueText, "Wished Date:"); //$NON-NLS-1$
 		categoryCombo=createLabeledCombo(body, dateTime, "Category:"); //$NON-NLS-1$
 
 		addListeners();
@@ -54,7 +54,11 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 
 		disposeListeners();
 		valueText.setText(getAmountvalue());
-		dateTime.setDate(getYear(), getMonth(), getDay());
+
+		Assert.isTrue(currentEObject instanceof Amount);
+		LocalDate date=((Amount)currentEObject).getWishedDate();
+
+		dateTime.setDate(getYear(date), getMonth(date), getDay(date));
 		String[] items=getItems();
 		categoryCombo.setItems(items);
 		setComboSelection(items);
@@ -84,36 +88,6 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 			return StringUtils.EMPTY;
 		}
 		return String.valueOf(value);
-	}
-
-	/**
-	 * Returns the amount wished date year
-	 * @return the amount wished date year
-	 */
-	private int getYear() {
-		Assert.isTrue(currentEObject instanceof Amount);
-		Date wishedDate=((Amount)currentEObject).getWishedDate();
-		return wishedDate == null ? 0 : wishedDate.getYear();
-	}
-
-	/**
-	 * Returns the amount wished date month
-	 * @return the amount wished date month
-	 */
-	private int getMonth() {
-		Assert.isTrue(currentEObject instanceof Amount);
-		Date wishedDate=((Amount)currentEObject).getWishedDate();
-		return wishedDate == null ? 0 : wishedDate.getMonth().getValue();
-	}
-
-	/**
-	 * Returns the amount wished date day
-	 * @return the amount wished date day
-	 */
-	private int getDay() {
-		Assert.isTrue(currentEObject instanceof Amount);
-		Date wishedDate=((Amount)currentEObject).getWishedDate();
-		return wishedDate == null ? 0 : wishedDate.getDay();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.properties.pages;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,6 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 
@@ -120,12 +120,12 @@ public abstract class AbstractWizardPage extends WizardPage {
 	 * @param selectionListener the selection listener
 	 * @return the created {@link Text}
 	 */
-	protected DateTime createDateTime(Composite composite, String label, Date content, SelectionListener selectionListener) {
+	protected DateTime createDateTime(Composite composite, String label, LocalDate content, SelectionListener selectionListener) {
 		createLabel(composite, label);
 		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
 		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 		if (content != null) {
-			dateTime.setDate(content.getYear(), content.getMonth().getValue(), content.getDay());
+			dateTime.setDate(content.getYear(), content.getMonth().getValue(), content.getDayOfMonth());
 		}
 		dateTime.addSelectionListener(selectionListener);
 		return dateTime;

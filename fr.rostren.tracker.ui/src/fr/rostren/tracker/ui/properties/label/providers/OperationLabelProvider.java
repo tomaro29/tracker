@@ -3,6 +3,8 @@ package fr.rostren.tracker.ui.properties.label.providers;
 import org.apache.commons.lang.StringUtils;
 
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 
 public class OperationLabelProvider extends AbstractLabelProvider {
 	protected static final String STRING_UNDEFINED_TITLE="UNDEFINED Title"; //$NON-NLS-1$
@@ -42,6 +44,7 @@ public class OperationLabelProvider extends AbstractLabelProvider {
 	 * @return the operation date
 	 */
 	private String getOperationDate(Operation operation) {
-		return operation.getDate() == null ? OperationLabelProvider.STRING_UNDEFINED_DATE : operation.getDate().toString();
+		return operation.getDate() == null	? OperationLabelProvider.STRING_UNDEFINED_DATE
+											: TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(), operation.getDate());
 	}
 }

@@ -2,21 +2,24 @@
  */
 package fr.rostren.tracker.impl;
 
+import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.Category;
+import fr.rostren.tracker.TrackerPackage;
+
+import java.time.LocalDate;
+
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import fr.rostren.tracker.Amount;
-import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Date;
-import fr.rostren.tracker.TrackerPackage;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Amount</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Amount</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
@@ -31,7 +34,8 @@ import fr.rostren.tracker.TrackerPackage;
 public class AmountImpl extends EObjectImpl implements Amount {
 	/**
 	 * The cached value of the '{@link #getCategory() <em>Category</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCategory()
 	 * @generated
 	 * @ordered
@@ -40,7 +44,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -49,7 +54,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -57,17 +63,28 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	protected double value=VALUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getWishedDate() <em>Wished Date</em>}' containment reference.
+	 * The default value of the '{@link #getWishedDate() <em>Wished Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getWishedDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected Date wishedDate;
+	protected static final LocalDate WISHED_DATE_EDEFAULT=null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getWishedDate() <em>Wished Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWishedDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected LocalDate wishedDate=WISHED_DATE_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected AmountImpl() {
@@ -75,7 +92,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -84,7 +102,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -101,7 +120,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Category basicGetCategory() {
@@ -109,7 +129,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -121,7 +142,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -148,7 +170,7 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * @generated
 	 */
 	@Override
-	public Date getWishedDate() {
+	public LocalDate getWishedDate() {
 		return wishedDate;
 	}
 
@@ -157,56 +179,17 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWishedDate(Date newWishedDate, NotificationChain msgs) {
-		Date oldWishedDate=wishedDate;
+	@Override
+	public void setWishedDate(LocalDate newWishedDate) {
+		LocalDate oldWishedDate=wishedDate;
 		wishedDate=newWishedDate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification=new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__WISHED_DATE, oldWishedDate, newWishedDate);
-			if (msgs == null)
-				msgs=notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__WISHED_DATE, oldWishedDate, wishedDate));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setWishedDate(Date newWishedDate) {
-		if (newWishedDate != wishedDate) {
-			NotificationChain msgs=null;
-			if (wishedDate != null)
-				msgs=((InternalEObject)wishedDate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.AMOUNT__WISHED_DATE, null, msgs);
-			if (newWishedDate != null)
-				msgs=((InternalEObject)newWishedDate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.AMOUNT__WISHED_DATE, null, msgs);
-			msgs=basicSetWishedDate(newWishedDate, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.AMOUNT__WISHED_DATE, newWishedDate, newWishedDate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TrackerPackage.AMOUNT__WISHED_DATE:
-				return basicSetWishedDate(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -225,7 +208,8 @@ public class AmountImpl extends EObjectImpl implements Amount {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -238,14 +222,15 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				setValue((Double)newValue);
 				return;
 			case TrackerPackage.AMOUNT__WISHED_DATE:
-				setWishedDate((Date)newValue);
+				setWishedDate((LocalDate)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -258,14 +243,15 @@ public class AmountImpl extends EObjectImpl implements Amount {
 				setValue(VALUE_EDEFAULT);
 				return;
 			case TrackerPackage.AMOUNT__WISHED_DATE:
-				setWishedDate((Date)null);
+				setWishedDate(WISHED_DATE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -276,13 +262,14 @@ public class AmountImpl extends EObjectImpl implements Amount {
 			case TrackerPackage.AMOUNT__VALUE:
 				return value != VALUE_EDEFAULT;
 			case TrackerPackage.AMOUNT__WISHED_DATE:
-				return wishedDate != null;
+				return WISHED_DATE_EDEFAULT == null ? wishedDate != null : !WISHED_DATE_EDEFAULT.equals(wishedDate);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -293,8 +280,10 @@ public class AmountImpl extends EObjectImpl implements Amount {
 		StringBuffer result=new StringBuffer(super.toString());
 		result.append(" (value: ");
 		result.append(value);
+		result.append(", wishedDate: ");
+		result.append(wishedDate);
 		result.append(')');
 		return result.toString();
 	}
 
-} // AmountImpl
+} //AmountImpl

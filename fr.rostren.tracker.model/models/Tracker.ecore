@@ -28,9 +28,9 @@
         eType="#//OperationTitle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subAmounts" lowerBound="1"
         upperBound="-1" eType="#//Amount" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="date" eType="#//Date" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//Origin" eOpposite="#//Origin/operations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="#//Date"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Credit" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Debit" eSuperTypes="#//Operation"/>
@@ -56,8 +56,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
         eType="#//Category"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="wishedDate" eType="#//Date"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wishedDate" eType="#//Date"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationTitleService">
     <eOperations name="addTitle">
@@ -79,13 +78,13 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AccountService">
-    <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
+    <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="account" eType="#//Account"/>
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="month" eType="#//Month"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
-    <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
+    <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="account" eType="#//Account"/>
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="month" eType="#//Month"/>
@@ -93,42 +92,15 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationService">
-    <eOperations name="sumAmounts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
+    <eOperations name="sumAmounts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="operation" eType="#//Operation"/>
     </eOperations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Month">
-    <eLiterals name="Jan"/>
-    <eLiterals name="Feb" value="1"/>
-    <eLiterals name="Mars" value="2"/>
-    <eLiterals name="Apr" value="3"/>
-    <eLiterals name="May" value="4"/>
-    <eLiterals name="June" value="5"/>
-    <eLiterals name="July" value="6"/>
-    <eLiterals name="Aug" value="7"/>
-    <eLiterals name="Sept" value="8"/>
-    <eLiterals name="Oct" value="9"/>
-    <eLiterals name="Nov" value="10"/>
-    <eLiterals name="Dec" value="11"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoriesRepository">
     <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
         eType="#//IncomeCategory" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="spending" lowerBound="1"
         eType="#//SpendingCategory" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Date">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-        <details key="constraints" value="ValidateDayLength"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" eType="#//Month"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-        <details key="constraints" value="ValidateYearLength"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Origin">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//OriginType"/>
@@ -168,4 +140,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="spendings" upperBound="-1"
         eType="#//SpendingCategory" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.time.LocalDate"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Month" instanceClassName="java.time.Month"/>
 </ecore:EPackage>

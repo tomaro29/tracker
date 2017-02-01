@@ -6,12 +6,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.eclipse.emf.ecore.EObject;
 import org.junit.Test;
 
 import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Date;
 import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Origin;
@@ -28,7 +28,7 @@ public class LineContentTest {
 	private static final String EMPTY_MODEL_PATH="input/models/emptyModel.tracker"; //$NON-NLS-1$
 	private static final String INCOMPLETE_MODEL_PATH="input/models/incompleteModel.tracker"; //$NON-NLS-1$
 
-	private final Date testDate=TrackerFactory.eINSTANCE.createDate();
+	private final LocalDate testDate=LocalDate.now();
 	private final String testTitle="any title1"; //$NON-NLS-1$
 	private final String testTitle2="any title2"; //$NON-NLS-1$
 	private final String existingCreditTitle="VIR SEPA OBNA "; //$NON-NLS-1$
@@ -103,7 +103,7 @@ public class LineContentTest {
 		assertNotNull(lineContent);
 		assertEquals(testDate, lineContent.getOperation().getDate());
 		assertEquals(testTitle, lineContent.getTitle());
-		assertEquals(testAmount, lineContent.getOperation().getTotalAmount());
+		assertEquals(testAmount, lineContent.getOperation().getTotalAmount(), 0);
 		assertEquals(testOrigin, lineContent.getOperation().getOrigin());
 		assertTrue(lineContent.getOperation() instanceof Credit);
 		assertNull(lineContent.getLinkedCategory());
@@ -113,7 +113,7 @@ public class LineContentTest {
 		assertNotNull(lineContent);
 		assertEquals(testDate, lineContent.getOperation().getDate());
 		assertEquals(testTitle, lineContent.getTitle());
-		assertEquals(testAmount, lineContent.getOperation().getTotalAmount());
+		assertEquals(testAmount, lineContent.getOperation().getTotalAmount(), 0);
 		assertEquals(testOrigin, lineContent.getOperation().getOrigin());
 		assertTrue(lineContent.getOperation() instanceof Debit);
 		assertNull(lineContent.getLinkedCategory());

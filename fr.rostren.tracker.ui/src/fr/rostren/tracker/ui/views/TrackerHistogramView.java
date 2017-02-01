@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
@@ -49,6 +50,7 @@ import fr.rostren.tracker.histogram.Histogram;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.TrackerEditor;
 import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
+import fr.rostren.tracker.ui.views.internal.actions.RefreshHistogramAction;
 
 public class TrackerHistogramView extends ViewPart {
 	private static final String ALL_CATEGORIES_ITEM="All Categories"; //$NON-NLS-1$
@@ -121,8 +123,21 @@ public class TrackerHistogramView extends ViewPart {
 		createFilterColumn(formBody);
 		createHistogramColumn(formBody);
 
+		// Add actions to tool bar
+		IToolBarManager manager=histogramParentForm.getToolBarManager();
+		// Refresh histogram
+		addRefreshActionToToolBar(manager);
+
 		formBody.setWeights(new int[] {1, 3});
 		formBody.pack();
+	}
+
+	/**
+	 * Adds the refresh action to the tool bar
+	 * @param manager the tool bar manager
+	 */
+	private void addRefreshActionToToolBar(IToolBarManager manager) {
+		manager.add(new RefreshHistogramAction(this));
 	}
 
 	/**

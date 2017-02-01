@@ -2,6 +2,7 @@ package fr.rostren.tracker.pdf.content.extractor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,7 +70,7 @@ public class PDFContentExtractor {
 			throw new IllegalArgumentException("The monitor cannot be null."); //$NON-NLS-1$
 		}
 		List<Operation> operations=new ArrayList<>();
-		for (String uri: getURISFromText()) {
+		for (String uri: getURIsFromText()) {
 			monitor.subTask(uri);
 			if (StringUtils.isEmpty(uri)) {
 				continue;
@@ -95,11 +96,11 @@ public class PDFContentExtractor {
 	 * Returns the list of Uris
 	 * @return uris as a table
 	 */
-	private String[] getURISFromText() {
+	private List<String> getURIsFromText() {
 		if (uriText.contains(" ")) { //$NON-NLS-1$
-			return uriText.split(" "); //$NON-NLS-1$
+			return Arrays.asList(uriText.split(" ")); //$NON-NLS-1$
 		}
-		return new String[] {uriText,};
+		return Arrays.asList(uriText);
 	}
 
 	/**

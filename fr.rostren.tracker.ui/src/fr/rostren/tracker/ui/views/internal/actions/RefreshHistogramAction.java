@@ -29,7 +29,7 @@ public class RefreshHistogramAction extends Action {
 
 	@Override
 	public void run() {
-		view.populateHistogram();
+		view.refresh();
 	}
 
 	/**

@@ -132,22 +132,23 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 	 */
 	private void extractCompleteLine() {
 		setLastPotentialDate(extractDateFromCurrentLine());
-		int length=getCurrentSplitLine().length;
-		String lastPart=getCurrentSplitLine()[length - 1];
-		String beforeLastPart=getCurrentSplitLine()[length - 2];
+		String[] currentSplitLine=getCurrentSplitLine();
+		int length=currentSplitLine.length;
+		String lastPart=currentSplitLine[length - 1];
+		String beforeLastPart=currentSplitLine[length - 2];
 
 		StringBuilder titleBuilder=new StringBuilder();
 		if (!beforeLastPart.matches(FACT_PATTREN.pattern()) && beforeLastPart.length() <= 3 && beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
 			for (int index=1; index < length - 2; index++) {
-				titleBuilder.append(getCurrentSplitLine()[index]);
+				titleBuilder.append(currentSplitLine[index]);
 				titleBuilder.append(STRING_SEPARATOR);
 			}
 
 			setLastPotentialAmount(getAmountAsDouble(beforeLastPart + lastPart));
 		}
 		else {
-			for (int index=1; index < getCurrentSplitLine().length - 1; index++) {
-				titleBuilder.append(getCurrentSplitLine()[index]);
+			for (int index=1; index < currentSplitLine.length - 1; index++) {
+				titleBuilder.append(currentSplitLine[index]);
 				titleBuilder.append(STRING_SEPARATOR);
 			}
 

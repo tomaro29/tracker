@@ -55,24 +55,21 @@ public class Histogram {
 	 * @param enableStack <code>true</code> if the stack configuration is enabled, <code>false</code> otherwise.
 	 */
 	public void populateHistogram(List<String> titles, List<Double> incomeSeriesValues, List<Double> spendingSeriesValues, boolean enableStack) {
-		xAxis.setCategorySeries(convertToStringArray(titles));
+		String[] titlesArray=convertToStringArray(titles);
+		xAxis.setCategorySeries(titlesArray);
 		xAxis.enableCategory(true);
 
 		//create income bar series
 		IBarSeries incomeSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.INCOME);
 		incomeSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
 		double[] primitiveIncomeDoubleArray=convertToPrimitiveDoubleArray(incomeSeriesValues);
-		if (primitiveIncomeDoubleArray != null) {
-			incomeSeries.setYSeries(primitiveIncomeDoubleArray);
-		}
+		incomeSeries.setYSeries(primitiveIncomeDoubleArray);
 
 		//create spending bar series
 		IBarSeries spendingSeries=(IBarSeries)chart.getSeriesSet().createSeries(SeriesType.BAR, Histogram.SPENDING);
 		spendingSeries.setBarColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		double[] primitiveSpendingDoubleArray=convertToPrimitiveDoubleArray(spendingSeriesValues);
-		if (primitiveSpendingDoubleArray != null) {
-			spendingSeries.setYSeries(primitiveSpendingDoubleArray);
-		}
+		spendingSeries.setYSeries(primitiveSpendingDoubleArray);
 
 		//Set Labels font, format and make visible
 		ISeriesLabel incomeSeriesLabel=incomeSeries.getLabel();
@@ -99,7 +96,7 @@ public class Histogram {
 	 * @return the converted array
 	 */
 	private double[] convertToPrimitiveDoubleArray(List<Double> list) {
-		return list == null ? null : ArrayUtils.toPrimitive(list.stream().toArray(Double[]::new));
+		return ArrayUtils.toPrimitive(list.stream().toArray(Double[]::new));
 	}
 
 	/**

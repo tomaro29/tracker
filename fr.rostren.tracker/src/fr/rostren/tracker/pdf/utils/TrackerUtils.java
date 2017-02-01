@@ -555,11 +555,12 @@ public class TrackerUtils {
 	 * @return the income category amount of the given item and its children
 	 */
 	public static List<Double> findIncomeCategoryAmounts(Account account, String item, List<String> months, int year, boolean wishedEnabled) {
-		Category incomeCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item).orElseThrow(IllegalArgumentException::new);
-		return months.stream()//
-				.mapToDouble(month -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.of(Integer.parseInt(month)), year, wishedEnabled)))//
+		List<Double> amounts=new ArrayList<>();
+		findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getIncome(), item).ifPresent(incomeCategory -> amounts.addAll(months.stream()//
+				.mapToDouble(month -> getTotalAmount(findCategoryAmounts(account, incomeCategory, Month.valueOf(month), year, wishedEnabled)))//
 				.boxed()//
-				.collect(Collectors.toList());
+				.collect(Collectors.toList())));
+		return amounts;
 	}
 
 	/**
@@ -571,11 +572,12 @@ public class TrackerUtils {
 	 * @return the spending category amount of the given item and its children
 	 */
 	public static List<Double> findSpendingCategoryAmounts(Account account, String item, List<String> months, int year, boolean wishedEnabled) {
-		Category spendingCategory=findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item).orElseThrow(IllegalArgumentException::new);
-		return months.stream()//
-				.mapToDouble(month -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.of(Integer.parseInt(month)), year, wishedEnabled)))//
+		List<Double> amounts=new ArrayList<>();
+		findCategory(TrackerUtils.getTracker(account).getCategoriesRepository().getSpending(), item).ifPresent(spendingCategory -> amounts.addAll(months.stream()//
+				.mapToDouble(month -> getTotalAmount(findCategoryAmounts(account, spendingCategory, Month.valueOf(month), year, wishedEnabled)))//
 				.boxed()//
-				.collect(Collectors.toList());
+				.collect(Collectors.toList())));
+		return amounts;
 	}
 
 	/**

@@ -86,6 +86,7 @@ public class TrackerHistogramView extends ViewPart {
 	private Combo yearsCombo;
 
 	private Tracker tracker;
+	private Section histogramSection;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -113,6 +114,12 @@ public class TrackerHistogramView extends ViewPart {
 		toolkit.decorateFormHeading(histogramParentForm);
 		histogramParentForm.setText(TrackerHistogramView.VIEW_TITLE);
 
+		// Add actions to tool bar
+		IToolBarManager manager=histogramParentForm.getToolBarManager();
+		// Refresh histogram
+		addRefreshActionToToolBar(manager);
+		manager.update(true);
+
 		Composite mainBody=histogramParentForm.getBody();
 		mainBody.setLayout(new GridLayout());
 		formBody=new SashForm(mainBody, SWT.HORIZONTAL | SWT.SMOOTH);
@@ -122,11 +129,6 @@ public class TrackerHistogramView extends ViewPart {
 		tracker=getTracker();
 		createFilterColumn(formBody);
 		createHistogramColumn(formBody);
-
-		// Add actions to tool bar
-		IToolBarManager manager=histogramParentForm.getToolBarManager();
-		// Refresh histogram
-		addRefreshActionToToolBar(manager);
 
 		formBody.setWeights(new int[] {1, 3});
 		formBody.pack();
@@ -175,7 +177,7 @@ public class TrackerHistogramView extends ViewPart {
 		SashForm histogramColumn=new SashForm(parent, SWT.VERTICAL | SWT.SMOOTH);
 		toolkit.adapt(histogramColumn);
 
-		Section histogramSection=toolkit.createSection(histogramColumn, ExpandableComposite.TITLE_BAR | SWT.MIN);
+		histogramSection=toolkit.createSection(histogramColumn, ExpandableComposite.TITLE_BAR | SWT.MIN);
 		histogramSection.setText(TrackerHistogramView.HISTOGRAM_SECTION);
 
 		histogramForm=toolkit.createScrolledForm(histogramSection);
@@ -193,6 +195,7 @@ public class TrackerHistogramView extends ViewPart {
 		histogramSection.layout();
 
 		populateHistogram();
+		histogramSection.update();
 	}
 
 	/**
@@ -204,9 +207,13 @@ public class TrackerHistogramView extends ViewPart {
 		List<Double> spendingValues=new ArrayList<>();
 
 		Account account=TrackerUtils.findAccount(tracker, accountsCombo.getItem(accountsCombo.getSelectionIndex()));
-		int year=Integer.parseInt(yearsCombo.getItem(accountsCombo.getSelectionIndex()));
+		if (yearsCombo.getItems().length == 0) {
+			//FIXME there is no item in the combo => warning message
+			return;
+		}
+		int year=Integer.parseInt(yearsCombo.getText());
 		if (categoryCheckButton.getSelection()) {
-			String item=categoriesCombo.getItem(categoriesCombo.getSelectionIndex());
+			String item=categoriesCombo.getText();
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
 				incomeValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, IncomeCategory.class);
 				spendingValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, SpendingCategory.class);
@@ -217,7 +224,7 @@ public class TrackerHistogramView extends ViewPart {
 			}
 		}
 		else if (operationCheckButton.getSelection()) {
-			String item=operationsCombo.getItem(operationsCombo.getSelectionIndex());
+			String item=operationsCombo.getText();
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
 				incomeValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, IncomeCategory.class);
 				spendingValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, SpendingCategory.class);
@@ -247,16 +254,13 @@ public class TrackerHistogramView extends ViewPart {
 		Label accountsLabel=new Label(parent, SWT.NONE);
 		accountsLabel.setText(TrackerHistogramView.ACCOUNTS_COMBO_TITLE);
 		accountsCombo=new Combo(parent, SWT.NONE);
-		populateAccountsCombo(accountsCombo);
 
 		categoryCheckButton=createFilterButton(parent, TrackerHistogramView.FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE, true, true);
 		categoriesCombo=new Combo(parent, SWT.NONE);
-		populateCategoriesCombo(categoriesCombo);
 
 		operationCheckButton=createFilterButton(parent, TrackerHistogramView.FILTER_BY_OPERATION_CHECK_BUTTON_TITLE, true, false);
 		operationsCombo=new Combo(parent, SWT.NONE);
 		operationsCombo.setEnabled(false);
-		populateOperationsCombo(operationsCombo);
 
 		categoryCheckButton.addSelectionListener(new FilterSelectionListener(operationCheckButton, categoriesCombo, operationsCombo, this));
 		operationCheckButton.addSelectionListener(new FilterSelectionListener(categoryCheckButton, operationsCombo, categoriesCombo, this));
@@ -264,7 +268,18 @@ public class TrackerHistogramView extends ViewPart {
 		Label yearsLabel=new Label(parent, SWT.NONE);
 		yearsLabel.setText(TrackerHistogramView.YEARS_COMBO_TITLE);
 		yearsCombo=new Combo(parent, SWT.NONE);
-		populateYearsCombo(yearsCombo);
+
+		populateFilter();
+	}
+
+	/**
+	 *Populates the Filter combos
+	 */
+	private void populateFilter() {
+		populateCombo(accountsCombo, getAccountsItems(TrackerUtils.getAccounts(tracker)));
+		populateCombo(categoriesCombo, getCategoriesItems(TrackerUtils.getCategories(tracker)));
+		populateCombo(operationsCombo, getOperationsItems(TrackerUtils.getOperationsTitles(tracker)));
+		populateCombo(yearsCombo, getYearsItems(TrackerUtils.findYears(tracker)));
 	}
 
 	/**
@@ -284,43 +299,20 @@ public class TrackerHistogramView extends ViewPart {
 	}
 
 	/**
-	 * Populates the years combo
-	 * @param combo the years combo
-	 */
-	private void populateYearsCombo(Combo combo) {
-		String[] items=getYearsItems(TrackerUtils.findYears(tracker));
-		combo.setItems(items);
-		combo.select(0);
-	}
-
-	/**
 	 * Populates the accounts combo
 	 * @param combo the accounts combo
+	 * @param items the table of new items
 	 */
-	private void populateAccountsCombo(Combo combo) {
-		String[] items=getAccountsItems(TrackerUtils.getAccounts(tracker));
+	private void populateCombo(Combo combo, String[] items) {
+		String oldSelection=combo.getText();
 		combo.setItems(items);
-		combo.select(0);
-	}
-
-	/**
-	 * Populates the categories combo
-	 * @param combo the categories combo
-	 */
-	private void populateCategoriesCombo(Combo combo) {
-		String[] items=getCategoriesItems(TrackerUtils.getCategories(tracker));
-		combo.setItems(items);
-		combo.select(0);
-	}
-
-	/**
-	 * Populates the operations combo
-	 * @param combo the operations combo
-	 */
-	private void populateOperationsCombo(Combo combo) {
-		String[] items=getOperationsItems(TrackerUtils.getOperationsTitles(tracker));
-		combo.setItems(items);
-		combo.select(0);
+		List<String> asList=Arrays.asList(items);
+		if (!StringUtils.isEmpty(oldSelection) && asList.contains(oldSelection)) {
+			combo.select(asList.indexOf(oldSelection));
+		}
+		else {
+			combo.select(0);
+		}
 	}
 
 	/**
@@ -436,5 +428,18 @@ public class TrackerHistogramView extends ViewPart {
 		resourceSet.setPackageRegistry(TrackerPackage.Registry.INSTANCE);
 
 		return resourceSet.getResource(uri, true);
+	}
+
+	/**
+	 *Refreshes the Filter selection and the histogram.
+	 */
+	public void refresh() {
+		//Refresh Filter selection
+		populateFilter();
+
+		//Refresh histogram content
+		populateHistogram();
+
+		histogramSection.redraw();
 	}
 }

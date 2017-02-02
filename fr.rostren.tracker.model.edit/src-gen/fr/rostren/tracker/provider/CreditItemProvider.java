@@ -2,8 +2,6 @@
  */
 package fr.rostren.tracker.provider;
 
-import fr.rostren.tracker.Credit;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +11,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
@@ -68,15 +68,16 @@ public class CreditItemProvider extends OperationItemProvider {
 	public String getText(Object object) {
 		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Operation)object));
 		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Operation)object));
+		String operationDate=TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(), ((Operation)object).getDate());
 
 		if (operationTitle == null) {
 			return "New " + getString("_UI_CreditOperation_type");
 		}
 		else if (operationTitle.length() == 0) {
-			return getString("_UI_CreditOperation_type") + " --> Undefined Operation Title = " + operationAmount + " euros";
+			return getString("_UI_CreditOperation_type") + operationDate + " --> Undefined Operation Title = " + operationAmount + " euros";
 		}
 		else {
-			return getString("_UI_CreditOperation_type") + " --> " + operationTitle + " = " + operationAmount + " euros";
+			return getString("_UI_CreditOperation_type") + operationDate + " --> " + operationTitle + " = " + operationAmount + " euros";
 		}
 	}
 

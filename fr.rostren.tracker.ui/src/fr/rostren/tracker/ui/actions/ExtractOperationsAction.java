@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -63,9 +64,9 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	private boolean extractOperations(PDFContentExtractor extractor, IProgressMonitor monitor) throws InterruptedException {
 		try {
 			addedOperations=extractor.extractOperations(monitor);
-			for (Operation operation: addedOperations) {
-				addedOrigins.add(operation.getOrigin());
-			}
+			addedOrigins.addAll(addedOperations.stream()//
+					.map(operation -> operation.getOrigin())//
+					.collect(Collectors.toList()));
 			return true;
 		}
 		catch (ExtractorException e) {

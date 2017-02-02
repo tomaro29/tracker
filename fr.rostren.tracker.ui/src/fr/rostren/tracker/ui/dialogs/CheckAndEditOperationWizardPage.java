@@ -83,10 +83,9 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Object source=event.widget;
 			Assert.isTrue(source instanceof DateTime);
 			DateTime dateTime=(DateTime)source;
-			//set operation date to the new selected date
 			LocalDate date=LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth() + 1), dateTime.getDay());
+			//set operation date to the new selected date
 			operation.setDate(date);
-
 			//set all subAmounts wished dates to the new selected date
 			operation.getSubAmounts().stream().forEach(subAmount -> subAmount.setWishedDate(date));
 			populateTable();
@@ -100,10 +99,9 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 			Object source=event.getSource();
 			Assert.isTrue(source instanceof DateTime);
 			DateTime dateTime=(DateTime)source;
-			//set operation date to the new selected date
 			LocalDate date=LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth() + 1), dateTime.getDay());
+			//set operation date to the new selected date
 			operation.setDate(date);
-
 			//set all subAmounts wished dates to the new selected date
 			operation.getSubAmounts().stream().forEach(subAmount -> subAmount.setWishedDate(date));
 			populateTable();
@@ -362,11 +360,10 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 * @param label the label
 	 */
 	private void createLabel(Composite composite, String label) {
-		if (label == null) {
-			return;
+		if (label != null) {
+			Label textLabel=new Label(composite, SWT.NONE);
+			textLabel.setText(label);
 		}
-		Label textLabel=new Label(composite, SWT.NONE);
-		textLabel.setText(label);
 	}
 
 	/**
@@ -374,14 +371,15 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 */
 	protected void populateTable() {
 		table.removeAll();
-		for (Amount amount: operation.getSubAmounts()) {
-			TableItem item=new TableItem(table, SWT.NONE);
-			Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
-			item.setFont(font);
-			item.setData(amount);
-			item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory().getTitle(),
-				TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.AMOUNT__WISHED_DATE.getEAttributeType(), amount.getWishedDate())});
-		}
+		operation.getSubAmounts().stream()//
+				.forEach(amount -> {
+					TableItem item=new TableItem(table, SWT.NONE);
+					Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
+					item.setFont(font);
+					item.setData(amount);
+					item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory().getTitle(),
+						TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.AMOUNT__WISHED_DATE.getEAttributeType(), amount.getWishedDate())});
+				});
 	}
 
 	@Override
@@ -513,20 +511,19 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
 			// the selected row
-			final TableItem item=(TableItem)event.item;
-			if (item == null) {
-				return;
-			}
-			lastSelection=(Amount)item.getData();
-			if (lastSelection == null) {
-				editButton.setEnabled(false);
-				removeButton.setEnabled(false);
-				return;
-			}
-			editButton.setEnabled(true);
-			if (operation.getSubAmounts().size() > 1) {
-				removeButton.setEnabled(true);
-			}
+			Optional<TableItem> itemOpt=Optional.of((TableItem)event.item);
+			itemOpt.ifPresent(item -> {
+				lastSelection=(Amount)item.getData();
+				if (lastSelection == null) {
+					editButton.setEnabled(false);
+					removeButton.setEnabled(false);
+					return;
+				}
+				editButton.setEnabled(true);
+				if (operation.getSubAmounts().size() > 1) {
+					removeButton.setEnabled(true);
+				}
+			});
 		}
 
 		@Override

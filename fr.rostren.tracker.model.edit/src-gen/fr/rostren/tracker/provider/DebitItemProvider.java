@@ -11,6 +11,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
@@ -66,14 +68,15 @@ public class DebitItemProvider extends OperationItemProvider {
 	public String getText(Object object) {
 		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Operation)object));
 		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Operation)object));
+		String operationDate=TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(), ((Operation)object).getDate());
 
 		if (operationTitle == null) {
 			return "New " + getString("_UI_DebitOperation_type");
 		}
 		if (operationTitle.length() == 0) {
-			return getString("_UI_DebitOperation_type") + " --> Undefined Operation Title = " + operationAmount + " euros";
+			return getString("_UI_DebitOperation_type") + operationDate + " --> Undefined Operation Title = " + operationAmount + " euros";
 		}
-		return getString("_UI_DebitOperation_type") + " --> " + operationTitle + " = " + operationAmount + " euros";
+		return getString("_UI_DebitOperation_type") + operationDate + " --> " + operationTitle + " = " + operationAmount + " euros";
 	}
 
 	/**

@@ -3,7 +3,9 @@
 package fr.rostren.tracker.provider.dev;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.EList;
@@ -39,6 +41,14 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 	 */
 	public CheckingAccountItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);
+	}
+
+	@Override
+	public Collection<?> getChildren(Object object) {
+		Collection<?> children=super.getChildren(object);
+		List<Operation> operations=children.stream().filter(child -> child instanceof Operation).map(child -> (Operation)child).collect(Collectors.toList());
+		Collections.sort(operations, (op1, op2) -> op1.getDate().compareTo(op2.getDate()));
+		return operations;
 	}
 
 	/**

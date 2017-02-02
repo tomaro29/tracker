@@ -107,4 +107,12 @@ public class Histogram {
 	private String[] convertToStringArray(List<String> list) {
 		return list.stream().toArray(String[]::new);
 	}
+
+	/**
+	 * Refreshs the chart content
+	 */
+	public void refresh() {
+		chart.redraw();
+		chart.getAxisSet().adjustRange();
+	}
 }

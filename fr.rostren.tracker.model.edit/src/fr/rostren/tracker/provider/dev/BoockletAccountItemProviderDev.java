@@ -3,7 +3,9 @@
 package fr.rostren.tracker.provider.dev;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 
@@ -13,6 +15,7 @@ import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Outgoing;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.Transfer;
 import fr.rostren.tracker.provider.BoockletAccountItemProvider;
 
 /**
@@ -31,6 +34,14 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 	 */
 	public BoockletAccountItemProviderDev(AdapterFactory adapterFactory) {
 		super(adapterFactory);
+	}
+
+	@Override
+	public Collection<?> getChildren(Object object) {
+		Collection<?> children=super.getChildren(object);
+		List<Transfer> transfers=children.stream().filter(child -> child instanceof Transfer).map(child -> (Transfer)child).collect(Collectors.toList());
+		Collections.sort(transfers, (transfer1, transfer2) -> transfer1.getDate().compareTo(transfer2.getDate()));
+		return transfers;
 	}
 
 	/**

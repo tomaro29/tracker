@@ -1,5 +1,6 @@
 package fr.rostren.tracker.ui.actions;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -55,9 +56,8 @@ public class EditOperationsAction extends Action {
 	 * Adds operations to the checking account.
 	 */
 	private void addOperationsToAccount() {
-		for (Operation operation: addedOperations) {
-			DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operation);
-		}
+		Collections.sort(addedOperations, (op1, op2) -> op1.getDate().compareTo(op2.getDate()));
+		addedOperations.stream().forEach(operation -> DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operation));
 	}
 
 	/**

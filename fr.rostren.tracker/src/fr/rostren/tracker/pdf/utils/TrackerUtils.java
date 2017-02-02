@@ -140,12 +140,12 @@ public class TrackerUtils {
 		categories.add(category);
 		if (category instanceof IncomeCategory) {
 			categories.addAll(((IncomeCategory)category).getIncomes().stream()//
-					.flatMap(subCategory -> getCategories(category).stream())//
+					.flatMap(subCategory -> getCategories(subCategory).stream())//
 					.collect(Collectors.toList()));
 		}
 		if (category instanceof SpendingCategory) {
 			categories.addAll(((SpendingCategory)category).getSpendings().stream()//
-					.flatMap(subCategory -> getCategories(category).stream())//
+					.flatMap(subCategory -> getCategories(subCategory).stream())//
 					.collect(Collectors.toList()));
 		}
 		return categories;
@@ -604,7 +604,7 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * Returns the list of all amounts of operations related to the given category
+	 * Returns the list of all amounts of operations related to the given category or one of its sub categories
 	 * @param account the concerned account.
 	 * @param category the category.
 	 * @param month the month.
@@ -613,13 +613,14 @@ public class TrackerUtils {
 	 * @return the list of amounts related to the given category.
 	 */
 	private static List<Amount> findCategoryAmounts(Account account, Category category, Month month, int year, boolean wishedEnabled) {
+		List<Category> linkedCategories=getCategories(category);
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checking=(CheckingAccount)account;
 			return checking.getOperations()//
 					.stream()//
 					.flatMap(operation -> operation.getSubAmounts()//
 							.stream()//
-							.filter(amount -> category.equals(amount.getCategory()))//
+							.filter(amount -> linkedCategories.contains(category))//
 							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
 					.collect(Collectors.toList());
 		}

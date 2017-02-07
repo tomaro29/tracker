@@ -116,7 +116,6 @@ public class TrackerHistogramView extends ViewPart {
 
 		// Add actions to tool bar
 		IToolBarManager manager=histogramParentForm.getToolBarManager();
-		// Refresh histogram
 		addRefreshActionToToolBar(manager);
 		manager.update(true);
 
@@ -130,7 +129,7 @@ public class TrackerHistogramView extends ViewPart {
 		createFilterArea(formBody);
 		createHistogramArea(formBody);
 
-		formBody.setWeights(new int[] {1, 3});
+		formBody.setWeights(new int[] {1, 4});
 		formBody.pack();
 	}
 
@@ -150,7 +149,7 @@ public class TrackerHistogramView extends ViewPart {
 		filterColumn=new SashForm(parent, SWT.HORIZONTAL | SWT.SMOOTH);
 		toolkit.adapt(filterColumn);
 
-		Section filterSection=toolkit.createSection(filterColumn, ExpandableComposite.TITLE_BAR | ExpandableComposite.TWISTIE | ExpandableComposite.EXPANDED);
+		Section filterSection=toolkit.createSection(filterColumn, ExpandableComposite.TITLE_BAR);//| ExpandableComposite.TWISTIE | ExpandableComposite.EXPANDED);
 		filterSection.setText(TrackerHistogramView.FILTER_SECTION);
 
 		filterForm=toolkit.createScrolledForm(filterSection);

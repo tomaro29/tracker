@@ -51,6 +51,7 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.TrackerEditor;
 import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
 import fr.rostren.tracker.ui.views.internal.actions.RefreshHistogramAction;
+import fr.rostren.tracker.ui.views.internal.menu.creators.FilterMenuCreatorAction;
 
 public class TrackerHistogramView extends ViewPart {
 	private static final String ALL_CATEGORIES_ITEM="All Categories"; //$NON-NLS-1$
@@ -114,10 +115,7 @@ public class TrackerHistogramView extends ViewPart {
 		toolkit.decorateFormHeading(histogramParentForm);
 		histogramParentForm.setText(TrackerHistogramView.VIEW_TITLE);
 
-		// Add actions to tool bar
-		IToolBarManager manager=histogramParentForm.getToolBarManager();
-		addRefreshActionToToolBar(manager);
-		manager.update(true);
+		defineToolBarActions(histogramParentForm.getToolBarManager());
 
 		Composite mainBody=histogramParentForm.getBody();
 		mainBody.setLayout(new GridLayout());
@@ -134,11 +132,12 @@ public class TrackerHistogramView extends ViewPart {
 	}
 
 	/**
-	 * Adds the refresh action to the tool bar
-	 * @param manager the tool bar manager
+	 * Adds actions to the view tool bar
 	 */
-	private void addRefreshActionToToolBar(IToolBarManager manager) {
+	private void defineToolBarActions(IToolBarManager manager) {
+		manager.add(new FilterMenuCreatorAction(this));
 		manager.add(new RefreshHistogramAction(this));
+		manager.update(true);
 	}
 
 	/**

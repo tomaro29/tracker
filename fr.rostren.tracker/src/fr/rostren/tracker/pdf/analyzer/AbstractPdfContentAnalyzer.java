@@ -3,6 +3,10 @@ package fr.rostren.tracker.pdf.analyzer;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
@@ -24,14 +28,24 @@ public abstract class AbstractPdfContentAnalyzer {
 		OPERATIONS_DIVERSES
 	}
 
+	protected final Shell shell;
+	protected final Pattern ONLY_NUMBERS=Pattern.compile("[0-9]*"); //$NON-NLS-1$
+	protected final String STRING_SEPARATOR=" "; //$NON-NLS-1$
 	protected final Pattern SPACE_STRING_PATTREN=Pattern.compile("(\\s)+"); //$NON-NLS-1$
 	protected final Pattern EMPTY_STRING_PATTREN=Pattern.compile("(\\s)*"); //$NON-NLS-1$
+	protected final Pattern DATE_SEPARATOR_PATTREN=Pattern.compile("/"); //$NON-NLS-1$
 	protected final Pattern PART_1_DATE_PATTREN=Pattern.compile("(0[0-9]|1[0-9]|2[0-9]|3[0-1])"); //$NON-NLS-1$
-	protected final Pattern PART_2_DATE_PATTREN=Pattern.compile("([1-9]|0[1-9]|1[0-2])"); //$NON-NLS-1$
+	protected final Pattern PART_2_DATE_PATTREN=Pattern.compile("(0[1-9]|1[0-2]|[1-9])"); //$NON-NLS-1$
+	protected final Pattern PART_3_DATE_PATTREN=Pattern.compile("([0-9]{4})"); //$NON-NLS-1$
 	protected final Pattern OPERATION_TITLE_PATTREN=Pattern.compile("(.)*"); //$NON-NLS-1$
-	protected final Pattern AMOUNT_NUMBER_PATTREN=Pattern.compile("([0-9]((\\s)?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
+	protected final Pattern AMOUNT_NUMBER_PATTREN=Pattern.compile("([0-9](([\\s.])?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
 	protected final Pattern NUMBER_PATTREN=Pattern.compile("([0-9]*)"); //$NON-NLS-1$
 	protected final Pattern FACT_PATTREN=Pattern.compile("FACT\\s+([0-9]*)"); //$NON-NLS-1$
+
+	boolean isCredit;
+	LocalDate lastPotentialDate=null;
+	String lastPotentialOperationTitle=null;
+	double lastPotentialAmount=0;
 
 	private int currentYear=0;
 	private String currentLine;
@@ -40,9 +54,13 @@ public abstract class AbstractPdfContentAnalyzer {
 	/** The last parsed token. */
 	private PdfToken lastToken;
 
-	private LocalDate lastPotentialDate=null;
-	private String lastPotentialOperationTitle=null;
-	private double lastPotentialAmount=0;
+	/**
+	 *Constructor.
+	 *@param shell the shell.
+	 */
+	public AbstractPdfContentAnalyzer(Shell shell) {
+		this.shell=shell;
+	}
 
 	/**
 	 * This parses a single line in the pdf.
@@ -63,30 +81,51 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @return {@link LineContent}
 	 */
 	protected LineContent extractOperation(Origin origin) {
-		LineContent currentLineContent=null;
 		extractDataFromCurrentLine();
-		if (isCompleted()) {
-			if (lastToken != null && PdfToken.VIR_RECU.equals(lastToken) || PdfToken.OPERATIONS_DEPOT.equals(lastToken)) {
-				currentLineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
-			}
-			else if (lastToken != null && PdfToken.PAIE_CHEQUE.equals(lastToken)	|| PdfToken.PAIEMENTS_CARTES.equals(lastToken) || PdfToken.PRELEVEMENTS.equals(lastToken)
-						|| PdfToken.RETRAITS_CARTES.equals(lastToken) || PdfToken.OPERATIONS_DIVERSES.equals(lastToken)) {
-				currentLineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
-			}
-			else if (lastToken != null && PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
-				if (lastPotentialOperationTitle.contains("REMISE") //$NON-NLS-1$
-					|| lastPotentialOperationTitle.contains("INTERETS")) { //$NON-NLS-1$
-					// REMISE(C), INTERETS(C)
-					currentLineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
-				}
-				else {
-					// COTISATION(D), FRAIS(D)
-					currentLineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
-				}
-			}
-			reset();
+		if (!isCompleted()) {
+			return null;
 		}
+		LineContent currentLineContent=getLineContent(origin);
+		reset();
 		return currentLineContent;
+	}
+
+	/**
+	 * REturns the {@link LineContent} instance
+	 * @param origin the line origin
+	 * @return the {@link LineContent} instance
+	 */
+	private LineContent getLineContent(Origin origin) {
+		if (lastToken != null && PdfToken.VIR_RECU.equals(lastToken) || PdfToken.OPERATIONS_DEPOT.equals(lastToken)) {
+			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
+		}
+		else if (lastToken != null && PdfToken.PAIE_CHEQUE.equals(lastToken)	|| PdfToken.PAIEMENTS_CARTES.equals(lastToken) || PdfToken.PRELEVEMENTS.equals(lastToken)
+					|| PdfToken.RETRAITS_CARTES.equals(lastToken) || PdfToken.OPERATIONS_DIVERSES.equals(lastToken)) {
+			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
+		}
+		else if (lastToken != null && PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
+			if (lastPotentialOperationTitle.contains("REMISE") //$NON-NLS-1$
+				|| lastPotentialOperationTitle.contains("INTERETS")) { //$NON-NLS-1$
+				// REMISE(C), INTERETS(C)
+				return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
+			}
+			// COTISATION(D), FRAIS(D)
+			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
+		}
+		else if (lastToken != null && PdfToken.DATE.equals(lastToken)) {//the operation type is not defined
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					isCredit=MessageDialog.openQuestion(shell, "Operation Type Definition", //$NON-NLS-1$
+							"Is the next operation a Credit one ?\n" //$NON-NLS-1$
+																								+ lastPotentialDate + STRING_SEPARATOR.toString() + lastPotentialOperationTitle
+																							+ STRING_SEPARATOR.toString() + lastPotentialAmount);
+				}
+			});
+
+			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, isCredit ? OperationType.CREDIT : OperationType.DEBIT, origin);
+		}
+		return null;
 	}
 
 	/**
@@ -125,7 +164,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @return the extracted year
 	 */
 	protected int extractYearFromCurrentLine() {
-		String year=currentLine.subSequence(9, 13).toString();
+		String year=currentLine.subSequence(25, 29).toString();
 		return Integer.parseInt(year);
 	}
 

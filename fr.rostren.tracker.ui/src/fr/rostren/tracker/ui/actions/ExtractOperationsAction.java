@@ -33,7 +33,7 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	public ExtractOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
 		this.shell=shell;
 		this.pdfURIText=pdfURIText;
-		extractor=new PDFContentExtractor(pdfURIText, account);
+		extractor=new PDFContentExtractor(shell, pdfURIText, account);
 	}
 
 	@Override

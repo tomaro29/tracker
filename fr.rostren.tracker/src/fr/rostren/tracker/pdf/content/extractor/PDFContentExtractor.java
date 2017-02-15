@@ -3,11 +3,11 @@ package fr.rostren.tracker.pdf.content.extractor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.swt.widgets.Shell;
 
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
@@ -26,7 +27,10 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.pdf.analyzer.AbstractPdfContentAnalyzer;
+import fr.rostren.tracker.pdf.analyzer.AnonymousPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.CEPdfContentAnalyzer;
+import fr.rostren.tracker.pdf.analyzer.CICPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.TrackerPdfReader;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
@@ -35,20 +39,26 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
  * Extracts the content of a pdf file.
  */
 public class PDFContentExtractor {
+	private static final String CIC_PDF_IDENTIFIER="CIC%20-%20"; //$NON-NLS-1$
+	private static final String CE_PDF_IDENTIFIER="CE%20-%20"; //$NON-NLS-1$
+
 	private Set<String> alreadyParsedFiles=new HashSet<>();
 
+	private final Shell shell;
 	private final String uriText;
 	private final Account account;
 
 	/**
 	 * Constructor.
+	 * @param shell the parent shell
 	 *
 	 * @param uriText
 	 *            the selected PDF document uris to import.
 	 * @param account
 	 *            the account where we extract data
 	 */
-	public PDFContentExtractor(String uriText, Account account) {
+	public PDFContentExtractor(Shell shell, String uriText, Account account) {
+		this.shell=shell;
 		if (StringUtils.isEmpty(uriText) || StringUtils.isBlank(uriText)) {
 			throw new IllegalArgumentException("The uri cannot be null or empty or blank."); //$NON-NLS-1$
 		}
@@ -70,24 +80,23 @@ public class PDFContentExtractor {
 		if (monitor == null) {
 			throw new IllegalArgumentException("The monitor cannot be null."); //$NON-NLS-1$
 		}
-		List<Operation> operations=new ArrayList<>();
-		for (String uri: getURIsFromText()) {
-			monitor.subTask(uri);
-			if (StringUtils.isEmpty(uri)) {
-				continue;
-			}
+		List<URI> uris=getURIsFromText().stream()//
+				.filter(uri -> !StringUtils.isEmpty(uri))//
+				.map(uri -> URI.createURI(uri))//
+				.collect(Collectors.toList());
 
-			URI selectedFileURI=URI.createURI(uri);
+		List<Operation> operations=new ArrayList<>();
+		for (URI selectedFileURI: uris) {
 			if (selectedFileURI.isPlatform()) {
 				IPath resourcePath=new Path(selectedFileURI.toPlatformString(true));
 				IFile iFile=ResourcesPlugin.getWorkspace().getRoot().getFile(resourcePath);
-				uri=iFile.getLocationURI().getPath();
+				String uri=iFile.getLocationURI().getPath();
 				String fileName=iFile.getProjectRelativePath().toOSString();
 				operations.addAll(extractOperations(uri, fileName, monitor));
 			}
 			else {
-				uri=selectedFileURI.toFileString();
-				operations.addAll(extractOperations(uri, uri, monitor));
+				String uri=selectedFileURI.toFileString();
+				operations.addAll(extractOperations(uri, selectedFileURI.lastSegment(), monitor));
 			}
 		}
 		return operations;
@@ -116,12 +125,13 @@ public class PDFContentExtractor {
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
 	 */
 	private List<Operation> extractOperations(String src, String fileName, IProgressMonitor monitor) throws ExtractorException {
-		List<Operation> operations=new ArrayList<>();
+		AbstractPdfContentAnalyzer analyzer=adaptAnalyzer(fileName);
 
+		List<Operation> operations=new ArrayList<>();
 		try (TrackerPdfReader reader=new TrackerPdfReader(src)) {
 			Tracker tracker=TrackerUtils.getTracker(account);
-			CEPdfContentAnalyzer analyzer=new CEPdfContentAnalyzer();
-			for (int i=0; i < reader.getNumberOfPages(); i++) {
+			int numberOfPages=reader.getNumberOfPages();
+			for (int i=0; i < numberOfPages; i++) {
 				String originId=fileName + "_page_" + (i + 1);//$NON-NLS-1$
 				if (!isAlreadyParsed(tracker, originId)) {
 					Origin origin=createLinkedOrigin(tracker, originId);
@@ -140,10 +150,8 @@ public class PDFContentExtractor {
 						monitor.worked(1);
 					}
 				}
-				else {
-					alreadyParsedFiles.add(fileName);
-				}
 			}
+			alreadyParsedFiles.add(fileName);
 			monitor.done();
 		}
 		catch (IOException exception) {
@@ -152,7 +160,21 @@ public class PDFContentExtractor {
 					exception);
 		}
 		return operations;
+	}
 
+	/**
+	 * Adapts the pdf analyzer basing on the pdf file name.
+	 * @param fileName the file name
+	 * @return the adapted analyzer
+	 */
+	private AbstractPdfContentAnalyzer adaptAnalyzer(String fileName) {
+		if (fileName.startsWith(PDFContentExtractor.CE_PDF_IDENTIFIER)) {
+			return new CEPdfContentAnalyzer(shell);
+		}
+		if (fileName.startsWith(PDFContentExtractor.CIC_PDF_IDENTIFIER)) {
+			return new CICPdfContentAnalyzer(shell);
+		}
+		return new AnonymousPdfContentAnalyzer(shell);
 	}
 
 	/**
@@ -189,13 +211,9 @@ public class PDFContentExtractor {
 		if (tracker.getOriginsRepository() == null) {
 			tracker.setOriginsRepository(TrackerFactory.eINSTANCE.createOriginsRepository());
 		}
-		List<Origin> existingOrigins=tracker.getOriginsRepository().getOrigins();
-		for (Origin existingOrigin: existingOrigins) {
-			if (existingOrigin != null && originId.equals(existingOrigin.getIdentifier()) && OriginType.PDF_FILE.equals(existingOrigin.getType())) {
-				return true;
-			}
-		}
-		return false;
+		return tracker.getOriginsRepository().getOrigins().stream()//
+				.filter(existingOrigin -> existingOrigin != null && originId.equals(existingOrigin.getIdentifier()) && OriginType.PDF_FILE.equals(existingOrigin.getType()))
+				.findAny().isPresent();
 	}
 
 	/**

@@ -1,23 +1,21 @@
-package fr.rostren.tracker.ui.dialogs;
+package fr.rostren.tracker.pdf.utils;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
 
-public class CheckOperationDialog extends Dialog {
-	private Operation operation;
+public class DefineOperationTypeDialog extends Dialog {
+	private OperationType type;
 
 	/**
 	 * Constructor
 	 * @param shell the parent shell
-	 * @param operation the operation
 	 */
-	public CheckOperationDialog(Shell shell, Operation operation) {
+	public DefineOperationTypeDialog(Shell shell) {
 		super(shell);
-		this.setOperation(operation);
 	}
 
 	@Override
@@ -44,18 +42,17 @@ public class CheckOperationDialog extends Dialog {
 	}
 
 	/**
-	 * @return the operation
+	 * @return the operation type
 	 */
-	public Operation getOperation() {
-		return operation;
+	public OperationType getOperationType() {
+		return type;
 	}
 
 	/**
-	 * @param operation
-	 *            the operation to set
+	 * @param type
+	 *            the operation type to set
 	 */
-	public void setOperation(Operation operation) {
-		this.operation=operation;
+	public void setOperationType(OperationType type) {
+		this.type=type;
 	}
-
 }

@@ -211,17 +211,10 @@ public class LineContent {
 			income=TrackerFactory.eINSTANCE.createIncomeCategory();
 			repository.setIncome(income);
 		}
-		for (Category category: income.getIncomes()) {
-			if (TrackerUtils.isUndefinedCategory(category)) {
-				return category;
-			}
-		}
 
-		// return the undefined category in a new undefined group
-		IncomeCategory category=TrackerFactory.eINSTANCE.createIncomeCategory();
-		category.setTitle(TrackerUtils.UNDEFINED_INCOME_TITLE);
-		income.getIncomes().add(category);
-		return category;
+		return income.getIncomes().stream()//
+				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
+				.findAny().orElse(getCategoryInIncome(income));
 	}
 
 	/**
@@ -235,13 +228,29 @@ public class LineContent {
 			spending=TrackerFactory.eINSTANCE.createSpendingCategory();
 			repository.setSpending(spending);
 		}
-		for (Category category: spending.getSpendings()) {
-			if (TrackerUtils.isUndefinedCategory(category)) {
-				return category;
-			}
-		}
+		return spending.getSpendings().stream()//
+				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
+				.findAny().orElse(getCategoryInSpending(spending));
+	}
 
-		// return the undefined category in a new undefined group
+	/**
+	 * returns the undefined category in a new undefined group
+	 * @param income the income category
+	 * @return the undefined category in a new undefined group
+	 */
+	private IncomeCategory getCategoryInIncome(IncomeCategory income) {
+		IncomeCategory category=TrackerFactory.eINSTANCE.createIncomeCategory();
+		category.setTitle(TrackerUtils.UNDEFINED_INCOME_TITLE);
+		income.getIncomes().add(category);
+		return category;
+	}
+
+	/**
+	 * returns the undefined category in a new undefined group
+	 * @param spending the spending category
+	 * @return the undefined category in a new undefined group
+	 */
+	private SpendingCategory getCategoryInSpending(SpendingCategory spending) {
 		SpendingCategory category=TrackerFactory.eINSTANCE.createSpendingCategory();
 		category.setTitle(TrackerUtils.UNDEFINED_SPENDING_TITLE);
 		spending.getSpendings().add(category);

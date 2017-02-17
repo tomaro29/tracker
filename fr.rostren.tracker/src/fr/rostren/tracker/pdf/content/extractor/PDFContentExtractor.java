@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.swt.widgets.Shell;
 
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
@@ -44,21 +43,17 @@ public class PDFContentExtractor {
 
 	private Set<String> alreadyParsedFiles=new HashSet<>();
 
-	private final Shell shell;
 	private final String uriText;
 	private final Account account;
 
 	/**
 	 * Constructor.
-	 * @param shell the parent shell
-	 *
 	 * @param uriText
 	 *            the selected PDF document uris to import.
 	 * @param account
 	 *            the account where we extract data
 	 */
-	public PDFContentExtractor(Shell shell, String uriText, Account account) {
-		this.shell=shell;
+	public PDFContentExtractor(String uriText, Account account) {
 		if (StringUtils.isEmpty(uriText) || StringUtils.isBlank(uriText)) {
 			throw new IllegalArgumentException("The uri cannot be null or empty or blank."); //$NON-NLS-1$
 		}
@@ -82,7 +77,7 @@ public class PDFContentExtractor {
 		}
 		List<URI> uris=getURIsFromText().stream()//
 				.filter(uri -> !StringUtils.isEmpty(uri))//
-				.map(uri -> URI.createURI(uri))//
+				.map(uri -> URI.createURI(uri.endsWith(".pdf") ? uri : uri.concat(".pdf")))// //$NON-NLS-1$ //$NON-NLS-2$
 				.collect(Collectors.toList());
 
 		List<OperationData> operations=new ArrayList<>();
@@ -107,8 +102,8 @@ public class PDFContentExtractor {
 	 * @return uris as a table
 	 */
 	private List<String> getURIsFromText() {
-		if (uriText.contains(" ")) { //$NON-NLS-1$
-			return Arrays.asList(uriText.split(" ")); //$NON-NLS-1$
+		if (uriText.contains(".pdf ")) { //$NON-NLS-1$
+			return Arrays.asList(uriText.split(".pdf ")); //$NON-NLS-1$
 		}
 		return Arrays.asList(uriText);
 	}
@@ -170,12 +165,12 @@ public class PDFContentExtractor {
 	 */
 	private AbstractPdfContentAnalyzer adaptAnalyzer(String fileName) {
 		if (fileName.matches(PDFContentExtractor.CE_PDF_REGEX)) {
-			return new CEPdfContentAnalyzer(shell);
+			return new CEPdfContentAnalyzer();
 		}
 		if (fileName.matches(PDFContentExtractor.CIC_PDF_REGEX)) {
-			return new CICPdfContentAnalyzer(shell);
+			return new CICPdfContentAnalyzer();
 		}
-		return new AnonymousPdfContentAnalyzer(shell);
+		return new AnonymousPdfContentAnalyzer();
 	}
 
 	/**

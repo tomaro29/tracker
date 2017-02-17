@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
@@ -34,13 +33,6 @@ public class AnonymousPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 			.concat(EMPTY_STRING_PATTREN.pattern()));
 	private final Pattern PARTIAL_LINE_PATTERN=Pattern.compile(PART_1_DATE_PATTREN.pattern().concat(DATE_SEPARATOR_PATTREN.pattern()).concat(PART_2_DATE_PATTREN.pattern())
 			.concat(EMPTY_STRING_PATTREN.pattern()).concat(OPERATION_TITLE_PATTREN.pattern()).concat(EMPTY_STRING_PATTREN.pattern()));
-
-	/**
-	 * @param shell the shell
-	 */
-	public AnonymousPdfContentAnalyzer(Shell shell) {
-		super(shell);
-	}
 
 	@Override
 	public LineContent parseLine(String line, Origin origin) {

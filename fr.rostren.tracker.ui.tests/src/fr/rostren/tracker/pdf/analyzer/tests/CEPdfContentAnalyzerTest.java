@@ -3,7 +3,6 @@ package fr.rostren.tracker.pdf.analyzer.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -11,15 +10,14 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Debit;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.analyzer.AbstractPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.AbstractPdfContentAnalyzer.PdfToken;
 import fr.rostren.tracker.pdf.analyzer.CEPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.pdf.utils.OperationType;
 
 public class CEPdfContentAnalyzerTest {
 
@@ -267,8 +265,8 @@ public class CEPdfContentAnalyzerTest {
 	private void testCreditParsingResult(LineContent content, double expectedAmount, Month expectedMonth) {
 		assertNotNull(content);
 		assertEquals("OperationTitle ", content.getTitle()); //$NON-NLS-1$
-		Operation operation=content.getOperation();
-		assertTrue(operation instanceof Credit);
+		OperationData operation=content.getOperation();
+		assertEquals(OperationType.CREDIT, operation.getType());
 		assertNull(operation.getOperationTitle());
 		assertEquals(String.valueOf(expectedAmount), String.valueOf(operation.getTotalAmount()));
 		LocalDate date=operation.getDate();
@@ -289,8 +287,8 @@ public class CEPdfContentAnalyzerTest {
 	private void testDebitParsingResult(LineContent content, double expectedAmount, Month expectedMonth) {
 		assertNotNull(content);
 		assertEquals("OperationTitle ", content.getTitle()); //$NON-NLS-1$
-		Operation operation=content.getOperation();
-		assertTrue(operation instanceof Debit);
+		OperationData operation=content.getOperation();
+		assertEquals(OperationType.DEBIT, operation.getType());
 		assertNull(operation.getOperationTitle());
 		assertEquals(String.valueOf(expectedAmount), String.valueOf(operation.getTotalAmount()));
 		LocalDate date=operation.getDate();

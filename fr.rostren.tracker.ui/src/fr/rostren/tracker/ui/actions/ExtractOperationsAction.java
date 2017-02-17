@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Origin;
@@ -17,7 +16,6 @@ import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
 import fr.rostren.tracker.pdf.utils.OperationData;
 
 public class ExtractOperationsAction implements IRunnableWithProgress {
-	private final Shell shell;
 	private final String pdfURIText;
 	private final PDFContentExtractor extractor;
 
@@ -26,14 +24,12 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 
 	/**
 	 * Constructor
-	 * @param shell the parent shell
 	 * @param pdfURIText the pdf uri as a {@link String}
 	 * @param account the checking account
 	 */
-	public ExtractOperationsAction(Shell shell, String pdfURIText, CheckingAccount account) {
-		this.shell=shell;
+	public ExtractOperationsAction(String pdfURIText, CheckingAccount account) {
 		this.pdfURIText=pdfURIText;
-		extractor=new PDFContentExtractor(shell, pdfURIText, account);
+		extractor=new PDFContentExtractor(pdfURIText, account);
 	}
 
 	@Override

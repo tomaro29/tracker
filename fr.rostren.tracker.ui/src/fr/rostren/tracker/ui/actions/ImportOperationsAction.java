@@ -50,7 +50,7 @@ public class ImportOperationsAction extends Action {
 		validate();
 
 		// Reads the pdf file and extracts data using a progress monitor
-		ExtractOperationsAction extractAction=new ExtractOperationsAction(shell, pdfURIText, account);
+		ExtractOperationsAction extractAction=new ExtractOperationsAction(pdfURIText, account);
 		runJobInDialog(extractAction);
 		if (!extractAction.getAddedOperations().isEmpty()) {
 			// Edits operations SubAmounts and categories

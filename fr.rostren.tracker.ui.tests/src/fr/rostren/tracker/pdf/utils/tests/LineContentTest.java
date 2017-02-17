@@ -11,15 +11,14 @@ import java.time.LocalDate;
 import org.eclipse.emf.ecore.EObject;
 import org.junit.Test;
 
-import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.utils.LineContent;
-import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
+import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.pdf.utils.OperationType;
 import fr.rostren.tracker.tests.TestUtils;
 
 public class LineContentTest {
@@ -105,7 +104,8 @@ public class LineContentTest {
 		assertEquals(testTitle, lineContent.getTitle());
 		assertEquals(testAmount, lineContent.getOperation().getTotalAmount(), 0);
 		assertEquals(testOrigin, lineContent.getOperation().getOrigin());
-		assertTrue(lineContent.getOperation() instanceof Credit);
+		assertTrue(lineContent.getOperation() instanceof OperationData);
+		assertEquals(OperationType.CREDIT, lineContent.getOperation().getType());
 		assertNull(lineContent.getLinkedCategory());
 		assertNull(lineContent.getLinkedOperationTitle());
 
@@ -115,7 +115,8 @@ public class LineContentTest {
 		assertEquals(testTitle, lineContent.getTitle());
 		assertEquals(testAmount, lineContent.getOperation().getTotalAmount(), 0);
 		assertEquals(testOrigin, lineContent.getOperation().getOrigin());
-		assertTrue(lineContent.getOperation() instanceof Debit);
+		assertTrue(lineContent.getOperation() instanceof OperationData);
+		assertEquals(OperationType.DEBIT, lineContent.getOperation().getType());
 		assertNull(lineContent.getLinkedCategory());
 		assertNull(lineContent.getLinkedOperationTitle());
 

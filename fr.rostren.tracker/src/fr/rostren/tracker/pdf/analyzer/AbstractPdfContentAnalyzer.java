@@ -3,8 +3,6 @@ package fr.rostren.tracker.pdf.analyzer;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Shell;
-
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
 import fr.rostren.tracker.pdf.utils.OperationType;
@@ -26,7 +24,6 @@ public abstract class AbstractPdfContentAnalyzer {
 		OPERATIONS_DIVERSES
 	}
 
-	protected final Shell shell;
 	protected final Pattern ONLY_NUMBERS=Pattern.compile("[0-9]*"); //$NON-NLS-1$
 	protected final String STRING_SEPARATOR=" "; //$NON-NLS-1$
 	protected final Pattern SPACE_STRING_PATTREN=Pattern.compile("(\\s)+"); //$NON-NLS-1$
@@ -51,14 +48,6 @@ public abstract class AbstractPdfContentAnalyzer {
 	private String[] currentSplitLine;
 	/** The last parsed token. */
 	private PdfToken lastToken;
-
-	/**
-	 *Constructor.
-	 *@param shell the shell.
-	 */
-	public AbstractPdfContentAnalyzer(Shell shell) {
-		this.shell=shell;
-	}
 
 	/**
 	 * This parses a single line in the pdf.

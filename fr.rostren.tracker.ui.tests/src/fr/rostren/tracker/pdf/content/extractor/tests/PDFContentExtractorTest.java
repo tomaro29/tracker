@@ -14,12 +14,12 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.Test;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
+import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.tests.TestUtils;
 
 public class PDFContentExtractorTest {
@@ -32,8 +32,8 @@ public class PDFContentExtractorTest {
 	private final String emptyURI=""; //$NON-NLS-1$
 	private final String blankURI=" "; //$NON-NLS-1$
 	private final String invalidURI="uri"; //$NON-NLS-1$
-	private final String validURI="input/TEST.pdf"; //$NON-NLS-1$
-	private final String notPDFURI="input/EMPTY_FILE.pdf"; //$NON-NLS-1$
+	private final String validURI="input/CE%20-%20TEST.pdf"; //$NON-NLS-1$
+	private final String notPDFURI="input/EMPTY_FILE.txt"; //$NON-NLS-1$
 
 	private final Set<String> alreadyParsedFiles=new HashSet<>();
 
@@ -111,7 +111,7 @@ public class PDFContentExtractorTest {
 	 * @throws IOException IOException
 	 * @throws ExtractorException ExtractorException
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=ExtractorException.class)
 	public void extractOperations_NoTrackerContainerTest() throws ExtractorException, IOException {
 		PDFContentExtractor extractor=new PDFContentExtractor(validURI, account);
 		extractor.extractOperations(new NullProgressMonitor());
@@ -127,7 +127,7 @@ public class PDFContentExtractorTest {
 		owner.getAccounts().add(account);
 
 		PDFContentExtractor extractor=new PDFContentExtractor(validURI, account);
-		List<Operation> operations=extractor.extractOperations(new NullProgressMonitor());
+		List<OperationData> operations=extractor.extractOperations(new NullProgressMonitor());
 		assertNotNull(operations);
 		assertFalse(operations.isEmpty());
 		assertEquals(44, operations.size());
@@ -144,7 +144,7 @@ public class PDFContentExtractorTest {
 		Tracker existingTracker=(Tracker)TestUtils.load(PDFContentExtractorTest.TEST_MODEL_PATH);
 		PDFContentExtractor extractor=new PDFContentExtractor(validURI, existingTracker.getOwners().get(0).getAccounts().get(0));
 
-		List<Operation> operations=extractor.extractOperations(new NullProgressMonitor());
+		List<OperationData> operations=extractor.extractOperations(new NullProgressMonitor());
 		assertNotNull(operations);
 		assertTrue(operations.isEmpty());
 
@@ -152,7 +152,7 @@ public class PDFContentExtractorTest {
 		assertNotNull(alreadyParsed);
 		assertFalse(alreadyParsed.isEmpty());
 		assertEquals(1, alreadyParsed.size());
-		assertEquals("input\\TEST.pdf", alreadyParsed.iterator().next().toString()); //$NON-NLS-1$
+		assertEquals("input\\CE%20-%20TEST.pdf", alreadyParsed.iterator().next().toString()); //$NON-NLS-1$
 	}
 
 	/**

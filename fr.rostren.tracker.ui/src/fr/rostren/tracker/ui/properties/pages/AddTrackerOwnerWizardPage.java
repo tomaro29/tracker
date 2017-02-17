@@ -15,7 +15,7 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
 /**
  * Page to add a {@link Owner} instance to an existing {@link Tracker} instance.
  */
-public class AddTrackerOwnerWizardPage extends AbstractWizardPage {
+public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 	private static final String PAGE_NAME="Add owner to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add Owner"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new owner to the selected tracker."; //$NON-NLS-1$

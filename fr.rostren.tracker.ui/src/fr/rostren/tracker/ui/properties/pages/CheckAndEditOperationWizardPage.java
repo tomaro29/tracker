@@ -1,16 +1,22 @@
-package fr.rostren.tracker.ui.dialogs;
+package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
@@ -37,14 +43,17 @@ import org.eclipse.swt.widgets.Text;
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.pdf.utils.OperationType;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.ui.properties.content.providers.OperationsTypesContentProvider;
+import fr.rostren.tracker.ui.properties.label.providers.OperationTypeLabelProvider;
 import fr.rostren.tracker.ui.properties.wizards.OperationSubAmountWizard;
 
-public class CheckAndEditOperationWizardPage extends WizardPage {
+public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	private static final String AMOUNTS_VALUES_ERROR_MESSAGE="The total amount is:{0} euros. Please edit sub amounts accordingly."; //$NON-NLS-1$
 	private static final String PAGE_NAME="Edit ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Validate ''{0}'' Operation"; //$NON-NLS-1$
@@ -64,7 +73,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	private static final String REFINEMENT_GROUP_TITLE="Operation Sub Amounts"; //$NON-NLS-1$
 
 	protected Amount lastSelection;
-	protected Operation operation;
+	protected OperationData operation;
 	protected Account account;
 	protected Table table;
 	protected Button addButton;
@@ -75,6 +84,21 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	private final int FONT_WIDTH=10;
 
 	private final String operationTitle;
+	private OperationType operationType;
+
+	private final ISelectionChangedListener typeListener=new ISelectionChangedListener() {
+
+		@Override
+		public void selectionChanged(SelectionChangedEvent event) {
+			ISelection selection=event.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			StructuredSelection ss=(StructuredSelection)selection;
+			Object firstElement=ss.getFirstElement();
+			if (firstElement != null && firstElement instanceof OperationType) {
+				operationType=(OperationType)firstElement;
+			}
+		}
+	};
 
 	private final Listener modifyDateListener=new Listener() {
 
@@ -118,7 +142,7 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 * @param operation the operation
 	 * @param account the {@link Account} instance to use
 	 */
-	public CheckAndEditOperationWizardPage(Operation operation, Account account) {
+	public CheckAndEditOperationWizardPage(OperationData operation, Account account) {
 		super(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_NAME, operation.getOperationTitle().getTitle()));
 
 		this.operation=operation;
@@ -309,10 +333,13 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 	 * @param subContainer the sub container
 	 * @param operation the operation
 	 */
-	private void createOperationLabels(Composite subContainer, Operation operation) {
-		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, operation.eClass().getName());
+	private void createOperationLabels(Composite subContainer, OperationData operation) {
+		ComboViewer typeCombo=createComboViewer(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, new HashSet<>(Arrays.asList(OperationType.values())),
+				new OperationsTypesContentProvider(), new OperationTypeLabelProvider(), typeListener, null);
+		typeCombo.getCombo().select(Arrays.asList(typeCombo.getCombo().getItems()).indexOf(operation.getType().toString()));
 		createDateTime(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, operation.getDate(), dateKeyListener, modifyDateListener);
-		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL, TrackerUtils.getOperationTotalAmount(Optional.of(operation)));
+		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL,
+				operation.getTotalAmount() == 0 ? StringUtils.EMPTY : String.valueOf(operation.getTotalAmount()));
 	}
 
 	/**
@@ -377,14 +404,14 @@ public class CheckAndEditOperationWizardPage extends WizardPage {
 					Font font=new Font(table.getDisplay(), "Arial", 9, SWT.CENTER); //$NON-NLS-1$
 					item.setFont(font);
 					item.setData(amount);
-					item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory().getTitle(),
+					item.setText(new String[] {String.valueOf(amount.getValue()), amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle(),
 						TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.AMOUNT__WISHED_DATE.getEAttributeType(), amount.getWishedDate())});
 				});
 	}
 
 	@Override
 	public boolean isPageComplete() {
-		return TrackerUtils.isValidOperationAmounts(operation);
+		return TrackerUtils.isValidOperationAmounts(operation.getTotalAmount(), operation.getSubAmounts());
 	}
 
 	private class TableButtonListener implements Listener {

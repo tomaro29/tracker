@@ -182,4 +182,10 @@ public class AnonymousPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 		}
 		return null;
 	}
+
+	@Override
+	protected int extractYearFromCurrentLine() {
+		String year=getCurrentLine().subSequence(25, 29).toString();
+		return Integer.parseInt(year);
+	}
 }

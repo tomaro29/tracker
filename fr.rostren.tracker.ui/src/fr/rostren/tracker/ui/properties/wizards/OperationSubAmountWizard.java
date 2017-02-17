@@ -6,6 +6,7 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.ui.properties.pages.OperationSubAmountWizardPage;
 
 /**
@@ -23,7 +24,7 @@ public class OperationSubAmountWizard extends Wizard {
 	 * @param operation the operation
 	 * @param amount the amount to edit if any, <code>null</code> otherwise
 	 */
-	public OperationSubAmountWizard(String pageTitle, Tracker tracker, Operation operation, Amount amount) {
+	public OperationSubAmountWizard(String pageTitle, Tracker tracker, OperationData operation, Amount amount) {
 		super();
 		page=new OperationSubAmountWizardPage(pageTitle, tracker, operation, amount);
 	}

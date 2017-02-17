@@ -494,11 +494,12 @@ public class TrackerUtils {
 
 	/**
 	 * <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
-	 * @param operation the operation
+	 * @param totalAmount the operation total amount
+	 * @param subAmounts the operation sub amounts
 	 * @return <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
 	 */
-	public static boolean isValidOperationAmounts(Operation operation) {
-		return operation.getTotalAmount() == getTotalAmount(operation.getSubAmounts());
+	public static boolean isValidOperationAmounts(double totalAmount, List<Amount> subAmounts) {
+		return totalAmount == getTotalAmount(subAmounts);
 	}
 
 	/**

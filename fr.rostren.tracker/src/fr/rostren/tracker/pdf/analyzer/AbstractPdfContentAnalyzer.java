@@ -3,13 +3,11 @@ package fr.rostren.tracker.pdf.analyzer;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.utils.LineContent;
-import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
+import fr.rostren.tracker.pdf.utils.OperationType;
 
 /**
  * An abstract Class to parse banks pdf format.
@@ -39,7 +37,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	protected final Pattern PART_3_DATE_PATTREN=Pattern.compile("([0-9]{4})"); //$NON-NLS-1$
 	protected final Pattern OPERATION_TITLE_PATTREN=Pattern.compile("(.)*"); //$NON-NLS-1$
 	protected final Pattern AMOUNT_NUMBER_PATTREN=Pattern.compile("([0-9](([\\s.])?[0-9]*)*,[0-9]{2})"); //$NON-NLS-1$
-	protected final Pattern NUMBER_PATTREN=Pattern.compile("([0-9]*)"); //$NON-NLS-1$
+	protected final Pattern NUMBER_PATTREN=Pattern.compile("([1-9][0-9]*)"); //$NON-NLS-1$
 	protected final Pattern FACT_PATTREN=Pattern.compile("FACT\\s+([0-9]*)"); //$NON-NLS-1$
 
 	boolean isCredit;
@@ -112,18 +110,9 @@ public abstract class AbstractPdfContentAnalyzer {
 			// COTISATION(D), FRAIS(D)
 			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
 		}
-		else if (lastToken != null && PdfToken.DATE.equals(lastToken)) {//the operation type is not defined
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					isCredit=MessageDialog.openQuestion(shell, "Operation Type Definition", //$NON-NLS-1$
-							"Is the next operation a Credit one ?\n" //$NON-NLS-1$
-																								+ lastPotentialDate + STRING_SEPARATOR.toString() + lastPotentialOperationTitle
-																							+ STRING_SEPARATOR.toString() + lastPotentialAmount);
-				}
-			});
-
-			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, isCredit ? OperationType.CREDIT : OperationType.DEBIT, origin);
+		else if (lastToken != null && PdfToken.DATE.equals(lastToken)) {
+			//in this case the operation type is not defined
+			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.UNDEFINED, origin);
 		}
 		return null;
 	}
@@ -163,10 +152,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * Extracts the year
 	 * @return the extracted year
 	 */
-	protected int extractYearFromCurrentLine() {
-		String year=currentLine.subSequence(25, 29).toString();
-		return Integer.parseInt(year);
-	}
+	protected abstract int extractYearFromCurrentLine();
 
 	/**
 	 * Returns the current line.

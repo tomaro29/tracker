@@ -1,4 +1,4 @@
-package fr.rostren.tracker.ui.dialogs;
+package fr.rostren.tracker.ui.properties.wizards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +10,13 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 import fr.rostren.tracker.Account;
-import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.ui.properties.pages.CheckAndEditOperationWizardPage;
 
 public class CheckAndEditOperationWizard extends Wizard {
-	protected BiMap<Operation, CheckAndEditOperationWizardPage> pages;
+	protected BiMap<OperationData, CheckAndEditOperationWizardPage> pages;
 
-	private List<Operation> operations=new ArrayList<>();
+	private List<OperationData> operations=new ArrayList<>();
 	private boolean canFinish=false;
 
 	/**
@@ -23,13 +24,13 @@ public class CheckAndEditOperationWizard extends Wizard {
 	 * @param operations the operations
 	 * @param account the checking account
 	 */
-	public CheckAndEditOperationWizard(List<Operation> operations, Account account) {
+	public CheckAndEditOperationWizard(List<OperationData> operations, Account account) {
 		super();
 		setNeedsProgressMonitor(true);
 		this.operations=operations;
 
 		pages=HashBiMap.create();
-		for (Operation operation: operations) {
+		for (OperationData operation: operations) {
 			CheckAndEditOperationWizardPage page=new CheckAndEditOperationWizardPage(operation, account);
 			pages.put(operation, page);
 		}
@@ -52,14 +53,14 @@ public class CheckAndEditOperationWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		for (Operation operation: operations) {
+		for (OperationData operation: operations) {
 			addPage(pages.get(operation));
 		}
 	}
 
 	@Override
 	public IWizardPage getPreviousPage(IWizardPage page) {
-		Operation operation=pages.inverse().get(page);
+		OperationData operation=pages.inverse().get(page);
 		int previousIndex=operations.indexOf(operation) - 1;
 		canFinish=isFirstPage(previousIndex) && isLastPage(previousIndex);
 
@@ -71,7 +72,7 @@ public class CheckAndEditOperationWizard extends Wizard {
 
 	@Override
 	public IWizardPage getNextPage(IWizardPage page) {
-		Operation operation=pages.inverse().get(page);
+		OperationData operation=pages.inverse().get(page);
 		int nextIndex=operations.indexOf(operation) + 1;
 		canFinish=isLastPage(nextIndex);
 

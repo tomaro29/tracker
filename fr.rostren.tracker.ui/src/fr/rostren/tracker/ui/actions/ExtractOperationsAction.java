@@ -11,17 +11,17 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
+import fr.rostren.tracker.pdf.utils.OperationData;
 
 public class ExtractOperationsAction implements IRunnableWithProgress {
 	private final Shell shell;
 	private final String pdfURIText;
 	private final PDFContentExtractor extractor;
 
-	private List<Operation> addedOperations=new ArrayList<>();
+	private List<OperationData> addedOperations=new ArrayList<>();
 	private final Set<Origin> addedOrigins=new HashSet<>();
 
 	/**
@@ -86,7 +86,7 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	 * Returns the added operations
 	 * @return the added operations
 	 */
-	public List<Operation> getAddedOperations() {
+	public List<OperationData> getAddedOperations() {
 		return addedOperations;
 	}
 

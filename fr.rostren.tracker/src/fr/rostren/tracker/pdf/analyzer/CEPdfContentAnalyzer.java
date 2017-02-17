@@ -180,4 +180,10 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 		}
 		return null;
 	}
+
+	@Override
+	protected int extractYearFromCurrentLine() {
+		String year=getCurrentLine().subSequence(9, 13).toString();
+		return Integer.parseInt(year);
+	}
 }

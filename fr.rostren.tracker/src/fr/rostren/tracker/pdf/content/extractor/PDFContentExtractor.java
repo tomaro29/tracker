@@ -22,7 +22,6 @@ import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.Tracker;
@@ -32,6 +31,7 @@ import fr.rostren.tracker.pdf.analyzer.AnonymousPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.CEPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.CICPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.pdf.utils.TrackerPdfReader;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
@@ -39,8 +39,8 @@ import fr.rostren.tracker.pdf.utils.TrackerUtils;
  * Extracts the content of a pdf file.
  */
 public class PDFContentExtractor {
-	private static final String CIC_PDF_IDENTIFIER="CIC%20-%20"; //$NON-NLS-1$
-	private static final String CE_PDF_IDENTIFIER="CE%20-%20"; //$NON-NLS-1$
+	private static final String CIC_PDF_REGEX=".*CIC.*"; //$NON-NLS-1$
+	private static final String CE_PDF_REGEX=".*CE.*"; //$NON-NLS-1$
 
 	private Set<String> alreadyParsedFiles=new HashSet<>();
 
@@ -76,7 +76,7 @@ public class PDFContentExtractor {
 	 * @return the list of all operations extracted from the pdf file.
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
 	 */
-	public List<Operation> extractOperations(IProgressMonitor monitor) throws ExtractorException {
+	public List<OperationData> extractOperations(IProgressMonitor monitor) throws ExtractorException {
 		if (monitor == null) {
 			throw new IllegalArgumentException("The monitor cannot be null."); //$NON-NLS-1$
 		}
@@ -85,7 +85,7 @@ public class PDFContentExtractor {
 				.map(uri -> URI.createURI(uri))//
 				.collect(Collectors.toList());
 
-		List<Operation> operations=new ArrayList<>();
+		List<OperationData> operations=new ArrayList<>();
 		for (URI selectedFileURI: uris) {
 			if (selectedFileURI.isPlatform()) {
 				IPath resourcePath=new Path(selectedFileURI.toPlatformString(true));
@@ -124,10 +124,10 @@ public class PDFContentExtractor {
 	 * @return the list of all the extracted operation
 	 * @throws ExtractorException if an {@link ExtractorException} is thrown
 	 */
-	private List<Operation> extractOperations(String src, String fileName, IProgressMonitor monitor) throws ExtractorException {
+	private List<OperationData> extractOperations(String src, String fileName, IProgressMonitor monitor) throws ExtractorException {
 		AbstractPdfContentAnalyzer analyzer=adaptAnalyzer(fileName);
 
-		List<Operation> operations=new ArrayList<>();
+		List<OperationData> operations=new ArrayList<>();
 		try (TrackerPdfReader reader=new TrackerPdfReader(src)) {
 			Tracker tracker=TrackerUtils.getTracker(account);
 			int numberOfPages=reader.getNumberOfPages();
@@ -139,17 +139,18 @@ public class PDFContentExtractor {
 
 					String[] lines=page.split("\n"); //$NON-NLS-1$
 					monitor.beginTask(src + " page " + i, lines.length); //$NON-NLS-1$
-					for (int j=0; j < lines.length; j++) {
-						String line=lines[j];
-						monitor.subTask(" parsing line: " + line); //$NON-NLS-1$
-						LineContent currentLineContent=analyzer.parseLine(line, origin);
-						if (currentLineContent != null && account != null && account instanceof CheckingAccount) {
-							currentLineContent.completeOperation(tracker);
-							operations.add(currentLineContent.getOperation());
-						}
-						monitor.worked(1);
-					}
+					Arrays.asList(lines).stream()//
+							.forEach(line -> {
+								monitor.subTask(" parsing line: " + line); //$NON-NLS-1$
+								LineContent currentLineContent=analyzer.parseLine(line, origin);
+								if (currentLineContent != null && account instanceof CheckingAccount) {
+									currentLineContent.completeOperation(tracker);
+									operations.add(currentLineContent.getOperation());
+								}
+								monitor.worked(1);
+							});
 				}
+				System.out.println("page parsed " + i); //$NON-NLS-1$
 			}
 			alreadyParsedFiles.add(fileName);
 			monitor.done();
@@ -168,10 +169,10 @@ public class PDFContentExtractor {
 	 * @return the adapted analyzer
 	 */
 	private AbstractPdfContentAnalyzer adaptAnalyzer(String fileName) {
-		if (fileName.startsWith(PDFContentExtractor.CE_PDF_IDENTIFIER)) {
+		if (fileName.matches(PDFContentExtractor.CE_PDF_REGEX)) {
 			return new CEPdfContentAnalyzer(shell);
 		}
-		if (fileName.startsWith(PDFContentExtractor.CIC_PDF_IDENTIFIER)) {
+		if (fileName.matches(PDFContentExtractor.CIC_PDF_REGEX)) {
 			return new CICPdfContentAnalyzer(shell);
 		}
 		return new AnonymousPdfContentAnalyzer(shell);

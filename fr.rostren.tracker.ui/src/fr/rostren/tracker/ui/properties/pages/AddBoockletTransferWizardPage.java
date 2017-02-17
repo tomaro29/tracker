@@ -40,7 +40,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerOriginWizard;
  * Page to add a {@link Transfer} instance to an existing
  * {@link BoockletAccount} instance.
  */
-public class AddBoockletTransferWizardPage extends AbstractWizardPage {
+public class AddBoockletTransferWizardPage extends AbstractAddWizardPage {
 	protected static final String[] TRANSFER_TYPES=new String[] {Incoming.class.getSimpleName(), Outgoing.class.getSimpleName()};
 
 	private static final String PAGE_NAME="Add tranfer to ''{0}'' Page"; //$NON-NLS-1$

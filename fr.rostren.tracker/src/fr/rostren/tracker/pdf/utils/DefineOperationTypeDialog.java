@@ -5,8 +5,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-import fr.rostren.tracker.pdf.utils.LineContent.OperationType;
-
 public class DefineOperationTypeDialog extends Dialog {
 	private OperationType type;
 

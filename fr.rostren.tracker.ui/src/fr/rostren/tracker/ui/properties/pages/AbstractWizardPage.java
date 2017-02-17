@@ -41,25 +41,7 @@ public abstract class AbstractWizardPage extends WizardPage {
 
 	@Override
 	public void createControl(Composite parent) {
-		Composite container=new Composite(parent, SWT.NONE);
-		GridLayout layout=new GridLayout();
-		layout.numColumns=2;
-		layout.makeColumnsEqualWidth=false;
-		layout.marginWidth=0;
-		layout.marginHeight=0;
-		container.setLayout(layout);
-
-		createContainer(container);
-
-		setControl(container);
-		setPageComplete(true);
 	}
-
-	/**
-	 * Creates a container
-	 * @param parent the composite parent of the container to create
-	 */
-	abstract protected void createContainer(Composite parent);
 
 	/**
 	 * Returns the list of operations related to all checking accounts
@@ -154,14 +136,14 @@ public abstract class AbstractWizardPage extends WizardPage {
 	 * Creates combo viewer
 	 * @param composite the composite parent of the combo to create
 	 * @param label the combo label
-	 * @param operationsTitles the combo input
+	 * @param input the combo input
 	 * @param contentProvider the content provider
 	 * @param labelProvider the label Provider
 	 * @param listener the linked listener
 	 * @param addButtonlistener the "Add" button listener
 	 * @return the created combo viewer
 	 */
-	protected ComboViewer createComboViewer(Composite composite, String label, Set<? extends Object> operationsTitles, IContentProvider contentProvider,
+	protected ComboViewer createComboViewer(Composite composite, String label, Set<? extends Object> input, IContentProvider contentProvider,
 			ILabelProvider labelProvider, ISelectionChangedListener listener, SelectionAdapter addButtonlistener) {
 		createLabel(composite, label);
 
@@ -171,7 +153,7 @@ public abstract class AbstractWizardPage extends WizardPage {
 		ComboViewer viewer=new ComboViewer(parent, SWT.READ_ONLY);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
-		viewer.setInput(new ArrayList<>(operationsTitles));
+		viewer.setInput(new ArrayList<>(input));
 		viewer.getCombo().select(0);
 
 		viewer.addSelectionChangedListener(listener);

@@ -31,7 +31,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
  * Page to add a {@link Category} instance to an existing {@link OperationTitle}
  * instance.
  */
-public class AddOperationTitleCategoryWizardPage extends AbstractWizardPage {
+public class AddOperationTitleCategoryWizardPage extends AbstractAddWizardPage {
 	private static final String PAGE_NAME="Add Category to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add Category"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new category to the selected operation title."; //$NON-NLS-1$

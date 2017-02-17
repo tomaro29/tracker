@@ -30,6 +30,7 @@ import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryContentProvider;
@@ -40,14 +41,14 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
  * Page to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class OperationSubAmountWizardPage extends AbstractWizardPage {
+public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 	private static final String PAGE_NAME="Add sub-amount to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String PAGE_TITLE="Add sub-amount"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new sub-amount to the selected operation."; //$NON-NLS-1$
 
 	protected final Tracker tracker;
-	protected final Operation operation;
+	protected final OperationData operation;
 	protected final Amount amount;
 
 	protected Category category;
@@ -137,7 +138,7 @@ public class OperationSubAmountWizardPage extends AbstractWizardPage {
 	 * @param operation the operation
 	 * @param amount the amount to edit if any, <code>null</code> otherwise.
 	 */
-	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, Operation operation, Amount amount) {
+	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, OperationData operation, Amount amount) {
 		super(MessageFormat.format(OperationSubAmountWizardPage.PAGE_NAME, pageTitle));
 		this.tracker=tracker;
 		this.operation=operation;

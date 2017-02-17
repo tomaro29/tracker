@@ -11,19 +11,19 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.AbortEditActionException;
 import fr.rostren.tracker.ui.DomainUtils;
-import fr.rostren.tracker.ui.dialogs.CheckAndEditOperationWizard;
+import fr.rostren.tracker.ui.properties.wizards.CheckAndEditOperationWizard;
 
 public class EditOperationsAction extends Action {
 	private static final String ACTION_ABORTED_MESSAGE="The Current PDF Import Action is aborted! All new origins and operations will be cleaned from the model."; //$NON-NLS-1$
 	private final Shell shell;
 	private final CheckingAccount account;
-	private final List<Operation> addedOperations;
+	private final List<OperationData> addedOperations;
 	private final Set<Origin> addedOrigins;
 
 	/**
@@ -33,7 +33,7 @@ public class EditOperationsAction extends Action {
 	 * @param addedOperations the added operations
 	 * @param addedOrigins the added origins
 	 */
-	public EditOperationsAction(Shell shell, CheckingAccount account, List<Operation> addedOperations, Set<Origin> addedOrigins) {
+	public EditOperationsAction(Shell shell, CheckingAccount account, List<OperationData> addedOperations, Set<Origin> addedOrigins) {
 		this.shell=shell;
 		this.account=account;
 		this.addedOperations=addedOperations;

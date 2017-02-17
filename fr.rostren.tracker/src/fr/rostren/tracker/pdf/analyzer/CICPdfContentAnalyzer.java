@@ -121,7 +121,7 @@ public class CICPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 	 * @return the {@link Double} amount
 	 */
 	private Double getAmountAsDouble(String amount) {
-		return new Double(amount.replaceAll(STRING_SEPARATOR, StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		return new Double(amount.replaceAll("[\\. ]", StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	@Override
@@ -133,5 +133,11 @@ public class CICPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 			return LocalDate.of(Integer.parseInt(split[2]), Month.of(Integer.parseInt(split[1])), Integer.parseInt(split[0]));
 		}
 		return null;
+	}
+
+	@Override
+	protected int extractYearFromCurrentLine() {
+		String year=getCurrentLine().subSequence(25, 29).toString();
+		return Integer.parseInt(year);
 	}
 }

@@ -8,10 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.CategoriesRepository;
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.IncomeCategory;
-import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.SpendingCategory;
@@ -19,14 +16,10 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 
 public class LineContent {
+
 	private static final String FACT=" FACT "; //$NON-NLS-1$
 
-	public enum OperationType {
-		CREDIT,
-		DEBIT
-	}
-
-	private Operation operation;
+	private final OperationData operation;
 
 	/** The title. */
 	private String title;
@@ -67,16 +60,10 @@ public class LineContent {
 		}
 
 		this.setTitle(formatTitle(title));
-		if (OperationType.CREDIT.equals(type)) {
-			operation=TrackerFactory.eINSTANCE.createCredit();
-			operation.setDate(date);
-			operation.setTotalAmount(amount);
-		}
-		else if (OperationType.DEBIT.equals(type)) {
-			operation=TrackerFactory.eINSTANCE.createDebit();
-			operation.setDate(date);
-			operation.setTotalAmount(amount);
-		}
+		operation=new OperationData();
+		operation.setType(type);
+		operation.setDate(date);
+		operation.setTotalAmount(amount);
 		operation.setOrigin(origin);
 	}
 
@@ -159,7 +146,7 @@ public class LineContent {
 	private Category findCategoryInTrackerModel(String title, Tracker tracker) {
 		return getExistingTitle(title, tracker).filter(existingTitle -> !existingTitle.getCategories().isEmpty())//
 				.map(existingTitle -> existingTitle.getCategories().get(0))//
-				.orElse(createNewCategory(tracker).orElseThrow(IllegalArgumentException::new));
+				.orElse(createNewCategory(tracker));
 	}
 
 	/**
@@ -168,23 +155,23 @@ public class LineContent {
 	 *            the tracker model
 	 * @return the newly created category
 	 */
-	private Optional<Category> createNewCategory(Tracker tracker) {
+	private Category createNewCategory(Tracker tracker) {
 		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 		setLinkedOperationTitle(newTitle);
 		newTitle.setTitle(title);
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
 
 		Category undefined=null;
-		if (operation instanceof Credit) {
+		if (OperationType.CREDIT.equals(operation.getType())) {
 			undefined=getUndefinedIncomeCategory(getCategoriesRepository(tracker));
 			undefined.getOperationTitles().add(newTitle);
 		}
-		if (operation instanceof Debit) {
+		if (OperationType.DEBIT.equals(operation.getType())) {
 			undefined=getUndefinedSpendingCategory(getCategoriesRepository(tracker));
 			undefined.getOperationTitles().add(newTitle);
 		}
 
-		return Optional.of(undefined);
+		return undefined;
 	}
 
 	/**
@@ -270,11 +257,11 @@ public class LineContent {
 	}
 
 	/**
-	 * Returns the operation
+	 * Returns the operation data
 	 *
-	 * @return the operation
+	 * @return the operation data
 	 */
-	public Operation getOperation() {
+	public OperationData getOperation() {
 		return operation;
 	}
 

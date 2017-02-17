@@ -111,7 +111,7 @@ public class PDFContentExtractorTest {
 	 * @throws IOException IOException
 	 * @throws ExtractorException ExtractorException
 	 */
-	@Test(expected=ExtractorException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void extractOperations_NoTrackerContainerTest() throws ExtractorException, IOException {
 		PDFContentExtractor extractor=new PDFContentExtractor(validURI, account);
 		extractor.extractOperations(new NullProgressMonitor());

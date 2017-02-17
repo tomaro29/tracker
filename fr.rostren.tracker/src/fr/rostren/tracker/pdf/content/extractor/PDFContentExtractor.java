@@ -127,7 +127,7 @@ public class PDFContentExtractor {
 			Tracker tracker=TrackerUtils.getTracker(account);
 			int numberOfPages=reader.getNumberOfPages();
 			for (int i=0; i < numberOfPages; i++) {
-				String originId=fileName + "_page_" + (i + 1);//$NON-NLS-1$
+				String originId=src + "_page_" + (i + 1);//$NON-NLS-1$
 				if (!isAlreadyParsed(tracker, originId)) {
 					Origin origin=createLinkedOrigin(tracker, originId);
 					String page=PdfTextExtractor.getTextFromPage(reader, i + 1);
@@ -147,7 +147,7 @@ public class PDFContentExtractor {
 				}
 				System.out.println("page parsed " + i); //$NON-NLS-1$
 			}
-			alreadyParsedFiles.add(fileName);
+			alreadyParsedFiles.add(src);
 			monitor.done();
 		}
 		catch (IOException exception) {

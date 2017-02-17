@@ -152,7 +152,7 @@ public class PDFContentExtractorTest {
 		assertNotNull(alreadyParsed);
 		assertFalse(alreadyParsed.isEmpty());
 		assertEquals(1, alreadyParsed.size());
-		assertEquals("input\\CE%20-%20TEST.pdf", alreadyParsed.iterator().next().toString()); //$NON-NLS-1$
+		assertEquals("input\\CE - TEST.pdf", alreadyParsed.iterator().next().toString()); //$NON-NLS-1$
 	}
 
 	/**

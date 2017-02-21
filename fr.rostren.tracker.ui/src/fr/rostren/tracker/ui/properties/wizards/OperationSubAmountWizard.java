@@ -18,22 +18,24 @@ import fr.rostren.tracker.ui.properties.pages.OperationSubAmountWizardPage;
 public class OperationSubAmountWizard extends Wizard {
 
 	protected OperationSubAmountWizardPage page;
+	private final boolean isAdd;
 
 	/**
 	 * Constructor.
-	 * @param pageTitle the page title
 	 * @param tracker the tracker
 	 * @param operation the operation
 	 * @param amount the amount to edit if any, <code>null</code> otherwise
+	 * @param isAdd <code>true</code> if the action is a result of an Add action, <code>false</code> if is edit one
 	 */
-	public OperationSubAmountWizard(String pageTitle, Tracker tracker, OperationData operation, Amount amount) {
+	public OperationSubAmountWizard(Tracker tracker, OperationData operation, Amount amount, boolean isAdd) {
 		super();
-		page=new OperationSubAmountWizardPage(pageTitle, tracker, operation, amount);
+		this.isAdd=isAdd;
+		page=new OperationSubAmountWizardPage(operation.getOperationTitle().getTitle(), tracker, operation, amount, isAdd);
 	}
 
 	@Override
 	public String getWindowTitle() {
-		return "Add Operation Amount."; //$NON-NLS-1$
+		return isAdd ? "Add Operation Amount." : "Edit Operation Amount."; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override

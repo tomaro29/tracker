@@ -42,11 +42,9 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 		@Override
 		public void widgetSelected(SelectionEvent event) {
 			Operation operation=getOperation();
-
-			String pageTitle=operation.getOperationTitle().getTitle();
 			Tracker tracker=TrackerUtils.getTracker(operation);
 
-			OperationSubAmountWizard wizard=new OperationSubAmountWizard(pageTitle, tracker, OperationAdapter.adaptOperation(operation), null);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, OperationAdapter.adaptOperation(operation), null, true);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				Amount newAmount=TrackerFactory.eINSTANCE.createAmount();

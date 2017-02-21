@@ -43,9 +43,12 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
  */
 public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
-	private static final String PAGE_NAME="Add sub-amount to ''{0}'' Page"; //$NON-NLS-1$
-	private static final String PAGE_TITLE="Add sub-amount"; //$NON-NLS-1$
-	private static final String WIZARD_DESCRIPTION="Wizard to add a new sub-amount to the selected operation."; //$NON-NLS-1$
+	private static final String ADD_PAGE_NAME="Add sub-amount to ''{0}'' Page"; //$NON-NLS-1$
+	private static final String ADD_PAGE_TITLE="Add sub-amount"; //$NON-NLS-1$
+
+	private static final String EDIT_PAGE_NAME="Edit sub-amount to ''{0}'' Page"; //$NON-NLS-1$
+	private static final String EDIT_PAGE_TITLE="Edit sub-amount"; //$NON-NLS-1$
+	private static final String WIZARD_DESCRIPTION="Wizard to add or edit a new sub-amount to the selected operation."; //$NON-NLS-1$
 
 	protected final Tracker tracker;
 	protected final OperationData operation;
@@ -130,6 +133,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 			// Do Nothing
 		}
 	};
+	private final boolean isAdd;
 
 	/**
 	 * Constructor
@@ -137,13 +141,15 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	 * @param tracker the given tracker
 	 * @param operation the operation
 	 * @param amount the amount to edit if any, <code>null</code> otherwise.
+	 * @param isAdd <code>true</code> if the action is a result of an Add action, <code>false</code> if is edit one
 	 */
-	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, OperationData operation, Amount amount) {
-		super(MessageFormat.format(OperationSubAmountWizardPage.PAGE_NAME, pageTitle));
+	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, OperationData operation, Amount amount, boolean isAdd) {
+		super(MessageFormat.format(isAdd ? OperationSubAmountWizardPage.ADD_PAGE_NAME : OperationSubAmountWizardPage.EDIT_PAGE_NAME, pageTitle));
 		this.tracker=tracker;
 		this.operation=operation;
 		this.amount=amount;
-		setTitle(OperationSubAmountWizardPage.PAGE_TITLE);
+		this.isAdd=isAdd;
+		setTitle(isAdd ? OperationSubAmountWizardPage.ADD_PAGE_TITLE : OperationSubAmountWizardPage.EDIT_PAGE_TITLE);
 		setDescription(OperationSubAmountWizardPage.WIZARD_DESCRIPTION);
 		if (amount != null) {
 			value=String.valueOf(amount.getValue());

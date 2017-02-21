@@ -22,7 +22,7 @@ public class CICPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 			.concat(EMPTY_STRING_PATTREN.pattern()).concat(OPERATION_TITLE_PATTREN.pattern()).concat(EMPTY_STRING_PATTREN.pattern()).concat(AMOUNT_NUMBER_PATTREN.pattern())
 			.concat(EMPTY_STRING_PATTREN.pattern()));
 	private final Pattern PARTIAL_LINE_PATTERN=Pattern.compile(PART_1_DATE_PATTREN.pattern().concat(DATE_SEPARATOR_PATTREN.pattern()).concat(PART_2_DATE_PATTREN.pattern())
-			.concat(EMPTY_STRING_PATTREN.pattern()).concat(OPERATION_TITLE_PATTREN.pattern()).concat(EMPTY_STRING_PATTREN.pattern()));
+			.concat(DATE_SEPARATOR_PATTREN.pattern()).concat(PART_3_DATE_PATTREN.pattern()).concat(EMPTY_STRING_PATTREN.pattern()).concat(OPERATION_TITLE_PATTREN.pattern()));
 
 	@Override
 	public LineContent parseLine(String line, Origin origin) {
@@ -104,7 +104,21 @@ public class CICPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 
 			setLastPotentialAmount(getAmountAsDouble(lastPart.toString()));
 		}
-		setLastPotentialOperationTitle(titleBuilder.toString());
+
+		String potentialTitle=titleBuilder.toString();
+		if (potentialTitle.matches(PARTIAL_LINE_PATTERN.pattern())) {
+			String[] split=potentialTitle.split(STRING_SEPARATOR);
+			titleBuilder=new StringBuilder();
+			for (int index=1; index < split.length - 1; index++) {
+				titleBuilder.append(split[index]);
+				titleBuilder.append(STRING_SEPARATOR);
+			}
+			titleBuilder.append(split[split.length - 1]);
+			setLastPotentialOperationTitle(titleBuilder.toString());
+		}
+		else {
+			setLastPotentialOperationTitle(titleBuilder.toString());
+		}
 	}
 
 	/**

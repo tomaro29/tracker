@@ -1,16 +1,12 @@
 package fr.rostren.tracker.ui.actions;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
 import fr.rostren.tracker.pdf.utils.OperationData;
@@ -20,7 +16,6 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	private final PDFContentExtractor extractor;
 
 	private List<OperationData> addedOperations=new ArrayList<>();
-	private final Set<Origin> addedOrigins=new HashSet<>();
 
 	/**
 	 * Constructor
@@ -60,9 +55,6 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	private boolean extractOperations(PDFContentExtractor extractor, IProgressMonitor monitor) throws InterruptedException {
 		try {
 			addedOperations=extractor.extractOperations(monitor);
-			addedOrigins.addAll(addedOperations.stream()//
-					.map(operation -> operation.getOrigin())//
-					.collect(Collectors.toList()));
 			return true;
 		}
 		catch (ExtractorException e) {
@@ -84,13 +76,5 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 	 */
 	public List<OperationData> getAddedOperations() {
 		return addedOperations;
-	}
-
-	/**
-	 * Returns the added origins
-	 * @return the added origins
-	 */
-	public Set<Origin> getAddedOrigins() {
-		return addedOrigins;
 	}
 }

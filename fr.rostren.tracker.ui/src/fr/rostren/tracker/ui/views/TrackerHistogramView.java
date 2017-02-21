@@ -133,6 +133,7 @@ public class TrackerHistogramView extends ViewPart {
 
 	/**
 	 * Adds actions to the view tool bar
+	 * @param manager the tool bar manager
 	 */
 	private void defineToolBarActions(IToolBarManager manager) {
 		manager.add(new FilterMenuCreatorAction(this));

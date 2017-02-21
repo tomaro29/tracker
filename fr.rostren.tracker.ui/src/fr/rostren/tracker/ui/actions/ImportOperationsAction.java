@@ -54,7 +54,7 @@ public class ImportOperationsAction extends Action {
 		runJobInDialog(extractAction);
 		if (!extractAction.getAddedOperations().isEmpty()) {
 			// Edits operations SubAmounts and categories
-			EditOperationsAction editAction=new EditOperationsAction(shell, account, extractAction.getAddedOperations(), extractAction.getAddedOrigins());
+			EditOperationsAction editAction=new EditOperationsAction(shell, account, extractAction.getAddedOperations());
 			editAction.run();
 		}
 	}

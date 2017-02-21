@@ -32,7 +32,7 @@ public class PDFContentExtractorTest {
 	private final String emptyURI=""; //$NON-NLS-1$
 	private final String blankURI=" "; //$NON-NLS-1$
 	private final String invalidURI="uri"; //$NON-NLS-1$
-	private final String validURI="input/CE%20-%20TEST.pdf"; //$NON-NLS-1$
+	private final String validURI="input/CE - TEST.pdf"; //$NON-NLS-1$
 	private final String notPDFURI="input/EMPTY_FILE.txt"; //$NON-NLS-1$
 
 	private final Set<String> alreadyParsedFiles=new HashSet<>();

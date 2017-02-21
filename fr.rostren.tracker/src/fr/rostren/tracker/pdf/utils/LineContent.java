@@ -1,6 +1,7 @@
 package fr.rostren.tracker.pdf.utils;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
@@ -144,34 +145,56 @@ public class LineContent {
 	 *         category otherwise.
 	 */
 	private Category findCategoryInTrackerModel(String title, Tracker tracker) {
-		return getExistingTitle(title, tracker).filter(existingTitle -> !existingTitle.getCategories().isEmpty())//
-				.map(existingTitle -> existingTitle.getCategories().get(0))//
-				.orElse(createNewCategory(tracker));
+		linkedOperationTitle=null;
+		TrackerUtils.findOperationTitle(tracker, title).ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
+		if (linkedOperationTitle != null && !linkedOperationTitle.getCategories().isEmpty()) {
+			return linkedOperationTitle.getCategories().get(0);
+		}
+		OperationTitle newTitle=linkedOperationTitle == null ? createNewTitle(tracker) : linkedOperationTitle;
+		return createNewCategory(newTitle, tracker);
 	}
 
 	/**
 	 * Creates a new category
+	 * @param newTitle the operation Title
 	 * @param tracker
 	 *            the tracker model
 	 * @return the newly created category
 	 */
-	private Category createNewCategory(Tracker tracker) {
+	private Category createNewCategory(OperationTitle newTitle, Tracker tracker) {
+		CategoriesRepository categoriesRepository=getCategoriesRepository(tracker);
+		if (OperationType.CREDIT.equals(operation.getType())) {
+			Category undefined=getUndefinedIncomeCategory(categoriesRepository);
+			List<IncomeCategory> incomes=categoriesRepository.getIncome().getIncomes();
+			if (!incomes.contains(undefined)) {
+				incomes.add((IncomeCategory)undefined);
+			}
+			undefined.getOperationTitles().add(newTitle);
+			return undefined;
+		}
+		else if (OperationType.DEBIT.equals(operation.getType())) {
+			Category undefined=getUndefinedSpendingCategory(categoriesRepository);
+			List<SpendingCategory> spendings=categoriesRepository.getSpending().getSpendings();
+			if (!spendings.contains(undefined)) {
+				spendings.add((SpendingCategory)undefined);
+			}
+			undefined.getOperationTitles().add(newTitle);
+			return undefined;
+		}
+		return null;
+	}
+
+	/**
+	 * Creates a new {@link OperationTitle} instance
+	 * @param tracker the tracker
+	 * @return the new title instance
+	 */
+	private OperationTitle createNewTitle(Tracker tracker) {
 		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 		setLinkedOperationTitle(newTitle);
 		newTitle.setTitle(title);
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
-
-		Category undefined=null;
-		if (OperationType.CREDIT.equals(operation.getType())) {
-			undefined=getUndefinedIncomeCategory(getCategoriesRepository(tracker));
-			undefined.getOperationTitles().add(newTitle);
-		}
-		if (OperationType.DEBIT.equals(operation.getType())) {
-			undefined=getUndefinedSpendingCategory(getCategoriesRepository(tracker));
-			undefined.getOperationTitles().add(newTitle);
-		}
-
-		return undefined;
+		return newTitle;
 	}
 
 	/**
@@ -199,9 +222,10 @@ public class LineContent {
 			repository.setIncome(income);
 		}
 
-		return income.getIncomes().stream()//
+		Optional<IncomeCategory> findAny=income.getIncomes().stream()//
 				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
-				.findAny().orElse(getCategoryInIncome(income));
+				.findAny();
+		return findAny.orElse(getCategoryInIncome(income));
 	}
 
 	/**
@@ -228,7 +252,6 @@ public class LineContent {
 	private IncomeCategory getCategoryInIncome(IncomeCategory income) {
 		IncomeCategory category=TrackerFactory.eINSTANCE.createIncomeCategory();
 		category.setTitle(TrackerUtils.UNDEFINED_INCOME_TITLE);
-		income.getIncomes().add(category);
 		return category;
 	}
 
@@ -240,20 +263,7 @@ public class LineContent {
 	private SpendingCategory getCategoryInSpending(SpendingCategory spending) {
 		SpendingCategory category=TrackerFactory.eINSTANCE.createSpendingCategory();
 		category.setTitle(TrackerUtils.UNDEFINED_SPENDING_TITLE);
-		spending.getSpendings().add(category);
 		return category;
-	}
-
-	/**
-	 * Returns the existing title
-	 * @param title the title to seek
-	 * @param tracker the tracker
-	 * @return the existing title
-	 */
-	private Optional<OperationTitle> getExistingTitle(String title, Tracker tracker) {
-		Optional<OperationTitle> operationTitleOpt=TrackerUtils.findOperationTitle(tracker, title);
-		operationTitleOpt.ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
-		return operationTitleOpt;
 	}
 
 	/**

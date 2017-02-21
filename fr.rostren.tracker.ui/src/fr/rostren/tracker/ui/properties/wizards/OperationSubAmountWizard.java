@@ -1,5 +1,7 @@
 package fr.rostren.tracker.ui.properties.wizards;
 
+import java.time.LocalDate;
+
 import org.eclipse.jface.wizard.Wizard;
 
 import fr.rostren.tracker.Amount;
@@ -58,5 +60,13 @@ public class OperationSubAmountWizard extends Wizard {
 	 */
 	public double getAmountValue() {
 		return page.getAmountValue();
+	}
+
+	/**
+	 * Returns the amount wished date
+	 * @return the amount wished date
+	 */
+	public LocalDate getAmountWishedDate() {
+		return page.getAmountWishedDate();
 	}
 }

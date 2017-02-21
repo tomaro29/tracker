@@ -79,12 +79,12 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	protected Button addButton;
 	protected Button editButton;
 	protected Button removeButton;
+	protected OperationType operationType;
 
 	private final int TEXT_MARGIN=3;
 	private final int FONT_WIDTH=10;
 
 	private final String operationTitle;
-	private OperationType operationType;
 
 	private final ISelectionChangedListener typeListener=new ISelectionChangedListener() {
 
@@ -460,6 +460,13 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 				if (value != 0) {
 					newAmount.setValue(value);
 				}
+				LocalDate date=wizard.getAmountWishedDate();
+				if (date != null) {
+					newAmount.setWishedDate(date);
+				}
+				else {
+					newAmount.setWishedDate(operation.getDate());
+				}
 				adaptAndValidateValues(newAmount);
 				populateTable();
 			}
@@ -526,8 +533,9 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 			if (!categories.contains(newAmount.getCategory())) {
 				categories.add(newAmount.getCategory());
 			}
-			setPageComplete(isPageComplete());
-			if (!isPageComplete()) {
+			boolean isComplete=isPageComplete();
+			setPageComplete(isComplete);
+			if (!isComplete) {
 				setErrorMessage(MessageFormat.format(CheckAndEditOperationWizardPage.AMOUNTS_VALUES_ERROR_MESSAGE, operation.getTotalAmount()));
 			}
 		}
@@ -554,7 +562,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 		}
 
 		@Override
-		public void widgetDefaultSelected(SelectionEvent arg0) {
+		public void widgetDefaultSelected(SelectionEvent event) {
 			// Do Nothing
 		}
 	}

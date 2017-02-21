@@ -279,6 +279,22 @@ public class TrackerUtils {
 	}
 
 	/**
+	 * Returns the {@link OperationTitle} instance
+	 * @param operation the operation
+	 * @param title the operation title as a {@link String}
+	 * @return the {@link OperationTitle} instance
+	 */
+	public static Optional<OperationTitle> findOperationTitle(Operation operation, String title) {
+		if (operation == null) {
+			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
+		}
+		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
+			return null;
+		}
+		return findOperationTitle(TrackerUtils.getTracker(operation), title);
+	}
+
+	/**
 	 * Returns the operation origin
 	 * @param operation the operation
 	 * @param originId the origin Id
@@ -297,28 +313,6 @@ public class TrackerUtils {
 		}
 		return tracker.getOriginsRepository().getOrigins().stream()//
 				.filter(origin -> originId.equals(origin.getIdentifier()))//
-				.findFirst();
-	}
-
-	/**
-	 * Returns the {@link OperationTitle} instance
-	 * @param operation the operation
-	 * @param title the operation title as a {@link String}
-	 * @return the {@link OperationTitle} instance
-	 */
-	public static Optional<OperationTitle> findOperationTitle(Operation operation, String title) {
-		if (operation == null) {
-			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
-		}
-		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
-			return null;
-		}
-		Tracker tracker=TrackerUtils.getTracker(operation);
-		if (tracker == null) {
-			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
-		}
-		return tracker.getOperationsTitlesRepositories().getOperationsTitles().stream()//
-				.filter(opTitle -> title.equals(opTitle.getTitle()))//
 				.findFirst();
 	}
 
@@ -379,10 +373,7 @@ public class TrackerUtils {
 		if (category == null) {
 			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
 		}
-		if (TrackerUtils.UNDEFINED_INCOME_TITLE.equals(category.getTitle()) || TrackerUtils.UNDEFINED_SPENDING_TITLE.equals(category.getTitle())) {
-			return true;
-		}
-		return false;
+		return TrackerUtils.UNDEFINED_INCOME_TITLE.equals(category.getTitle()) || TrackerUtils.UNDEFINED_SPENDING_TITLE.equals(category.getTitle());
 	}
 
 	/**

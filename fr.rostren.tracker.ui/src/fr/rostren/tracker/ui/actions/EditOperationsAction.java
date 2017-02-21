@@ -2,7 +2,7 @@ package fr.rostren.tracker.ui.actions;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -11,8 +11,8 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.pdf.utils.OperationAdapter;
 import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 import fr.rostren.tracker.ui.AbortEditActionException;
@@ -20,24 +20,21 @@ import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.wizards.CheckAndEditOperationWizard;
 
 public class EditOperationsAction extends Action {
-	private static final String ACTION_ABORTED_MESSAGE="The Current PDF Import Action is aborted! All new origins and operations will be cleaned from the model."; //$NON-NLS-1$
+	private static final String ACTION_ABORTED_MESSAGE="The Current PDF Import Action is aborted! No new origins or operations are added to the model!"; //$NON-NLS-1$
 	private final Shell shell;
 	private final CheckingAccount account;
 	private final List<OperationData> addedOperations;
-	private final Set<Origin> addedOrigins;
 
 	/**
 	 * Constructor
 	 * @param shell the parent shell
 	 * @param account the checking account
 	 * @param addedOperations the added operations
-	 * @param addedOrigins the added origins
 	 */
-	public EditOperationsAction(Shell shell, CheckingAccount account, List<OperationData> addedOperations, Set<Origin> addedOrigins) {
+	public EditOperationsAction(Shell shell, CheckingAccount account, List<OperationData> addedOperations) {
 		this.shell=shell;
 		this.account=account;
 		this.addedOperations=addedOperations;
-		this.addedOrigins=addedOrigins;
 	}
 
 	@Override
@@ -47,7 +44,6 @@ public class EditOperationsAction extends Action {
 			addOperationsToAccount();
 		}
 		catch (AbortEditActionException e) {
-			removeAll();
 			MessageDialog.openInformation(shell, "Abort PDF Import Action", e.getMessage());//$NON-NLS-1$
 		}
 	}
@@ -57,15 +53,12 @@ public class EditOperationsAction extends Action {
 	 */
 	private void addOperationsToAccount() {
 		Collections.sort(addedOperations, (op1, op2) -> op1.getDate().compareTo(op2.getDate()));
-		addedOperations.stream().forEach(operation -> DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operation));
-	}
-
-	/**
-	 * Removes all extracted operations. Used when the action is aborted.
-	 */
-	private void removeAll() {
-		TrackerUtils.getTracker(account).getOriginsRepository().getOrigins().removeAll(addedOrigins);
-		account.getOperations().removeAll(addedOperations);
+		addedOperations.stream().forEach(
+				operationData -> DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, OperationAdapter.adaptOperation(operationData)));
+		addedOperations.stream().map(operation -> operation.getOrigin())//
+				.collect(Collectors.toSet()).stream()//
+				.forEach(origin -> DomainUtils.executeAddCommand(TrackerUtils.getTracker(account).getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS,
+						origin));
 	}
 
 	/**

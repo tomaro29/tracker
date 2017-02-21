@@ -2,199 +2,160 @@
 <tracker:Tracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tracker="http://fr.rostren.tracker/1.0">
   <owners firstName="first name" lastName="last name">
     <accounts xsi:type="tracker:CheckingAccount" name="checking">
-      <operations xsi:type="tracker:Debit" totalAmount="239.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.445" origin="//@originsRepository/@origins.1" date="10/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="239.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.10" origin="//@originsRepository/@origins.1" date="10/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="239.0" wishedDate="10/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="335.42" operationTitle="//@operationsTitlesRepositories/@operationsTitles.446" origin="//@originsRepository/@origins.1" date="10/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="335.42" operationTitle="//@operationsTitlesRepositories/@operationsTitles.11" origin="//@originsRepository/@origins.1" date="10/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="335.42" wishedDate="10/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="71.48" operationTitle="//@operationsTitlesRepositories/@operationsTitles.447" origin="//@originsRepository/@origins.1" date="10/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="71.48" operationTitle="//@operationsTitlesRepositories/@operationsTitles.12" origin="//@originsRepository/@origins.1" date="10/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="71.48" wishedDate="10/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="1.58" operationTitle="//@operationsTitlesRepositories/@operationsTitles.448" origin="//@originsRepository/@origins.1" date="11/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="1.58" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1" date="11/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="1.58" wishedDate="11/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="18.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.425" origin="//@originsRepository/@origins.0" date="12/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="18.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0" date="12/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="18.26" wishedDate="12/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="18.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.449" origin="//@originsRepository/@origins.1" date="12/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="18.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.14" origin="//@originsRepository/@origins.1" date="12/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="18.1" wishedDate="12/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.95" operationTitle="//@operationsTitlesRepositories/@operationsTitles.450" origin="//@originsRepository/@origins.1" date="12/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="8.95" operationTitle="//@operationsTitlesRepositories/@operationsTitles.15" origin="//@originsRepository/@origins.1" date="12/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.95" wishedDate="12/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="9.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.451" origin="//@originsRepository/@origins.1" date="13/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="9.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1" date="13/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="9.2" wishedDate="13/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="8.4" operationTitle="//@operationsTitlesRepositories/@operationsTitles.426" origin="//@originsRepository/@origins.0" date="15/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="8.4" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0" date="15/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="8.4" wishedDate="15/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="28.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.440" origin="//@originsRepository/@origins.1" date="15/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="28.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1" date="15/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="28.0" wishedDate="15/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="2.43" operationTitle="//@operationsTitlesRepositories/@operationsTitles.443" origin="//@originsRepository/@origins.1" date="16/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="2.43" operationTitle="//@operationsTitlesRepositories/@operationsTitles.8" origin="//@originsRepository/@origins.1" date="16/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2.43" wishedDate="16/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="12.78" operationTitle="//@operationsTitlesRepositories/@operationsTitles.444" origin="//@originsRepository/@origins.1" date="16/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="12.78" operationTitle="//@operationsTitlesRepositories/@operationsTitles.9" origin="//@originsRepository/@origins.1" date="16/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="12.78" wishedDate="16/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="9.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.452" origin="//@originsRepository/@origins.1" date="16/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="9.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1" date="16/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="9.2" wishedDate="16/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="46.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.453" origin="//@originsRepository/@origins.1" date="16/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="46.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.16" origin="//@originsRepository/@origins.1" date="16/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="46.0" wishedDate="16/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.454" origin="//@originsRepository/@origins.1" date="16/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="8.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.17" origin="//@originsRepository/@origins.1" date="16/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.0" wishedDate="16/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="25.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.427" origin="//@originsRepository/@origins.0" date="17/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="25.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.1" origin="//@originsRepository/@origins.0" date="17/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="25.2" wishedDate="17/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="64.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.455" origin="//@originsRepository/@origins.1" date="17/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="64.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.18" origin="//@originsRepository/@origins.1" date="17/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="64.0" wishedDate="17/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="119.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.456" origin="//@originsRepository/@origins.1" date="18/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="119.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.19" origin="//@originsRepository/@origins.1" date="18/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="119.0" wishedDate="18/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="10.13" operationTitle="//@operationsTitlesRepositories/@operationsTitles.428" origin="//@originsRepository/@origins.0" date="19/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="10.13" operationTitle="//@operationsTitlesRepositories/@operationsTitles.2" origin="//@originsRepository/@origins.0" date="19/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="10.13" wishedDate="19/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="85.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.457" origin="//@originsRepository/@origins.1" date="19/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="85.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.20" origin="//@originsRepository/@origins.1" date="19/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="85.0" wishedDate="19/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.458" origin="//@originsRepository/@origins.1" date="20/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="8.26" operationTitle="//@operationsTitlesRepositories/@operationsTitles.21" origin="//@originsRepository/@origins.1" date="20/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.26" wishedDate="20/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="25.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.441" origin="//@originsRepository/@origins.1" date="22/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="25.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1" date="22/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="25.0" wishedDate="22/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="55.59" operationTitle="//@operationsTitlesRepositories/@operationsTitles.459" origin="//@originsRepository/@origins.1" date="23/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="55.59" operationTitle="//@operationsTitlesRepositories/@operationsTitles.22" origin="//@originsRepository/@origins.1" date="23/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="55.59" wishedDate="23/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="15.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.429" origin="//@originsRepository/@origins.0" date="24/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="15.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.3" origin="//@originsRepository/@origins.0" date="24/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="15.1" wishedDate="24/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="40.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.437" origin="//@originsRepository/@origins.1" date="24/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="40.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1" date="24/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="40.0" wishedDate="24/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="56.5" operationTitle="//@operationsTitlesRepositories/@operationsTitles.460" origin="//@originsRepository/@origins.1" date="24/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="56.5" operationTitle="//@operationsTitlesRepositories/@operationsTitles.23" origin="//@originsRepository/@origins.1" date="24/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="56.5" wishedDate="24/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="7.6" operationTitle="//@operationsTitlesRepositories/@operationsTitles.461" origin="//@originsRepository/@origins.1" date="26/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="7.6" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1" date="26/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="7.6" wishedDate="26/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="2089.39" operationTitle="//@operationsTitlesRepositories/@operationsTitles.430" origin="//@originsRepository/@origins.0" date="29/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="2089.39" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.0" date="29/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2089.39" wishedDate="29/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="13.8" operationTitle="//@operationsTitlesRepositories/@operationsTitles.431" origin="//@originsRepository/@origins.0" date="30/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="13.8" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0" date="30/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="13.8" wishedDate="30/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="17.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.432" origin="//@originsRepository/@origins.0" date="30/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="17.2" operationTitle="//@operationsTitlesRepositories/@operationsTitles.5" origin="//@originsRepository/@origins.0" date="30/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="17.2" wishedDate="30/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="36.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.439" origin="//@originsRepository/@origins.1" date="30/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="36.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1" date="30/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="36.0" wishedDate="30/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="33.9" operationTitle="//@operationsTitlesRepositories/@operationsTitles.433" origin="//@originsRepository/@origins.0" date="31/12/2015">
+      <operations xsi:type="tracker:Credit" totalAmount="33.9" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.0" date="31/12/2015">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="33.9" wishedDate="31/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="60.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.438" origin="//@originsRepository/@origins.1" date="31/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="60.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1" date="31/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="60.0" wishedDate="31/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="18.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.462" origin="//@originsRepository/@origins.1" date="31/12/2015">
+      <operations xsi:type="tracker:Debit" totalAmount="18.1" operationTitle="//@operationsTitlesRepositories/@operationsTitles.24" origin="//@originsRepository/@origins.1" date="31/12/2015">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="18.1" wishedDate="31/12/2015"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="6.9" operationTitle="//@operationsTitlesRepositories/@operationsTitles.434" origin="//@originsRepository/@origins.0" date="2/01/2016">
+      <operations xsi:type="tracker:Credit" totalAmount="6.9" operationTitle="//@operationsTitlesRepositories/@operationsTitles.0" origin="//@originsRepository/@origins.0" date="2/01/2016">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="6.9" wishedDate="2/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="2412.69" operationTitle="//@operationsTitlesRepositories/@operationsTitles.435" origin="//@originsRepository/@origins.1" date="2/01/2016">
+      <operations xsi:type="tracker:Credit" totalAmount="2412.69" operationTitle="//@operationsTitlesRepositories/@operationsTitles.6" origin="//@originsRepository/@origins.1" date="2/01/2016">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="2412.69" wishedDate="2/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Credit" totalAmount="1100.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.436" origin="//@originsRepository/@origins.1" date="5/01/2016">
+      <operations xsi:type="tracker:Credit" totalAmount="1100.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.4" origin="//@originsRepository/@origins.1" date="5/01/2016">
         <subAmounts category="//@categoriesRepository/@income/@incomes.0" value="1100.0" wishedDate="5/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="134.98" operationTitle="//@operationsTitlesRepositories/@operationsTitles.463" origin="//@originsRepository/@origins.1" date="6/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="134.98" operationTitle="//@operationsTitlesRepositories/@operationsTitles.25" origin="//@originsRepository/@origins.1" date="6/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="134.98" wishedDate="6/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="86.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.464" origin="//@originsRepository/@origins.1" date="6/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="86.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.26" origin="//@originsRepository/@origins.1" date="6/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="86.0" wishedDate="6/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="20.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.442" origin="//@originsRepository/@origins.1" date="8/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="20.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.7" origin="//@originsRepository/@origins.1" date="8/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="20.0" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="345.81" operationTitle="//@operationsTitlesRepositories/@operationsTitles.465" origin="//@originsRepository/@origins.1" date="8/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="345.81" operationTitle="//@operationsTitlesRepositories/@operationsTitles.27" origin="//@originsRepository/@origins.1" date="8/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="345.81" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="123.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.466" origin="//@originsRepository/@origins.1" date="8/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="123.0" operationTitle="//@operationsTitlesRepositories/@operationsTitles.28" origin="//@originsRepository/@origins.1" date="8/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="123.0" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="12.35" operationTitle="//@operationsTitlesRepositories/@operationsTitles.467" origin="//@originsRepository/@origins.1" date="8/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="12.35" operationTitle="//@operationsTitlesRepositories/@operationsTitles.21" origin="//@originsRepository/@origins.1" date="8/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="12.35" wishedDate="8/01/2016"/>
       </operations>
-      <operations xsi:type="tracker:Debit" totalAmount="8.8" operationTitle="//@operationsTitlesRepositories/@operationsTitles.468" origin="//@originsRepository/@origins.1" date="8/01/2016">
+      <operations xsi:type="tracker:Debit" totalAmount="8.8" operationTitle="//@operationsTitlesRepositories/@operationsTitles.13" origin="//@originsRepository/@origins.1" date="8/01/2016">
         <subAmounts category="//@categoriesRepository/@spending/@spendings.0" value="8.8" wishedDate="8/01/2016"/>
       </operations>
     </accounts>
   </owners>
   <originsRepository>
     <origins identifier="input\CE - TEST.pdf_page_1" operations="//@owners.0/@accounts.0/@operations.4 //@owners.0/@accounts.0/@operations.8 //@owners.0/@accounts.0/@operations.15 //@owners.0/@accounts.0/@operations.18 //@owners.0/@accounts.0/@operations.23 //@owners.0/@accounts.0/@operations.27 //@owners.0/@accounts.0/@operations.28 //@owners.0/@accounts.0/@operations.29 //@owners.0/@accounts.0/@operations.31 //@owners.0/@accounts.0/@operations.34"/>
-    <origins identifier="input\CE - TEST.pdf_page_2" operations="//@owners.0/@accounts.0/@operations.35 //@owners.0/@accounts.0/@operations.36 //@owners.0/@accounts.0/@operations.24 //@owners.0/@accounts.0/@operations.32 //@owners.0/@accounts.0/@operations.30 //@owners.0/@accounts.0/@operations.9 //@owners.0/@accounts.0/@operations.21 //@owners.0/@accounts.0/@operations.39 //@owners.0/@accounts.0/@operations.10 //@owners.0/@accounts.0/@operations.11 //@owners.0/@accounts.0/@operations.0 //@owners.0/@accounts.0/@operations.1 //@owners.0/@accounts.0/@operations.2 //@owners.0/@accounts.0/@operations.3 //@owners.0/@accounts.0/@operations.5 //@owners.0/@accounts.0/@operations.6 //@owners.0/@accounts.0/@operations.7 //@owners.0/@accounts.0/@operations.12 //@owners.0/@accounts.0/@operations.13 //@owners.0/@accounts.0/@operations.14 //@owners.0/@accounts.0/@operations.16 //@owners.0/@accounts.0/@operations.17 //@owners.0/@accounts.0/@operations.19 //@owners.0/@accounts.0/@operations.20 //@owners.0/@accounts.0/@operations.22 //@owners.0/@accounts.0/@operations.25 //@owners.0/@accounts.0/@operations.26 //@owners.0/@accounts.0/@operations.33 //@owners.0/@accounts.0/@operations.37 //@owners.0/@accounts.0/@operations.38 //@owners.0/@accounts.0/@operations.40 //@owners.0/@accounts.0/@operations.41 //@owners.0/@accounts.0/@operations.42 //@owners.0/@accounts.0/@operations.43"/>
+    <origins identifier="input\CE - TEST.pdf_page_2" operations="//@owners.0/@accounts.0/@operations.0 //@owners.0/@accounts.0/@operations.1 //@owners.0/@accounts.0/@operations.2 //@owners.0/@accounts.0/@operations.3 //@owners.0/@accounts.0/@operations.5 //@owners.0/@accounts.0/@operations.6 //@owners.0/@accounts.0/@operations.7 //@owners.0/@accounts.0/@operations.9 //@owners.0/@accounts.0/@operations.10 //@owners.0/@accounts.0/@operations.11 //@owners.0/@accounts.0/@operations.12 //@owners.0/@accounts.0/@operations.13 //@owners.0/@accounts.0/@operations.14 //@owners.0/@accounts.0/@operations.16 //@owners.0/@accounts.0/@operations.17 //@owners.0/@accounts.0/@operations.19 //@owners.0/@accounts.0/@operations.20 //@owners.0/@accounts.0/@operations.21 //@owners.0/@accounts.0/@operations.22 //@owners.0/@accounts.0/@operations.24 //@owners.0/@accounts.0/@operations.25 //@owners.0/@accounts.0/@operations.26 //@owners.0/@accounts.0/@operations.30 //@owners.0/@accounts.0/@operations.32 //@owners.0/@accounts.0/@operations.33 //@owners.0/@accounts.0/@operations.35 //@owners.0/@accounts.0/@operations.36 //@owners.0/@accounts.0/@operations.37 //@owners.0/@accounts.0/@operations.38 //@owners.0/@accounts.0/@operations.39 //@owners.0/@accounts.0/@operations.40 //@owners.0/@accounts.0/@operations.41 //@owners.0/@accounts.0/@operations.42 //@owners.0/@accounts.0/@operations.43"/>
   </originsRepository>
   <categoriesRepository>
     <income title="recettes">
-      <incomes title="UNDEFINED INCOME" operationTitles="//@operationsTitlesRepositories/@operationsTitles.29 //@operationsTitlesRepositories/@operationsTitles.30 //@operationsTitlesRepositories/@operationsTitles.31 //@operationsTitlesRepositories/@operationsTitles.32 //@operationsTitlesRepositories/@operationsTitles.33 //@operationsTitlesRepositories/@operationsTitles.34 //@operationsTitlesRepositories/@operationsTitles.35 //@operationsTitlesRepositories/@operationsTitles.36 //@operationsTitlesRepositories/@operationsTitles.37 //@operationsTitlesRepositories/@operationsTitles.38 //@operationsTitlesRepositories/@operationsTitles.39 //@operationsTitlesRepositories/@operationsTitles.40 //@operationsTitlesRepositories/@operationsTitles.47 //@operationsTitlesRepositories/@operationsTitles.73 //@operationsTitlesRepositories/@operationsTitles.74 //@operationsTitlesRepositories/@operationsTitles.75 //@operationsTitlesRepositories/@operationsTitles.76 //@operationsTitlesRepositories/@operationsTitles.77 //@operationsTitlesRepositories/@operationsTitles.78 //@operationsTitlesRepositories/@operationsTitles.79 //@operationsTitlesRepositories/@operationsTitles.80 //@operationsTitlesRepositories/@operationsTitles.81 //@operationsTitlesRepositories/@operationsTitles.82 //@operationsTitlesRepositories/@operationsTitles.83 //@operationsTitlesRepositories/@operationsTitles.84 //@operationsTitlesRepositories/@operationsTitles.91 //@operationsTitlesRepositories/@operationsTitles.117 //@operationsTitlesRepositories/@operationsTitles.118 //@operationsTitlesRepositories/@operationsTitles.119 //@operationsTitlesRepositories/@operationsTitles.120 //@operationsTitlesRepositories/@operationsTitles.121 //@operationsTitlesRepositories/@operationsTitles.122 //@operationsTitlesRepositories/@operationsTitles.123 //@operationsTitlesRepositories/@operationsTitles.124 //@operationsTitlesRepositories/@operationsTitles.125 //@operationsTitlesRepositories/@operationsTitles.126 //@operationsTitlesRepositories/@operationsTitles.127 //@operationsTitlesRepositories/@operationsTitles.128 //@operationsTitlesRepositories/@operationsTitles.135 //@operationsTitlesRepositories/@operationsTitles.161 //@operationsTitlesRepositories/@operationsTitles.162 //@operationsTitlesRepositories/@operationsTitles.163 //@operationsTitlesRepositories/@operationsTitles.164 //@operationsTitlesRepositories/@operationsTitles.165 //@operationsTitlesRepositories/@operationsTitles.166 //@operationsTitlesRepositories/@operationsTitles.167 //@operationsTitlesRepositories/@operationsTitles.168 //@operationsTitlesRepositories/@operationsTitles.169 //@operationsTitlesRepositories/@operationsTitles.170 //@operationsTitlesRepositories/@operationsTitles.171 //@operationsTitlesRepositories/@operationsTitles.172 //@operationsTitlesRepositories/@operationsTitles.179 //@operationsTitlesRepositories/@operationsTitles.205 //@operationsTitlesRepositories/@operationsTitles.206 //@operationsTitlesRepositories/@operationsTitles.207 //@operationsTitlesRepositories/@operationsTitles.208 //@operationsTitlesRepositories/@operationsTitles.209 //@operationsTitlesRepositories/@operationsTitles.210 //@operationsTitlesRepositories/@operationsTitles.211 //@operationsTitlesRepositories/@operationsTitles.212 //@operationsTitlesRepositories/@operationsTitles.213 //@operationsTitlesRepositories/@operationsTitles.214 //@operationsTitlesRepositories/@operationsTitles.215 //@operationsTitlesRepositories/@operationsTitles.216 //@operationsTitlesRepositories/@operationsTitles.223 //@operationsTitlesRepositories/@operationsTitles.249 //@operationsTitlesRepositories/@operationsTitles.250 //@operationsTitlesRepositories/@operationsTitles.251 //@operationsTitlesRepositories/@operationsTitles.252 //@operationsTitlesRepositories/@operationsTitles.253 //@operationsTitlesRepositories/@operationsTitles.254 //@operationsTitlesRepositories/@operationsTitles.255 //@operationsTitlesRepositories/@operationsTitles.256 //@operationsTitlesRepositories/@operationsTitles.257 //@operationsTitlesRepositories/@operationsTitles.258 //@operationsTitlesRepositories/@operationsTitles.259 //@operationsTitlesRepositories/@operationsTitles.260 //@operationsTitlesRepositories/@operationsTitles.267 //@operationsTitlesRepositories/@operationsTitles.293 //@operationsTitlesRepositories/@operationsTitles.294 //@operationsTitlesRepositories/@operationsTitles.295 //@operationsTitlesRepositories/@operationsTitles.296 //@operationsTitlesRepositories/@operationsTitles.297 //@operationsTitlesRepositories/@operationsTitles.298 //@operationsTitlesRepositories/@operationsTitles.299 //@operationsTitlesRepositories/@operationsTitles.300 //@operationsTitlesRepositories/@operationsTitles.301 //@operationsTitlesRepositories/@operationsTitles.302 //@operationsTitlesRepositories/@operationsTitles.303 //@operationsTitlesRepositories/@operationsTitles.304 //@operationsTitlesRepositories/@operationsTitles.311 //@operationsTitlesRepositories/@operationsTitles.337 //@operationsTitlesRepositories/@operationsTitles.338 //@operationsTitlesRepositories/@operationsTitles.339 //@operationsTitlesRepositories/@operationsTitles.340 //@operationsTitlesRepositories/@operationsTitles.341 //@operationsTitlesRepositories/@operationsTitles.342 //@operationsTitlesRepositories/@operationsTitles.343 //@operationsTitlesRepositories/@operationsTitles.344 //@operationsTitlesRepositories/@operationsTitles.345 //@operationsTitlesRepositories/@operationsTitles.346 //@operationsTitlesRepositories/@operationsTitles.347 //@operationsTitlesRepositories/@operationsTitles.348 //@operationsTitlesRepositories/@operationsTitles.355 //@operationsTitlesRepositories/@operationsTitles.381 //@operationsTitlesRepositories/@operationsTitles.382 //@operationsTitlesRepositories/@operationsTitles.383 //@operationsTitlesRepositories/@operationsTitles.384 //@operationsTitlesRepositories/@operationsTitles.385 //@operationsTitlesRepositories/@operationsTitles.386 //@operationsTitlesRepositories/@operationsTitles.387 //@operationsTitlesRepositories/@operationsTitles.388 //@operationsTitlesRepositories/@operationsTitles.389 //@operationsTitlesRepositories/@operationsTitles.390 //@operationsTitlesRepositories/@operationsTitles.391 //@operationsTitlesRepositories/@operationsTitles.392 //@operationsTitlesRepositories/@operationsTitles.399 //@operationsTitlesRepositories/@operationsTitles.425 //@operationsTitlesRepositories/@operationsTitles.426 //@operationsTitlesRepositories/@operationsTitles.427 //@operationsTitlesRepositories/@operationsTitles.428 //@operationsTitlesRepositories/@operationsTitles.429 //@operationsTitlesRepositories/@operationsTitles.430 //@operationsTitlesRepositories/@operationsTitles.431 //@operationsTitlesRepositories/@operationsTitles.432 //@operationsTitlesRepositories/@operationsTitles.433 //@operationsTitlesRepositories/@operationsTitles.434 //@operationsTitlesRepositories/@operationsTitles.435 //@operationsTitlesRepositories/@operationsTitles.436 //@operationsTitlesRepositories/@operationsTitles.443"/>
+      <incomes title="UNDEFINED INCOME" operationTitles="//@operationsTitlesRepositories/@operationsTitles.0 //@operationsTitlesRepositories/@operationsTitles.1 //@operationsTitlesRepositories/@operationsTitles.2 //@operationsTitlesRepositories/@operationsTitles.3 //@operationsTitlesRepositories/@operationsTitles.4 //@operationsTitlesRepositories/@operationsTitles.5 //@operationsTitlesRepositories/@operationsTitles.6 //@operationsTitlesRepositories/@operationsTitles.8"/>
     </income>
     <spending title="depenses">
-      <spendings title="UNDEFINED SPENDING" operationTitles="//@operationsTitlesRepositories/@operationsTitles.41 //@operationsTitlesRepositories/@operationsTitles.42 //@operationsTitlesRepositories/@operationsTitles.43 //@operationsTitlesRepositories/@operationsTitles.44 //@operationsTitlesRepositories/@operationsTitles.45 //@operationsTitlesRepositories/@operationsTitles.46 //@operationsTitlesRepositories/@operationsTitles.48 //@operationsTitlesRepositories/@operationsTitles.49 //@operationsTitlesRepositories/@operationsTitles.50 //@operationsTitlesRepositories/@operationsTitles.51 //@operationsTitlesRepositories/@operationsTitles.52 //@operationsTitlesRepositories/@operationsTitles.53 //@operationsTitlesRepositories/@operationsTitles.54 //@operationsTitlesRepositories/@operationsTitles.55 //@operationsTitlesRepositories/@operationsTitles.56 //@operationsTitlesRepositories/@operationsTitles.57 //@operationsTitlesRepositories/@operationsTitles.58 //@operationsTitlesRepositories/@operationsTitles.59 //@operationsTitlesRepositories/@operationsTitles.60 //@operationsTitlesRepositories/@operationsTitles.61 //@operationsTitlesRepositories/@operationsTitles.62 //@operationsTitlesRepositories/@operationsTitles.63 //@operationsTitlesRepositories/@operationsTitles.64 //@operationsTitlesRepositories/@operationsTitles.65 //@operationsTitlesRepositories/@operationsTitles.66 //@operationsTitlesRepositories/@operationsTitles.67 //@operationsTitlesRepositories/@operationsTitles.68 //@operationsTitlesRepositories/@operationsTitles.69 //@operationsTitlesRepositories/@operationsTitles.70 //@operationsTitlesRepositories/@operationsTitles.71 //@operationsTitlesRepositories/@operationsTitles.72 //@operationsTitlesRepositories/@operationsTitles.85 //@operationsTitlesRepositories/@operationsTitles.86 //@operationsTitlesRepositories/@operationsTitles.87 //@operationsTitlesRepositories/@operationsTitles.88 //@operationsTitlesRepositories/@operationsTitles.89 //@operationsTitlesRepositories/@operationsTitles.90 //@operationsTitlesRepositories/@operationsTitles.92 //@operationsTitlesRepositories/@operationsTitles.93 //@operationsTitlesRepositories/@operationsTitles.94 //@operationsTitlesRepositories/@operationsTitles.95 //@operationsTitlesRepositories/@operationsTitles.96 //@operationsTitlesRepositories/@operationsTitles.97 //@operationsTitlesRepositories/@operationsTitles.98 //@operationsTitlesRepositories/@operationsTitles.99 //@operationsTitlesRepositories/@operationsTitles.100 //@operationsTitlesRepositories/@operationsTitles.101 //@operationsTitlesRepositories/@operationsTitles.102 //@operationsTitlesRepositories/@operationsTitles.103 //@operationsTitlesRepositories/@operationsTitles.104 //@operationsTitlesRepositories/@operationsTitles.105 //@operationsTitlesRepositories/@operationsTitles.106 //@operationsTitlesRepositories/@operationsTitles.107 //@operationsTitlesRepositories/@operationsTitles.108 //@operationsTitlesRepositories/@operationsTitles.109 //@operationsTitlesRepositories/@operationsTitles.110 //@operationsTitlesRepositories/@operationsTitles.111 //@operationsTitlesRepositories/@operationsTitles.112 //@operationsTitlesRepositories/@operationsTitles.113 //@operationsTitlesRepositories/@operationsTitles.114 //@operationsTitlesRepositories/@operationsTitles.115 //@operationsTitlesRepositories/@operationsTitles.116 //@operationsTitlesRepositories/@operationsTitles.129 //@operationsTitlesRepositories/@operationsTitles.130 //@operationsTitlesRepositories/@operationsTitles.131 //@operationsTitlesRepositories/@operationsTitles.132 //@operationsTitlesRepositories/@operationsTitles.133 //@operationsTitlesRepositories/@operationsTitles.134 //@operationsTitlesRepositories/@operationsTitles.136 //@operationsTitlesRepositories/@operationsTitles.137 //@operationsTitlesRepositories/@operationsTitles.138 //@operationsTitlesRepositories/@operationsTitles.139 //@operationsTitlesRepositories/@operationsTitles.140 //@operationsTitlesRepositories/@operationsTitles.141 //@operationsTitlesRepositories/@operationsTitles.142 //@operationsTitlesRepositories/@operationsTitles.143 //@operationsTitlesRepositories/@operationsTitles.144 //@operationsTitlesRepositories/@operationsTitles.145 //@operationsTitlesRepositories/@operationsTitles.146 //@operationsTitlesRepositories/@operationsTitles.147 //@operationsTitlesRepositories/@operationsTitles.148 //@operationsTitlesRepositories/@operationsTitles.149 //@operationsTitlesRepositories/@operationsTitles.150 //@operationsTitlesRepositories/@operationsTitles.151 //@operationsTitlesRepositories/@operationsTitles.152 //@operationsTitlesRepositories/@operationsTitles.153 //@operationsTitlesRepositories/@operationsTitles.154 //@operationsTitlesRepositories/@operationsTitles.155 //@operationsTitlesRepositories/@operationsTitles.156 //@operationsTitlesRepositories/@operationsTitles.157 //@operationsTitlesRepositories/@operationsTitles.158 //@operationsTitlesRepositories/@operationsTitles.159 //@operationsTitlesRepositories/@operationsTitles.160 //@operationsTitlesRepositories/@operationsTitles.173 //@operationsTitlesRepositories/@operationsTitles.174 //@operationsTitlesRepositories/@operationsTitles.175 //@operationsTitlesRepositories/@operationsTitles.176 //@operationsTitlesRepositories/@operationsTitles.177 //@operationsTitlesRepositories/@operationsTitles.178 //@operationsTitlesRepositories/@operationsTitles.180 //@operationsTitlesRepositories/@operationsTitles.181 //@operationsTitlesRepositories/@operationsTitles.182 //@operationsTitlesRepositories/@operationsTitles.183 //@operationsTitlesRepositories/@operationsTitles.184 //@operationsTitlesRepositories/@operationsTitles.185 //@operationsTitlesRepositories/@operationsTitles.186 //@operationsTitlesRepositories/@operationsTitles.187 //@operationsTitlesRepositories/@operationsTitles.188 //@operationsTitlesRepositories/@operationsTitles.189 //@operationsTitlesRepositories/@operationsTitles.190 //@operationsTitlesRepositories/@operationsTitles.191 //@operationsTitlesRepositories/@operationsTitles.192 //@operationsTitlesRepositories/@operationsTitles.193 //@operationsTitlesRepositories/@operationsTitles.194 //@operationsTitlesRepositories/@operationsTitles.195 //@operationsTitlesRepositories/@operationsTitles.196 //@operationsTitlesRepositories/@operationsTitles.197 //@operationsTitlesRepositories/@operationsTitles.198 //@operationsTitlesRepositories/@operationsTitles.199 //@operationsTitlesRepositories/@operationsTitles.200 //@operationsTitlesRepositories/@operationsTitles.201 //@operationsTitlesRepositories/@operationsTitles.202 //@operationsTitlesRepositories/@operationsTitles.203 //@operationsTitlesRepositories/@operationsTitles.204 //@operationsTitlesRepositories/@operationsTitles.217 //@operationsTitlesRepositories/@operationsTitles.218 //@operationsTitlesRepositories/@operationsTitles.219 //@operationsTitlesRepositories/@operationsTitles.220 //@operationsTitlesRepositories/@operationsTitles.221 //@operationsTitlesRepositories/@operationsTitles.222 //@operationsTitlesRepositories/@operationsTitles.224 //@operationsTitlesRepositories/@operationsTitles.225 //@operationsTitlesRepositories/@operationsTitles.226 //@operationsTitlesRepositories/@operationsTitles.227 //@operationsTitlesRepositories/@operationsTitles.228 //@operationsTitlesRepositories/@operationsTitles.229 //@operationsTitlesRepositories/@operationsTitles.230 //@operationsTitlesRepositories/@operationsTitles.231 //@operationsTitlesRepositories/@operationsTitles.232 //@operationsTitlesRepositories/@operationsTitles.233 //@operationsTitlesRepositories/@operationsTitles.234 //@operationsTitlesRepositories/@operationsTitles.235 //@operationsTitlesRepositories/@operationsTitles.236 //@operationsTitlesRepositories/@operationsTitles.237 //@operationsTitlesRepositories/@operationsTitles.238 //@operationsTitlesRepositories/@operationsTitles.239 //@operationsTitlesRepositories/@operationsTitles.240 //@operationsTitlesRepositories/@operationsTitles.241 //@operationsTitlesRepositories/@operationsTitles.242 //@operationsTitlesRepositories/@operationsTitles.243 //@operationsTitlesRepositories/@operationsTitles.244 //@operationsTitlesRepositories/@operationsTitles.245 //@operationsTitlesRepositories/@operationsTitles.246 //@operationsTitlesRepositories/@operationsTitles.247 //@operationsTitlesRepositories/@operationsTitles.248 //@operationsTitlesRepositories/@operationsTitles.261 //@operationsTitlesRepositories/@operationsTitles.262 //@operationsTitlesRepositories/@operationsTitles.263 //@operationsTitlesRepositories/@operationsTitles.264 //@operationsTitlesRepositories/@operationsTitles.265 //@operationsTitlesRepositories/@operationsTitles.266 //@operationsTitlesRepositories/@operationsTitles.268 //@operationsTitlesRepositories/@operationsTitles.269 //@operationsTitlesRepositories/@operationsTitles.270 //@operationsTitlesRepositories/@operationsTitles.271 //@operationsTitlesRepositories/@operationsTitles.272 //@operationsTitlesRepositories/@operationsTitles.273 //@operationsTitlesRepositories/@operationsTitles.274 //@operationsTitlesRepositories/@operationsTitles.275 //@operationsTitlesRepositories/@operationsTitles.276 //@operationsTitlesRepositories/@operationsTitles.277 //@operationsTitlesRepositories/@operationsTitles.278 //@operationsTitlesRepositories/@operationsTitles.279 //@operationsTitlesRepositories/@operationsTitles.280 //@operationsTitlesRepositories/@operationsTitles.281 //@operationsTitlesRepositories/@operationsTitles.282 //@operationsTitlesRepositories/@operationsTitles.283 //@operationsTitlesRepositories/@operationsTitles.284 //@operationsTitlesRepositories/@operationsTitles.285 //@operationsTitlesRepositories/@operationsTitles.286 //@operationsTitlesRepositories/@operationsTitles.287 //@operationsTitlesRepositories/@operationsTitles.288 //@operationsTitlesRepositories/@operationsTitles.289 //@operationsTitlesRepositories/@operationsTitles.290 //@operationsTitlesRepositories/@operationsTitles.291 //@operationsTitlesRepositories/@operationsTitles.292 //@operationsTitlesRepositories/@operationsTitles.305 //@operationsTitlesRepositories/@operationsTitles.306 //@operationsTitlesRepositories/@operationsTitles.307 //@operationsTitlesRepositories/@operationsTitles.308 //@operationsTitlesRepositories/@operationsTitles.309 //@operationsTitlesRepositories/@operationsTitles.310 //@operationsTitlesRepositories/@operationsTitles.312 //@operationsTitlesRepositories/@operationsTitles.313 //@operationsTitlesRepositories/@operationsTitles.314 //@operationsTitlesRepositories/@operationsTitles.315 //@operationsTitlesRepositories/@operationsTitles.316 //@operationsTitlesRepositories/@operationsTitles.317 //@operationsTitlesRepositories/@operationsTitles.318 //@operationsTitlesRepositories/@operationsTitles.319 //@operationsTitlesRepositories/@operationsTitles.320 //@operationsTitlesRepositories/@operationsTitles.321 //@operationsTitlesRepositories/@operationsTitles.322 //@operationsTitlesRepositories/@operationsTitles.323 //@operationsTitlesRepositories/@operationsTitles.324 //@operationsTitlesRepositories/@operationsTitles.325 //@operationsTitlesRepositories/@operationsTitles.326 //@operationsTitlesRepositories/@operationsTitles.327 //@operationsTitlesRepositories/@operationsTitles.328 //@operationsTitlesRepositories/@operationsTitles.329 //@operationsTitlesRepositories/@operationsTitles.330 //@operationsTitlesRepositories/@operationsTitles.331 //@operationsTitlesRepositories/@operationsTitles.332 //@operationsTitlesRepositories/@operationsTitles.333 //@operationsTitlesRepositories/@operationsTitles.334 //@operationsTitlesRepositories/@operationsTitles.335 //@operationsTitlesRepositories/@operationsTitles.336 //@operationsTitlesRepositories/@operationsTitles.349 //@operationsTitlesRepositories/@operationsTitles.350 //@operationsTitlesRepositories/@operationsTitles.351 //@operationsTitlesRepositories/@operationsTitles.352 //@operationsTitlesRepositories/@operationsTitles.353 //@operationsTitlesRepositories/@operationsTitles.354 //@operationsTitlesRepositories/@operationsTitles.356 //@operationsTitlesRepositories/@operationsTitles.357 //@operationsTitlesRepositories/@operationsTitles.358 //@operationsTitlesRepositories/@operationsTitles.359 //@operationsTitlesRepositories/@operationsTitles.360 //@operationsTitlesRepositories/@operationsTitles.361 //@operationsTitlesRepositories/@operationsTitles.362 //@operationsTitlesRepositories/@operationsTitles.363 //@operationsTitlesRepositories/@operationsTitles.364 //@operationsTitlesRepositories/@operationsTitles.365 //@operationsTitlesRepositories/@operationsTitles.366 //@operationsTitlesRepositories/@operationsTitles.367 //@operationsTitlesRepositories/@operationsTitles.368 //@operationsTitlesRepositories/@operationsTitles.369 //@operationsTitlesRepositories/@operationsTitles.370 //@operationsTitlesRepositories/@operationsTitles.371 //@operationsTitlesRepositories/@operationsTitles.372 //@operationsTitlesRepositories/@operationsTitles.373 //@operationsTitlesRepositories/@operationsTitles.374 //@operationsTitlesRepositories/@operationsTitles.375 //@operationsTitlesRepositories/@operationsTitles.376 //@operationsTitlesRepositories/@operationsTitles.377 //@operationsTitlesRepositories/@operationsTitles.378 //@operationsTitlesRepositories/@operationsTitles.379 //@operationsTitlesRepositories/@operationsTitles.380 //@operationsTitlesRepositories/@operationsTitles.393 //@operationsTitlesRepositories/@operationsTitles.394 //@operationsTitlesRepositories/@operationsTitles.395 //@operationsTitlesRepositories/@operationsTitles.396 //@operationsTitlesRepositories/@operationsTitles.397 //@operationsTitlesRepositories/@operationsTitles.398 //@operationsTitlesRepositories/@operationsTitles.400 //@operationsTitlesRepositories/@operationsTitles.401 //@operationsTitlesRepositories/@operationsTitles.402 //@operationsTitlesRepositories/@operationsTitles.403 //@operationsTitlesRepositories/@operationsTitles.404 //@operationsTitlesRepositories/@operationsTitles.405 //@operationsTitlesRepositories/@operationsTitles.406 //@operationsTitlesRepositories/@operationsTitles.407 //@operationsTitlesRepositories/@operationsTitles.408 //@operationsTitlesRepositories/@operationsTitles.409 //@operationsTitlesRepositories/@operationsTitles.410 //@operationsTitlesRepositories/@operationsTitles.411 //@operationsTitlesRepositories/@operationsTitles.412 //@operationsTitlesRepositories/@operationsTitles.413 //@operationsTitlesRepositories/@operationsTitles.414 //@operationsTitlesRepositories/@operationsTitles.415 //@operationsTitlesRepositories/@operationsTitles.416 //@operationsTitlesRepositories/@operationsTitles.417 //@operationsTitlesRepositories/@operationsTitles.418 //@operationsTitlesRepositories/@operationsTitles.419 //@operationsTitlesRepositories/@operationsTitles.420 //@operationsTitlesRepositories/@operationsTitles.421 //@operationsTitlesRepositories/@operationsTitles.422 //@operationsTitlesRepositories/@operationsTitles.423 //@operationsTitlesRepositories/@operationsTitles.424 //@operationsTitlesRepositories/@operationsTitles.437 //@operationsTitlesRepositories/@operationsTitles.438 //@operationsTitlesRepositories/@operationsTitles.439 //@operationsTitlesRepositories/@operationsTitles.440 //@operationsTitlesRepositories/@operationsTitles.441 //@operationsTitlesRepositories/@operationsTitles.442 //@operationsTitlesRepositories/@operationsTitles.444 //@operationsTitlesRepositories/@operationsTitles.445 //@operationsTitlesRepositories/@operationsTitles.446 //@operationsTitlesRepositories/@operationsTitles.447 //@operationsTitlesRepositories/@operationsTitles.448 //@operationsTitlesRepositories/@operationsTitles.449 //@operationsTitlesRepositories/@operationsTitles.450 //@operationsTitlesRepositories/@operationsTitles.451 //@operationsTitlesRepositories/@operationsTitles.452 //@operationsTitlesRepositories/@operationsTitles.453 //@operationsTitlesRepositories/@operationsTitles.454 //@operationsTitlesRepositories/@operationsTitles.455 //@operationsTitlesRepositories/@operationsTitles.456 //@operationsTitlesRepositories/@operationsTitles.457 //@operationsTitlesRepositories/@operationsTitles.458 //@operationsTitlesRepositories/@operationsTitles.459 //@operationsTitlesRepositories/@operationsTitles.460 //@operationsTitlesRepositories/@operationsTitles.461 //@operationsTitlesRepositories/@operationsTitles.462 //@operationsTitlesRepositories/@operationsTitles.463 //@operationsTitlesRepositories/@operationsTitles.464 //@operationsTitlesRepositories/@operationsTitles.465 //@operationsTitlesRepositories/@operationsTitles.466 //@operationsTitlesRepositories/@operationsTitles.467 //@operationsTitlesRepositories/@operationsTitles.468"/>
+      <spendings title="UNDEFINED SPENDING" operationTitles="//@operationsTitlesRepositories/@operationsTitles.7 //@operationsTitlesRepositories/@operationsTitles.9 //@operationsTitlesRepositories/@operationsTitles.10 //@operationsTitlesRepositories/@operationsTitles.11 //@operationsTitlesRepositories/@operationsTitles.12 //@operationsTitlesRepositories/@operationsTitles.13 //@operationsTitlesRepositories/@operationsTitles.14 //@operationsTitlesRepositories/@operationsTitles.15 //@operationsTitlesRepositories/@operationsTitles.16 //@operationsTitlesRepositories/@operationsTitles.17 //@operationsTitlesRepositories/@operationsTitles.18 //@operationsTitlesRepositories/@operationsTitles.19 //@operationsTitlesRepositories/@operationsTitles.20 //@operationsTitlesRepositories/@operationsTitles.21 //@operationsTitlesRepositories/@operationsTitles.22 //@operationsTitlesRepositories/@operationsTitles.23 //@operationsTitlesRepositories/@operationsTitles.24 //@operationsTitlesRepositories/@operationsTitles.25 //@operationsTitlesRepositories/@operationsTitles.26 //@operationsTitlesRepositories/@operationsTitles.27 //@operationsTitlesRepositories/@operationsTitles.28"/>
     </spending>
   </categoriesRepository>
   <operationsTitlesRepositories>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL "/>
-    <operationsTitles title="VIR SEPA CPAM "/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES "/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL "/>
-    <operationsTitles title="VIR SEPA OBNA "/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH "/>
-    <operationsTitles title="VIR SEPA SERVICES SAS "/>
-    <operationsTitles title="CHEQUE"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE "/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE "/>
-    <operationsTitles title="CB WEEKENDESK.FR"/>
-    <operationsTitles title="CB HOP"/>
-    <operationsTitles title="CB EASYJET ENH"/>
-    <operationsTitles title="CB P TITS DELICES"/>
-    <operationsTitles title="CB STYL'FLEURS"/>
-    <operationsTitles title="CB EURL HAREL"/>
-    <operationsTitles title="CB DR BERTHELIN"/>
-    <operationsTitles title="CB PEAGE PT DE RE"/>
-    <operationsTitles title="CB ANTOINE TAXI"/>
-    <operationsTitles title="CB EUREKA INN"/>
-    <operationsTitles title="CB ANTO TAXI"/>
-    <operationsTitles title="CB INTERMARCHE"/>
-    <operationsTitles title="CB YVES ROCHER"/>
-    <operationsTitles title="CB PARECOIF"/>
-    <operationsTitles title="CB GUILLOU FRANCOI"/>
-    <operationsTitles title="CB BATA FRANCE"/>
-    <operationsTitles title="CB CAFE DE LA"/>
-    <operationsTitles title="CB THY - WWW.THY.C"/>
-    <operationsTitles title="CB SNCF INTERNET"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
     <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
@@ -204,8 +165,6 @@
     <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
@@ -214,409 +173,10 @@
     <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
     <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA BPCE ASSURANCES " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA CPAM LOIRE-ATL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HIGH CO DATA SAS HIGH " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA HUMA PREV PREST PL " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA SERVICES SAS " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="VIR SEPA OBNA " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CHEQUE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="* REMISE SERVICES BOUQUET LIBE " categories="//@categoriesRepository/@income/@incomes.0"/>
-    <operationsTitles title="* COTISATION BOUQUET LIBERTE " categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB WEEKENDESK.FR" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB HOP" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EASYJET ENH" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB STYL'FLEURS" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EURL HAREL" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB DR BERTHELIN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PEAGE PT DE RE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTOINE TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB EUREKA INN" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB ANTO TAXI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB YVES ROCHER" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB PARECOIF" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB GUILLOU FRANCOI" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB BATA FRANCE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB CAFE DE LA" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB THY - WWW.THY.C" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB SNCF INTERNET" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB INTERMARCHE" categories="//@categoriesRepository/@spending/@spendings.0"/>
-    <operationsTitles title="CB P TITS DELICES" categories="//@categoriesRepository/@spending/@spendings.0"/>
   </operationsTitlesRepositories>
 </tracker:Tracker>

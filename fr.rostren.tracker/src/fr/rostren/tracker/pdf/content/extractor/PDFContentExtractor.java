@@ -91,7 +91,7 @@ public class PDFContentExtractor {
 			}
 			else {
 				String uri=selectedFileURI.toFileString();
-				operations.addAll(extractOperations(uri, selectedFileURI.lastSegment(), monitor));
+				operations.addAll(extractOperations(uri, uri, monitor));
 			}
 		}
 		return operations;
@@ -127,9 +127,9 @@ public class PDFContentExtractor {
 			Tracker tracker=TrackerUtils.getTracker(account);
 			int numberOfPages=reader.getNumberOfPages();
 			for (int i=0; i < numberOfPages; i++) {
-				String originId=src + "_page_" + (i + 1);//$NON-NLS-1$
+				String originId=fileName + "_page_" + (i + 1);//$NON-NLS-1$
 				if (!isAlreadyParsed(tracker, originId)) {
-					Origin origin=createLinkedOrigin(tracker, originId);
+					Origin origin=createLinkedOrigin(originId);
 					String page=PdfTextExtractor.getTextFromPage(reader, i + 1);
 
 					String[] lines=page.split("\n"); //$NON-NLS-1$
@@ -145,9 +145,8 @@ public class PDFContentExtractor {
 								monitor.worked(1);
 							});
 				}
-				System.out.println("page parsed " + i); //$NON-NLS-1$
 			}
-			alreadyParsedFiles.add(src);
+			alreadyParsedFiles.add(fileName);
 			monitor.done();
 		}
 		catch (IOException exception) {
@@ -176,17 +175,14 @@ public class PDFContentExtractor {
 	/**
 	 * Create an origin for operations.
 	 *
-	 * @param tracker
-	 *            the current tracker model root
 	 * @param originIdentifier
 	 *            the pdf origin identifier
 	 * @return the created origin
 	 */
-	private Origin createLinkedOrigin(Tracker tracker, String originIdentifier) {
+	private Origin createLinkedOrigin(String originIdentifier) {
 		Origin origin=TrackerFactory.eINSTANCE.createOrigin();
 		origin.setIdentifier(originIdentifier);
 		origin.setType(OriginType.PDF_FILE);
-		tracker.getOriginsRepository().getOrigins().add(origin);
 		return origin;
 	}
 

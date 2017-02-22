@@ -72,6 +72,19 @@ public class TrackerUtils {
 	}
 
 	/**
+	 * @param tracker the tracker
+	 * @return the categories repository if any, a new one otherwise.
+	 */
+	public static CategoriesRepository getCategoriesRepository(Tracker tracker) {
+		CategoriesRepository repository=tracker.getCategoriesRepository();
+		if (repository == null) {
+			repository=TrackerFactory.eINSTANCE.createCategoriesRepository();
+			tracker.setCategoriesRepository(repository);
+		}
+		return repository;
+	}
+
+	/**
 	 * Returns the operations titles
 	 * @param tracker the {@link Tracker} instance
 	 * @return the operations titles list

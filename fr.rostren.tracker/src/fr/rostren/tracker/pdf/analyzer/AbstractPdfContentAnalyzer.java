@@ -72,9 +72,7 @@ public abstract class AbstractPdfContentAnalyzer {
 		if (!isCompleted()) {
 			return null;
 		}
-		LineContent currentLineContent=getLineContent(origin);
-		reset();
-		return currentLineContent;
+		return getLineContent(origin);
 	}
 
 	/**
@@ -83,27 +81,29 @@ public abstract class AbstractPdfContentAnalyzer {
 	 * @return the {@link LineContent} instance
 	 */
 	private LineContent getLineContent(Origin origin) {
+		LineContent lineContent=null;
 		if (lastToken != null && PdfToken.VIR_RECU.equals(lastToken) || PdfToken.OPERATIONS_DEPOT.equals(lastToken)) {
-			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
+			lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
 		}
 		else if (lastToken != null && PdfToken.PAIE_CHEQUE.equals(lastToken)	|| PdfToken.PAIEMENTS_CARTES.equals(lastToken) || PdfToken.PRELEVEMENTS.equals(lastToken)
 					|| PdfToken.RETRAITS_CARTES.equals(lastToken) || PdfToken.OPERATIONS_DIVERSES.equals(lastToken)) {
-			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
+			lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
 		}
 		else if (lastToken != null && PdfToken.FRAIS_BANCAIRES.equals(lastToken)) {
 			if (lastPotentialOperationTitle.contains("REMISE") //$NON-NLS-1$
 				|| lastPotentialOperationTitle.contains("INTERETS")) { //$NON-NLS-1$
 				// REMISE(C), INTERETS(C)
-				return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
+				lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
 			}
 			// COTISATION(D), FRAIS(D)
-			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
+			lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
 		}
 		else if (lastToken != null && PdfToken.DATE.equals(lastToken)) {
 			//in this case the operation type is not defined
-			return new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.UNDEFINED, origin);
+			lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.UNDEFINED, origin);
 		}
-		return null;
+		reset();
+		return lineContent;
 	}
 
 	/**

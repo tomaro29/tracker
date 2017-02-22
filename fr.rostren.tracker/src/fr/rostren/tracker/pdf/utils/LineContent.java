@@ -145,7 +145,7 @@ public class LineContent {
 	 * @return the newly created category
 	 */
 	private Category createNewCategory(OperationTitle newTitle, Tracker tracker) {
-		CategoriesRepository categoriesRepository=getCategoriesRepository(tracker);
+		CategoriesRepository categoriesRepository=TrackerUtils.getCategoriesRepository(tracker);
 		if (OperationType.CREDIT.equals(operation.getType())) {
 			Category undefined=getUndefinedIncomeCategory(categoriesRepository);
 			List<IncomeCategory> incomes=categoriesRepository.getIncome().getIncomes();
@@ -178,19 +178,6 @@ public class LineContent {
 		newTitle.setTitle(title);
 		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
 		return newTitle;
-	}
-
-	/**
-	 * @param tracker the tracker
-	 * @return the categories repository if any, a new one otherwise.
-	 */
-	private CategoriesRepository getCategoriesRepository(Tracker tracker) {
-		CategoriesRepository repository=tracker.getCategoriesRepository();
-		if (repository == null) {
-			repository=TrackerFactory.eINSTANCE.createCategoriesRepository();
-			tracker.setCategoriesRepository(repository);
-		}
-		return repository;
 	}
 
 	/**

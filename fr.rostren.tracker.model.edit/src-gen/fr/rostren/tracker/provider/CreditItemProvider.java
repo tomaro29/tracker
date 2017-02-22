@@ -68,16 +68,18 @@ public class CreditItemProvider extends OperationItemProvider {
 	public String getText(Object object) {
 		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Operation)object));
 		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Operation)object));
-		String operationDate=TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(), ((Operation)object).getDate());
+		String operationDate=((Operation)object).getDate() == null	? null
+																	: TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(),
+																			((Operation)object).getDate());
 
 		if (operationTitle == null) {
 			return "New " + getString("_UI_CreditOperation_type");
 		}
 		else if (operationTitle.length() == 0) {
-			return getString("_UI_CreditOperation_type") + operationDate + " --> Undefined Operation Title = " + operationAmount + " euros";
+			return getString("_UI_Credit_type") + ": " + operationDate + " --> Undefined Operation Title = " + operationAmount + " euros";
 		}
 		else {
-			return getString("_UI_CreditOperation_type") + operationDate + " --> " + operationTitle + " = " + operationAmount + " euros";
+			return getString("_UI_Credit_type") + ": " + operationDate + " --> " + operationTitle + " = " + operationAmount + " euros";
 		}
 	}
 

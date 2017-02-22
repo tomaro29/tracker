@@ -21,7 +21,6 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 
 /**
@@ -95,8 +94,6 @@ public class OperationItemProvider extends ItemProviderAdapter
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.OPERATION__OPERATION_TITLE);
-			childrenFeatures.add(TrackerPackage.Literals.OPERATION__SUB_AMOUNTS);
 		}
 		return childrenFeatures;
 	}
@@ -160,10 +157,6 @@ public class OperationItemProvider extends ItemProviderAdapter
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.OPERATION__OPERATION_TITLE, TrackerFactory.eINSTANCE.createOperationTitle()));
-
-		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.OPERATION__SUB_AMOUNTS, TrackerFactory.eINSTANCE.createAmount()));
 	}
 
 	/**

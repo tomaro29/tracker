@@ -8,11 +8,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.Incoming;
+import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Outgoing;
+import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
@@ -26,6 +33,7 @@ import fr.rostren.tracker.provider.BoockletAccountItemProvider;
  * @generated
  */
 public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider {
+	private static OperationTitle defaultOperationTitle;
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -51,22 +59,16 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		// create newIncoming
-		Incoming newIncoming=createNewIncoming();
-
-		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newIncoming));
-
-		// create newOutgoing
-		Outgoing newOutgoing=createNewOutgoing();
-
-		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newOutgoing));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, createNewIncoming(object)));
+		newChildDescriptors.add(createChildParameter(TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, createNewOutgoing(object)));
 	}
 
 	/**
 	 * Creates a new {@link Incoming} instance
+	 * @param object the given account
 	 * @return the created {@link Incoming} instance
 	 */
-	private Incoming createNewIncoming() {
+	private Incoming createNewIncoming(Object object) {
 		Incoming newIncoming=TrackerFactory.eINSTANCE.createIncoming();
 		// Add a default sub amount
 		List<Amount> amounts=newIncoming.getSubAmounts();
@@ -77,16 +79,16 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 		}
 
 		// Add a default operation title
-		OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
-		newIncoming.setOperationTitle(operationTitle);
+		addOperationTitle(object, newIncoming);
 		return newIncoming;
 	}
 
 	/**
 	 * Creates a new {@link Outgoing} instance
+	 * @param object the given account
 	 * @return the created {@link Outgoing} instance
 	 */
-	private Outgoing createNewOutgoing() {
+	private Outgoing createNewOutgoing(Object object) {
 		Outgoing newOutgoing=TrackerFactory.eINSTANCE.createOutgoing();
 		// Add a default sub amount
 		List<Amount> amounts=newOutgoing.getSubAmounts();
@@ -95,10 +97,39 @@ public class BoockletAccountItemProviderDev extends BoockletAccountItemProvider 
 			Amount amount=TrackerFactory.eINSTANCE.createAmount();
 			amounts.add(amount);
 		}
+		// Add a default operation title
+		addOperationTitle(object, newOutgoing);
+		return newOutgoing;
+	}
+
+	/**
+	 * Adds an {@link OperationTitle} instance to the given operation
+	 * @param object the given account
+	 * @param operation the given operation
+	 */
+	private void addOperationTitle(Object object, Operation operation) {
+		if (!(object instanceof BoockletAccount)) {
+			return;
+		}
+		EObject rootContainer=EcoreUtil.getRootContainer((BoockletAccount)object);
+		if (!(rootContainer instanceof Tracker)) {
+			return;
+		}
 
 		// Add a default operation title
-		OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
-		newOutgoing.setOperationTitle(operationTitle);
-		return newOutgoing;
+		OperationsTitleRepository repository=((Tracker)rootContainer).getOperationsTitlesRepositories();
+		if (repository == null) {
+			return;
+		}
+
+		EList<OperationTitle> operationsTitles=repository.getOperationsTitles();
+		if (!operationsTitles.isEmpty()) {
+			for (OperationTitle operationTitle: operationsTitles) {
+				if (operationTitle.getTitle() == null) {
+					BoockletAccountItemProviderDev.defaultOperationTitle=operationTitle;
+				}
+			}
+		}
+		operation.setOperationTitle(BoockletAccountItemProviderDev.defaultOperationTitle);
 	}
 }

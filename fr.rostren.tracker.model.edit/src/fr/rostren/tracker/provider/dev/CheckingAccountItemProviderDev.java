@@ -79,6 +79,7 @@ public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider 
 			amounts.add(amount);
 		}
 
+		// Add a default operation title
 		addOperationTitle(object, operation);
 		return operation;
 	}

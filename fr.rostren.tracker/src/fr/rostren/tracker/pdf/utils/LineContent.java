@@ -111,25 +111,8 @@ public class LineContent {
 		operation.setOperationTitle(getLinkedOperationTitle());
 
 		// Adds the total amount as a subAmount to the operation
-		Amount newAmountObject=createCategoryAmount(operation.getTotalAmount(), getLinkedCategory());
+		Amount newAmountObject=TrackerUtils.createAmount(operation, operation.getTotalAmount(), getLinkedCategory());
 		operation.getSubAmounts().add(newAmountObject);
-	}
-
-	/**
-	 * Creates an amount
-	 *
-	 * @param amount
-	 *            amount to create
-	 * @param linkedCategory
-	 *            the linked category
-	 * @return the created amount
-	 */
-	private Amount createCategoryAmount(double amount, Category linkedCategory) {
-		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
-		amountObject.setValue(amount);
-		amountObject.setCategory(linkedCategory);
-		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
-		return amountObject;
 	}
 
 	/**

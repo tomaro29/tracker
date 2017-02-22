@@ -61,7 +61,7 @@ public class OutgoingItemProviderDev extends OutgoingItemProvider {
 			subAmount.setValue(newTotalAmount);
 		}
 		else {
-			// TODO Afficher un message de warning pour mettre � jour les
+			// TODO Afficher un message de warning pour mettre  a jour les
 			// subAmounts
 		}
 

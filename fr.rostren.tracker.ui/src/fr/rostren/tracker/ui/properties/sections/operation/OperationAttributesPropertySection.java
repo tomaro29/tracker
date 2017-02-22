@@ -50,7 +50,6 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		dateTime=createDateTime(body, titleCombo, "Date:"); //$NON-NLS-1$
 		originCombo=createLabeledCombo(body, dateTime, "Origin:"); //$NON-NLS-1$
 		totalAmount=createLabeledText(body, originCombo, "Total Amount:"); //$NON-NLS-1$
-		totalAmount.setEnabled(false);
 		addListeners();
 	}
 
@@ -87,6 +86,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		titleCombo.addModifyListener(listener);
 		dateTime.addSelectionListener(datelistener);
 		originCombo.addModifyListener(listener);
+		totalAmount.addModifyListener(listener);
 	}
 
 	@Override
@@ -94,6 +94,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 		titleCombo.removeModifyListener(listener);
 		dateTime.removeSelectionListener(datelistener);
 		originCombo.removeModifyListener(listener);
+		totalAmount.removeModifyListener(listener);
 	}
 
 	/**
@@ -110,6 +111,13 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	 */
 	public CCombo getOriginCombo() {
 		return originCombo;
+	}
+
+	/**
+	 * @return the totalAmount
+	 */
+	public Text getTotalAmountText() {
+		return totalAmount;
 	}
 
 	/**

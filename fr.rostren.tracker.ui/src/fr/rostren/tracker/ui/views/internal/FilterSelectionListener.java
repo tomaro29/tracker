@@ -29,6 +29,17 @@ public class FilterSelectionListener implements SelectionListener {
 		this.view=view;
 	}
 
+	/**
+	 * Constructor.
+	 * @param view the related histogram view
+	 */
+	public FilterSelectionListener(TrackerHistogramView view) {
+		this.view=view;
+		otherButton=null;
+		attachedCombo=null;
+		otherCombo=null;
+	}
+
 	@Override
 	public void widgetDefaultSelected(SelectionEvent event) {
 		//Do Nothing
@@ -36,15 +47,17 @@ public class FilterSelectionListener implements SelectionListener {
 
 	@Override
 	public void widgetSelected(SelectionEvent event) {
-		Object source=event.getSource();
-		Assert.isTrue(source instanceof Button);
+		if (otherButton != null && attachedCombo != null) {
+			Object source=event.getSource();
+			Assert.isTrue(source instanceof Button);
 
-		Button button=(Button)source;
-		otherButton.setSelection(!button.getSelection());
-		otherCombo.setEnabled(!button.getSelection());
-		attachedCombo.setEnabled(button.getSelection());
+			Button button=(Button)source;
+			otherButton.setSelection(!button.getSelection());
+			otherCombo.setEnabled(!button.getSelection());
+			attachedCombo.setEnabled(button.getSelection());
+		}
 
 		//refresh the histogram population according to selection
-		view.populateHistogram();
+		view.refresh();
 	}
 }

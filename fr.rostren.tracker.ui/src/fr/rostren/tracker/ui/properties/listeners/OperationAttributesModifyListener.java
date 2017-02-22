@@ -2,8 +2,10 @@ package fr.rostren.tracker.ui.properties.listeners;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
+import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
@@ -30,14 +32,28 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 		EObject eObject=section.getCurrentEObject();
 		CCombo titleCombo=section.getTitleCombo();
 		CCombo originCombo=section.getOriginCombo();
+		Text totalAmountText=section.getTotalAmountText();
 
+		Operation operation=(Operation)eObject;
 		if (widget.equals(titleCombo)) {
-			OperationTitle title=TrackerUtils.findOperationTitle((Operation)eObject, titleCombo.getText()).orElseThrow(IllegalArgumentException::new);
-			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
+			OperationTitle title=TrackerUtils.findOperationTitle(operation, titleCombo.getText()).orElseThrow(IllegalArgumentException::new);
+			DomainUtils.executeSetCommand(operation, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
 		}
 		if (widget.equals(originCombo)) {
-			Origin origin=TrackerUtils.findOperationOrigin((Operation)eObject, originCombo.getText()).orElseThrow(IllegalArgumentException::new);
-			DomainUtils.executeSetCommand(eObject, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
+			Origin origin=TrackerUtils.findOperationOrigin(operation, originCombo.getText()).orElseThrow(IllegalArgumentException::new);
+			DomainUtils.executeSetCommand(operation, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
+		}
+		if (widget.equals(totalAmountText)) {
+			double amount=Double.parseDouble(totalAmountText.getText());
+			DomainUtils.executeSetCommand(operation, TrackerPackage.Literals.OPERATION__TOTAL_AMOUNT, amount);
+			if (operation.getSubAmounts().isEmpty()) {
+				Amount newAmount=TrackerUtils.createAmount(operation, amount, null);
+				DomainUtils.executeAddCommand(operation, TrackerPackage.Literals.OPERATION__SUB_AMOUNTS, newAmount);
+			}
+			if (operation.getSubAmounts().size() == 1) {
+				Amount subAmount=operation.getSubAmounts().get(0);
+				DomainUtils.executeSetCommand(subAmount, TrackerPackage.Literals.AMOUNT__VALUE, amount);
+			}
 		}
 	}
 }

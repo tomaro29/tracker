@@ -10,6 +10,8 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
 import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
@@ -64,14 +66,14 @@ public class OutgoingItemProvider extends TransferItemProvider {
 	public String getText(Object object) {
 		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Transfer)object));
 		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Transfer)object));
+		String operationDate=((Transfer)object).getDate() == null	? null
+																	: TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(),
+																			((Transfer)object).getDate());
 
-		if (operationTitle == null) {
-			return "New " + getString("_UI_Outgoing_type");
+		if (operationTitle == null || operationTitle.length() == 0) {
+			return getString("_UI_Outgoing_type") + ": " + operationDate + " --> Undefined Operation Title = " + operationAmount + " euros";
 		}
-		if (operationTitle.length() == 0) {
-			return getString("_UI_Outgoing_type") + " --> Undefined Operation Title = " + operationAmount + " euros";
-		}
-		return getString("_UI_Outgoing_type") + " --> " + operationTitle + " = " + operationAmount + " euros";
+		return getString("_UI_Outgoing_type") + ": " + operationDate + " --> " + operationTitle + " = " + operationAmount + " euros";
 	}
 
 	/**

@@ -256,7 +256,9 @@ public class TrackerHistogramView extends ViewPart {
 
 		Label accountsLabel=new Label(container, SWT.NONE);
 		accountsLabel.setText(TrackerHistogramView.ACCOUNTS_COMBO_TITLE);
+
 		accountsCombo=new Combo(container, SWT.NONE);
+		accountsCombo.addSelectionListener(new FilterSelectionListener(this));
 
 		container=new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
@@ -264,6 +266,7 @@ public class TrackerHistogramView extends ViewPart {
 
 		categoryCheckButton=createFilterButton(container, TrackerHistogramView.FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE, true, true);
 		categoriesCombo=new Combo(container, SWT.NONE);
+		categoriesCombo.addSelectionListener(new FilterSelectionListener(this));
 
 		container=new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
@@ -271,6 +274,7 @@ public class TrackerHistogramView extends ViewPart {
 		operationCheckButton=createFilterButton(container, TrackerHistogramView.FILTER_BY_OPERATION_CHECK_BUTTON_TITLE, true, false);
 		operationsCombo=new Combo(container, SWT.NONE);
 		operationsCombo.setEnabled(false);
+		operationsCombo.addSelectionListener(new FilterSelectionListener(this));
 
 		categoryCheckButton.addSelectionListener(new FilterSelectionListener(operationCheckButton, categoriesCombo, operationsCombo, this));
 		operationCheckButton.addSelectionListener(new FilterSelectionListener(categoryCheckButton, operationsCombo, categoriesCombo, this));
@@ -281,6 +285,7 @@ public class TrackerHistogramView extends ViewPart {
 		Label yearsLabel=new Label(container, SWT.NONE);
 		yearsLabel.setText(TrackerHistogramView.YEARS_COMBO_TITLE);
 		yearsCombo=new Combo(container, SWT.NONE);
+		yearsCombo.addSelectionListener(new FilterSelectionListener(this));
 
 		populateFilter();
 	}
@@ -348,6 +353,7 @@ public class TrackerHistogramView extends ViewPart {
 	private String[] getAccountsItems(Set<Account> accounts) {
 		return accounts.stream()//
 				.map(account -> account.getName())//
+				.filter(name -> !StringUtils.isEmpty(name))//
 				.collect(Collectors.toList()).stream()//
 				.toArray(String[]::new);
 	}

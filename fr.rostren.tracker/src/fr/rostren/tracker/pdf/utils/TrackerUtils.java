@@ -36,6 +36,42 @@ public class TrackerUtils {
 	public static final String UNDEFINED_SPENDING_TITLE="UNDEFINED SPENDING"; //$NON-NLS-1$
 
 	/**
+	 * Creates an amount
+	 *
+	 * @param operation the operation
+	 * @param amount
+	 *            amount to create
+	 * @param linkedCategory
+	 *            the linked category
+	 * @return the created amount
+	 */
+	public static Amount createAmount(OperationData operation, double amount, Category linkedCategory) {
+		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
+		amountObject.setValue(amount);
+		amountObject.setCategory(linkedCategory);
+		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
+		return amountObject;
+	}
+
+	/**
+	 * Creates an amount
+	 *
+	 * @param operation the operation
+	 * @param amount
+	 *            amount to create
+	 * @param linkedCategory
+	 *            the linked category
+	 * @return the created amount
+	 */
+	public static Amount createAmount(Operation operation, double amount, Category linkedCategory) {
+		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
+		amountObject.setValue(amount);
+		amountObject.setCategory(linkedCategory);
+		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
+		return amountObject;
+	}
+
+	/**
 	 * Returns the operations titles
 	 * @param tracker the {@link Tracker} instance
 	 * @return the operations titles list
@@ -185,6 +221,7 @@ public class TrackerUtils {
 				.filter(account -> account instanceof CheckingAccount)//
 				.forEach(account -> years.addAll(//
 						((CheckingAccount)account).getOperations().stream()//
+								.filter(operation -> operation.getDate() != null)//
 								.mapToInt(operation -> operation.getDate().getYear())//
 								.boxed()//
 								.collect(Collectors.toSet())//
@@ -193,6 +230,7 @@ public class TrackerUtils {
 				.filter(account -> account instanceof BoockletAccount)//
 				.forEach(account -> years.addAll(//
 						((BoockletAccount)account).getTransfers().stream()//
+								.filter(transfer -> transfer.getDate() != null)//
 								.mapToInt(transfer -> transfer.getDate().getYear())//
 								.boxed()//
 								.collect(Collectors.toSet())//

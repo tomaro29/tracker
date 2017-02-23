@@ -7,9 +7,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
-import fr.rostren.tracker.pdf.utils.OperationData;
 
 public class ExtractOperationsAction implements IRunnableWithProgress {
 	private final String pdfURIText;

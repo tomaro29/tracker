@@ -2,10 +2,35 @@
  */
 package fr.rostren.tracker.util;
 
-import fr.rostren.tracker.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+
+import fr.rostren.tracker.Account;
+import fr.rostren.tracker.AccountService;
+import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.BoockletAccount;
+import fr.rostren.tracker.CategoriesRepository;
+import fr.rostren.tracker.Category;
+import fr.rostren.tracker.CategoryService;
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.Incoming;
+import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.OperationService;
+import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationsTitleRepository;
+import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.OriginsRepository;
+import fr.rostren.tracker.Outgoing;
+import fr.rostren.tracker.Owner;
+import fr.rostren.tracker.SpendingCategory;
+import fr.rostren.tracker.Title;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.Transfer;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
@@ -32,15 +57,15 @@ public class TrackerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public TrackerSwitch() {
-		if (modelPackage == null) {
-			modelPackage=TrackerPackage.eINSTANCE;
+		if (TrackerSwitch.modelPackage == null) {
+			TrackerSwitch.modelPackage=TrackerPackage.eINSTANCE;
 		}
 	}
 
 	/**
 	 * Checks whether this is a switch for the given package. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param ePackage
 	 *            the package in question.
 	 * @return whether this is a switch for the given package.
@@ -48,7 +73,7 @@ public class TrackerSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
+		return ePackage == TrackerSwitch.modelPackage;
 	}
 
 	/**
@@ -64,206 +89,238 @@ public class TrackerSwitch<T> extends Switch<T> {
 			case TrackerPackage.OWNER: {
 				Owner owner=(Owner)theEObject;
 				T result=caseOwner(owner);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.ACCOUNT: {
 				Account account=(Account)theEObject;
 				T result=caseAccount(account);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.CHECKING_ACCOUNT: {
 				CheckingAccount checkingAccount=(CheckingAccount)theEObject;
 				T result=caseCheckingAccount(checkingAccount);
-				if (result == null)
+				if (result == null) {
 					result=caseAccount(checkingAccount);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.BOOCKLET_ACCOUNT: {
 				BoockletAccount boockletAccount=(BoockletAccount)theEObject;
 				T result=caseBoockletAccount(boockletAccount);
-				if (result == null)
+				if (result == null) {
 					result=caseAccount(boockletAccount);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.OPERATION: {
 				Operation operation=(Operation)theEObject;
 				T result=caseOperation(operation);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.CREDIT: {
 				Credit credit=(Credit)theEObject;
 				T result=caseCredit(credit);
-				if (result == null)
+				if (result == null) {
 					result=caseOperation(credit);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.DEBIT: {
 				Debit debit=(Debit)theEObject;
 				T result=caseDebit(debit);
-				if (result == null)
+				if (result == null) {
 					result=caseOperation(debit);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.TRANSFER: {
 				Transfer transfer=(Transfer)theEObject;
 				T result=caseTransfer(transfer);
-				if (result == null)
+				if (result == null) {
 					result=caseOperation(transfer);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.INCOMING: {
 				Incoming incoming=(Incoming)theEObject;
 				T result=caseIncoming(incoming);
-				if (result == null)
+				if (result == null) {
 					result=caseTransfer(incoming);
-				if (result == null)
+				}
+				if (result == null) {
 					result=caseOperation(incoming);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.OUTGOING: {
 				Outgoing outgoing=(Outgoing)theEObject;
 				T result=caseOutgoing(outgoing);
-				if (result == null)
+				if (result == null) {
 					result=caseTransfer(outgoing);
-				if (result == null)
+				}
+				if (result == null) {
 					result=caseOperation(outgoing);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.TITLE: {
 				Title title=(Title)theEObject;
 				T result=caseTitle(title);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.CATEGORY: {
 				Category category=(Category)theEObject;
 				T result=caseCategory(category);
-				if (result == null)
+				if (result == null) {
 					result=caseTitle(category);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.OPERATION_TITLE: {
 				OperationTitle operationTitle=(OperationTitle)theEObject;
 				T result=caseOperationTitle(operationTitle);
-				if (result == null)
+				if (result == null) {
 					result=caseTitle(operationTitle);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.AMOUNT: {
 				Amount amount=(Amount)theEObject;
 				T result=caseAmount(amount);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.OPERATION_TITLE_SERVICE: {
-				OperationTitleService operationTitleService=(OperationTitleService)theEObject;
-				T result=caseOperationTitleService(operationTitleService);
-				if (result == null)
-					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.CATEGORY_SERVICE: {
 				CategoryService categoryService=(CategoryService)theEObject;
 				T result=caseCategoryService(categoryService);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.ACCOUNT_SERVICE: {
 				AccountService accountService=(AccountService)theEObject;
 				T result=caseAccountService(accountService);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.OPERATION_SERVICE: {
 				OperationService operationService=(OperationService)theEObject;
 				T result=caseOperationService(operationService);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.CATEGORIES_REPOSITORY: {
 				CategoriesRepository categoriesRepository=(CategoriesRepository)theEObject;
 				T result=caseCategoriesRepository(categoriesRepository);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.ORIGIN: {
 				Origin origin=(Origin)theEObject;
 				T result=caseOrigin(origin);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.ORIGINS_REPOSITORY: {
 				OriginsRepository originsRepository=(OriginsRepository)theEObject;
 				T result=caseOriginsRepository(originsRepository);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.TRACKER: {
 				Tracker tracker=(Tracker)theEObject;
 				T result=caseTracker(tracker);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY: {
 				OperationsTitleRepository operationsTitleRepository=(OperationsTitleRepository)theEObject;
 				T result=caseOperationsTitleRepository(operationsTitleRepository);
-				if (result == null)
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.INCOME_CATEGORY: {
 				IncomeCategory incomeCategory=(IncomeCategory)theEObject;
 				T result=caseIncomeCategory(incomeCategory);
-				if (result == null)
+				if (result == null) {
 					result=caseCategory(incomeCategory);
-				if (result == null)
+				}
+				if (result == null) {
 					result=caseTitle(incomeCategory);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			case TrackerPackage.SPENDING_CATEGORY: {
 				SpendingCategory spendingCategory=(SpendingCategory)theEObject;
 				T result=caseSpendingCategory(spendingCategory);
-				if (result == null)
+				if (result == null) {
 					result=caseCategory(spendingCategory);
-				if (result == null)
+				}
+				if (result == null) {
 					result=caseTitle(spendingCategory);
-				if (result == null)
+				}
+				if (result == null) {
 					result=defaultCase(theEObject);
+				}
 				return result;
 			}
 			default:
@@ -464,20 +521,6 @@ public class TrackerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAmount(Amount object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation Title Service</em>'.
-	 * <!-- begin-user-doc --> This
-	 * implementation returns null; returning a non-null result will terminate
-	 * the switch. <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation Title Service</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOperationTitleService(OperationTitleService object) {
 		return null;
 	}
 

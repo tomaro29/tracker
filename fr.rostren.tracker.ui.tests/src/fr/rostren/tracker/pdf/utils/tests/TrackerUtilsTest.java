@@ -27,7 +27,7 @@ import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 public class TrackerUtilsTest {
 

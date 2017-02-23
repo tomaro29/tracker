@@ -17,9 +17,9 @@ import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.pdf.content.extractor.ExtractorException;
 import fr.rostren.tracker.pdf.content.extractor.PDFContentExtractor;
-import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.tests.TestUtils;
 
 public class PDFContentExtractorTest {

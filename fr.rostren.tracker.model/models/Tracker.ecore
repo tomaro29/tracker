@@ -14,6 +14,34 @@
       <eAnnotations source="isUnique"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AccountService">
+    <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="category" eType="#//Category"/>
+      <eParameters name="month" eType="#//Month"/>
+      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="category" eType="#//Category"/>
+      <eParameters name="month" eType="#//Month"/>
+      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="category" eType="#//Category"/>
+      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="category" eType="#//Category"/>
+      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="category" eType="#//Category"/>
+    </eOperations>
+    <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="category" eType="#//Category"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
+        eType="#//Account"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckingAccount" eSuperTypes="#//Account">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//Operation" containment="true"/>
@@ -32,6 +60,24 @@
         eType="#//Origin" eOpposite="#//Origin/operations"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="#//Date"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationService">
+    <eOperations name="sumAmounts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="operation" eType="#//Operation"/>
+    </eOperations>
+    <eOperations name="addSubAmount">
+      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="addSubAmount">
+      <eParameters name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="category" eType="#//Category"/>
+    </eOperations>
+    <eOperations name="removeSubAmount">
+      <eParameters name="amount" eType="#//Amount"/>
+    </eOperations>
+    <eOperations name="validateAmounts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//Operation"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Credit" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Debit" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Transfer" abstract="true" eSuperTypes="#//Operation">
@@ -48,6 +94,23 @@
         eType="#//OperationTitle" eOpposite="#//OperationTitle/categories"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CategoryService">
+    <eOperations name="addDescription">
+      <eParameters name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="removeDescription"/>
+    <eOperations name="addOperationTitle">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="removeOperationTitle">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="removeOperationTitle">
+      <eParameters name="title" eType="#//OperationTitle"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
+        eType="#//Category"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationTitle" eSuperTypes="#//Title">
     <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"
         eType="#//Category" eOpposite="#//Category/operationTitles"/>
@@ -57,44 +120,6 @@
         eType="#//Category"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="wishedDate" eType="#//Date"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationTitleService">
-    <eOperations name="addTitle">
-      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="deleteTitle">
-      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CategoryService">
-    <eOperations name="addCategory">
-      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="deleteCategory">
-      <eParameters name="category" eType="#//Category"/>
-    </eOperations>
-    <eOperations name="addCategoryOperation">
-      <eParameters name="operationTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AccountService">
-    <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
-      <eParameters name="account" eType="#//Account"/>
-      <eParameters name="category" eType="#//Category"/>
-      <eParameters name="month" eType="#//Month"/>
-      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
-      <eParameters name="account" eType="#//Account"/>
-      <eParameters name="category" eType="#//Category"/>
-      <eParameters name="month" eType="#//Month"/>
-      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationService">
-    <eOperations name="sumAmounts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
-      <eParameters name="operation" eType="#//Operation"/>
-    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoriesRepository">
     <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
@@ -127,6 +152,51 @@
         eType="#//CategoriesRepository" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationsTitlesRepositories"
         lowerBound="1" eType="#//OperationsTitleRepository" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackerService">
+    <eOperations name="addIncomeCategory">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addSpendingCategory">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="deleteCategory">
+      <eParameters name="category" eType="#//Category"/>
+    </eOperations>
+    <eOperations name="deleteCategory">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addOwner">
+      <eParameters name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="deleteOwner">
+      <eParameters name="owner" eType="#//Owner"/>
+    </eOperations>
+    <eOperations name="deleteOwner">
+      <eParameters name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addOrigin">
+      <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="deleteOrigin">
+      <eParameters name="origin" eType="#//Origin"/>
+    </eOperations>
+    <eOperations name="deleteOrigin">
+      <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addOperationTitle">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="deleteOperationTitle">
+      <eParameters name="operationTitle" eType="#//OperationTitle"/>
+    </eOperations>
+    <eOperations name="deleteOperationTitle">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tracker" lowerBound="1"
+        eType="#//Tracker"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationsTitleRepository">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationsTitles" upperBound="-1"

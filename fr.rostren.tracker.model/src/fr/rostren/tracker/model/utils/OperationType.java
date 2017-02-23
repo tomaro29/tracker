@@ -1,4 +1,4 @@
-package fr.rostren.tracker.pdf.utils;
+package fr.rostren.tracker.model.utils;
 
 public enum OperationType {
 	UNDEFINED,

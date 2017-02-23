@@ -22,11 +22,11 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.pdf.utils.OperationAdapter;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationSubAmountContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationSubAmountLabelProvider;
@@ -44,7 +44,9 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 			Operation operation=getOperation();
 			Tracker tracker=TrackerUtils.getTracker(operation);
 
-			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, OperationAdapter.adaptOperation(operation), null, true);
+			OperationService operationService=TrackerFactory.eINSTANCE.createOperationService();
+			operationService.setOperation(operation);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operationService.adaptOperation(), null, true);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				Amount newAmount=TrackerFactory.eINSTANCE.createAmount();

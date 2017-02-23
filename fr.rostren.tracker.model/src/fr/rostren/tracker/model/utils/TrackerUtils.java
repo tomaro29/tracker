@@ -1,4 +1,4 @@
-package fr.rostren.tracker.pdf.utils;
+package fr.rostren.tracker.model.utils;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -34,42 +34,6 @@ import fr.rostren.tracker.TrackerFactory;
 public class TrackerUtils {
 	public static final String UNDEFINED_INCOME_TITLE="UNDEFINED INCOME"; //$NON-NLS-1$
 	public static final String UNDEFINED_SPENDING_TITLE="UNDEFINED SPENDING"; //$NON-NLS-1$
-
-	/**
-	 * Creates an amount
-	 *
-	 * @param operation the operation
-	 * @param amount
-	 *            amount to create
-	 * @param linkedCategory
-	 *            the linked category
-	 * @return the created amount
-	 */
-	public static Amount createAmount(OperationData operation, double amount, Category linkedCategory) {
-		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
-		amountObject.setValue(amount);
-		amountObject.setCategory(linkedCategory);
-		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
-		return amountObject;
-	}
-
-	/**
-	 * Creates an amount
-	 *
-	 * @param operation the operation
-	 * @param amount
-	 *            amount to create
-	 * @param linkedCategory
-	 *            the linked category
-	 * @return the created amount
-	 */
-	public static Amount createAmount(Operation operation, double amount, Category linkedCategory) {
-		Amount amountObject=TrackerFactory.eINSTANCE.createAmount();
-		amountObject.setValue(amount);
-		amountObject.setCategory(linkedCategory);
-		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
-		return amountObject;
-	}
 
 	/**
 	 * @param tracker the tracker
@@ -368,10 +332,10 @@ public class TrackerUtils {
 	}
 
 	/**
-	 * Returns the amount category
+	 * Returns the amount potential category in the containing tracker
 	 * @param amount the amount
 	 * @param title the category title as a {@link String}
-	 * @return the amount category
+	 * @return the amount potential category in the containing tracker
 	 */
 	public static Optional<Category> findAmountCategory(Amount amount, String title) {
 		if (amount == null) {
@@ -532,16 +496,6 @@ public class TrackerUtils {
 		return tracker.getOwners().stream()//
 				.noneMatch(owner -> owner.getAccounts().stream()//
 						.noneMatch(account -> account.getIdentifier() == Integer.parseInt(identifier)));
-	}
-
-	/**
-	 * <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
-	 * @param totalAmount the operation total amount
-	 * @param subAmounts the operation sub amounts
-	 * @return <code>true</code> if the sum of all sub amounts is equal to the total amount. <code>false</code> otherwise.
-	 */
-	public static boolean isValidOperationAmounts(double totalAmount, List<Amount> subAmounts) {
-		return totalAmount == getTotalAmount(subAmounts);
 	}
 
 	/**

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.pdf.utils.LineContent;
-import fr.rostren.tracker.pdf.utils.OperationType;
+import fr.rostren.tracker.model.utils.LineContent;
+import fr.rostren.tracker.model.utils.OperationType;
 
 /**
  * An abstract Class to parse banks pdf format.

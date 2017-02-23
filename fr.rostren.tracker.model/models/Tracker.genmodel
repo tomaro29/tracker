@@ -24,6 +24,33 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Account/amount"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Account/identifier"/>
     </genClasses>
+    <genClasses ecoreClass="Tracker.ecore#//AccountService">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//AccountService/account"/>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/sumPerCategory">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/category"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/month"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/year"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/averagePerCategory">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/category"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/month"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/year"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/sumPerCategory.1">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.1/category"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.1/year"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/averagePerCategory.1">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.1/category"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.1/year"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/sumPerCategory.2">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.2/category"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/averagePerCategory.2">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.2/category"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//CheckingAccount">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CheckingAccount/operations"/>
     </genClasses>
@@ -36,6 +63,23 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/subAmounts"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Operation/origin"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Tracker.ecore#//Operation/date"/>
+    </genClasses>
+    <genClasses ecoreClass="Tracker.ecore#//OperationService">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//OperationService/operation"/>
+      <genOperations ecoreOperation="Tracker.ecore#//OperationService/sumAmounts">
+        <genParameters ecoreParameter="Tracker.ecore#//OperationService/sumAmounts/operation"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//OperationService/addSubAmount">
+        <genParameters ecoreParameter="Tracker.ecore#//OperationService/addSubAmount/amount"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//OperationService/addSubAmount.1">
+        <genParameters ecoreParameter="Tracker.ecore#//OperationService/addSubAmount.1/amount"/>
+        <genParameters ecoreParameter="Tracker.ecore#//OperationService/addSubAmount.1/category"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//OperationService/removeSubAmount">
+        <genParameters ecoreParameter="Tracker.ecore#//OperationService/removeSubAmount/amount"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//OperationService/validateAmounts"/>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//Credit"/>
     <genClasses ecoreClass="Tracker.ecore#//Debit"/>
@@ -52,6 +96,22 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Category/operationTitles"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Category/description"/>
     </genClasses>
+    <genClasses ecoreClass="Tracker.ecore#//CategoryService">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoryService/category"/>
+      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/addDescription">
+        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/addDescription/description"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/removeDescription"/>
+      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/addOperationTitle">
+        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/addOperationTitle/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/removeOperationTitle">
+        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/removeOperationTitle/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/removeOperationTitle.1">
+        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/removeOperationTitle.1/title"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//OperationTitle">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//OperationTitle/categories"/>
     </genClasses>
@@ -59,44 +119,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Amount/category"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tracker.ecore#//Amount/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Tracker.ecore#//Amount/wishedDate"/>
-    </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//OperationTitleService">
-      <genOperations ecoreOperation="Tracker.ecore#//OperationTitleService/addTitle">
-        <genParameters ecoreParameter="Tracker.ecore#//OperationTitleService/addTitle/title"/>
-      </genOperations>
-      <genOperations ecoreOperation="Tracker.ecore#//OperationTitleService/deleteTitle">
-        <genParameters ecoreParameter="Tracker.ecore#//OperationTitleService/deleteTitle/title"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//CategoryService">
-      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/addCategory">
-        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/addCategory/title"/>
-      </genOperations>
-      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/deleteCategory">
-        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/deleteCategory/category"/>
-      </genOperations>
-      <genOperations ecoreOperation="Tracker.ecore#//CategoryService/addCategoryOperation">
-        <genParameters ecoreParameter="Tracker.ecore#//CategoryService/addCategoryOperation/operationTitle"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//AccountService">
-      <genOperations ecoreOperation="Tracker.ecore#//AccountService/sumPerCategory">
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/account"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/category"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/month"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/year"/>
-      </genOperations>
-      <genOperations ecoreOperation="Tracker.ecore#//AccountService/averagePerCategory">
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/account"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/category"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/month"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/year"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Tracker.ecore#//OperationService">
-      <genOperations ecoreOperation="Tracker.ecore#//OperationService/sumAmounts">
-        <genParameters ecoreParameter="Tracker.ecore#//OperationService/sumAmounts/operation"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//CategoriesRepository">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//CategoriesRepository/income"/>
@@ -116,6 +138,50 @@
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Tracker/originsRepository"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Tracker/categoriesRepository"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//Tracker/operationsTitlesRepositories"/>
+    </genClasses>
+    <genClasses ecoreClass="Tracker.ecore#//TrackerService">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tracker.ecore#//TrackerService/tracker"/>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/addIncomeCategory">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/addIncomeCategory/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/addSpendingCategory">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/addSpendingCategory/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteCategory">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteCategory/category"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteCategory.1">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteCategory.1/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/addOwner">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/addOwner/firstName"/>
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/addOwner/lastName"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteOwner">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOwner/owner"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteOwner.1">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOwner.1/firstName"/>
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOwner.1/lastName"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/addOrigin">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/addOrigin/identifier"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteOrigin">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOrigin/origin"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteOrigin.1">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOrigin.1/identifier"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/addOperationTitle">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/addOperationTitle/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteOperationTitle">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOperationTitle/operationTitle"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//TrackerService/deleteOperationTitle.1">
+        <genParameters ecoreParameter="Tracker.ecore#//TrackerService/deleteOperationTitle.1/title"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//OperationsTitleRepository">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tracker.ecore#//OperationsTitleRepository/operationsTitles"/>

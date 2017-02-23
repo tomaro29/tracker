@@ -19,7 +19,7 @@ import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.OriginsRepository;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 public class ImportOperationsAction extends Action {
 	private static final String FILES_ALREADY_IMPORTED_BEFORE="The files:\n" //$NON-NLS-1$

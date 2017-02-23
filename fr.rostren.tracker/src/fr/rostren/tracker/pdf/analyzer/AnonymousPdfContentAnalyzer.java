@@ -3,7 +3,7 @@ package fr.rostren.tracker.pdf.analyzer;
 import java.time.LocalDate;
 
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.model.utils.LineContent;
 
 /**
  * This class parses an anonymous Pdf format.

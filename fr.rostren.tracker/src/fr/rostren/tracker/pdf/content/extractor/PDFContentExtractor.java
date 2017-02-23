@@ -25,14 +25,14 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.model.utils.LineContent;
+import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.pdf.analyzer.AbstractPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.AnonymousPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.CEPdfContentAnalyzer;
 import fr.rostren.tracker.pdf.analyzer.CICPdfContentAnalyzer;
-import fr.rostren.tracker.pdf.utils.LineContent;
-import fr.rostren.tracker.pdf.utils.OperationData;
 import fr.rostren.tracker.pdf.utils.TrackerPdfReader;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
 
 /**
  * Extracts the content of a pdf file.
@@ -129,7 +129,7 @@ public class PDFContentExtractor {
 			for (int i=0; i < numberOfPages; i++) {
 				String originId=fileName + "_page_" + (i + 1);//$NON-NLS-1$
 				if (!isAlreadyParsed(tracker, originId)) {
-					Origin origin=createLinkedOrigin(originId);
+					Origin origin=TrackerFactory.eINSTANCE.createOrigin(originId, OriginType.PDF_FILE);
 					String page=PdfTextExtractor.getTextFromPage(reader, i + 1);
 
 					String[] lines=page.split("\n"); //$NON-NLS-1$
@@ -170,20 +170,6 @@ public class PDFContentExtractor {
 			return new CICPdfContentAnalyzer();
 		}
 		return new AnonymousPdfContentAnalyzer();
-	}
-
-	/**
-	 * Create an origin for operations.
-	 *
-	 * @param originIdentifier
-	 *            the pdf origin identifier
-	 * @return the created origin
-	 */
-	private Origin createLinkedOrigin(String originIdentifier) {
-		Origin origin=TrackerFactory.eINSTANCE.createOrigin();
-		origin.setIdentifier(originIdentifier);
-		origin.setType(OriginType.PDF_FILE);
-		return origin;
 	}
 
 	/**

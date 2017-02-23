@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
  * Page to add a {@link Category} instance to an existing {@link Tracker}

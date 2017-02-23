@@ -16,9 +16,9 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.pdf.utils.LineContent;
-import fr.rostren.tracker.pdf.utils.OperationData;
-import fr.rostren.tracker.pdf.utils.OperationType;
+import fr.rostren.tracker.model.utils.LineContent;
+import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.tests.TestUtils;
 
 public class LineContentTest {

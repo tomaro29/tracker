@@ -5,27 +5,32 @@ package fr.rostren.tracker.impl;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.rostren.tracker.AccountService;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.CategoriesRepository;
+import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CategoryService;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Credit;
 import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Incoming;
+import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.OperationTitleService;
 import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginType;
@@ -36,6 +41,10 @@ import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.TrackerService;
+import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationType;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
@@ -43,6 +52,8 @@ import fr.rostren.tracker.TrackerPackage;
  * @generated
  */
 public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
+	private static OperationTitle defaultOperationTitle;
+
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!--
@@ -97,8 +108,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createOperationTitle();
 			case TrackerPackage.AMOUNT:
 				return createAmount();
-			case TrackerPackage.OPERATION_TITLE_SERVICE:
-				return createOperationTitleService();
 			case TrackerPackage.CATEGORY_SERVICE:
 				return createCategoryService();
 			case TrackerPackage.ACCOUNT_SERVICE:
@@ -200,6 +209,22 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return credit;
 	}
 
+	@Override
+	public Credit createCredit(EObject object) {
+		Credit operation=TrackerFactory.eINSTANCE.createCredit();
+		// Add a default sub amount
+		List<Amount> amounts=operation.getSubAmounts();
+
+		if (amounts.isEmpty()) {
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
+			amounts.add(amount);
+		}
+
+		// Add a default operation title
+		addOperationTitle(object, operation);
+		return operation;
+	}
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -208,6 +233,21 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Debit createDebit() {
 		DebitImpl debit=new DebitImpl();
 		return debit;
+	}
+
+	@Override
+	public Debit createDebit(EObject object) {
+		Debit operation=TrackerFactory.eINSTANCE.createDebit();
+		// Add a default sub amount
+		List<Amount> amounts=operation.getSubAmounts();
+
+		if (amounts.isEmpty()) {
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
+			amounts.add(amount);
+		}
+
+		addOperationTitle(object, operation);
+		return operation;
 	}
 
 	/**
@@ -220,6 +260,21 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return incoming;
 	}
 
+	@Override
+	public Incoming createIncoming(EObject object) {
+		Incoming operation=TrackerFactory.eINSTANCE.createIncoming();
+		// Add a default sub amount
+		List<Amount> amounts=operation.getSubAmounts();
+
+		if (amounts.isEmpty()) {
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
+			amounts.add(amount);
+		}
+
+		addOperationTitle(object, operation);
+		return operation;
+	}
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -228,6 +283,21 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Outgoing createOutgoing() {
 		OutgoingImpl outgoing=new OutgoingImpl();
 		return outgoing;
+	}
+
+	@Override
+	public Outgoing createOutgoing(EObject object) {
+		Outgoing operation=TrackerFactory.eINSTANCE.createOutgoing();
+		// Add a default sub amount
+		List<Amount> amounts=operation.getSubAmounts();
+
+		if (amounts.isEmpty()) {
+			Amount amount=TrackerFactory.eINSTANCE.createAmount();
+			amounts.add(amount);
+		}
+
+		addOperationTitle(object, operation);
+		return operation;
 	}
 
 	/**
@@ -248,16 +318,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Amount createAmount() {
 		AmountImpl amount=new AmountImpl();
 		return amount;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public OperationTitleService createOperationTitleService() {
-		OperationTitleServiceImpl operationTitleService=new OperationTitleServiceImpl();
-		return operationTitleService;
 	}
 
 	/**
@@ -435,6 +495,148 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	@Deprecated
 	public static TrackerPackage getPackage() {
 		return TrackerPackage.eINSTANCE;
+	}
+
+	@Override
+	public Amount createAmount(Operation operation, double amount, Category category) {
+		Amount amountObject=createAmount();
+		amountObject.setValue(amount);
+		amountObject.setCategory(category);
+		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
+		return amountObject;
+	}
+
+	@Override
+	public Amount createAmount(OperationData operation, double amount, Category category) {
+		Amount amountObject=createAmount();
+		amountObject.setValue(amount);
+		amountObject.setCategory(category);
+		amountObject.setWishedDate(LocalDate.of(operation.getDate().getYear(), operation.getDate().getMonth(), operation.getDate().getDayOfMonth()));
+		return amountObject;
+	}
+
+	@Override
+	public Origin createOrigin(String identifier, OriginType type) {
+		Origin origin=createOrigin();
+		origin.setIdentifier(identifier);
+		origin.setType(type);
+		return origin;
+	}
+
+	@Override
+	public OperationTitle createOperationTitle(Tracker tracker, String title) {
+		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
+		newTitle.setTitle(title);
+		tracker.getOperationsTitlesRepositories().getOperationsTitles().add(newTitle);
+		return newTitle;
+	}
+
+	@Override
+	public Category createCategory(Tracker tracker, OperationTitle title, OperationType type) {
+		CategoriesRepository categoriesRepository=TrackerUtils.getCategoriesRepository(tracker);
+		if (OperationType.CREDIT.equals(type)) {
+			Category undefined=getUndefinedIncomeCategory(categoriesRepository);
+			List<IncomeCategory> incomes=categoriesRepository.getIncome().getIncomes();
+			if (!incomes.contains(undefined)) {
+				incomes.add((IncomeCategory)undefined);
+			}
+			undefined.getOperationTitles().add(title);
+			return undefined;
+		}
+		else if (OperationType.DEBIT.equals(type)) {
+			Category undefined=getUndefinedSpendingCategory(categoriesRepository);
+			List<SpendingCategory> spendings=categoriesRepository.getSpending().getSpendings();
+			if (!spendings.contains(undefined)) {
+				spendings.add((SpendingCategory)undefined);
+			}
+			undefined.getOperationTitles().add(title);
+			return undefined;
+		}
+		return null;
+	}
+
+	@Override
+	public IncomeCategory createCategory(IncomeCategory income) {
+		IncomeCategory category=TrackerFactory.eINSTANCE.createIncomeCategory();
+		category.setTitle(TrackerUtils.UNDEFINED_INCOME_TITLE);
+		income.getIncomes().add(category);
+		return category;
+	}
+
+	@Override
+	public SpendingCategory createCategory(SpendingCategory spending) {
+		SpendingCategory category=TrackerFactory.eINSTANCE.createSpendingCategory();
+		category.setTitle(TrackerUtils.UNDEFINED_SPENDING_TITLE);
+		spending.getSpendings().add(category);
+		return category;
+	}
+
+	/**
+	 * Returns the undefined income category
+	 * @param repository the repository
+	 * @return the undefined income category
+	 */
+	private Category getUndefinedIncomeCategory(CategoriesRepository repository) {
+		IncomeCategory income=repository.getIncome();
+		if (income == null) {
+			income=TrackerFactory.eINSTANCE.createIncomeCategory();
+			repository.setIncome(income);
+		}
+
+		Optional<IncomeCategory> findAny=income.getIncomes().stream()//
+				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
+				.findAny();
+		return findAny.orElse(createCategory(income));
+	}
+
+	/**
+	 * Returns the undefined spending category
+	 * @param repository the repository
+	 * @return the undefined spending category
+	 */
+	private Category getUndefinedSpendingCategory(CategoriesRepository repository) {
+		SpendingCategory spending=repository.getSpending();
+		if (spending == null) {
+			spending=TrackerFactory.eINSTANCE.createSpendingCategory();
+			repository.setSpending(spending);
+		}
+		return spending.getSpendings().stream()//
+				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
+				.findAny().orElse(createCategory(spending));
+	}
+
+	/**
+	 * Adds an {@link OperationTitle} instance to the given operation
+	 * @param object the given account
+	 * @param operation the given operation
+	 */
+	private void addOperationTitle(EObject object, Operation operation) {
+		EObject rootContainer=EcoreUtil.getRootContainer(object);
+		if (!(rootContainer instanceof Tracker)) {
+			return;
+		}
+
+		// Add a default operation title
+		OperationsTitleRepository repository=((Tracker)rootContainer).getOperationsTitlesRepositories();
+		if (repository == null) {
+			return;
+		}
+
+		EList<OperationTitle> operationsTitles=repository.getOperationsTitles();
+		if (!operationsTitles.isEmpty()) {
+			for (OperationTitle operationTitle: operationsTitles) {
+				if (operationTitle.getTitle() == null) {
+					TrackerFactoryImpl.defaultOperationTitle=operationTitle;
+				}
+			}
+		}
+		operation.setOperationTitle(TrackerFactoryImpl.defaultOperationTitle);
+	}
+
+	@Override
+	public TrackerService createTrackerService() {
+		TrackerServiceImpl trackerService=new TrackerServiceImpl();
+		return trackerService;
 	}
 
 } // TrackerFactoryImpl

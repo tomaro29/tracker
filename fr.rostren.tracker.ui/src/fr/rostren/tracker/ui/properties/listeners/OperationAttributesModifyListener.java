@@ -9,8 +9,9 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.sections.operation.OperationAttributesPropertySection;
 
@@ -47,7 +48,7 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 			double amount=Double.parseDouble(totalAmountText.getText());
 			DomainUtils.executeSetCommand(operation, TrackerPackage.Literals.OPERATION__TOTAL_AMOUNT, amount);
 			if (operation.getSubAmounts().isEmpty()) {
-				Amount newAmount=TrackerUtils.createAmount(operation, amount, null);
+				Amount newAmount=TrackerFactory.eINSTANCE.createAmount(operation, amount, null);
 				DomainUtils.executeAddCommand(operation, TrackerPackage.Literals.OPERATION__SUB_AMOUNTS, newAmount);
 			}
 			if (operation.getSubAmounts().size() == 1) {

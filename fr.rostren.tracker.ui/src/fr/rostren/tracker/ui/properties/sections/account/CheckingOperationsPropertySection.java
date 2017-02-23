@@ -26,7 +26,7 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CheckingOperationsContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationLabelProvider;

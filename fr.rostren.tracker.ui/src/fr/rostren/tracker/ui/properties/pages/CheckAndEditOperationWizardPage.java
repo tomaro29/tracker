@@ -43,12 +43,13 @@ import org.eclipse.swt.widgets.Text;
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
+import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.pdf.utils.OperationData;
-import fr.rostren.tracker.pdf.utils.OperationType;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationType;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTypesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationTypeLabelProvider;
 import fr.rostren.tracker.ui.properties.wizards.OperationSubAmountWizard;
@@ -80,6 +81,8 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	protected Button editButton;
 	protected Button removeButton;
 	protected OperationType operationType;
+
+	private final OperationService operationService;
 
 	private final int TEXT_MARGIN=3;
 	private final int FONT_WIDTH=10;
@@ -146,6 +149,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 		super(MessageFormat.format(CheckAndEditOperationWizardPage.PAGE_NAME, operation.getOperationTitle().getTitle()));
 
 		this.operation=operation;
+		operationService=TrackerFactory.eINSTANCE.createOperationService();
 		this.account=account;
 		operationTitle=operation.getOperationTitle().getTitle();
 
@@ -411,7 +415,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 
 	@Override
 	public boolean isPageComplete() {
-		return TrackerUtils.isValidOperationAmounts(operation.getTotalAmount(), operation.getSubAmounts());
+		return operationService.validateAmounts();
 	}
 
 	private class TableButtonListener implements Listener {

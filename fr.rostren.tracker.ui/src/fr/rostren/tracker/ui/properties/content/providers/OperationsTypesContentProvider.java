@@ -3,7 +3,7 @@ package fr.rostren.tracker.ui.properties.content.providers;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.rostren.tracker.pdf.utils.OperationType;
+import fr.rostren.tracker.model.utils.OperationType;
 
 public class OperationsTypesContentProvider extends AbstractContentProvider {
 

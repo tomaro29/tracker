@@ -26,7 +26,7 @@ import fr.rostren.tracker.OperationsTitleRepository;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.OriginsRepository;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.OperationTitleComparator;
 import fr.rostren.tracker.ui.properties.content.comparators.OriginComparator;
 import fr.rostren.tracker.ui.properties.listeners.DateSelectionListener;

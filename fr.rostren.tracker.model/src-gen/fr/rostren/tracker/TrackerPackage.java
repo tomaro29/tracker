@@ -150,7 +150,145 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCheckingAccount()
 	 * @generated
 	 */
-	int CHECKING_ACCOUNT=2;
+	int CHECKING_ACCOUNT=3;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.BoockletAccountImpl <em>Boocklet Account</em>}' class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see fr.rostren.tracker.impl.BoockletAccountImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getBoockletAccount()
+	 * @generated
+	 */
+	int BOOCKLET_ACCOUNT=4;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.TitleImpl <em>Title</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.TitleImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTitle()
+	 * @generated
+	 */
+	int TITLE=12;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationImpl <em>Operation</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.OperationImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperation()
+	 * @generated
+	 */
+	int OPERATION=5;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.CreditImpl <em>Credit</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.CreditImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCredit()
+	 * @generated
+	 */
+	int CREDIT=7;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.DebitImpl <em>Debit</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.DebitImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDebit()
+	 * @generated
+	 */
+	int DEBIT=8;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.TransferImpl <em>Transfer</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.TransferImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTransfer()
+	 * @generated
+	 */
+	int TRANSFER=9;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.IncomingImpl <em>Incoming</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.IncomingImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncoming()
+	 * @generated
+	 */
+	int INCOMING=10;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.OutgoingImpl <em>Outgoing</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.OutgoingImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOutgoing()
+	 * @generated
+	 */
+	int OUTGOING=11;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.CategoryImpl <em>Category</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.CategoryImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCategory()
+	 * @generated
+	 */
+	int CATEGORY=13;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationTitleImpl <em>Operation Title</em>}' class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see fr.rostren.tracker.impl.OperationTitleImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationTitle()
+	 * @generated
+	 */
+	int OPERATION_TITLE=15;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.AmountImpl <em>Amount</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.AmountImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getAmount()
+	 * @generated
+	 */
+	int AMOUNT=16;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.CategoryServiceImpl <em>Category Service</em>}' class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see fr.rostren.tracker.impl.CategoryServiceImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCategoryService()
+	 * @generated
+	 */
+	int CATEGORY_SERVICE=14;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.AccountServiceImpl <em>Account Service</em>}' class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see fr.rostren.tracker.impl.AccountServiceImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getAccountService()
+	 * @generated
+	 */
+	int ACCOUNT_SERVICE=2;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_SERVICE__ACCOUNT=0;
+
+	/**
+	 * The number of structural features of the '<em>Account Service</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_SERVICE_FEATURE_COUNT=1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!--
@@ -196,16 +334,6 @@ public interface TrackerPackage extends EPackage {
 	int CHECKING_ACCOUNT_FEATURE_COUNT=ACCOUNT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.BoockletAccountImpl <em>Boocklet Account</em>}' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see fr.rostren.tracker.impl.BoockletAccountImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getBoockletAccount()
-	 * @generated
-	 */
-	int BOOCKLET_ACCOUNT=3;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -247,24 +375,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOCKLET_ACCOUNT_FEATURE_COUNT=ACCOUNT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.TitleImpl <em>Title</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.TitleImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTitle()
-	 * @generated
-	 */
-	int TITLE=10;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationImpl <em>Operation</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.OperationImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperation()
-	 * @generated
-	 */
-	int OPERATION=4;
 
 	/**
 	 * The feature id for the '<em><b>Total Amount</b></em>' attribute. <!--
@@ -320,13 +430,31 @@ public interface TrackerPackage extends EPackage {
 	int OPERATION_FEATURE_COUNT=5;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.CreditImpl <em>Credit</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.CreditImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCredit()
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationServiceImpl <em>Operation Service</em>}' class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see fr.rostren.tracker.impl.OperationServiceImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationService()
 	 * @generated
 	 */
-	int CREDIT=5;
+	int OPERATION_SERVICE=6;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SERVICE__OPERATION=0;
+
+	/**
+	 * The number of structural features of the '<em>Operation Service</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SERVICE_FEATURE_COUNT=1;
 
 	/**
 	 * The feature id for the '<em><b>Total Amount</b></em>' attribute. <!--
@@ -382,15 +510,6 @@ public interface TrackerPackage extends EPackage {
 	int CREDIT_FEATURE_COUNT=OPERATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.DebitImpl <em>Debit</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.DebitImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getDebit()
-	 * @generated
-	 */
-	int DEBIT=6;
-
-	/**
 	 * The feature id for the '<em><b>Total Amount</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -442,15 +561,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEBIT_FEATURE_COUNT=OPERATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.TransferImpl <em>Transfer</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.TransferImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTransfer()
-	 * @generated
-	 */
-	int TRANSFER=7;
 
 	/**
 	 * The feature id for the '<em><b>Total Amount</b></em>' attribute. <!--
@@ -524,15 +634,6 @@ public interface TrackerPackage extends EPackage {
 	int TRANSFER_FEATURE_COUNT=OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.IncomingImpl <em>Incoming</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.IncomingImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getIncoming()
-	 * @generated
-	 */
-	int INCOMING=8;
-
-	/**
 	 * The feature id for the '<em><b>Total Amount</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -602,15 +703,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int INCOMING_FEATURE_COUNT=TRANSFER_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.OutgoingImpl <em>Outgoing</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.OutgoingImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOutgoing()
-	 * @generated
-	 */
-	int OUTGOING=9;
 
 	/**
 	 * The feature id for the '<em><b>Total Amount</b></em>' attribute. <!--
@@ -702,15 +794,6 @@ public interface TrackerPackage extends EPackage {
 	int TITLE_FEATURE_COUNT=1;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.CategoryImpl <em>Category</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.CategoryImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCategory()
-	 * @generated
-	 */
-	int CATEGORY=11;
-
-	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -746,14 +829,21 @@ public interface TrackerPackage extends EPackage {
 	int CATEGORY_FEATURE_COUNT=TITLE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationTitleImpl <em>Operation Title</em>}' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see fr.rostren.tracker.impl.OperationTitleImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationTitle()
+	 * The feature id for the '<em><b>Category</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
+	 * @ordered
 	 */
-	int OPERATION_TITLE=12;
+	int CATEGORY_SERVICE__CATEGORY=0;
+
+	/**
+	 * The number of structural features of the '<em>Category Service</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_SERVICE_FEATURE_COUNT=1;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute. <!--
@@ -780,15 +870,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_TITLE_FEATURE_COUNT=TITLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.AmountImpl <em>Amount</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see fr.rostren.tracker.impl.AmountImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getAmount()
-	 * @generated
-	 */
-	int AMOUNT=13;
 
 	/**
 	 * The feature id for the '<em><b>Category</b></em>' reference. <!--
@@ -827,79 +908,6 @@ public interface TrackerPackage extends EPackage {
 	int AMOUNT_FEATURE_COUNT=3;
 
 	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationTitleServiceImpl <em>Operation Title Service</em>}' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see fr.rostren.tracker.impl.OperationTitleServiceImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationTitleService()
-	 * @generated
-	 */
-	int OPERATION_TITLE_SERVICE=14;
-
-	/**
-	 * The number of structural features of the '<em>Operation Title Service</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_TITLE_SERVICE_FEATURE_COUNT=0;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.CategoryServiceImpl <em>Category Service</em>}' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see fr.rostren.tracker.impl.CategoryServiceImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCategoryService()
-	 * @generated
-	 */
-	int CATEGORY_SERVICE=15;
-
-	/**
-	 * The number of structural features of the '<em>Category Service</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_SERVICE_FEATURE_COUNT=0;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.AccountServiceImpl <em>Account Service</em>}' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see fr.rostren.tracker.impl.AccountServiceImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getAccountService()
-	 * @generated
-	 */
-	int ACCOUNT_SERVICE=16;
-
-	/**
-	 * The number of structural features of the '<em>Account Service</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_SERVICE_FEATURE_COUNT=0;
-
-	/**
-	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationServiceImpl <em>Operation Service</em>}' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see fr.rostren.tracker.impl.OperationServiceImpl
-	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationService()
-	 * @generated
-	 */
-	int OPERATION_SERVICE=17;
-
-	/**
-	 * The number of structural features of the '<em>Operation Service</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_SERVICE_FEATURE_COUNT=0;
-
-	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.CategoriesRepositoryImpl <em>Categories Repository</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -907,7 +915,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getCategoriesRepository()
 	 * @generated
 	 */
-	int CATEGORIES_REPOSITORY=18;
+	int CATEGORIES_REPOSITORY=17;
 
 	/**
 	 * The feature id for the '<em><b>Income</b></em>' containment reference.
@@ -951,7 +959,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOrigin()
 	 * @generated
 	 */
-	int ORIGIN=19;
+	int ORIGIN=18;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute. <!--
@@ -997,7 +1005,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOriginsRepository()
 	 * @generated
 	 */
-	int ORIGINS_REPOSITORY=20;
+	int ORIGINS_REPOSITORY=19;
 
 	/**
 	 * The feature id for the '<em><b>Origins</b></em>' containment reference list.
@@ -1022,7 +1030,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTracker()
 	 * @generated
 	 */
-	int TRACKER=21;
+	int TRACKER=20;
 
 	/**
 	 * The feature id for the '<em><b>Owners</b></em>' containment reference list.
@@ -1064,6 +1072,34 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRACKER_FEATURE_COUNT=4;
+
+	/**
+	 * The meta object id for the '{@link fr.rostren.tracker.impl.TrackerServiceImpl <em>Service</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.rostren.tracker.impl.TrackerServiceImpl
+	 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTrackerService()
+	 * @generated
+	 */
+	int TRACKER_SERVICE=21;
+
+	/**
+	 * The feature id for the '<em><b>Tracker</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACKER_SERVICE__TRACKER=0;
+
+	/**
+	 * The number of structural features of the '<em>Service</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACKER_SERVICE_FEATURE_COUNT=1;
 
 	/**
 	 * The meta object id for the '{@link fr.rostren.tracker.impl.OperationsTitleRepositoryImpl <em>Operations Title Repository</em>}' class.
@@ -1603,16 +1639,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAmount_WishedDate();
 
 	/**
-	 * Returns the meta object for class '{@link fr.rostren.tracker.OperationTitleService <em>Operation Title Service</em>}'.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @return the meta object for class '<em>Operation Title Service</em>'.
-	 * @see fr.rostren.tracker.OperationTitleService
-	 * @generated
-	 */
-	EClass getOperationTitleService();
-
-	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.CategoryService <em>Category Service</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Category Service</em>'.
@@ -1620,6 +1646,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCategoryService();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.rostren.tracker.CategoryService#getCategory <em>Category</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Category</em>'.
+	 * @see fr.rostren.tracker.CategoryService#getCategory()
+	 * @see #getCategoryService()
+	 * @generated
+	 */
+	EReference getCategoryService_Category();
 
 	/**
 	 * Returns the meta object for class '
@@ -1633,6 +1670,17 @@ public interface TrackerPackage extends EPackage {
 	EClass getAccountService();
 
 	/**
+	 * Returns the meta object for the reference '{@link fr.rostren.tracker.AccountService#getAccount <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Account</em>'.
+	 * @see fr.rostren.tracker.AccountService#getAccount()
+	 * @see #getAccountService()
+	 * @generated
+	 */
+	EReference getAccountService_Account();
+
+	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.OperationService <em>Operation Service</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation Service</em>'.
@@ -1640,6 +1688,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getOperationService();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.rostren.tracker.OperationService#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operation</em>'.
+	 * @see fr.rostren.tracker.OperationService#getOperation()
+	 * @see #getOperationService()
+	 * @generated
+	 */
+	EReference getOperationService_Operation();
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.CategoriesRepository <em>Categories Repository</em>}'.
@@ -1800,6 +1859,27 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTracker_OperationsTitlesRepositories();
+
+	/**
+	 * Returns the meta object for class '{@link fr.rostren.tracker.TrackerService <em>Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Service</em>'.
+	 * @see fr.rostren.tracker.TrackerService
+	 * @generated
+	 */
+	EClass getTrackerService();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.rostren.tracker.TrackerService#getTracker <em>Tracker</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Tracker</em>'.
+	 * @see fr.rostren.tracker.TrackerService#getTracker()
+	 * @see #getTrackerService()
+	 * @generated
+	 */
+	EReference getTrackerService_Tracker();
 
 	/**
 	 * Returns the meta object for class '{@link fr.rostren.tracker.OperationsTitleRepository <em>Operations Title Repository</em>}'.
@@ -2203,16 +2283,6 @@ public interface TrackerPackage extends EPackage {
 		EAttribute AMOUNT__WISHED_DATE=eINSTANCE.getAmount_WishedDate();
 
 		/**
-		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationTitleServiceImpl <em>Operation Title Service</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.rostren.tracker.impl.OperationTitleServiceImpl
-		 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getOperationTitleService()
-		 * @generated
-		 */
-		EClass OPERATION_TITLE_SERVICE=eINSTANCE.getOperationTitleService();
-
-		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.CategoryServiceImpl <em>Category Service</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -2221,6 +2291,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CATEGORY_SERVICE=eINSTANCE.getCategoryService();
+
+		/**
+		 * The meta object literal for the '<em><b>Category</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CATEGORY_SERVICE__CATEGORY=eINSTANCE.getCategoryService_Category();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.AccountServiceImpl <em>Account Service</em>}' class.
@@ -2233,6 +2311,14 @@ public interface TrackerPackage extends EPackage {
 		EClass ACCOUNT_SERVICE=eINSTANCE.getAccountService();
 
 		/**
+		 * The meta object literal for the '<em><b>Account</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACCOUNT_SERVICE__ACCOUNT=eINSTANCE.getAccountService_Account();
+
+		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationServiceImpl <em>Operation Service</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -2241,6 +2327,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass OPERATION_SERVICE=eINSTANCE.getOperationService();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_SERVICE__OPERATION=eINSTANCE.getOperationService_Operation();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.CategoriesRepositoryImpl <em>Categories Repository</em>}' class.
@@ -2363,6 +2457,24 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACKER__OPERATIONS_TITLES_REPOSITORIES=eINSTANCE.getTracker_OperationsTitlesRepositories();
+
+		/**
+		 * The meta object literal for the '{@link fr.rostren.tracker.impl.TrackerServiceImpl <em>Service</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.rostren.tracker.impl.TrackerServiceImpl
+		 * @see fr.rostren.tracker.impl.TrackerPackageImpl#getTrackerService()
+		 * @generated
+		 */
+		EClass TRACKER_SERVICE=eINSTANCE.getTrackerService();
+
+		/**
+		 * The meta object literal for the '<em><b>Tracker</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACKER_SERVICE__TRACKER=eINSTANCE.getTrackerService_Tracker();
 
 		/**
 		 * The meta object literal for the '{@link fr.rostren.tracker.impl.OperationsTitleRepositoryImpl <em>Operations Title Repository</em>}' class.

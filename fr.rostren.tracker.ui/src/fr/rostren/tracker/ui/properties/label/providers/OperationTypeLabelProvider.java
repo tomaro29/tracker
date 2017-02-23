@@ -1,6 +1,6 @@
 package fr.rostren.tracker.ui.properties.label.providers;
 
-import fr.rostren.tracker.pdf.utils.OperationType;
+import fr.rostren.tracker.model.utils.OperationType;
 
 public class OperationTypeLabelProvider extends AbstractLabelProvider {
 

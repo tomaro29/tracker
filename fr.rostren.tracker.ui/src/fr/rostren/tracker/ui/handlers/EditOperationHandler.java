@@ -15,8 +15,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.pdf.utils.OperationAdapter;
-import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.OperationService;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.ui.properties.wizards.CheckAndEditOperationWizard;
 
 public class EditOperationHandler extends AbstractHandler {
@@ -35,8 +36,11 @@ public class EditOperationHandler extends AbstractHandler {
 		if (selection instanceof StructuredSelection) {
 			Operation selectedOperation=(Operation)selection.getFirstElement();
 
+			OperationService operationService=TrackerFactory.eINSTANCE.createOperationService();
+			operationService.setOperation(selectedOperation);
+
 			List<OperationData> operations=new ArrayList<>();
-			operations.add(OperationAdapter.adaptOperation(selectedOperation));
+			operations.add(operationService.adaptOperation());
 			CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(operations, (Account)selectedOperation.eContainer());
 			WizardDialog wizardDialog=new WizardDialog(shell, wizard);
 			if (wizardDialog.open() == Window.OK) {

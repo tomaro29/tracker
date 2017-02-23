@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 
 import fr.rostren.tracker.Origin;
-import fr.rostren.tracker.pdf.utils.LineContent;
+import fr.rostren.tracker.model.utils.LineContent;
 
 /**
  * This class parses CE Pdf format.

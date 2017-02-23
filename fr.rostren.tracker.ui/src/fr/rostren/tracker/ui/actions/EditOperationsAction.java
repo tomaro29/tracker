@@ -11,10 +11,11 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.OperationService;
+import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.pdf.utils.OperationAdapter;
-import fr.rostren.tracker.pdf.utils.OperationData;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.AbortEditActionException;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.wizards.CheckAndEditOperationWizard;
@@ -53,8 +54,10 @@ public class EditOperationsAction extends Action {
 	 */
 	private void addOperationsToAccount() {
 		Collections.sort(addedOperations, (op1, op2) -> op1.getDate().compareTo(op2.getDate()));
-		addedOperations.stream().forEach(
-				operationData -> DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, OperationAdapter.adaptOperation(operationData)));
+		addedOperations.stream().forEach(operationData -> {
+			OperationService operationServise=TrackerFactory.eINSTANCE.createOperationService();
+			DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operationServise.adaptOperation(operationData));
+		});
 		addedOperations.stream().map(operation -> operation.getOrigin())//
 				.collect(Collectors.toSet()).stream()//
 				.forEach(origin -> DomainUtils.executeAddCommand(TrackerUtils.getTracker(account).getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS,

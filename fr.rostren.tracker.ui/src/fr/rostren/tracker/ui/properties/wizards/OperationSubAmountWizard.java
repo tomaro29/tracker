@@ -8,7 +8,7 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.ui.properties.pages.OperationSubAmountWizardPage;
 
 /**

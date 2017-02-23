@@ -17,7 +17,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.dev.TrackerEditorDev;
 
 /**

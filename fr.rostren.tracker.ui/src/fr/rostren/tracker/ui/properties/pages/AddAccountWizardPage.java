@@ -13,7 +13,7 @@ import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
  * Page to add an {@link Operation} instance to an existing

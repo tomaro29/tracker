@@ -50,12 +50,6 @@
               <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </endLabelStyleDescription>
           </computedStyleDescriptions>
-          <computedStyleDescriptions xmi:type="style:FlatContainerStyleDescription" xmi:id="_gkyf8Oe3EeaRGeDsawQNEQ" arcWidth="8" arcHeight="8" borderSizeComputationExpression="1" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid">
-            <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <backgroundColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xmi:type="description:UserFixedColor" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EClass']"/>
-          </computedStyleDescriptions>
         </data>
       </ownedAnnotationEntries>
       <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_METl8BkYEeaAwfcgYSmHNQ" source="GMF_DIAGRAMS">
@@ -169,6 +163,10 @@
               <children xmi:type="notation:Node" xmi:id="_PV-yExkYEeaAwfcgYSmHNQ" type="3010" element="_PU_6oRkYEeaAwfcgYSmHNQ">
                 <styles xmi:type="notation:FontStyle" xmi:id="_PV-yFBkYEeaAwfcgYSmHNQ" fontName="Segoe UI" fontHeight="8"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_PV-yFRkYEeaAwfcgYSmHNQ"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_mzedoPm8EeakWK6xlyyUag" type="3010" element="_mzRpUPm8EeakWK6xlyyUag">
+                <styles xmi:type="notation:FontStyle" xmi:id="_mzedofm8EeakWK6xlyyUag" fontName="Segoe UI" fontHeight="8"/>
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_mzedovm8EeakWK6xlyyUag"/>
               </children>
               <styles xmi:type="notation:SortingStyle" xmi:id="_PVyk2BkYEeaAwfcgYSmHNQ"/>
               <styles xmi:type="notation:FilteringStyle" xmi:id="_PVyk2RkYEeaAwfcgYSmHNQ"/>
@@ -961,13 +959,15 @@
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_PUN3gBkYEeaAwfcgYSmHNQ" name="AccountService" tooltipText="&#xA;ERROR : The typed element must have a type&#xA;ERROR : The typed element must have a type" width="12" height="10">
+      <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_PUN3gBkYEeaAwfcgYSmHNQ" name="AccountService" tooltipText="" width="12" height="10">
         <target xmi:type="ecore:EClass" href="Tracker.ecore#//AccountService"/>
         <semanticElements xmi:type="ecore:EClass" href="Tracker.ecore#//AccountService"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_4HR54Oe3EeaRGeDsawQNEQ" labelColor="239,41,41" description="_gkyf8Oe3EeaRGeDsawQNEQ" borderSize="1" borderSizeComputationExpression="1" borderColor="239,41,41" backgroundStyle="Liquid" foregroundColor="255,252,216"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_p6DpgPm7EeakWK6xlyyUag" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
+        </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU7pMRkYEeaAwfcgYSmHNQ" name="sumPerCategory(account Account, category Category, month Month, year EInt) : EDouble" tooltipText="sumPerCategory(account, category, month, year) : EDouble">
           <target xmi:type="ecore:EOperation" href="Tracker.ecore#//AccountService/sumPerCategory"/>
@@ -1004,7 +1004,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU9eYRkYEeaAwfcgYSmHNQ" name="value : EBigDecimal" tooltipText="">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU9eYRkYEeaAwfcgYSmHNQ" name="value : EDouble = 0.0" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="Tracker.ecore#//Amount/value"/>
           <semanticElements xmi:type="ecore:EAttribute" href="Tracker.ecore#//Amount/value"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_PU-FcBkYEeaAwfcgYSmHNQ" labelAlignment="LEFT">
@@ -1069,33 +1069,46 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_PUTXEBkYEeaAwfcgYSmHNQ" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_mzMw0Pm8EeakWK6xlyyUag" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU_TkBkYEeaAwfcgYSmHNQ" name="addCategory(title EString)" tooltipText="addCategory(title)">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU_TkBkYEeaAwfcgYSmHNQ" name="addCategory(tracker Tracker, title EString)" tooltipText="addCategory(tracker, title)">
           <target xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/addCategory"/>
           <semanticElements xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/addCategory"/>
           <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/addCategory/title"/>
+          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/addCategory/tracker"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_PU_TkRkYEeaAwfcgYSmHNQ" labelAlignment="LEFT">
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU_TkhkYEeaAwfcgYSmHNQ" name="deleteCategory(category Category)" tooltipText="deleteCategory(category)">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU_TkhkYEeaAwfcgYSmHNQ" name="deleteCategory(tracker Tracker, category Category)" tooltipText="deleteCategory(tracker, category)">
           <target xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/deleteCategory"/>
           <semanticElements xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/deleteCategory"/>
           <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/deleteCategory/category"/>
+          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/deleteCategory/tracker"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_PU_6oBkYEeaAwfcgYSmHNQ" labelAlignment="LEFT">
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU_6oRkYEeaAwfcgYSmHNQ" name="addCategoryOperation(operationTitle EString)" tooltipText="addCategoryOperation(operationTitle)">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PU_6oRkYEeaAwfcgYSmHNQ" name="addCategoryOperation(category Category, title EString)" tooltipText="addCategoryOperation(category, title)">
           <target xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/addCategoryOperation"/>
           <semanticElements xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/addCategoryOperation"/>
-          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/addCategoryOperation/operationTitle"/>
+          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/addCategoryOperation/category"/>
+          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/addCategoryOperation/title"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_PU_6ohkYEeaAwfcgYSmHNQ" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_mzRpUPm8EeakWK6xlyyUag" name="deleteCategory(tracker Tracker, title EString)" tooltipText="deleteCategory(tracker, title)">
+          <target xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/deleteCategory.1"/>
+          <semanticElements xmi:type="ecore:EOperation" href="Tracker.ecore#//CategoryService/deleteCategory.1"/>
+          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/deleteCategory.1/title"/>
+          <semanticElements xmi:type="ecore:EParameter" href="Tracker.ecore#//CategoryService/deleteCategory.1/tracker"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_mzRpUfm8EeakWK6xlyyUag" labelAlignment="LEFT">
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>

@@ -1,4 +1,4 @@
-package fr.rostren.tracker.pdf.utils;
+package fr.rostren.tracker.model.utils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

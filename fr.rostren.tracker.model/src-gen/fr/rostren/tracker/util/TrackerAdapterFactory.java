@@ -2,11 +2,36 @@
  */
 package fr.rostren.tracker.util;
 
-import fr.rostren.tracker.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.rostren.tracker.Account;
+import fr.rostren.tracker.AccountService;
+import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.BoockletAccount;
+import fr.rostren.tracker.CategoriesRepository;
+import fr.rostren.tracker.Category;
+import fr.rostren.tracker.CategoryService;
+import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.Debit;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.Incoming;
+import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.OperationService;
+import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.OperationsTitleRepository;
+import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.OriginsRepository;
+import fr.rostren.tracker.Outgoing;
+import fr.rostren.tracker.Owner;
+import fr.rostren.tracker.SpendingCategory;
+import fr.rostren.tracker.Title;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.Transfer;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
@@ -30,8 +55,8 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public TrackerAdapterFactory() {
-		if (modelPackage == null) {
-			modelPackage=TrackerPackage.eINSTANCE;
+		if (TrackerAdapterFactory.modelPackage == null) {
+			TrackerAdapterFactory.modelPackage=TrackerPackage.eINSTANCE;
 		}
 	}
 
@@ -45,11 +70,11 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == TrackerAdapterFactory.modelPackage) {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
+			return ((EObject)object).eClass().getEPackage() == TrackerAdapterFactory.modelPackage;
 		}
 		return false;
 	}
@@ -57,7 +82,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The switch that delegates to the <code>createXXX</code> methods. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected TrackerSwitch<Adapter> modelSwitch=new TrackerSwitch<Adapter>() {
@@ -129,11 +154,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseAmount(Amount object) {
 			return createAmountAdapter();
-		}
-
-		@Override
-		public Adapter caseOperationTitleService(OperationTitleService object) {
-			return createOperationTitleServiceAdapter();
 		}
 
 		@Override
@@ -265,7 +285,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.Operation
 	 * @generated
@@ -308,7 +328,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.Transfer
 	 * @generated
@@ -323,7 +343,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.Incoming
 	 * @generated
@@ -338,7 +358,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.Outgoing
 	 * @generated
@@ -367,7 +387,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.Category
 	 * @generated
@@ -382,7 +402,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.OperationTitle
 	 * @generated
@@ -438,7 +458,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see fr.rostren.tracker.AccountService
 	 * @generated

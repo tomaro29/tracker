@@ -47,7 +47,7 @@ import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.histogram.Histogram;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.TrackerEditor;
 import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
 import fr.rostren.tracker.ui.views.internal.actions.RefreshHistogramAction;

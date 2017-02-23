@@ -6,7 +6,7 @@ import java.util.List;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 
 public class TrackerCategoriesContentProvider extends AbstractContentProvider {

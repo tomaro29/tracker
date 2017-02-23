@@ -10,7 +10,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 import fr.rostren.tracker.Account;
-import fr.rostren.tracker.pdf.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.ui.properties.pages.CheckAndEditOperationWizardPage;
 
 public class CheckAndEditOperationWizard extends Wizard {

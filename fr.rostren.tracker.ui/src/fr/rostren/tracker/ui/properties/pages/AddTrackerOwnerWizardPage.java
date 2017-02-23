@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.pdf.utils.TrackerUtils;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
  * Page to add a {@link Owner} instance to an existing {@link Tracker} instance.

@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Intel(R) CoFluent(TM) Studio - Intel Corporation
- * Copyright (C) 2003-2017, Intel Corporation. All rights reserved.
- *******************************************************************************/
 package fr.rostren.tracker.ui.views.internal;
 
 import java.net.MalformedURLException;

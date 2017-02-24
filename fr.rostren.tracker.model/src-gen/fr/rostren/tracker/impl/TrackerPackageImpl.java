@@ -1091,25 +1091,47 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "averagePerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "sumPerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "averagePerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "sumPerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op=addEOperation(accountServiceEClass, ecorePackage.getEDouble(), "averagePerCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(accountServiceEClass, ecorePackage.getEDoubleObject(), "findIncomeCategoryAmounts", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "item", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "months", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(accountServiceEClass, ecorePackage.getEDoubleObject(), "findSpendingCategoryAmounts", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "item", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "months", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(accountServiceEClass, this.getAmount(), "findCategoryAmounts", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getCategory(), "category", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMonth(), "month", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "year", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "wishedDated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(checkingAccountEClass, CheckingAccount.class, "CheckingAccount", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCheckingAccount_Operations(), this.getOperation(), null, "operations", null, 0, -1, CheckingAccount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
@@ -1149,6 +1171,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEParameter(op, this.getAmount(), "amount", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(operationServiceEClass, ecorePackage.getEBoolean(), "validateAmounts", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(operationServiceEClass, ecorePackage.getEString(), "getOperationTitleAsString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(operationServiceEClass, ecorePackage.getEString(), "getOperationTotalAmount", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(creditEClass, Credit.class, "Credit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1191,6 +1217,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		op=addEOperation(categoryServiceEClass, null, "removeOperationTitle", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getOperationTitle(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(categoryServiceEClass, this.getCategory(), "getCategories", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(categoryServiceEClass, this.getCategory(), "findCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(categoryServiceEClass, ecorePackage.getEBoolean(), "isTitleUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(categoryServiceEClass, ecorePackage.getEBoolean(), "isUndefinedCategory", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(operationTitleEClass, OperationTitle.class, "OperationTitle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationTitle_Categories(), this.getCategory(), this.getCategory_OperationTitles(), "categories", null, 0, -1, OperationTitle.class, !IS_TRANSIENT,
@@ -1276,6 +1312,39 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		op=addEOperation(trackerServiceEClass, null, "deleteOperationTitle", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, this.getCategoriesRepository(), "getCategoriesRepository", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, this.getCategory(), "getAllCategories", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, this.getAccount(), "getAccounts", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, this.getCategory(), "getCategories", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, ecorePackage.getEInt(), "findYears", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(trackerServiceEClass, ecorePackage.getEBoolean(), "isOperationTitleUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(trackerServiceEClass, ecorePackage.getEBoolean(), "isCategoryTitleUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "title", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(trackerServiceEClass, ecorePackage.getEBoolean(), "isOriginIdentifierUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "identifier", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(trackerServiceEClass, ecorePackage.getEBoolean(), "isOwnerIdentifierUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "firstName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "lastName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(trackerServiceEClass, ecorePackage.getEBoolean(), "isAccountIdentifierUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "identifier", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op=addEOperation(trackerServiceEClass, this.getAccount(), "findAccount", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, this.getOperationTitle(), "getOperationsTitles", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(trackerServiceEClass, this.getOrigin(), "getOrigins", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(operationsTitleRepositoryEClass, OperationsTitleRepository.class, "OperationsTitleRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationsTitleRepository_OperationsTitles(), this.getOperationTitle(), null, "operationsTitles", null, 0, -1, OperationsTitleRepository.class,

@@ -3,9 +3,13 @@
 package fr.rostren.tracker.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -13,8 +17,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CategoryService;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.model.utils.TrackerUtils;
@@ -128,22 +133,17 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
 	 */
 	@Override
 	public void addOperationTitle(String title) {
-		Tracker tracker=TrackerUtils.getTracker(category);
-		List<OperationTitle> titles=TrackerUtils.getOperationsTitles(tracker).stream()//
-				.filter(operationTitle -> operationTitle.getTitle() != null && operationTitle.getTitle().equals(title))//
-				.collect(Collectors.toList());
-		if (titles.isEmpty()) {
-			OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle(tracker, title);
+		Optional<OperationTitle> titleOpt=TrackerUtils.getTrackerService(category).findOperationTitle(title);
+		if (!titleOpt.isPresent()) {
+			OperationTitle operationTitle=TrackerFactory.eINSTANCE.createOperationTitle(TrackerUtils.getTracker(category), title);
 			category.getOperationTitles().add(operationTitle);
 			return;
 		}
-		if (titles.size() > 1) {
-			throw new IllegalArgumentException("The Tracker contains several Operation Titles for the same string !"); //$NON-NLS-1$
-		}
-		OperationTitle any=titles.get(0);
-		if (!category.getOperationTitles().contains(any)) {
-			category.getOperationTitles().add(any);
-		}
+		titleOpt.ifPresent(any -> {
+			if (!category.getOperationTitles().contains(any)) {
+				category.getOperationTitles().add(any);
+			}
+		});
 	}
 
 	/**
@@ -169,6 +169,103 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
 		if (category.getOperationTitles().contains(title)) {
 			category.getOperationTitles().remove(title);
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns a list containing the category itself and all its subCategories.
+	 * @param category the {@link Category} instance
+	 * @return the categories
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public EList<Category> getCategories() {
+		if (category instanceof IncomeCategory) {
+			EList<Category> categories=new BasicEList<>(((IncomeCategory)category).getIncomes().stream()//
+					.flatMap(subCategory -> TrackerUtils.getCategoryService(subCategory).getCategories().stream())//
+					.collect(Collectors.toList()));
+			categories.add(0, category);
+			return categories;
+		}
+		if (category instanceof SpendingCategory) {
+			EList<Category> categories=new BasicEList<>(((SpendingCategory)category).getSpendings().stream()//
+					.flatMap(subCategory -> TrackerUtils.getCategoryService(subCategory).getCategories().stream())//
+					.collect(Collectors.toList()));
+			categories.add(0, category);
+			return categories;
+		}
+		throw new IllegalArgumentException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns the concerned category
+	 * @param category the category to test
+	 * @param title the category title as a {@link String}
+	 * @return the category
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public Category findCategory(String title) {
+		if (title.equals(category.getTitle())) {
+			return category;
+		}
+		if (category instanceof IncomeCategory) {
+			for (IncomeCategory subCategory: ((IncomeCategory)category).getIncomes()) {
+				return TrackerUtils.getCategoryService(subCategory).findCategory(title);
+			}
+		}
+		if (category instanceof SpendingCategory) {
+			for (SpendingCategory subCategory: ((SpendingCategory)category).getSpendings()) {
+				return TrackerUtils.getCategoryService(subCategory).findCategory(title);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <code>true</code> if is unique, <code>false</code> otherwise.
+	 * @param category the category
+	 * @param title the title
+	 * @return <code>true</code> if is unique, <code>false</code> otherwise.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isTitleUnique(String title) {
+		//FIXME validate the next java8 code
+		if (StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
+			return false;
+		}
+
+		if (category instanceof IncomeCategory) {
+			return ((IncomeCategory)category).getIncomes().stream()//
+					.allMatch(subCategory -> TrackerUtils.getCategoryService(subCategory).isTitleUnique(title));
+		}
+		if (category instanceof SpendingCategory) {
+			return ((SpendingCategory)category).getSpendings().stream()//
+					.allMatch(subCategory -> TrackerUtils.getCategoryService(subCategory).isTitleUnique(title));
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <code>true</code> if the category is the undefined category, <code>false</code> otherwise.
+	 * @param category the category
+	 * @return <code>true</code> if the category is the undefined category, <code>false</code> otherwise.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isUndefinedCategory() {
+		if (category == null) {
+			throw new IllegalArgumentException("The category cannot be null.");//$NON-NLS-1$
+		}
+		return TrackerUtils.UNDEFINED_INCOME_TITLE.equals(category.getTitle()) || TrackerUtils.UNDEFINED_SPENDING_TITLE.equals(category.getTitle());
 	}
 
 	/**

@@ -124,7 +124,7 @@ public class LineContent {
 	 */
 	private Category findCategoryInTrackerModel(String title, Tracker tracker) {
 		linkedOperationTitle=null;
-		TrackerUtils.findOperationTitle(tracker, title).ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
+		TrackerUtils.getTrackerService(tracker).findOperationTitle(title).ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
 		if (linkedOperationTitle != null && !linkedOperationTitle.getCategories().isEmpty()) {
 			return linkedOperationTitle.getCategories().get(0);
 		}

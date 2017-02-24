@@ -3,12 +3,15 @@ package fr.rostren.tracker.ui.views;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -201,11 +204,11 @@ public class TrackerHistogramView extends ViewPart {
 	 * Populates the histogram according to the filter selection
 	 */
 	public void populateHistogram() {
-		List<String> months=getHistogramMonths();
+		EList<String> months=getHistogramMonths();
 		List<Double> incomeValues=new ArrayList<>();
 		List<Double> spendingValues=new ArrayList<>();
 
-		Account account=TrackerUtils.findAccount(tracker, accountsCombo.getItem(accountsCombo.getSelectionIndex()));
+		Account account=TrackerUtils.getTrackerService(tracker).findAccount(accountsCombo.getItem(accountsCombo.getSelectionIndex()));
 		if (yearsCombo.getItems().length == 0) {
 			//FIXME there is no item in the combo => warning message
 			return;
@@ -214,19 +217,19 @@ public class TrackerHistogramView extends ViewPart {
 		if (categoryCheckButton.getSelection()) {
 			String item=categoriesCombo.getText();
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
-				incomeValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, SpendingCategory.class);
 			}
 			else {
-				incomeValues=TrackerUtils.findIncomeCategoryAmounts(account, item, months, year, true);
-				spendingValues=TrackerUtils.findSpendingCategoryAmounts(account, item, months, year, true);
+				incomeValues=TrackerUtils.getAccountService(account).findIncomeCategoryAmounts(item, months, year, true);
+				spendingValues=TrackerUtils.getAccountService(account).findSpendingCategoryAmounts(item, months, year, true);
 			}
 		}
 		else if (operationCheckButton.getSelection()) {
 			String item=operationsCombo.getText();
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
-				incomeValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.findAllCategoriesAmount(account, months, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, IncomeCategory.class);
+				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, SpendingCategory.class);
 			}
 			else {
 				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, months);
@@ -240,10 +243,10 @@ public class TrackerHistogramView extends ViewPart {
 	/**
 	 * @return the list of dates
 	 */
-	private List<String> getHistogramMonths() {
-		return Arrays.asList(Month.values()).stream()//
+	private EList<String> getHistogramMonths() {
+		return new BasicEList<>(Arrays.asList(Month.values()).stream()//
 				.map(month -> month.toString())//
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 
 	/**
@@ -294,10 +297,10 @@ public class TrackerHistogramView extends ViewPart {
 	 *Populates the Filter combos
 	 */
 	private void populateFilter() {
-		populateCombo(accountsCombo, getAccountsItems(TrackerUtils.getAccounts(tracker)));
-		populateCombo(categoriesCombo, getCategoriesItems(TrackerUtils.getCategories(tracker)));
-		populateCombo(operationsCombo, getOperationsItems(TrackerUtils.getOperationsTitles(tracker)));
-		populateCombo(yearsCombo, getYearsItems(TrackerUtils.findYears(tracker)));
+		populateCombo(accountsCombo, getAccountsItems(new HashSet<>(TrackerUtils.getTrackerService(tracker).getAccounts())));
+		populateCombo(categoriesCombo, getCategoriesItems(new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories())));
+		populateCombo(operationsCombo, getOperationsItems(new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles())));
+		populateCombo(yearsCombo, getYearsItems(new HashSet<>(TrackerUtils.getTrackerService(tracker).findYears())));
 	}
 
 	/**

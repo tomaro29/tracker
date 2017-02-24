@@ -2,6 +2,8 @@
  */
 package fr.rostren.tracker;
 
+import java.util.Optional;
+
 import org.eclipse.emf.ecore.EObject;
 
 import fr.rostren.tracker.model.utils.OperationData;
@@ -88,6 +90,22 @@ public interface OperationService extends EObject {
 	boolean validateAmounts();
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getOperationTitleAsString();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getOperationTotalAmount();
+
+	/**
 	 * Adapts an {@link OperationData} instance to an {@link Operation} instance
 	 * @param operation the operation data to adapt
 	 * @return the adapted {@link Operation} instance
@@ -100,5 +118,21 @@ public interface OperationService extends EObject {
 	 * @return the adapted {@link OperationData} instance
 	 */
 	OperationData adaptOperation();
+
+	/**
+	 * Returns the {@link OperationTitle} instance
+	 * @param operation the operation
+	 * @param title the operation title as a {@link String}
+	 * @return the {@link OperationTitle} instance
+	 */
+	Optional<OperationTitle> findOperationTitle(String title);
+
+	/**
+	 * Returns the operation origin
+	 * @param operation the operation
+	 * @param originId the origin Id
+	 * @return the operation origin
+	 */
+	Optional<Origin> findOperationOrigin(String originId);
 
 } // OperationService

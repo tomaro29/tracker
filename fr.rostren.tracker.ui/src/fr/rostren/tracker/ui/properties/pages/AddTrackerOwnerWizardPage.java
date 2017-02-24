@@ -88,7 +88,7 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 			setErrorMessage("The Owner Last Name cannot be empty or blank !"); //$NON-NLS-1$
 			return false;
 		}
-		if (!TrackerUtils.isOwnerIdentifierUnique(tracker, firstName, lastName)) {
+		if (!TrackerUtils.getTrackerService(tracker).isOwnerIdentifierUnique(firstName, lastName)) {
 			setErrorMessage("The owner must be unique !"); //$NON-NLS-1$
 			return false;
 		}

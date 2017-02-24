@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.model.utils.TrackerUtils;
@@ -30,8 +32,8 @@ public class TrackerCategoriesContentProvider extends AbstractContentProvider {
 			}
 		}
 		else if (parentElement instanceof Tracker) {
-			for (Category category: TrackerUtils.getAllCategories(((Tracker)parentElement).getCategoriesRepository())) {
-				children.addAll(TrackerUtils.getCategories(category));
+			for (Category category: TrackerUtils.getTrackerService((EObject)parentElement).getAllCategories()) {
+				children.addAll(TrackerUtils.getCategoryService(category).getCategories());
 			}
 		}
 		Collections.sort(children, new CategoryComparator());

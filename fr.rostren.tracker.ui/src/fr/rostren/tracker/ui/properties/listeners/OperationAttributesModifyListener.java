@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Widget;
 
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.TrackerFactory;
@@ -36,12 +37,13 @@ public class OperationAttributesModifyListener extends AbstractModifyListener {
 		Text totalAmountText=section.getTotalAmountText();
 
 		Operation operation=(Operation)eObject;
+		OperationService service=TrackerUtils.getOperationService(operation);
 		if (widget.equals(titleCombo)) {
-			OperationTitle title=TrackerUtils.findOperationTitle(operation, titleCombo.getText()).orElseThrow(IllegalArgumentException::new);
+			OperationTitle title=service.findOperationTitle(titleCombo.getText()).orElseThrow(IllegalArgumentException::new);
 			DomainUtils.executeSetCommand(operation, TrackerPackage.Literals.OPERATION__OPERATION_TITLE, title);
 		}
 		if (widget.equals(originCombo)) {
-			Origin origin=TrackerUtils.findOperationOrigin(operation, originCombo.getText()).orElseThrow(IllegalArgumentException::new);
+			Origin origin=service.findOperationOrigin(originCombo.getText()).orElseThrow(IllegalArgumentException::new);
 			DomainUtils.executeSetCommand(operation, TrackerPackage.Literals.OPERATION__ORIGIN, origin);
 		}
 		if (widget.equals(totalAmountText)) {

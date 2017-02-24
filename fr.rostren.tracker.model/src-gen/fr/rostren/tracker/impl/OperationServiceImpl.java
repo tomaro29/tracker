@@ -2,6 +2,9 @@
  */
 package fr.rostren.tracker.impl;
 
+import java.util.Optional;
+
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -14,10 +17,15 @@ import fr.rostren.tracker.Credit;
 import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationService;
+import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.Origin;
+import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.TrackerService;
 import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.model.utils.OperationType;
+import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -172,6 +180,62 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 		operation.setTotalAmount(operatioData.getTotalAmount());
 		operation.getSubAmounts().addAll(operatioData.getSubAmounts());
 		return operation;
+	}
+
+	@Override
+	public Optional<OperationTitle> findOperationTitle(String title) {
+		if (operation == null) {
+			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
+		}
+		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
+			return null;
+		}
+
+		TrackerService service=TrackerUtils.getTrackerService(operation);
+		return service.findOperationTitle(title);
+	}
+
+	@Override
+	public Optional<Origin> findOperationOrigin(String originId) {
+		if (operation == null) {
+			throw new IllegalArgumentException("The operation cannot be null.");//$NON-NLS-1$
+		}
+		if (StringUtils.isEmpty(originId) || StringUtils.isBlank(originId)) {
+			return null;
+		}
+		Tracker tracker=TrackerUtils.getTracker(operation);
+		if (tracker == null) {
+			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
+		}
+		return tracker.getOriginsRepository().getOrigins().stream()//
+				.filter(origin -> originId.equals(origin.getIdentifier()))//
+				.findFirst();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns the operation title as a {@link String}
+	 * @param operationOpt the operation {@link Optional} instance
+	 * @return the operation title as a {@link String}
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getOperationTitleAsString() {
+		return operation.getOperationTitle() == null ? StringUtils.EMPTY : operation.getOperationTitle().getTitle();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns the operation total amount as a {@link String}
+	 * @param operationOpt the operation {@link Optional} instance
+	 * @return the operation total amount as a {@link String}
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getOperationTotalAmount() {
+		return operation.getTotalAmount() == 0 ? StringUtils.EMPTY : String.valueOf(operation.getTotalAmount());
 	}
 
 	/**

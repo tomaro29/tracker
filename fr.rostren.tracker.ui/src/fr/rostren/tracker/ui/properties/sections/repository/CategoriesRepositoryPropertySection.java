@@ -131,7 +131,7 @@ public class CategoriesRepositoryPropertySection extends AbstractTablePropertySe
 	 */
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof CategoriesRepository);
-		List<Category> categories=TrackerUtils.getCategories((CategoriesRepository)currentEObject);
+		List<Category> categories=TrackerUtils.getTrackerService(currentEObject).getCategories();
 		if (categories == null || categories.isEmpty()) {
 			return Collections.emptyList();
 		}

@@ -4,12 +4,12 @@ package fr.rostren.tracker.provider;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
+import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.Transfer;
@@ -64,8 +64,8 @@ public class IncomingItemProvider extends TransferItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Transfer)object));
-		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Transfer)object));
+		String operationTitle=TrackerUtils.getOperationService((Operation)object).getOperationTitleAsString();
+		String operationAmount=TrackerUtils.getOperationService((Operation)object).getOperationTotalAmount();
 		String operationDate=((Transfer)object).getDate() == null	? null
 																	: TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(),
 																			((Transfer)object).getDate());

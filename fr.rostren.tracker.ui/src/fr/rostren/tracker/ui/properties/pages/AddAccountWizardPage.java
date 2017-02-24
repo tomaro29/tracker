@@ -152,7 +152,7 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 				return false;
 			}
 		}
-		if (!TrackerUtils.isAccountIdentifierUnique(tracker, identifier)) {
+		if (!TrackerUtils.getTrackerService(tracker).isAccountIdentifierUnique(identifier)) {
 			setErrorMessage("The Account identifier must be unique !"); //$NON-NLS-1$
 			return false;
 		}

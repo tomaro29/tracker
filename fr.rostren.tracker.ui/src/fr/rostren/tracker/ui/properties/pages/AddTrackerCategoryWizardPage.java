@@ -133,7 +133,7 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 			setErrorMessage("The Category title cannot be empty or blank !"); //$NON-NLS-1$
 			return false;
 		}
-		if (!TrackerUtils.isCategoryTitleUnique(tracker, title)) {
+		if (!TrackerUtils.getTrackerService(tracker).isCategoryTitleUnique(title)) {
 			setErrorMessage("The Category title must be unique !"); //$NON-NLS-1$
 			return false;
 		}

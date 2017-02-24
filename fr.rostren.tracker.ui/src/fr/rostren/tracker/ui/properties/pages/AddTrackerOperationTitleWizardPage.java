@@ -70,7 +70,7 @@ public class AddTrackerOperationTitleWizardPage extends AbstractAddWizardPage {
 			setErrorMessage("The Operation title cannot be empty or blank !"); //$NON-NLS-1$
 			return false;
 		}
-		if (!TrackerUtils.isOperationTitleUnique(tracker, title)) {
+		if (!TrackerUtils.getTrackerService(tracker).isOperationTitleUnique(title)) {
 			setErrorMessage("The Operation title must be unique !"); //$NON-NLS-1$
 			return false;
 		}

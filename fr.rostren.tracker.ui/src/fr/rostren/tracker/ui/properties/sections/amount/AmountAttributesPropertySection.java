@@ -144,7 +144,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	private List<Category> getSortedCategories() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		Tracker tracker=TrackerUtils.getTracker(currentEObject);
-		Set<Category> categories=new HashSet(TrackerUtils.getCategories(tracker));
+		Set<Category> categories=new HashSet(TrackerUtils.getTrackerService(tracker).getCategories());
 		return getSortedList(categories, new CategoryComparator());
 	}
 

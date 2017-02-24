@@ -1,6 +1,7 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
@@ -56,7 +57,7 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-				refreshComboViewerContent(titlesComboViewer, TrackerUtils.getOperationsTitles(tracker), newOperationTitle);
+				refreshComboViewerContent(titlesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles()), newOperationTitle);
 			}
 		}
 	};
@@ -88,7 +89,7 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		Set<OperationTitle> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
+		Set<OperationTitle> operationsTitles=new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles());
 		titlesComboViewer=createComboViewer(parent, "Operation Title: ", operationsTitles, //$NON-NLS-1$
 				new OperationsTitlesRepositoryContentProvider(), new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {

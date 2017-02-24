@@ -3,6 +3,7 @@ package fr.rostren.tracker.ui.properties.pages;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -86,7 +87,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 						newCategory.setDescription(description);
 					}
 					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getIncome(), TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
-					refreshComboViewerContent(categoriesComboViewer, TrackerUtils.getCategories(tracker), newCategory);
+					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories()), newCategory);
 				}
 				else if (wizard.isSpending()) {
 					Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
@@ -100,7 +101,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 						newCategory.setDescription(description);
 					}
 					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getSpending(), TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
-					refreshComboViewerContent(categoriesComboViewer, TrackerUtils.getCategories(tracker), newCategory);
+					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories()), newCategory);
 				}
 			}
 		}
@@ -162,7 +163,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createText(parent, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
-		Set<Category> categories=TrackerUtils.getCategories(tracker);
+		Set<Category> categories=new HashSet(TrackerUtils.getTrackerService(tracker).getCategories());
 		categoriesComboViewer=createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
 				new CategoryLabelProvider(), categoryListener, addCategoryButtonlistener);
 		if (!categories.isEmpty()) {

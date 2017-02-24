@@ -1,6 +1,7 @@
 package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
@@ -77,7 +78,7 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-				refreshComboViewerContent(titlesComboViewer, TrackerUtils.getOperationsTitles(tracker), newOperationTitle);
+				refreshComboViewerContent(titlesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles()), newOperationTitle);
 			}
 		}
 	};
@@ -96,7 +97,7 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
-				refreshComboViewerContent(originsComboViewer, TrackerUtils.getOrigins(tracker), newOrigin);
+				refreshComboViewerContent(originsComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getOrigins()), newOrigin);
 			}
 		}
 	};
@@ -156,14 +157,14 @@ public class AddCheckOperationWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createCombo(parent, "Operation Type: ", AddCheckOperationWizardPage.OPERATION_TYPES, modifyOperationTypeListener); //$NON-NLS-1$
 
-		Set<OperationTitle> operationsTitles=TrackerUtils.getOperationsTitles(tracker);
+		Set<OperationTitle> operationsTitles=new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles());
 		titlesComboViewer=createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
 				new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
 			title=operationsTitles.iterator().next();
 		}
 
-		Set<Origin> origins=TrackerUtils.getOrigins(tracker);
+		Set<Origin> origins=new HashSet<>(TrackerUtils.getTrackerService(tracker).getOrigins());
 		originsComboViewer=createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
 				new OriginLabelProvider(), originListener, addOriginButtonlistener);
 		if (!origins.isEmpty()) {

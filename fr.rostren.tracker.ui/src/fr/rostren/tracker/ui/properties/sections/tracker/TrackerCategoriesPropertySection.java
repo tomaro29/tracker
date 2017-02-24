@@ -132,7 +132,7 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 	 */
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<Category> categories=TrackerUtils.getAllCategories((CategoriesRepository)currentEObject);
+		List<Category> categories=TrackerUtils.getTrackerService(currentEObject).getAllCategories();
 		if (categories == null || categories.isEmpty()) {
 			return Collections.emptyList();
 		}

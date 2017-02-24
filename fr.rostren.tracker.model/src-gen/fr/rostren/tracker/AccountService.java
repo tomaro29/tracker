@@ -3,7 +3,9 @@
 package fr.rostren.tracker;
 
 import java.time.Month;
+import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -54,7 +56,7 @@ public interface AccountService extends EObject {
 	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	double sumPerCategory(Category category, Month month, int year);
+	double sumPerCategory(Category category, Month month, int year, boolean wishedDated);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,7 +64,7 @@ public interface AccountService extends EObject {
 	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	double averagePerCategory(Category category, Month month, int year);
+	double averagePerCategory(Category category, Month month, int year, boolean wishedDated);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +72,7 @@ public interface AccountService extends EObject {
 	 * @model
 	 * @generated
 	 */
-	double sumPerCategory(Category category, int year);
+	double sumPerCategory(Category category, int year, boolean wishedDated);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,7 +80,7 @@ public interface AccountService extends EObject {
 	 * @model
 	 * @generated
 	 */
-	double averagePerCategory(Category category, int year);
+	double averagePerCategory(Category category, int year, boolean wishedDated);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,5 +97,39 @@ public interface AccountService extends EObject {
 	 * @generated
 	 */
 	double averagePerCategory(Category category);
+
+	/**
+	 * Returns the total amount
+	 * @param months the months to witch we need to extract income category amount
+	 * @param year the year for witch we need to extract data
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @param clazz the class type of the amount {@link Category}.
+	 * @return the total amount of all typed categories
+	 */
+	List<Double> findAllCategoriesAmount(List<String> months, int year, boolean wishedEnabled, Class<?> clazz);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monthsMany="true"
+	 * @generated
+	 */
+	EList<Double> findIncomeCategoryAmounts(String item, EList<String> months, int year, boolean wishedDated);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monthsMany="true"
+	 * @generated
+	 */
+	EList<Double> findSpendingCategoryAmounts(String item, EList<String> months, int year, boolean wishedDated);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monthDataType="fr.rostren.tracker.Month"
+	 * @generated
+	 */
+	EList<Amount> findCategoryAmounts(Category category, Month month, int year, boolean wishedDated);
 
 } // AccountService

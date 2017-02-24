@@ -94,7 +94,7 @@ public class AddTrackerOriginWizardPage extends AbstractAddWizardPage {
 			setErrorMessage("The origin identifier cannot be empty or blank !"); //$NON-NLS-1$
 			return false;
 		}
-		if (!TrackerUtils.isOriginIdentifierUnique(tracker, identifier)) {
+		if (!TrackerUtils.getTrackerService(tracker).isOriginIdentifierUnique(identifier)) {
 			setErrorMessage("The origin identifier must be unique !"); //$NON-NLS-1$
 			return false;
 		}

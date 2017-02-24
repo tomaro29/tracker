@@ -533,7 +533,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 
 	@Override
 	public Category createCategory(Tracker tracker, OperationTitle title, OperationType type) {
-		CategoriesRepository categoriesRepository=TrackerUtils.getCategoriesRepository(tracker);
+		CategoriesRepository categoriesRepository=TrackerUtils.getTrackerService(tracker).getCategoriesRepository();
 		if (OperationType.CREDIT.equals(type)) {
 			Category undefined=getUndefinedIncomeCategory(categoriesRepository);
 			List<IncomeCategory> incomes=categoriesRepository.getIncome().getIncomes();
@@ -584,7 +584,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		}
 
 		Optional<IncomeCategory> findAny=income.getIncomes().stream()//
-				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
+				.filter(category -> TrackerUtils.getCategoryService(category).isUndefinedCategory())//
 				.findAny();
 		return findAny.orElse(createCategory(income));
 	}
@@ -601,7 +601,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			repository.setSpending(spending);
 		}
 		return spending.getSpendings().stream()//
-				.filter(category -> TrackerUtils.isUndefinedCategory(category))//
+				.filter(category -> TrackerUtils.getCategoryService(category).isUndefinedCategory())//
 				.findAny().orElse(createCategory(spending));
 	}
 

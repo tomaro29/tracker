@@ -4,7 +4,6 @@ package fr.rostren.tracker.provider;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -66,8 +65,8 @@ public class CreditItemProvider extends OperationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String operationTitle=TrackerUtils.getOperationTitleAsString(Optional.of((Operation)object));
-		String operationAmount=TrackerUtils.getOperationTotalAmount(Optional.of((Operation)object));
+		String operationTitle=TrackerUtils.getOperationService((Operation)object).getOperationTitleAsString();
+		String operationAmount=TrackerUtils.getOperationService((Operation)object).getOperationTotalAmount();
 		String operationDate=((Operation)object).getDate() == null	? null
 																	: TrackerFactory.eINSTANCE.convertToString(TrackerPackage.Literals.OPERATION__DATE.getEAttributeType(),
 																			((Operation)object).getDate());

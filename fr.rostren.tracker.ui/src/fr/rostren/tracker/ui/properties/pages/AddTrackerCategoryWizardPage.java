@@ -28,6 +28,8 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 
 	protected String title;
 	protected String description;
+	protected boolean isIncome;
+	protected boolean isSpending;
 
 	protected Button incomeCheckButton;
 	protected Button spendingCheckButton;
@@ -53,6 +55,7 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 		public void widgetSelected(SelectionEvent event) {
 			Button button=(Button)event.getSource();
 			spendingCheckButton.setSelection(!button.getSelection());
+			isIncome=button.getSelection();
 		}
 
 		@Override
@@ -66,6 +69,7 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 		public void widgetSelected(SelectionEvent event) {
 			Button button=(Button)event.getSource();
 			incomeCheckButton.setSelection(!button.getSelection());
+			isSpending=button.getSelection();
 		}
 
 		@Override
@@ -114,14 +118,14 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 	 * @return <code>true</code> if the category is an income one, <code>false</code> otherwise.
 	 */
 	public boolean isIncome() {
-		return incomeCheckButton.getSelection();
+		return isIncome;
 	}
 
 	/**
 	 * @return <code>true</code> if the category is an spending one, <code>false</code> otherwise.
 	 */
 	public boolean isSpending() {
-		return spendingCheckButton.getSelection();
+		return isSpending;
 	}
 
 	/* (non-Javadoc)

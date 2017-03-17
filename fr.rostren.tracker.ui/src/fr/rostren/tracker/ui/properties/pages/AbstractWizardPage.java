@@ -107,7 +107,9 @@ public abstract class AbstractWizardPage extends WizardPage {
 		DateTime dateTime=new DateTime(composite, SWT.DATE | SWT.MEDIUM | SWT.DROP_DOWN);
 		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 		if (content != null) {
-			dateTime.setDate(content.getYear(), content.getMonth().getValue(), content.getDayOfMonth());
+			dateTime.setDay(content.getDayOfMonth());
+			dateTime.setMonth(content.getMonth().getValue() - 1);
+			dateTime.setYear(content.getYear());
 		}
 		dateTime.addSelectionListener(selectionListener);
 		return dateTime;
@@ -143,8 +145,8 @@ public abstract class AbstractWizardPage extends WizardPage {
 	 * @param addButtonlistener the "Add" button listener
 	 * @return the created combo viewer
 	 */
-	protected ComboViewer createComboViewer(Composite composite, String label, Set<? extends Object> input, IContentProvider contentProvider,
-			ILabelProvider labelProvider, ISelectionChangedListener listener, SelectionAdapter addButtonlistener) {
+	protected ComboViewer createComboViewer(Composite composite, String label, Set<? extends Object> input, IContentProvider contentProvider, ILabelProvider labelProvider,
+			ISelectionChangedListener listener, SelectionAdapter addButtonlistener) {
 		createLabel(composite, label);
 
 		Composite parent=new Composite(composite, SWT.NONE);

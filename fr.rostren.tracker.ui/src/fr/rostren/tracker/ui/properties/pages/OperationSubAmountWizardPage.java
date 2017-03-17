@@ -27,7 +27,9 @@ import org.eclipse.swt.widgets.Text;
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.Operation;
+import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
@@ -86,8 +88,9 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 					if (!StringUtils.isEmpty(description)) {
 						newCategory.setDescription(description);
 					}
-					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getIncome(), TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
-					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories()), newCategory);
+					IncomeCategory income=tracker.getCategoriesRepository().getIncome();
+					DomainUtils.executeAddCommand(income, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
+					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(TrackerUtils.getAllIncomeCategories(income)), newCategory);
 				}
 				else if (wizard.isSpending()) {
 					Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
@@ -100,8 +103,9 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 					if (!StringUtils.isEmpty(description)) {
 						newCategory.setDescription(description);
 					}
-					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getSpending(), TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
-					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories()), newCategory);
+					SpendingCategory spending=tracker.getCategoriesRepository().getSpending();
+					DomainUtils.executeAddCommand(spending, TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+					refreshComboViewerContent(categoriesComboViewer, new HashSet<>(TrackerUtils.getAllSpendingCategories(spending)), newCategory);
 				}
 			}
 		}
@@ -163,7 +167,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		createText(parent, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
-		Set<Category> categories=new HashSet(TrackerUtils.getTrackerService(tracker).getCategories());
+		Set<Category> categories=new HashSet<>(TrackerUtils.getTrackerService(tracker).getAllCategories());
 		categoriesComboViewer=createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
 				new CategoryLabelProvider(), categoryListener, addCategoryButtonlistener);
 		if (!categories.isEmpty()) {

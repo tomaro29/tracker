@@ -237,7 +237,7 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
 	@Override
 	public boolean isTitleUnique(String title) {
 		//FIXME validate the next java8 code
-		if (StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
+		if (!StringUtils.isEmpty(category.getTitle()) && StringUtils.deleteWhitespace(category.getTitle()).equals(StringUtils.deleteWhitespace(title))) {
 			return false;
 		}
 

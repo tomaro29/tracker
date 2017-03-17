@@ -1,6 +1,5 @@
 package fr.rostren.tracker.model.utils;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,34 +118,30 @@ public class TrackerUtils {
 
 	/**
 	 * Returns the categories
-	 * @param incomeOpt the {@link IncomeCategory} {@link Optional} instance
+	 * @param income the {@link IncomeCategory} instance
 	 * @return the categories
 	 */
-	public static List<Category> getAllIncomeCategories(Optional<IncomeCategory> incomeOpt) {
-		return incomeOpt.map(income -> {
-			List<Category> categories=income.getIncomes()//
-					.stream()//
-					.flatMap(category -> getCategoryService(category).getCategories().stream())//
-					.collect(Collectors.toList());
-			categories.add(0, income);
-			return categories;
-		}).orElse(Collections.emptyList());
+	public static List<Category> getAllIncomeCategories(IncomeCategory income) {
+		List<Category> categories=income.getIncomes()//
+				.stream()//
+				.flatMap(category -> getCategoryService(category).getCategories().stream())//
+				.collect(Collectors.toList());
+		categories.add(0, income);
+		return categories;
 	}
 
 	/**
 	 * Returns the categories
-	 * @param spendingOpt the {@link SpendingCategory} {@link Optional} instance
+	 * @param spending the {@link SpendingCategory} instance
 	 * @return the categories
 	 */
-	public static List<Category> getAllSpendingCategories(Optional<SpendingCategory> spendingOpt) {
-		return spendingOpt.map(spending -> {
-			List<Category> categories=spending.getSpendings()//
-					.stream()//
-					.flatMap(category -> getCategoryService(category).getCategories().stream())//
-					.collect(Collectors.toList());
-			categories.add(0, spending);
-			return categories;
-		}).orElse(Collections.emptyList());
+	public static List<Category> getAllSpendingCategories(SpendingCategory spending) {
+		List<Category> categories=spending.getSpendings()//
+				.stream()//
+				.flatMap(category -> getCategoryService(category).getCategories().stream())//
+				.collect(Collectors.toList());
+		categories.add(0, spending);
+		return categories;
 	}
 
 	/**

@@ -150,6 +150,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 
 		this.operation=operation;
 		operationService=TrackerFactory.eINSTANCE.createOperationService();
+		operationService.setOperation(operationService.adaptOperation(operation));
 		this.account=account;
 		operationTitle=operation.getOperationTitle().getTitle();
 

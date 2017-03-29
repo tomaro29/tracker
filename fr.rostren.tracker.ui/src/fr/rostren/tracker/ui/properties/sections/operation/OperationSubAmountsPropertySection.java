@@ -38,7 +38,7 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 	private final ITreeContentProvider contentProvider=new OperationSubAmountContentProvider();
 	private final ILabelProvider labelProvider=new OperationSubAmountLabelProvider();
 
-	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
+	private final SelectionAdapter addButtonListener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
 			Operation operation=getOperation();
@@ -71,6 +71,43 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 			}
 		}
 	};
+	private final SelectionAdapter editButtonListener=new SelectionAdapter() {
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+			Operation operation=getOperation();
+
+			ISelection selection=tableViewer.getSelection();
+			Assert.isTrue(selection instanceof StructuredSelection);
+			Object elementToEdit=((StructuredSelection)selection).getFirstElement();
+			if (elementToEdit == null || !(elementToEdit instanceof Amount)) {
+				return;
+			}
+			Amount amount=(Amount)elementToEdit;
+			Tracker tracker=TrackerUtils.getTracker(operation);
+
+			OperationService operationService=TrackerFactory.eINSTANCE.createOperationService();
+			operationService.setOperation(operation);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operationService.adaptOperation(), amount, false);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				Category category=wizard.getAmountCategory();
+				if (category != null) {
+					amount.setCategory(category);
+				}
+
+				double value=wizard.getAmountValue();
+				if (value != 0) {
+					amount.setValue(value);
+				}
+
+				EList<Category> categories=operation.getOperationTitle().getCategories();
+				if (!categories.contains(amount.getCategory())) {
+					categories.add(amount.getCategory());
+				}
+				refresh();
+			}
+		}
+	};
 
 	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
 		@Override
@@ -99,7 +136,7 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
+		table=createTable(body, null, addButtonListener, editButtonListener, removeButtonListener);
 		tableViewer=new TableViewer(table);
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setLabelProvider(labelProvider);
@@ -132,6 +169,11 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 	}
 
 	@Override
+	public void dispose() {
+		disposeButtonsListeners(addButtonListener, editButtonListener, removeButtonListener);
+	}
+
+	@Override
 	protected void addListeners() {
 		// TODO Auto-generated method stub
 
@@ -140,10 +182,5 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 	@Override
 	protected void disposeListeners() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, removeButtonListener);
 	}
 }

@@ -118,6 +118,6 @@ public class OriginOperationsPropertySection extends AbstractTablePropertySectio
 
 	@Override
 	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+		disposeButtonsListeners(addButtonlistener, null, removeButtonListener);
 	}
 }

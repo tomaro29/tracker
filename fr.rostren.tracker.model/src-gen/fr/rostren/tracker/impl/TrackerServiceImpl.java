@@ -327,18 +327,17 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	@Override
 	public EList<Category> getAllCategories() {
 		CategoriesRepository repository=tracker.getCategoriesRepository();
-		//FIXME validate Java 8 code migration
 		IncomeCategory income=repository.getIncome();
 		EList<Category> categories=new BasicEList<>();
 		if (income != null) {
-			categories=new BasicEList<>(income.getIncomes().stream()//
+			categories.addAll(income.getIncomes().stream()//
 					.flatMap(category -> TrackerUtils.getCategoryService(category).getCategories().stream())//
 					.collect(Collectors.toList()));
 			categories.add(0, income);
 		}
 		SpendingCategory spending=repository.getSpending();
 		if (spending != null) {
-			categories=new BasicEList<>(spending.getSpendings().stream()//
+			categories.addAll(spending.getSpendings().stream()//
 					.flatMap(category -> TrackerUtils.getCategoryService(category).getCategories().stream())//
 					.collect(Collectors.toList()));
 			categories.add(0, spending);
@@ -406,7 +405,6 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	 */
 	@Override
 	public EList<Integer> findYears() {
-		//FIXME validate Java 8 code migration
 		EList<Integer> years=new BasicEList<>();
 		getAccounts().stream()//
 				.filter(account -> account instanceof CheckingAccount)//
@@ -460,7 +458,6 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	 */
 	@Override
 	public boolean isCategoryTitleUnique(String title) {
-		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The title to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
@@ -479,7 +476,6 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	 */
 	@Override
 	public boolean isOriginIdentifierUnique(String identifier) {
-		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(identifier) || StringUtils.isBlank(identifier)) {
 			throw new IllegalArgumentException("The identifier to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
@@ -500,7 +496,6 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	 */
 	@Override
 	public boolean isOwnerIdentifierUnique(String firstName, String lastName) {
-		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(firstName) || StringUtils.isBlank(firstName)) {
 			throw new IllegalArgumentException("The first name to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}
@@ -524,7 +519,6 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	 */
 	@Override
 	public boolean isAccountIdentifierUnique(String identifier) {
-		//FIXME validate the next java8 code
 		if (StringUtils.isEmpty(identifier) || StringUtils.isBlank(identifier)) {
 			throw new IllegalArgumentException("The identifier to check cannot be null, empty or blank.");//$NON-NLS-1$
 		}

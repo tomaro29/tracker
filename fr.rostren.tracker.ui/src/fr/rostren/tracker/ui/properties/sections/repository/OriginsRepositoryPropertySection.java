@@ -126,6 +126,6 @@ public class OriginsRepositoryPropertySection extends AbstractTablePropertySecti
 
 	@Override
 	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+		disposeButtonsListeners(addButtonlistener, null, removeButtonListener);
 	}
 }

@@ -150,7 +150,6 @@ public class TrackerUtils {
 	 * @return the category title
 	 */
 	public static String getCategoryTitle(Optional<Amount> amountOpt) {
-		//FIXME validate Java 8 code migration
 		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
 		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
 	}
@@ -161,7 +160,6 @@ public class TrackerUtils {
 	 * @return the amount value
 	 */
 	public static String getAmountValue(Optional<Amount> amountOpt) {
-		//FIXME validate Java 8 code migration
 		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
 		return amount.getValue() == 0 ? StringUtils.EMPTY : String.valueOf(amount.getValue());
 	}

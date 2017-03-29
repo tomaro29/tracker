@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
@@ -34,6 +35,7 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryContentProvider;
@@ -138,7 +140,6 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 			// Do Nothing
 		}
 	};
-	private final boolean isAdd;
 
 	/**
 	 * Constructor
@@ -153,21 +154,24 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 		this.tracker=tracker;
 		this.operation=operation;
 		this.amount=amount;
-		this.isAdd=isAdd;
 		setTitle(isAdd ? OperationSubAmountWizardPage.ADD_PAGE_TITLE : OperationSubAmountWizardPage.EDIT_PAGE_TITLE);
 		setDescription(OperationSubAmountWizardPage.WIZARD_DESCRIPTION);
-		if (amount != null) {
-			value=String.valueOf(amount.getValue());
-			category=amount.getCategory();
-			wishedDate=amount.getWishedDate();
+		if (amount == null) {
+			return;
 		}
+		value=String.valueOf(amount.getValue());
+		category=amount.getCategory();
+		wishedDate=amount.getWishedDate();
 	}
 
 	@Override
 	protected void createContainer(Composite parent) {
 		createText(parent, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
-		Set<Category> categories=new HashSet<>(TrackerUtils.getTrackerService(tracker).getAllCategories());
+		Set<Category> categories=new HashSet<>(TrackerUtils.getTrackerService(tracker).getAllCategories()).stream()//
+				.filter(category -> operation.getType() == OperationType.DEBIT && category instanceof SpendingCategory
+									|| operation.getType() == OperationType.CREDIT && category instanceof IncomeCategory)//
+				.collect(Collectors.toSet());
 		categoriesComboViewer=createComboViewer(parent, "Category: ", categories, new CategoriesRepositoryContentProvider(), //$NON-NLS-1$
 				new CategoryLabelProvider(), categoryListener, addCategoryButtonlistener);
 		if (!categories.isEmpty()) {

@@ -16,6 +16,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 public abstract class AbstractTablePropertySection extends AbstractTrackerPropertySection {
 	public TableViewer tableViewer;
 	protected Button addButton;
+	protected Button editButton;
 	protected Button removeButton;
 	protected Table table;
 
@@ -39,6 +40,35 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
 		removeButton.addSelectionListener(removeButtonListener);
 		formatRemoveButton(table, addButton);
+
+		return table;
+	}
+
+	/**
+	 * Creates a table
+	 * @param composite the composite parent of the {@link Table} to create
+	 * @param control the control
+	 * @param addButtonlistener the add button listener
+	 * @param editButtonlistener the edit button listener
+	 * @param removeButtonListener the remove button listener
+	 * @return the created table
+	 */
+	protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter editButtonlistener, SelectionAdapter removeButtonListener) {
+		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
+		Table table=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
+		formatTableLayout(control, table, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+
+		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
+		addButton.addSelectionListener(addButtonlistener);
+		formatAddButton(table, table);
+
+		editButton=widgetFactory.createButton(composite, "Edit", SWT.PUSH); //$NON-NLS-1$
+		editButton.addSelectionListener(editButtonlistener);
+		formatEditButton(table, addButton);
+
+		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
+		removeButton.addSelectionListener(removeButtonListener);
+		formatRemoveButton(table, editButton);
 
 		return table;
 	}
@@ -78,6 +108,19 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 	}
 
 	/**
+	 * Formats the edit button layout
+	 * @param leftAttachment the left composite attachment
+	 * @param topAttachment the top button attachment
+	 */
+	private void formatEditButton(Composite leftAttachment, Button topAttachment) {
+		FormData data=new FormData();
+		data.width=75;
+		data.left=new FormAttachment(leftAttachment, ITabbedPropertyConstants.HSPACE);
+		data.top=new FormAttachment(topAttachment, ITabbedPropertyConstants.VSPACE);
+		editButton.setLayoutData(data);
+	}
+
+	/**
 	 * Formats the add button layout
 	 * @param leftAttachment the left composite attachment
 	 * @param topAttachment the top composite attachment
@@ -92,12 +135,16 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 
 	/**
 	 * Disposes buttons listeners
-	 * @param addButtonlistener the add listener
-	 * @param removeButtonListener the remove listener
+	 * @param addButtonlistener the add button listener
+	 * @param editButtonButtonListener the edit button listener
+	 * @param removeButtonListener the remove button listener
 	 */
-	protected void disposeButtonsListeners(SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
+	protected void disposeButtonsListeners(SelectionAdapter addButtonlistener, SelectionAdapter editButtonButtonListener, SelectionAdapter removeButtonListener) {
 		if (addButton != null && !addButton.isDisposed()) {
 			addButton.removeSelectionListener(addButtonlistener);
+		}
+		if (editButton != null && !editButton.isDisposed()) {
+			editButton.removeSelectionListener(editButtonButtonListener);
 		}
 		if (removeButton != null && !removeButton.isDisposed()) {
 			removeButton.removeSelectionListener(removeButtonListener);

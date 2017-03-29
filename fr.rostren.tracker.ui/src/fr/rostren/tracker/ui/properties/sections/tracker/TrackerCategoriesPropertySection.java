@@ -44,7 +44,6 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 			EObject currentEObject=getCurrentEObject();
 			Assert.isTrue(currentEObject instanceof Tracker);
 			Tracker tracker=(Tracker)currentEObject;
-			CategoriesRepository repository=tracker.getCategoriesRepository();
 
 			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Tracker", tracker); //$NON-NLS-1$
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
@@ -152,6 +151,6 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 
 	@Override
 	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+		disposeButtonsListeners(addButtonlistener, null, removeButtonListener);
 	}
 }

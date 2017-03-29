@@ -124,6 +124,6 @@ public class TrackerOwnersPropertySection extends AbstractTablePropertySection {
 
 	@Override
 	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+		disposeButtonsListeners(addButtonlistener, null, removeButtonListener);
 	}
 }

@@ -118,6 +118,6 @@ public class OperationTitleCategoriesPropertySection extends AbstractTableProper
 
 	@Override
 	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, removeButtonListener);
+		disposeButtonsListeners(addButtonlistener, null, removeButtonListener);
 	}
 }

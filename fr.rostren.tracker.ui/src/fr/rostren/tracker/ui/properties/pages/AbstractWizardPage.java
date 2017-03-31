@@ -10,11 +10,14 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -23,11 +26,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Tree;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryContentProvider;
+import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
 
 public abstract class AbstractWizardPage extends WizardPage {
 
@@ -170,6 +176,51 @@ public abstract class AbstractWizardPage extends WizardPage {
 	}
 
 	/**
+	 * Creates tree
+	 * @param composite the composite parent of the combo to create
+	 * @param label the combo label
+	 * @param addButtonlistener the "Add" button listener
+	 * @return the created tree
+	 */
+	protected Tree createTree(Composite composite, String label, SelectionAdapter addButtonlistener) {
+		createLabel(composite, label);
+		Composite parent=new Composite(composite, SWT.NONE);
+		parent.setLayout(new GridLayout(3, false));
+
+		Tree tree=new Tree(parent, SWT.V_SCROLL | SWT.BORDER);
+		tree.setFont(new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+		if (addButtonlistener != null) {
+			Button addButton=new Button(parent, SWT.PUSH);
+			addButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 0));
+			addButton.setText("Add"); //$NON-NLS-1$
+			addButton.addSelectionListener(addButtonlistener);
+		}
+
+		GridData data=new GridData();
+		data.verticalAlignment=GridData.FILL;
+		data.grabExcessVerticalSpace=true;
+		data.grabExcessHorizontalSpace=true;
+		data.horizontalAlignment=GridData.FILL;
+		parent.setLayoutData(data);
+		tree.setLayoutData(data);
+		return tree;
+	}
+
+	/**
+	 * Creates tree viewer
+	 * @param tree the tree parent of the treeviewer to create
+	 * @param listener the linked listener
+	 * @return the created tree viewer
+	 */
+	protected TreeViewer createTreeViewer(Tree tree, ISelectionChangedListener listener) {
+		TreeViewer treeViewer=new TreeViewer(tree);
+		treeViewer.addSelectionChangedListener(listener);
+		treeViewer.setContentProvider(new CategoriesRepositoryContentProvider());
+		treeViewer.setLabelProvider(new CategoryLabelProvider());
+		return treeViewer;
+	}
+
+	/**
 	 * Refreshes the Combo viewer content by setting the input, and selects the last element in the combo.
 	 * @param comboViewer the combo to refresh
 	 * @param set the input to set
@@ -184,6 +235,19 @@ public abstract class AbstractWizardPage extends WizardPage {
 				return;
 			}
 		}
+	}
+
+	/**
+	 * Refreshes the tree viewer content by setting the input, and selects the last element in the tree.
+	 * @param treeViewer the tree viewer to refresh
+	 * @param set the input to set
+	 * @param selection the new selection
+	 */
+	protected void refreshTreeViewerContent(TreeViewer treeViewer, Set<? extends Object> set, Object selection) {
+		treeViewer.setInput(new ArrayList<>(set));
+		treeViewer.refresh();
+		treeViewer.expandAll();
+		treeViewer.setSelection(new StructuredSelection(selection));
 	}
 
 	/**

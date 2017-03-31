@@ -16,6 +16,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
@@ -31,6 +32,8 @@ import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
 import fr.rostren.tracker.ui.properties.sections.AbstractTreePropertySection;
+import fr.rostren.tracker.ui.properties.wizards.AddIncomeCategoryWizard;
+import fr.rostren.tracker.ui.properties.wizards.AddSpendingCategoryWizard;
 import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
 
 public class CategoriesRepositoryPropertySection extends AbstractTreePropertySection {
@@ -46,39 +49,72 @@ public class CategoriesRepositoryPropertySection extends AbstractTreePropertySec
 			CategoriesRepository repository=(CategoriesRepository)currentEObject;
 			Tracker tracker=(Tracker)repository.eContainer();
 
-			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Operations Titles Repository", //$NON-NLS-1$
+			TreeItem[] selection=tree.getSelection();
+			if (selection.length == 0) {
+				addTrackerCategory(tracker);
+			}
+			else {
+				addCategorySubCategory(tracker, (Category)selection[0].getData());
+			}
+
+			refresh();
+		}
+
+		private void addCategorySubCategory(Tracker tracker, Category category) {
+			if (category instanceof IncomeCategory) {
+				AddIncomeCategoryWizard wizard=new AddIncomeCategoryWizard("Categories Repository", //$NON-NLS-1$
+						tracker);
+				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+				if (Window.OK == wizardDialog.open()) {
+					addIncomeCategory((IncomeCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
+				}
+			}
+			else if (category instanceof SpendingCategory) {
+				AddSpendingCategoryWizard wizard=new AddSpendingCategoryWizard("Categories Repository", //$NON-NLS-1$
+						tracker);
+				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+				if (Window.OK == wizardDialog.open()) {
+					addSpendingCategory((SpendingCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
+				}
+			}
+		}
+
+		private void addTrackerCategory(Tracker tracker) {
+			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Categories Repository", //$NON-NLS-1$
 					tracker);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				if (wizard.isIncome()) {
-					Category newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
-
-					String title=wizard.getCategoryTitle();
-					if (!StringUtils.isEmpty(title)) {
-						newCategory.setTitle(title);
-					}
-					String description=wizard.getCategoryDescription();
-					if (!StringUtils.isEmpty(description)) {
-						newCategory.setDescription(description);
-					}
-					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getIncome(), TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
+					addIncomeCategory(tracker.getCategoriesRepository().getIncome(), wizard.getCategoryTitle(), wizard.getCategoryDescription());
 				}
 				else if (wizard.isSpending()) {
-					Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
-
-					String title=wizard.getCategoryTitle();
-					if (!StringUtils.isEmpty(title)) {
-						newCategory.setTitle(title);
-					}
-					String description=wizard.getCategoryDescription();
-					if (!StringUtils.isEmpty(description)) {
-						newCategory.setDescription(description);
-					}
-					DomainUtils.executeAddCommand(tracker.getCategoriesRepository().getSpending(), TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+					addSpendingCategory(tracker.getCategoriesRepository().getSpending(), wizard.getCategoryTitle(), wizard.getCategoryDescription());
 				}
-
-				refresh();
 			}
+		}
+
+		private void addSpendingCategory(SpendingCategory category, String title, String description) {
+			Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
+
+			if (!StringUtils.isEmpty(title)) {
+				newCategory.setTitle(title);
+			}
+			if (!StringUtils.isEmpty(description)) {
+				newCategory.setDescription(description);
+			}
+			DomainUtils.executeAddCommand(category, TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+		}
+
+		private void addIncomeCategory(IncomeCategory category, String title, String description) {
+			Category newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
+
+			if (!StringUtils.isEmpty(title)) {
+				newCategory.setTitle(title);
+			}
+			if (!StringUtils.isEmpty(description)) {
+				newCategory.setDescription(description);
+			}
+			DomainUtils.executeAddCommand(category, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
 		}
 	};
 

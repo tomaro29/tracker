@@ -15,7 +15,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
 public abstract class AbstractTreePropertySection extends AbstractTrackerPropertySection {
 	public TreeViewer treeViewer;
-	protected Tree tree;
+	public Tree tree;
 	protected Button addButton;
 	protected Button editButton;
 	protected Button removeButton;

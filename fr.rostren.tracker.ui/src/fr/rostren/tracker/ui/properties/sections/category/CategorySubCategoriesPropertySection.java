@@ -11,7 +11,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -28,10 +28,10 @@ import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.CategorySubCategoriesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
-import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
+import fr.rostren.tracker.ui.properties.sections.AbstractTreePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddCategoryCategoryWizard;
 
-public class CategorySubCategoriesPropertySection extends AbstractTablePropertySection {
+public class CategorySubCategoriesPropertySection extends AbstractTreePropertySection {
 
 	private final ITreeContentProvider contentProvider=new CategorySubCategoriesContentProvider();
 	private final ILabelProvider labelProvider=new CategoryLabelProvider();
@@ -89,7 +89,7 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 			Assert.isTrue(currentEObject instanceof Category);
 			Category category=(Category)currentEObject;
 
-			ISelection selection=tableViewer.getSelection();
+			ISelection selection=treeViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
 			if (category instanceof IncomeCategory) {
@@ -106,10 +106,10 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer=new TableViewer(table);
-		tableViewer.setContentProvider(contentProvider);
-		tableViewer.setLabelProvider(labelProvider);
+		tree=createTree(body, null, addButtonlistener, removeButtonListener);
+		treeViewer=new TreeViewer(tree);
+		treeViewer.setContentProvider(contentProvider);
+		treeViewer.setLabelProvider(labelProvider);
 		addListeners();
 	}
 
@@ -121,7 +121,8 @@ public class CategorySubCategoriesPropertySection extends AbstractTablePropertyS
 	@Override
 	public void refresh() {
 		disposeListeners();
-		tableViewer.setInput(getSubCategories());
+		treeViewer.setInput(getSubCategories());
+		treeViewer.expandAll();
 		addListeners();
 	}
 

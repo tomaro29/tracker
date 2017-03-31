@@ -10,7 +10,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -30,10 +30,10 @@ import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.TrackerCategoriesContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
-import fr.rostren.tracker.ui.properties.sections.AbstractTablePropertySection;
+import fr.rostren.tracker.ui.properties.sections.AbstractTreePropertySection;
 import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
 
-public class TrackerCategoriesPropertySection extends AbstractTablePropertySection {
+public class TrackerCategoriesPropertySection extends AbstractTreePropertySection {
 
 	private final ITreeContentProvider contentProvider=new TrackerCategoriesContentProvider();
 	private final ILabelProvider labelProvider=new CategoryLabelProvider();
@@ -89,7 +89,7 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 			Tracker tracker=(Tracker)currentEObject;
 			CategoriesRepository repository=tracker.getCategoriesRepository();
 
-			ISelection selection=tableViewer.getSelection();
+			ISelection selection=treeViewer.getSelection();
 			Assert.isTrue(selection instanceof StructuredSelection);
 			Category elementToRemove=(Category)((StructuredSelection)selection).getFirstElement();
 			if (elementToRemove.eContainer() instanceof IncomeCategory) {
@@ -106,10 +106,10 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer=new TableViewer(table);
-		tableViewer.setContentProvider(contentProvider);
-		tableViewer.setLabelProvider(labelProvider);
+		tree=createTree(body, null, addButtonlistener, removeButtonListener);
+		treeViewer=new TreeViewer(tree);
+		treeViewer.setContentProvider(contentProvider);
+		treeViewer.setLabelProvider(labelProvider);
 		addListeners();
 	}
 
@@ -121,7 +121,8 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 	@Override
 	public void refresh() {
 		disposeListeners();
-		tableViewer.setInput(getCategories());
+		treeViewer.setInput(getCategories());
+		treeViewer.expandAll();
 		addListeners();
 	}
 
@@ -131,7 +132,7 @@ public class TrackerCategoriesPropertySection extends AbstractTablePropertySecti
 	 */
 	private List<Category> getCategories() {
 		Assert.isTrue(currentEObject instanceof Tracker);
-		List<Category> categories=TrackerUtils.getTrackerService(currentEObject).getAllCategories();
+		List<Category> categories=TrackerUtils.getTrackerService(currentEObject).getCategories();
 		if (categories == null || categories.isEmpty()) {
 			return Collections.emptyList();
 		}

@@ -1,6 +1,6 @@
 package fr.rostren.tracker.ui.properties.sections;
 
-import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.graphics.Font;
@@ -8,70 +8,69 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
-public abstract class AbstractTablePropertySection extends AbstractTrackerPropertySection {
-	public TableViewer tableViewer;
+public abstract class AbstractTreePropertySection extends AbstractTrackerPropertySection {
+	public TreeViewer treeViewer;
+	protected Tree tree;
 	protected Button addButton;
 	protected Button editButton;
 	protected Button removeButton;
-	protected Table table;
 
 	/**
-	 * Creates a table
-	 * @param composite the composite parent of the {@link Table} to create
+	 * Creates a tree
+	 * @param composite the composite parent of the {@link Tree} to create
 	 * @param control the control
 	 * @param addButtonlistener the add button listener
 	 * @param removeButtonListener the remove button listener
-	 * @return the created table
+	 * @return the created tree
 	 */
-	protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
+	protected Tree createTree(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
-		Table table=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
-		formatTableLayout(control, table, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+		Tree tree=widgetFactory.createTree(composite, SWT.V_SCROLL | SWT.MULTI);
+		formatTreeLayout(control, tree, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
 		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
 		addButton.addSelectionListener(addButtonlistener);
-		formatAddButton(table, table);
+		formatAddButton(tree, tree);
 
 		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
 		removeButton.addSelectionListener(removeButtonListener);
-		formatRemoveButton(table, addButton);
+		formatRemoveButton(tree, addButton);
 
-		return table;
+		return tree;
 	}
 
 	/**
-	 * Creates a table
-	 * @param composite the composite parent of the {@link Table} to create
+	 * Creates a tree
+	 * @param composite the composite parent of the {@link Tree} to create
 	 * @param control the control
 	 * @param addButtonlistener the add button listener
 	 * @param editButtonlistener the edit button listener
 	 * @param removeButtonListener the remove button listener
-	 * @return the created table
+	 * @return the created tree
 	 */
-	protected Table createTable(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter editButtonlistener, SelectionAdapter removeButtonListener) {
+	protected Tree createTree(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter editButtonlistener, SelectionAdapter removeButtonListener) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
-		Table table=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
-		formatTableLayout(control, table, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+		Tree tree=widgetFactory.createTree(composite, SWT.V_SCROLL | SWT.MULTI);
+		formatTreeLayout(control, tree, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
 		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
 		addButton.addSelectionListener(addButtonlistener);
-		formatAddButton(table, table);
+		formatAddButton(tree, tree);
 
 		editButton=widgetFactory.createButton(composite, "Edit", SWT.PUSH); //$NON-NLS-1$
 		editButton.addSelectionListener(editButtonlistener);
-		formatEditButton(table, addButton);
+		formatEditButton(tree, addButton);
 
 		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
 		removeButton.addSelectionListener(removeButtonListener);
-		formatRemoveButton(table, editButton);
+		formatRemoveButton(tree, editButton);
 
-		return table;
+		return tree;
 	}
 
 	/**
@@ -93,27 +92,6 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		data.height=275;
 		tree.setLayoutData(data);
 		tree.setFont(font);
-	}
-
-	/**
-	 * Formats the table layout
-	 * @param control the text control, as a top attachment
-	 * @param table the table to format
-	 * @param font the table content font
-	 */
-	private void formatTableLayout(Text control, Table table, Font font) {
-		FormData data=new FormData();
-		data.left=new FormAttachment(0, 5);
-		if (control == null) {
-			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
-		}
-		else {
-			data.top=new FormAttachment(control, ITabbedPropertyConstants.VSPACE);
-		}
-		data.right=new FormAttachment(100, -85);
-		data.height=275;
-		table.setLayoutData(data);
-		table.setFont(font);
 	}
 
 	/**

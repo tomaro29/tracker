@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2017
+ * All rights reserved.
+ *
+ * Contributors:
+ *     <mrostren> Initial code
+ *******************************************************************************/
 package fr.rostren.tracker.ui.actions;
 
 import java.lang.reflect.InvocationTargetException;

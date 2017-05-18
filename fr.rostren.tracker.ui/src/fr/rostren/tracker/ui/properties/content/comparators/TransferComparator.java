@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2017
+ * All rights reserved.
+ *
+ * Contributors:
+ *     <mrostren> Initial code
+ *******************************************************************************/
 package fr.rostren.tracker.ui.properties.content.comparators;
 
 import java.util.Comparator;

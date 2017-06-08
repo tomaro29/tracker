@@ -13,16 +13,13 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.rostren.tracker.AccountService;
 import fr.rostren.tracker.Amount;
@@ -49,6 +46,7 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.TrackerService;
+import fr.rostren.tracker.model.TrackerFactoryUtils;
 import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.model.utils.TrackerUtils;
@@ -99,10 +97,14 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		switch (eClass.getClassifierID()) {
 			case TrackerPackage.OWNER:
 				return createOwner();
+			case TrackerPackage.ACCOUNT_SERVICE:
+				return createAccountService();
 			case TrackerPackage.CHECKING_ACCOUNT:
 				return createCheckingAccount();
 			case TrackerPackage.BOOCKLET_ACCOUNT:
 				return createBoockletAccount();
+			case TrackerPackage.OPERATION_SERVICE:
+				return createOperationService();
 			case TrackerPackage.CREDIT:
 				return createCredit();
 			case TrackerPackage.DEBIT:
@@ -111,16 +113,12 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createIncoming();
 			case TrackerPackage.OUTGOING:
 				return createOutgoing();
+			case TrackerPackage.CATEGORY_SERVICE:
+				return createCategoryService();
 			case TrackerPackage.OPERATION_TITLE:
 				return createOperationTitle();
 			case TrackerPackage.AMOUNT:
 				return createAmount();
-			case TrackerPackage.CATEGORY_SERVICE:
-				return createCategoryService();
-			case TrackerPackage.ACCOUNT_SERVICE:
-				return createAccountService();
-			case TrackerPackage.OPERATION_SERVICE:
-				return createOperationService();
 			case TrackerPackage.CATEGORIES_REPOSITORY:
 				return createCategoriesRepository();
 			case TrackerPackage.ORIGIN:
@@ -129,6 +127,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createOriginsRepository();
 			case TrackerPackage.TRACKER:
 				return createTracker();
+			case TrackerPackage.TRACKER_SERVICE:
+				return createTrackerService();
 			case TrackerPackage.OPERATIONS_TITLE_REPOSITORY:
 				return createOperationsTitleRepository();
 			case TrackerPackage.INCOME_CATEGORY:
@@ -216,6 +216,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return credit;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Credit createCredit(EObject object) {
 		Credit operation=TrackerFactory.eINSTANCE.createCredit();
@@ -228,7 +231,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		}
 
 		// Add a default operation title
-		addOperationTitle(object, operation);
+
+		TrackerFactoryUtils helper=new TrackerFactoryUtils(this);
+		helper.addOperationTitle(object, operation);
 		return operation;
 	}
 
@@ -242,6 +247,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return debit;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Debit createDebit(EObject object) {
 		Debit operation=TrackerFactory.eINSTANCE.createDebit();
@@ -253,7 +261,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			amounts.add(amount);
 		}
 
-		addOperationTitle(object, operation);
+		TrackerFactoryUtils helper=new TrackerFactoryUtils(this);
+		helper.addOperationTitle(object, operation);
 		return operation;
 	}
 
@@ -267,6 +276,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return incoming;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Incoming createIncoming(EObject object) {
 		Incoming operation=TrackerFactory.eINSTANCE.createIncoming();
@@ -278,7 +290,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			amounts.add(amount);
 		}
 
-		addOperationTitle(object, operation);
+		TrackerFactoryUtils helper=new TrackerFactoryUtils(this);
+		helper.addOperationTitle(object, operation);
 		return operation;
 	}
 
@@ -292,6 +305,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return outgoing;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Outgoing createOutgoing(EObject object) {
 		Outgoing operation=TrackerFactory.eINSTANCE.createOutgoing();
@@ -303,7 +319,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			amounts.add(amount);
 		}
 
-		addOperationTitle(object, operation);
+		TrackerFactoryUtils helper=new TrackerFactoryUtils(this);
+		helper.addOperationTitle(object, operation);
 		return operation;
 	}
 
@@ -451,9 +468,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public OriginType createOriginTypeFromString(EDataType eDataType, String initialValue) {
 		OriginType result=OriginType.get(initialValue);
-		if (result == null) {
+		if (result == null)
 			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
 		return result;
 	}
 
@@ -504,6 +520,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return TrackerPackage.eINSTANCE;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Amount createAmount(Operation operation, double amount, Category category) {
 		Amount amountObject=createAmount();
@@ -513,6 +532,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return amountObject;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Amount createAmount(OperationData operation, double amount, Category category) {
 		Amount amountObject=createAmount();
@@ -522,6 +544,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return amountObject;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Origin createOrigin(String identifier, OriginType type) {
 		Origin origin=createOrigin();
@@ -530,6 +555,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return origin;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public OperationTitle createOperationTitle(Tracker tracker, String title) {
 		OperationTitle newTitle=TrackerFactory.eINSTANCE.createOperationTitle();
@@ -538,11 +566,15 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return newTitle;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Category createCategory(Tracker tracker, OperationTitle title, OperationType type) {
+		TrackerFactoryUtils helper=new TrackerFactoryUtils(this);
 		CategoriesRepository categoriesRepository=TrackerUtils.getTrackerService(tracker).getCategoriesRepository();
 		if (OperationType.CREDIT.equals(type)) {
-			Category undefined=getUndefinedIncomeCategory(categoriesRepository);
+			Category undefined=helper.getUndefinedIncomeCategory(categoriesRepository);
 			List<IncomeCategory> incomes=categoriesRepository.getIncome().getIncomes();
 			if (!incomes.contains(undefined)) {
 				incomes.add((IncomeCategory)undefined);
@@ -551,7 +583,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			return undefined;
 		}
 		else if (OperationType.DEBIT.equals(type)) {
-			Category undefined=getUndefinedSpendingCategory(categoriesRepository);
+			Category undefined=helper.getUndefinedSpendingCategory(categoriesRepository);
 			List<SpendingCategory> spendings=categoriesRepository.getSpending().getSpendings();
 			if (!spendings.contains(undefined)) {
 				spendings.add((SpendingCategory)undefined);
@@ -562,6 +594,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return null;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public IncomeCategory createCategory(IncomeCategory income) {
 		IncomeCategory category=TrackerFactory.eINSTANCE.createIncomeCategory();
@@ -570,6 +605,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return category;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public SpendingCategory createCategory(SpendingCategory spending) {
 		SpendingCategory category=TrackerFactory.eINSTANCE.createSpendingCategory();
@@ -579,71 +617,27 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	}
 
 	/**
-	 * Returns the undefined income category
-	 * @param repository the repository
-	 * @return the undefined income category
+	 * @generated NOT
 	 */
-	private Category getUndefinedIncomeCategory(CategoriesRepository repository) {
-		IncomeCategory income=repository.getIncome();
-		if (income == null) {
-			income=TrackerFactory.eINSTANCE.createIncomeCategory();
-			repository.setIncome(income);
-		}
-
-		Optional<IncomeCategory> findAny=income.getIncomes().stream()//
-				.filter(category -> TrackerUtils.getCategoryService(category).isUndefinedCategory())//
-				.findAny();
-		return findAny.orElse(createCategory(income));
-	}
-
-	/**
-	 * Returns the undefined spending category
-	 * @param repository the repository
-	 * @return the undefined spending category
-	 */
-	private Category getUndefinedSpendingCategory(CategoriesRepository repository) {
-		SpendingCategory spending=repository.getSpending();
-		if (spending == null) {
-			spending=TrackerFactory.eINSTANCE.createSpendingCategory();
-			repository.setSpending(spending);
-		}
-		return spending.getSpendings().stream()//
-				.filter(category -> TrackerUtils.getCategoryService(category).isUndefinedCategory())//
-				.findAny().orElse(createCategory(spending));
-	}
-
-	/**
-	 * Adds an {@link OperationTitle} instance to the given operation
-	 * @param object the given account
-	 * @param operation the given operation
-	 */
-	private void addOperationTitle(EObject object, Operation operation) {
-		EObject rootContainer=EcoreUtil.getRootContainer(object);
-		if (!(rootContainer instanceof Tracker)) {
-			return;
-		}
-
-		// Add a default operation title
-		OperationsTitleRepository repository=((Tracker)rootContainer).getOperationsTitlesRepositories();
-		if (repository == null) {
-			return;
-		}
-
-		EList<OperationTitle> operationsTitles=repository.getOperationsTitles();
-		if (!operationsTitles.isEmpty()) {
-			for (OperationTitle operationTitle: operationsTitles) {
-				if (operationTitle.getTitle() == null) {
-					TrackerFactoryImpl.defaultOperationTitle=operationTitle;
-				}
-			}
-		}
-		operation.setOperationTitle(TrackerFactoryImpl.defaultOperationTitle);
-	}
-
 	@Override
 	public TrackerService createTrackerService() {
 		TrackerServiceImpl trackerService=new TrackerServiceImpl();
 		return trackerService;
 	}
 
+	/**
+	 * @param defaultOperationTitle the defaultOperationTitle to set
+	 * @generated NOT
+	 */
+	public static void setDefaultOperationTitle(OperationTitle defaultOperationTitle) {
+		TrackerFactoryImpl.defaultOperationTitle=defaultOperationTitle;
+	}
+
+	/**
+	 * @return the defaultOperationTitle
+	 * @generated NOT
+	 */
+	public static OperationTitle getDefaultOperationTitle() {
+		return TrackerFactoryImpl.defaultOperationTitle;
+	}
 } // TrackerFactoryImpl

@@ -352,11 +352,17 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 		return categories;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public EList<OperationTitle> getOperationsTitles() {
 		return tracker.getOperationsTitlesRepositories().getOperationsTitles();
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public EList<Origin> getOrigins() {
 		return tracker.getOriginsRepository().getOrigins();
@@ -551,6 +557,9 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 				.findFirst().orElseThrow(IllegalArgumentException::new);
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Optional<OperationTitle> findOperationTitle(String title) {
 		if (tracker == null) {

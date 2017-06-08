@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getCheckingAccount()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isLinkedToOperations'"
  * @generated
  */
 public interface CheckingAccount extends Account {

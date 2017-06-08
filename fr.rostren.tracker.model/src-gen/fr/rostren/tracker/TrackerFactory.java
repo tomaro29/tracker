@@ -71,6 +71,7 @@ public interface TrackerFactory extends EFactory {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Credit</em>'.
+	 * @generated NOT
 	 */
 	Credit createCredit(EObject object);
 
@@ -88,6 +89,7 @@ public interface TrackerFactory extends EFactory {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Debit</em>'.
+	 * @generated NOT
 	 */
 	Debit createDebit(EObject object);
 
@@ -104,6 +106,7 @@ public interface TrackerFactory extends EFactory {
 	 * Returns a new object of class '<em>Incoming</em>'.
 	 * @param object the given account
 	 * @return a new object of class '<em>Incoming</em>'.
+	 * @generated NOT
 	 */
 	Incoming createIncoming(EObject object);
 
@@ -120,6 +123,7 @@ public interface TrackerFactory extends EFactory {
 	 * Returns a new object of class '<em>Outgoing</em>'.
 	 * @param object the given account
 	 * @return a new object of class '<em>Outgoing</em>'.
+	 * @generated NOT
 	 */
 	Outgoing createOutgoing(EObject object);
 
@@ -137,6 +141,7 @@ public interface TrackerFactory extends EFactory {
 	 * @param tracker the tracker
 	 * @param title the title
 	 * @return a new object of class '<em>Operation Title</em>'.
+	 * @generated NOT
 	 */
 	public OperationTitle createOperationTitle(Tracker tracker, String title);
 
@@ -155,6 +160,7 @@ public interface TrackerFactory extends EFactory {
 	 * @param amount amount
 	 * @param category the linked category
 	 * @return a new object of class '<em>Amount</em>'.
+	 * @generated NOT
 	 */
 	Amount createAmount(Operation operation, double amount, Category category);
 
@@ -164,6 +170,7 @@ public interface TrackerFactory extends EFactory {
 	 * @param amount amount
 	 * @param category the linked category
 	 * @return a new object of class '<em>Amount</em>'.
+	 * @generated NOT
 	 */
 	Amount createAmount(OperationData operation, double amount, Category linkedCategory);
 
@@ -217,6 +224,7 @@ public interface TrackerFactory extends EFactory {
 	 * @param identifier the identifier
 	 * @param type the type
 	 * @return a new object of class '<em>Origin</em>'.
+	 * @generated NOT
 	 */
 	Origin createOrigin(String identifier, OriginType type);
 
@@ -279,6 +287,7 @@ public interface TrackerFactory extends EFactory {
 	 * @param title the operation Title
 	 * @param type the operation type
 	 * @return a new object of class '<em>Spending Category</em>'.
+	 * @generated NOT
 	 */
 	Category createCategory(Tracker tracker, OperationTitle title, OperationType type);
 
@@ -286,6 +295,7 @@ public interface TrackerFactory extends EFactory {
 	 * Returns a new object of class '<em>Income Category</em>'.
 	 * @param income the income category
 	 * @return a new object of class '<em>Income Category</em>'.
+	 * @generated NOT
 	 */
 	IncomeCategory createCategory(IncomeCategory income);
 
@@ -293,6 +303,7 @@ public interface TrackerFactory extends EFactory {
 	 * Returns a new object of class '<em>Spending Category</em>'.
 	 * @param spending the spending category
 	 * @return a new object of class '<em>Spending Category</em>'.
+	 * @generated NOT
 	 */
 	SpendingCategory createCategory(SpendingCategory spending);
 

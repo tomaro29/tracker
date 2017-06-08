@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see fr.rostren.tracker.TrackerPackage#getAccount()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasUniqueName hasName hasAmount hasIdentifier'"
  * @generated
  */
 public interface Account extends EObject {

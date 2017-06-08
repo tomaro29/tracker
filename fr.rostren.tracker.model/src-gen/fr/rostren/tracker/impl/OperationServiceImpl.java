@@ -85,9 +85,8 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 			InternalEObject oldOperation=(InternalEObject)operation;
 			operation=(Operation)eResolveProxy(oldOperation);
 			if (operation != oldOperation) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.OPERATION_SERVICE__OPERATION, oldOperation, operation));
-				}
 			}
 		}
 		return operation;
@@ -111,9 +110,8 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	public void setOperation(Operation newOperation) {
 		Operation oldOperation=operation;
 		operation=newOperation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OPERATION_SERVICE__OPERATION, oldOperation, operation));
-		}
 	}
 
 	/**
@@ -166,12 +164,18 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 		return operation.getTotalAmount() == sumAmounts(operation);
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public OperationData adaptOperation() {
 		return new OperationData(OperationType.valueOf(operation.eClass().getName().toUpperCase()), operation.getOperationTitle(), operation.getTotalAmount(), operation.getDate(),
 				operation.getOrigin(), operation.getSubAmounts());
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Operation adaptOperation(OperationData operatioData) {
 		if ((operation == null || operation instanceof Debit) && OperationType.CREDIT.equals(operatioData.getType())) {
@@ -189,6 +193,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 		return operation;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Optional<OperationTitle> findOperationTitle(String title) {
 		if (operation == null) {
@@ -202,6 +209,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 		return service.findOperationTitle(title);
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public Optional<Origin> findOperationOrigin(String originId) {
 		if (operation == null) {
@@ -254,9 +264,8 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.OPERATION_SERVICE__OPERATION:
-				if (resolve) {
+				if (resolve)
 					return getOperation();
-				}
 				return basicGetOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);

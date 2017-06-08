@@ -112,6 +112,7 @@ public interface AccountService extends EObject {
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
+	 * @generated NOT
 	 */
 	List<Double> findAllCategoriesAmount(List<String> months, int year, boolean wishedEnabled, Class<?> clazz);
 

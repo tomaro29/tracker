@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getSpendingCategory()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasCategories'"
  * @generated
  */
 public interface SpendingCategory extends Category {

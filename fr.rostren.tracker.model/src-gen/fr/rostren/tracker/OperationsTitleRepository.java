@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getOperationsTitleRepository()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasTitles'"
  * @generated
  */
 public interface OperationsTitleRepository extends EObject {

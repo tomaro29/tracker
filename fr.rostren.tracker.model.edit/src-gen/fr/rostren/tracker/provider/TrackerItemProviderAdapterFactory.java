@@ -282,30 +282,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link fr.rostren.tracker.OperationTitleService} instances. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected OperationTitleServiceItemProvider operationTitleServiceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.rostren.tracker.OperationTitleService}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createOperationTitleServiceAdapter() {
-		if (operationTitleServiceItemProvider == null) {
-			operationTitleServiceItemProvider=new OperationTitleServiceItemProvider(this);
-		}
-
-		return operationTitleServiceItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.CategoryService} instances.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
@@ -464,6 +440,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		}
 
 		return trackerItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.rostren.tracker.TrackerService} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TrackerServiceItemProvider trackerServiceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.rostren.tracker.TrackerService}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTrackerServiceAdapter() {
+		if (trackerServiceItemProvider == null) {
+			trackerServiceItemProvider=new TrackerServiceItemProvider(this);
+		}
+
+		return trackerServiceItemProvider;
 	}
 
 	/**
@@ -639,10 +638,14 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	public void dispose() {
 		if (ownerItemProvider != null)
 			ownerItemProvider.dispose();
+		if (accountServiceItemProvider != null)
+			accountServiceItemProvider.dispose();
 		if (checkingAccountItemProvider != null)
 			checkingAccountItemProvider.dispose();
 		if (boockletAccountItemProvider != null)
 			boockletAccountItemProvider.dispose();
+		if (operationServiceItemProvider != null)
+			operationServiceItemProvider.dispose();
 		if (creditItemProvider != null)
 			creditItemProvider.dispose();
 		if (debitItemProvider != null)
@@ -651,18 +654,12 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 			incomingItemProvider.dispose();
 		if (outgoingItemProvider != null)
 			outgoingItemProvider.dispose();
+		if (categoryServiceItemProvider != null)
+			categoryServiceItemProvider.dispose();
 		if (operationTitleItemProvider != null)
 			operationTitleItemProvider.dispose();
 		if (amountItemProvider != null)
 			amountItemProvider.dispose();
-		if (operationTitleServiceItemProvider != null)
-			operationTitleServiceItemProvider.dispose();
-		if (categoryServiceItemProvider != null)
-			categoryServiceItemProvider.dispose();
-		if (accountServiceItemProvider != null)
-			accountServiceItemProvider.dispose();
-		if (operationServiceItemProvider != null)
-			operationServiceItemProvider.dispose();
 		if (categoriesRepositoryItemProvider != null)
 			categoriesRepositoryItemProvider.dispose();
 		if (originItemProvider != null)
@@ -671,6 +668,8 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 			originsRepositoryItemProvider.dispose();
 		if (trackerItemProvider != null)
 			trackerItemProvider.dispose();
+		if (trackerServiceItemProvider != null)
+			trackerServiceItemProvider.dispose();
 		if (operationsTitleRepositoryItemProvider != null)
 			operationsTitleRepositoryItemProvider.dispose();
 		if (incomeCategoryItemProvider != null)

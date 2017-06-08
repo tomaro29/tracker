@@ -270,6 +270,7 @@ public interface TrackerService extends EObject {
 	 * @param tracker the tracker
 	 * @param title the title
 	 * @return the operation title
+	 * @generated NOT
 	 */
 	Optional<OperationTitle> findOperationTitle(String title);
 } // TrackerService

@@ -82,9 +82,8 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
 			InternalEObject oldCategory=(InternalEObject)category;
 			category=(Category)eResolveProxy(oldCategory);
 			if (category != oldCategory) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.CATEGORY_SERVICE__CATEGORY, oldCategory, category));
-				}
 			}
 		}
 		return category;
@@ -108,9 +107,8 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
 	public void setCategory(Category newCategory) {
 		Category oldCategory=category;
 		category=newCategory;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.CATEGORY_SERVICE__CATEGORY, oldCategory, category));
-		}
 	}
 
 	/**
@@ -284,9 +282,8 @@ public class CategoryServiceImpl extends EObjectImpl implements CategoryService 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.CATEGORY_SERVICE__CATEGORY:
-				if (resolve) {
+				if (resolve)
 					return getCategory();
-				}
 				return basicGetCategory();
 		}
 		return super.eGet(featureID, resolve, coreType);

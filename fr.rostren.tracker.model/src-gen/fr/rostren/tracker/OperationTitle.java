@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getOperationTitle()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isLinkedToCategories'"
  * @generated
  */
 public interface OperationTitle extends Title {

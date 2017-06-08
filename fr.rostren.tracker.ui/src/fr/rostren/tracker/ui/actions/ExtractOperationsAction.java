@@ -44,7 +44,7 @@ public class ExtractOperationsAction implements IRunnableWithProgress {
 		if (!monitor.isCanceled() && done && addedOperations.isEmpty()) {
 			if (!extractor.getAlreadyParsedFiles().isEmpty()) {
 				throw new InterruptedException("The PDF file : '" //$NON-NLS-1$
-												+ pdfURIText + "' is already parsed or has not a comaptible name."); //$NON-NLS-1$
+												+ pdfURIText + "' is already parsed or has not a compatible name."); //$NON-NLS-1$
 			}
 			throw new InterruptedException("The PDF is not valid, please make sure that the selection : '" //$NON-NLS-1$
 											+ pdfURIText + "' has a correct format or contains at least one valid operation."); //$NON-NLS-1$

@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getTracker()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasOwners hasOrigins hasCategories hasTitles'"
  * @generated
  */
 public interface Tracker extends EObject {

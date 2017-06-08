@@ -116,6 +116,7 @@ public interface OperationService extends EObject {
 	 * Adapts an {@link OperationData} instance to an {@link Operation} instance
 	 * @param operation the operation data to adapt
 	 * @return the adapted {@link Operation} instance
+	 * @generated NOT
 	 */
 	Operation adaptOperation(OperationData operationData);
 
@@ -123,6 +124,7 @@ public interface OperationService extends EObject {
 	 * Adapts an {@link Operation} instance to an {@link OperationData} instance
 	 * @param operation the operation to adapt
 	 * @return the adapted {@link OperationData} instance
+	 * @generated NOT
 	 */
 	OperationData adaptOperation();
 
@@ -131,6 +133,7 @@ public interface OperationService extends EObject {
 	 * @param operation the operation
 	 * @param title the operation title as a {@link String}
 	 * @return the {@link OperationTitle} instance
+	 * @generated NOT
 	 */
 	Optional<OperationTitle> findOperationTitle(String title);
 
@@ -139,6 +142,7 @@ public interface OperationService extends EObject {
 	 * @param operation the operation
 	 * @param originId the origin Id
 	 * @return the operation origin
+	 * @generated NOT
 	 */
 	Optional<Origin> findOperationOrigin(String originId);
 

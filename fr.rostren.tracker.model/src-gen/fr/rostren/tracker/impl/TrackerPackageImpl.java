@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import fr.rostren.tracker.Account;
@@ -49,6 +50,7 @@ import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.TrackerService;
 import fr.rostren.tracker.Transfer;
+import fr.rostren.tracker.util.TrackerValidator;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
@@ -284,6 +286,14 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		// Initialize created meta-data
 		theTrackerPackage.initializePackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put(theTrackerPackage, new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return TrackerValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theTrackerPackage.freeze();
@@ -1378,8 +1388,37 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 		// isUnique
 		createIsUniqueAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source="http://www.eclipse.org/emf/2002/Ecore";
+		addAnnotation(ownerEClass, source, new String[] {"constraints", "hasAccount hasFirstName hasLastName"});
+		addAnnotation(accountEClass, source, new String[] {"constraints", "hasUniqueName hasName hasAmount hasIdentifier"});
+		addAnnotation(checkingAccountEClass, source, new String[] {"constraints", "isLinkedToOperations"});
+		addAnnotation(boockletAccountEClass, source, new String[] {"constraints", "isLinkedToTansfers"});
+		addAnnotation(operationEClass, source, new String[] {"constraints", "hasAmount hasTitle hasSubAmount hasOrigin hasDate hasValidAmount"});
+		addAnnotation(transferEClass, source, new String[] {"constraints", "isLinkedToAccount"});
+		addAnnotation(titleEClass, source, new String[] {"constraints", "isNotEmpty isNotBlank isUnique "});
+		addAnnotation(categoryEClass, source, new String[] {"constraints", "isDescribed hasTitles"});
+		addAnnotation(operationTitleEClass, source, new String[] {"constraints", "isLinkedToCategories"});
+		addAnnotation(amountEClass, source, new String[] {"constraints", "hasDate hasCategory hasValue"});
+		addAnnotation(categoriesRepositoryEClass, source, new String[] {"constraints", "hasCategories"});
+		addAnnotation(originEClass, source, new String[] {"constraints", "isTyped hasIdentifier isLinkedToOperations"});
+		addAnnotation(originsRepositoryEClass, source, new String[] {"constraints", "hasOrigins"});
+		addAnnotation(trackerEClass, source, new String[] {"constraints", "hasOwners hasOrigins hasCategories hasTitles"});
+		addAnnotation(operationsTitleRepositoryEClass, source, new String[] {"constraints", "hasTitles"});
+		addAnnotation(incomeCategoryEClass, source, new String[] {"constraints", "hasCategories"});
+		addAnnotation(spendingCategoryEClass, source, new String[] {"constraints", "hasCategories"});
 	}
 
 	/**

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see fr.rostren.tracker.TrackerPackage#getTitle()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isNotEmpty isNotBlank isUnique '"
  * @generated
  */
 public interface Title extends EObject {

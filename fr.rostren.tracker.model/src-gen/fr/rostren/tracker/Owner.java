@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getOwner()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasAccount hasFirstName hasLastName'"
  * @generated
  */
 public interface Owner extends EObject {

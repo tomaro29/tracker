@@ -86,9 +86,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 			InternalEObject oldAccount=(InternalEObject)account;
 			account=(Account)eResolveProxy(oldAccount);
 			if (account != oldAccount) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.ACCOUNT_SERVICE__ACCOUNT, oldAccount, account));
-				}
 			}
 		}
 		return account;
@@ -112,9 +111,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	public void setAccount(Account newAccount) {
 		Account oldAccount=account;
 		account=newAccount;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT_SERVICE__ACCOUNT, oldAccount, account));
-		}
 	}
 
 	/**
@@ -177,6 +175,9 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 		return getAmountsStream(category).average().orElseThrow(() -> new IllegalArgumentException());
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	public List<Double> findAllCategoriesAmount(List<String> months, int year, boolean wishedEnabled, Class<?> clazz) {
 		return months.stream()//
@@ -236,6 +237,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @param wishedEnabled <code>true</code> is the wished date is enabled, <code>false</code> otherwise.
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return all valid amounts vs comparison year and month.
+	 * @generated NOT
 	 */
 	private List<Amount> findAllAmounts(Month month, int year, boolean wishedEnabled, Class<?> clazz) {
 		if (account instanceof CheckingAccount) {
@@ -282,6 +284,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * REturns the total amount of all given amounts as double.
 	 * @param amounts the list of amounts to addition
 	 * @return the total amount value, sum of all given amounts as double.
+	 * @generated NOT
 	 */
 	private static double getTotalAmount(List<Amount> amounts) {
 		return amounts.stream()//
@@ -297,6 +300,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @param month the selected month
 	 * @param wishedEnabled <code>true</code> if the comparison is based on the wished date, <code>false</code> otherwise
 	 * @return <code>true</code> if the amount has a valid date; <code>false</code> otherwise.
+	 * @generated NOT
 	 */
 	private static boolean isDateValid(Amount amount, Operation operation, int year, Month month, boolean wishedEnabled) {
 		Optional<LocalDate> wishedDate=amount.getWishedDate() != null ? Optional.of(amount.getWishedDate()) : Optional.empty();
@@ -309,6 +313,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 
 	/**
 	 * @return the {@link DoubleStream} representing all concerned amounts
+	 * @generated NOT
 	 */
 	private DoubleStream getAmountsStream(Category category, Month month, int year, boolean wishedDated) {
 		if (account instanceof CheckingAccount) {
@@ -338,6 +343,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 
 	/**
 	 * @return the {@link DoubleStream} representing all concerned amounts
+	 * @generated NOT
 	 */
 	private DoubleStream getAmountsStream(Category category, int year, boolean wishedDated) {
 		if (account instanceof CheckingAccount) {
@@ -367,6 +373,7 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 
 	/**
 	 * @return the {@link DoubleStream} representing all concerned amounts
+	 * @generated NOT
 	 */
 	private DoubleStream getAmountsStream(Category category) {
 		if (account instanceof CheckingAccount) {
@@ -384,22 +391,37 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	private boolean filterOperation(Operation operation, Month month, int year) {
 		return operation.getDate().getMonth().equals(month) && filterOperation(operation, year);
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	private boolean filterOperation(Operation operation, int year) {
 		return operation.getDate().getYear() == year;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	private boolean filterAmount(Amount amount, Category category, Month month, int year) {
 		return amount.getWishedDate().getMonth().equals(month) && filterAmount(amount, category, year);
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	private boolean filterAmount(Amount amount, Category category, int year) {
 		return amount.getWishedDate().getYear() == year && filterAmount(amount, category);
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	private boolean filterAmount(Amount amount, Category category) {
 		return amount.getCategory().equals(category);
 	}
@@ -413,9 +435,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.ACCOUNT_SERVICE__ACCOUNT:
-				if (resolve) {
+				if (resolve)
 					return getAccount();
-				}
 				return basicGetAccount();
 		}
 		return super.eGet(featureID, resolve, coreType);

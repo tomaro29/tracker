@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see fr.rostren.tracker.TrackerPackage#getOperation()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasAmount hasTitle hasSubAmount hasOrigin hasDate hasValidAmount'"
  * @generated
  */
 public interface Operation extends EObject {

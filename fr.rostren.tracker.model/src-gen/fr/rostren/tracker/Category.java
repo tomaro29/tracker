@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see fr.rostren.tracker.TrackerPackage#getCategory()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isDescribed hasTitles'"
  * @generated
  */
 public interface Category extends Title {

@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see fr.rostren.tracker.TrackerPackage#getOrigin()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isTyped hasIdentifier isLinkedToOperations'"
  * @generated
  */
 public interface Origin extends EObject {

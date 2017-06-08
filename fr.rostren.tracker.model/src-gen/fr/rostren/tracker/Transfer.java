@@ -23,6 +23,7 @@ package fr.rostren.tracker;
  *
  * @see fr.rostren.tracker.TrackerPackage#getTransfer()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isLinkedToAccount'"
  * @generated
  */
 public interface Transfer extends Operation {

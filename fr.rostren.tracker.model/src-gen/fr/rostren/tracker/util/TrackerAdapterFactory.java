@@ -9,6 +9,7 @@
  */
 package fr.rostren.tracker.util;
 
+import fr.rostren.tracker.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -62,8 +63,8 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public TrackerAdapterFactory() {
-		if (TrackerAdapterFactory.modelPackage == null) {
-			TrackerAdapterFactory.modelPackage=TrackerPackage.eINSTANCE;
+		if (modelPackage == null) {
+			modelPackage=TrackerPackage.eINSTANCE;
 		}
 	}
 
@@ -77,11 +78,11 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == TrackerAdapterFactory.modelPackage) {
+		if (object == modelPackage) {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == TrackerAdapterFactory.modelPackage;
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -104,6 +105,11 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseAccountService(AccountService object) {
+			return createAccountServiceAdapter();
+		}
+
+		@Override
 		public Adapter caseCheckingAccount(CheckingAccount object) {
 			return createCheckingAccountAdapter();
 		}
@@ -116,6 +122,11 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseOperation(Operation object) {
 			return createOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseOperationService(OperationService object) {
+			return createOperationServiceAdapter();
 		}
 
 		@Override
@@ -154,6 +165,11 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseCategoryService(CategoryService object) {
+			return createCategoryServiceAdapter();
+		}
+
+		@Override
 		public Adapter caseOperationTitle(OperationTitle object) {
 			return createOperationTitleAdapter();
 		}
@@ -161,21 +177,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseAmount(Amount object) {
 			return createAmountAdapter();
-		}
-
-		@Override
-		public Adapter caseCategoryService(CategoryService object) {
-			return createCategoryServiceAdapter();
-		}
-
-		@Override
-		public Adapter caseAccountService(AccountService object) {
-			return createAccountServiceAdapter();
-		}
-
-		@Override
-		public Adapter caseOperationService(OperationService object) {
-			return createOperationServiceAdapter();
 		}
 
 		@Override
@@ -196,6 +197,11 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseTracker(Tracker object) {
 			return createTrackerAdapter();
+		}
+
+		@Override
+		public Adapter caseTrackerService(TrackerService object) {
+			return createTrackerServiceAdapter();
 		}
 
 		@Override
@@ -433,20 +439,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.rostren.tracker.OperationTitleService <em>Operation Title Service</em>}'.
-	 * <!-- begin-user-doc --> This default
-	 * implementation returns null so that we can easily ignore cases; it's
-	 * useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.rostren.tracker.OperationTitleService
-	 * @generated
-	 */
-	public Adapter createOperationTitleServiceAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link fr.rostren.tracker.CategoryService <em>Category Service</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
@@ -539,6 +531,20 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTrackerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.rostren.tracker.TrackerService <em>Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.rostren.tracker.TrackerService
+	 * @generated
+	 */
+	public Adapter createTrackerServiceAdapter() {
 		return null;
 	}
 

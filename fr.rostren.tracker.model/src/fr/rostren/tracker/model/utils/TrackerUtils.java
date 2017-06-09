@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.model.utils;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import fr.rostren.tracker.TrackerService;
  * A util Class.
  */
 public class TrackerUtils {
+	private static final String OBJECT_CANNOT_BE_NULL="The ''{0}'' cannot be null."; //$NON-NLS-1$
 	public static final String UNDEFINED_INCOME_TITLE="UNDEFINED INCOME"; //$NON-NLS-1$
 	public static final String UNDEFINED_SPENDING_TITLE="UNDEFINED SPENDING"; //$NON-NLS-1$
 	private static Map<EObject, EObject> servicesMap=new HashMap<>();
@@ -58,7 +60,7 @@ public class TrackerUtils {
 	public static TrackerService getTrackerService(EObject eObject) {
 		Tracker tracker=TrackerUtils.getTracker(eObject);
 		if (tracker == null) {
-			throw new IllegalArgumentException("The tracker cannot be null.");//$NON-NLS-1$
+			throw new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Tracker.class.getName().toLowerCase()));
 		}
 		if (TrackerUtils.servicesMap.containsKey(tracker)) {
 			return (TrackerService)TrackerUtils.servicesMap.get(tracker);
@@ -76,7 +78,7 @@ public class TrackerUtils {
 	 */
 	public static AccountService getAccountService(Account account) {
 		if (account == null) {
-			throw new IllegalArgumentException("The account cannot be null."); //$NON-NLS-1$
+			throw new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Account.class.getName().toLowerCase()));
 		}
 		if (TrackerUtils.servicesMap.containsKey(account)) {
 			return (AccountService)TrackerUtils.servicesMap.get(account);
@@ -94,7 +96,7 @@ public class TrackerUtils {
 	 */
 	public static CategoryService getCategoryService(Category category) {
 		if (category == null) {
-			throw new IllegalArgumentException("The category cannot be null."); //$NON-NLS-1$
+			throw new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Category.class.getName().toLowerCase()));
 		}
 		if (TrackerUtils.servicesMap.containsKey(category)) {
 			return (CategoryService)TrackerUtils.servicesMap.get(category);
@@ -112,7 +114,7 @@ public class TrackerUtils {
 	 */
 	public static OperationService getOperationService(Operation operation) {
 		if (operation == null) {
-			throw new IllegalArgumentException("The operation cannot be null."); //$NON-NLS-1$
+			throw new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Operation.class.getName().toLowerCase()));
 		}
 		if (TrackerUtils.servicesMap.containsKey(operation)) {
 			return (OperationService)TrackerUtils.servicesMap.get(operation);
@@ -157,7 +159,7 @@ public class TrackerUtils {
 	 * @return the category title
 	 */
 	public static String getCategoryTitle(Optional<Amount> amountOpt) {
-		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
+		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Amount.class.getName().toLowerCase())));
 		return amount.getCategory() == null ? StringUtils.EMPTY : amount.getCategory().getTitle();
 	}
 
@@ -167,7 +169,7 @@ public class TrackerUtils {
 	 * @return the amount value
 	 */
 	public static String getAmountValue(Optional<Amount> amountOpt) {
-		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException("The amount cannot be null.")); //$NON-NLS-1$
+		Amount amount=amountOpt.orElseThrow(() -> new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Amount.class.getName().toLowerCase())));
 		return amount.getValue() == 0 ? StringUtils.EMPTY : String.valueOf(amount.getValue());
 	}
 
@@ -179,7 +181,7 @@ public class TrackerUtils {
 	 */
 	public static Optional<Category> findAmountCategory(Amount amount, String title) {
 		if (amount == null) {
-			throw new IllegalArgumentException("The amount cannot be null.");//$NON-NLS-1$
+			throw new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Amount.class.getName().toLowerCase()));
 		}
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			return null;

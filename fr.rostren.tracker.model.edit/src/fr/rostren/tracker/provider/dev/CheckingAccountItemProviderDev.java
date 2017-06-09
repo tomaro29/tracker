@@ -18,7 +18,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.rostren.tracker.Operation;
-import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.provider.CheckingAccountItemProvider;
@@ -29,7 +28,6 @@ import fr.rostren.tracker.provider.CheckingAccountItemProvider;
  * <!-- end-user-doc -->
  */
 public class CheckingAccountItemProviderDev extends CheckingAccountItemProvider {
-	private static OperationTitle defaultOperationTitle;
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--

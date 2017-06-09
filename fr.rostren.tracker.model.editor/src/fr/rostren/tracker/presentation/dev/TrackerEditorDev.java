@@ -42,18 +42,17 @@ public class TrackerEditorDev extends TrackerEditor implements ITabbedPropertySh
 				throw new IllegalArgumentException(new NullPointerException("Invalid null ResourceSet")); //$NON-NLS-1$
 			}
 
-			for (Resource resource: resourceSet.getResources()) {
-				if (resource == null) {
-					throw new IllegalArgumentException(new NullPointerException("Invalid null Resource")); //$NON-NLS-1$
-				}
-
-				if (resource.getContents().isEmpty()) {
-					return null;
-				}
-
-				final EObject root=resource.getContents().get(0);
-				return root instanceof Tracker ? (Tracker)root : null;
+			Resource resource=resourceSet.getResources().get(0);
+			if (resource == null) {
+				throw new IllegalArgumentException(new NullPointerException("Invalid null Resource")); //$NON-NLS-1$
 			}
+
+			if (resource.getContents().isEmpty()) {
+				return null;
+			}
+
+			final EObject root=resource.getContents().get(0);
+			return root instanceof Tracker ? (Tracker)root : null;
 		}
 
 		return null;

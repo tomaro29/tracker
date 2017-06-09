@@ -52,7 +52,7 @@ public class LineContent {
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The operation title cannot be empty or null."); //$NON-NLS-1$
 		}
-		if (amount == 0) {
+		if (amount == 0.0) {
 			throw new IllegalArgumentException("The operation amount cannot be zero."); //$NON-NLS-1$
 		}
 		if (type == null) {
@@ -131,12 +131,12 @@ public class LineContent {
 	 */
 	private Category findCategoryInTrackerModel(String title, Tracker tracker) {
 		linkedOperationTitle=null;
-		TrackerUtils.getTrackerService(tracker).findOperationTitle(title).ifPresent(operationTitle -> setLinkedOperationTitle(operationTitle));
+		TrackerUtils.getTrackerService(tracker).findOperationTitle(title).ifPresent(operationTitle -> linkedOperationTitle=operationTitle);
 		if (linkedOperationTitle != null && !linkedOperationTitle.getCategories().isEmpty()) {
 			return linkedOperationTitle.getCategories().get(0);
 		}
 		OperationTitle newTitle=linkedOperationTitle == null ? TrackerFactory.eINSTANCE.createOperationTitle(tracker, title) : linkedOperationTitle;
-		setLinkedOperationTitle(newTitle);
+		linkedOperationTitle=newTitle;
 		return TrackerFactory.eINSTANCE.createCategory(tracker, newTitle, operation.getType());
 	}
 
@@ -169,14 +169,6 @@ public class LineContent {
 	 */
 	public OperationTitle getLinkedOperationTitle() {
 		return linkedOperationTitle;
-	}
-
-	/**
-	 * @param linkedOperationTitle
-	 *            the linkedOperationTitle to set
-	 */
-	private void setLinkedOperationTitle(OperationTitle linkedOperationTitle) {
-		this.linkedOperationTitle=linkedOperationTitle;
 	}
 
 	/**

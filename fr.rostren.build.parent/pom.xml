@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>fr.rostren.tracker</groupId>
+	<artifactId>fr.rostren.build.parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<name>Tracker Project</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<useUIHarness>true</useUIHarness>
+					<useUIThread>false</useUIThread>
+					<appArgLine>-Xmx1024m -XX:MaxPermSize=256m</appArgLine>
+					<reportsDirectory>${tests-publish-directory}</reportsDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<!-- Plugins -->
+		<module>../fr.rostren.tracker</module>
+		<module>../fr.rostren.tracker.model</module>
+		<module>../fr.rostren.tracker.model.edit</module>
+		<module>../fr.rostren.tracker.model.editor</module>
+		<module>../fr.rostren.tracker.ui</module>
+
+		<!-- Tests <module>../fr.rostren.tracker.tests</module> -->
+
+		<!-- Product <module>../fr.rostren.tracker.product</module> -->
+		<!-- Update Site <module>../fr.rostren.tracker.updatesite</module> -->
+	</modules>
+</project>

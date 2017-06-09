@@ -15,9 +15,6 @@ public class CategoryPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Category) {
-			return true;
-		}
-		return false;
+		return object instanceof Category;
 	}
 }

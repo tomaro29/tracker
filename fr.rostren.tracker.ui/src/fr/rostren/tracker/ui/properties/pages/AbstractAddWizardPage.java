@@ -21,6 +21,12 @@ public abstract class AbstractAddWizardPage extends AbstractWizardPage {
 		super(pageName);
 	}
 
+	/**
+	 * Creates a container
+	 * @param parent the composite parent of the container to create
+	 */
+	abstract protected void createContainer(Composite parent);
+
 	@Override
 	public void createControl(Composite parent) {
 		Composite container=new Composite(parent, SWT.NONE);
@@ -36,10 +42,4 @@ public abstract class AbstractAddWizardPage extends AbstractWizardPage {
 		setControl(container);
 		setPageComplete(true);
 	}
-
-	/**
-	 * Creates a container
-	 * @param parent the composite parent of the container to create
-	 */
-	abstract protected void createContainer(Composite parent);
 }

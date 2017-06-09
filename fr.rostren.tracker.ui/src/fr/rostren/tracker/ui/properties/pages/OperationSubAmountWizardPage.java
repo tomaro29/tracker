@@ -61,6 +61,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
  */
 public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
+	private static final String CATEGORIES_REPOSITORY="Categories Repository"; //$NON-NLS-1$
 	private static final String ADD_PAGE_NAME="Add sub-amount to ''{0}'' Page"; //$NON-NLS-1$
 	private static final String ADD_PAGE_TITLE="Add sub-amount"; //$NON-NLS-1$
 
@@ -104,16 +105,14 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 		private Category addCategorySubCategory(Tracker tracker, Category category) {
 			if (category instanceof IncomeCategory) {
-				AddIncomeCategoryWizard wizard=new AddIncomeCategoryWizard("Categories Repository", //$NON-NLS-1$
-						tracker);
+				AddIncomeCategoryWizard wizard=new AddIncomeCategoryWizard(OperationSubAmountWizardPage.CATEGORIES_REPOSITORY, tracker);
 				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 				if (Window.OK == wizardDialog.open()) {
 					return addIncomeCategory((IncomeCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
 				}
 			}
 			else if (category instanceof SpendingCategory) {
-				AddSpendingCategoryWizard wizard=new AddSpendingCategoryWizard("Categories Repository", //$NON-NLS-1$
-						tracker);
+				AddSpendingCategoryWizard wizard=new AddSpendingCategoryWizard(OperationSubAmountWizardPage.CATEGORIES_REPOSITORY, tracker);
 				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 				if (Window.OK == wizardDialog.open()) {
 					return addSpendingCategory((SpendingCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
@@ -123,8 +122,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 		}
 
 		private Category addTrackerCategory(Tracker tracker) {
-			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Categories Repository", //$NON-NLS-1$
-					tracker);
+			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard(OperationSubAmountWizardPage.CATEGORIES_REPOSITORY, tracker);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				if (wizard.isIncome()) {

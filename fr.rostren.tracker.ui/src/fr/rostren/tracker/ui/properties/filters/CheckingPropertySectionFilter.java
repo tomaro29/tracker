@@ -15,9 +15,6 @@ public class CheckingPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof CheckingAccount) {
-			return true;
-		}
-		return false;
+		return object instanceof CheckingAccount;
 	}
 }

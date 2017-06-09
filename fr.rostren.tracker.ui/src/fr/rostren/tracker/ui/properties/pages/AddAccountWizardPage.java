@@ -144,15 +144,23 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 			return false;
 		}
 		try {
-			Integer.parseInt(identifier);
+			int parseInt=Integer.parseInt(identifier);
+			if (parseInt == 0) {
+				setErrorMessage("The Account identifier cannot be '0' !"); //$NON-NLS-1$
+				return false;
+			}
 		}
 		catch (NumberFormatException e) {
-			setErrorMessage("The Account identifier must be an number !"); //$NON-NLS-1$
+			setErrorMessage("The Account identifier must be a number !"); //$NON-NLS-1$
 			return false;
 		}
 		if (!StringUtils.isEmpty(amount) && !StringUtils.isBlank(amount)) {
 			try {
-				Float.parseFloat(amount);
+				float parseFloat=Float.parseFloat(amount);
+				if (parseFloat == 0) {
+					setErrorMessage("The Account amount cannot be '0' !"); //$NON-NLS-1$
+					return false;
+				}
 			}
 			catch (NumberFormatException e) {
 				setErrorMessage("The Account amount must be a number !"); //$NON-NLS-1$

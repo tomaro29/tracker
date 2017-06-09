@@ -15,9 +15,6 @@ public class OperationTitlePropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof OperationTitle) {
-			return true;
-		}
-		return false;
+		return object instanceof OperationTitle;
 	}
 }

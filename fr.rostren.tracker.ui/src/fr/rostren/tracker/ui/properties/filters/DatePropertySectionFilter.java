@@ -15,9 +15,6 @@ public class DatePropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof LocalDate) {
-			return true;
-		}
-		return false;
+		return object instanceof LocalDate;
 	}
 }

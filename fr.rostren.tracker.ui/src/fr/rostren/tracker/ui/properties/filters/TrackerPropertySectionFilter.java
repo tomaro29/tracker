@@ -15,9 +15,6 @@ public class TrackerPropertySectionFilter implements IFilter {
 
 	@Override
 	public boolean select(Object object) {
-		if (object instanceof Tracker) {
-			return true;
-		}
-		return false;
+		return object instanceof Tracker;
 	}
 }

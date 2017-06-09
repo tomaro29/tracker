@@ -44,7 +44,7 @@ import fr.rostren.tracker.ui.properties.wizards.AddSpendingCategoryWizard;
 import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
 
 public class TrackerCategoriesPropertySection extends AbstractTreePropertySection {
-
+	private static final String CATEGORIES_REPOSITORY="Categories Repository"; //$NON-NLS-1$
 	private final ITreeContentProvider contentProvider=new TrackerCategoriesContentProvider();
 	private final ILabelProvider labelProvider=new CategoryLabelProvider();
 
@@ -68,16 +68,14 @@ public class TrackerCategoriesPropertySection extends AbstractTreePropertySectio
 
 		private void addCategorySubCategory(Tracker tracker, Category category) {
 			if (category instanceof IncomeCategory) {
-				AddIncomeCategoryWizard wizard=new AddIncomeCategoryWizard("Categories Repository", //$NON-NLS-1$
-						tracker);
+				AddIncomeCategoryWizard wizard=new AddIncomeCategoryWizard(TrackerCategoriesPropertySection.CATEGORIES_REPOSITORY, tracker);
 				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 				if (Window.OK == wizardDialog.open()) {
 					addIncomeCategory((IncomeCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
 				}
 			}
 			else if (category instanceof SpendingCategory) {
-				AddSpendingCategoryWizard wizard=new AddSpendingCategoryWizard("Categories Repository", //$NON-NLS-1$
-						tracker);
+				AddSpendingCategoryWizard wizard=new AddSpendingCategoryWizard(TrackerCategoriesPropertySection.CATEGORIES_REPOSITORY, tracker);
 				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 				if (Window.OK == wizardDialog.open()) {
 					addSpendingCategory((SpendingCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
@@ -86,8 +84,7 @@ public class TrackerCategoriesPropertySection extends AbstractTreePropertySectio
 		}
 
 		private void addTrackerCategory(Tracker tracker) {
-			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard("Categories Repository", //$NON-NLS-1$
-					tracker);
+			AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard(TrackerCategoriesPropertySection.CATEGORIES_REPOSITORY, tracker);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				if (wizard.isIncome()) {

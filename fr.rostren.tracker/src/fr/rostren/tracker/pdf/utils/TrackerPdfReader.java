@@ -21,12 +21,4 @@ public class TrackerPdfReader extends PdfReader implements Closeable {
 	public TrackerPdfReader(String src) throws IOException {
 		super(src);
 	}
-
-	/* (non-Javadoc)
-	 * @see com.itextpdf.text.pdf.PdfReader#close()
-	 */
-	@Override
-	public void close() {
-		super.close();
-	}
 }

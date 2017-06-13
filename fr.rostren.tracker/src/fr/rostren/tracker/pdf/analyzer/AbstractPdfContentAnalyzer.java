@@ -15,7 +15,7 @@ import fr.rostren.tracker.model.utils.LineContent;
 import fr.rostren.tracker.model.utils.OperationType;
 
 /**
- * An abstract Class to parse banks pdf format.
+ * An abstract Class to parse pdf format.
  */
 public abstract class AbstractPdfContentAnalyzer {
 

@@ -31,7 +31,7 @@ public class OperationData {
 	}
 
 	/**
-	 *Constructor
+	 * Constructor
 	 * @param type the operation type
 	 * @param title the operation title
 	 * @param totalAmount the operation total amount

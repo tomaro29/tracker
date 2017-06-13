@@ -116,7 +116,7 @@ public class Histogram {
 	}
 
 	/**
-	 * Refreshs the chart content
+	 * Refreshes the chart content
 	 */
 	public void refresh() {
 		chart.redraw();

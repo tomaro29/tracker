@@ -8,10 +8,10 @@
 package fr.rostren.tracker.model.utils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.apache.commons.lang.StringUtils;
 
-import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
@@ -25,7 +25,7 @@ public class LineContent {
 	private final OperationData operation;
 
 	/** The title. */
-	private String title;
+	private final String title;
 	/** The category. */
 	private Category linkedCategory;
 	/** The operation title. */
@@ -33,17 +33,11 @@ public class LineContent {
 
 	/**
 	 * Constructor
-	 *
-	 * @param date
-	 *            the date of the operation
-	 * @param title
-	 *            the title of the operation
-	 * @param amount
-	 *            the amount of the operation
-	 * @param type
-	 *            the operation type
-	 * @param origin
-	 *            the operation origin
+	 * @param date the date of the operation
+	 * @param title the title of the operation
+	 * @param amount the amount of the operation
+	 * @param type the operation type
+	 * @param origin the operation origin
 	 */
 	public LineContent(LocalDate date, String title, double amount, OperationType type, Origin origin) {
 		if (date == null) {
@@ -62,19 +56,13 @@ public class LineContent {
 			throw new IllegalArgumentException("The operation origin cannot be null."); //$NON-NLS-1$
 		}
 
-		this.setTitle(formatTitle(title));
-		operation=new OperationData();
-		operation.setType(type);
-		operation.setDate(date);
-		operation.setTotalAmount(amount);
-		operation.setOrigin(origin);
+		this.title=formatTitle(title);
+		operation=new OperationData(type, null, amount, date, origin, new ArrayList<>());
 	}
 
 	/**
 	 * Formats the title
-	 *
-	 * @param currentTitle
-	 *            the current title
+	 * @param currentTitle the current title
 	 * @return the formatted title.
 	 */
 	private String formatTitle(String currentTitle) {
@@ -98,34 +86,23 @@ public class LineContent {
 
 	/**
 	 * Complete the operation
-	 *
-	 * @param tracker
-	 *            the tracker root
+	 * @param tracker the tracker root
 	 */
 	public void completeOperation(Tracker tracker) {
 		if (tracker == null) {
 			throw new IllegalArgumentException("The tracker cannot be null."); //$NON-NLS-1$
 		}
-
-		setLinkedCategory(findCategoryInTrackerModel(getTitle(), tracker));
-
-		// Adds a title to the operation
-		operation.setOperationTitle(getLinkedOperationTitle());
-
-		// Adds the total amount as a subAmount to the operation
-		Amount newAmountObject=TrackerFactory.eINSTANCE.createAmount(operation, operation.getTotalAmount(), getLinkedCategory());
-		operation.getSubAmounts().add(newAmountObject);
+		linkedCategory=findCategoryInTrackerModel(title, tracker);
+		operation.setOperationTitle(linkedOperationTitle);
+		operation.getSubAmounts().add(TrackerFactory.eINSTANCE.createAmount(operation, operation.getTotalAmount(), linkedCategory));
 	}
 
 	/**
 	 * Finds a category based on the given operation title.
 	 * It creates a new category if the corresponding one
 	 * does not exist already in the model.
-	 *
-	 * @param title
-	 *            the title of the category to find
-	 * @param tracker
-	 *            the tracker model
+	 * @param title the title of the category to find
+	 * @param tracker the tracker model
 	 * @return the corresponding category if it exists already, and a new
 	 *         category otherwise.
 	 */
@@ -141,8 +118,6 @@ public class LineContent {
 	}
 
 	/**
-	 * Returns the operation data
-	 *
 	 * @return the operation data
 	 */
 	public OperationData getOperation() {
@@ -157,14 +132,6 @@ public class LineContent {
 	}
 
 	/**
-	 * @param linkedCategory
-	 *            the linkedCategory to set
-	 */
-	private void setLinkedCategory(Category linkedCategory) {
-		this.linkedCategory=linkedCategory;
-	}
-
-	/**
 	 * @return the linkedOperationTitle
 	 */
 	public OperationTitle getLinkedOperationTitle() {
@@ -176,13 +143,5 @@ public class LineContent {
 	 */
 	public String getTitle() {
 		return title;
-	}
-
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title=title;
 	}
 }

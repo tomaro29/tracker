@@ -31,7 +31,7 @@ import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerService;
 
 /**
- * A util Class.
+ * An utility Class.
  */
 public class TrackerUtils {
 	private static final String OBJECT_CANNOT_BE_NULL="The ''{0}'' cannot be null."; //$NON-NLS-1$

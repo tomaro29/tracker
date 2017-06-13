@@ -49,7 +49,11 @@ public class TrackerFactoryUtils {
 		Optional<IncomeCategory> findAny=income.getIncomes().stream()//
 				.filter(category -> TrackerUtils.getCategoryService(category).isUndefinedCategory())//
 				.findAny();
-		return findAny.orElse(factory.createCategory(income));
+		IncomeCategory newCategory=null;
+		if (!findAny.isPresent()) {
+			newCategory=factory.createCategory(income);
+		}
+		return findAny.orElse(newCategory);
 	}
 
 	/**
@@ -63,9 +67,14 @@ public class TrackerFactoryUtils {
 			spending=TrackerFactory.eINSTANCE.createSpendingCategory();
 			repository.setSpending(spending);
 		}
-		return spending.getSpendings().stream()//
+		Optional<SpendingCategory> findAny=spending.getSpendings().stream()//
 				.filter(category -> TrackerUtils.getCategoryService(category).isUndefinedCategory())//
-				.findAny().orElse(factory.createCategory(spending));
+				.findAny();
+		SpendingCategory newCategory=null;
+		if (!findAny.isPresent()) {
+			newCategory=factory.createCategory(spending);
+		}
+		return findAny.orElse(newCategory);
 	}
 
 	/**

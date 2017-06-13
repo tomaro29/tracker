@@ -71,6 +71,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 	protected final Tracker tracker;
 	protected final OperationData operation;
+	private final OperationType operationType;
 	protected final Amount amount;
 
 	protected Category category;
@@ -208,13 +209,15 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	 * @param pageTitle the page title
 	 * @param tracker the given tracker
 	 * @param operation the operation
+	 * @param operationType the operation type as selected in the combo
 	 * @param amount the amount to edit if any, <code>null</code> otherwise.
 	 * @param isAdd <code>true</code> if the action is a result of an Add action, <code>false</code> if is edit one
 	 */
-	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, OperationData operation, Amount amount, boolean isAdd) {
+	public OperationSubAmountWizardPage(String pageTitle, Tracker tracker, OperationData operation, OperationType operationType, Amount amount, boolean isAdd) {
 		super(MessageFormat.format(isAdd ? OperationSubAmountWizardPage.ADD_PAGE_NAME : OperationSubAmountWizardPage.EDIT_PAGE_NAME, pageTitle));
 		this.tracker=tracker;
 		this.operation=operation;
+		this.operationType=operationType;
 		this.amount=amount;
 		setTitle(isAdd ? OperationSubAmountWizardPage.ADD_PAGE_TITLE : OperationSubAmountWizardPage.EDIT_PAGE_TITLE);
 		setDescription(OperationSubAmountWizardPage.WIZARD_DESCRIPTION);
@@ -234,8 +237,8 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 		createText(composite, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
 		Set<Category> categories=new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories()).stream()//
-				.filter(category -> operation.getType() == OperationType.DEBIT && category instanceof SpendingCategory
-									|| operation.getType() == OperationType.CREDIT && category instanceof IncomeCategory)//
+				.filter(category -> operationType == OperationType.DEBIT && category instanceof SpendingCategory
+									|| operationType == OperationType.CREDIT && category instanceof IncomeCategory)//
 				.collect(Collectors.toSet());
 		categoriesTree=createTree(composite, "Category: ", addCategoryButtonlistener); //$NON-NLS-1$
 		categoriesTreeViewer=createTreeViewer(categoriesTree, categoryListener);

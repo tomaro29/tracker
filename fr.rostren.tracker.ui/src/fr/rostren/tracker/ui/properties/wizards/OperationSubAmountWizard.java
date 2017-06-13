@@ -16,6 +16,7 @@ import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.model.utils.OperationData;
+import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.ui.properties.pages.OperationSubAmountWizardPage;
 
 /**
@@ -31,13 +32,14 @@ public class OperationSubAmountWizard extends Wizard {
 	 * Constructor.
 	 * @param tracker the tracker
 	 * @param operation the operation
+	 * @param operationType the operation type as selected in the combo
 	 * @param amount the amount to edit if any, <code>null</code> otherwise
 	 * @param isAdd <code>true</code> if the action is a result of an Add action, <code>false</code> if is edit one
 	 */
-	public OperationSubAmountWizard(Tracker tracker, OperationData operation, Amount amount, boolean isAdd) {
+	public OperationSubAmountWizard(Tracker tracker, OperationData operation, OperationType operationType, Amount amount, boolean isAdd) {
 		super();
 		this.isAdd=isAdd;
-		page=new OperationSubAmountWizardPage(operation.getOperationTitle().getTitle(), tracker, operation, amount, isAdd);
+		page=new OperationSubAmountWizardPage(operation.getOperationTitle().getTitle(), tracker, operation, operationType, amount, isAdd);
 	}
 
 	@Override

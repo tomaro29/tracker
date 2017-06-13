@@ -33,6 +33,7 @@ import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.model.utils.OperationData;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationSubAmountContentProvider;
@@ -53,7 +54,8 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 
 			OperationService operationService=TrackerFactory.eINSTANCE.createOperationService();
 			operationService.setOperation(operation);
-			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operationService.adaptOperation(), null, true);
+			OperationData operationData=operationService.adaptOperation();
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operationData, operationData.getType(), null, true);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				Amount newAmount=TrackerFactory.eINSTANCE.createAmount();
@@ -94,7 +96,8 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 
 			OperationService operationService=TrackerFactory.eINSTANCE.createOperationService();
 			operationService.setOperation(operation);
-			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operationService.adaptOperation(), amount, false);
+			OperationData operationData=operationService.adaptOperation();
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operationData, operationData.getType(), amount, false);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				Category category=wizard.getAmountCategory();

@@ -457,7 +457,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 		 */
 		private void performAdd() {
 			Tracker tracker=TrackerUtils.getTracker(account);
-			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operation, null, true);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operation, operationType, null, true);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				Amount newAmount=TrackerFactory.eINSTANCE.createAmount();
@@ -489,7 +489,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 		 */
 		private void performEdit(Amount amount) {
 			Tracker tracker=TrackerUtils.getTracker(account);
-			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operation, amount, false);
+			OperationSubAmountWizard wizard=new OperationSubAmountWizard(tracker, operation, operationType, amount, false);
 			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
 			if (Window.OK == wizardDialog.open()) {
 				amount.setValue(wizard.getAmountValue());

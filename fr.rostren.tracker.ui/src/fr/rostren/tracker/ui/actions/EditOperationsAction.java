@@ -18,6 +18,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.OperationService;
 import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.TrackerPackage;
@@ -63,12 +64,16 @@ public class EditOperationsAction extends Action {
 		Collections.sort(addedOperations, (op1, op2) -> op1.getDate().compareTo(op2.getDate()));
 		addedOperations.stream().forEach(operationData -> {
 			OperationService operationServise=TrackerFactory.eINSTANCE.createOperationService();
-			DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operationServise.adaptOperation(operationData));
+			Operation operation=operationServise.adaptOperation(operationData);
+			DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operation);
+			System.out.println(operation.eResource());
 		});
 		addedOperations.stream().map(operation -> operation.getOrigin())//
 				.collect(Collectors.toSet()).stream()//
-				.forEach(origin -> DomainUtils.executeAddCommand(TrackerUtils.getTracker(account).getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS,
-						origin));
+				.forEach(origin -> {
+					DomainUtils.executeAddCommand(TrackerUtils.getTracker(account).getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, origin);
+					System.out.println(origin.eResource());
+				});
 	}
 
 	/**

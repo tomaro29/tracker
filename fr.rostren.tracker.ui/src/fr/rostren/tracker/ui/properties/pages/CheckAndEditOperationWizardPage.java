@@ -348,6 +348,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 		ComboViewer typeCombo=createComboViewer(subContainer, CheckAndEditOperationWizardPage.OPERATION_TYPE_LABEL, new HashSet<>(Arrays.asList(OperationType.values())),
 				new OperationsTypesContentProvider(), new OperationTypeLabelProvider(), typeListener, null);
 		typeCombo.getCombo().select(Arrays.asList(typeCombo.getCombo().getItems()).indexOf(operation.getType().toString()));
+		operationType=operation.getType();
 		createDateTime(subContainer, CheckAndEditOperationWizardPage.OPERATION_DATE_LABEL, operation.getDate(), dateKeyListener, modifyDateListener);
 		createLabel(subContainer, CheckAndEditOperationWizardPage.OPERATION_TOTAL_AMOUNT_LABEL,
 				operation.getTotalAmount() == 0 ? StringUtils.EMPTY : String.valueOf(operation.getTotalAmount()));

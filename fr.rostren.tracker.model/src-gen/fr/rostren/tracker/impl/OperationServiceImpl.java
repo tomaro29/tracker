@@ -18,6 +18,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Credit;
@@ -47,6 +50,13 @@ import fr.rostren.tracker.model.utils.TrackerUtils;
  * @generated
  */
 public class OperationServiceImpl extends EObjectImpl implements OperationService {
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	private static final BiMap<OperationData, Operation> operationsBiMap=HashBiMap.create();
+
 	/**
 	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -85,8 +95,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 			InternalEObject oldOperation=(InternalEObject)operation;
 			operation=(Operation)eResolveProxy(oldOperation);
 			if (operation != oldOperation) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.OPERATION_SERVICE__OPERATION, oldOperation, operation));
+				}
 			}
 		}
 		return operation;
@@ -110,8 +121,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	public void setOperation(Operation newOperation) {
 		Operation oldOperation=operation;
 		operation=newOperation;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OPERATION_SERVICE__OPERATION, oldOperation, operation));
+		}
 	}
 
 	/**
@@ -169,8 +181,13 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	 */
 	@Override
 	public OperationData adaptOperation() {
-		return new OperationData(OperationType.valueOf(operation.eClass().getName().toUpperCase()), operation.getOperationTitle(), operation.getTotalAmount(), operation.getDate(),
-				operation.getOrigin(), operation.getSubAmounts());
+		if (OperationServiceImpl.operationsBiMap.containsValue(operation)) {
+			return OperationServiceImpl.operationsBiMap.inverse().get(operation);
+		}
+		OperationData operationData=new OperationData(OperationType.valueOf(operation.eClass().getName().toUpperCase()), operation.getOperationTitle(), operation.getTotalAmount(),
+				operation.getDate(), operation.getOrigin(), operation.getSubAmounts());
+		OperationServiceImpl.operationsBiMap.put(operationData, operation);
+		return operationData;
 	}
 
 	/**
@@ -178,6 +195,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	 */
 	@Override
 	public Operation adaptOperation(OperationData operatioData) {
+		if (OperationServiceImpl.operationsBiMap.containsKey(operatioData)) {
+			return OperationServiceImpl.operationsBiMap.get(operatioData);
+		}
 		if ((operation == null || operation instanceof Debit) && OperationType.CREDIT.equals(operatioData.getType())) {
 			operation=TrackerFactory.eINSTANCE.createCredit();
 		}
@@ -190,6 +210,7 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 		operation.setOrigin(operatioData.getOrigin());
 		operation.setTotalAmount(operatioData.getTotalAmount());
 		operation.getSubAmounts().addAll(operatioData.getSubAmounts());
+		OperationServiceImpl.operationsBiMap.put(operatioData, operation);
 		return operation;
 	}
 
@@ -264,8 +285,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.OPERATION_SERVICE__OPERATION:
-				if (resolve)
+				if (resolve) {
 					return getOperation();
+				}
 				return basicGetOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);

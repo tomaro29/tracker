@@ -157,7 +157,7 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 		if (!StringUtils.isEmpty(amount) && !StringUtils.isBlank(amount)) {
 			try {
 				float parseFloat=Float.parseFloat(amount);
-				if (parseFloat == 0) {
+				if (Float.isInfinite(parseFloat) || Float.isNaN(parseFloat)) {
 					setErrorMessage("The Account amount cannot be '0' !"); //$NON-NLS-1$
 					return false;
 				}

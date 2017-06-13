@@ -42,7 +42,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	protected CCombo categoryCombo;
 
 	private final ModifyListener listener=new AmountAttributesModifyListener(this);
-	private final SelectionListener datelistener=new DateSelectionListener(this, dateTime);
+	private final SelectionListener datelistener=new DateSelectionListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {

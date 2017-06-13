@@ -13,6 +13,12 @@ import org.eclipse.swt.widgets.Widget;
 
 public abstract class AbstractModifyListener implements ModifyListener {
 
+	/**
+	 * Executes the modify action
+	 * @param widget the widget
+	 */
+	abstract protected void executeModify(Widget widget);
+
 	@Override
 	public void modifyText(ModifyEvent event) {
 		Widget widget=event.widget;
@@ -22,10 +28,4 @@ public abstract class AbstractModifyListener implements ModifyListener {
 
 		executeModify(widget);
 	}
-
-	/**
-	 * Executes the modify action
-	 * @param widget the widget
-	 */
-	abstract protected void executeModify(Widget widget);
 }

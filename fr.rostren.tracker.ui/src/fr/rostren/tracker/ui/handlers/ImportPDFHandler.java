@@ -52,17 +52,16 @@ public class ImportPDFHandler extends AbstractHandler {
 			account=(CheckingAccount)selectedElement;
 			// opens dialog to load a pdf
 			LoadResourceDialog dialog=new LoadResourceDialog(shell);
-			if (dialog.open() != Window.OK) {
-				continue;
-			}
+			if (dialog.open() == Window.OK) {
 
-			pdfURIText=dialog.getURIText();
-			if (pdfURIText.isEmpty()) {
-				MessageDialog.openError(shell, "Empty PDF URI.", //$NON-NLS-1$
-						"The pdf uri cannot be empty."); //$NON-NLS-1$
-				return null;
+				pdfURIText=dialog.getURIText();
+				if (pdfURIText.isEmpty()) {
+					MessageDialog.openError(shell, "Empty PDF URI.", //$NON-NLS-1$
+							"The pdf uri cannot be empty."); //$NON-NLS-1$
+					return null;
+				}
+				runImportOperationsAction(pdfURIText, account);
 			}
-			runImportOperationsAction(pdfURIText, account);
 		}
 		return null;
 

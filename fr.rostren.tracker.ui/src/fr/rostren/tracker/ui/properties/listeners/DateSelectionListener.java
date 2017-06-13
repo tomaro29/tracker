@@ -24,16 +24,13 @@ import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySecti
 
 public class DateSelectionListener implements SelectionListener {
 
-	private final DateTime dateTime;
 	private final AbstractAttributesPropertySection section;
 
 	/**
 	 * Constructor
 	 * @param section the section
-	 * @param dateTime the date time widget
 	 */
-	public DateSelectionListener(AbstractAttributesPropertySection section, DateTime dateTime) {
-		this.dateTime=dateTime;
+	public DateSelectionListener(AbstractAttributesPropertySection section) {
 		this.section=section;
 	}
 

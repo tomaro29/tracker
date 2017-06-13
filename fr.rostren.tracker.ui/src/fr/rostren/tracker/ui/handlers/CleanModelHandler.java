@@ -65,21 +65,6 @@ public class CleanModelHandler extends AbstractHandler implements IHandler {
 						tracker.getOriginsRepository().getOrigins().clear();
 						account.getOperations().clear();
 					});
-
-			// for (Iterator<?> objects = selection.iterator();
-			// objects.hasNext();) {
-			// Object selectedElement =
-			// AdapterFactoryEditingDomain.unwrap(objects.next());
-			// if (selectedElement instanceof CheckingAccount) {
-			//
-			// // delete all the account content and the pdf origins
-			// CheckingAccount account = (CheckingAccount) selectedElement;
-			// Tracker tracker = TrackerUtils.getTracker(account);
-			//
-			// tracker.getOriginsRepository().getOrigins().clear();
-			// account.getOperations().clear();
-			// }
-			// }
 			editor.doSave(new NullProgressMonitor());
 		}
 		return null;

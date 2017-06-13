@@ -29,9 +29,6 @@ import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 
 public class ImportOperationsAction extends Action {
-	private static final String FILES_ALREADY_IMPORTED_BEFORE="The files:\n" //$NON-NLS-1$
-																	+ "''{0}''\n" //$NON-NLS-1$
-																+ "are already imported before!"; //$NON-NLS-1$
 
 	private static final String REPOSITORY_DOES_NOT_EXIST="The ''{0}'' repository does not exist, can we create it automatically ?"; //$NON-NLS-1$
 	private static final String REPOSITORY_MISSING="Some repositories are missing. User is invited to create all repositories in the tracker manually before asking for importing any file!"; //$NON-NLS-1$
@@ -76,16 +73,17 @@ public class ImportOperationsAction extends Action {
 			public void run() {
 				IWorkbench workench=PlatformUI.getWorkbench();
 				IWorkbenchWindow window=workench.getActiveWorkbenchWindow();
-				Shell shell=window != null ? window.getShell() : null;
+				Shell dialogShell=window != null ? window.getShell() : null;
 				try {
-					ProgressMonitorDialog dialog=new ProgressMonitorDialog(shell);
+					ProgressMonitorDialog dialog=new ProgressMonitorDialog(dialogShell);
 					dialog.run(true, true, job);
 				}
 				catch (InterruptedException e) {
-					MessageDialog.openInformation(shell, "Unable to Import Files", e.getMessage());//$NON-NLS-1$
+					MessageDialog.openInformation(dialogShell, "Unable to Import Files", e.getMessage());//$NON-NLS-1$
+					Thread.currentThread().interrupt();
 				}
 				catch (InvocationTargetException e) {
-					MessageDialog.openWarning(shell, "Extraction interruption", "The extraction action has been interrupted for a technical reason."); //$NON-NLS-1$ //$NON-NLS-2$
+					MessageDialog.openWarning(dialogShell, "Extraction interruption", "The extraction action has been interrupted for a technical reason."); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
 		};

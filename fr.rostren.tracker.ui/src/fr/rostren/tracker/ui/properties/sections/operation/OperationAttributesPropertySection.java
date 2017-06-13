@@ -47,7 +47,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 	protected Text totalAmount;
 
 	private final ModifyListener listener=new OperationAttributesModifyListener(this);
-	private final SelectionListener datelistener=new DateSelectionListener(this, dateTime);
+	private final SelectionListener datelistener=new DateSelectionListener(this);
 
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {

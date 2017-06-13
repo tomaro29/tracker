@@ -8,6 +8,7 @@
 package fr.rostren.tracker.model.utils;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +34,19 @@ import fr.rostren.tracker.TrackerService;
 /**
  * An utility Class.
  */
-public class TrackerUtils {
-	private static final String OBJECT_CANNOT_BE_NULL="The ''{0}'' cannot be null."; //$NON-NLS-1$
+public final class TrackerUtils {
 	public static final String UNDEFINED_INCOME_TITLE="UNDEFINED INCOME"; //$NON-NLS-1$
 	public static final String UNDEFINED_SPENDING_TITLE="UNDEFINED SPENDING"; //$NON-NLS-1$
+
+	private static final String OBJECT_CANNOT_BE_NULL="The ''{0}'' cannot be null."; //$NON-NLS-1$
 	private static Map<EObject, EObject> servicesMap=new HashMap<>();
+
+	/**
+	 * A private Constructor to prevent this class non static calls
+	 */
+	private TrackerUtils() {
+		// Do Nothing
+	}
 
 	/**
 	 * Returns the tracker
@@ -184,7 +193,7 @@ public class TrackerUtils {
 			throw new IllegalArgumentException(MessageFormat.format(TrackerUtils.OBJECT_CANNOT_BE_NULL, Amount.class.getName().toLowerCase()));
 		}
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
-			return null;
+			return Optional.empty();
 		}
 		TrackerService service=TrackerUtils.getTrackerService(amount);
 		return service.getAllCategories().stream()//
@@ -200,6 +209,6 @@ public class TrackerUtils {
 	 */
 	public static List<Double> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 }

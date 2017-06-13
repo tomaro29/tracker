@@ -237,8 +237,8 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 		createText(composite, "Value: ", value, modifyValueListener); //$NON-NLS-1$
 
 		Set<Category> categories=new HashSet<>(TrackerUtils.getTrackerService(tracker).getCategories()).stream()//
-				.filter(category -> operationType == OperationType.DEBIT && category instanceof SpendingCategory
-									|| operationType == OperationType.CREDIT && category instanceof IncomeCategory)//
+				.filter(categ -> operationType == OperationType.DEBIT && categ instanceof SpendingCategory
+									|| operationType == OperationType.CREDIT && categ instanceof IncomeCategory)//
 				.collect(Collectors.toSet());
 		categoriesTree=createTree(composite, "Category: ", addCategoryButtonlistener); //$NON-NLS-1$
 		categoriesTreeViewer=createTreeViewer(categoriesTree, categoryListener);

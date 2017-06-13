@@ -12,8 +12,6 @@ import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
-
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.model.utils.LineContent;
 
@@ -40,20 +38,7 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 			.concat(EMPTY_STRING_PATTREN.pattern()).concat(OPERATION_TITLE_PATTREN.pattern()).concat(EMPTY_STRING_PATTREN.pattern()));
 
 	@Override
-	public LineContent parseLine(String line, Origin origin) {
-		if (StringUtils.isEmpty(line) || StringUtils.isBlank(line)) {
-			return null;
-		}
-		if (origin == null) {
-			throw new IllegalArgumentException("The origin of the line to parse cannot be null"); //$NON-NLS-1$
-		}
-		setCurrentLine(line);
-		setCurrentSplitLine(getCurrentLine().split(SPACE_STRING_PATTREN.pattern()));
-		Matcher numbersMatcher=ONLY_NUMBERS.matcher(line);
-		if (numbersMatcher.matches()) {
-			return null;
-		}
-
+	LineContent parseValidLine(String line, Origin origin) {
 		Matcher dateMatcher=CE_DATE_LINE_PATTREN.matcher(line);
 		Matcher operationsDepotMatcher=CE_OPERATIONS_DEPOT_LINE_PATTREN.matcher(line);
 		Matcher virRecuMatcher=CE_VIREMENTS_RECUS_LINE_PATTREN.matcher(line);
@@ -99,74 +84,19 @@ public class CEPdfContentAnalyzer extends AbstractPdfContentAnalyzer {
 					&& (PdfToken.OPERATIONS_DEPOT.equals(getLastToken())	|| PdfToken.VIR_RECU.equals(getLastToken()) || PdfToken.PAIE_CHEQUE.equals(getLastToken())
 						|| PdfToken.FRAIS_BANCAIRES.equals(getLastToken()) || PdfToken.PAIEMENTS_CARTES.equals(getLastToken()) || PdfToken.RETRAITS_CARTES.equals(getLastToken())
 						|| PdfToken.PRELEVEMENTS.equals(getLastToken()) || PdfToken.OPERATIONS_DIVERSES.equals(getLastToken()))) {
-			return extractOperation(origin);
+			return extractOperation(origin, STRING_SEPARATOR);
 		}
 		return null;
 	}
 
 	@Override
-	protected void extractDataFromCurrentLine() {
-		if (getCurrentLine().matches(CE_COMPLETE_LINE_PATTERN.pattern())) {
-			extractCompleteLine();
-		}
-		else if (getCurrentLine().matches(CE_PARTIAL_LINE_PATTERN.pattern())) {
-			extractPartialLine();
-		}
-		else if (getCurrentLine().matches(AMOUNT_NUMBER_PATTREN.pattern())) {
-			setLastPotentialAmount(getAmountAsDouble(getCurrentLine().toString()));
-		}
+	protected Pattern getCompleteLinePattern() {
+		return CE_COMPLETE_LINE_PATTERN;
 	}
 
-	/**
-	 * Extracts the partial line
-	 */
-	private void extractPartialLine() {
-		setLastPotentialDate(extractDateFromCurrentLine());
-		StringBuilder titleBuilder=new StringBuilder();
-		for (int index=1; index < getCurrentSplitLine().length; index++) {
-			titleBuilder.append(getCurrentSplitLine()[index]);
-			titleBuilder.append(STRING_SEPARATOR);
-		}
-		setLastPotentialOperationTitle(titleBuilder.toString());
-	}
-
-	/**
-	 * Extracts the complete line
-	 */
-	private void extractCompleteLine() {
-		setLastPotentialDate(extractDateFromCurrentLine());
-		String[] currentSplitLine=getCurrentSplitLine();
-		int length=currentSplitLine.length;
-		String lastPart=currentSplitLine[length - 1];
-		String beforeLastPart=currentSplitLine[length - 2];
-
-		StringBuilder titleBuilder=new StringBuilder();
-		if (!beforeLastPart.matches(FACT_PATTREN.pattern()) && beforeLastPart.length() <= 3 && beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
-			for (int index=1; index < length - 2; index++) {
-				titleBuilder.append(currentSplitLine[index]);
-				titleBuilder.append(STRING_SEPARATOR);
-			}
-
-			setLastPotentialAmount(getAmountAsDouble(beforeLastPart + lastPart));
-		}
-		else {
-			for (int index=1; index < currentSplitLine.length - 1; index++) {
-				titleBuilder.append(currentSplitLine[index]);
-				titleBuilder.append(STRING_SEPARATOR);
-			}
-
-			setLastPotentialAmount(getAmountAsDouble(lastPart.toString()));
-		}
-		setLastPotentialOperationTitle(titleBuilder.toString());
-	}
-
-	/**
-	 * Returns the amount as {@link Double}
-	 * @param amount the amount as a string
-	 * @return the {@link Double} amount
-	 */
-	private Double getAmountAsDouble(String amount) {
-		return new Double(amount.replaceAll(STRING_SEPARATOR, StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+	@Override
+	protected Pattern getPartialLinePattern() {
+		return CE_PARTIAL_LINE_PATTERN;
 	}
 
 	@Override

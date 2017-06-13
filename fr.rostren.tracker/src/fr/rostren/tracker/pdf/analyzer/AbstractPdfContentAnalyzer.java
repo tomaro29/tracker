@@ -8,7 +8,10 @@
 package fr.rostren.tracker.pdf.analyzer;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
 
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.model.utils.LineContent;
@@ -65,17 +68,41 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *            the operation origin
 	 * @return {@link LineContent}
 	 */
-	public abstract LineContent parseLine(String line, Origin origin);
+	public LineContent parseLine(String line, Origin origin) {
+		if (StringUtils.isEmpty(line) || StringUtils.isBlank(line)) {
+			return null;
+		}
+		if (origin == null) {
+			throw new IllegalArgumentException("The origin of the line to parse cannot be null"); //$NON-NLS-1$
+		}
+		setCurrentLine(line);
+		setCurrentSplitLine(getCurrentLine().split(SPACE_STRING_PATTREN.pattern()));
+		Matcher numbersMatcher=ONLY_NUMBERS.matcher(line);
+		if (numbersMatcher.matches()) {
+			return null;
+		}
+
+		return parseValidLine(line, origin);
+	}
+
+	/**
+	 * Parses a valid line
+	 * @param line line is not empty, not blank and not a number
+	 * @param origin not null
+	 * @return the {@link LineContent} instance
+	 */
+	abstract LineContent parseValidLine(String line, Origin origin);
 
 	/**
 	 * Extracts operations if exists from the current line.
 	 *
 	 * @param origin
 	 *            the operation origin
+	 * @param stringSeparator the string separator to use
 	 * @return {@link LineContent}
 	 */
-	protected LineContent extractOperation(Origin origin) {
-		extractDataFromCurrentLine();
+	protected LineContent extractOperation(Origin origin, String stringSeparator) {
+		extractDataFromCurrentLine(stringSeparator);
 		if (!isCompleted()) {
 			return null;
 		}
@@ -134,8 +161,99 @@ public abstract class AbstractPdfContentAnalyzer {
 
 	/**
 	 * Tries to extract an operation characteristics from lines.
+	 * @param stringSeparator the string separator to use
 	 */
-	protected abstract void extractDataFromCurrentLine();
+	protected void extractDataFromCurrentLine(String stringSeparator) {
+		if (getCurrentLine().matches(getCompleteLinePattern().pattern())) {
+			extractCompleteLine(stringSeparator);
+		}
+		else if (getCurrentLine().matches(getPartialLinePattern().pattern())) {
+			extractPartialLine();
+		}
+		else if (getCurrentLine().matches(AMOUNT_NUMBER_PATTREN.pattern())) {
+			setLastPotentialAmount(getAmountAsDouble(getCurrentLine().toString(), stringSeparator));
+		}
+	}
+
+	/**
+	 * Returns the complete line pattern
+	 * @return the complete line pattern
+	 */
+	protected abstract Pattern getCompleteLinePattern();
+
+	/**
+	 * Returns the complete line pattern
+	 * @return the complete line pattern
+	 */
+	protected abstract Pattern getPartialLinePattern();
+
+	/**
+	 * Extracts the complete line
+	 * @param stringSeparator the string separator to use
+	 */
+	protected void extractCompleteLine(String stringSeparator) {
+		setLastPotentialDate(extractDateFromCurrentLine());
+		String[] currentSplitLine=getCurrentSplitLine();
+		int length=currentSplitLine.length;
+		String lastPart=currentSplitLine[length - 1];
+		String beforeLastPart=currentSplitLine[length - 2];
+
+		StringBuilder titleBuilder=new StringBuilder();
+		if (!beforeLastPart.matches(FACT_PATTREN.pattern()) && beforeLastPart.length() <= 3 && beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
+			for (int index=1; index < length - 2; index++) {
+				titleBuilder.append(currentSplitLine[index]);
+				titleBuilder.append(STRING_SEPARATOR);
+			}
+
+			setLastPotentialAmount(getAmountAsDouble(beforeLastPart + lastPart, stringSeparator));
+		}
+		else {
+			for (int index=1; index < currentSplitLine.length - 1; index++) {
+				titleBuilder.append(currentSplitLine[index]);
+				titleBuilder.append(STRING_SEPARATOR);
+			}
+
+			setLastPotentialAmount(getAmountAsDouble(lastPart.toString(), stringSeparator));
+		}
+
+		String potentialTitle=titleBuilder.toString();
+		if (potentialTitle.matches(getPartialLinePattern().pattern())) {
+			String[] split=potentialTitle.split(STRING_SEPARATOR);
+			titleBuilder=new StringBuilder();
+			for (int index=1; index < split.length - 1; index++) {
+				titleBuilder.append(split[index]);
+				titleBuilder.append(STRING_SEPARATOR);
+			}
+			titleBuilder.append(split[split.length - 1]);
+			setLastPotentialOperationTitle(titleBuilder.toString());
+		}
+		else {
+			setLastPotentialOperationTitle(titleBuilder.toString());
+		}
+	}
+
+	/**
+	 * Extracts the partial line
+	 */
+	protected void extractPartialLine() {
+		setLastPotentialDate(extractDateFromCurrentLine());
+		StringBuilder titleBuilder=new StringBuilder();
+		for (int index=1; index < getCurrentSplitLine().length; index++) {
+			titleBuilder.append(getCurrentSplitLine()[index]);
+			titleBuilder.append(STRING_SEPARATOR);
+		}
+		setLastPotentialOperationTitle(titleBuilder.toString());
+	}
+
+	/**
+	 * Returns the amount as {@link Double}
+	 * @param amount the amount as a string
+	 * @param stringSeparator the string separator to use
+	 * @return the {@link Double} amount
+	 */
+	private Double getAmountAsDouble(String amount, String stringSeparator) {
+		return new Double(amount.replaceAll(stringSeparator, StringUtils.EMPTY).replaceAll(",", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+	}
 
 	/**
 	 * Specify the date from the current line.

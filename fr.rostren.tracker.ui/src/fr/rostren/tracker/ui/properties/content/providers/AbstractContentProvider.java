@@ -41,6 +41,6 @@ public class AbstractContentProvider implements ITreeContentProvider {
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		// Implemented in subClasses !
-		return null;
+		return new Object[0];
 	}
 }

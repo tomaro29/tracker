@@ -35,6 +35,9 @@ public final class DomainUtils {
 	 */
 	public static void executeRemoveCommand(EObject eObject, EStructuralFeature feature, Object value) {
 		EditingDomain editingDomain=getEditingDomain(eObject);
+		if (editingDomain == null) {
+			return;
+		}
 		Command cmd=RemoveCommand.create(editingDomain, eObject, feature, value);
 		editingDomain.getCommandStack().execute(cmd);
 	}
@@ -47,6 +50,9 @@ public final class DomainUtils {
 	 */
 	public static void executeAddCommand(EObject eObject, EStructuralFeature feature, Object value) {
 		EditingDomain editingDomain=getEditingDomain(eObject);
+		if (editingDomain == null) {
+			return;
+		}
 		Command cmd=AddCommand.create(editingDomain, eObject, feature, value);
 		editingDomain.getCommandStack().execute(cmd);
 	}
@@ -59,6 +65,9 @@ public final class DomainUtils {
 	 */
 	public static void executeSetCommand(EObject eObject, EStructuralFeature feature, Object value) {
 		EditingDomain editingDomain=getEditingDomain(eObject);
+		if (editingDomain == null) {
+			return;
+		}
 		Command cmd=SetCommand.create(editingDomain, eObject, feature, value);
 		editingDomain.getCommandStack().execute(cmd);
 	}

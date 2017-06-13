@@ -80,6 +80,8 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	/** The refinement table group title. */
 	private static final String REFINEMENT_GROUP_TITLE="Operation Sub Amounts"; //$NON-NLS-1$
 
+	private static final int FONT_WIDTH=10;
+
 	protected Amount lastSelection;
 	protected OperationData operation;
 	protected Account account;
@@ -90,9 +92,6 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	protected OperationType operationType;
 
 	private final OperationService operationService;
-
-	private final int TEXT_MARGIN=3;
-	private final int FONT_WIDTH=10;
 
 	private final String operationTitle;
 
@@ -234,28 +233,28 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	 * @return the created table
 	 */
 	private Table createTable(final Composite parent) {
-		Table table=new Table(parent, SWT.FILL | SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		Table newTable=new Table(parent, SWT.FILL | SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
+		newTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		table.setVisible(true);
+		newTable.setHeaderVisible(true);
+		newTable.setLinesVisible(true);
+		newTable.setVisible(true);
 
-		table.setFont(new Font(table.getDisplay(), "Arial", FONT_WIDTH, SWT.BOLD)); //$NON-NLS-1$
+		newTable.setFont(new Font(newTable.getDisplay(), "Arial", CheckAndEditOperationWizardPage.FONT_WIDTH, SWT.BOLD)); //$NON-NLS-1$
 
-		TableColumn subAmountColumn=new TableColumn(table, SWT.NONE);
+		TableColumn subAmountColumn=new TableColumn(newTable, SWT.NONE);
 		subAmountColumn.setText(CheckAndEditOperationWizardPage.SUB_AMOUNT_COLUMN_TITLE);
 		subAmountColumn.setWidth(100);
 
-		TableColumn categoryColumn=new TableColumn(table, SWT.NONE);
+		TableColumn categoryColumn=new TableColumn(newTable, SWT.NONE);
 		categoryColumn.setText(CheckAndEditOperationWizardPage.CATEGORY_COLUMN_TITLE);
 		categoryColumn.setWidth(100);
 
-		TableColumn wishedDateColumn=new TableColumn(table, SWT.NONE);
+		TableColumn wishedDateColumn=new TableColumn(newTable, SWT.NONE);
 		wishedDateColumn.setText(CheckAndEditOperationWizardPage.WISHED_DATE_COLUMN_TITLE);
 		wishedDateColumn.setWidth(100);
 
-		return table;
+		return newTable;
 	}
 
 	/**
@@ -468,7 +467,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 				}
 
 				double value=wizard.getAmountValue();
-				if (value != 0) {
+				if (Double.isFinite(value)) {
 					newAmount.setValue(value);
 				}
 				LocalDate date=wizard.getAmountWishedDate();

@@ -58,9 +58,9 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 			if (Window.OK == wizardDialog.open()) {
 				OperationTitle newOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
 
-				String title=wizard.getOperationTitle();
-				if (title != null) {
-					newOperationTitle.setTitle(title);
+				String newTitle=wizard.getOperationTitle();
+				if (newTitle != null) {
+					newOperationTitle.setTitle(newTitle);
 				}
 
 				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);

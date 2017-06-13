@@ -119,10 +119,10 @@ public class AddCategorySubCategoryWizardPage extends AbstractAddWizardPage {
 	protected void createContainer(Composite parent) {
 		List<Category> categories=new ArrayList<>();
 		if (category instanceof IncomeCategory) {
-			categories=new ArrayList<>(((IncomeCategory)category).getIncomes());
+			categories.addAll(((IncomeCategory)category).getIncomes());
 		}
 		else {
-			categories=new ArrayList<>(((SpendingCategory)category).getSpendings());
+			categories.addAll(((SpendingCategory)category).getSpendings());
 		}
 		categoriesComboViewer=createComboViewer(parent, "Category: ", new HashSet<>(categories), //$NON-NLS-1$
 				new CategoriesRepositoryContentProvider(), new CategoryLabelProvider(), categoryListener, addSubCategoryButtonlistener);

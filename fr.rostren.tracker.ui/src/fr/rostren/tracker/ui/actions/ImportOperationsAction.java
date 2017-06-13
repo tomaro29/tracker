@@ -68,27 +68,22 @@ public class ImportOperationsAction extends Action {
 	 * @param job the job to run
 	 */
 	public void runJobInDialog(final IRunnableWithProgress job) {
-		Runnable runnable=new Runnable() {
-			@Override
-			public void run() {
-				IWorkbench workench=PlatformUI.getWorkbench();
-				IWorkbenchWindow window=workench.getActiveWorkbenchWindow();
-				Shell dialogShell=window != null ? window.getShell() : null;
-				try {
-					ProgressMonitorDialog dialog=new ProgressMonitorDialog(dialogShell);
-					dialog.run(true, true, job);
-				}
-				catch (InterruptedException e) {
-					MessageDialog.openInformation(dialogShell, "Unable to Import Files", e.getMessage());//$NON-NLS-1$
-					Thread.currentThread().interrupt();
-				}
-				catch (InvocationTargetException e) {
-					MessageDialog.openWarning(dialogShell, "Extraction interruption", "The extraction action has been interrupted for a technical reason."); //$NON-NLS-1$ //$NON-NLS-2$
-				}
+		Display.getDefault().syncExec(() -> {
+			IWorkbench workench=PlatformUI.getWorkbench();
+			IWorkbenchWindow window=workench.getActiveWorkbenchWindow();
+			Shell dialogShell=window != null ? window.getShell() : null;
+			try {
+				ProgressMonitorDialog dialog=new ProgressMonitorDialog(dialogShell);
+				dialog.run(true, true, job);
 			}
-		};
-
-		Display.getDefault().syncExec(runnable);
+			catch (InterruptedException e) {
+				MessageDialog.openInformation(dialogShell, "Unable to Import Files", e.getMessage());//$NON-NLS-1$
+				Thread.currentThread().interrupt();
+			}
+			catch (InvocationTargetException e) {
+				MessageDialog.openWarning(dialogShell, "Extraction interruption", "The extraction action has been interrupted for a technical reason."); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		});
 	}
 
 	/**

@@ -129,8 +129,10 @@ public abstract class AbstractPdfContentAnalyzer {
 				// REMISE(C), INTERETS(C)
 				lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.CREDIT, origin);
 			}
-			// COTISATION(D), FRAIS(D)
-			lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
+			else {
+				// COTISATION(D), FRAIS(D)
+				lineContent=new LineContent(lastPotentialDate, lastPotentialOperationTitle, lastPotentialAmount, OperationType.DEBIT, origin);
+			}
 		}
 		else if (lastToken != null && PdfToken.DATE.equals(lastToken)) {
 			//in this case the operation type is not defined
@@ -147,7 +149,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *         "false" otherwise.
 	 */
 	protected boolean isCompleted() {
-		return lastPotentialDate != null && lastPotentialOperationTitle != null && lastPotentialAmount != 0;
+		return lastPotentialDate != null && lastPotentialOperationTitle != null && Double.isFinite(lastPotentialAmount);
 	}
 
 	/**
@@ -193,23 +195,23 @@ public abstract class AbstractPdfContentAnalyzer {
 	 */
 	protected void extractCompleteLine(String stringSeparator) {
 		setLastPotentialDate(extractDateFromCurrentLine());
-		String[] currentSplitLine=getCurrentSplitLine();
-		int length=currentSplitLine.length;
-		String lastPart=currentSplitLine[length - 1];
-		String beforeLastPart=currentSplitLine[length - 2];
+		String[] splitLine=getCurrentSplitLine();
+		int length=splitLine.length;
+		String lastPart=splitLine[length - 1];
+		String beforeLastPart=splitLine[length - 2];
 
 		StringBuilder titleBuilder=new StringBuilder();
 		if (!beforeLastPart.matches(FACT_PATTREN.pattern()) && beforeLastPart.length() <= 3 && beforeLastPart.matches(NUMBER_PATTREN.pattern())) {
 			for (int index=1; index < length - 2; index++) {
-				titleBuilder.append(currentSplitLine[index]);
+				titleBuilder.append(splitLine[index]);
 				titleBuilder.append(STRING_SEPARATOR);
 			}
 
 			setLastPotentialAmount(getAmountAsDouble(beforeLastPart + lastPart, stringSeparator));
 		}
 		else {
-			for (int index=1; index < currentSplitLine.length - 1; index++) {
-				titleBuilder.append(currentSplitLine[index]);
+			for (int index=1; index < splitLine.length - 1; index++) {
+				titleBuilder.append(splitLine[index]);
 				titleBuilder.append(STRING_SEPARATOR);
 			}
 

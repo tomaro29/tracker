@@ -24,28 +24,35 @@ public class CheckAndEditOperationWizard extends Wizard {
 	protected BiMap<OperationData, CheckAndEditOperationWizardPage> pages;
 
 	private List<OperationData> operations=new ArrayList<>();
-	private boolean canFinish=false;
+	private boolean canFinish;
+
+	private final String title;
 
 	/**
 	 * Constructor
 	 * @param operations the operations
 	 * @param account the checking account
+	 * @param title the wizard title
+	 * @param canFinish <code>true</code> if the wizard can finish (used in case of editing one operation). <code>false</code> otherwise.
 	 */
-	public CheckAndEditOperationWizard(List<OperationData> operations, Account account) {
+	public CheckAndEditOperationWizard(List<OperationData> operations, Account account, String title, boolean canFinish) {
 		super();
+		this.title=title;
 		setNeedsProgressMonitor(true);
 		this.operations=operations;
+		this.canFinish=canFinish;
 
 		pages=HashBiMap.create();
 		for (OperationData operation: operations) {
 			CheckAndEditOperationWizardPage page=new CheckAndEditOperationWizardPage(operation, account);
 			pages.put(operation, page);
+			page.setPageComplete(page.isPageComplete());
 		}
 	}
 
 	@Override
 	public String getWindowTitle() {
-		return "Import Operations From PDF File(s)."; //$NON-NLS-1$
+		return title;
 	}
 
 	@Override

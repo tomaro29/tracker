@@ -9,7 +9,6 @@
  */
 package fr.rostren.tracker.util;
 
-import fr.rostren.tracker.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -38,6 +37,7 @@ import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Title;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.TrackerService;
 import fr.rostren.tracker.Transfer;
 
 /**

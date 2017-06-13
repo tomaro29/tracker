@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.TrackerPackage;
 
@@ -56,7 +57,7 @@ public abstract class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final float AMOUNT_EDEFAULT=0.0F;
+	protected static final double AMOUNT_EDEFAULT=0.0;
 
 	/**
 	 * The cached value of the '{@link #getAmount() <em>Amount</em>}' attribute.
@@ -65,7 +66,7 @@ public abstract class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 * @ordered
 	 */
-	protected float amount=AMOUNT_EDEFAULT;
+	protected double amount=AMOUNT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
@@ -128,17 +129,18 @@ public abstract class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	@Override
-	public float getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public void setAmount(float newAmount) {
-		float oldAmount=amount;
+	public void setAmount(double newAmount) {
+		double oldAmount=amount;
 		amount=newAmount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT__AMOUNT, oldAmount, amount));
@@ -193,7 +195,7 @@ public abstract class AccountImpl extends EObjectImpl implements Account {
 				setName((String)newValue);
 				return;
 			case TrackerPackage.ACCOUNT__AMOUNT:
-				setAmount((Float)newValue);
+				setAmount((Double)newValue);
 				return;
 			case TrackerPackage.ACCOUNT__IDENTIFIER:
 				setIdentifier((Integer)newValue);

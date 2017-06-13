@@ -9,19 +9,17 @@
  */
 package fr.rostren.tracker.impl;
 
-import fr.rostren.tracker.Amount;
-import fr.rostren.tracker.Category;
-import fr.rostren.tracker.TrackerPackage;
-
 import java.time.LocalDate;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import fr.rostren.tracker.Amount;
+import fr.rostren.tracker.Category;
+import fr.rostren.tracker.TrackerPackage;
 
 /**
  * <!-- begin-user-doc -->

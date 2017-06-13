@@ -77,8 +77,8 @@ public class OwnerAccountsPropertySection extends AbstractTablePropertySection {
 					newAccount.setIdentifier(accountIdentifier);
 				}
 
-				float accountAmount=wizard.getAccountAmount();
-				if (accountAmount != 0.0) {
+				double accountAmount=wizard.getAccountAmount();
+				if (Double.isFinite(accountAmount)) {
 					newAccount.setAmount(accountAmount);
 				}
 

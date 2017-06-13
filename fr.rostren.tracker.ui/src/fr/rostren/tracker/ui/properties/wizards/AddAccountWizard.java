@@ -84,7 +84,7 @@ public class AddAccountWizard extends Wizard {
 	 * Returns the account amount
 	 * @return the account amount
 	 */
-	public float getAccountAmount() {
+	public double getAccountAmount() {
 		return page.getAccountAmount();
 	}
 }

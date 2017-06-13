@@ -66,13 +66,11 @@ public class EditOperationsAction extends Action {
 			OperationService operationServise=TrackerFactory.eINSTANCE.createOperationService();
 			Operation operation=operationServise.adaptOperation(operationData);
 			DomainUtils.executeAddCommand(account, TrackerPackage.Literals.CHECKING_ACCOUNT__OPERATIONS, operation);
-			System.out.println(operation.eResource());
 		});
 		addedOperations.stream().map(operation -> operation.getOrigin())//
 				.collect(Collectors.toSet()).stream()//
 				.forEach(origin -> {
 					DomainUtils.executeAddCommand(TrackerUtils.getTracker(account).getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, origin);
-					System.out.println(origin.eResource());
 				});
 	}
 
@@ -81,7 +79,7 @@ public class EditOperationsAction extends Action {
 	 * @throws AbortEditActionException if the action is aborted
 	 */
 	private void editOperations() throws AbortEditActionException {
-		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations, account);
+		CheckAndEditOperationWizard wizard=new CheckAndEditOperationWizard(addedOperations, account, "Import Operations From PDF File(s).", false); //$NON-NLS-1$
 		WizardDialog wizardDialog=new WizardDialog(shell, wizard);
 		if (wizardDialog.open() == Window.CANCEL) {
 			throw new AbortEditActionException(EditOperationsAction.ACTION_ABORTED_MESSAGE);

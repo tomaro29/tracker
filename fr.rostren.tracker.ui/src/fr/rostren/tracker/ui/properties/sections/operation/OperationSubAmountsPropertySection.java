@@ -66,7 +66,7 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 				}
 
 				double value=wizard.getAmountValue();
-				if (value != 0) {
+				if (Double.isFinite(value)) {
 					newAmount.setValue(value);
 				}
 
@@ -106,7 +106,7 @@ public class OperationSubAmountsPropertySection extends AbstractTablePropertySec
 				}
 
 				double value=wizard.getAmountValue();
-				if (value != 0) {
+				if (Double.isFinite(value)) {
 					amount.setValue(value);
 				}
 

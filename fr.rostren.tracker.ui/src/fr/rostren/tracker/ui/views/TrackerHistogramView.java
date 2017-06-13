@@ -159,7 +159,8 @@ public class TrackerHistogramView extends ViewPart {
 		filterColumn=new SashForm(parent, SWT.HORIZONTAL | SWT.SMOOTH);
 		toolkit.adapt(filterColumn);
 
-		Section filterSection=toolkit.createSection(filterColumn, ExpandableComposite.TITLE_BAR);//| ExpandableComposite.TWISTIE | ExpandableComposite.EXPANDED);
+		Section filterSection=toolkit.createSection(filterColumn, ExpandableComposite.TITLE_BAR);
+
 		filterSection.setText(TrackerHistogramView.FILTER_SECTION);
 
 		filterForm=toolkit.createScrolledForm(filterSection);
@@ -217,7 +218,7 @@ public class TrackerHistogramView extends ViewPart {
 
 		Account account=TrackerUtils.getTrackerService(tracker).findAccount(accountsCombo.getItem(accountsCombo.getSelectionIndex()));
 		if (yearsCombo.getItems().length == 0) {
-			//FIXME there is no item in the combo => warning message
+			//XXX there is no item in the combo => warning message
 			return;
 		}
 		int year=Integer.parseInt(yearsCombo.getText());
@@ -262,7 +263,6 @@ public class TrackerHistogramView extends ViewPart {
 	private void createFilterContent(Composite parent) {
 		Composite container=new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
-		//		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Label accountsLabel=new Label(container, SWT.NONE);
 		accountsLabel.setText(TrackerHistogramView.ACCOUNTS_COMBO_TITLE);
@@ -272,7 +272,6 @@ public class TrackerHistogramView extends ViewPart {
 
 		container=new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
-		//		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		categoryCheckButton=createFilterButton(container, TrackerHistogramView.FILTER_BY_CATEGORY_CHECK_BUTTON_TITLE, true, true);
 		categoriesCombo=new Combo(container, SWT.NONE);
@@ -280,7 +279,6 @@ public class TrackerHistogramView extends ViewPart {
 
 		container=new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
-		//		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 		operationCheckButton=createFilterButton(container, TrackerHistogramView.FILTER_BY_OPERATION_CHECK_BUTTON_TITLE, true, false);
 		operationsCombo=new Combo(container, SWT.NONE);
 		operationsCombo.setEnabled(false);
@@ -291,7 +289,6 @@ public class TrackerHistogramView extends ViewPart {
 
 		container=new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
-		//		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 		Label yearsLabel=new Label(container, SWT.NONE);
 		yearsLabel.setText(TrackerHistogramView.YEARS_COMBO_TITLE);
 		yearsCombo=new Combo(container, SWT.NONE);

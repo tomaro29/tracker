@@ -115,7 +115,7 @@ public class OperationTitleItemProvider extends TitleItemProvider {
 					operationTitle.eContainer();
 					fireNotifyChanged(new ViewerNotification(notification, operationTitle.eContainer(), true, true));
 
-					// FIXME Add the title of the current operation to the title
+					// XXX Add the title of the current operation to the title
 					// List of the category;
 				}
 				return;

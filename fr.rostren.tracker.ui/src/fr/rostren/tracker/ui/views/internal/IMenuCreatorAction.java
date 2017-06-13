@@ -19,7 +19,7 @@ public interface IMenuCreatorAction extends IMenuCreator {
 	 * @param action the action to add
 	 */
 	default void addActionToMenu(Menu parent, Action action) {
-		StringBuffer label=new StringBuffer();
+		StringBuilder label=new StringBuilder();
 		//add the numerical accelerator
 		label.append('&');
 		label.append(' ');

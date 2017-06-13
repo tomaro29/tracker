@@ -17,7 +17,7 @@ public class TransferOutgoingAccountPropertySection extends AbstractPropertySect
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		// TODO Auto-generated method stub
-		// FIXME
+		// XXX
 		// https://eclipse.org/articles/Article-Tabbed-Properties/tabbed_properties_view.html
 		super.createControls(parent, aTabbedPropertySheetPage);
 	}

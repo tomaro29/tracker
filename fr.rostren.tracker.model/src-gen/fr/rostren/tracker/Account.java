@@ -71,19 +71,17 @@ public interface Account extends EObject {
 	 * @model
 	 * @generated
 	 */
-	float getAmount();
+	double getAmount();
 
 	/**
-	 * Sets the value of the '{@link fr.rostren.tracker.Account#getAmount
-	 * <em>Amount</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Amount</em>' attribute.
+	 * Sets the value of the '{@link fr.rostren.tracker.Account#getAmount <em>Amount</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Amount</em>' attribute.
 	 * @see #getAmount()
 	 * @generated
 	 */
-	void setAmount(float value);
+	void setAmount(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute. <!--

@@ -93,9 +93,8 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 			InternalEObject oldTracker=(InternalEObject)tracker;
 			tracker=(Tracker)eResolveProxy(oldTracker);
 			if (tracker != oldTracker) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.TRACKER_SERVICE__TRACKER, oldTracker, tracker));
-				}
 			}
 		}
 		return tracker;
@@ -119,9 +118,8 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	public void setTracker(Tracker newTracker) {
 		Tracker oldTracker=tracker;
 		tracker=newTracker;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.TRACKER_SERVICE__TRACKER, oldTracker, tracker));
-		}
 	}
 
 	/**
@@ -587,9 +585,8 @@ public class TrackerServiceImpl extends EObjectImpl implements TrackerService {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.TRACKER_SERVICE__TRACKER:
-				if (resolve) {
+				if (resolve)
 					return getTracker();
-				}
 				return basicGetTracker();
 		}
 		return super.eGet(featureID, resolve, coreType);

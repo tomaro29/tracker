@@ -130,8 +130,8 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 	 * Returns the account amount
 	 * @return the account amount
 	 */
-	public float getAccountAmount() {
-		return Float.parseFloat(amount);
+	public double getAccountAmount() {
+		return Double.parseDouble(amount);
 	}
 
 	/* (non-Javadoc)

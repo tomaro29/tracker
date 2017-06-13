@@ -94,7 +94,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static final int DIAGNOSTIC_CODE_COUNT=TrackerValidator.GENERATED_DIAGNOSTIC_CODE_COUNT;
+	protected static final int DIAGNOSTIC_CODE_COUNT=GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
 	 * @generated NOT
@@ -234,40 +234,29 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOwner(Owner owner, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(owner, diagnostics, context)) {
+		if (!validate_NoCircularContainment(owner, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(owner, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOwner_hasAccount(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOwner_hasFirstName(owner, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOwner_hasLastName(owner, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -284,7 +273,7 @@ public class TrackerValidator extends EObjectValidator {
 		// Ensure that you remove @generated or mark it @generated NOT
 		if (false) {
 			if (diagnostics != null) {
-				diagnostics.add(createDiagnostic(Diagnostic.ERROR, TrackerValidator.DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
+				diagnostics.add(createDiagnostic(Diagnostic.ERROR, DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
 						new Object[] {"hasAccount", getObjectLabel(owner, context)}, new Object[] {owner}, context));
 			}
 			return false;
@@ -305,7 +294,7 @@ public class TrackerValidator extends EObjectValidator {
 		// Ensure that you remove @generated or mark it @generated NOT
 		if (false) {
 			if (diagnostics != null) {
-				diagnostics.add(createDiagnostic(Diagnostic.ERROR, TrackerValidator.DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
+				diagnostics.add(createDiagnostic(Diagnostic.ERROR, DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
 						new Object[] {"hasFirstName", getObjectLabel(owner, context)}, new Object[] {owner}, context));
 			}
 			return false;
@@ -326,7 +315,7 @@ public class TrackerValidator extends EObjectValidator {
 		// Ensure that you remove @generated or mark it @generated NOT
 		if (false) {
 			if (diagnostics != null) {
-				diagnostics.add(createDiagnostic(Diagnostic.ERROR, TrackerValidator.DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
+				diagnostics.add(createDiagnostic(Diagnostic.ERROR, DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
 						new Object[] {"hasLastName", getObjectLabel(owner, context)}, new Object[] {owner}, context));
 			}
 			return false;
@@ -340,43 +329,31 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAccount(Account account, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(account, diagnostics, context)) {
+		if (!validate_NoCircularContainment(account, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(account, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasUniqueName(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasName(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasAmount(account, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasIdentifier(account, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -482,46 +459,33 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCheckingAccount(CheckingAccount checkingAccount, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(checkingAccount, diagnostics, context)) {
+		if (!validate_NoCircularContainment(checkingAccount, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(checkingAccount, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasUniqueName(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasName(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasAmount(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasIdentifier(checkingAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCheckingAccount_isLinkedToOperations(checkingAccount, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -551,46 +515,33 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBoockletAccount(BoockletAccount boockletAccount, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(boockletAccount, diagnostics, context)) {
+		if (!validate_NoCircularContainment(boockletAccount, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(boockletAccount, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasUniqueName(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasName(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasAmount(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAccount_hasIdentifier(boockletAccount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateBoockletAccount_isLinkedToTansfers(boockletAccount, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -620,49 +571,35 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOperation(Operation operation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(operation, diagnostics, context)) {
+		if (!validate_NoCircularContainment(operation, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(operation, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasAmount(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasTitle(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasSubAmount(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasOrigin(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasDate(operation, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasValidAmount(operation, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -802,49 +739,35 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCredit(Credit credit, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(credit, diagnostics, context)) {
+		if (!validate_NoCircularContainment(credit, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(credit, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasAmount(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasTitle(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasSubAmount(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasOrigin(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasDate(credit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasValidAmount(credit, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -854,49 +777,35 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDebit(Debit debit, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(debit, diagnostics, context)) {
+		if (!validate_NoCircularContainment(debit, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(debit, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasAmount(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasTitle(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasSubAmount(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasOrigin(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasDate(debit, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasValidAmount(debit, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -906,52 +815,37 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTransfer(Transfer transfer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(transfer, diagnostics, context)) {
+		if (!validate_NoCircularContainment(transfer, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(transfer, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasAmount(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasTitle(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasSubAmount(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasOrigin(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasDate(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasValidAmount(transfer, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTransfer_isLinkedToAccount(transfer, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -981,52 +875,37 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateIncoming(Incoming incoming, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(incoming, diagnostics, context)) {
+		if (!validate_NoCircularContainment(incoming, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(incoming, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasAmount(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasTitle(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasSubAmount(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasOrigin(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasDate(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasValidAmount(incoming, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTransfer_isLinkedToAccount(incoming, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1036,52 +915,37 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOutgoing(Outgoing outgoing, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(outgoing, diagnostics, context)) {
+		if (!validate_NoCircularContainment(outgoing, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(outgoing, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasAmount(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasTitle(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasSubAmount(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasOrigin(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasDate(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperation_hasValidAmount(outgoing, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTransfer_isLinkedToAccount(outgoing, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1091,40 +955,29 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTitle(Title title, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(title, diagnostics, context)) {
+		if (!validate_NoCircularContainment(title, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(title, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotEmpty(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotBlank(title, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isUnique(title, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1237,46 +1090,33 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCategory(Category category, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(category, diagnostics, context)) {
+		if (!validate_NoCircularContainment(category, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(category, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotEmpty(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotBlank(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isUnique(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategory_isDescribed(category, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategory_hasTitles(category, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1335,43 +1175,31 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOperationTitle(OperationTitle operationTitle, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(operationTitle, diagnostics, context)) {
+		if (!validate_NoCircularContainment(operationTitle, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(operationTitle, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotEmpty(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotBlank(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isUnique(operationTitle, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperationTitle_isLinkedToCategories(operationTitle, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1401,40 +1229,29 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAmount(Amount amount, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(amount, diagnostics, context)) {
+		if (!validate_NoCircularContainment(amount, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(amount, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAmount_hasDate(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAmount_hasCategory(amount, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateAmount_hasValue(amount, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1504,34 +1321,25 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCategoriesRepository(CategoriesRepository categoriesRepository, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(categoriesRepository, diagnostics, context)) {
+		if (!validate_NoCircularContainment(categoriesRepository, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(categoriesRepository, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(categoriesRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategoriesRepository_hasCategories(categoriesRepository, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1563,40 +1371,29 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOrigin(Origin origin, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(origin, diagnostics, context)) {
+		if (!validate_NoCircularContainment(origin, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(origin, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOrigin_isTyped(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOrigin_hasIdentifier(origin, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOrigin_isLinkedToOperations(origin, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1666,34 +1463,25 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOriginsRepository(OriginsRepository originsRepository, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(originsRepository, diagnostics, context)) {
+		if (!validate_NoCircularContainment(originsRepository, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(originsRepository, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(originsRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOriginsRepository_hasOrigins(originsRepository, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1723,43 +1511,31 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTracker(Tracker tracker, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(tracker, diagnostics, context)) {
+		if (!validate_NoCircularContainment(tracker, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(tracker, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTracker_hasOwners(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTracker_hasOrigins(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTracker_hasCategories(tracker, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTracker_hasTitles(tracker, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1837,34 +1613,25 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOperationsTitleRepository(OperationsTitleRepository operationsTitleRepository, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(operationsTitleRepository, diagnostics, context)) {
+		if (!validate_NoCircularContainment(operationsTitleRepository, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(operationsTitleRepository, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(operationsTitleRepository, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateOperationsTitleRepository_hasTitles(operationsTitleRepository, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1894,49 +1661,35 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateIncomeCategory(IncomeCategory incomeCategory, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(incomeCategory, diagnostics, context)) {
+		if (!validate_NoCircularContainment(incomeCategory, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(incomeCategory, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotEmpty(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotBlank(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isUnique(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategory_isDescribed(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategory_hasTitles(incomeCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateIncomeCategory_hasCategories(incomeCategory, diagnostics, context);
-		}
 		return result;
 	}
 
@@ -1966,49 +1719,35 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSpendingCategory(SpendingCategory spendingCategory, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(spendingCategory, diagnostics, context)) {
+		if (!validate_NoCircularContainment(spendingCategory, diagnostics, context))
 			return false;
-		}
 		boolean result=validate_EveryMultiplicityConforms(spendingCategory, diagnostics, context);
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryDataValueConforms(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryReferenceIsContained(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryBidirectionalReferenceIsPaired(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryProxyResolves(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_UniqueID(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryKeyUnique(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validate_EveryMapEntryUnique(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotEmpty(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isNotBlank(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateTitle_isUnique(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategory_isDescribed(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateCategory_hasTitles(spendingCategory, diagnostics, context);
-		}
-		if (result || diagnostics != null) {
+		if (result || diagnostics != null)
 			result&=validateSpendingCategory_hasCategories(spendingCategory, diagnostics, context);
-		}
 		return result;
 	}
 

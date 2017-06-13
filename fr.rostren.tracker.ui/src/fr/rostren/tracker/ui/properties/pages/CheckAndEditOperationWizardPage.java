@@ -64,8 +64,8 @@ import fr.rostren.tracker.ui.properties.wizards.OperationSubAmountWizard;
 public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 	private static final String AMOUNTS_VALUES_ERROR_MESSAGE="The total amount is:{0} euros. Please edit sub amounts accordingly."; //$NON-NLS-1$
 	private static final String PAGE_NAME="Edit ''{0}'' Page"; //$NON-NLS-1$
-	private static final String PAGE_TITLE="Validate ''{0}'' Operation"; //$NON-NLS-1$
-	private static final String WIZARD_DESCRIPTION="Wizard to validate and edit operations."; //$NON-NLS-1$
+	private static final String PAGE_TITLE="''{0}'' Operation"; //$NON-NLS-1$
+	private static final String WIZARD_DESCRIPTION="Wizard to edit operations."; //$NON-NLS-1$
 
 	private static final String ADD_BUTTON_LABEL="Add"; //$NON-NLS-1$
 	private static final String EDIT_BUTTON_LABEL="Edit"; //$NON-NLS-1$

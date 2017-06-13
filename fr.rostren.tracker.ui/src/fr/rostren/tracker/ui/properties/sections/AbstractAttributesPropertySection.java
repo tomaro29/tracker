@@ -39,7 +39,6 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		Text attributeText=widgetFactory.createText(composite, StringUtils.EMPTY);
 
 		FormData data=new FormData();
-		data=new FormData();
 		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH + 15);
 		if (control == null) {
 			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
@@ -74,7 +73,6 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		OS.SendMessage(dateTime.handle, OS.DTM_SETFORMAT, 0, lpszFormat);
 
 		FormData data=new FormData();
-		data=new FormData();
 		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH + 15);
 		if (control == null) {
 			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
@@ -106,7 +104,6 @@ public abstract class AbstractAttributesPropertySection extends AbstractTrackerP
 		CCombo refCombo=widgetFactory.createCCombo(composite);
 
 		FormData data=new FormData();
-		data=new FormData();
 		data.left=new FormAttachment(0, AbstractPropertySection.STANDARD_LABEL_WIDTH + 15);
 		if (control == null) {
 			data.top=new FormAttachment(0, ITabbedPropertyConstants.VSPACE);

@@ -32,7 +32,7 @@ public class FilterByMenuCreatorAction extends AbstractMenuCreatorAction {
 		}
 
 		menu=new Menu(parent);
-		//FIXME add actions to this menu
+		//XXX add actions to this menu
 		return menu;
 	}
 }

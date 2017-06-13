@@ -71,7 +71,6 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 	protected final Tracker tracker;
 	protected final OperationData operation;
-	private final OperationType operationType;
 	protected final Amount amount;
 
 	protected Category category;
@@ -80,6 +79,7 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 
 	Tree categoriesTree;
 	TreeViewer categoriesTreeViewer;
+	private final OperationType operationType;
 
 	private final ModifyListener modifyValueListener=new ModifyListener() {
 		@Override
@@ -160,19 +160,6 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 			}
 			DomainUtils.executeAddCommand(category, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
 			return newCategory;
-		}
-	};
-	private final ISelectionChangedListener listener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof Category) {
-				category=(Category)firstElement;
-			}
 		}
 	};
 	private final ISelectionChangedListener categoryListener=new ISelectionChangedListener() {
@@ -288,7 +275,11 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	public boolean isPageComplete() {
 		if (!StringUtils.isEmpty(value) && !StringUtils.isBlank(value)) {
 			try {
-				Float.parseFloat(value);
+				double parsed=Double.parseDouble(value);
+				if (Double.isNaN(parsed) || Double.isInfinite(parsed)) {
+					setErrorMessage("The amount value must be finite"); //$NON-NLS-1$
+					return false;
+				}
 			}
 			catch (NumberFormatException e) {
 				setErrorMessage("The operation amount must be a number !"); //$NON-NLS-1$

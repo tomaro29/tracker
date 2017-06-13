@@ -91,7 +91,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	private String getAmountvalue() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		double value=((Amount)currentEObject).getValue();
-		if (value == 0) {
+		if (Double.isInfinite(value)) {
 			return StringUtils.EMPTY;
 		}
 		return String.valueOf(value);

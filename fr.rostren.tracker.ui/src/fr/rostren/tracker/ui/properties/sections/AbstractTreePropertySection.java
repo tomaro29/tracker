@@ -37,18 +37,18 @@ public abstract class AbstractTreePropertySection extends AbstractTrackerPropert
 	 */
 	protected Tree createTree(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter removeButtonListener) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
-		Tree tree=widgetFactory.createTree(composite, SWT.V_SCROLL | SWT.MULTI);
-		formatTreeLayout(control, tree, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+		Tree newTree=widgetFactory.createTree(composite, SWT.V_SCROLL | SWT.MULTI);
+		formatTreeLayout(control, newTree, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
 		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
 		addButton.addSelectionListener(addButtonlistener);
-		formatAddButton(tree, tree);
+		formatAddButton(newTree, newTree);
 
 		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
 		removeButton.addSelectionListener(removeButtonListener);
-		formatRemoveButton(tree, addButton);
+		formatRemoveButton(newTree, addButton);
 
-		return tree;
+		return newTree;
 	}
 
 	/**
@@ -62,22 +62,22 @@ public abstract class AbstractTreePropertySection extends AbstractTrackerPropert
 	 */
 	protected Tree createTree(Composite composite, Text control, SelectionAdapter addButtonlistener, SelectionAdapter editButtonlistener, SelectionAdapter removeButtonListener) {
 		TabbedPropertySheetWidgetFactory widgetFactory=getWidgetFactory();
-		Tree tree=widgetFactory.createTree(composite, SWT.V_SCROLL | SWT.MULTI);
-		formatTreeLayout(control, tree, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
+		Tree newTree=widgetFactory.createTree(composite, SWT.V_SCROLL | SWT.MULTI);
+		formatTreeLayout(control, newTree, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
 		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
 		addButton.addSelectionListener(addButtonlistener);
-		formatAddButton(tree, tree);
+		formatAddButton(newTree, newTree);
 
 		editButton=widgetFactory.createButton(composite, "Edit", SWT.PUSH); //$NON-NLS-1$
 		editButton.addSelectionListener(editButtonlistener);
-		formatEditButton(tree, addButton);
+		formatEditButton(newTree, addButton);
 
 		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
 		removeButton.addSelectionListener(removeButtonListener);
-		formatRemoveButton(tree, editButton);
+		formatRemoveButton(newTree, editButton);
 
-		return tree;
+		return newTree;
 	}
 
 	/**

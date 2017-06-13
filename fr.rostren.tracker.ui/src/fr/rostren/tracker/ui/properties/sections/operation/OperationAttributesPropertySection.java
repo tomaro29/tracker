@@ -35,7 +35,6 @@ import fr.rostren.tracker.OriginsRepository;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.OperationTitleComparator;
-import fr.rostren.tracker.ui.properties.content.comparators.OriginComparator;
 import fr.rostren.tracker.ui.properties.listeners.DateSelectionListener;
 import fr.rostren.tracker.ui.properties.listeners.OperationAttributesModifyListener;
 import fr.rostren.tracker.ui.properties.sections.AbstractAttributesPropertySection;
@@ -196,9 +195,7 @@ public class OperationAttributesPropertySection extends AbstractAttributesProper
 			return new ArrayList<>();
 		}
 
-		List<Origin> origins=tracker.getOriginsRepository().getOrigins();
-		Collections.sort(origins, new OriginComparator());
-		return origins;
+		return tracker.getOriginsRepository().getOrigins();
 	}
 
 	/**

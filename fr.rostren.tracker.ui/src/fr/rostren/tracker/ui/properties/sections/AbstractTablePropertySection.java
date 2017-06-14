@@ -7,25 +7,40 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.sections;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
 public abstract class AbstractTablePropertySection extends AbstractTrackerPropertySection {
-	public TableViewer tableViewer;
-	protected Button addButton;
-	protected Button editButton;
-	protected Button removeButton;
+	protected TableViewer tableViewer;
 	protected Table table;
+
+	protected ITreeContentProvider contentProvider;
+	protected ILabelProvider labelProvider;
+
+	@Override
+	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
+
+		tableViewer=new TableViewer(table);
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setLabelProvider(labelProvider);
+		addListeners();
+	}
 
 	/**
 	 * Creates a table
@@ -40,13 +55,8 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		Table newTable=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
 		formatTableLayout(control, newTable, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
-		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
-		addButton.addSelectionListener(addButtonlistener);
-		formatAddButton(newTable, newTable);
-
-		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
-		removeButton.addSelectionListener(removeButtonListener);
-		formatRemoveButton(newTable, addButton);
+		createAddButton(composite, widgetFactory, newTable, newTable, addButtonlistener);
+		createRemoveButton(composite, widgetFactory, newTable, addButton, removeButtonListener);
 
 		return newTable;
 	}
@@ -65,17 +75,9 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		Table newTable=widgetFactory.createTable(composite, SWT.V_SCROLL | SWT.MULTI);
 		formatTableLayout(control, newTable, new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
 
-		addButton=widgetFactory.createButton(composite, "Add", SWT.PUSH); //$NON-NLS-1$
-		addButton.addSelectionListener(addButtonlistener);
-		formatAddButton(newTable, newTable);
-
-		editButton=widgetFactory.createButton(composite, "Edit", SWT.PUSH); //$NON-NLS-1$
-		editButton.addSelectionListener(editButtonlistener);
-		formatEditButton(newTable, addButton);
-
-		removeButton=widgetFactory.createButton(composite, "Remove", SWT.PUSH); //$NON-NLS-1$
-		removeButton.addSelectionListener(removeButtonListener);
-		formatRemoveButton(newTable, editButton);
+		createAddButton(composite, widgetFactory, newTable, newTable, addButtonlistener);
+		createEditButton(composite, widgetFactory, newTable, addButton, editButtonlistener);
+		createRemoveButton(composite, widgetFactory, newTable, editButton, removeButtonListener);
 
 		return newTable;
 	}
@@ -102,50 +104,12 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 	}
 
 	/**
-	 * Formats the remove button layout
-	 * @param leftAttachment the left composite attachment
-	 * @param topAttachment the top button attachment
-	 */
-	private void formatRemoveButton(Composite leftAttachment, Button topAttachment) {
-		FormData data=new FormData();
-		data.width=75;
-		data.left=new FormAttachment(leftAttachment, ITabbedPropertyConstants.HSPACE);
-		data.top=new FormAttachment(topAttachment, ITabbedPropertyConstants.VSPACE);
-		removeButton.setLayoutData(data);
-	}
-
-	/**
-	 * Formats the edit button layout
-	 * @param leftAttachment the left composite attachment
-	 * @param topAttachment the top button attachment
-	 */
-	private void formatEditButton(Composite leftAttachment, Button topAttachment) {
-		FormData data=new FormData();
-		data.width=75;
-		data.left=new FormAttachment(leftAttachment, ITabbedPropertyConstants.HSPACE);
-		data.top=new FormAttachment(topAttachment, ITabbedPropertyConstants.VSPACE);
-		editButton.setLayoutData(data);
-	}
-
-	/**
-	 * Formats the add button layout
-	 * @param leftAttachment the left composite attachment
-	 * @param topAttachment the top composite attachment
-	 */
-	private void formatAddButton(Composite leftAttachment, Composite topAttachment) {
-		FormData data=new FormData();
-		data.width=75;
-		data.left=new FormAttachment(leftAttachment, ITabbedPropertyConstants.HSPACE);
-		data.top=new FormAttachment(topAttachment, 0, SWT.TOP);
-		addButton.setLayoutData(data);
-	}
-
-	/**
 	 * Disposes buttons listeners
 	 * @param addButtonlistener the add button listener
 	 * @param editButtonButtonListener the edit button listener
 	 * @param removeButtonListener the remove button listener
 	 */
+	@Override
 	protected void disposeButtonsListeners(SelectionAdapter addButtonlistener, SelectionAdapter editButtonButtonListener, SelectionAdapter removeButtonListener) {
 		if (addButton != null && !addButton.isDisposed()) {
 			addButton.removeSelectionListener(addButtonlistener);
@@ -157,4 +121,25 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 			removeButton.removeSelectionListener(removeButtonListener);
 		}
 	}
+
+	@Override
+	protected void refreshViewer() {
+		tableViewer.setInput(getEObjects());
+
+	}
+
+	@Override
+	protected void addListeners() {
+		// Do Nothing
+	}
+
+	@Override
+	protected void disposeListeners() {
+		// Do Nothing
+	}
+
+	/**
+	 * @return the list of objects
+	 */
+	abstract protected List<? extends EObject> getEObjects();
 }

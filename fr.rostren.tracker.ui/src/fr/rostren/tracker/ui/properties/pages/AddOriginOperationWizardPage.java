@@ -39,8 +39,6 @@ public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
 	private static final String PAGE_TITLE="Add operation"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new operation to the selected origin."; //$NON-NLS-1$
 
-	protected final Tracker tracker;
-
 	protected Optional<Operation> operation;
 
 	private final ISelectionChangedListener listener=new ISelectionChangedListener() {
@@ -63,15 +61,14 @@ public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
 	 * @param tracker the given tracker
 	 */
 	public AddOriginOperationWizardPage(String pageTitle, Tracker tracker) {
-		super(MessageFormat.format(AddOriginOperationWizardPage.PAGE_NAME, pageTitle));
-		this.tracker=tracker;
+		super(MessageFormat.format(AddOriginOperationWizardPage.PAGE_NAME, pageTitle), tracker);
 		setTitle(AddOriginOperationWizardPage.PAGE_TITLE);
 		setDescription(AddOriginOperationWizardPage.WIZARD_DESCRIPTION);
 	}
 
 	@Override
 	protected void createContainer(Composite parent) {
-		createComboViewer(parent, "Operations: ", getOperations(tracker), new OriginOperationsContentProvider(), //$NON-NLS-1$
+		createComboViewer(parent, "Operations: ", getOperations((Tracker)object), new OriginOperationsContentProvider(), //$NON-NLS-1$
 				new OperationLabelProvider(), listener, null);
 	}
 

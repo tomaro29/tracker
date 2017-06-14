@@ -15,15 +15,7 @@ import fr.rostren.tracker.Owner;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.ui.properties.content.comparators.OwnerComparator;
 
-public class TrackerOwnersContentProvider extends AbstractContentProvider {
-
-	@Override
-	public boolean hasChildren(Object element) {
-		if (element instanceof Tracker) {
-			return getChildren(element).length > 0;
-		}
-		return false;
-	}
+public class TrackerOwnersContentProvider extends AbstractTrackerContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {

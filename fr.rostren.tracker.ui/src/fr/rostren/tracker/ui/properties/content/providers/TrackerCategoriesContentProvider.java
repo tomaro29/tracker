@@ -20,14 +20,14 @@ import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.properties.content.comparators.CategoryComparator;
 
-public class TrackerCategoriesContentProvider extends AbstractContentProvider {
+public class TrackerCategoriesContentProvider extends AbstractTrackerContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof Tracker || element instanceof Category) {
+		if (element instanceof Category) {
 			return getChildren(element).length > 0;
 		}
-		return false;
+		return super.hasChildren(element);
 	}
 
 	@Override

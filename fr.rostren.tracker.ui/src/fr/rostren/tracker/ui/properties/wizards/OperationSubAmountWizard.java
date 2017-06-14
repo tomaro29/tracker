@@ -9,8 +9,6 @@ package fr.rostren.tracker.ui.properties.wizards;
 
 import java.time.LocalDate;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Operation;
@@ -23,10 +21,7 @@ import fr.rostren.tracker.ui.properties.pages.OperationSubAmountWizardPage;
  * Wizard to add an {@link Amount} instance to an existing
  * {@link Operation} instance.
  */
-public class OperationSubAmountWizard extends Wizard {
-
-	protected OperationSubAmountWizardPage page;
-	private final boolean isAdd;
+public class OperationSubAmountWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor.
@@ -38,23 +33,8 @@ public class OperationSubAmountWizard extends Wizard {
 	 */
 	public OperationSubAmountWizard(Tracker tracker, OperationData operation, OperationType operationType, Amount amount, boolean isAdd) {
 		super();
-		this.isAdd=isAdd;
 		page=new OperationSubAmountWizardPage(operation.getOperationTitle().getTitle(), tracker, operation, operationType, amount, isAdd);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return isAdd ? "Add Operation Amount." : "Edit Operation Amount."; //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title=isAdd ? "Add Operation Amount." : "Edit Operation Amount."; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -62,7 +42,7 @@ public class OperationSubAmountWizard extends Wizard {
 	 * @return the amount category
 	 */
 	public Category getAmountCategory() {
-		return page.getAmountCategory();
+		return ((OperationSubAmountWizardPage)page).getAmountCategory();
 	}
 
 	/**
@@ -70,7 +50,7 @@ public class OperationSubAmountWizard extends Wizard {
 	 * @return the amount value
 	 */
 	public double getAmountValue() {
-		return page.getAmountValue();
+		return ((OperationSubAmountWizardPage)page).getAmountValue();
 	}
 
 	/**
@@ -78,6 +58,6 @@ public class OperationSubAmountWizard extends Wizard {
 	 * @return the amount wished date
 	 */
 	public LocalDate getAmountWishedDate() {
-		return page.getAmountWishedDate();
+		return ((OperationSubAmountWizardPage)page).getAmountWishedDate();
 	}
 }

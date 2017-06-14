@@ -13,17 +13,10 @@ import java.util.List;
 
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.OperationTitle;
+import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.ui.properties.content.comparators.OperationTitleComparator;
 
-public class TrackerOperationsTitlesContentProvider extends AbstractContentProvider {
-
-	@Override
-	public boolean hasChildren(Object element) {
-		if (element instanceof Category) {
-			return getChildren(element).length > 0;
-		}
-		return false;
-	}
+public class TrackerOperationsTitlesContentProvider extends AbstractTrackerContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
@@ -35,7 +28,7 @@ public class TrackerOperationsTitlesContentProvider extends AbstractContentProvi
 				}
 			}
 		}
-		else if (parentElement instanceof Category) {
+		else if (parentElement instanceof Tracker) {
 			children.addAll(((Category)parentElement).getOperationTitles());
 		}
 		Collections.sort(children, new OperationTitleComparator());

@@ -13,17 +13,13 @@ import java.util.List;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import fr.rostren.tracker.BoockletAccount;
@@ -44,92 +40,75 @@ public class BoockletTransfersPropertySection extends AbstractTablePropertySecti
 
 	private final AccountTransfersModifyListener listener=new AccountTransfersModifyListener(this);
 
-	private final ITreeContentProvider contentProvider=new BoockletTransfersContentProvider();
-	private final ILabelProvider labelProvider=new TransferLabelProvider();
-
-	private final SelectionAdapter addButtonlistener=new SelectionAdapter() {
-		@Override
-		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
-			Assert.isTrue(currentEObject instanceof BoockletAccount);
-			BoockletAccount boocklet=(BoockletAccount)currentEObject;
-
-			String pageTitle=boocklet.getName();
-			Tracker tracker=(Tracker)boocklet.eContainer().eContainer();
-
-			AddBoockletTransferWizard wizard=new AddBoockletTransferWizard(pageTitle, tracker);
-			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
-			if (Window.OK == wizardDialog.open()) {
-				Transfer newTansfer=null;
-				if (wizard.isIncoming()) {
-					newTansfer=TrackerFactory.eINSTANCE.createIncoming();
-				}
-				else if (wizard.isOutgoing()) {
-					newTansfer=TrackerFactory.eINSTANCE.createOutgoing();
-				}
-
-				if (newTansfer == null) {
-					return;
-				}
-
-				OperationTitle transferTitle=wizard.getTransferTitle();
-				if (transferTitle != null) {
-					newTansfer.setOperationTitle(transferTitle);
-				}
-
-				Origin transferOrigin=wizard.getTransferOrigin();
-				if (transferOrigin != null) {
-					newTansfer.setOrigin(transferOrigin);
-				}
-
-				DomainUtils.executeAddCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newTansfer);
-				refresh();
-			}
-		}
-	};
-	private final SelectionAdapter removeButtonListener=new SelectionAdapter() {
-		@Override
-		public void widgetSelected(SelectionEvent event) {
-			EObject currentEObject=getCurrentEObject();
-			Assert.isTrue(currentEObject instanceof BoockletAccount);
-			BoockletAccount boocklet=(BoockletAccount)currentEObject;
-
-			ISelection selection=tableViewer.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			Object elementToRemove=((StructuredSelection)selection).getFirstElement();
-			DomainUtils.executeRemoveCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, elementToRemove);
-			refresh();
-		}
-	};
-
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		contentProvider=new BoockletTransfersContentProvider();
+		labelProvider=new TransferLabelProvider();
+		addButtonListener=new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				EObject currentEObject=getCurrentEObject();
+				Assert.isTrue(currentEObject instanceof BoockletAccount);
+				BoockletAccount boocklet=(BoockletAccount)currentEObject;
+
+				String pageTitle=boocklet.getName();
+				Tracker tracker=(Tracker)boocklet.eContainer().eContainer();
+
+				AddBoockletTransferWizard wizard=new AddBoockletTransferWizard(pageTitle, tracker);
+				WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+				if (Window.OK == wizardDialog.open()) {
+					Transfer newTansfer=null;
+					if (wizard.isIncoming()) {
+						newTansfer=TrackerFactory.eINSTANCE.createIncoming();
+					}
+					else if (wizard.isOutgoing()) {
+						newTansfer=TrackerFactory.eINSTANCE.createOutgoing();
+					}
+
+					if (newTansfer == null) {
+						return;
+					}
+
+					OperationTitle transferTitle=wizard.getTransferTitle();
+					if (transferTitle != null) {
+						newTansfer.setOperationTitle(transferTitle);
+					}
+
+					Origin transferOrigin=wizard.getTransferOrigin();
+					if (transferOrigin != null) {
+						newTansfer.setOrigin(transferOrigin);
+					}
+
+					DomainUtils.executeAddCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, newTansfer);
+					refresh();
+				}
+			}
+		};
+		removeButtonListener=new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				EObject currentEObject=getCurrentEObject();
+				Assert.isTrue(currentEObject instanceof BoockletAccount);
+				BoockletAccount boocklet=(BoockletAccount)currentEObject;
+
+				ISelection selection=tableViewer.getSelection();
+				Assert.isTrue(selection instanceof StructuredSelection);
+				Object elementToRemove=((StructuredSelection)selection).getFirstElement();
+				DomainUtils.executeRemoveCommand(boocklet, TrackerPackage.Literals.BOOCKLET_ACCOUNT__TRANSFERS, elementToRemove);
+				refresh();
+			}
+		};
+
+		table=createTable(body, null, addButtonListener, removeButtonListener);
 		super.createControls(parent, aTabbedPropertySheetPage);
-
-		table=createTable(body, null, addButtonlistener, removeButtonListener);
-		tableViewer=new TableViewer(table);
-		tableViewer.setContentProvider(contentProvider);
-		tableViewer.setLabelProvider(labelProvider);
-		addListeners();
-	}
-
-	@Override
-	public void setInput(IWorkbenchPart part, ISelection selection) {
-		super.setInput(part, selection);
-	}
-
-	@Override
-	public void refresh() {
-		disposeListeners();
-		tableViewer.setInput(getTransfers());
-		addListeners();
 	}
 
 	/**
 	 * Returns the transfers
 	 * @return the transfers
 	 */
-	private List<Transfer> getTransfers() {
+	@Override
+	protected List<? extends EObject> getEObjects() {
 		Assert.isTrue(currentEObject instanceof BoockletAccount);
 		EList<Transfer> transfers=((BoockletAccount)currentEObject).getTransfers();
 		if (transfers == null || transfers.isEmpty()) {
@@ -137,7 +116,6 @@ public class BoockletTransfersPropertySection extends AbstractTablePropertySecti
 		}
 		return transfers;
 	}
-
 	@Override
 	protected void addListeners() {
 		tableViewer.addSelectionChangedListener(listener);
@@ -146,10 +124,5 @@ public class BoockletTransfersPropertySection extends AbstractTablePropertySecti
 	@Override
 	protected void disposeListeners() {
 		tableViewer.removeSelectionChangedListener(listener);
-	}
-
-	@Override
-	public void dispose() {
-		disposeButtonsListeners(addButtonlistener, null, removeButtonListener);
 	}
 }

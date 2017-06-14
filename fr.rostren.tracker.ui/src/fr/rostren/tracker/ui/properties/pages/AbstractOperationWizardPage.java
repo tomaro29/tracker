@@ -8,15 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.window.Window;
-import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.rostren.tracker.Credit;
@@ -26,16 +21,11 @@ import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Outgoing;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.TrackerFactory;
-import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.model.utils.TrackerUtils;
-import fr.rostren.tracker.ui.DomainUtils;
 import fr.rostren.tracker.ui.properties.content.providers.OperationsTitlesRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.content.providers.OriginsRepositoryContentProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OperationTitleLabelProvider;
 import fr.rostren.tracker.ui.properties.label.providers.OriginLabelProvider;
-import fr.rostren.tracker.ui.properties.wizards.AddTrackerOperationTitleWizard;
-import fr.rostren.tracker.ui.properties.wizards.AddTrackerOriginWizard;
 
 public class AbstractOperationWizardPage extends AbstractAddWizardPage {
 
@@ -46,51 +36,6 @@ public class AbstractOperationWizardPage extends AbstractAddWizardPage {
 
 	protected OperationTitle title;
 	protected Origin origin;
-
-	protected final Tracker tracker;
-
-	protected ComboViewer titlesComboViewer;
-	protected ComboViewer originsComboViewer;
-
-	protected final SelectionAdapter addOperationTitleButtonlistener=new SelectionAdapter() {
-		@Override
-		public void widgetSelected(SelectionEvent event) {
-			AddTrackerOperationTitleWizard wizard=new AddTrackerOperationTitleWizard("Operations Titles Repository", //$NON-NLS-1$
-					tracker);
-			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
-			if (Window.OK == wizardDialog.open()) {
-				OperationTitle newOperationTitle=TrackerFactory.eINSTANCE.createOperationTitle();
-
-				String newTitle=wizard.getOperationTitle();
-				if (newTitle != null) {
-					newOperationTitle.setTitle(newTitle);
-				}
-
-				DomainUtils.executeAddCommand(tracker.getOperationsTitlesRepositories(), TrackerPackage.Literals.OPERATIONS_TITLE_REPOSITORY__OPERATIONS_TITLES, newOperationTitle);
-				refreshComboViewerContent(titlesComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles()), newOperationTitle);
-			}
-		}
-	};
-
-	protected final SelectionAdapter addOriginButtonlistener=new SelectionAdapter() {
-		@Override
-		public void widgetSelected(SelectionEvent event) {
-			AddTrackerOriginWizard wizard=new AddTrackerOriginWizard("Origins Repository", //$NON-NLS-1$
-					tracker);
-			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
-			if (Window.OK == wizardDialog.open()) {
-				Origin newOrigin=TrackerFactory.eINSTANCE.createOrigin();
-
-				String identifier=wizard.getIdentifier();
-				if (identifier != null) {
-					newOrigin.setIdentifier(identifier);
-				}
-
-				DomainUtils.executeAddCommand(tracker.getOriginsRepository(), TrackerPackage.Literals.ORIGINS_REPOSITORY__ORIGINS, newOrigin);
-				refreshComboViewerContent(originsComboViewer, new HashSet<>(TrackerUtils.getTrackerService(tracker).getOrigins()), newOrigin);
-			}
-		}
-	};
 
 	protected final ISelectionChangedListener titleListener=new ISelectionChangedListener() {
 
@@ -130,8 +75,7 @@ public class AbstractOperationWizardPage extends AbstractAddWizardPage {
 	 * @param isDebit <code>true</code> if debit
 	 */
 	protected AbstractOperationWizardPage(String pageName, Tracker tracker, boolean isIncoming, boolean isOutgoing, boolean isCredit, boolean isDebit) {
-		super(pageName);
-		this.tracker=tracker;
+		super(pageName, tracker);
 		this.isIncoming=isIncoming;
 		this.isOutgoing=isOutgoing;
 		this.isCredit=isCredit;
@@ -140,14 +84,14 @@ public class AbstractOperationWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	protected void createContainer(Composite parent) {
-		Set<OperationTitle> operationsTitles=new HashSet<>(TrackerUtils.getTrackerService(tracker).getOperationsTitles());
+		Set<OperationTitle> operationsTitles=new HashSet<>(TrackerUtils.getTrackerService(object).getOperationsTitles());
 		titlesComboViewer=createComboViewer(parent, "Title: ", operationsTitles, new OperationsTitlesRepositoryContentProvider(), //$NON-NLS-1$
 				new OperationTitleLabelProvider(), titleListener, addOperationTitleButtonlistener);
 		if (!operationsTitles.isEmpty()) {
 			title=operationsTitles.iterator().next();
 		}
 
-		Set<Origin> origins=new HashSet<>(TrackerUtils.getTrackerService(tracker).getOrigins());
+		Set<Origin> origins=new HashSet<>(TrackerUtils.getTrackerService(object).getOrigins());
 		originsComboViewer=createComboViewer(parent, "Origin: ", origins, new OriginsRepositoryContentProvider(), //$NON-NLS-1$
 				new OriginLabelProvider(), originListener, addOriginButtonlistener);
 		if (!origins.isEmpty()) {

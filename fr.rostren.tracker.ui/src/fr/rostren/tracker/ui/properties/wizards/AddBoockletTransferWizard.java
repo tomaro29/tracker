@@ -7,8 +7,6 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.wizards;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.Incoming;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Origin;
@@ -23,9 +21,7 @@ import fr.rostren.tracker.ui.properties.pages.AddBoockletTransferWizardPage;
 /**
  *
  */
-public class AddBoockletTransferWizard extends Wizard {
-
-	protected AddBoockletTransferWizardPage page;
+public class AddBoockletTransferWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor
@@ -35,21 +31,7 @@ public class AddBoockletTransferWizard extends Wizard {
 	public AddBoockletTransferWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddBoockletTransferWizardPage(pageTitle, tracker);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return "Add Boocklet Account Transfer."; //$NON-NLS-1$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title="Add Boocklet Account Transfer."; //$NON-NLS-1$
 	}
 
 	/**
@@ -57,7 +39,7 @@ public class AddBoockletTransferWizard extends Wizard {
 	 * @return <code>true</code> if is {@link Incoming}, <code>false</code> otherwise.
 	 */
 	public boolean isIncoming() {
-		return page.isIncoming();
+		return ((AddBoockletTransferWizardPage)page).isIncoming();
 	}
 
 	/**
@@ -65,7 +47,7 @@ public class AddBoockletTransferWizard extends Wizard {
 	 * @return <code>true</code> if is {@link Outgoing}, <code>false</code> otherwise.
 	 */
 	public boolean isOutgoing() {
-		return page.isOutgoing();
+		return ((AddBoockletTransferWizardPage)page).isOutgoing();
 	}
 
 	/**
@@ -73,7 +55,7 @@ public class AddBoockletTransferWizard extends Wizard {
 	 * @return the transfer title
 	 */
 	public OperationTitle getTransferTitle() {
-		return page.getTransferTitle();
+		return ((AddBoockletTransferWizardPage)page).getTransferTitle();
 	}
 
 	/**
@@ -81,6 +63,6 @@ public class AddBoockletTransferWizard extends Wizard {
 	 * @return the transfer origin
 	 */
 	public Origin getTransferOrigin() {
-		return page.getTransferOrigin();
+		return ((AddBoockletTransferWizardPage)page).getTransferOrigin();
 	}
 }

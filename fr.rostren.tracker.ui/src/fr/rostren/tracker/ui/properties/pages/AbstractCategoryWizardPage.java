@@ -4,14 +4,11 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.pages;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-
-import fr.rostren.tracker.model.utils.TrackerUtils;
 
 public class AbstractCategoryWizardPage extends AbstractAddWizardPage {
 
@@ -41,7 +38,7 @@ public class AbstractCategoryWizardPage extends AbstractAddWizardPage {
 	 * @param object the object
 	 */
 	protected AbstractCategoryWizardPage(String pageName, String title, String description, EObject object) {
-		super(pageName);
+		super(pageName, object);
 		setTitle(title);
 		setDescription(description);
 		this.object=object;
@@ -71,15 +68,6 @@ public class AbstractCategoryWizardPage extends AbstractAddWizardPage {
 
 	@Override
 	public boolean isPageComplete() {
-		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
-			setErrorMessage("The Category title cannot be empty or blank !"); //$NON-NLS-1$
-			return false;
-		}
-		if (!TrackerUtils.getTrackerService(object).isCategoryTitleUnique(title)) {
-			setErrorMessage("The Category title must be unique !"); //$NON-NLS-1$
-			return false;
-		}
-		setErrorMessage(null);
-		return true;
+		return isCategoryPageComplete(title);
 	}
 }

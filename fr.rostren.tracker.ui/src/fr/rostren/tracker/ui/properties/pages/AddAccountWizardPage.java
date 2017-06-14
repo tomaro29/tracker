@@ -9,7 +9,6 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
@@ -20,7 +19,6 @@ import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
  * Page to add an {@link Operation} instance to an existing
@@ -79,7 +77,7 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 	 * @param tracker the given tracker
 	 */
 	public AddAccountWizardPage(String pageTitle, Tracker tracker) {
-		super(MessageFormat.format(AddAccountWizardPage.PAGE_NAME, pageTitle));
+		super(MessageFormat.format(AddAccountWizardPage.PAGE_NAME, pageTitle), tracker);
 		this.tracker=tracker;
 		setTitle(AddAccountWizardPage.PAGE_TITLE);
 		setDescription(AddAccountWizardPage.WIZARD_DESCRIPTION);
@@ -134,44 +132,8 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 		return Double.parseDouble(amount);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.wizard.WizardPage#isPageComplete()
-	 */
 	@Override
 	public boolean isPageComplete() {
-		if (StringUtils.isEmpty(identifier) || StringUtils.isBlank(identifier)) {
-			setErrorMessage("The Account identifier cannot be empty or blank !"); //$NON-NLS-1$
-			return false;
-		}
-		try {
-			int parseInt=Integer.parseInt(identifier);
-			if (parseInt == 0) {
-				setErrorMessage("The Account identifier cannot be '0' !"); //$NON-NLS-1$
-				return false;
-			}
-		}
-		catch (NumberFormatException e) {
-			setErrorMessage("The Account identifier must be a number !"); //$NON-NLS-1$
-			return false;
-		}
-		if (!StringUtils.isEmpty(amount) && !StringUtils.isBlank(amount)) {
-			try {
-				float parseFloat=Float.parseFloat(amount);
-				if (Float.isInfinite(parseFloat) || Float.isNaN(parseFloat)) {
-					setErrorMessage("The Account amount cannot be '0' !"); //$NON-NLS-1$
-					return false;
-				}
-			}
-			catch (NumberFormatException e) {
-				setErrorMessage("The Account amount must be a number !"); //$NON-NLS-1$
-				return false;
-			}
-		}
-		if (!TrackerUtils.getTrackerService(tracker).isAccountIdentifierUnique(identifier)) {
-			setErrorMessage("The Account identifier must be unique !"); //$NON-NLS-1$
-			return false;
-		}
-		setErrorMessage(null);
-		return true;
+		return isAccountPageComplete(tracker, identifier, amount);
 	}
 }

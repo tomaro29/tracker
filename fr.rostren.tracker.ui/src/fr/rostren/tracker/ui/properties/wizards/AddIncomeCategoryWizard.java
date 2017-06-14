@@ -7,8 +7,6 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.wizards;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.ui.properties.pages.AddIncomeCategoryWizardPage;
@@ -17,9 +15,7 @@ import fr.rostren.tracker.ui.properties.pages.AddIncomeCategoryWizardPage;
  * Wizard to add an {@link Category} instance to an existing {@link Tracker}
  * instance.
  */
-public class AddIncomeCategoryWizard extends Wizard {
-
-	protected AddIncomeCategoryWizardPage page;
+public class AddIncomeCategoryWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor.
@@ -29,21 +25,7 @@ public class AddIncomeCategoryWizard extends Wizard {
 	public AddIncomeCategoryWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddIncomeCategoryWizardPage(pageTitle, tracker);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return "Add Category to tracker."; //$NON-NLS-1$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title="Add Category to tracker."; //$NON-NLS-1$
 	}
 
 	/**
@@ -51,7 +33,7 @@ public class AddIncomeCategoryWizard extends Wizard {
 	 * @return the category title
 	 */
 	public String getCategoryTitle() {
-		return page.getCategoryTitle();
+		return ((AddIncomeCategoryWizardPage)page).getCategoryTitle();
 	}
 
 	/**
@@ -59,6 +41,6 @@ public class AddIncomeCategoryWizard extends Wizard {
 	 * @return the category description
 	 */
 	public String getCategoryDescription() {
-		return page.getCategoryDescription();
+		return ((AddIncomeCategoryWizardPage)page).getCategoryDescription();
 	}
 }

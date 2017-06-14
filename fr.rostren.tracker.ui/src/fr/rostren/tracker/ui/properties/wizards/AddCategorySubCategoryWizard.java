@@ -7,8 +7,6 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.wizards;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.ui.properties.pages.AddCategorySubCategoryWizardPage;
 
@@ -16,9 +14,7 @@ import fr.rostren.tracker.ui.properties.pages.AddCategorySubCategoryWizardPage;
  * Wizard to add an {@link Category} instance to an existing
  * {@link Category} instance.
  */
-public class AddCategorySubCategoryWizard extends Wizard {
-
-	protected AddCategorySubCategoryWizardPage page;
+public class AddCategorySubCategoryWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor.
@@ -28,21 +24,7 @@ public class AddCategorySubCategoryWizard extends Wizard {
 	public AddCategorySubCategoryWizard(String pageTitle, Category category) {
 		super();
 		page=new AddCategorySubCategoryWizardPage(pageTitle, category);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return "Add Sub Category to Category."; //$NON-NLS-1$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title="Add Sub Category to Category."; //$NON-NLS-1$
 	}
 
 	/**
@@ -50,6 +32,6 @@ public class AddCategorySubCategoryWizard extends Wizard {
 	 * @return the Category
 	 */
 	public Category getSubCategory() {
-		return page.getSubCategory();
+		return ((AddCategorySubCategoryWizardPage)page).getSubCategory();
 	}
 }

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.wizards;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Credit;
 import fr.rostren.tracker.Debit;
@@ -24,9 +22,7 @@ import fr.rostren.tracker.ui.properties.pages.AddCheckOperationWizardPage;
  * Wizard to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class AddCheckOperationWizard extends Wizard {
-
-	protected AddCheckOperationWizardPage page;
+public class AddCheckOperationWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor.
@@ -36,21 +32,7 @@ public class AddCheckOperationWizard extends Wizard {
 	public AddCheckOperationWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddCheckOperationWizardPage(pageTitle, tracker);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return "Add Checking Account Operation."; //$NON-NLS-1$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title="Add Checking Account Operation."; //$NON-NLS-1$
 	}
 
 	/**
@@ -58,7 +40,7 @@ public class AddCheckOperationWizard extends Wizard {
 	 * @return <code>true</code> if is an {@link Incoming} <code>false</code> otherwise.
 	 */
 	public boolean isIncoming() {
-		return page.isIncoming();
+		return ((AddCheckOperationWizardPage)page).isIncoming();
 	}
 
 	/**
@@ -66,7 +48,7 @@ public class AddCheckOperationWizard extends Wizard {
 	 * @return <code>true</code> if is an {@link Outgoing} <code>false</code> otherwise.
 	 */
 	public boolean isOutgoing() {
-		return page.isOutgoing();
+		return ((AddCheckOperationWizardPage)page).isOutgoing();
 	}
 
 	/**
@@ -74,7 +56,7 @@ public class AddCheckOperationWizard extends Wizard {
 	 * @return <code>true</code> if is an {@link Credit} <code>false</code> otherwise.
 	 */
 	public boolean isCredit() {
-		return page.isCredit();
+		return ((AddCheckOperationWizardPage)page).isCredit();
 	}
 
 	/**
@@ -82,7 +64,7 @@ public class AddCheckOperationWizard extends Wizard {
 	 * @return <code>true</code> if is an {@link Debit} <code>false</code> otherwise.
 	 */
 	public boolean isDebit() {
-		return page.isDebit();
+		return ((AddCheckOperationWizardPage)page).isDebit();
 	}
 
 	/**
@@ -90,7 +72,7 @@ public class AddCheckOperationWizard extends Wizard {
 	 * @return the operation title
 	 */
 	public OperationTitle getOperationTitle() {
-		return page.getOperationTitle();
+		return ((AddCheckOperationWizardPage)page).getOperationTitle();
 	}
 
 	/**
@@ -98,6 +80,6 @@ public class AddCheckOperationWizard extends Wizard {
 	 * @return the operation origin
 	 */
 	public Origin getOperationOrigin() {
-		return page.getOperationOrigin();
+		return ((AddCheckOperationWizardPage)page).getOperationOrigin();
 	}
 }

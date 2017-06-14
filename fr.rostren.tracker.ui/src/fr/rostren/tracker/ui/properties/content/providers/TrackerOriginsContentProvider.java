@@ -15,15 +15,7 @@ import fr.rostren.tracker.Origin;
 import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.ui.properties.content.comparators.OriginComparator;
 
-public class TrackerOriginsContentProvider extends AbstractContentProvider {
-
-	@Override
-	public boolean hasChildren(Object element) {
-		if (element instanceof Tracker) {
-			return getChildren(element).length > 0;
-		}
-		return false;
-	}
+public class TrackerOriginsContentProvider extends AbstractTrackerContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {

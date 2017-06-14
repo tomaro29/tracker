@@ -7,8 +7,6 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.wizards;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.CheckingAccount;
 import fr.rostren.tracker.Operation;
@@ -19,9 +17,7 @@ import fr.rostren.tracker.ui.properties.pages.AddAccountWizardPage;
  * Wizard to add an {@link Operation} instance to an existing
  * {@link CheckingAccount} instance.
  */
-public class AddAccountWizard extends Wizard {
-
-	protected AddAccountWizardPage page;
+public class AddAccountWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor.
@@ -31,21 +27,7 @@ public class AddAccountWizard extends Wizard {
 	public AddAccountWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddAccountWizardPage(pageTitle, tracker);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return "Add Checking Account Operation."; //$NON-NLS-1$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title="Add Checking Account Operation."; //$NON-NLS-1$
 	}
 
 	/**
@@ -53,7 +35,7 @@ public class AddAccountWizard extends Wizard {
 	 * @return <code>true</code> if is an {@link CheckingAccount} <code>false</code> otherwise.
 	 */
 	public boolean isCheckingAccount() {
-		return page.isCheckingAccount();
+		return ((AddAccountWizardPage)page).isCheckingAccount();
 	}
 
 	/**
@@ -61,7 +43,7 @@ public class AddAccountWizard extends Wizard {
 	 * @return <code>true</code> if is an {@link BoockletAccount} <code>false</code> otherwise.
 	 */
 	public boolean isBoockletAccount() {
-		return page.isBoockletAccount();
+		return ((AddAccountWizardPage)page).isBoockletAccount();
 	}
 
 	/**
@@ -69,7 +51,7 @@ public class AddAccountWizard extends Wizard {
 	 * @return the account name
 	 */
 	public String getAccountName() {
-		return page.getAccountName();
+		return ((AddAccountWizardPage)page).getAccountName();
 	}
 
 	/**
@@ -77,7 +59,7 @@ public class AddAccountWizard extends Wizard {
 	 * @return the operation origin
 	 */
 	public int getAccountIdentifier() {
-		return page.getAccountIdentifier();
+		return ((AddAccountWizardPage)page).getAccountIdentifier();
 	}
 
 	/**
@@ -85,6 +67,6 @@ public class AddAccountWizard extends Wizard {
 	 * @return the account amount
 	 */
 	public double getAccountAmount() {
-		return page.getAccountAmount();
+		return ((AddAccountWizardPage)page).getAccountAmount();
 	}
 }

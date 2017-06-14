@@ -7,8 +7,6 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.wizards;
 
-import org.eclipse.jface.wizard.Wizard;
-
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.Tracker;
@@ -18,9 +16,7 @@ import fr.rostren.tracker.ui.properties.pages.AddCategoryOperationTitleWizardPag
  * Wizard to add an {@link OperationTitle} instance to an existing
  * {@link Category} instance.
  */
-public class AddCategoryOperationTitleWizard extends Wizard {
-
-	protected AddCategoryOperationTitleWizardPage page;
+public class AddCategoryOperationTitleWizard extends AbstractAddWizard {
 
 	/**
 	 * Constructor.
@@ -30,21 +26,7 @@ public class AddCategoryOperationTitleWizard extends Wizard {
 	public AddCategoryOperationTitleWizard(String pageTitle, Tracker tracker) {
 		super();
 		page=new AddCategoryOperationTitleWizardPage(pageTitle, tracker);
-	}
-
-	@Override
-	public String getWindowTitle() {
-		return "Add Operation Title to Category."; //$NON-NLS-1$
-	}
-
-	@Override
-	public boolean performFinish() {
-		return true;
-	}
-
-	@Override
-	public void addPages() {
-		addPage(page);
+		title="Add Operation Title to Category."; //$NON-NLS-1$
 	}
 
 	/**
@@ -52,6 +34,6 @@ public class AddCategoryOperationTitleWizard extends Wizard {
 	 * @return the operation title
 	 */
 	public OperationTitle getOperationTitle() {
-		return page.getOperationTitle();
+		return ((AddCategoryOperationTitleWizardPage)page).getOperationTitle();
 	}
 }

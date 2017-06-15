@@ -13,10 +13,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionListener;
@@ -32,7 +35,20 @@ import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
+import fr.rostren.tracker.Category;
+import fr.rostren.tracker.IncomeCategory;
+import fr.rostren.tracker.SpendingCategory;
+import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
+import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.ui.DomainUtils;
+import fr.rostren.tracker.ui.properties.wizards.AddIncomeCategoryWizard;
+import fr.rostren.tracker.ui.properties.wizards.AddSpendingCategoryWizard;
+import fr.rostren.tracker.ui.properties.wizards.AddTrackerCategoryWizard;
+
 public abstract class AbstractTrackerPropertySection extends AbstractPropertySection {
+
+	private static final String CATEGORIES_REPOSITORY="Categories Repository"; //$NON-NLS-1$
 	protected Composite body;
 	protected EObject currentEObject;
 
@@ -208,5 +224,82 @@ public abstract class AbstractTrackerPropertySection extends AbstractPropertySec
 		data.left=new FormAttachment(leftAttachment, ITabbedPropertyConstants.HSPACE);
 		data.top=new FormAttachment(topAttachment, 0, SWT.TOP);
 		return data;
+	}
+
+	/**
+	 * Adds a {@link Category} SubCategory to the tracker
+	 * @param tracker the tracker
+	 * @param category the category to add to
+	 */
+	public void addCategorySubCategory(Tracker tracker, Category category) {
+		if (category instanceof IncomeCategory) {
+			AddIncomeCategoryWizard wizard=new AddIncomeCategoryWizard(AbstractTrackerPropertySection.CATEGORIES_REPOSITORY, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				addIncomeCategory((IncomeCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
+			}
+		}
+		else if (category instanceof SpendingCategory) {
+			AddSpendingCategoryWizard wizard=new AddSpendingCategoryWizard(AbstractTrackerPropertySection.CATEGORIES_REPOSITORY, tracker);
+			WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+			if (Window.OK == wizardDialog.open()) {
+				addSpendingCategory((SpendingCategory)category, wizard.getCategoryTitle(), wizard.getCategoryDescription());
+			}
+		}
+	}
+
+	/**
+	 * Adds a {@link Category}  to the tracker
+	 * @param tracker the tracker
+	 */
+	public void addTrackerCategory(Tracker tracker) {
+		AddTrackerCategoryWizard wizard=new AddTrackerCategoryWizard(AbstractTrackerPropertySection.CATEGORIES_REPOSITORY, tracker);
+		WizardDialog wizardDialog=new WizardDialog(getShell(), wizard);
+		if (Window.OK == wizardDialog.open()) {
+			if (wizard.isIncome()) {
+				addIncomeCategory(tracker.getCategoriesRepository().getIncome(), wizard.getCategoryTitle(), wizard.getCategoryDescription());
+			}
+			else if (wizard.isSpending()) {
+				addSpendingCategory(tracker.getCategoriesRepository().getSpending(), wizard.getCategoryTitle(), wizard.getCategoryDescription());
+			}
+		}
+	}
+
+	/**
+	 * Adds a {@link SpendingCategory}  to the given category
+	 * @param category the category
+	 * @param title the title
+	 * @param description the description
+	 */
+	public void addSpendingCategory(SpendingCategory category, String title, String description) {
+		Category newCategory=TrackerFactory.eINSTANCE.createSpendingCategory();
+		setAttributes(newCategory, title, description);
+		DomainUtils.executeAddCommand(category, TrackerPackage.Literals.SPENDING_CATEGORY__SPENDINGS, newCategory);
+	}
+
+	/**
+	 * Adds a {@link IncomeCategory}  to the given category
+	 * @param category the category
+	 * @param title the title
+	 * @param description the description
+	 */
+	public void addIncomeCategory(IncomeCategory category, String title, String description) {
+		Category newCategory=TrackerFactory.eINSTANCE.createIncomeCategory();
+		setAttributes(newCategory, title, description);
+		DomainUtils.executeAddCommand(category, TrackerPackage.Literals.INCOME_CATEGORY__INCOMES, newCategory);
+	}
+
+	/**
+	 * @param category the category
+	 * @param title the title
+	 * @param description the description
+	 */
+	public void setAttributes(Category category, String title, String description) {
+		if (!StringUtils.isEmpty(title)) {
+			category.setTitle(title);
+		}
+		if (!StringUtils.isEmpty(description)) {
+			category.setDescription(description);
+		}
 	}
 }

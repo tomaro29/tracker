@@ -38,6 +38,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IPartService;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -60,6 +61,7 @@ import fr.rostren.tracker.histogram.Histogram;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.presentation.TrackerEditor;
 import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
+import fr.rostren.tracker.ui.views.internal.HistogramViewEditPartListener;
 import fr.rostren.tracker.ui.views.internal.actions.RefreshHistogramAction;
 import fr.rostren.tracker.ui.views.internal.menu.creators.FilterMenuCreatorAction;
 
@@ -98,6 +100,7 @@ public class TrackerHistogramView extends ViewPart {
 
 	private Tracker tracker;
 	private Section histogramSection;
+	private HistogramViewEditPartListener listener;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -139,6 +142,36 @@ public class TrackerHistogramView extends ViewPart {
 
 		formBody.setWeights(new int[] {1, 4});
 		formBody.pack();
+		listener=new HistogramViewEditPartListener(this);
+		addEditPartListener();
+	}
+
+	/**
+	 * Adds the edit part listener to the currently active edit part.
+	 */
+	private void addEditPartListener() {
+		IWorkbenchWindow activeWorkbenchWindow=PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IPartService service=activeWorkbenchWindow.getService(IPartService.class);
+		service.addPartListener(listener);
+	}
+
+	@Override
+	public void dispose() {
+		removeEditPartListener();
+		super.dispose();
+	}
+
+	/**
+	 * Removes the edit part listener from the currently running service.
+	 */
+	private void removeEditPartListener() {
+		if (listener == null) {
+			return;
+		}
+
+		IWorkbenchWindow activeWorkbenchWindow=PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IPartService service=activeWorkbenchWindow.getService(IPartService.class);
+		service.removePartListener(listener);
 	}
 
 	/**

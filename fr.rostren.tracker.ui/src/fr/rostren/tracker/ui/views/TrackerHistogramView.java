@@ -12,23 +12,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridData;
@@ -37,9 +27,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPartService;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
@@ -47,7 +35,6 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.rostren.tracker.Account;
@@ -56,12 +43,12 @@ import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.OperationTitle;
 import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
-import fr.rostren.tracker.TrackerPackage;
 import fr.rostren.tracker.histogram.Histogram;
+import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.model.utils.TrackerUtils;
-import fr.rostren.tracker.presentation.TrackerEditor;
 import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
 import fr.rostren.tracker.ui.views.internal.HistogramViewEditPartListener;
+import fr.rostren.tracker.ui.views.internal.TrackerHistogramViewUtils;
 import fr.rostren.tracker.ui.views.internal.actions.RefreshHistogramAction;
 import fr.rostren.tracker.ui.views.internal.menu.creators.FilterMenuCreatorAction;
 
@@ -136,7 +123,7 @@ public class TrackerHistogramView extends ViewPart {
 		toolkit.adapt(formBody);
 		formBody.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		tracker=getTracker();
+		tracker=TrackerHistogramViewUtils.getTracker();
 		createFilterArea(formBody);
 		createHistogramArea(formBody);
 
@@ -273,8 +260,8 @@ public class TrackerHistogramView extends ViewPart {
 				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, SpendingCategory.class);
 			}
 			else {
-				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, months);
-				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, months);
+				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, months, year, true, OperationType.CREDIT);
+				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, months, year, true, OperationType.DEBIT);
 			}
 		}
 
@@ -433,67 +420,22 @@ public class TrackerHistogramView extends ViewPart {
 	}
 
 	/**
-	 * Returns the current active editor part
-	 * @return the current active editor part
+	 * Sets the tracker value
+	 * @param tracker the tracker to set
 	 */
-	private IEditorPart getEditorPart() {
-		IWorkbenchWindow activeWorkbenchWindow=PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPage activePage=activeWorkbenchWindow.getActivePage();
-
-		if (activePage == null || activePage.getActiveEditor() == null) {
-			return null;
-		}
-		return activePage.getActiveEditor();
-	}
-
-	/**
-	 * Returns the current tracker object
-	 * @return the current tracker object
-	 */
-	private Tracker getTracker() {
-		IEditorPart editorPart=getEditorPart();
-		if (!(editorPart instanceof TrackerEditor)) {
-			return null;
-		}
-		TrackerEditor editor=(TrackerEditor)editorPart;
-		ISelection selection=editor.getSelection();
-		if (!(selection instanceof StructuredSelection)) {
-			return null;
-		}
-		if (!selection.isEmpty()) {
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement instanceof XMIResourceImpl) {
-				return (Tracker)((XMIResourceImpl)firstElement).getContents().get(0);
-			}
-		}
-		URI uri=URI.createFileURI(((FileEditorInput)editorPart.getEditorInput()).getPath().toOSString());
-		Resource resource=loadResource(uri);
-		return (Tracker)resource.getContents().get(0);
-	}
-
-	/**
-	 * Loads the resource
-	 * @param uri the resource {@link URI} instance
-	 * @return the loaded resource
-	 */
-	private Resource loadResource(URI uri) {
-		ResourceSet resourceSet=new ResourceSetImpl();
-
-		EPackage.Registry.INSTANCE.put(TrackerPackage.eNS_URI, TrackerPackage.eINSTANCE);
-
-		Map<String, Object> options=resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
-		options.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		resourceSet.setPackageRegistry(TrackerPackage.Registry.INSTANCE);
-
-		return resourceSet.getResource(uri, true);
+	public void setTracker(Tracker tracker) {
+		this.tracker=tracker;
 	}
 
 	/**
 	 *Refreshes the Filter selection and the histogram.
+	 * @param repopulateFilters <code>true</code> if the filters area must be populated again, <code>false</code>
+	 * otherwise.
 	 */
-	public void refresh() {
-		populateFilter();
+	public void refresh(boolean repopulateFilters) {
+		if (repopulateFilters) {
+			populateFilter();
+		}
 		populateHistogram();
 		histogram.refresh();
 	}

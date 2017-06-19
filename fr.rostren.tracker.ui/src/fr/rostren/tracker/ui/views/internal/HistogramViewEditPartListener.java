@@ -12,6 +12,7 @@ import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 
+import fr.rostren.tracker.Tracker;
 import fr.rostren.tracker.presentation.TrackerEditor;
 import fr.rostren.tracker.ui.views.TrackerHistogramView;
 
@@ -74,7 +75,9 @@ public class HistogramViewEditPartListener implements IPartListener2 {
 	 */
 	private void updateHistorgamView(IWorkbenchPart part) {
 		if (part instanceof TrackerEditor) {
-			view.refresh();
+			Tracker tracker=TrackerHistogramViewUtils.getTracker();
+			view.setTracker(tracker);
+			view.refresh(true);
 		}
 	}
 }

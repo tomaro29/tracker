@@ -65,6 +65,6 @@ public class FilterSelectionListener implements SelectionListener {
 		}
 
 		//refresh the histogram population according to selection
-		view.refresh();
+		view.refresh(false);
 	}
 }

@@ -95,8 +95,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 			InternalEObject oldOperation=(InternalEObject)operation;
 			operation=(Operation)eResolveProxy(oldOperation);
 			if (operation != oldOperation) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.OPERATION_SERVICE__OPERATION, oldOperation, operation));
+				}
 			}
 		}
 		return operation;
@@ -120,8 +121,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	public void setOperation(Operation newOperation) {
 		Operation oldOperation=operation;
 		operation=newOperation;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OPERATION_SERVICE__OPERATION, oldOperation, operation));
+		}
 	}
 
 	/**
@@ -283,8 +285,9 @@ public class OperationServiceImpl extends EObjectImpl implements OperationServic
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.OPERATION_SERVICE__OPERATION:
-				if (resolve)
+				if (resolve) {
 					return getOperation();
+				}
 				return basicGetOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);

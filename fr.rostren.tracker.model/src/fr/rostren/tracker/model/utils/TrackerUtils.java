@@ -8,6 +8,7 @@
 package fr.rostren.tracker.model.utils;
 
 import java.text.MessageFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -203,12 +204,23 @@ public final class TrackerUtils {
 
 	/**
 	 * @param tracker the opened tracker root
-	 * @param item the operation item
-	 * @param dates the dates to witch we need to extract the amount
+	 * @param item the operation title
+	 * @param months the months to witch we need to extract the amount
+	 * @param year the year for witch we need to extract data
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @param type the operation type
 	 * @return the operation amounts
 	 */
-	public static List<Double> findOperationAmounts(Tracker tracker, String item, List<String> dates) {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+	public static List<Double> findOperationAmounts(Tracker tracker, String item, List<String> months, int year, boolean wishedEnabled, OperationType type) {
+		List<Double> amounts=new ArrayList<>();
+		List<Account> accounts=tracker.getOwners().stream()//
+				.flatMap(owner -> owner.getAccounts().stream())//
+				.collect(Collectors.toList());
+		for (String month: months) {
+			amounts.addAll(accounts.stream()//
+					.flatMap(account -> getAccountService(account).findOperationAmounts(item, Month.valueOf(month), year, wishedEnabled, type).stream())//
+					.map(amount -> amount.getValue()).collect(Collectors.toList()));
+		}
+		return amounts;
 	}
 }

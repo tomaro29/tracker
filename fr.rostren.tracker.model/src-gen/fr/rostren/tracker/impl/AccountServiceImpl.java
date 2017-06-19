@@ -11,12 +11,14 @@ package fr.rostren.tracker.impl;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -31,8 +33,11 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
+import fr.rostren.tracker.Credit;
+import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.TrackerPackage;
+import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
@@ -86,8 +91,9 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 			InternalEObject oldAccount=(InternalEObject)account;
 			account=(Account)eResolveProxy(oldAccount);
 			if (account != oldAccount) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.ACCOUNT_SERVICE__ACCOUNT, oldAccount, account));
+				}
 			}
 		}
 		return account;
@@ -111,8 +117,9 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	public void setAccount(Account newAccount) {
 		Account oldAccount=account;
 		account=newAccount;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ACCOUNT_SERVICE__ACCOUNT, oldAccount, account));
+		}
 	}
 
 	/**
@@ -280,6 +287,35 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 		return new BasicEList<>();
 	}
 
+	@Override
+	public List<Operation> findOperations(String title) {
+		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
+			return new ArrayList<>();
+		}
+		if (account instanceof CheckingAccount) {
+			return ((CheckingAccount)account).getOperations().stream().filter(operation -> operation.getOperationTitle().getTitle().equals(title)).collect(Collectors.toList());
+		}
+		if (account instanceof BoockletAccount) {
+			return ((BoockletAccount)account).getTransfers().stream().filter(transfer -> transfer.getOperationTitle().getTitle().equals(title)).collect(Collectors.toList());
+
+		}
+		return new ArrayList<>();
+	}
+
+	@Override
+	public EList<Amount> findOperationAmounts(String title, Month month, int year, boolean wishedEnabled, OperationType type) {
+		if (account instanceof CheckingAccount) {
+			return new BasicEList<>(findOperations(title)//
+					.stream()//
+					.filter(operation -> operation instanceof Credit && type.equals(OperationType.CREDIT) || operation instanceof Debit && type.equals(OperationType.DEBIT))
+					.flatMap(operation -> operation.getSubAmounts()//
+							.stream()//
+							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
+					.collect(Collectors.toList()));
+		}
+		return new BasicEList<>();
+	}
+
 	/**
 	 * REturns the total amount of all given amounts as double.
 	 * @param amounts the list of amounts to addition
@@ -435,8 +471,9 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.ACCOUNT_SERVICE__ACCOUNT:
-				if (resolve)
+				if (resolve) {
 					return getAccount();
+				}
 				return basicGetAccount();
 		}
 		return super.eGet(featureID, resolve, coreType);

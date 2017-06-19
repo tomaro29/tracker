@@ -15,6 +15,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import fr.rostren.tracker.model.utils.OperationType;
+
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Account Service</b></em>'. <!-- end-user-doc -->
@@ -139,5 +141,27 @@ public interface AccountService extends EObject {
 	 * @generated
 	 */
 	EList<Amount> findCategoryAmounts(Category category, Month month, int year, boolean wishedDated);
+
+	/**
+	 * Returns the list of operations
+	 * @param title the title
+	 * @return the list of operations
+	 * @generated NOT
+	 */
+	List<Operation> findOperations(String title);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns the list of all amounts of operations titled with the given title.
+	 * @param title the operation title as a {@link String}
+	 * @param month the month.
+	 * @param year the year.
+	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
+	 * @param type the operation type
+	 * @return the list of amounts related to the given category.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	EList<Amount> findOperationAmounts(String title, Month month, int year, boolean wishedEnabled, OperationType type);
 
 } // AccountService

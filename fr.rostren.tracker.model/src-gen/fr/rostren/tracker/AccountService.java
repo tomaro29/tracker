@@ -13,9 +13,8 @@ import java.time.Month;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import fr.rostren.tracker.model.utils.OperationType;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -65,7 +64,7 @@ public interface AccountService extends EObject {
 	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	double sumPerCategory(Category category, Month month, int year, boolean wishedDated);
+	double sumPerCategory(Category category, Month month, int year, boolean wishedEnabled);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,7 +72,7 @@ public interface AccountService extends EObject {
 	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	double averagePerCategory(Category category, Month month, int year, boolean wishedDated);
+	double averagePerCategory(Category category, Month month, int year, boolean wishedEnabled);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,7 +80,7 @@ public interface AccountService extends EObject {
 	 * @model
 	 * @generated
 	 */
-	double sumPerCategory(Category category, int year, boolean wishedDated);
+	double sumPerCategory(Category category, int year, boolean wishedEnabled);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,7 +88,7 @@ public interface AccountService extends EObject {
 	 * @model
 	 * @generated
 	 */
-	double averagePerCategory(Category category, int year, boolean wishedDated);
+	double averagePerCategory(Category category, int year, boolean wishedEnabled);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,15 +107,18 @@ public interface AccountService extends EObject {
 	double averagePerCategory(Category category);
 
 	/**
+	 * <!-- begin-user-doc -->
 	 * Returns the total amount
 	 * @param months the months to witch we need to extract income category amount
 	 * @param year the year for witch we need to extract data
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
 	 * @param clazz the class type of the amount {@link Category}.
 	 * @return the total amount of all typed categories
-	 * @generated NOT
+	 * <!-- end-user-doc -->
+	 * @model monthsMany="true"
+	 * @generated
 	 */
-	List<Double> findAllCategoriesAmount(List<String> months, int year, boolean wishedEnabled, Class<?> clazz);
+	EList<Double> findIncomeCategoryAmounts(String item, EList<String> months, int year, boolean wishedEnabled);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,15 +126,7 @@ public interface AccountService extends EObject {
 	 * @model monthsMany="true"
 	 * @generated
 	 */
-	EList<Double> findIncomeCategoryAmounts(String item, EList<String> months, int year, boolean wishedDated);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model monthsMany="true"
-	 * @generated
-	 */
-	EList<Double> findSpendingCategoryAmounts(String item, EList<String> months, int year, boolean wishedDated);
+	EList<Double> findSpendingCategoryAmounts(String item, EList<String> months, int year, boolean wishedEnabled);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,7 +134,15 @@ public interface AccountService extends EObject {
 	 * @model monthDataType="fr.rostren.tracker.Month"
 	 * @generated
 	 */
-	EList<Amount> findCategoryAmounts(Category category, Month month, int year, boolean wishedDated);
+	EList<Amount> findCategoryAmounts(Category category, Month month, int year, boolean wishedEnabled);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monthsMany="true"
+	 * @generated
+	 */
+	EList<Double> findAllCategoriesAmounts(EList<String> months, int year, boolean wishedEnabled, EClass clazz);
 
 	/**
 	 * Returns the list of operations
@@ -157,11 +159,11 @@ public interface AccountService extends EObject {
 	 * @param month the month.
 	 * @param year the year.
 	 * @param wishedEnabled <code>true</code> if the wished date is enabled, <code>false</code> otherwise.
-	 * @param type the operation type
+	 * @param clazz the class type of the operation {@link Credit} or {@link Debit}.
 	 * @return the list of amounts related to the given category.
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @model monthDataType="fr.rostren.tracker.Month"
+	 * @generated
 	 */
-	EList<Amount> findOperationAmounts(String title, Month month, int year, boolean wishedEnabled, OperationType type);
-
+	EList<Amount> findOperationAmounts(String title, Month month, int year, boolean wishedEnabled, EClass clazz);
 } // AccountService

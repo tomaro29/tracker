@@ -39,12 +39,10 @@ import org.eclipse.ui.part.ViewPart;
 
 import fr.rostren.tracker.Account;
 import fr.rostren.tracker.Category;
-import fr.rostren.tracker.IncomeCategory;
 import fr.rostren.tracker.OperationTitle;
-import fr.rostren.tracker.SpendingCategory;
 import fr.rostren.tracker.Tracker;
+import fr.rostren.tracker.TrackerFactory;
 import fr.rostren.tracker.histogram.Histogram;
-import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 import fr.rostren.tracker.ui.views.internal.FilterSelectionListener;
 import fr.rostren.tracker.ui.views.internal.HistogramViewEditPartListener;
@@ -245,8 +243,8 @@ public class TrackerHistogramView extends ViewPart {
 		if (categoryCheckButton.getSelection()) {
 			String item=categoriesCombo.getText();
 			if (item.equals(TrackerHistogramView.ALL_CATEGORIES_ITEM)) {
-				incomeValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.getAccountService(account).findAllCategoriesAmounts(months, year, true, TrackerFactory.eINSTANCE.createIncomeCategory().eClass());
+				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmounts(months, year, true, TrackerFactory.eINSTANCE.createSpendingCategory().eClass());
 			}
 			else {
 				incomeValues=TrackerUtils.getAccountService(account).findIncomeCategoryAmounts(item, months, year, true);
@@ -256,12 +254,12 @@ public class TrackerHistogramView extends ViewPart {
 		else if (operationCheckButton.getSelection()) {
 			String item=operationsCombo.getText();
 			if (item.equals(TrackerHistogramView.ALL_OPERATIONS_ITEM)) {
-				incomeValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, IncomeCategory.class);
-				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmount(months, year, true, SpendingCategory.class);
+				incomeValues=TrackerUtils.getAccountService(account).findAllCategoriesAmounts(months, year, true, TrackerFactory.eINSTANCE.createIncomeCategory().eClass());
+				spendingValues=TrackerUtils.getAccountService(account).findAllCategoriesAmounts(months, year, true, TrackerFactory.eINSTANCE.createSpendingCategory().eClass());
 			}
 			else {
-				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, months, year, true, OperationType.CREDIT);
-				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, months, year, true, OperationType.DEBIT);
+				incomeValues=TrackerUtils.findOperationAmounts(tracker, item, months, year, true, TrackerFactory.eINSTANCE.createCredit().eClass());
+				spendingValues=TrackerUtils.findOperationAmounts(tracker, item, months, year, true, TrackerFactory.eINSTANCE.createDebit().eClass());
 			}
 		}
 

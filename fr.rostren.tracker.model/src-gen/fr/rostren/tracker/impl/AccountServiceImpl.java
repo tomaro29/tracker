@@ -12,7 +12,6 @@ package fr.rostren.tracker.impl;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,11 +32,8 @@ import fr.rostren.tracker.Amount;
 import fr.rostren.tracker.BoockletAccount;
 import fr.rostren.tracker.Category;
 import fr.rostren.tracker.CheckingAccount;
-import fr.rostren.tracker.Credit;
-import fr.rostren.tracker.Debit;
 import fr.rostren.tracker.Operation;
 import fr.rostren.tracker.TrackerPackage;
-import fr.rostren.tracker.model.utils.OperationType;
 import fr.rostren.tracker.model.utils.TrackerUtils;
 
 /**
@@ -128,8 +124,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @generated NOT
 	 */
 	@Override
-	public double sumPerCategory(Category category, Month month, int year, boolean wishedDated) {
-		return getAmountsStream(category, month, year, wishedDated).sum();
+	public double sumPerCategory(Category category, Month month, int year, boolean wishedEnabled) {
+		return getAmountsStream(category, month, year, wishedEnabled).sum();
 	}
 
 	/**
@@ -138,8 +134,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @generated NOT
 	 */
 	@Override
-	public double averagePerCategory(Category category, Month month, int year, boolean wishedDated) {
-		return getAmountsStream(category, month, year, wishedDated).average().orElseThrow(() -> new IllegalArgumentException());
+	public double averagePerCategory(Category category, Month month, int year, boolean wishedEnabled) {
+		return getAmountsStream(category, month, year, wishedEnabled).average().orElseThrow(() -> new IllegalArgumentException());
 	}
 
 	/**
@@ -148,8 +144,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @generated NOT
 	 */
 	@Override
-	public double sumPerCategory(Category category, int year, boolean wishedDated) {
-		return getAmountsStream(category, year, wishedDated).sum();
+	public double sumPerCategory(Category category, int year, boolean wishedEnabled) {
+		return getAmountsStream(category, year, wishedEnabled).sum();
 	}
 
 	/**
@@ -158,8 +154,8 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @generated NOT
 	 */
 	@Override
-	public double averagePerCategory(Category category, int year, boolean wishedDated) {
-		return getAmountsStream(category, year, wishedDated).average().orElseThrow(() -> new IllegalArgumentException());
+	public double averagePerCategory(Category category, int year, boolean wishedEnabled) {
+		return getAmountsStream(category, year, wishedEnabled).average().orElseThrow(() -> new IllegalArgumentException());
 	}
 
 	/**
@@ -186,11 +182,11 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @generated NOT
 	 */
 	@Override
-	public List<Double> findAllCategoriesAmount(List<String> months, int year, boolean wishedEnabled, Class<?> clazz) {
-		return months.stream()//
+	public EList<Double> findAllCategoriesAmounts(EList<String> months, int year, boolean wishedEnabled, EClass clazz) {
+		return new BasicEList<>(months.stream()//
 				.mapToDouble(month -> getTotalAmount(findAllAmounts(Month.valueOf(month), year, wishedEnabled, clazz)))//
 				.boxed()//
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 
 	/**
@@ -238,29 +234,6 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	}
 
 	/**
-	 * Returns all valid amounts vs comparison year and month.
-	 * @param month the selected month.
-	 * @param year the selected year.
-	 * @param wishedEnabled <code>true</code> is the wished date is enabled, <code>false</code> otherwise.
-	 * @param clazz the class type of the amount {@link Category}.
-	 * @return all valid amounts vs comparison year and month.
-	 * @generated NOT
-	 */
-	private List<Amount> findAllAmounts(Month month, int year, boolean wishedEnabled, Class<?> clazz) {
-		if (account instanceof CheckingAccount) {
-			CheckingAccount checking=(CheckingAccount)account;
-			return checking.getOperations()//
-					.stream()//
-					.flatMap(operation -> operation.getSubAmounts()//
-							.stream()//
-							.filter(amount -> clazz.isInstance(amount.getCategory()))//
-							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
-					.collect(Collectors.toList());
-		}
-		return Collections.emptyList();
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * Returns the list of all amounts of operations related to the given category or one of its sub categories
 	 * @param category the category.
@@ -287,6 +260,11 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 		return new BasicEList<>();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
 	public List<Operation> findOperations(String title) {
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
@@ -302,14 +280,42 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 		return new ArrayList<>();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
-	public EList<Amount> findOperationAmounts(String title, Month month, int year, boolean wishedEnabled, OperationType type) {
+	public EList<Amount> findOperationAmounts(String title, Month month, int year, boolean wishedEnabled, EClass clazz) {
 		if (account instanceof CheckingAccount) {
 			return new BasicEList<>(findOperations(title)//
 					.stream()//
-					.filter(operation -> operation instanceof Credit && type.equals(OperationType.CREDIT) || operation instanceof Debit && type.equals(OperationType.DEBIT))
+					.filter(operation -> clazz.isInstance(operation))
 					.flatMap(operation -> operation.getSubAmounts()//
 							.stream()//
+							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
+					.collect(Collectors.toList()));
+		}
+		return new BasicEList<>();
+	}
+
+	/**
+	 * Returns all valid amounts vs comparison year and month.
+	 * @param month the selected month.
+	 * @param year the selected year.
+	 * @param wishedEnabled <code>true</code> is the wished date is enabled, <code>false</code> otherwise.
+	 * @param clazz the class type of the amount {@link Category}.
+	 * @return all valid amounts vs comparison year and month.
+	 * @generated NOT
+	 */
+	private EList<Amount> findAllAmounts(Month month, int year, boolean wishedEnabled, EClass clazz) {
+		if (account instanceof CheckingAccount) {
+			CheckingAccount checking=(CheckingAccount)account;
+			return new BasicEList<>(checking.getOperations()//
+					.stream()//
+					.flatMap(operation -> operation.getSubAmounts()//
+							.stream()//
+							.filter(amount -> clazz.isInstance(amount.getCategory()))//
 							.filter(amount -> isDateValid(amount, operation, year, month, wishedEnabled)))//
 					.collect(Collectors.toList()));
 		}
@@ -351,28 +357,28 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @return the {@link DoubleStream} representing all concerned amounts
 	 * @generated NOT
 	 */
-	private DoubleStream getAmountsStream(Category category, Month month, int year, boolean wishedDated) {
+	private DoubleStream getAmountsStream(Category category, Month month, int year, boolean wishedEnabled) {
 		if (account instanceof CheckingAccount) {
-			return wishedDated	? ((CheckingAccount)account).getOperations().stream()//
+			return wishedEnabled	? ((CheckingAccount)account).getOperations().stream()//
 					.flatMap(operation -> operation.getSubAmounts().stream())//
 					.filter(amount -> filterAmount(amount, category, month, year))//
 					.mapToDouble(amount -> amount.getValue())
-								: ((CheckingAccount)account).getOperations().stream()//
-										.filter(operation -> filterOperation(operation, month, year))//
-										.flatMap(operation -> operation.getSubAmounts().stream())//
-										.filter(amount -> filterAmount(amount, category))//
-										.mapToDouble(amount -> amount.getValue());
+									: ((CheckingAccount)account).getOperations().stream()//
+											.filter(operation -> filterOperation(operation, month, year))//
+											.flatMap(operation -> operation.getSubAmounts().stream())//
+											.filter(amount -> filterAmount(amount, category))//
+											.mapToDouble(amount -> amount.getValue());
 		}
 		if (account instanceof BoockletAccount) {
-			return wishedDated	? ((BoockletAccount)account).getTransfers().stream()//
+			return wishedEnabled	? ((BoockletAccount)account).getTransfers().stream()//
 					.flatMap(operation -> operation.getSubAmounts().stream())//
 					.filter(amount -> filterAmount(amount, category, month, year))//
 					.mapToDouble(amount -> amount.getValue())
-								: ((BoockletAccount)account).getTransfers().stream()//
-										.filter(operation -> filterOperation(operation, month, year))//
-										.flatMap(operation -> operation.getSubAmounts().stream())//
-										.filter(amount -> filterAmount(amount, category))//
-										.mapToDouble(amount -> amount.getValue());
+									: ((BoockletAccount)account).getTransfers().stream()//
+											.filter(operation -> filterOperation(operation, month, year))//
+											.flatMap(operation -> operation.getSubAmounts().stream())//
+											.filter(amount -> filterAmount(amount, category))//
+											.mapToDouble(amount -> amount.getValue());
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -381,28 +387,28 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 	 * @return the {@link DoubleStream} representing all concerned amounts
 	 * @generated NOT
 	 */
-	private DoubleStream getAmountsStream(Category category, int year, boolean wishedDated) {
+	private DoubleStream getAmountsStream(Category category, int year, boolean wishedEnabled) {
 		if (account instanceof CheckingAccount) {
-			return wishedDated	? ((CheckingAccount)account).getOperations().stream()//
+			return wishedEnabled	? ((CheckingAccount)account).getOperations().stream()//
 					.flatMap(operation -> operation.getSubAmounts().stream())//
 					.filter(amount -> filterAmount(amount, category, year))//
 					.mapToDouble(amount -> amount.getValue())
-								: ((CheckingAccount)account).getOperations().stream()//
-										.filter(operation -> filterOperation(operation, year))//
-										.flatMap(operation -> operation.getSubAmounts().stream())//
-										.filter(amount -> filterAmount(amount, category))//
-										.mapToDouble(amount -> amount.getValue());
+									: ((CheckingAccount)account).getOperations().stream()//
+											.filter(operation -> filterOperation(operation, year))//
+											.flatMap(operation -> operation.getSubAmounts().stream())//
+											.filter(amount -> filterAmount(amount, category))//
+											.mapToDouble(amount -> amount.getValue());
 		}
 		if (account instanceof BoockletAccount) {
-			return wishedDated	? ((BoockletAccount)account).getTransfers().stream()//
+			return wishedEnabled	? ((BoockletAccount)account).getTransfers().stream()//
 					.flatMap(operation -> operation.getSubAmounts().stream())//
 					.filter(amount -> filterAmount(amount, category, year))//
 					.mapToDouble(amount -> amount.getValue())
-								: ((BoockletAccount)account).getTransfers().stream()//
-										.filter(operation -> filterOperation(operation, year))//
-										.flatMap(operation -> operation.getSubAmounts().stream())//
-										.filter(amount -> filterAmount(amount, category))//
-										.mapToDouble(amount -> amount.getValue());
+									: ((BoockletAccount)account).getTransfers().stream()//
+											.filter(operation -> filterOperation(operation, year))//
+											.flatMap(operation -> operation.getSubAmounts().stream())//
+											.filter(amount -> filterAmount(amount, category))//
+											.mapToDouble(amount -> amount.getValue());
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -522,5 +528,4 @@ public class AccountServiceImpl extends EObjectImpl implements AccountService {
 		}
 		return super.eIsSet(featureID);
 	}
-
 } // AccountServiceImpl

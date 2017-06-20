@@ -25,23 +25,23 @@
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="month" eType="#//Month"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="month" eType="#//Month"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="averagePerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="sumPerCategory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
       <eParameters name="category" eType="#//Category"/>
@@ -53,19 +53,35 @@
       <eParameters name="item" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="months" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="findSpendingCategoryAmounts" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
       <eParameters name="item" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="months" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="findCategoryAmounts" upperBound="-1" eType="#//Amount">
       <eParameters name="category" eType="#//Category"/>
       <eParameters name="month" eType="#//Month"/>
       <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="wishedDated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="findAllCategoriesAmounts" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
+      <eParameters name="months" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="clazz" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </eOperations>
+    <eOperations name="findOperations" upperBound="-1" eType="#//Operation">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="findOperationAmounts" upperBound="-1" eType="#//Amount">
+      <eParameters name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="month" eType="#//Month"/>
+      <eParameters name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="wishedEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="clazz" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
         eType="#//Account"/>

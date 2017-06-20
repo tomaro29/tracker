@@ -31,23 +31,23 @@
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/category"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/month"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory/wishedEnabled"/>
       </genOperations>
       <genOperations ecoreOperation="Tracker.ecore#//AccountService/averagePerCategory">
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/category"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/month"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory/wishedEnabled"/>
       </genOperations>
       <genOperations ecoreOperation="Tracker.ecore#//AccountService/sumPerCategory.1">
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.1/category"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.1/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.1/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.1/wishedEnabled"/>
       </genOperations>
       <genOperations ecoreOperation="Tracker.ecore#//AccountService/averagePerCategory.1">
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.1/category"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.1/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.1/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/averagePerCategory.1/wishedEnabled"/>
       </genOperations>
       <genOperations ecoreOperation="Tracker.ecore#//AccountService/sumPerCategory.2">
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/sumPerCategory.2/category"/>
@@ -59,19 +59,35 @@
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findIncomeCategoryAmounts/item"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findIncomeCategoryAmounts/months"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findIncomeCategoryAmounts/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findIncomeCategoryAmounts/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findIncomeCategoryAmounts/wishedEnabled"/>
       </genOperations>
       <genOperations ecoreOperation="Tracker.ecore#//AccountService/findSpendingCategoryAmounts">
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findSpendingCategoryAmounts/item"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findSpendingCategoryAmounts/months"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findSpendingCategoryAmounts/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findSpendingCategoryAmounts/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findSpendingCategoryAmounts/wishedEnabled"/>
       </genOperations>
       <genOperations ecoreOperation="Tracker.ecore#//AccountService/findCategoryAmounts">
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findCategoryAmounts/category"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findCategoryAmounts/month"/>
         <genParameters ecoreParameter="Tracker.ecore#//AccountService/findCategoryAmounts/year"/>
-        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findCategoryAmounts/wishedDated"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findCategoryAmounts/wishedEnabled"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/findAllCategoriesAmounts">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findAllCategoriesAmounts/months"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findAllCategoriesAmounts/year"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findAllCategoriesAmounts/wishedEnabled"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findAllCategoriesAmounts/clazz"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/findOperations">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findOperations/title"/>
+      </genOperations>
+      <genOperations ecoreOperation="Tracker.ecore#//AccountService/findOperationAmounts">
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findOperationAmounts/title"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findOperationAmounts/month"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findOperationAmounts/year"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findOperationAmounts/wishedEnabled"/>
+        <genParameters ecoreParameter="Tracker.ecore#//AccountService/findOperationAmounts/clazz"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="Tracker.ecore#//CheckingAccount">

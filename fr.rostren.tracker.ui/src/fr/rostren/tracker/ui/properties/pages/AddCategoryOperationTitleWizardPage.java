@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 
@@ -38,17 +37,13 @@ public class AddCategoryOperationTitleWizardPage extends AbstractAddWizardPage {
 	protected OperationTitle title;
 
 	protected ComboViewer titlesComboViewer;
-	private final ISelectionChangedListener titleListener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof OperationTitle) {
-				title=(OperationTitle)firstElement;
-			}
+	private final ISelectionChangedListener titleListener=event -> {
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement != null && firstElement instanceof OperationTitle) {
+			title=(OperationTitle)firstElement;
 		}
 	};
 

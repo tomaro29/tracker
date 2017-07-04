@@ -9,7 +9,6 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -39,36 +38,22 @@ public class AddAccountWizardPage extends AbstractAddWizardPage {
 	protected String identifier;
 	protected String amount;
 
-	private final ModifyListener modifyAccountTypeListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			String text=((Combo)event.widget).getText();
-			isChecking=AddAccountWizardPage.ACCOUNTS_TYPES[0].equals(text);
-			isBoocklet=AddAccountWizardPage.ACCOUNTS_TYPES[1].equals(text);
-		}
+	private final ModifyListener modifyAccountTypeListener=event -> {
+		String text=((Combo)event.widget).getText();
+		isChecking=AddAccountWizardPage.ACCOUNTS_TYPES[0].equals(text);
+		isBoocklet=AddAccountWizardPage.ACCOUNTS_TYPES[1].equals(text);
 	};
 
-	private final ModifyListener modifyNameListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			name=((Text)event.widget).getText();
-		}
+	private final ModifyListener modifyNameListener=event -> name=((Text)event.widget).getText();
+
+	private final ModifyListener modifyIdentifierListener=event -> {
+		identifier=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
-	private final ModifyListener modifyIdentifierListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			identifier=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
-	};
-
-	private final ModifyListener modifyAmountListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			amount=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
+	private final ModifyListener modifyAmountListener=event -> {
+		amount=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
 	/**

@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 
@@ -37,17 +36,13 @@ public class AddCategorySubCategoryWizardPage extends AbstractAddWizardPage {
 
 	protected Category subCategory;
 
-	private final ISelectionChangedListener categoryListener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof Category) {
-				subCategory=(Category)firstElement;
-			}
+	private final ISelectionChangedListener categoryListener=event -> {
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement != null && firstElement instanceof Category) {
+			subCategory=(Category)firstElement;
 		}
 	};
 

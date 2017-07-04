@@ -9,7 +9,6 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -36,15 +35,12 @@ public class AddCheckOperationWizardPage extends AbstractOperationWizardPage {
 	private static final String PAGE_TITLE="Add operation"; //$NON-NLS-1$
 	private static final String WIZARD_DESCRIPTION="Wizard to add a new operation to the selected checking account."; //$NON-NLS-1$
 
-	private final ModifyListener modifyOperationTypeListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			String text=((Combo)event.widget).getText();
-			isCredit=AddCheckOperationWizardPage.OPERATION_TYPES[0].equals(text);
-			isDebit=AddCheckOperationWizardPage.OPERATION_TYPES[1].equals(text);
-			isIncoming=AddCheckOperationWizardPage.OPERATION_TYPES[2].equals(text);
-			isOutgoing=AddCheckOperationWizardPage.OPERATION_TYPES[3].equals(text);
-		}
+	private final ModifyListener modifyOperationTypeListener=event -> {
+		String text=((Combo)event.widget).getText();
+		isCredit=AddCheckOperationWizardPage.OPERATION_TYPES[0].equals(text);
+		isDebit=AddCheckOperationWizardPage.OPERATION_TYPES[1].equals(text);
+		isIncoming=AddCheckOperationWizardPage.OPERATION_TYPES[2].equals(text);
+		isOutgoing=AddCheckOperationWizardPage.OPERATION_TYPES[3].equals(text);
 	};
 
 	/**

@@ -10,7 +10,6 @@ package fr.rostren.tracker.ui.properties.pages;
 import java.text.MessageFormat;
 
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -40,13 +39,10 @@ public class AddBoockletTransferWizardPage extends AbstractOperationWizardPage {
 	protected ComboViewer titlesComboViewer;
 	protected ComboViewer originsComboViewer;
 
-	private final ModifyListener modifyTransferTypeListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			String text=((Combo)event.widget).getText();
-			isIncoming=AddBoockletTransferWizardPage.TRANSFER_TYPES[0].equals(text);
-			isOutgoing=AddBoockletTransferWizardPage.TRANSFER_TYPES[1].equals(text);
-		}
+	private final ModifyListener modifyTransferTypeListener=event -> {
+		String text=((Combo)event.widget).getText();
+		isIncoming=AddBoockletTransferWizardPage.TRANSFER_TYPES[0].equals(text);
+		isOutgoing=AddBoockletTransferWizardPage.TRANSFER_TYPES[1].equals(text);
 	};
 
 	/**

@@ -9,7 +9,6 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -33,24 +32,18 @@ public class AddTrackerOriginWizardPage extends AbstractAddWizardPage {
 	protected String identifier;
 	protected OriginType type=OriginType.MANUAL;
 
-	private final ModifyListener modifyIdentifierListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			identifier=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
+	private final ModifyListener modifyIdentifierListener=event -> {
+		identifier=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
-	private final ModifyListener modifyOriginTypeListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			String text=((Combo)event.widget).getText();
-			if (AddTrackerOriginWizardPage.ORIGIN_TYPES[0].equals(text)) {
-				type=OriginType.MANUAL;
-			}
-			if (AddTrackerOriginWizardPage.ORIGIN_TYPES[1].equals(text)) {
-				type=OriginType.PDF_FILE;
-			}
+	private final ModifyListener modifyOriginTypeListener=event -> {
+		String text=((Combo)event.widget).getText();
+		if (AddTrackerOriginWizardPage.ORIGIN_TYPES[0].equals(text)) {
+			type=OriginType.MANUAL;
+		}
+		if (AddTrackerOriginWizardPage.ORIGIN_TYPES[1].equals(text)) {
+			type=OriginType.PDF_FILE;
 		}
 	};
 

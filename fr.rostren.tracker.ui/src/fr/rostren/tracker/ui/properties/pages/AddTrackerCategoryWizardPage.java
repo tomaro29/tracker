@@ -9,7 +9,6 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -37,20 +36,12 @@ public class AddTrackerCategoryWizardPage extends AbstractAddWizardPage {
 	protected Button incomeCheckButton;
 	protected Button spendingCheckButton;
 
-	private final ModifyListener modifyTitleListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			title=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
+	private final ModifyListener modifyTitleListener=event -> {
+		title=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
-	private final ModifyListener modifyDescriptionListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			description=((Text)event.widget).getText();
-		}
-	};
+	private final ModifyListener modifyDescriptionListener=event -> description=((Text)event.widget).getText();
 
 	private final SelectionListener selectionIncomeListener=new SelectionListener() {
 

@@ -9,7 +9,6 @@ package fr.rostren.tracker.ui.properties.pages;
 
 import java.text.MessageFormat;
 
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -28,20 +27,14 @@ public class AddTrackerOwnerWizardPage extends AbstractAddWizardPage {
 	protected String firstName;
 	protected String lastName;
 
-	private final ModifyListener modifyFirstNameListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			firstName=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
+	private final ModifyListener modifyFirstNameListener=event -> {
+		firstName=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
-	private final ModifyListener modifyLastNameListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			lastName=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
+	private final ModifyListener modifyLastNameListener=event -> {
+		lastName=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
 	/**

@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -95,34 +94,26 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 
 	private final String operationTitle;
 
-	private final ISelectionChangedListener typeListener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof OperationType) {
-				operationType=(OperationType)firstElement;
-			}
+	private final ISelectionChangedListener typeListener=event -> {
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement != null && firstElement instanceof OperationType) {
+			operationType=(OperationType)firstElement;
 		}
 	};
 
-	private final Listener modifyDateListener=new Listener() {
-
-		@Override
-		public void handleEvent(Event event) {
-			Object source=event.widget;
-			Assert.isTrue(source instanceof DateTime);
-			DateTime dateTime=(DateTime)source;
-			LocalDate date=LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth() + 1), dateTime.getDay());
-			//set operation date to the new selected date
-			operation.setDate(date);
-			//set all subAmounts wished dates to the new selected date
-			operation.getSubAmounts().stream().forEach(subAmount -> subAmount.setWishedDate(date));
-			populateTable();
-		}
+	private final Listener modifyDateListener=event -> {
+		Object source=event.widget;
+		Assert.isTrue(source instanceof DateTime);
+		DateTime dateTime=(DateTime)source;
+		LocalDate date=LocalDate.of(dateTime.getYear(), Month.of(dateTime.getMonth() + 1), dateTime.getDay());
+		//set operation date to the new selected date
+		operation.setDate(date);
+		//set all subAmounts wished dates to the new selected date
+		operation.getSubAmounts().stream().forEach(subAmount -> subAmount.setWishedDate(date));
+		populateTable();
 	};
 
 	private final SelectionListener dateKeyListener=new SelectionListener() {

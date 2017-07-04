@@ -10,7 +10,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 
@@ -37,32 +36,24 @@ public class AbstractOperationWizardPage extends AbstractAddWizardPage {
 	protected OperationTitle title;
 	protected Origin origin;
 
-	protected final ISelectionChangedListener titleListener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof OperationTitle) {
-				title=(OperationTitle)firstElement;
-			}
+	protected final ISelectionChangedListener titleListener=event -> {
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement != null && firstElement instanceof OperationTitle) {
+			title=(OperationTitle)firstElement;
 		}
 	};
 
-	protected final ISelectionChangedListener originListener=new ISelectionChangedListener() {
+	protected final ISelectionChangedListener originListener=event -> {
 
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof Origin) {
-				origin=(Origin)firstElement;
-			}
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement != null && firstElement instanceof Origin) {
+			origin=(Origin)firstElement;
 		}
 	};
 

@@ -13,7 +13,6 @@ import java.util.Optional;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 
@@ -41,17 +40,13 @@ public class AddOriginOperationWizardPage extends AbstractAddWizardPage {
 
 	protected Optional<Operation> operation;
 
-	private final ISelectionChangedListener listener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement instanceof Operation) {
-				operation=Optional.of((Operation)firstElement);
-			}
+	private final ISelectionChangedListener listener=event -> {
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement instanceof Operation) {
+			operation=Optional.of((Operation)firstElement);
 		}
 	};
 

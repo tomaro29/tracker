@@ -15,14 +15,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -67,25 +66,18 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	TreeViewer categoriesTreeViewer;
 	private final OperationType operationType;
 
-	private final ModifyListener modifyValueListener=new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent event) {
-			value=((Text)event.widget).getText();
-			setPageComplete(isPageComplete());
-		}
+	private final ModifyListener modifyValueListener=event -> {
+		value=((Text)event.widget).getText();
+		setPageComplete(isPageComplete());
 	};
 
-	private final ISelectionChangedListener categoryListener=new ISelectionChangedListener() {
-
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			ISelection selection=event.getSelection();
-			Assert.isTrue(selection instanceof StructuredSelection);
-			StructuredSelection ss=(StructuredSelection)selection;
-			Object firstElement=ss.getFirstElement();
-			if (firstElement != null && firstElement instanceof Category) {
-				category=(Category)firstElement;
-			}
+	private final ISelectionChangedListener categoryListener=event -> {
+		ISelection selection=event.getSelection();
+		Assert.isTrue(selection instanceof StructuredSelection);
+		StructuredSelection ss=(StructuredSelection)selection;
+		Object firstElement=ss.getFirstElement();
+		if (firstElement != null && firstElement instanceof Category) {
+			category=(Category)firstElement;
 		}
 	};
 	private final SelectionListener wishedDateKeyListener=new SelectionListener() {
@@ -139,10 +131,14 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 				.filter(categ -> operationType == OperationType.DEBIT && categ instanceof SpendingCategory
 									|| operationType == OperationType.CREDIT && categ instanceof IncomeCategory)//
 				.collect(Collectors.toSet());
-		categoriesTree=createTree(composite, "Category: ", addCategoryButtonlistener); //$NON-NLS-1$
+		categoriesTree=createTree(composite, "Category: ", addCategoryButtonlistener != null); //$NON-NLS-1$
 		categoriesTreeViewer=createTreeViewer(categoriesTree, categoryListener);
 		categoriesTreeViewer.setInput(new ArrayList<>(categories));
 		categoriesTreeViewer.expandAll();
+		if (addCategoryButtonlistener != null) {
+			getAddButton().addSelectionListener(addCategoryButtonlistener);
+		}
+
 		if (category != null) {
 			categoriesTreeViewer.setSelection(new StructuredSelection(category), true);
 		}
@@ -172,6 +168,9 @@ public class OperationSubAmountWizardPage extends AbstractAddWizardPage {
 	 * @return the amount value
 	 */
 	public double getAmountValue() {
+		if (StringUtils.isEmpty(value) || StringUtils.isBlank(value)) {
+			return 0;
+		}
 		return Double.parseDouble(value);
 	}
 

@@ -10,6 +10,7 @@ package fr.rostren.tracker.ui.properties.pages;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -43,6 +44,8 @@ import fr.rostren.tracker.ui.properties.content.providers.CategoriesRepositoryCo
 import fr.rostren.tracker.ui.properties.label.providers.CategoryLabelProvider;
 
 public abstract class AbstractWizardPage extends WizardPage {
+
+	private Button addButton;
 
 	/**
 	 * Constructor
@@ -186,21 +189,21 @@ public abstract class AbstractWizardPage extends WizardPage {
 	 * Creates tree
 	 * @param composite the composite parent of the combo to create
 	 * @param label the combo label
-	 * @param addButtonlistener the "Add" button listener
+	 * @param withButton the "Add" button has to be added
 	 * @return the created tree
 	 */
-	protected Tree createTree(Composite composite, String label, SelectionAdapter addButtonlistener) {
+	protected Tree createTree(Composite composite, String label, boolean withButton) {
+		addButton=null;
 		createLabel(composite, label);
 		Composite parent=new Composite(composite, SWT.NONE);
 		parent.setLayout(new GridLayout(3, false));
 
 		Tree tree=new Tree(parent, SWT.V_SCROLL | SWT.BORDER);
 		tree.setFont(new Font(composite.getDisplay(), "Arial", 10, SWT.BOLD)); //$NON-NLS-1$
-		if (addButtonlistener != null) {
-			Button addButton=new Button(parent, SWT.PUSH);
+		if (withButton) {
+			addButton=new Button(parent, SWT.PUSH);
 			addButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 0));
 			addButton.setText("Add"); //$NON-NLS-1$
-			addButton.addSelectionListener(addButtonlistener);
 		}
 
 		GridData data=new GridData();
@@ -211,6 +214,13 @@ public abstract class AbstractWizardPage extends WizardPage {
 		parent.setLayoutData(data);
 		tree.setLayoutData(data);
 		return tree;
+	}
+
+	/**
+	 * @return the addButton
+	 */
+	public Button getAddButton() {
+		return addButton;
 	}
 
 	/**
@@ -247,11 +257,11 @@ public abstract class AbstractWizardPage extends WizardPage {
 	/**
 	 * Refreshes the tree viewer content by setting the input, and selects the last element in the tree.
 	 * @param treeViewer the tree viewer to refresh
-	 * @param set the input to set
+	 * @param input the input to set
 	 * @param selection the new selection
 	 */
-	protected void refreshTreeViewerContent(TreeViewer treeViewer, Set<? extends Object> set, Object selection) {
-		treeViewer.setInput(new ArrayList<>(set));
+	protected void refreshTreeViewerContent(TreeViewer treeViewer, List<? extends Object> input, Object selection) {
+		treeViewer.setInput(input);
 		treeViewer.refresh();
 		treeViewer.expandAll();
 		treeViewer.setSelection(new StructuredSelection(selection));

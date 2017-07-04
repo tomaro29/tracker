@@ -140,16 +140,16 @@ public abstract class AbstractAddWizardPage extends AbstractWizardPage {
 	protected final SelectionAdapter addCategoryButtonlistener=new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
-			TreeItem[] selection=categoriesTree.getSelection();
 			Category newCategory=null;
-			if (selection.length == 0) {
+			if (categoriesTree == null || categoriesTree.getSelection().length == 0) {
 				newCategory=addTrackerCategory((Tracker)object);
 			}
 			else {
+				TreeItem[] selection=categoriesTree.getSelection();
 				newCategory=addCategorySubCategory((Tracker)object, (Category)selection[0].getData());
 			}
-			if (newCategory != null) {
-				refreshTreeViewerContent(categoriesTreeViewer, new HashSet<>(TrackerUtils.getTrackerService(object).getCategories()), newCategory);
+			if (newCategory != null && categoriesTreeViewer != null) {
+				refreshTreeViewerContent(categoriesTreeViewer, TrackerUtils.getTrackerService(object).getCategories(), newCategory);
 			}
 		}
 

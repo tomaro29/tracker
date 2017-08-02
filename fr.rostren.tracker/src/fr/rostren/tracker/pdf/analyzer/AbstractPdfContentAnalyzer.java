@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.pdf.analyzer;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -149,7 +150,7 @@ public abstract class AbstractPdfContentAnalyzer {
 	 *         "false" otherwise.
 	 */
 	protected boolean isCompleted() {
-		return lastPotentialDate != null && lastPotentialOperationTitle != null && Double.isFinite(lastPotentialAmount);
+		return lastPotentialDate != null && lastPotentialOperationTitle != null && BigDecimal.ZERO.doubleValue() != lastPotentialAmount;
 	}
 
 	/**

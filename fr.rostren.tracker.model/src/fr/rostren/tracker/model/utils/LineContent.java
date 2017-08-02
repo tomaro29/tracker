@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.model.utils;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.apache.commons.lang.StringUtils;
@@ -52,7 +53,7 @@ public class LineContent {
 		if (StringUtils.isEmpty(title) || StringUtils.isBlank(title)) {
 			throw new IllegalArgumentException("The operation title cannot be empty or null."); //$NON-NLS-1$
 		}
-		if (Double.isInfinite(amount) || Double.isNaN(amount)) {
+		if (Double.isInfinite(amount) || Double.isNaN(amount) || BigDecimal.ZERO.doubleValue() == amount) {
 			throw new IllegalArgumentException("The operation amount cannot be zero."); //$NON-NLS-1$
 		}
 		if (type == null) {

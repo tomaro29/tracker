@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.sections;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -832,7 +833,7 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		}
 
 		double value=wizard.getAmountValue();
-		if (Double.isFinite(value)) {
+		if (Double.isFinite(value) && BigDecimal.ZERO.doubleValue() != value) {
 			amount.setValue(value);
 		}
 	}
@@ -871,7 +872,7 @@ public abstract class AbstractTablePropertySection extends AbstractTrackerProper
 		}
 
 		double accountAmount=wizard.getAccountAmount();
-		if (Double.isFinite(accountAmount)) {
+		if (Double.isFinite(accountAmount) && BigDecimal.ZERO.doubleValue() != accountAmount) {
 			account.setAmount(accountAmount);
 		}
 	}

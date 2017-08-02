@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.sections.amount;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,7 +92,7 @@ public class AmountAttributesPropertySection extends AbstractAttributesPropertyS
 	private String getAmountvalue() {
 		Assert.isTrue(currentEObject instanceof Amount);
 		double value=((Amount)currentEObject).getValue();
-		if (Double.isInfinite(value)) {
+		if (Double.isInfinite(value) || BigDecimal.ZERO.doubleValue() == value) {
 			return StringUtils.EMPTY;
 		}
 		return String.valueOf(value);

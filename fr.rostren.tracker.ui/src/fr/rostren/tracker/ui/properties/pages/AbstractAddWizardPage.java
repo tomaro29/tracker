@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.pages;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 
 import org.apache.commons.lang.StringUtils;
@@ -271,7 +272,7 @@ public abstract class AbstractAddWizardPage extends AbstractWizardPage {
 		if (!StringUtils.isEmpty(value) && !StringUtils.isBlank(value)) {
 			try {
 				double parsed=Double.parseDouble(value);
-				if (Double.isNaN(parsed) || Double.isInfinite(parsed)) {
+				if (Double.isNaN(parsed) || Double.isInfinite(parsed) || BigDecimal.ZERO.doubleValue() == parsed) {
 					setErrorMessage("The amount value must be finite"); //$NON-NLS-1$
 					return false;
 				}

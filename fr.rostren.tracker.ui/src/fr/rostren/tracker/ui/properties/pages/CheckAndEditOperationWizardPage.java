@@ -7,6 +7,7 @@
  *******************************************************************************/
 package fr.rostren.tracker.ui.properties.pages;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.Month;
@@ -459,7 +460,7 @@ public class CheckAndEditOperationWizardPage extends AbstractWizardPage {
 				}
 
 				double value=wizard.getAmountValue();
-				if (Double.isFinite(value)) {
+				if (Double.isFinite(value) && BigDecimal.ZERO.doubleValue() != value) {
 					newAmount.setValue(value);
 				}
 				LocalDate date=wizard.getAmountWishedDate();

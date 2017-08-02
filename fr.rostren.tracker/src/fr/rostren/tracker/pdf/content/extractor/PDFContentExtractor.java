@@ -84,8 +84,11 @@ public class PDFContentExtractor {
 		}
 		List<URI> uris=getURIsFromText().stream()//
 				.filter(uri -> !StringUtils.isEmpty(uri))//
-				.map(uri -> URI.createURI(uri.endsWith(".pdf") ? uri : uri.concat(".pdf")))// //$NON-NLS-1$ //$NON-NLS-2$
-				.collect(Collectors.toList());
+				.map(uri -> {
+					String adapted=uri.endsWith(".pdf") ? uri : uri.concat(".pdf");//$NON-NLS-1$ //$NON-NLS-2$
+					adapted=adapted.startsWith(" platform:/") ? adapted.replaceFirst(" platform:/", "platform:/") : adapted;//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					return URI.createURI(adapted);
+				}).collect(Collectors.toList());
 
 		List<OperationData> operations=new ArrayList<>();
 		for (URI selectedFileURI: uris) {
@@ -93,12 +96,14 @@ public class PDFContentExtractor {
 				IPath resourcePath=new Path(selectedFileURI.toPlatformString(true));
 				IFile iFile=ResourcesPlugin.getWorkspace().getRoot().getFile(resourcePath);
 				String uri=iFile.getLocationURI().getPath();
-				String fileName=iFile.getProjectRelativePath().toOSString();
+				String fileName=iFile.getName();
 				operations.addAll(extractOperations(uri, fileName, monitor));
 			}
 			else {
 				String uri=selectedFileURI.toFileString();
-				operations.addAll(extractOperations(uri, uri, monitor));
+				if (uri != null) {
+					operations.addAll(extractOperations(uri, uri, monitor));
+				}
 			}
 		}
 		return operations;

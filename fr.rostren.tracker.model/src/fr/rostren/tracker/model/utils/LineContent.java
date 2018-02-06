@@ -34,7 +34,6 @@ public class LineContent {
 
 	/**
 	 * Constructor
-	 *
 	 * @param date
 	 *            the date of the operation
 	 * @param title
